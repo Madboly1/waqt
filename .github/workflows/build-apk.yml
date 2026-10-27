@@ -12,11 +12,13 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Auto-Extract ZIP if Uploaded Directly
+      - name: Auto-Extract ZIP and Fix Strings XML
         run: |
           if [ -f "WAQT_Complete_GitHub_Project.zip" ]; then
             unzip -o WAQT_Complete_GitHub_Project.zip
           fi
+          mkdir -p app/src/main/res/values
+          printf '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <string name="app_name">WAQT</string>\n</resources>\n' > app/src/main/res/values/strings.xml
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -30,7 +32,7 @@ jobs:
           gradle-version: "8.7"
 
       - name: Build Debug APK
-        run: gradle assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon --stacktrace
 
       - name: Upload WAQT APK Artifact
         uses: actions/upload-artifact@v4
