@@ -12,97 +12,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Auto-Extract ZIP and Set WAQT Icon & Name
+      - name: Extract Project ZIP (Any Name)
         run: |
-          if [ -f "WAQT_Complete_GitHub_Project.zip" ]; then
-            unzip -o WAQT_Complete_GitHub_Project.zip
+          echo "=== Finding any ZIP archive ==="
+          ls -la
+          for f in *.zip; do
+            if [ -f "$f" ]; then
+              echo "Extracting: $f ..."
+              unzip -o "$f"
+            fi
+          done
+          if [ ! -f "build.gradle.kts" ]; then
+            SUBDIR=$(find . -maxdepth 2 -name "build.gradle.kts" -not -path "./build.gradle.kts" | head -n 1)
+            if [ -n "$SUBDIR" ]; then
+              DIRNAME=$(dirname "$SUBDIR")
+              echo "Moving files from subfolder $DIRNAME to root..."
+              cp -r "$DIRNAME"/* .
+            fi
           fi
-          mkdir -p app/src/main/res/values app/src/main/res/drawable
-          printf '<?xml version="1.0" encoding="utf-8"?>\n<resources>\n    <string name="app_name">وَقْت</string>\n</resources>\n' > app/src/main/res/values/strings.xml
-          cat << 'EOF' > app/src/main/res/drawable/ic_launcher_waqt.xml
-          <?xml version="1.0" encoding="utf-8"?>
-          <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-              <item>
-                  <shape android:shape="rectangle">
-                      <solid android:color="#0B0F19" />
-                      <corners android:radius="18dp" />
-                  </shape>
-              </item>
-              <item
-                  android:bottom="6dp"
-                  android:left="6dp"
-                  android:right="6dp"
-                  android:top="6dp"
-                  android:drawable="@drawable/logo_waqt" />
-          </layer-list>
-          EOF
-          cat << 'EOF' > app/src/main/AndroidManifest.xml
-          <?xml version="1.0" encoding="utf-8"?>
-          <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              package="com.example.glassproductivity">
-
-              <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
-              <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-              <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
-              <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
-              <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
-              <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-              <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
-              <uses-permission android:name="android.permission.VIBRATE" />
-              <uses-permission android:name="android.permission.WAKE_LOCK" />
-              <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-
-              <application
-                  android:allowBackup="true"
-                  android:icon="@drawable/ic_launcher_waqt"
-                  android:roundIcon="@drawable/ic_launcher_waqt"
-                  android:label="وَقْت"
-                  android:supportsRtl="true"
-                  android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-                  tools:targetApi="34">
-
-                  <activity
-                      android:name=".MainActivity"
-                      android:exported="true"
-                      android:icon="@drawable/ic_launcher_waqt"
-                      android:roundIcon="@drawable/ic_launcher_waqt"
-                      android:label="وَقْت"
-                      android:windowSoftInputMode="adjustResize">
-                      <intent-filter>
-                          <action android:name="android.intent.action.MAIN" />
-                          <category android:name="android.intent.category.LAUNCHER" />
-                      </intent-filter>
-                  </activity>
-
-                  <service
-                      android:name=".FloatingCardService"
-                      android:enabled="true"
-                      android:exported="false"
-                      android:foregroundServiceType="specialUse">
-                      <property
-                          android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
-                          android:value="persistent_glassmorphic_productivity_overlay" />
-                  </service>
-
-                  <receiver
-                      android:name=".AlarmReceiver"
-                      android:enabled="true"
-                      android:exported="true">
-                      <intent-filter>
-                          <action android:name="com.example.glassproductivity.ACTION_TRIGGER_REMINDER" />
-                          <action android:name="com.example.glassproductivity.ACTION_PRE_NOTIFY" />
-                          <action android:name="com.example.glassproductivity.ACTION_COMPLETE_FROM_NOTIF" />
-                          <action android:name="com.example.glassproductivity.ACTION_SNOOZE_10M_FROM_NOTIF" />
-                          <action android:name="com.example.glassproductivity.ACTION_SNOOZE_1H_FROM_NOTIF" />
-                          <action android:name="android.intent.action.BOOT_COMPLETED" />
-                          <action android:name="android.intent.action.TIME_SET" />
-                          <action android:name="android.intent.action.TIMEZONE_CHANGED" />
-                      </intent-filter>
-                  </receiver>
-              </application>
-          </manifest>
-          EOF
+          echo "=== Extracted Files ==="
+          ls -la
 
       - name: Set up JDK 17
         uses: actions/setup-java@v4
