@@ -1,0 +1,191 @@
+
+name: WAQT Signed Release and OTA Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Download WAQT source code
+      - name: Checkout WAQT
+        uses: actions/checkout@v4
+
+      # 2. Setup Java 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      # 3. Setup Gradle 8.7
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+
+      # 4. Validate required secrets
+      - name: Validate signing secrets
+        env:
+          KEYSTORE_BASE64: ${{ secrets.WAQT_KEYSTORE_BASE64 }}
+          KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
+          UPDATE_TOKEN: ${{ secrets.UPDATE_REPO_TOKEN }}
+        run: |
+          test -n "$KEYSTORE_BASE64" || (echo "Missing WAQT_KEYSTORE_BASE64" && exit 1)
+          test -n "$KEYSTORE_PASSWORD" || (echo "Missing WAQT_KEYSTORE_PASSWORD" && exit 1)
+          test -n "$KEY_ALIAS" || (echo "Missing WAQT_KEY_ALIAS" && exit 1)
+          test -n "$KEY_PASSWORD" || (echo "Missing WAQT_KEY_PASSWORD" && exit 1)
+          test -n "$UPDATE_TOKEN" || (echo "Missing UPDATE_REPO_TOKEN" && exit 1)
+
+          echo "All required secrets are available."
+
+      # 5. Decode signing key
+      - name: Decode signing key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.WAQT_KEYSTORE_BASE64 }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/waqt-release.jks"
+
+          test -s "$RUNNER_TEMP/waqt-release.jks" || (echo "Keystore file is empty" && exit 1)
+
+      # 6. Verify signing key
+      - name: Verify signing key
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
+        run: |
+          keytool -list \
+            -keystore "$RUNNER_TEMP/waqt-release.jks" \
+            -alias "$KEY_ALIAS" \
+            -storepass "$KEYSTORE_PASSWORD" > /dev/null
+
+          echo "Signing key verified successfully."
+
+      # 7. Build signed release APK
+      - name: Build signed release APK
+        env:
+          WAQT_KEYSTORE_PATH: ${{ runner.temp }}/waqt-release.jks
+          WAQT_KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
+          WAQT_KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
+          WAQT_KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
+        run: |
+          gradle :app:assembleRelease --no-daemon --stacktrace
+
+      # 8. Prepare release metadata
+      - name: Prepare release metadata
+        id: meta
+        run: |
+          VERSION_NAME=$(grep -o 'versionName = "[^"]*"' app/build.gradle.kts | cut -d'"' -f2)
+          VERSION_CODE=$(grep -o 'versionCode = [0-9]*' app/build.gradle.kts | awk '{print $3}')
+
+          APK="app/build/outputs/apk/release/app-release.apk"
+
+          test -n "$VERSION_NAME"
+          test -n "$VERSION_CODE"
+          test -f "$APK"
+
+          if [ "$GITHUB_REF_TYPE" = "tag" ]; then
+            if [ "$GITHUB_REF_NAME" != "v${VERSION_NAME}" ]; then
+              echo "Tag does not match app version."
+              exit 1
+            fi
+          fi
+
+          echo "version_name=$VERSION_NAME" >> "$GITHUB_OUTPUT"
+          echo "version_code=$VERSION_CODE" >> "$GITHUB_OUTPUT"
+          echo "apk=$APK" >> "$GITHUB_OUTPUT"
+
+      # 9. Checkout OTA updates repository
+      - name: Checkout OTA repository
+        uses: actions/checkout@v4
+        with:
+          repository: Madboly1/waqt-updates
+          token: ${{ secrets.UPDATE_REPO_TOKEN }}
+          ref: main
+          path: update-repo
+
+      # 10. Publish GitHub Release
+      - name: Publish GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION_NAME: ${{ steps.meta.outputs.version_name }}
+          VERSION_CODE: ${{ steps.meta.outputs.version_code }}
+          APK_PATH: ${{ steps.meta.outputs.apk }}
+        run: |
+          gh release create "v${VERSION_NAME}" \
+            "${APK_PATH}#WAQT-${VERSION_NAME}.apk" \
+            --title "WAQT ${VERSION_NAME}" \
+            --notes "WAQT Android release ${VERSION_NAME} (versionCode ${VERSION_CODE})."
+
+      # 11. Update OTA manifest
+      - name: Update OTA manifest
+        env:
+          VERSION_NAME: ${{ steps.meta.outputs.version_name }}
+          VERSION_CODE: ${{ steps.meta.outputs.version_code }}
+        run: |
+          cd update-repo
+
+          test -f update.json || (echo "update.json not found" && exit 1)
+
+          python3 - <<'PY'
+          import json
+          import os
+
+          path = "update.json"
+
+          with open(path, "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          version_name = os.environ["VERSION_NAME"]
+          version_code = int(os.environ["VERSION_CODE"])
+
+          data["versionCode"] = version_code
+          data["versionName"] = version_name
+          data["updateMessage"] = "تحديث جديد متاح لتطبيق وَقْت ✨"
+          data["apkDownloadUrl"] = (
+              f"https://github.com/Madboly1/waqt/releases/download/"
+              f"v{version_name}/WAQT-{version_name}.apk"
+          )
+
+          with open(path, "w", encoding="utf-8") as f:
+              json.dump(data, f, ensure_ascii=False, indent=2)
+              f.write("\n")
+
+          print("OTA manifest updated successfully.")
+          PY
+
+      # 12. Push updated manifest
+      - name: Push OTA manifest
+        env:
+          VERSION_NAME: ${{ steps.meta.outputs.version_name }}
+        run: |
+          cd update-repo
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add update.json
+
+          if git diff --cached --quiet; then
+            echo "No manifest changes detected."
+            exit 0
+          fi
+
+          git commit -m "Publish WAQT ${VERSION_NAME} update metadata"
+          git push origin main
+
+      # 13. Cleanup signing key
+      - name: Cleanup signing key
+        if: always()
+        run: |
+          rm -f "$RUNNER_TEMP/waqt-release.jks"
