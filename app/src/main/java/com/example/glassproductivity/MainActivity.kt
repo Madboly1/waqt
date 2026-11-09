@@ -6802,7 +6802,33 @@ class MainActivity : AppCompatActivity() {
                             .setMessage(details)
                             .setNegativeButton(if (isArabic) "لاحقًا" else "Later", null)
                             .setPositiveButton(if (isArabic) "تحميل التحديث" else "Download update") { _, _ ->
-                                openSettingsSafely(Intent(Intent.ACTION_VIEW, Uri.parse(apkUrl)))
+                                try {
+                                    val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as android.app.DownloadManager
+                                    val safeVersion = remoteName.replace(Regex("[^A-Za-z0-9._-]"), "_")
+                                    val request = android.app.DownloadManager.Request(Uri.parse(apkUrl))
+                                        .setTitle(if (isArabic) "تحميل تحديث وَقْت $remoteName" else "Downloading WAQT $remoteName")
+                                        .setDescription(if (isArabic) "سيظهر إشعار عند اكتمال التحميل. اضغط عليه لتثبيت التحديث." else "A notification will appear when the download is complete. Tap it to install.")
+                                        .setMimeType("application/vnd.android.package-archive")
+                                        .setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                        .setAllowedOverMetered(true)
+                                        .setAllowedOverRoaming(false)
+                                        .setDestinationInExternalPublicDir(
+                                            android.os.Environment.DIRECTORY_DOWNLOADS,
+                                            "WAQT-update-$safeVersion.apk"
+                                        )
+                                    downloadManager.enqueue(request)
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        if (isArabic) "بدأ تحميل التحديث… هتلاقي إشعار عند اكتماله." else "Update download started. You'll be notified when it finishes.",
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                } catch (downloadError: Exception) {
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        (if (isArabic) "تعذر بدء التحميل: " else "Could not start download: ") + (downloadError.message ?: "Unknown error"),
+                                        Toast.LENGTH_LONG
+                                    ).show()
+                                }
                             }
                             .show()
                     } else if (manual) {
