@@ -177,6 +177,8 @@ class MainActivity : AppCompatActivity() {
     private var autoSpeakAssistantReply: Boolean = false
     private val chatHistoryStore by lazy { ChatHistoryStore(this) }
     private var activeChatId: String = ""
+    private var activeAIChatDialog: Dialog? = null
+    private var isAIChatMinimized: Boolean = false
 
     private lateinit var rootFrameLayout: FrameLayout
     private lateinit var mainContentContainer: LinearLayout
@@ -771,7 +773,12 @@ class MainActivity : AppCompatActivity() {
             setupDraggableChatHeadTouch(this)
             setOnClickListener {
                 triggerGentleHaptic()
-                showAIChatCopilotModal()
+                val currentDialog = activeAIChatDialog
+                if (currentDialog?.isShowing == true && isAIChatMinimized) {
+                    restoreAIChatDialog(currentDialog)
+                } else if (currentDialog?.isShowing != true) {
+                    showAIChatCopilotModal(activeChatId.takeIf { it.isNotBlank() })
+                }
             }
         }
         rootFrameLayout.addView(floatingAIChatBubble)
@@ -872,6 +879,14 @@ class MainActivity : AppCompatActivity() {
             textSize = 18f
             setPadding(dp(8), 0, dp(8), 0)
             setOnClickListener { showGeminiKeyDialog() }
+        })
+        header.addView(TextView(this).apply {
+            text = "－"
+            textSize = 21f
+            setTextColor(textPrimaryColor())
+            setPadding(dp(8), 0, dp(8), 0)
+            contentDescription = if (isArabic) "تصغير المحادثة" else "Minimize chat"
+            setOnClickListener { minimizeAIChatDialog(dialog) }
         })
         header.addView(TextView(this).apply {
             text = "✕"
@@ -1004,6 +1019,10 @@ class MainActivity : AppCompatActivity() {
         activeChatScroll = chatScroll
         dialog.setOnDismissListener {
             if (chatIsRecording) stopChatVoiceRecording(discard = true)
+            if (activeAIChatDialog === dialog) {
+                activeAIChatDialog = null
+                isAIChatMinimized = false
+            }
             activeChatMessagesBox = null
             activeChatScroll = null
         }
@@ -1011,7 +1030,33 @@ class MainActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.setLayout((resources.displayMetrics.widthPixels * 0.94).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
+        activeAIChatDialog = dialog
+        isAIChatMinimized = false
+        floatingAIChatBubble.visibility = View.VISIBLE
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
+    }
+
+    private fun minimizeAIChatDialog(dialog: Dialog) {
+        if (!dialog.isShowing) return
+        isAIChatMinimized = true
+        floatingAIChatBubble.visibility = View.VISIBLE
+        dialog.window?.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            addFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            decorView.visibility = View.GONE
+        }
+    }
+
+    private fun restoreAIChatDialog(dialog: Dialog) {
+        if (!dialog.isShowing) return
+        dialog.window?.apply {
+            clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            decorView.visibility = View.VISIBLE
+            addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+            setDimAmount(0.48f)
+        }
+        isAIChatMinimized = false
+        activeChatScroll?.post { activeChatScroll?.fullScroll(View.FOCUS_DOWN) }
     }
 
     private fun showChatHistoryDialog(parentDialog: Dialog) {
@@ -1128,8 +1173,10 @@ class MainActivity : AppCompatActivity() {
 - فرّق بين النقاش، والتعلّم، والتخطيط، وطلب تنفيذ إجراء داخل التطبيق.
 
 قواعد تنفيذ الإجراءات (مهمة جدًا):
-- لا تضف أو تكمل أو تحذف أو تعدّل أي مهمة لمجرد أن المستخدم ذكرها أو ناقشها.
-- عند اقتراح خطة، اعرضها أولًا للمراجعة. لا تنشئ مهامًا إلا إذا طلب المستخدم صراحة إضافة الخطوات إلى WAQT أو وافق بوضوح على خطة سبق عرضها.
+- لا تضف أو تكمل أو تحذف أو تعدّل أي مهمة أو عادة لمجرد أن المستخدم ذكرها أو ناقشها.
+- عند اقتراح خطة، اعرضها أولًا للمراجعة. لا تنشئ مهامًا أو عادات إلا إذا طلب المستخدم صراحة إضافتها إلى WAQT أو وافق بوضوح على خطة سبق عرضها.
+- إذا طلب المستخدم إضافة عادة، استخدم add_habit وليس add_task. اختر category من تصنيفات العادات الموجودة في لقطة اليوم، واجعل recurrence daily أو weekly أو custom_days. عند عدم تحديد وقت تذكير استخدم 09:00.
+- لا تدّعِ إضافة عادة إلا بإرسال action من النوع add_habit.
 - طلب خطة أو مناقشة هدف لا يعني الموافقة على إنشاء المهام.
 - لا تنفذ إجراءً غير متاح لك، ولا تدّعِ أنك نفذته.
 - لا تكرر إضافة مهمة موجودة بالفعل.
@@ -1140,6 +1187,7 @@ class MainActivity : AppCompatActivity() {
 اكتب داخل reply إجابة مفيدة ومنظمة. عند بناء خطة استخدم عناوين ومراحل ونقاط قصيرة داخل النص، ولا تختصر الخطة في ٤ سطور إذا كانت تحتاج تفصيلًا.
 الـ actions اختيارية، ولا تستخدمها إلا بعد طلب صريح أو موافقة واضحة:
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
+{"type":"add_habit","title":"اسم العادة","priority":"high|medium|low","category":"health|study|religion|sports أو معرّف تصنيف موجود","hour":9,"minute":0,"recurrence":"daily|weekly|custom_days","custom_days_csv":"1,2,3,4,5,6,7","description":"وصف اختياري"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"start_focus","minutes":25}
@@ -1302,7 +1350,8 @@ class MainActivity : AppCompatActivity() {
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
-            "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
+            "اعمل عادة", "اعمل عادات", "أنشئ عادة", "انشئ عادة", "ضيف عادة", "ضيف عادات", "أضف عادة", "اضف عادة", "سجل عادة", "add habit", "create habit", "add a habit",
+            "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "add habit", "create habit", "add a habit", "do it", "execute the plan"
         ).any { message.contains(it) }
         if (directIntent) return true
         val approval = listOf("موافق", "موافقة", "تمام", "اعتمد", "نفذها", "يلا", "yes", "okay", "ok", "approved", "go ahead")
@@ -1335,6 +1384,39 @@ class MainActivity : AppCompatActivity() {
                         ReminderRepository.addOrUpdateItem(this, item)
                         try { AlarmScheduler.scheduleNextOccurrence(this, item) } catch (_: Exception) {}
                         note = "➕ ضفت مهمة: $title"
+                    }
+                }
+                "add_habit" -> {
+                    val title = a.optString("title").trim()
+                    if (title.isNotBlank()) {
+                        val existing = ReminderRepository.getAllItems(this).firstOrNull {
+                            it.isHabit && it.title.trim().equals(title, ignoreCase = true)
+                        }
+                        if (existing != null) {
+                            note = "ℹ️ العادة موجودة بالفعل: ${existing.title}"
+                        } else {
+                            val categories = ReminderRepository.getAllHabitCategories(this).filterNot { it.id == "all" }
+                            val requestedCategory = a.optString("category", "health").trim()
+                            val category = categories.firstOrNull {
+                                it.id.equals(requestedCategory, ignoreCase = true) || it.name.equals(requestedCategory, ignoreCase = true)
+                            }?.id ?: categories.firstOrNull { it.id == "health" }?.id ?: categories.firstOrNull()?.id ?: "health"
+                            val recurrence = a.optString("recurrence", "daily").let {
+                                if (it in listOf("daily", "weekly", "custom_days")) it else "daily"
+                            }
+                            val validDays = a.optString("custom_days_csv", "1,2,3,4,5,6,7")
+                                .split(",").mapNotNull { it.trim().toIntOrNull() }.filter { it in 1..7 }.distinct().sorted()
+                            val daysCsv = if (recurrence == "custom_days" && validDays.isNotEmpty()) validDays.joinToString(",") else "1,2,3,4,5,6,7"
+                            val habit = ReminderItem(
+                                id = UUID.randomUUID().toString(), title = title, isHabit = true,
+                                hour = a.optInt("hour", 9).coerceIn(0, 23), minute = a.optInt("minute", 0).coerceIn(0, 59),
+                                priority = a.optString("priority", "medium").let { if (it in listOf("high", "medium", "low")) it else "medium" },
+                                category = category, description = a.optString("description", ""), recurrence = recurrence,
+                                customDaysCsv = daysCsv, hasReminder = a.optBoolean("has_reminder", true)
+                            )
+                            ReminderRepository.addOrUpdateItem(this, habit)
+                            try { AlarmScheduler.scheduleNextOccurrence(this, habit) } catch (_: Exception) {}
+                            note = "🌱 ضفت عادة: $title"
+                        }
                     }
                 }
                 "complete_task" -> {
