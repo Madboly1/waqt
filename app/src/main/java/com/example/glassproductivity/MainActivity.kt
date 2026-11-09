@@ -1307,7 +1307,7 @@ class MainActivity : AppCompatActivity() {
         if (directIntent) return true
         val approval = listOf("موافق", "موافقة", "تمام", "اعتمد", "نفذها", "يلا", "yes", "okay", "ok", "approved", "go ahead")
             .any { message == it || message.startsWith("$it ") }
-        val previousAssistantAskedForApproval = listOf("أحولها لمهام", "أضيفها للمهام", "أضيف الخطوات", "أضيف الخطة", "تحب أضيف", "shall i add", "add these to your tasks")
+        val previousAssistantAskedForApproval = listOf("أحولها لمهام", "أضيفها للمهام", "أضيف الخطوات", "أضيف الخطة", "تحب أضيف", "تحب أضيف العادة", "أضيف العادات", "shall i add", "add these to your tasks", "add this habit")
             .any { previousReply.contains(it, ignoreCase = true) }
         return approval && previousAssistantAskedForApproval
     }
