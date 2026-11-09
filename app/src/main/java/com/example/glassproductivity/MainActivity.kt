@@ -3295,83 +3295,47 @@ class MainActivity : AppCompatActivity() {
         val root = FrameLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
+
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-            setPadding(dp(14), dp(12), dp(14), dp(100))
+            setPadding(dp(16), dp(14), dp(16), dp(100))
         }
-        val searchBar = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            background = GradientDrawable().apply {
-                shape = GradientDrawable.RECTANGLE
-                cornerRadius = dp(18).toFloat()
-                setColor(if (isDarkMode) Color.parseColor("#FF1C2B3B") else Color.parseColor("#FFFFFFFF"))
-                setStroke(dp(1), if (isDarkMode) Color.parseColor("#334F7890") else Color.parseColor("#1F203040"))
-            }
-            elevation = dp(2).toFloat()
-            setPadding(dp(15), 0, dp(15), 0)
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(52)).apply { bottomMargin = dp(14) }
-            isClickable = true
-            setOnClickListener { showSearchNotesDialog() }
-        }
-        searchBar.addView(TextView(this).apply {
-            text = "⌕"; textSize = 25f; setTextColor(textMutedColor()); gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(34), ViewGroup.LayoutParams.MATCH_PARENT)
-        })
-        searchBar.addView(TextView(this).apply {
-            text = noteSearchQuery.ifBlank { if (isArabic) "ابحث في ملاحظاتك" else "Search your notes" }
-            textSize = 15f
-            setTextColor(if (noteSearchQuery.isBlank()) textMutedColor() else textPrimaryColor())
-            gravity = Gravity.CENTER_VERTICAL
-            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
-        })
-        searchBar.addView(TextView(this).apply {
-            text = "☷"; textSize = 19f; setTextColor(textMutedColor()); gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(30), ViewGroup.LayoutParams.MATCH_PARENT)
-        })
-        content.addView(searchBar)
         content.addView(buildNoteCategoryRow())
 
-        val pinnedIds = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
-            .getStringSet("waqt_pinned_notes", emptySet())?.toSet() ?: emptySet()
-        val notes = ReminderRepository.getAllNotes(this)
-            .filter { noteSelectedCategory == "all" || it.category == noteSelectedCategory }
-            .filter { noteSearchQuery.isBlank() || it.title.contains(noteSearchQuery, ignoreCase = true) || it.content.contains(noteSearchQuery, ignoreCase = true) }
-            .sortedWith(compareByDescending<NoteItem> { pinnedIds.contains(it.id) })
+        val notes = ReminderRepository.getAllNotes(this).filter {
+            noteSelectedCategory == "all" || it.category == noteSelectedCategory
+        }.filter {
+            noteSearchQuery.isBlank() || it.title.contains(noteSearchQuery, ignoreCase = true) || it.content.contains(noteSearchQuery, ignoreCase = true)
+        }
 
         if (notes.isEmpty()) {
             content.addView(buildEmptyCardPlaceholder(
-                if (isArabic) "مدونتك لسه فاضية" else "Your notes are empty",
-                if (isArabic) "اضغط على علامة + واكتب أول فكرة تيجي في بالك." else "Tap + to capture your first thought."
+                if (isArabic) "لا توجد تدوينات مسجلة" else "No journal entries",
+                if (isArabic) "اضغط + لإضافة تدوينة جديدة، وهتظهر هنا على شكل كارت مستقل."
+                else "Tap + to create a journal entry. Your entries will appear here as cards."
             ))
         } else {
-            val grid = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL; gravity = Gravity.TOP; clipChildren = false; clipToPadding = false
-            }
-            val columnA = LinearLayout(this).apply {
+            val cards = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
-                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { marginEnd = dp(6) }
                 clipChildren = false
+                clipToPadding = false
             }
-            val columnB = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = dp(6) }
-                clipChildren = false
+            notes.forEach { note ->
+                cards.addView(buildSingleNoteCardView(note, true), LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
+                ).apply { bottomMargin = dp(12) })
             }
-            notes.forEachIndexed { index, note ->
-                val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(10) }
-                if (index % 2 == 0) columnA.addView(buildSingleNoteCardView(note, true), params)
-                else columnB.addView(buildSingleNoteCardView(note, true), params)
-            }
-            grid.addView(columnA); grid.addView(columnB)
             val scroll = ScrollView(this).apply {
-                isFillViewport = false; clipToPadding = false; overScrollMode = View.OVER_SCROLL_NEVER
-                setPadding(0, dp(2), 0, dp(10)); addView(grid)
+                isFillViewport = true
+                clipToPadding = false
+                overScrollMode = View.OVER_SCROLL_NEVER
+                addView(cards)
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f)
             }
             content.addView(scroll)
         }
+
         root.addView(content)
         root.addView(buildNotesLeftSlideOutDock())
         root.addView(buildAddFab { showAddOrEditNoteModal(null) })
@@ -3476,7 +3440,7 @@ class MainActivity : AppCompatActivity() {
             }
             setPadding(dp(13), dp(12), dp(13), dp(13))
             isClickable = true; isFocusable = true; elevation = dp(1).toFloat()
-            setOnClickListener { showNoteDetailsPage(note) }
+            setOnClickListener { showAddOrEditNoteModal(note) }
         }
         val top = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         if (note.category.isNotBlank() && note.category != "general") {
@@ -3805,10 +3769,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAddOrEditNoteModal(existingNote: NoteItem?) {
-        val d = Dialog(this)
-        d.requestWindowFeature(Window.FEATURE_NO_TITLE)
         noteAudioPath = existingNote?.audioPath ?: ""
         noteImageUri = existingNote?.imageUri ?: ""
+        val page = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = createGlassCardDrawable(true, false)
+            setPadding(dp(16), dp(12), dp(16), dp(16))
+        }
+        val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        toolbar.addView(TextView(this).apply {
+            text = "‹"; textSize = 30f; gravity = Gravity.CENTER
+            setTextColor(textPrimaryColor()); layoutParams = LinearLayout.LayoutParams(dp(44), dp(48))
+            setOnClickListener { renderCurrentTab() }
+        })
+        toolbar.addView(TextView(this).apply {
+            text = if (existingNote == null) (if (isArabic) "تدوينة جديدة" else "New journal entry") else (if (isArabic) "تعديل التدوينة" else "Edit entry")
+            textSize = 18f; setTypeface(typeface, Typeface.BOLD); setTextColor(textPrimaryColor())
+            gravity = Gravity.CENTER_VERTICAL
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+        })
+        page.addView(toolbar)
         val v = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createPillDrawable(bgCardColor(), dp(22), COLOR_TEAL)
@@ -3934,7 +3914,6 @@ class MainActivity : AppCompatActivity() {
                         imageUri = noteImageUri
                     )
                     ReminderRepository.addOrUpdateNote(this@MainActivity, note)
-                    d.dismiss()
                     renderCurrentTab()
                 }
             }
@@ -3946,15 +3925,9 @@ class MainActivity : AppCompatActivity() {
             overScrollMode = View.OVER_SCROLL_NEVER
             addView(v)
         }
-        d.setContentView(editorScroll)
-        d.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        d.show()
-        styleGlassDialog(d)
-        d.window?.setLayout(
-            (resources.displayMetrics.widthPixels * 0.92).toInt(),
-            (resources.displayMetrics.heightPixels * 0.82).toInt()
-        )
-        d.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        page.addView(editorScroll, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
+        tabContentHost.removeAllViews()
+        tabContentHost.addView(page, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
 
     private fun launchFloatingQuickNoteOverlay() {
