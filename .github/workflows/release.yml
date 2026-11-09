@@ -122,10 +122,23 @@ jobs:
           VERSION_CODE: ${{ steps.meta.outputs.version_code }}
           APK_PATH: ${{ steps.meta.outputs.apk }}
         run: |
-          gh release create "v${VERSION_NAME}" \
-            "${APK_PATH}#WAQT-${VERSION_NAME}.apk" \
-            --title "WAQT ${VERSION_NAME}" \
-            --notes "WAQT Android release ${VERSION_NAME} (versionCode ${VERSION_CODE})."
+          TAG="v${VERSION_NAME}"
+          NOTES="WAQT Android release ${VERSION_NAME} (versionCode ${VERSION_CODE})."
+
+          # Reuse an existing release when this version has already been published.
+          # Always replace the canonical OTA asset so update.json keeps working.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists; replacing app-release.apk."
+            gh release upload "$TAG" "${APK_PATH}#app-release.apk" --clobber
+            gh release edit "$TAG" \
+              --title "WAQT ${VERSION_NAME}" \
+              --notes "$NOTES"
+          else
+            gh release create "$TAG" \
+              "${APK_PATH}#app-release.apk" \
+              --title "WAQT ${VERSION_NAME}" \
+              --notes "$NOTES"
+          fi
 
       # 11. Update OTA manifest
       - name: Update OTA manifest
