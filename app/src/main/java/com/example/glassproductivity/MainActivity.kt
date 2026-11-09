@@ -177,6 +177,7 @@ class MainActivity : AppCompatActivity() {
     private var autoSpeakAssistantReply: Boolean = false
     private val chatHistoryStore by lazy { ChatHistoryStore(this) }
     private var activeChatId: String = ""
+    private var activeAIChatDialog: Dialog? = null
 
     private lateinit var rootFrameLayout: FrameLayout
     private lateinit var mainContentContainer: LinearLayout
@@ -771,7 +772,13 @@ class MainActivity : AppCompatActivity() {
             setupDraggableChatHeadTouch(this)
             setOnClickListener {
                 triggerGentleHaptic()
-                showAIChatCopilotModal()
+                val minimizedDialog = activeAIChatDialog
+                if (minimizedDialog != null) {
+                    visibility = View.GONE
+                    minimizedDialog.show()
+                } else {
+                    showAIChatCopilotModal()
+                }
             }
         }
         rootFrameLayout.addView(floatingAIChatBubble)
@@ -872,6 +879,17 @@ class MainActivity : AppCompatActivity() {
             textSize = 18f
             setPadding(dp(8), 0, dp(8), 0)
             setOnClickListener { showGeminiKeyDialog() }
+        })
+        header.addView(TextView(this).apply {
+            text = "—"
+            textSize = 20f
+            setPadding(dp(8), 0, dp(8), 0)
+            contentDescription = if (isArabic) "تصغير المحادثة" else "Minimize chat"
+            setOnClickListener {
+                if (chatIsRecording) stopChatVoiceRecording(discard = true)
+                dialog.hide()
+                floatingAIChatBubble.visibility = View.VISIBLE
+            }
         })
         header.addView(TextView(this).apply {
             text = "✕"
@@ -1006,11 +1024,15 @@ class MainActivity : AppCompatActivity() {
             if (chatIsRecording) stopChatVoiceRecording(discard = true)
             activeChatMessagesBox = null
             activeChatScroll = null
+            if (activeAIChatDialog === dialog) activeAIChatDialog = null
+            floatingAIChatBubble.visibility = View.VISIBLE
         }
         dialog.setContentView(root)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.setLayout((resources.displayMetrics.widthPixels * 0.94).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
+        activeAIChatDialog = dialog
+        floatingAIChatBubble.visibility = View.GONE
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
     }
 
@@ -1140,6 +1162,7 @@ class MainActivity : AppCompatActivity() {
 اكتب داخل reply إجابة مفيدة ومنظمة. عند بناء خطة استخدم عناوين ومراحل ونقاط قصيرة داخل النص، ولا تختصر الخطة في ٤ سطور إذا كانت تحتاج تفصيلًا.
 الـ actions اختيارية، ولا تستخدمها إلا بعد طلب صريح أو موافقة واضحة:
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
+{"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"start_focus","minutes":25}
@@ -1302,6 +1325,8 @@ class MainActivity : AppCompatActivity() {
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
+            "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
+            "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
         ).any { message.contains(it) }
         if (directIntent) return true
@@ -1335,6 +1360,37 @@ class MainActivity : AppCompatActivity() {
                         ReminderRepository.addOrUpdateItem(this, item)
                         try { AlarmScheduler.scheduleNextOccurrence(this, item) } catch (_: Exception) {}
                         note = "➕ ضفت مهمة: $title"
+                    }
+                }
+                "add_habit" -> {
+                    val title = a.optString("title").trim().take(100)
+                    if (title.isNotBlank()) {
+                        val existing = ReminderRepository.getAllItems(this).firstOrNull {
+                            it.isHabit && it.title.trim().equals(title, ignoreCase = true)
+                        }
+                        if (existing != null) {
+                            note = "ℹ️ العادة موجودة بالفعل: ${existing.title}"
+                        } else {
+                            val requestedCategory = a.optString("category", "study").trim()
+                            val categories = ReminderRepository.getAllHabitCategories(this)
+                            val category = categories.firstOrNull {
+                                it.id.equals(requestedCategory, ignoreCase = true) || it.name.equals(requestedCategory, ignoreCase = true)
+                            }?.id ?: "study"
+                            val hasReminder = a.optBoolean("has_reminder", true)
+                            val habit = ReminderItem(
+                                id = UUID.randomUUID().toString(), title = title, isHabit = true,
+                                hour = a.optInt("hour", 9).coerceIn(0, 23),
+                                minute = a.optInt("minute", 0).coerceIn(0, 59),
+                                priority = a.optString("priority", "medium").let { if (it in listOf("high", "medium", "low")) it else "medium" },
+                                category = category, description = a.optString("description", "").take(240),
+                                recurrence = "daily", customDaysCsv = "1,2,3,4,5,6,7",
+                                targetValue = a.optInt("target_value", 1).coerceIn(1, 1000),
+                                targetUnit = a.optString("target_unit", "").take(20), hasReminder = hasReminder
+                            )
+                            ReminderRepository.addOrUpdateItem(this, habit)
+                            if (hasReminder) try { AlarmScheduler.scheduleNextOccurrence(this, habit) } catch (_: Exception) {}
+                            note = "🌱 ضفت عادة: $title${if (hasReminder) " — تذكير ${String.format(Locale.US, "%02d:%02d", habit.hour, habit.minute)}" else " — بدون تذكير"}"
+                        }
                     }
                 }
                 "complete_task" -> {
@@ -1771,7 +1827,33 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
+                val btnAddHabit = TextView(this@MainActivity).apply {
+                    text = if (isArabic) "+ عادة 🌱" else "+ Habit"
+                    textSize = 10f
+                    gravity = Gravity.CENTER
+                    setTypeface(typeface, Typeface.BOLD)
+                    setTextColor(textPrimaryColor())
+                    background = createPillDrawable(bgCardColor(), dp(10), COLOR_TEAL)
+                    setPadding(dp(6), dp(6), dp(6), dp(6))
+                    layoutParams = LinearLayout.LayoutParams(0, dp(34), 0.8f).apply { marginEnd = dp(5) }
+                    setOnClickListener {
+                        val title = taskTitle.take(100)
+                        val existing = ReminderRepository.getAllItems(this@MainActivity).firstOrNull { it.isHabit && it.title.equals(title, ignoreCase = true) }
+                        if (existing != null) {
+                            Toast.makeText(this@MainActivity, if (isArabic) "العادة موجودة بالفعل" else "Habit already exists", Toast.LENGTH_SHORT).show()
+                        } else {
+                            val habit = ReminderItem(id = UUID.randomUUID().toString(), title = title, isHabit = true, hour = 9, minute = 0, priority = "medium", category = "study")
+                            ReminderRepository.addOrUpdateItem(this@MainActivity, habit)
+                            try { AlarmScheduler.scheduleNextOccurrence(this@MainActivity, habit) } catch (_: Exception) {}
+                            Toast.makeText(this@MainActivity, if (isArabic) "🌱 اتضافت العادة" else "Habit added", Toast.LENGTH_SHORT).show()
+                            renderCurrentTab()
+                        }
+                    }
+                }
+                btnAddTask.layoutParams = LinearLayout.LayoutParams(0, dp(34), 1f).apply { marginEnd = dp(5) }
+                btnAddNote.layoutParams = LinearLayout.LayoutParams(0, dp(34), 1f).apply { marginEnd = dp(5) }
                 btnRow.addView(btnAddTask)
+                btnRow.addView(btnAddHabit)
                 btnRow.addView(btnAddNote)
                 addView(btnRow)
             }
