@@ -154,7 +154,7 @@ jobs:
           data["updateMessage"] = "تحديث جديد متاح لتطبيق وَقْت ✨"
           data["apkDownloadUrl"] = (
               f"https://github.com/Madboly1/waqt/releases/download/"
-              f"v{version_name}/WAQT-{version_name}.apk"
+              f"v{version_name}/app-release.apk"
           )
 
           with open(path, "w", encoding="utf-8") as f:
