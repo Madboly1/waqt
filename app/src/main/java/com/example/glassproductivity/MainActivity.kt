@@ -3295,47 +3295,83 @@ class MainActivity : AppCompatActivity() {
         val root = FrameLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
-
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-            setPadding(dp(16), dp(14), dp(16), dp(100))
+            setPadding(dp(14), dp(12), dp(14), dp(100))
         }
+        val searchBar = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            background = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE
+                cornerRadius = dp(18).toFloat()
+                setColor(if (isDarkMode) Color.parseColor("#FF1C2B3B") else Color.parseColor("#FFFFFFFF"))
+                setStroke(dp(1), if (isDarkMode) Color.parseColor("#334F7890") else Color.parseColor("#1F203040"))
+            }
+            elevation = dp(2).toFloat()
+            setPadding(dp(15), 0, dp(15), 0)
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(52)).apply { bottomMargin = dp(14) }
+            isClickable = true
+            setOnClickListener { showSearchNotesDialog() }
+        }
+        searchBar.addView(TextView(this).apply {
+            text = "⌕"; textSize = 25f; setTextColor(textMutedColor()); gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(dp(34), ViewGroup.LayoutParams.MATCH_PARENT)
+        })
+        searchBar.addView(TextView(this).apply {
+            text = noteSearchQuery.ifBlank { if (isArabic) "ابحث في ملاحظاتك" else "Search your notes" }
+            textSize = 15f
+            setTextColor(if (noteSearchQuery.isBlank()) textMutedColor() else textPrimaryColor())
+            gravity = Gravity.CENTER_VERTICAL
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
+        })
+        searchBar.addView(TextView(this).apply {
+            text = "☷"; textSize = 19f; setTextColor(textMutedColor()); gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(dp(30), ViewGroup.LayoutParams.MATCH_PARENT)
+        })
+        content.addView(searchBar)
         content.addView(buildNoteCategoryRow())
 
-        val notes = ReminderRepository.getAllNotes(this).filter {
-            noteSelectedCategory == "all" || it.category == noteSelectedCategory
-        }.filter {
-            noteSearchQuery.isBlank() || it.title.contains(noteSearchQuery, ignoreCase = true) || it.content.contains(noteSearchQuery, ignoreCase = true)
-        }
+        val pinnedIds = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+            .getStringSet("waqt_pinned_notes", emptySet())?.toSet() ?: emptySet()
+        val notes = ReminderRepository.getAllNotes(this)
+            .filter { noteSelectedCategory == "all" || it.category == noteSelectedCategory }
+            .filter { noteSearchQuery.isBlank() || it.title.contains(noteSearchQuery, ignoreCase = true) || it.content.contains(noteSearchQuery, ignoreCase = true) }
+            .sortedWith(compareByDescending<NoteItem> { pinnedIds.contains(it.id) })
 
         if (notes.isEmpty()) {
             content.addView(buildEmptyCardPlaceholder(
-                if (isArabic) "لا توجد تدوينات مسجلة" else "No journal entries",
-                if (isArabic) "اضغط + لإضافة تدوينة جديدة، وهتظهر هنا على شكل كارت مستقل."
-                else "Tap + to create a journal entry. Your entries will appear here as cards."
+                if (isArabic) "مدونتك لسه فاضية" else "Your notes are empty",
+                if (isArabic) "اضغط على علامة + واكتب أول فكرة تيجي في بالك." else "Tap + to capture your first thought."
             ))
         } else {
-            val cards = LinearLayout(this).apply {
+            val grid = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL; gravity = Gravity.TOP; clipChildren = false; clipToPadding = false
+            }
+            val columnA = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { marginEnd = dp(6) }
                 clipChildren = false
-                clipToPadding = false
             }
-            notes.forEach { note ->
-                cards.addView(buildSingleNoteCardView(note, true), LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-                ).apply { bottomMargin = dp(12) })
+            val columnB = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = dp(6) }
+                clipChildren = false
             }
+            notes.forEachIndexed { index, note ->
+                val params = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(10) }
+                if (index % 2 == 0) columnA.addView(buildSingleNoteCardView(note, true), params)
+                else columnB.addView(buildSingleNoteCardView(note, true), params)
+            }
+            grid.addView(columnA); grid.addView(columnB)
             val scroll = ScrollView(this).apply {
-                isFillViewport = true
-                clipToPadding = false
-                overScrollMode = View.OVER_SCROLL_NEVER
-                addView(cards)
+                isFillViewport = false; clipToPadding = false; overScrollMode = View.OVER_SCROLL_NEVER
+                setPadding(0, dp(2), 0, dp(10)); addView(grid)
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f)
             }
             content.addView(scroll)
         }
-
         root.addView(content)
         root.addView(buildNotesLeftSlideOutDock())
         root.addView(buildAddFab { showAddOrEditNoteModal(null) })
@@ -3422,66 +3458,76 @@ class MainActivity : AppCompatActivity() {
         val displayTitle = note.title.takeIf { it.isNotBlank() && it != "ملاحظة" }
             ?: note.content.lineSequence().firstOrNull { it.isNotBlank() }?.trim()?.take(64)
             ?: if (isArabic) "ملاحظة بدون عنوان" else "Untitled note"
-        val preview = note.content.lineSequence().firstOrNull { it.isNotBlank() }?.trim().orEmpty()
-
+        val preview = note.content.trim()
+        val pinned = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+            .getStringSet("waqt_pinned_notes", emptySet())?.contains(note.id) == true
+        val palette = if (isDarkMode) listOf(
+            "#FF263747", "#FF3A3544", "#FF3A3B2C", "#FF253C3A", "#FF3C3030", "#FF30394A"
+        ) else listOf(
+            "#FFFFF4D6", "#FFFBE3E3", "#FFE5F3EA", "#FFE7EDFA", "#FFF2E5FA", "#FFFFEAD8"
+        )
+        val cardColor = Color.parseColor(palette[(note.id.hashCode().ushr(1) % palette.size)])
         val card = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlassCardDrawable(isForeground, false)
-            setPadding(dp(18), dp(16), dp(18), dp(16))
-            isClickable = true
-            isFocusable = true
-            elevation = dp(5).toFloat()
+            background = GradientDrawable().apply {
+                shape = GradientDrawable.RECTANGLE; cornerRadius = dp(17).toFloat()
+                setColor(cardColor)
+                setStroke(dp(1), if (isDarkMode) Color.parseColor("#335D7890") else Color.parseColor("#1A465060"))
+            }
+            setPadding(dp(13), dp(12), dp(13), dp(13))
+            isClickable = true; isFocusable = true; elevation = dp(1).toFloat()
             setOnClickListener { showNoteDetailsPage(note) }
         }
-
-        val top = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-        }
+        val top = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        if (note.category.isNotBlank() && note.category != "general") {
+            top.addView(TextView(this).apply {
+                text = note.category; textSize = 10f
+                setTextColor(if (isDarkMode) Color.parseColor("#FFD3E3EF") else Color.parseColor("#FF52616C"))
+                maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.END
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            })
+        } else top.addView(View(this), LinearLayout.LayoutParams(0, dp(1), 1f))
         top.addView(TextView(this).apply {
-            text = "📌 ${note.category}"
-            textSize = 12f
-            setTextColor(accentOrangeColor())
-            setPadding(dp(9), dp(5), dp(9), dp(5))
-            background = createPillDrawable(bgElevatedColor(), dp(10), null)
-        })
-        top.addView(View(this), LinearLayout.LayoutParams(0, dp(1), 1f))
-        top.addView(TextView(this).apply {
-            text = if (isArabic) "فتح التدوينة  ↗" else "Open entry  ↗"
-            textSize = 11f
-            setTextColor(accentTealColor())
+            text = if (pinned) "📌" else "📍"; textSize = 15f; gravity = Gravity.CENTER
+            contentDescription = if (isArabic) "تثبيت الملاحظة" else "Pin note"
+            setPadding(dp(5), 0, dp(2), 0)
+            setOnClickListener {
+                val prefs = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+                val ids = prefs.getStringSet("waqt_pinned_notes", emptySet())?.toMutableSet() ?: mutableSetOf()
+                if (pinned) ids.remove(note.id) else ids.add(note.id)
+                prefs.edit().putStringSet("waqt_pinned_notes", ids).apply()
+                renderCurrentTab()
+            }
         })
         card.addView(top)
-
         card.addView(TextView(this).apply {
             text = displayTitle
-            setTextColor(textPrimaryColor())
-            textSize = 18f
-            setTypeface(typeface, Typeface.BOLD)
-            maxLines = 1
+            setTextColor(if (isDarkMode) Color.parseColor("#FFF4F7FA") else Color.parseColor("#FF20262C"))
+            textSize = 16f; setTypeface(typeface, Typeface.BOLD); maxLines = 4
             ellipsize = android.text.TextUtils.TruncateAt.END
-            setPadding(0, dp(12), 0, dp(5))
+            setPadding(0, dp(8), 0, dp(5))
         })
-
-        if (preview.isNotBlank()) {
-            card.addView(TextView(this).apply {
-                text = preview
-                setTextColor(textMutedColor())
-                textSize = 13f
-                maxLines = 2
-                ellipsize = android.text.TextUtils.TruncateAt.END
-                setLineSpacing(dp(3).toFloat(), 1f)
-            })
+        if (preview.isNotBlank()) card.addView(TextView(this).apply {
+            text = preview
+            setTextColor(if (isDarkMode) Color.parseColor("#FFD5E0E8") else Color.parseColor("#FF414B54"))
+            textSize = 13f; maxLines = 8; ellipsize = android.text.TextUtils.TruncateAt.END
+            setLineSpacing(dp(3).toFloat(), 1.02f)
+        })
+        if (note.imageUri.isNotBlank()) {
+            runCatching {
+                card.addView(ImageView(this).apply {
+                    setImageURI(Uri.parse(note.imageUri)); scaleType = ImageView.ScaleType.CENTER_CROP
+                    layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(118)).apply { topMargin = dp(9) }
+                    background = GradientDrawable().apply { cornerRadius = dp(10).toFloat(); setColor(if (isDarkMode) Color.parseColor("#FF18232D") else Color.WHITE) }
+                    clipToOutline = true
+                })
+            }
         }
-
-        val attachments = mutableListOf<String>()
-        if (note.imageUri.isNotBlank()) attachments.add("🖼 ${if (isArabic) "صورة" else "Image"}")
-        if (note.audioPath.isNotBlank() && java.io.File(note.audioPath).exists()) attachments.add("🎙 ${if (isArabic) "تسجيل صوتي" else "Voice note"}")
-        if (attachments.isNotEmpty()) {
+        if (note.audioPath.isNotBlank() && java.io.File(note.audioPath).exists()) {
             card.addView(TextView(this).apply {
-                text = attachments.joinToString("   •   ")
+                text = "🎙  ${if (isArabic) "تسجيل صوتي" else "Voice note"}"
                 textSize = 11f
-                setTextColor(accentTealColor())
+                setTextColor(if (isDarkMode) Color.parseColor("#FFB9E7E3") else Color.parseColor("#FF236C67"))
                 setPadding(0, dp(10), 0, 0)
             })
         }
