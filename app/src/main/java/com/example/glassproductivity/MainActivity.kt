@@ -1974,7 +1974,9 @@ class MainActivity : AppCompatActivity() {
         val total = tasks.size
         val activeIdx = currentTaskCarouselIndex.coerceIn(0, total - 1)
         val stackContainer = FrameLayout(this).apply {
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
+            // The carousel must wrap its content; MATCH_PARENT height made each
+            // note card stretch to the full available screen height.
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(330))
             clipChildren = false
             clipToPadding = false
             cameraDistance = dp(12000).toFloat()
@@ -2004,11 +2006,12 @@ class MainActivity : AppCompatActivity() {
         // cards remain visibly present, matching the layered reference layout.
         val cardWidth = (resources.displayMetrics.widthPixels * 0.72f).toInt()
         fun prepareStackCard(card: View) {
-            (card.layoutParams as? FrameLayout.LayoutParams)?.let { lp ->
-                lp.width = cardWidth
-                lp.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-                card.layoutParams = lp
-            }
+            val lp = (card.layoutParams as? FrameLayout.LayoutParams)
+                ?: FrameLayout.LayoutParams(cardWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+            lp.width = cardWidth
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            lp.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            card.layoutParams = lp
         }
 
         fun styleRearCard(card: View, side: Int) {
@@ -3334,8 +3337,9 @@ class MainActivity : AppCompatActivity() {
             setOnClickListener { launchFloatingQuickNoteOverlay() }
         }
         root.addView(quickJournalButton, FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-            gravity = Gravity.BOTTOM or Gravity.LEFT
-            leftMargin = dp(16); bottomMargin = dp(22)
+            // Keep this action clear of the add FAB and the side dock.
+            gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+            bottomMargin = dp(26)
         })
         return root
     }
@@ -5059,7 +5063,7 @@ class MainActivity : AppCompatActivity() {
         var startX = 0f
         var startY = 0f
 
-        card.setOnTouchListener { _, event ->
+        card.setOnTouchListener { touchedView, event ->
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> {
                     startX = event.x
@@ -5075,10 +5079,15 @@ class MainActivity : AppCompatActivity() {
                         } else {
                             onSwipe(if (dx < 0) 1 else -1)
                         }
+                    } else {
+                        // The touch listener consumes the gesture for swipe detection,
+                        // so explicitly dispatch a normal click for taps.
+                        touchedView.performClick()
                     }
                     true
                 }
-                else -> false
+                MotionEvent.ACTION_CANCEL -> true
+                else -> true
             }
         }
     }
