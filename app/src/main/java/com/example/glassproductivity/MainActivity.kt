@@ -3350,7 +3350,7 @@ class MainActivity : AppCompatActivity() {
         val total = notes.size
         val activeIdx = currentNoteCarouselIndex.coerceIn(0, total - 1)
         val stackContainer = FrameLayout(this).apply {
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(330))
             clipChildren = false
             clipToPadding = false
             cameraDistance = dp(12000).toFloat()
@@ -3377,11 +3377,12 @@ class MainActivity : AppCompatActivity() {
         // cards remain visibly present, matching the layered reference layout.
         val cardWidth = (resources.displayMetrics.widthPixels * 0.78f).toInt()
         fun prepareStackCard(card: View) {
-            (card.layoutParams as? FrameLayout.LayoutParams)?.let { lp ->
-                lp.width = cardWidth
-                lp.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
-                card.layoutParams = lp
-            }
+            val lp = (card.layoutParams as? FrameLayout.LayoutParams)
+                ?: FrameLayout.LayoutParams(cardWidth, ViewGroup.LayoutParams.WRAP_CONTENT)
+            lp.width = cardWidth
+            lp.height = ViewGroup.LayoutParams.WRAP_CONTENT
+            lp.gravity = Gravity.TOP or Gravity.CENTER_HORIZONTAL
+            card.layoutParams = lp
         }
 
         fun styleRearCard(card: View, side: Int) {
