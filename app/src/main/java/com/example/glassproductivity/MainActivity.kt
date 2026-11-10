@@ -3316,24 +3316,8 @@ class MainActivity : AppCompatActivity() {
                 else "Tap + to create a journal entry. Your entries will appear here as cards."
             ))
         } else {
-            val cards = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                clipChildren = false
-                clipToPadding = false
-            }
-            notes.forEach { note ->
-                cards.addView(buildSingleNoteCardView(note, true), LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
-                ).apply { bottomMargin = dp(12) })
-            }
-            val scroll = ScrollView(this).apply {
-                isFillViewport = true
-                clipToPadding = false
-                overScrollMode = View.OVER_SCROLL_NEVER
-                addView(cards)
-                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f)
-            }
-            content.addView(scroll)
+            currentNoteCarouselIndex = currentNoteCarouselIndex.coerceIn(0, notes.lastIndex)
+            content.addView(buildStackedNotesCarousel(notes))
         }
 
         root.addView(content)
