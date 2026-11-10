@@ -2002,7 +2002,7 @@ class MainActivity : AppCompatActivity() {
 
         // Keep the active card narrower than the viewport so both neighboring
         // cards remain visibly present, matching the layered reference layout.
-        val cardWidth = (resources.displayMetrics.widthPixels * 0.78f).toInt()
+        val cardWidth = (resources.displayMetrics.widthPixels * 0.72f).toInt()
         fun prepareStackCard(card: View) {
             (card.layoutParams as? FrameLayout.LayoutParams)?.let { lp ->
                 lp.width = cardWidth
@@ -3323,6 +3323,20 @@ class MainActivity : AppCompatActivity() {
         root.addView(content)
         root.addView(buildNotesLeftSlideOutDock())
         root.addView(buildAddFab { showAddOrEditNoteModal(null) })
+        val quickJournalButton = TextView(this).apply {
+            text = if (isArabic) "✎ يومياتي" else "✎ Quick journal"
+            textSize = 12f
+            gravity = Gravity.CENTER
+            setTextColor(textPrimaryColor())
+            background = createGlassCardDrawable(true, false)
+            setPadding(dp(14), dp(11), dp(14), dp(11))
+            elevation = dp(12).toFloat()
+            setOnClickListener { launchFloatingQuickNoteOverlay() }
+        }
+        root.addView(quickJournalButton, FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+            gravity = Gravity.BOTTOM or Gravity.LEFT
+            leftMargin = dp(16); bottomMargin = dp(22)
+        })
         return root
     }
 
@@ -3409,22 +3423,17 @@ class MainActivity : AppCompatActivity() {
         val preview = note.content.trim()
         val pinned = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
             .getStringSet("waqt_pinned_notes", emptySet())?.contains(note.id) == true
-        val palette = if (isDarkMode) listOf(
-            "#FF263747", "#FF3A3544", "#FF3A3B2C", "#FF253C3A", "#FF3C3030", "#FF30394A"
-        ) else listOf(
-            "#FFFFF4D6", "#FFFBE3E3", "#FFE5F3EA", "#FFE7EDFA", "#FFF2E5FA", "#FFFFEAD8"
-        )
-        val cardColor = Color.parseColor(palette[(note.id.hashCode().ushr(1) % palette.size)])
+        val cardColor = if (isDarkMode) Color.parseColor("#B8203B50") else Color.parseColor("#C9FFFFFF")
         val card = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = GradientDrawable().apply {
-                shape = GradientDrawable.RECTANGLE; cornerRadius = dp(17).toFloat()
+                shape = GradientDrawable.RECTANGLE; cornerRadius = dp(22).toFloat()
                 setColor(cardColor)
-                setStroke(dp(1), if (isDarkMode) Color.parseColor("#335D7890") else Color.parseColor("#1A465060"))
+                setStroke(dp(1), if (isDarkMode) Color.parseColor("#665DD5E8") else Color.parseColor("#6680B8C4"))
             }
             setPadding(dp(13), dp(12), dp(13), dp(13))
             isClickable = true; isFocusable = true; elevation = dp(1).toFloat()
-            setOnClickListener { showAddOrEditNoteModal(note) }
+            setOnClickListener { showNoteDetailsPage(note) }
         }
         val top = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         if (note.category.isNotBlank() && note.category != "general") {
@@ -3458,7 +3467,7 @@ class MainActivity : AppCompatActivity() {
         if (preview.isNotBlank()) card.addView(TextView(this).apply {
             text = preview
             setTextColor(if (isDarkMode) Color.parseColor("#FFD5E0E8") else Color.parseColor("#FF414B54"))
-            textSize = 13f; maxLines = 8; ellipsize = android.text.TextUtils.TruncateAt.END
+            textSize = 13f; maxLines = 3; ellipsize = android.text.TextUtils.TruncateAt.END
             setLineSpacing(dp(3).toFloat(), 1.02f)
         })
         if (note.imageUri.isNotBlank()) {
@@ -3483,174 +3492,146 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showNoteDetailsPage(note: NoteItem) {
-        val dialog = Dialog(this)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createGlassCardDrawable(true, false)
-            setPadding(dp(18), dp(14), dp(18), dp(16))
+            setPadding(dp(18), dp(12), dp(18), dp(16))
         }
-
-        val toolbar = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-        }
-        val close = TextView(this).apply {
-            text = "‹"
-            textSize = 30f
-            gravity = Gravity.CENTER
-            setTextColor(textPrimaryColor())
-            layoutParams = LinearLayout.LayoutParams(dp(42), dp(44))
-            setOnClickListener { dialog.dismiss() }
-        }
-        toolbar.addView(close)
+        val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        toolbar.addView(TextView(this).apply {
+            text = "‹"; textSize = 30f; gravity = Gravity.CENTER
+            setTextColor(textPrimaryColor()); layoutParams = LinearLayout.LayoutParams(dp(44), dp(48))
+            setOnClickListener { renderCurrentTab() }
+        })
         toolbar.addView(TextView(this).apply {
             text = if (isArabic) "التدوينة" else "Journal entry"
-            textSize = 17f
-            setTypeface(typeface, Typeface.BOLD)
-            setTextColor(textPrimaryColor())
+            textSize = 18f; setTypeface(typeface, Typeface.BOLD); setTextColor(textPrimaryColor())
+            gravity = Gravity.CENTER
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-            gravity = Gravity.CENTER
         })
-        val edit = TextView(this).apply {
-            text = "✏️"
-            textSize = 20f
-            gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(42), dp(44))
-            setOnClickListener {
-                dialog.dismiss()
-                showAddOrEditNoteModal(note)
-            }
-        }
-        toolbar.addView(edit)
-        val delete = TextView(this).apply {
-            text = "🗑"
-            textSize = 19f
-            gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(42), dp(44))
+        toolbar.addView(TextView(this).apply {
+            text = "✏️"; textSize = 20f; gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(dp(44), dp(48))
+            setOnClickListener { showAddOrEditNoteModal(note) }
+        })
+        toolbar.addView(TextView(this).apply {
+            text = "🗑"; textSize = 18f; gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(dp(40), dp(48))
             setOnClickListener {
                 AlertDialog.Builder(this@MainActivity)
                     .setMessage(if (isArabic) "تحذف التدوينة دي؟" else "Delete this entry?")
                     .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
                     .setPositiveButton(if (isArabic) "حذف" else "Delete") { _, _ ->
                         ReminderRepository.deleteNote(this@MainActivity, note.id)
-                        dialog.dismiss()
                         renderCurrentTab()
                     }.show()
             }
-        }
-        toolbar.addView(delete)
+        })
         page.addView(toolbar)
 
-        val scroll = ScrollView(this).apply {
-            isFillViewport = true
-            overScrollMode = View.OVER_SCROLL_NEVER
-        }
+        val scroll = ScrollView(this).apply { isFillViewport = true; overScrollMode = View.OVER_SCROLL_NEVER }
         val body = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(2), dp(12), dp(2), dp(28))
+            setPadding(dp(4), dp(14), dp(4), dp(30))
         }
         body.addView(TextView(this).apply {
             text = note.title.takeIf { it.isNotBlank() && it != "ملاحظة" }
                 ?: note.content.lineSequence().firstOrNull { it.isNotBlank() }?.trim()
                 ?: if (isArabic) "ملاحظة بدون عنوان" else "Untitled note"
-            textSize = 24f
-            setTypeface(typeface, Typeface.BOLD)
-            setTextColor(textPrimaryColor())
-            setPadding(0, 0, 0, dp(8))
+            textSize = 25f; setTypeface(typeface, Typeface.BOLD)
+            setTextColor(textPrimaryColor()); setPadding(0, 0, 0, dp(10))
         })
-        body.addView(TextView(this).apply {
-            text = "📌 ${note.category}"
-            textSize = 12f
-            setTextColor(accentOrangeColor())
-            setPadding(0, 0, 0, dp(18))
-        })
-
-        if (note.content.isNotBlank()) {
+        if (note.category.isNotBlank() && note.category != "general") {
             body.addView(TextView(this).apply {
-                text = note.content
-                textSize = 16f
-                setTextColor(textPrimaryColor())
-                gravity = Gravity.TOP or Gravity.START
-                setLineSpacing(dp(6).toFloat(), 1.05f)
-                setPadding(0, 0, 0, dp(18))
+                text = "🏷 ${note.category}"; textSize = 12f
+                setTextColor(accentTealColor()); setPadding(0, 0, 0, dp(18))
             })
         }
-
+        if (note.content.isNotBlank()) {
+            body.addView(TextView(this).apply {
+                text = note.content; textSize = 16f; setTextColor(textPrimaryColor())
+                gravity = Gravity.TOP or Gravity.START
+                setLineSpacing(dp(7).toFloat(), 1.06f)
+                setPadding(0, 0, 0, dp(20))
+            })
+        }
         if (note.imageUri.isNotBlank()) {
-            try {
-                val image = ImageView(this).apply {
+            runCatching {
+                body.addView(ImageView(this).apply {
                     setImageURI(Uri.parse(note.imageUri))
-                    scaleType = ImageView.ScaleType.FIT_CENTER
-                    adjustViewBounds = true
-                    background = createGlass3DDrawable(dp(16))
-                    clipToOutline = true
-                    layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                        bottomMargin = dp(18)
-                    }
+                    scaleType = ImageView.ScaleType.CENTER_CROP
+                    layoutParams = LinearLayout.LayoutParams(dp(190), dp(150)).apply { bottomMargin = dp(18) }
+                    background = createGlass3DDrawable(dp(14)); clipToOutline = true
+                    contentDescription = if (isArabic) "صورة مرفقة - اضغط للتكبير" else "Attached image - tap to enlarge"
                     setOnClickListener {
-                        val previewDialog = Dialog(this@MainActivity)
-                        val large = ImageView(this@MainActivity).apply {
-                            setImageURI(Uri.parse(note.imageUri))
-                            scaleType = ImageView.ScaleType.FIT_CENTER
+                        val preview = Dialog(this@MainActivity)
+                        val full = ImageView(this@MainActivity).apply {
+                            setImageURI(Uri.parse(note.imageUri)); scaleType = ImageView.ScaleType.FIT_CENTER
                             setBackgroundColor(Color.BLACK)
+                            setOnClickListener { preview.dismiss() }
                         }
-                        previewDialog.setContentView(large)
-                        previewDialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-                        previewDialog.show()
-                        previewDialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                        preview.setContentView(full)
+                        preview.window?.setBackgroundDrawableResource(android.R.color.black)
+                        preview.show()
+                        preview.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
                     }
-                }
-                body.addView(image)
-            } catch (_: Exception) {
-                body.addView(TextView(this).apply {
-                    text = if (isArabic) "تعذر عرض الصورة المرفقة" else "Could not display attached image"
-                    setTextColor(textMutedColor())
                 })
             }
         }
-
         if (note.audioPath.isNotBlank()) {
             val audioFile = java.io.File(note.audioPath)
             if (audioFile.exists()) {
-                body.addView(TextView(this).apply {
-                    text = "▶  ${if (isArabic) "تشغيل التسجيل الصوتي" else "Play voice recording"}"
-                    textSize = 14f
-                    gravity = Gravity.CENTER
-                    setTextColor(textPrimaryColor())
-                    background = createGlass3DDrawable(dp(14))
-                    setPadding(dp(16), dp(14), dp(16), dp(14))
-                    setOnClickListener {
-                        try {
+                val audioRow = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+                    background = createGlass3DDrawable(dp(18))
+                    setPadding(dp(12), dp(10), dp(12), dp(10))
+                }
+                val play = TextView(this).apply {
+                    text = "▶"; textSize = 20f; gravity = Gravity.CENTER
+                    setTextColor(accentTealColor()); layoutParams = LinearLayout.LayoutParams(dp(44), dp(44))
+                }
+                val waveform = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+                    layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f)
+                }
+                val heights = listOf(9,17,25,14,30,20,12,27,35,18,11,24,31,15,22,10,28,19,13,26,16,32,12,21)
+                heights.forEachIndexed { i, h ->
+                    waveform.addView(View(this).apply {
+                        background = GradientDrawable().apply { cornerRadius = dp(4).toFloat(); setColor(accentTealColor()) }
+                        layoutParams = LinearLayout.LayoutParams(dp(3), dp(h)).apply { marginEnd = dp(3) }
+                        alpha = if (i % 4 == 0) 0.55f else 0.95f
+                    })
+                }
+                audioRow.addView(play); audioRow.addView(waveform)
+                var prepared = false
+                play.setOnClickListener {
+                    try {
+                        val player = customAudioPlayer
+                        if (player != null && player.isPlaying) {
+                            player.pause(); play.text = "▶"
+                        } else if (player != null && prepared) {
+                            player.start(); play.text = "Ⅱ"
+                        } else {
                             stopCustomAudio()
+                            prepared = false
                             customAudioPlayer = MediaPlayer().apply {
                                 setDataSource(note.audioPath)
-                                setOnPreparedListener { it.start() }
-                                setOnCompletionListener { it.release(); if (customAudioPlayer === it) customAudioPlayer = null }
+                                setOnPreparedListener { prepared = true; it.start(); play.text = "Ⅱ" }
+                                setOnCompletionListener { play.text = "▶"; it.release(); if (customAudioPlayer === it) customAudioPlayer = null; prepared = false }
                                 prepareAsync()
                             }
-                        } catch (_: Exception) {
-                            Toast.makeText(this@MainActivity, if (isArabic) "تعذر تشغيل التسجيل" else "Could not play recording", Toast.LENGTH_SHORT).show()
                         }
+                    } catch (_: Exception) {
+                        Toast.makeText(this@MainActivity, if (isArabic) "تعذر تشغيل التسجيل" else "Could not play recording", Toast.LENGTH_SHORT).show()
                     }
-                })
-            } else {
-                body.addView(TextView(this).apply {
-                    text = if (isArabic) "ملف التسجيل الصوتي غير موجود" else "Voice recording file not found"
-                    setTextColor(textMutedColor())
-                })
+                }
+                body.addView(audioRow)
             }
         }
-
         scroll.addView(body)
         page.addView(scroll, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
-        dialog.setContentView(page)
-        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog.show()
-        styleGlassDialog(dialog)
-        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        tabContentHost.removeAllViews()
+        tabContentHost.addView(page, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
 
     private fun buildNotesLeftSlideOutDock(): View {
