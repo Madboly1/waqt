@@ -128,6 +128,10 @@ class MainActivity : AppCompatActivity() {
     private var noteSelectedCategory: String = "all"
     private var noteSearchQuery: String = ""
     private var isNotesLeftDockOpen: Boolean = false
+    private var notesSubTab: Int = 0 // 0 = Notes, 1 = Daily journal
+    private var diarySelectedDate: String = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).format(java.util.Date())
+    private var diaryDisplayedMonth: Int = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH)
+    private var diaryDisplayedYear: Int = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)
 
     private var currentTaskCarouselIndex: Int = 0
     private var currentHabitCarouselIndex: Int = 0
@@ -3299,51 +3303,230 @@ class MainActivity : AppCompatActivity() {
         val root = FrameLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
         }
-
         val content = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
-            setPadding(dp(16), dp(14), dp(16), dp(100))
-        }
-        content.addView(buildNoteCategoryRow())
-
-        val notes = ReminderRepository.getAllNotes(this).filter {
-            noteSelectedCategory == "all" || it.category == noteSelectedCategory
-        }.filter {
-            noteSearchQuery.isBlank() || it.title.contains(noteSearchQuery, ignoreCase = true) || it.content.contains(noteSearchQuery, ignoreCase = true)
+            setPadding(dp(16), dp(12), dp(16), dp(88))
         }
 
-        if (notes.isEmpty()) {
-            content.addView(buildEmptyCardPlaceholder(
-                if (isArabic) "لا توجد تدوينات مسجلة" else "No journal entries",
-                if (isArabic) "اضغط + لإضافة تدوينة جديدة، وهتظهر هنا على شكل كارت مستقل."
-                else "Tap + to create a journal entry. Your entries will appear here as cards."
-            ))
-        } else {
-            currentNoteCarouselIndex = currentNoteCarouselIndex.coerceIn(0, notes.lastIndex)
-            content.addView(buildStackedNotesCarousel(notes))
-        }
-
-        root.addView(content)
-        root.addView(buildNotesLeftSlideOutDock())
-        root.addView(buildAddFab { showAddOrEditNoteModal(null) })
-        val quickJournalButton = TextView(this).apply {
-            text = if (isArabic) "✎ يومياتي" else "✎ Quick journal"
-            textSize = 12f
+        // Two independent experiences: saved notes and date-based daily journal.
+        val switcher = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
-            setTextColor(textPrimaryColor())
             background = createGlassCardDrawable(true, false)
-            setPadding(dp(14), dp(11), dp(14), dp(11))
-            elevation = dp(12).toFloat()
-            setOnClickListener { launchFloatingQuickNoteOverlay() }
+            setPadding(dp(5), dp(5), dp(5), dp(5))
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)).apply { bottomMargin = dp(12) }
         }
-        root.addView(quickJournalButton, FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-            // Keep this action clear of the add FAB and the side dock.
-            gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
-            // Align with the app's floating controls while staying above the bottom navigation.
-            bottomMargin = dp(112)
-        })
+        listOf(if (isArabic) "📝 ملاحظاتي" else "📝 My notes", if (isArabic) "📅 يومياتي" else "📅 Daily journal").forEachIndexed { index, label ->
+            switcher.addView(TextView(this).apply {
+                text = label
+                textSize = 13f
+                gravity = Gravity.CENTER
+                setTypeface(typeface, if (notesSubTab == index) Typeface.BOLD else Typeface.NORMAL)
+                setTextColor(if (notesSubTab == index) Color.parseColor("#0B1417") else textPrimaryColor())
+                background = if (notesSubTab == index) createOrange3DDrawable(dp(18)) else null
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply {
+                    marginStart = dp(2); marginEnd = dp(2)
+                }
+                setOnClickListener { notesSubTab = index; renderCurrentTab() }
+            })
+        }
+        content.addView(switcher)
+
+        if (notesSubTab == 0) {
+            content.addView(buildNoteCategoryRow())
+            val notes = ReminderRepository.getAllNotes(this).filter {
+                noteSelectedCategory == "all" || it.category == noteSelectedCategory
+            }.filter {
+                noteSearchQuery.isBlank() || it.title.contains(noteSearchQuery, ignoreCase = true) || it.content.contains(noteSearchQuery, ignoreCase = true)
+            }
+            if (notes.isEmpty()) {
+                content.addView(buildEmptyCardPlaceholder(
+                    if (isArabic) "لا توجد ملاحظات مسجلة" else "No saved notes",
+                    if (isArabic) "اضغط + لإنشاء ملاحظة جديدة، وهتظهر هنا على شكل كارت مستقل."
+                    else "Tap + to create a note. Your notes will appear here as cards."
+                ))
+            } else {
+                currentNoteCarouselIndex = currentNoteCarouselIndex.coerceIn(0, notes.lastIndex)
+                content.addView(buildStackedNotesCarousel(notes))
+            }
+            root.addView(content)
+            root.addView(buildNotesLeftSlideOutDock())
+            root.addView(buildAddFab { showAddOrEditNoteModal(null) })
+        } else {
+            content.addView(buildDailyJournalCalendar())
+            root.addView(content)
+            root.addView(buildNotesLeftSlideOutDock())
+        }
         return root
+    }
+
+    private fun getDiaryPreferences() = getSharedPreferences("waqt_daily_journal", Context.MODE_PRIVATE)
+
+    private fun diaryDateKey(year: Int, month: Int, day: Int): String =
+        String.format(java.util.Locale.US, "%04d-%02d-%02d", year, month + 1, day)
+
+    private fun buildDailyJournalCalendar(): View {
+        val outer = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        val monthBar = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            background = createGlassCardDrawable(true, false)
+            setPadding(dp(8), dp(8), dp(8), dp(8))
+        }
+        fun monthButton(label: String, move: Int) = TextView(this).apply {
+            text = label; textSize = 22f; gravity = Gravity.CENTER
+            setTextColor(textPrimaryColor())
+            layoutParams = LinearLayout.LayoutParams(dp(42), dp(42))
+            setOnClickListener {
+                val c = java.util.Calendar.getInstance().apply { set(diaryDisplayedYear, diaryDisplayedMonth, 1); add(java.util.Calendar.MONTH, move) }
+                diaryDisplayedYear = c.get(java.util.Calendar.YEAR)
+                diaryDisplayedMonth = c.get(java.util.Calendar.MONTH)
+                renderCurrentTab()
+            }
+        }
+        monthBar.addView(monthButton("‹", -1))
+        monthBar.addView(TextView(this).apply {
+            val locale = if (isArabic) java.util.Locale("ar") else java.util.Locale.getDefault()
+            val c = java.util.Calendar.getInstance().apply { set(diaryDisplayedYear, diaryDisplayedMonth, 1) }
+            text = java.text.SimpleDateFormat("MMMM yyyy", locale).format(c.time)
+            textSize = 17f; gravity = Gravity.CENTER
+            setTypeface(typeface, Typeface.BOLD); setTextColor(textPrimaryColor())
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+        })
+        monthBar.addView(monthButton("›", 1))
+        outer.addView(monthBar)
+
+        val grid = android.widget.GridLayout(this).apply {
+            columnCount = 7
+            rowCount = 7
+            useDefaultMargins = false
+            setPadding(dp(4), dp(10), dp(4), dp(10))
+        }
+        val locale = if (isArabic) java.util.Locale("ar") else java.util.Locale.getDefault()
+        val dayFormat = java.text.SimpleDateFormat("EEEEE", locale)
+        val weekdays = (0..6).map { offset ->
+            val c = java.util.Calendar.getInstance().apply {
+                set(java.util.Calendar.DAY_OF_WEEK, java.util.Calendar.MONDAY)
+                add(java.util.Calendar.DAY_OF_YEAR, offset)
+            }
+            dayFormat.format(c.time)
+        }
+        weekdays.forEach { dayName ->
+            grid.addView(TextView(this).apply {
+                text = dayName; textSize = 11f; gravity = Gravity.CENTER
+                setTextColor(textMutedColor())
+                layoutParams = android.widget.GridLayout.LayoutParams().apply {
+                    width = 0; height = dp(34); columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1f)
+                }
+            })
+        }
+        val month = java.util.Calendar.getInstance().apply { set(diaryDisplayedYear, diaryDisplayedMonth, 1) }
+        val daysInMonth = month.getActualMaximum(java.util.Calendar.DAY_OF_MONTH)
+        val mondayOffset = (month.get(java.util.Calendar.DAY_OF_WEEK) + 5) % 7
+        repeat(mondayOffset) {
+            grid.addView(View(this).apply {
+                layoutParams = android.widget.GridLayout.LayoutParams().apply {
+                    width = 0; height = dp(54); columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1f)
+                }
+            })
+        }
+        val prefs = getDiaryPreferences()
+        for (day in 1..daysInMonth) {
+            val key = diaryDateKey(diaryDisplayedYear, diaryDisplayedMonth, day)
+            val hasEntry = prefs.contains(key)
+            val selected = key == diarySelectedDate
+            val cell = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER
+                background = if (selected) createOrange3DDrawable(dp(14)) else if (hasEntry) createGlass3DDrawable(dp(14)) else null
+                layoutParams = android.widget.GridLayout.LayoutParams().apply {
+                    width = 0; height = dp(54)
+                    columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1f)
+                    setMargins(dp(2), dp(2), dp(2), dp(2))
+                }
+                addView(TextView(this@MainActivity).apply {
+                    text = day.toString(); textSize = 14f; gravity = Gravity.CENTER
+                    setTextColor(if (selected) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTypeface(typeface, if (selected || hasEntry) Typeface.BOLD else Typeface.NORMAL)
+                })
+                addView(View(this@MainActivity).apply {
+                    visibility = if (hasEntry) View.VISIBLE else View.INVISIBLE
+                    background = GradientDrawable().apply {
+                        shape = GradientDrawable.OVAL
+                        setColor(if (selected) Color.parseColor("#0B1417") else accentTealColor())
+                    }
+                    layoutParams = LinearLayout.LayoutParams(dp(5), dp(5)).apply { topMargin = dp(2) }
+                })
+                setOnClickListener { diarySelectedDate = key; showDailyJournalEntryPage(key) }
+            }
+            grid.addView(cell)
+        }
+        outer.addView(grid)
+        val savedCount = prefs.all.keys.count { it.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) }
+        outer.addView(TextView(this).apply {
+            text = if (isArabic) "اضغط على أي يوم لكتابة يومياته أو قراءة ما سجلته سابقًا.  •  $savedCount يوم مسجل"
+                else "Tap any day to write or revisit its entry.  •  $savedCount days saved"
+            textSize = 12f; setTextColor(textMutedColor())
+            setPadding(dp(8), dp(4), dp(8), dp(10))
+        })
+        return outer
+    }
+
+    private fun showDailyJournalEntryPage(dateKey: String) {
+        val prefs = getDiaryPreferences()
+        val existingText = prefs.getString(dateKey, "") ?: ""
+        val date = try {
+            val parsed = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US).parse(dateKey)
+            java.text.SimpleDateFormat(if (isArabic) "EEEE، d MMMM yyyy" else "EEEE, d MMMM yyyy",
+                if (isArabic) java.util.Locale("ar") else java.util.Locale.getDefault()).format(parsed!!)
+        } catch (_: Exception) { dateKey }
+
+        val page = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = createGlassCardDrawable(true, false)
+            setPadding(dp(16), dp(12), dp(16), dp(16))
+        }
+        val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        toolbar.addView(TextView(this).apply {
+            text = "‹"; textSize = 30f; gravity = Gravity.CENTER
+            setTextColor(textPrimaryColor()); layoutParams = LinearLayout.LayoutParams(dp(44), dp(48))
+            setOnClickListener { notesSubTab = 1; renderCurrentTab() }
+        })
+        toolbar.addView(TextView(this).apply {
+            text = date; textSize = 16f; setTypeface(typeface, Typeface.BOLD)
+            setTextColor(textPrimaryColor()); gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+        })
+        page.addView(toolbar)
+        val editor = EditText(this).apply {
+            hint = if (isArabic) "اكتب يومياتك هنا...\n\nاحكي عن يومك، أفكارك، أو أي لحظة حابب تفتكرها." else "Write about your day...\n\nCapture your thoughts, moments and memories."
+            setText(existingText)
+            setTextColor(textPrimaryColor()); setHintTextColor(textMutedColor())
+            textSize = 16f; gravity = Gravity.TOP or Gravity.START
+            minLines = 10
+            background = createGlass3DDrawable(dp(18))
+            setPadding(dp(16), dp(16), dp(16), dp(16))
+        }
+        page.addView(editor, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f).apply {
+            topMargin = dp(12); bottomMargin = dp(12)
+        })
+        val save = Button(this).apply {
+            text = if (isArabic) "حفظ يومياتي" else "Save journal"
+            isAllCaps = false; setTextColor(Color.parseColor("#0B1417"))
+            backgroundTintList = ColorStateList.valueOf(accentTealColor())
+            setOnClickListener {
+                val value = editor.text.toString().trim()
+                if (value.isBlank()) prefs.edit().remove(dateKey).apply()
+                else prefs.edit().putString(dateKey, value).apply()
+                Toast.makeText(this@MainActivity, if (isArabic) "تم حفظ يوميات اليوم" else "Daily entry saved", Toast.LENGTH_SHORT).show()
+                notesSubTab = 1
+                renderCurrentTab()
+            }
+        }
+        page.addView(save, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)))
+        tabContentHost.removeAllViews()
+        tabContentHost.addView(page, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
 
     private fun buildStackedNotesCarousel(notes: List<NoteItem>): View {
