@@ -1570,6 +1570,8 @@ class MainActivity : AppCompatActivity() {
             action.has(key) && !action.isNull(key) && action.optString(key).trim().isNotBlank()
         fun hasNumber(key: String): Boolean = action.has(key) && action.opt(key) is Number
         fun hasBoolean(key: String): Boolean = action.has(key) && action.opt(key) is Boolean
+        fun optionalText(key: String): Boolean = !action.has(key) || hasText(key)
+        fun optionalBoolean(key: String): Boolean = !action.has(key) || hasBoolean(key)
         fun numberInRange(key: String, range: IntRange): Boolean =
             !action.has(key) || (hasNumber(key) && action.optDouble(key).let { it.isFinite() && it % 1.0 == 0.0 && it.toInt() in range })
         fun valueIn(key: String, allowed: Set<String>): Boolean =
@@ -1603,10 +1605,15 @@ class MainActivity : AppCompatActivity() {
         if (type !in supportedTypes) return false
 
         val requiredFieldsValid = when (type) {
-            "add_task", "add_habit", "reopen_task", "complete_task", "update_task",
-            "update_habit", "delete_task", "delete_habit", "delete_note", "pin_note",
+            "add_task", "add_habit", "reopen_task", "complete_task",
+            "delete_task", "delete_habit", "delete_note", "pin_note",
             "unpin_note", "complete_habit" -> hasText("title")
-            "update_note" -> hasText("title")
+            "update_task" -> hasText("title") &&
+                listOf("new_title", "priority", "hour", "minute", "day_offset").any { action.has(it) }
+            "update_habit" -> hasText("title") &&
+                listOf("new_title", "priority", "hour", "minute", "category", "target_value", "target_unit", "has_reminder").any { action.has(it) }
+            "add_note" -> hasText("content")
+            "update_note" -> hasText("title") && (hasText("new_title") || hasText("content"))
             "update_journal_entry" -> validDate("date") && hasText("content")
             "delete_journal_entry" -> validDate("date")
             "save_journal_entry" -> hasText("content") && (!action.has("date") || validDate("date"))
@@ -1637,7 +1644,11 @@ class MainActivity : AppCompatActivity() {
             "start_focus" -> numberInRange("minutes", 1..180)
             "set_goal" -> numberInRange("minutes", 15..720)
             else -> true
-        } && valueIn("priority", setOf("high", "medium", "low")) &&
+        } &&
+            optionalText("new_title") && optionalText("target_unit") &&
+            optionalText("description") && optionalText("content") &&
+            optionalBoolean("has_reminder") &&
+            valueIn("priority", setOf("high", "medium", "low")) &&
             valueIn("category", setOf("health", "study", "religion", "sports")) &&
             valueIn("sound", setOf("off", "rain", "waves", "fire", "forest", "water", "library", "wind", "night")) &&
             valueIn("mode", setOf("dark", "light", "toggle")) &&
