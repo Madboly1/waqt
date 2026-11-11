@@ -956,12 +956,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         val savedMessages = chatHistoryStore.getMessages(activeChatId)
-        if (geminiKey().isBlank() && savedMessages.isEmpty()) {
+        if (!hasAnyAssistantKey() && savedMessages.isEmpty()) {
         messagesBox.addView(createAIMessageBubble(
             if (isArabic) "أهلاً بيك! أنا WAQT Mentor. احكيلي عن هدف عايز توصله، مشكلة محتاج تفكر فيها، أو مهارة عايز تتعلمها. هنفهم وضعك ونبني طريق عملي يناسبك خطوة بخطوة."
             else "Hi! I’m your WAQT Mentor. Tell me what you’re trying to achieve, what’s getting in your way, or what you want to learn. We’ll think it through and build a realistic next step together."
         ))
-            messagesBox.addView(createAIMessageBubble(if (isArabic) "🔑 عشان أبقى مساعدك الحقيقي بجيميني، اضغطي على 🔑 فوق وحطي مفتاحك المجاني." else "🔑 Tap the key icon to connect Gemini."))
+            messagesBox.addView(createAIMessageBubble(if (isArabic) "🔑 عشان تشغّل WAQT Mentor، افتح إعدادات 🔑 واربط Gemini أو Groq أو OpenRouter." else "🔑 Connect Gemini, Groq, or OpenRouter from the key icon."))
         }
 
         // Restore the selected conversation from the local database.
@@ -1108,7 +1108,17 @@ class MainActivity : AppCompatActivity() {
     // ------------------------------------------------------------------
     private val geminiHistory = mutableListOf<Pair<String, String>>()
 
-    private fun geminiKey(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).getString("gemini_api_key", "") ?: ""
+    private fun geminiKey(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        .getString("gemini_api_key", "") ?: ""
+
+    private fun groqKey(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        .getString("groq_api_key", "") ?: ""
+
+    private fun openRouterKey(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        .getString("openrouter_api_key", "") ?: ""
+
+    private fun hasAnyAssistantKey(): Boolean =
+        geminiKey().isNotBlank() || groqKey().isNotBlank() || openRouterKey().isNotBlank()
 
     private fun geminiModel(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
         .getString("gemini_model", GeminiClient.DEFAULT_MODEL) ?: GeminiClient.DEFAULT_MODEL
@@ -1119,36 +1129,59 @@ class MainActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(22), dp(8), dp(22), dp(4))
         }
-        panel.addView(TextView(this).apply {
-            text = if (isArabic) "مفتاح API" else "API key"
-            textSize = 13f; setTextColor(textPrimaryColor())
-        })
-        val et = EditText(this).apply {
-            hint = if (isArabic) "الصق مفتاح Gemini هنا" else "Paste your Gemini API key"
-            setText(geminiKey()); setSingleLine(true)
-            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
-            setPadding(dp(14), dp(12), dp(14), dp(12))
+
+        fun addProviderField(title: String, hint: String, value: String): EditText {
+            panel.addView(TextView(this).apply {
+                text = title
+                textSize = 13f
+                setTextColor(textPrimaryColor())
+                setPadding(0, dp(10), 0, dp(4))
+            })
+            return EditText(this).apply {
+                this.hint = hint
+                setText(value)
+                setSingleLine(true)
+                inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                setPadding(dp(14), dp(12), dp(14), dp(12))
+                panel.addView(this)
+            }
         }
-        panel.addView(et)
+
+        val geminiInput = addProviderField("Gemini API key", if (isArabic) "مفتاح Gemini" else "Paste Gemini API key", geminiKey())
+        val groqInput = addProviderField("Groq API key — fallback 1", if (isArabic) "مفتاح Groq المجاني" else "Paste Groq API key", groqKey())
+        val routerInput = addProviderField("OpenRouter API key — fallback 2", if (isArabic) "مفتاح OpenRouter المجاني" else "Paste OpenRouter API key", openRouterKey())
+
         panel.addView(TextView(this).apply {
-            text = if (isArabic) "موديل الذكاء الاصطناعي" else "AI model"
-            textSize = 13f; setTextColor(textPrimaryColor()); setPadding(0, dp(14), 0, dp(4))
+            text = if (isArabic) "موديل Gemini الأساسي" else "Primary Gemini model"
+            textSize = 13f
+            setTextColor(textPrimaryColor())
+            setPadding(0, dp(14), 0, dp(4))
         })
         val models = listOf(GeminiClient.DEFAULT_MODEL, GeminiClient.FALLBACK_MODEL)
         val spinner = Spinner(this)
         spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, models)
         spinner.setSelection(models.indexOf(geminiModel()).coerceAtLeast(0))
         panel.addView(spinner)
+
+        val scrollPanel = ScrollView(this).apply {
+            addView(panel)
+            isFillViewport = true
+        }
         AlertDialog.Builder(this)
-            .setTitle(if (isArabic) "إعدادات المساعد الذكي" else "AI assistant settings")
-            .setMessage(if (isArabic) "المفتاح بيتحفظ على موبايلك فقط. تقدر تغيّر الموديل من هنا." else "Your key stays on this device. Choose the model here.")
-            .setView(panel)
+            .setTitle(if (isArabic) "إعدادات مزودي الذكاء الاصطناعي" else "AI provider settings")
+            .setMessage(
+                if (isArabic) "WAQT هيجرب Gemini الأول، ولو الخدمة وقفت أو وصلت للحد ينتقل تلقائيًا إلى Groq ثم OpenRouter. أضف المفاتيح المتاحة عندك فقط."
+                else "WAQT tries Gemini first, then automatically falls back to Groq and OpenRouter when a provider is unavailable or rate-limited. Add only the keys you have."
+            )
+            .setView(scrollPanel)
             .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
                 prefs.edit()
-                    .putString("gemini_api_key", et.text.toString().trim())
+                    .putString("gemini_api_key", geminiInput.text.toString().trim())
+                    .putString("groq_api_key", groqInput.text.toString().trim())
+                    .putString("openrouter_api_key", routerInput.text.toString().trim())
                     .putString("gemini_model", models[spinner.selectedItemPosition.coerceIn(0, models.lastIndex)])
                     .apply()
-                Toast.makeText(this, if (isArabic) "✅ اتحفظت إعدادات المساعد" else "Assistant settings saved", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, if (isArabic) "✅ اتحفظت إعدادات مزودي الذكاء الاصطناعي" else "AI provider settings saved", Toast.LENGTH_SHORT).show()
                 onSaved?.invoke()
             }
             .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
@@ -1351,10 +1384,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun sendToAssistant(userText: String?, box: LinearLayout, scroll: ScrollView, media: GeminiClient.MediaInput? = null) {
-        if (geminiKey().isBlank()) {
-            if (media != null) {
-                box.addView(createAIMessageBubble(if (isArabic) "إرفاق الصور والرسائل الصوتية يحتاج ربط Gemini أولًا من زر 🔑." else "Image and voice attachments require Gemini. Connect your API key with 🔑 first."))
-            } else if (userText != null) {
+        if (media != null && geminiKey().isBlank()) {
+            box.addView(createAIMessageBubble(
+                if (isArabic) "الصور والرسائل الصوتية محتاجة مفتاح Gemini؛ اربطه من زر 🔑. المحادثة النصية تقدر تشتغل بـ Groq أو OpenRouter."
+                else "Images and voice messages currently require a Gemini key. Text chat can use Groq or OpenRouter."
+            ))
+            return
+        }
+        if (!hasAnyAssistantKey()) {
+            if (userText != null) {
                 chatHistoryStore.addMessage(activeChatId, "user", userText)
                 processUserMessageWithLocalAI(userText, box, scroll)
             }
@@ -1382,7 +1420,7 @@ class MainActivity : AppCompatActivity() {
         val requestHistory = geminiHistory.takeLast(6).toMutableList().apply { add("user" to prompt) }
         val previousAssistantReply = lastAssistantReply
 
-        GeminiClient.generate(geminiKey(), geminiModel(), geminiSystemPrompt, requestHistory, media) { result ->
+        GeminiClient.generate(geminiKey(), geminiModel(), geminiSystemPrompt, requestHistory, media, groqKey(), openRouterKey()) { result ->
             box.removeView(typing)
             result.onSuccess { raw ->
                 var replyText = raw
@@ -1451,10 +1489,10 @@ class MainActivity : AppCompatActivity() {
                 val m = e.message ?: ""
                 val friendly = when {
                     m.contains("HTTP 400") || m.contains("HTTP 403") -> if (isArabic) "المفتاح مش شغال. اضغطي 🔑 فوق وحطي مفتاح صحيح." else "Invalid key."
-                    m.contains("HTTP 429") -> if (isArabic) "وصلت للحد المجاني دلوقتي، جرّبي بعد شوية." else "Rate limit reached."
+                    m.contains("HTTP 429") -> if (isArabic) "المزودين المتاحين وصلوا للحد المجاني أو مشغولين حاليًا. جرّب بعد شوية أو أضف مفتاح مزود تاني." else "Available providers are rate-limited or busy. Try again later or add another provider key."
                     m.contains("HTTP 503") || m.contains("HTTP 500") || m.contains("HTTP 502") || m.contains("HTTP 504") -> if (isArabic) "خدمة Gemini مشغولة مؤقتًا. جرّبي تاني بعد لحظة." else "Gemini is temporarily busy. Please try again shortly."
                     m.contains("HTTP 404") -> if (isArabic) "موديل Gemini المختار مش متاح للمفتاح ده. افتحي 🔑 ثم اختاري موديل متاح." else "The selected Gemini model is unavailable for this key. Choose another model."
-                    m.contains("API key") || m.contains("HTTP 400") || m.contains("HTTP 401") || m.contains("HTTP 403") -> if (isArabic) "مفتاح Gemini غير صالح أو غير مسموح له باستخدام الخدمة. راجعي المفتاح من 🔑." else "Gemini API key is invalid or not authorized. Check the key."
+                    m.contains("HTTP 400") || m.contains("HTTP 401") || m.contains("HTTP 403") || m.contains("API key") -> if (isArabic) "في مشكلة في مفاتيح مزودي الذكاء الاصطناعي. راجع مفاتيح Gemini وGroq وOpenRouter من زر 🔑." else "One or more AI provider keys are invalid. Check your Gemini, Groq, and OpenRouter keys."
                     m.contains("SocketTimeoutException") || m.contains("timeout", ignoreCase = true) -> if (isArabic) "الرد اتأخر بسبب الاتصال. جرّبي تاني مع إنترنت أسرع." else "The request timed out. Please try again on a better connection."
                     else -> if (isArabic) "حصلت مشكلة: ${m.take(140)}" else "Request failed: ${m.take(140)}"
                 }
@@ -2373,7 +2411,7 @@ class MainActivity : AppCompatActivity() {
             Slide("🌱", "تاب العادات", "Habits Tab", "ابني عاداتك يوم بيوم وتابع سلسلتك! اضغط (+) لإضافة عادة جديدة وتحديد أهميتها (مهمة/متوسطة/عادية) وتصنيفها وأيام تكرارها.", "Build streaks, choose habit priority & category, and track daily progress.", 1),
             Slide("🍅", "تاب التركيز والأصوات", "Focus & Ambient Sounds", "مؤقت بومودورو بالساعة الرملية والتيك-تاك الهادي، وأصوات محيطية طبيعية بنقاء عالي ولوب ناعم، مع استراحة تلقائية وإحصائيات لهدفك اليومي.", "Pomodoro timer with seamless ambient sounds, auto breaks and daily goals.", 2),
             Slide("📝", "تاب مدونتي", "My Journal", "اعمل تصنيفاتك بنفسك، ودون تدويناتك أو افتح تدوينة عائمة فوق أي تطبيق!", "Create your own categories and floating quick notes over any app.", 3),
-            Slide("✨", "المساعد الذكي", "Smart Assistant", "بيبص على يومك ويقولك تبدأ بإيه، وبيضيف المهام لوحده! حط مفتاح Gemini المجاني مرة واحدة من أيقونة 🔑 جوه الشات.", "Looks at your day, picks priorities, adds tasks. Needs a free Gemini key.", 0),
+            Slide("✨", "المساعد الذكي", "Smart Assistant", "بيبص على يومك ويساعدك تحقق أهدافك. اربط Gemini أو Groq أو OpenRouter من أيقونة 🔑، وWAQT هيتنقل بينهم تلقائيًا.", "Understands your day, helps with goals, and can switch between Gemini, Groq, and OpenRouter.", 0),
             Slide("🧭", "التنقل والشريط الجانبي", "Navigation & Side Rail", "الشريط السفلي للتنقل بين التابات، والشريط الجانبي فتحتهولك أهو: فيه بحث وإحصائيات وتذكيرات سريعة (واسحبه لأي حافة).", "Bottom bar to switch tabs. The side rail gives quick access to stats, search, and presets.", 0, openSideDock = true),
             Slide("🔔", "الأذونات (اختيارية)", "Optional permissions", "تقدر تستخدم التطبيق من غير ما تفعّل أي إذن دلوقتي. فعّل الإذن وقت ما تحتاج الميزة المرتبطة بيه فقط؛ وتقدر تتخطى الخطوة دي عادي.", "Permissions are optional. WAQT works without enabling them now. Grant each permission only when you use the feature that needs it, or skip this step.", 0)
         )
@@ -5843,14 +5881,14 @@ class MainActivity : AppCompatActivity() {
 
         body.addView(createAccordionSection(if (isArabic) "✨ إعدادات المساعد الذكي" else "✨ AI Assistant") { container ->
             container.addView(TextView(this@MainActivity).apply {
-                text = if (isArabic) "إعدادات المساعد مستقلة عن باقي التطبيق. غيّر مفتاح Gemini والموديل من هنا أو من أيقونة المفتاح داخل المحادثة." else "Assistant settings are separate from the rest of the app. Manage Gemini key and model here or from the key icon in chat."
+                text = if (isArabic) "إعدادات المساعد مستقلة عن باقي التطبيق. اربط Gemini وGroq وOpenRouter، وWAQT هينتقل تلقائيًا بين المزودين عند تعطل الخدمة أو انتهاء الحد." else "Connect Gemini, Groq, and OpenRouter here. WAQT automatically switches providers when a service is unavailable or rate-limited."
                 textSize = 12f; setTextColor(textMutedColor()); setPadding(dp(8), dp(4), dp(8), dp(10))
             })
             container.addView(createSettingsActionButton(if (isArabic) "مفتاح API واختيار الموديل" else "API key & model", "🔑") {
                 showGeminiKeyDialog()
             })
             container.addView(TextView(this@MainActivity).apply {
-                text = if (isArabic) "الموديل الحالي: ${geminiModel()}" else "Current model: ${geminiModel()}"
+                text = if (isArabic) "الترتيب: Gemini ← Groq ← OpenRouter | موديل Gemini: ${geminiModel()}" else "Fallback order: Gemini → Groq → OpenRouter | Gemini model: ${geminiModel()}"
                 textSize = 11f; setTextColor(textMutedColor()); setPadding(dp(12), dp(8), dp(12), dp(4))
             })
         })
