@@ -784,12 +784,39 @@ object AlarmScheduler {
     const val ACTION_COMPLETE_FROM_NOTIF = "com.example.glassproductivity.ACTION_COMPLETE_FROM_NOTIF"
     const val ACTION_SNOOZE_10M_FROM_NOTIF = "com.example.glassproductivity.ACTION_SNOOZE_10M_FROM_NOTIF"
     const val ACTION_SNOOZE_1H_FROM_NOTIF = "com.example.glassproductivity.ACTION_SNOOZE_1H_FROM_NOTIF"
+    const val ACTION_POMODORO_END = "com.example.glassproductivity.ACTION_POMODORO_END"
+    const val EXTRA_POMODORO_BREAK = "extra_pomodoro_break"
+    const val EXTRA_POMODORO_SESSION = "extra_pomodoro_session"
 
     const val EXTRA_ITEM_ID = "extra_item_id"
     const val EXTRA_TITLE = "extra_title"
     const val EXTRA_IS_HABIT = "extra_is_habit"
     const val EXTRA_STREAK_COUNT = "extra_streak_count"
     const val EXTRA_STREAK_GOAL = "extra_streak_goal"
+
+
+    fun schedulePomodoroEnd(context: Context, triggerAtMillis: Long, isBreak: Boolean, sessionId: String) {
+        val intent = Intent(context, AlarmReceiver::class.java).apply {
+            action = ACTION_POMODORO_END
+            putExtra(EXTRA_POMODORO_BREAK, isBreak)
+            putExtra(EXTRA_POMODORO_SESSION, sessionId)
+        }
+        val requestCode = 73000 + if (isBreak) 1 else 0
+        val pending = PendingIntent.getBroadcast(context, requestCode, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        setAlarmClockSafely(context, manager, triggerAtMillis.coerceAtLeast(System.currentTimeMillis() + 1000L), pending)
+    }
+
+    fun cancelPomodoroEnd(context: Context) {
+        val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        for (isBreak in listOf(false, true)) {
+            val intent = Intent(context, AlarmReceiver::class.java).apply { action = ACTION_POMODORO_END }
+            val pending = PendingIntent.getBroadcast(context, 73000 + if (isBreak) 1 else 0, intent,
+                PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE)
+            if (pending != null) { manager.cancel(pending); pending.cancel() }
+        }
+    }
 
     fun scheduleNextOccurrence(
         context: Context,
