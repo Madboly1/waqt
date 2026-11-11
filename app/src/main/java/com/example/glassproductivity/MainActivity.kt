@@ -1269,6 +1269,7 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_theme","mode":"dark|light|toggle"}
 {"type":"set_language","language":"ar|en"}
 {"type":"open_app_settings"}
+{"type":"open_notification_settings"}
 {"type":"set_auto_update_check","enabled":true}
 {"type":"check_for_updates"}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
@@ -1951,6 +1952,22 @@ class MainActivity : AppCompatActivity() {
                 "open_app_settings" -> {
                     showAccordionSettingsDialog()
                     note = if (isArabic) "⚙️ فتحت لك إعدادات وَقْت." else "⚙️ Opened WAQT settings."
+                }
+                "open_notification_settings" -> {
+                    try {
+                        val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                            putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
+                        }
+                        startActivity(intent)
+                        note = if (isArabic) "🔔 فتحت إعدادات إشعارات وَقْت على جهازك. تقدر تراجع الأذونات وتغيّرها بنفسك." else "🔔 Opened WAQT notification settings. You can review and change permissions there."
+                    } catch (_: Exception) {
+                        try {
+                            startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+                            note = if (isArabic) "🔔 فتحت صفحة معلومات التطبيق؛ ادخل منها إلى الإشعارات." else "🔔 Opened app info. Go to Notifications from there."
+                        } catch (_: Exception) {
+                            note = if (isArabic) "⚠️ مش قادر أفتح إعدادات الإشعارات على الجهاز." else "⚠️ Could not open notification settings on this device."
+                        }
+                    }
                 }
                 "navigate_tab" -> {
                     val requested = a.optString("tab").trim().lowercase(Locale.ROOT)
