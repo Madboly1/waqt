@@ -1243,6 +1243,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
 {"type":"start_focus","minutes":25}
+{"type":"pause_focus"}
+{"type":"resume_focus"}
+{"type":"stop_focus"}
 {"type":"set_goal","minutes":120}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
@@ -1406,6 +1409,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
+            "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
             "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
@@ -1541,13 +1545,45 @@ class MainActivity : AppCompatActivity() {
                 }
                 "start_focus" -> {
                     val m = a.optInt("minutes", 25).coerceIn(1, 180)
-                    if (!isPomodoroRunning) {
+                    currentTab = 2
+                    if (isPomodoroRunning) {
+                        note = "ℹ️ جلسة التركيز شغالة بالفعل."
+                    } else {
                         isBreakSession = false
                         selectedPomodoroMinutes = m
                         pomodoroTotalMillis = m * 60 * 1000L
                         pomodoroRemainingMillis = pomodoroTotalMillis
+                        activeFocusSessionId = UUID.randomUUID().toString()
+                        renderCurrentTab()
+                        startWallClockCountDown(pomodoroRemainingMillis)
+                        note = "🍅 بدأت جلسة تركيز لمدة $m دقيقة."
+                    }
+                }
+                "pause_focus" -> {
+                    if (isPomodoroRunning) {
+                        toggleInAppPomodoro()
+                        note = "⏸️ أوقفت جلسة التركيز مؤقتًا."
+                    } else {
+                        note = "ℹ️ مفيش جلسة تركيز شغالة حاليًا."
+                    }
+                }
+                "resume_focus" -> {
+                    if (!isPomodoroRunning && pomodoroRemainingMillis > 0L) {
                         currentTab = 2
-                        note = "🍅 جهّزت جلسة تركيز $m دقيقة"
+                        toggleInAppPomodoro()
+                        note = "▶️ استأنفت جلسة التركيز."
+                    } else if (isPomodoroRunning) {
+                        note = "ℹ️ جلسة التركيز شغالة بالفعل."
+                    } else {
+                        note = "ℹ️ مفيش جلسة متوقفة لاستئنافها."
+                    }
+                }
+                "stop_focus" -> {
+                    if (isPomodoroRunning || pomodoroRemainingMillis < pomodoroTotalMillis) {
+                        setPomodoroDuration(selectedPomodoroMinutes)
+                        note = "⏹️ أنهيت جلسة التركيز وأعدت ضبط المؤقت."
+                    } else {
+                        note = "ℹ️ مفيش جلسة نشطة لإيقافها."
                     }
                 }
                 "set_goal" -> {
