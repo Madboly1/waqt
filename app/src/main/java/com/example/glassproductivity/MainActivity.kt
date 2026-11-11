@@ -1249,6 +1249,7 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
 {"type":"update_journal_entry","date":"yyyy-MM-dd","content":"النص الكامل الجديد للتدوينة الموجودة"}
+{"type":"delete_journal_entry","date":"yyyy-MM-dd — يتطلب تأكيد المستخدم"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
 {"type":"set_habit_progress","title":"اسم العادة","progress":0-1000}
 {"type":"start_focus","minutes":25}
@@ -1651,6 +1652,27 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         diary.edit().putString(dateKey, value).apply()
                         note = "✏️ حدّثت تدوينة يوم $dateKey."
+                    }
+                }
+                "delete_journal_entry" -> {
+                    val dateKey = a.optString("date").trim()
+                    val diary = getDiaryPreferences()
+                    if (!dateKey.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) {
+                        note = "⚠️ لازم تحدد تاريخًا صحيحًا للتدوينة."
+                    } else if (!diary.contains(dateKey)) {
+                        note = "ℹ️ مفيش تدوينة محفوظة بتاريخ $dateKey."
+                    } else {
+                        AlertDialog.Builder(this)
+                            .setTitle(if (isArabic) "تأكيد حذف التدوينة" else "Confirm journal deletion")
+                            .setMessage(if (isArabic) "المساعد بيطلب حذف تدوينة يوم $dateKey نهائيًا. متأكد؟" else "The assistant wants to permanently delete the journal entry for $dateKey. Continue?")
+                            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+                            .setPositiveButton(if (isArabic) "حذف التدوينة" else "Delete entry") { _, _ ->
+                                diary.edit().remove(dateKey).apply()
+                                Toast.makeText(this, if (isArabic) "تم حذف تدوينة $dateKey" else "Journal entry deleted", Toast.LENGTH_SHORT).show()
+                                renderCurrentTab()
+                            }
+                            .show()
+                        note = "⚠️ طلبت تأكيد حذف تدوينة يوم $dateKey."
                     }
                 }
                 "save_journal_entry" -> {
