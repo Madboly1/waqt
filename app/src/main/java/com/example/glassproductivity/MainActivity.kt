@@ -2843,7 +2843,7 @@ class MainActivity : AppCompatActivity() {
         val bubble = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
-            background = createPillDrawable(if (isDarkMode) Color.parseColor("#CC1B4055") else Color.parseColor("#E3EAF5F8"), dp(20), accentTealColor())
+            background = createPillDrawable(if (isDarkMode) Color.parseColor("#CC1B4055") else Color.parseColor("#E3EAF5F8"), dp(20), if (isDarkMode) "#8ADCF0" else "#328AA5")
             setPadding(dp(10), dp(8), dp(12), dp(8))
             layoutParams = LinearLayout.LayoutParams((resources.displayMetrics.widthPixels * 0.78f).toInt(), dp(66)).apply {
                 gravity = Gravity.END
