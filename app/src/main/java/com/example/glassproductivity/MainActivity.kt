@@ -1257,6 +1257,8 @@ class MainActivity : AppCompatActivity() {
 {"type":"resume_focus"}
 {"type":"stop_focus"}
 {"type":"set_goal","minutes":120}
+{"type":"set_ambient_sound","sound":"off|rain|waves|fire|forest|water|library|wind|night"}
+{"type":"set_ambient_volume","volume":0-100}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
 لا تستخدم navigate_tab أو open_notes_section لمجرد ذكر قسم؛ استخدمهما عندما يطلب المستخدم فتحه أو الانتقال إليه صراحة.
@@ -1418,6 +1420,8 @@ class MainActivity : AppCompatActivity() {
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
+            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت",
+            "play rain", "play ocean", "play ambient sound", "stop ambient sound", "change volume",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
@@ -1750,6 +1754,43 @@ class MainActivity : AppCompatActivity() {
                         note = "⏹️ أنهيت جلسة التركيز وأعدت ضبط المؤقت."
                     } else {
                         note = "ℹ️ مفيش جلسة نشطة لإيقافها."
+                    }
+                }
+                "set_ambient_sound" -> {
+                    val requested = a.optString("sound").trim().lowercase(Locale.ROOT)
+                    val soundIndex = when (requested) {
+                        "off", "stop", "إيقاف", "توقف" -> 0
+                        "rain", "مطر", "المطر" -> 1
+                        "waves", "ocean", "أمواج", "الأمواج", "البحر" -> 2
+                        "fire", "campfire", "نار", "النار" -> 3
+                        "forest", "غابة", "الغابة" -> 4
+                        "water", "stream", "جدول الماء", "الماء" -> 5
+                        "library", "مكتبة", "المكتبة" -> 6
+                        "wind", "air", "هواء", "الهواء" -> 7
+                        "night", "ليل", "الليل" -> 8
+                        else -> -1
+                    }
+                    if (soundIndex < 0) {
+                        note = "⚠️ مش قادر أحدد الصوت المطلوب. الأصوات المتاحة: المطر، الأمواج، النار، الغابة، جدول الماء، المكتبة، الهواء، الليل، أو إيقاف."
+                    } else {
+                        selectedAmbientIndex = soundIndex
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, soundIndex).apply()
+                        if (soundIndex == 0) stopAmbientSound() else startRichAmbientSound(soundIndex)
+                        note = if (soundIndex == 0) "🔇 أوقفت الصوت المحيطي." else "🎧 شغّلت الصوت المحيطي: ${listOf("", "المطر", "أمواج البحر", "نار المخيم", "الغابة", "جدول الماء", "المكتبة", "الهواء", "أصوات الليل")[soundIndex]}."
+                    }
+                }
+                "set_ambient_volume" -> {
+                    val volume = a.optInt("volume", -1)
+                    if (volume !in 0..100) {
+                        note = "⚠️ مستوى الصوت لازم يكون من 0 إلى 100."
+                    } else {
+                        ambientVolume = (volume / 100f).coerceIn(0f, 1f)
+                        soundEngine.setAmbientVolume(ambientVolume)
+                        customAudioPlayer?.setVolume(ambientVolume, ambientVolume)
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putInt(ReminderRepository.KEY_SOUND_VOLUME, volume).apply()
+                        note = "🔊 ضبطت مستوى الصوت المحيطي على $volume٪."
                     }
                 }
                 "set_goal" -> {
