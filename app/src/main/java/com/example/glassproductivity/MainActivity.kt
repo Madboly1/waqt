@@ -1268,6 +1268,7 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_ambient_volume","volume":0-100}
 {"type":"set_theme","mode":"dark|light|toggle"}
 {"type":"set_language","language":"ar|en"}
+{"type":"open_app_settings"}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
 لا تستخدم navigate_tab أو open_notes_section لمجرد ذكر قسم؛ استخدمهما عندما يطلب المستخدم فتحه أو الانتقال إليه صراحة.
@@ -1434,7 +1435,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
-            "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
+            "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
         ).any { message.contains(it) }
@@ -1924,6 +1925,10 @@ class MainActivity : AppCompatActivity() {
                     val m = a.optInt("minutes", 120).coerceIn(15, 720)
                     getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putInt(ReminderRepository.KEY_DAILY_FOCUS_GOAL_MINS, m).apply()
                     note = "🎯 هدف التركيز: $m دقيقة"
+                }
+                "open_app_settings" -> {
+                    showAccordionSettingsDialog()
+                    note = if (isArabic) "⚙️ فتحت لك إعدادات وَقْت." else "⚙️ Opened WAQT settings."
                 }
                 "navigate_tab" -> {
                     val requested = a.optString("tab").trim().lowercase(Locale.ROOT)
