@@ -1227,6 +1227,7 @@ class MainActivity : AppCompatActivity() {
 - طلب خطة أو مناقشة هدف لا يعني الموافقة على إنشاء المهام.
 - لا تنفذ إجراءً غير متاح لك، ولا تدّعِ أنك نفذته.
 - لا تكرر إضافة مهمة موجودة بالفعل.
+- عند إكمال أو حذف مهمة أو عادة أو ملاحظة، لا تختَر أول نتيجة عشوائيًا. استخدم تطابق الاسم الكامل، أو نتيجة جزئية وحيدة فقط؛ إذا تعددت النتائج اطلب من المستخدم تحديد الاسم.
 
 تنسيق الرد:
 أخرج JSON صالحًا فقط دون Markdown fences أو أي نص خارجه، بالشكل:
@@ -1440,7 +1441,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
-            "فعّل الفحص التلقائي للتحديثات", "شغل الفحص التلقائي للتحديثات", "وقف الفحص التلقائي للتحديثات", "عطّل الفحص التلقائي للتحديثات", "افحص التحديثات", "افحص وجود تحديث", "check for updates", "enable automatic updates check", "disable automatic updates check", "turn on update checks", "turn off update checks", "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
+            "فعّل الفحص التلقائي للتحديثات", "شغل الفحص التلقائي للتحديثات", "وقف الفحص التلقائي للتحديثات", "عطّل الفحص التلقائي للتحديثات", "افحص التحديثات", "افحص وجود تحديث", "check for updates", "enable automatic updates check", "disable automatic updates check", "turn on update checks", "turn off update checks", "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ", "افتح الجولة التعريفية", "افتح شرح التطبيق", "اعرض الجولة", "صدّر نسخة احتياطية", "صدر نسخة احتياطية", "اعمل نسخة احتياطية", "export backup", "open app tour",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
         ).any { message.contains(it) }
@@ -1537,8 +1538,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 "complete_task" -> {
                     val q = a.optString("title").trim()
-                    val hit = ReminderRepository.getAllItems(this).firstOrNull { !it.isHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true) }
-                    if (hit != null) {
+                    val matches = ReminderRepository.getAllItems(this).filter {
+                        !it.isHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true)
+                    }
+                    val hit = matches.firstOrNull { it.title.equals(q, ignoreCase = true) } ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من مهمة مطابقة؛ اكتب اسم المهمة بدقة." else "ℹ️ ملقتش المهمة المطلوبة."
+                    } else {
                         ReminderRepository.addOrUpdateItem(this, hit.copy(isCompletedToday = true, completionPercentage = 100, lastCompletedEpochDay = today))
                         note = "✅ خلّصت: ${hit.title}"
                     }
@@ -1595,9 +1601,10 @@ class MainActivity : AppCompatActivity() {
                     val actionType = a.optString("type")
                     val q = a.optString("title").trim()
                     val wantHabit = actionType == "delete_habit"
-                    val hit = ReminderRepository.getAllItems(this).firstOrNull {
+                    val matches = ReminderRepository.getAllItems(this).filter {
                         it.isHabit == wantHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true)
                     }
+                    val hit = matches.firstOrNull { it.title.equals(q, ignoreCase = true) } ?: matches.singleOrNull()
                     if (hit != null) {
                         AlertDialog.Builder(this)
                             .setTitle(if (isArabic) "تأكيد الحذف" else "Confirm deletion")
@@ -1610,11 +1617,19 @@ class MainActivity : AppCompatActivity() {
                                 renderCurrentTab()
                             }.show()
                         note = "⚠️ طلبت تأكيد حذف: ${hit.title}"
-                    } else note = if (isArabic) "ملقتش عنصر بالاسم ده." else "I couldn't find that item."
+                    } else {
+                        note = when {
+                            matches.size > 1 -> "⚠️ لقيت أكتر من عنصر مطابق؛ اكتب الاسم كاملًا قبل الحذف."
+                            else -> if (isArabic) "ملقتش عنصر بالاسم ده." else "I couldn't find that item."
+                        }
+                    }
                 }
                 "delete_note" -> {
                     val q = a.optString("title").trim()
-                    val hit = ReminderRepository.getAllNotes(this).firstOrNull { q.isNotBlank() && (it.title.contains(q, true) || it.content.contains(q, true)) }
+                    val matches = ReminderRepository.getAllNotes(this).filter {
+                        q.isNotBlank() && (it.title.contains(q, true) || it.content.contains(q, true))
+                    }
+                    val hit = matches.firstOrNull { it.title.equals(q, true) } ?: matches.singleOrNull()
                     if (hit != null) {
                         AlertDialog.Builder(this)
                             .setTitle(if (isArabic) "تأكيد حذف الملاحظة" else "Confirm note deletion")
@@ -1625,6 +1640,8 @@ class MainActivity : AppCompatActivity() {
                                 renderCurrentTab()
                             }.show()
                         note = "⚠️ طلبت تأكيد حذف الملاحظة: ${hit.title}"
+                    } else {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من ملاحظة مطابقة؛ اكتب عنوانًا أدق قبل الحذف." else "ℹ️ ملقتش الملاحظة المطلوبة."
                     }
                 }
                 "add_note" -> {
@@ -1722,8 +1739,13 @@ class MainActivity : AppCompatActivity() {
                 }
                 "complete_habit" -> {
                     val q = a.optString("title").trim()
-                    val habit = ReminderRepository.getAllItems(this).firstOrNull { it.isHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true) }
-                    if (habit != null) {
+                    val matches = ReminderRepository.getAllItems(this).filter {
+                        it.isHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true)
+                    }
+                    val habit = matches.firstOrNull { it.title.equals(q, ignoreCase = true) } ?: matches.singleOrNull()
+                    if (habit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من عادة مطابقة؛ اكتب اسم العادة بدقة." else "ℹ️ ملقتش العادة المطلوبة."
+                    } else {
                         ReminderRepository.addOrUpdateItem(this, habit.copy(isCompletedToday = true, lastCompletedEpochDay = today, currentProgressToday = habit.targetValue, completionPercentage = 100))
                         note = "🌱 سجلت إنجاز العادة: ${habit.title}"
                     }
