@@ -1565,10 +1565,61 @@ class MainActivity : AppCompatActivity() {
         return approval && previousAssistantAskedForApproval
     }
 
+    private fun isAssistantActionWellFormed(action: org.json.JSONObject): Boolean {
+        fun hasText(key: String): Boolean =
+            action.has(key) && !action.isNull(key) && action.optString(key).trim().isNotBlank()
+        fun hasNumber(key: String): Boolean = action.has(key) && action.opt(key) is Number
+        fun hasBoolean(key: String): Boolean = action.has(key) && action.opt(key) is Boolean
+
+        val type = action.optString("type").trim()
+        if (type.isBlank()) return false
+
+        val supportedTypes = setOf(
+            "add_task", "add_habit", "reopen_task", "set_task_progress", "complete_task",
+            "update_task", "update_habit", "delete_task", "delete_habit", "delete_note",
+            "add_note", "update_note", "pin_note", "unpin_note", "update_journal_entry",
+            "delete_journal_entry", "save_journal_entry", "set_habit_progress", "complete_habit",
+            "start_focus", "pause_focus", "resume_focus", "stop_focus", "set_ambient_sound",
+            "set_ambient_volume", "set_theme", "set_language", "set_focus_duration",
+            "set_break_duration", "choose_custom_audio", "preview_custom_audio",
+            "stop_custom_audio", "choose_alarm_ringtone", "set_tick_tock", "set_goal",
+            "set_auto_update_check", "check_for_updates", "open_app_settings", "open_app_tour",
+            "export_backup", "open_notification_settings", "navigate_tab", "open_notes_section"
+        )
+        if (type !in supportedTypes) return false
+
+        return when (type) {
+            "add_task", "add_habit", "reopen_task", "complete_task", "update_task",
+            "update_habit", "delete_task", "delete_habit", "delete_note", "pin_note",
+            "unpin_note", "set_task_progress", "set_habit_progress", "complete_habit" -> hasText("title")
+            "update_note" -> hasText("title")
+            "update_journal_entry", "delete_journal_entry" -> hasText("date") &&
+                action.optString("date").matches(Regex("\\d{4}-\\d{2}-\\d{2}")) &&
+                (type == "delete_journal_entry" || hasText("content"))
+            "save_journal_entry" -> hasText("content") &&
+                (!action.has("date") || action.optString("date").matches(Regex("\\d{4}-\\d{2}-\\d{2}")))
+            "set_ambient_sound" -> hasText("sound")
+            "set_ambient_volume" -> hasNumber("volume")
+            "set_language" -> hasText("language")
+            "set_focus_duration", "set_break_duration" -> hasNumber("minutes")
+            "set_tick_tock", "set_auto_update_check" -> hasBoolean("enabled")
+            "navigate_tab" -> hasText("tab")
+            "open_notes_section" -> hasText("section")
+            "set_task_progress" -> hasNumber("percentage")
+            "set_habit_progress" -> hasNumber("progress")
+            else -> true
+        }
+    }
+
     private fun applyAssistantActions(actions: org.json.JSONArray, box: LinearLayout) {
         val today = ReminderRepository.currentEpochDay()
         for (i in 0 until actions.length()) {
-            val a = actions.optJSONObject(i) ?: continue
+            val a = actions.optJSONObject(i)
+            if (a == null || !isAssistantActionWellFormed(a)) {
+                val warning = if (isArabic) "⚠️ تجاهلت أمرًا غير مكتمل أو غير مدعوم من المساعد." else "⚠️ Ignored an incomplete or unsupported assistant action."
+                box.addView(createAIMessageBubble(warning))
+                continue
+            }
             var note: String? = null
             when (a.optString("type")) {
                 "add_task" -> {
