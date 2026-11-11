@@ -1489,10 +1489,10 @@ class MainActivity : AppCompatActivity() {
                 val m = e.message ?: ""
                 val friendly = when {
                     m.contains("HTTP 400") || m.contains("HTTP 403") -> if (isArabic) "المفتاح مش شغال. اضغطي 🔑 فوق وحطي مفتاح صحيح." else "Invalid key."
-                    m.contains("HTTP 429") -> if (isArabic) "وصلت للحد المجاني دلوقتي، جرّبي بعد شوية." else "Rate limit reached."
+                    m.contains("HTTP 429") -> if (isArabic) "المزودين المتاحين وصلوا للحد المجاني أو مشغولين حاليًا. جرّب بعد شوية أو أضف مفتاح مزود تاني." else "Available providers are rate-limited or busy. Try again later or add another provider key."
                     m.contains("HTTP 503") || m.contains("HTTP 500") || m.contains("HTTP 502") || m.contains("HTTP 504") -> if (isArabic) "خدمة Gemini مشغولة مؤقتًا. جرّبي تاني بعد لحظة." else "Gemini is temporarily busy. Please try again shortly."
                     m.contains("HTTP 404") -> if (isArabic) "موديل Gemini المختار مش متاح للمفتاح ده. افتحي 🔑 ثم اختاري موديل متاح." else "The selected Gemini model is unavailable for this key. Choose another model."
-                    m.contains("API key") || m.contains("HTTP 400") || m.contains("HTTP 401") || m.contains("HTTP 403") -> if (isArabic) "مفتاح Gemini غير صالح أو غير مسموح له باستخدام الخدمة. راجعي المفتاح من 🔑." else "Gemini API key is invalid or not authorized. Check the key."
+                    m.contains("HTTP 400") || m.contains("HTTP 401") || m.contains("HTTP 403") || m.contains("API key") -> if (isArabic) "في مشكلة في مفاتيح مزودي الذكاء الاصطناعي. راجع مفاتيح Gemini وGroq وOpenRouter من زر 🔑." else "One or more AI provider keys are invalid. Check your Gemini, Groq, and OpenRouter keys."
                     m.contains("SocketTimeoutException") || m.contains("timeout", ignoreCase = true) -> if (isArabic) "الرد اتأخر بسبب الاتصال. جرّبي تاني مع إنترنت أسرع." else "The request timed out. Please try again on a better connection."
                     else -> if (isArabic) "حصلت مشكلة: ${m.take(140)}" else "Request failed: ${m.take(140)}"
                 }
@@ -2411,7 +2411,7 @@ class MainActivity : AppCompatActivity() {
             Slide("🌱", "تاب العادات", "Habits Tab", "ابني عاداتك يوم بيوم وتابع سلسلتك! اضغط (+) لإضافة عادة جديدة وتحديد أهميتها (مهمة/متوسطة/عادية) وتصنيفها وأيام تكرارها.", "Build streaks, choose habit priority & category, and track daily progress.", 1),
             Slide("🍅", "تاب التركيز والأصوات", "Focus & Ambient Sounds", "مؤقت بومودورو بالساعة الرملية والتيك-تاك الهادي، وأصوات محيطية طبيعية بنقاء عالي ولوب ناعم، مع استراحة تلقائية وإحصائيات لهدفك اليومي.", "Pomodoro timer with seamless ambient sounds, auto breaks and daily goals.", 2),
             Slide("📝", "تاب مدونتي", "My Journal", "اعمل تصنيفاتك بنفسك، ودون تدويناتك أو افتح تدوينة عائمة فوق أي تطبيق!", "Create your own categories and floating quick notes over any app.", 3),
-            Slide("✨", "المساعد الذكي", "Smart Assistant", "بيبص على يومك ويقولك تبدأ بإيه، وبيضيف المهام لوحده! حط مفتاح Gemini المجاني مرة واحدة من أيقونة 🔑 جوه الشات.", "Looks at your day, picks priorities, adds tasks. Needs a free Gemini key.", 0),
+            Slide("✨", "المساعد الذكي", "Smart Assistant", "بيبص على يومك ويساعدك تحقق أهدافك. اربط Gemini أو Groq أو OpenRouter من أيقونة 🔑، وWAQT هيتنقل بينهم تلقائيًا.", "Understands your day, helps with goals, and can switch between Gemini, Groq, and OpenRouter.", 0),
             Slide("🧭", "التنقل والشريط الجانبي", "Navigation & Side Rail", "الشريط السفلي للتنقل بين التابات، والشريط الجانبي فتحتهولك أهو: فيه بحث وإحصائيات وتذكيرات سريعة (واسحبه لأي حافة).", "Bottom bar to switch tabs. The side rail gives quick access to stats, search, and presets.", 0, openSideDock = true),
             Slide("🔔", "الأذونات (اختيارية)", "Optional permissions", "تقدر تستخدم التطبيق من غير ما تفعّل أي إذن دلوقتي. فعّل الإذن وقت ما تحتاج الميزة المرتبطة بيه فقط؛ وتقدر تتخطى الخطوة دي عادي.", "Permissions are optional. WAQT works without enabling them now. Grant each permission only when you use the feature that needs it, or skip this step.", 0)
         )
