@@ -1377,8 +1377,20 @@ class MainActivity : AppCompatActivity() {
                 // Allow actions returned from that voice request while keeping the normal text-intent
                 // and explicit-approval gate for ordinary chat turns.
                 val isExplicitVoiceRequest = media?.label == "voice"
-                if (actions != null && (isExplicitVoiceRequest || shouldAllowAssistantActions(cleanUserText, previousAssistantReply))) {
-                    applyAssistantActions(actions, box)
+                val actionExecutionAllowed = isExplicitVoiceRequest ||
+                    shouldAllowAssistantActions(cleanUserText, previousAssistantReply)
+                if (actions != null && actions.length() > 0) {
+                    if (actionExecutionAllowed) {
+                        applyAssistantActions(actions, box)
+                    } else {
+                        box.addView(createAIMessageBubble(
+                            if (isArabic) {
+                                "🔒 فهمت إن فيه إجراء ممكن يتنفذ، لكن مش هغيّر بياناتك من غير طلب واضح منك. اكتب الأمر صراحة، زي: «ضيف المهمة» أو «حدّث العادة»."
+                            } else {
+                                "🔒 I detected a possible app action, but I won't change your data without a clear request. Please state the action explicitly."
+                            }
+                        ))
+                    }
                 }
                 if (autoSpeakAssistantReply) {
                     autoSpeakAssistantReply = false
