@@ -1102,23 +1102,45 @@ class MainActivity : AppCompatActivity() {
 
     private fun geminiKey(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).getString("gemini_api_key", "") ?: ""
 
-    private fun geminiModel(): String = GeminiClient.DEFAULT_MODEL
+    private fun geminiModel(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        .getString("gemini_model", GeminiClient.DEFAULT_MODEL) ?: GeminiClient.DEFAULT_MODEL
 
     private fun showGeminiKeyDialog(onSaved: (() -> Unit)? = null) {
         val prefs = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        val panel = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(22), dp(8), dp(22), dp(4))
+        }
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "مفتاح API" else "API key"
+            textSize = 13f; setTextColor(textPrimaryColor())
+        })
         val et = EditText(this).apply {
             hint = if (isArabic) "الصق مفتاح Gemini هنا" else "Paste your Gemini API key"
-            setText(geminiKey())
-            setSingleLine(true)
-            setPadding(dp(24), dp(16), dp(24), dp(16))
+            setText(geminiKey()); setSingleLine(true)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            setPadding(dp(14), dp(12), dp(14), dp(12))
         }
+        panel.addView(et)
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "موديل الذكاء الاصطناعي" else "AI model"
+            textSize = 13f; setTextColor(textPrimaryColor()); setPadding(0, dp(14), 0, dp(4))
+        })
+        val models = listOf(GeminiClient.DEFAULT_MODEL, GeminiClient.FALLBACK_MODEL)
+        val spinner = Spinner(this)
+        spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, models)
+        spinner.setSelection(models.indexOf(geminiModel()).coerceAtLeast(0))
+        panel.addView(spinner)
         AlertDialog.Builder(this)
-            .setTitle(if (isArabic) "🔑 مفتاح Gemini" else "🔑 Gemini API key")
-            .setMessage(if (isArabic) "مجاني من aistudio.google.com/apikey — المفتاح بيتحفظ على موبايلك بس." else "Free at aistudio.google.com/apikey. Stored on this device only.")
-            .setView(et)
+            .setTitle(if (isArabic) "إعدادات المساعد الذكي" else "AI assistant settings")
+            .setMessage(if (isArabic) "المفتاح بيتحفظ على موبايلك فقط. تقدر تغيّر الموديل من هنا." else "Your key stays on this device. Choose the model here.")
+            .setView(panel)
             .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
-                prefs.edit().putString("gemini_api_key", et.text.toString().trim()).apply()
-                Toast.makeText(this, if (isArabic) "✅ اتحفظ المفتاح" else "Saved", Toast.LENGTH_SHORT).show()
+                prefs.edit()
+                    .putString("gemini_api_key", et.text.toString().trim())
+                    .putString("gemini_model", models[spinner.selectedItemPosition.coerceIn(0, models.lastIndex)])
+                    .apply()
+                Toast.makeText(this, if (isArabic) "✅ اتحفظت إعدادات المساعد" else "Assistant settings saved", Toast.LENGTH_SHORT).show()
                 onSaved?.invoke()
             }
             .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
@@ -1206,6 +1228,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
+{"type":"delete_task","title":"جزء مميز من عنوان المهمة — يتطلب تأكيد المستخدم"}
+{"type":"delete_habit","title":"جزء مميز من اسم العادة — يتطلب تأكيد المستخدم"}
+{"type":"delete_note","title":"عنوان الملاحظة — يتطلب تأكيد المستخدم"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
@@ -1367,7 +1392,7 @@ class MainActivity : AppCompatActivity() {
         val message = userText.trim().lowercase(Locale.ROOT)
         if (message.isBlank()) return false
         val directIntent = listOf(
-            "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "حوّلها لمهام", "حولها لمهام",
+            "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "add habit", "create a habit", "add this habit", "save as habit",
@@ -1443,6 +1468,41 @@ class MainActivity : AppCompatActivity() {
                     if (hit != null) {
                         ReminderRepository.addOrUpdateItem(this, hit.copy(isCompletedToday = true, completionPercentage = 100, lastCompletedEpochDay = today))
                         note = "✅ خلّصت: ${hit.title}"
+                    }
+                }
+                "delete_task", "delete_habit" -> {
+                    val q = a.optString("title").trim()
+                    val wantHabit = a.optString("type") == "delete_habit"
+                    val hit = ReminderRepository.getAllItems(this).firstOrNull {
+                        it.isHabit == wantHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true)
+                    }
+                    if (hit != null) {
+                        AlertDialog.Builder(this)
+                            .setTitle(if (isArabic) "تأكيد الحذف" else "Confirm deletion")
+                            .setMessage(if (isArabic) "المساعد بيطلب حذف «${hit.title}». متأكد؟" else "The assistant wants to delete “${hit.title}”. Continue?")
+                            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+                            .setPositiveButton(if (isArabic) "حذف" else "Delete") { _, _ ->
+                                ReminderRepository.deleteItem(this, hit.id)
+                                AlarmScheduler.cancelAlarm(this, hit.id)
+                                Toast.makeText(this, if (isArabic) "تم حذف ${hit.title}" else "Deleted ${hit.title}", Toast.LENGTH_SHORT).show()
+                                renderCurrentTab()
+                            }.show()
+                        note = "⚠️ طلبت تأكيد حذف: ${hit.title}"
+                    } else note = if (isArabic) "ملقتش عنصر بالاسم ده." else "I couldn't find that item."
+                }
+                "delete_note" -> {
+                    val q = a.optString("title").trim()
+                    val hit = ReminderRepository.getAllNotes(this).firstOrNull { q.isNotBlank() && (it.title.contains(q, true) || it.content.contains(q, true)) }
+                    if (hit != null) {
+                        AlertDialog.Builder(this)
+                            .setTitle(if (isArabic) "تأكيد حذف الملاحظة" else "Confirm note deletion")
+                            .setMessage(if (isArabic) "تحذف «${hit.title}»؟" else "Delete “${hit.title}”?")
+                            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+                            .setPositiveButton(if (isArabic) "حذف" else "Delete") { _, _ ->
+                                ReminderRepository.deleteNote(this, hit.id)
+                                renderCurrentTab()
+                            }.show()
+                        note = "⚠️ طلبت تأكيد حذف الملاحظة: ${hit.title}"
                     }
                 }
                 "add_note" -> {
@@ -5059,6 +5119,20 @@ class MainActivity : AppCompatActivity() {
         appearanceCard.addView(appearanceActions)
         body.addView(appearanceCard)
 
+        body.addView(createAccordionSection(if (isArabic) "✨ إعدادات المساعد الذكي" else "✨ AI Assistant") { container ->
+            container.addView(TextView(this@MainActivity).apply {
+                text = if (isArabic) "إعدادات المساعد مستقلة عن باقي التطبيق. غيّر مفتاح Gemini والموديل من هنا أو من أيقونة المفتاح داخل المحادثة." else "Assistant settings are separate from the rest of the app. Manage Gemini key and model here or from the key icon in chat."
+                textSize = 12f; setTextColor(textMutedColor()); setPadding(dp(8), dp(4), dp(8), dp(10))
+            })
+            container.addView(createSettingsActionButton(if (isArabic) "مفتاح API واختيار الموديل" else "API key & model", "🔑") {
+                showGeminiKeyDialog()
+            })
+            container.addView(TextView(this@MainActivity).apply {
+                text = if (isArabic) "الموديل الحالي: ${geminiModel()}" else "Current model: ${geminiModel()}"
+                textSize = 11f; setTextColor(textMutedColor()); setPadding(dp(12), dp(8), dp(12), dp(4))
+            })
+        })
+
         body.addView(createAccordionSection(if (isArabic) "🍅 التركيز والاستراحة" else "🍅 Focus & Breaks") { container ->
             fun addDurationRow(label: String, value: Int, onChoose: () -> Unit) {
                 val row = LinearLayout(this@MainActivity).apply {
@@ -5175,16 +5249,9 @@ class MainActivity : AppCompatActivity() {
                 val stamp = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
                 backupExportLauncher.launch("waqt-backup-$stamp.json")
             })
-            container.addView(createSettingsActionButton(
-                if (isArabic) "✨ مفتاح مساعد Gemini" else "✨ Gemini assistant key",
-                "🔑"
-            ) {
-                showGeminiKeyDialog()
-            })
             container.addView(TextView(this@MainActivity).apply {
-                text = if (isArabic) "🤖 المحرك: Gemini Flash Lite (اختيار تلقائي ثابت)" else "🤖 Engine: Gemini Flash Lite (fixed automatic selection)"
-                setTextColor(textMutedColor())
-                textSize = 12f
+                text = if (isArabic) "إعدادات المساعد الذكي موجودة في قسم مستقل أعلى هذه الصفحة." else "AI assistant settings are in their own section above."
+                setTextColor(textMutedColor()); textSize = 12f
                 setPadding(dp(12), dp(10), dp(12), dp(10))
             })
             container.addView(createSettingsActionButton(
