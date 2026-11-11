@@ -1235,6 +1235,8 @@ class MainActivity : AppCompatActivity() {
 الـ actions اختيارية، ولا تستخدمها إلا بعد طلب صريح أو موافقة واضحة:
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
+{"type":"update_task","title":"جزء مميز من عنوان المهمة الحالية","new_title":"العنوان الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0-365,"description":"وصف جديد","expected_minutes":25}
+{"type":"update_habit","title":"جزء مميز من اسم العادة الحالية","new_title":"الاسم الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"category":"health|study|religion|sports","has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب","recurrence":"daily|weekly|custom_days","custom_days_csv":"1,2,3,4,5,6,7","description":"وصف جديد"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
 {"type":"delete_task","title":"جزء مميز من عنوان المهمة — يتطلب تأكيد المستخدم"}
 {"type":"delete_habit","title":"جزء مميز من اسم العادة — يتطلب تأكيد المستخدم"}
@@ -1403,7 +1405,7 @@ class MainActivity : AppCompatActivity() {
         val message = userText.trim().lowercase(Locale.ROOT)
         if (message.isBlank()) return false
         val directIntent = listOf(
-            "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
+            "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حدّث", "حدث", "تعديل المهمة", "تعديل العادة", "غيّر موعد", "غيّر أولوية", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
@@ -1471,6 +1473,67 @@ class MainActivity : AppCompatActivity() {
                             ReminderRepository.addOrUpdateItem(this, habit)
                             if (hasReminder) try { AlarmScheduler.scheduleNextOccurrence(this, habit) } catch (_: Exception) {}
                             note = "🌱 ضفت عادة: $title${if (hasReminder) " — تذكير ${String.format(Locale.US, "%02d:%02d", habit.hour, habit.minute)}" else " — بدون تذكير"}"
+                        }
+                    }
+                }
+                "update_task", "update_habit" -> {
+                    val actionType = a.optString("type")
+                    val wantHabit = actionType == "update_habit"
+                    val query = a.optString("title").trim()
+                    val allMatches = ReminderRepository.getAllItems(this).filter {
+                        it.isHabit == wantHabit && query.isNotBlank() && it.title.contains(query, ignoreCase = true)
+                    }
+                    val exactMatches = allMatches.filter { it.title.equals(query, ignoreCase = true) }
+                    val matches = if (exactMatches.isNotEmpty()) exactMatches else allMatches
+                    when {
+                        query.isBlank() -> note = if (isArabic) "⚠️ محتاج اسم المهمة أو العادة اللي عايز تعدّلها." else "Please specify the task or habit to update."
+                        matches.isEmpty() -> note = if (isArabic) "ملقتش عنصر مطابق لـ «$query»." else "No matching item found for “$query”."
+                        matches.size > 1 -> note = if (isArabic) "لقيت أكتر من تطابق لـ «$query»: " + matches.take(4).joinToString("، ") { it.title } + " — حدّد الاسم بشكل أدق." else "More than one match: " + matches.take(4).joinToString(", ") { it.title } + ". Please be more specific."
+                        else -> {
+                            val old = matches.first()
+                            val validPriorities = listOf("high", "medium", "low")
+                            val newTitle = a.optString("new_title", old.title).trim().take(100).ifBlank { old.title }
+                            val priority = if (a.has("priority")) a.optString("priority").takeIf { it in validPriorities } ?: old.priority else old.priority
+                            val hour = if (a.has("hour")) a.optInt("hour", old.hour).coerceIn(0, 23) else old.hour
+                            val minute = if (a.has("minute")) a.optInt("minute", old.minute).coerceIn(0, 59) else old.minute
+                            val description = if (a.has("description")) a.optString("description").take(500) else old.description
+                            val updated = if (wantHabit) {
+                                val categories = ReminderRepository.getAllHabitCategories(this)
+                                val requestedCategory = a.optString("category", old.category)
+                                val category = if (a.has("category")) categories.firstOrNull {
+                                    it.id.equals(requestedCategory, true) || it.name.equals(requestedCategory, true)
+                                }?.id ?: old.category else old.category
+                                val recurrenceValue = a.optString("recurrence", old.recurrence)
+                                val recurrence = if (a.has("recurrence") && recurrenceValue in listOf("daily", "weekly", "custom_days")) recurrenceValue else old.recurrence
+                                val customDays = if (a.has("custom_days_csv")) a.optString("custom_days_csv").split(",")
+                                    .mapNotNull { it.trim().toIntOrNull()?.takeIf { day -> day in 1..7 } }.distinct().sorted()
+                                    .joinToString(",").ifBlank { old.customDaysCsv } else old.customDaysCsv
+                                old.copy(
+                                    title = newTitle, priority = priority, hour = hour, minute = minute,
+                                    description = description, category = category,
+                                    hasReminder = if (a.has("has_reminder")) a.optBoolean("has_reminder") else old.hasReminder,
+                                    targetValue = if (a.has("target_value")) a.optInt("target_value", old.targetValue).coerceIn(1, 1000) else old.targetValue,
+                                    targetUnit = if (a.has("target_unit")) a.optString("target_unit").take(20) else old.targetUnit,
+                                    recurrence = recurrence, customDaysCsv = customDays
+                                )
+                            } else {
+                                val offset = if (a.has("day_offset")) a.optInt("day_offset", 0).coerceIn(0, 365) else null
+                                old.copy(
+                                    title = newTitle, priority = priority, hour = hour, minute = minute,
+                                    description = description,
+                                    expectedMinutes = if (a.has("expected_minutes")) a.optInt("expected_minutes", old.expectedMinutes).coerceIn(1, 1440) else old.expectedMinutes,
+                                    dueDateEpochDay = if (offset != null) shiftEpoch(today, offset) else old.dueDateEpochDay
+                                )
+                            }
+                            ReminderRepository.addOrUpdateItem(this, updated)
+                            if (updated.isHabit) {
+                                if (updated.hasReminder && !updated.isPaused) {
+                                    try { AlarmScheduler.scheduleNextOccurrence(this, updated) } catch (_: Exception) {}
+                                } else AlarmScheduler.cancelAlarm(this, updated.id)
+                            } else {
+                                try { AlarmScheduler.scheduleNextOccurrence(this, updated) } catch (_: Exception) {}
+                            }
+                            note = if (isArabic) "✏️ تم تحديث ${if (wantHabit) "العادة" else "المهمة"}: ${old.title}" else "Updated: ${old.title}"
                         }
                     }
                 }
