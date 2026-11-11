@@ -194,6 +194,35 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gtaRadialOverlayView: GTARadialWheelView
     private lateinit var floatingAIChatBubble: FrameLayout
 
+    private var activeJournalMediaDateKey: String = ""
+    private var journalAudioRecorder: MediaRecorder? = null
+    private var journalAudioFile: java.io.File? = null
+    private var isRecordingJournalAudio: Boolean = false
+
+    private val journalImagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri: Uri? ->
+        if (uri != null && activeJournalMediaDateKey.isNotBlank()) {
+            try {
+                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                val prefs = getSharedPreferences("waqt_daily_journal_media", Context.MODE_PRIVATE)
+                val current = try { org.json.JSONArray(prefs.getString(activeJournalMediaDateKey, "[]") ?: "[]") } catch (_: Exception) { org.json.JSONArray() }
+                current.put(org.json.JSONObject().put("type", "image").put("uri", uri.toString()).put("name", getFileNameFromUri(uri)))
+                prefs.edit().putString(activeJournalMediaDateKey, current.toString()).apply()
+                showDailyJournalEntryPage(activeJournalMediaDateKey)
+            } catch (e: Exception) {
+                Toast.makeText(this, if (isArabic) "تعذر إرفاق الصورة" else "Could not attach image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private val journalAudioPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) startJournalAudioRecording()
+        else Toast.makeText(this, if (isArabic) "لازم تسمح بالميكروفون لتسجيل الصوت" else "Microphone permission is needed", Toast.LENGTH_SHORT).show()
+    }
+
     private val noteImagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri: Uri? ->
@@ -3505,7 +3534,65 @@ class MainActivity : AppCompatActivity() {
         return outer
     }
 
+    private fun journalMediaPrefs() = getSharedPreferences("waqt_daily_journal_media", Context.MODE_PRIVATE)
+
+    private fun readJournalMedia(dateKey: String): org.json.JSONArray =
+        try { org.json.JSONArray(journalMediaPrefs().getString(dateKey, "[]") ?: "[]") } catch (_: Exception) { org.json.JSONArray() }
+
+    private fun startJournalAudioRecording() {
+        if (isRecordingJournalAudio) return
+        try {
+            val dir = java.io.File(filesDir, "journal_audio").apply { mkdirs() }
+            val file = java.io.File(dir, "journal_${activeJournalMediaDateKey}_${System.currentTimeMillis()}.m4a")
+            val recorder = if (Build.VERSION.SDK_INT >= 31) MediaRecorder(this) else @Suppress("DEPRECATION") MediaRecorder()
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            recorder.setAudioEncodingBitRate(96000)
+            recorder.setAudioSamplingRate(44100)
+            recorder.setOutputFile(file.absolutePath)
+            recorder.prepare()
+            recorder.start()
+            journalAudioRecorder = recorder
+            journalAudioFile = file
+            isRecordingJournalAudio = true
+            showDailyJournalEntryPage(activeJournalMediaDateKey)
+        } catch (e: Exception) {
+            try { journalAudioRecorder?.release() } catch (_: Exception) {}
+            journalAudioRecorder = null
+            journalAudioFile?.delete()
+            journalAudioFile = null
+            isRecordingJournalAudio = false
+            Toast.makeText(this, if (isArabic) "فشل بدء التسجيل الصوتي" else "Could not start recording", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun stopJournalAudioRecording() {
+        val recorder = journalAudioRecorder ?: return
+        try {
+            recorder.stop()
+            val file = journalAudioFile
+            if (file != null && file.exists() && file.length() > 0L) {
+                val media = readJournalMedia(activeJournalMediaDateKey)
+                media.put(org.json.JSONObject().put("type", "audio").put("path", file.absolutePath)
+                    .put("name", file.name).put("duration", ""))
+                journalMediaPrefs().edit().putString(activeJournalMediaDateKey, media.toString()).apply()
+                Toast.makeText(this, if (isArabic) "تم حفظ التسجيل الصوتي في يومياتك" else "Voice recording saved", Toast.LENGTH_SHORT).show()
+            }
+        } catch (_: Exception) {
+            journalAudioFile?.delete()
+            Toast.makeText(this, if (isArabic) "التسجيل لم يكتمل، حاول مرة تانية" else "Recording did not complete", Toast.LENGTH_SHORT).show()
+        } finally {
+            try { recorder.reset(); recorder.release() } catch (_: Exception) {}
+            journalAudioRecorder = null
+            journalAudioFile = null
+            isRecordingJournalAudio = false
+            showDailyJournalEntryPage(activeJournalMediaDateKey)
+        }
+    }
+
     private fun showDailyJournalEntryPage(dateKey: String) {
+        activeJournalMediaDateKey = dateKey
         val prefs = getDiaryPreferences()
         val existingText = prefs.getString(dateKey, "") ?: ""
         val date = try {
@@ -3517,8 +3604,6 @@ class MainActivity : AppCompatActivity() {
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createGlassCardDrawable(true, false)
-            // Reserve space for WAQT's persistent bottom navigation so the
-            // save action never sits underneath the tab bar.
             setPadding(dp(16), dp(12), dp(16), dp(88))
             clipToPadding = false
         }
@@ -3526,7 +3611,10 @@ class MainActivity : AppCompatActivity() {
         toolbar.addView(TextView(this).apply {
             text = "‹"; textSize = 30f; gravity = Gravity.CENTER
             setTextColor(textPrimaryColor()); layoutParams = LinearLayout.LayoutParams(dp(44), dp(48))
-            setOnClickListener { notesSubTab = 1; renderCurrentTab() }
+            setOnClickListener {
+                if (isRecordingJournalAudio) stopJournalAudioRecording()
+                notesSubTab = 1; renderCurrentTab()
+            }
         })
         toolbar.addView(TextView(this).apply {
             text = date; textSize = 16f; setTypeface(typeface, Typeface.BOLD)
@@ -3539,17 +3627,96 @@ class MainActivity : AppCompatActivity() {
             setText(existingText)
             setTextColor(textPrimaryColor()); setHintTextColor(textMutedColor())
             textSize = 16f; gravity = Gravity.TOP or Gravity.START
-            minLines = 10
+            minLines = 7
             background = createGlass3DDrawable(dp(18))
             setPadding(dp(16), dp(16), dp(16), dp(16))
         }
         page.addView(editor, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f).apply {
-            topMargin = dp(12); bottomMargin = dp(12)
+            topMargin = dp(12); bottomMargin = dp(8)
         })
-        // Keep long entries scrollable while the save button remains reachable.
         editor.isVerticalScrollBarEnabled = true
         editor.overScrollMode = View.OVER_SCROLL_IF_CONTENT_SCROLLS
-        val save = Button(this).apply {
+
+        val mediaHeader = TextView(this).apply {
+            text = if (isArabic) "المرفقات" else "Attachments"
+            textSize = 13f; setTypeface(typeface, Typeface.BOLD); setTextColor(textPrimaryColor())
+            setPadding(dp(2), dp(4), dp(2), dp(4))
+        }
+        page.addView(mediaHeader)
+        val mediaList = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        fun refreshMediaList() {
+            mediaList.removeAllViews()
+            val items = readJournalMedia(dateKey)
+            for (i in 0 until items.length()) {
+                val item = items.optJSONObject(i) ?: continue
+                val isImage = item.optString("type") == "image"
+                val path = item.optString("path")
+                val uriText = item.optString("uri")
+                val label = item.optString("name").ifBlank { if (isImage) "صورة" else "تسجيل صوتي" }
+                val row = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+                    background = createPillDrawable(bgElevatedColor(), dp(12), null)
+                    setPadding(dp(10), dp(7), dp(10), dp(7))
+                    layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(5) }
+                }
+                row.addView(TextView(this).apply {
+                    text = (if (isImage) "🖼  " else "🎙  ") + label
+                    textSize = 12f; setTextColor(textPrimaryColor()); maxLines = 1
+                    ellipsize = android.text.TextUtils.TruncateAt.END
+                    layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+                })
+                if (isImage || path.isNotBlank()) row.addView(TextView(this).apply {
+                    text = if (isImage) "فتح" else "▶"
+                    textSize = 13f; setTextColor(accentTealColor()); setPadding(dp(8), dp(4), dp(8), dp(4))
+                    setOnClickListener {
+                        try {
+                            val uri = if (isImage) Uri.parse(uriText) else androidx.core.content.FileProvider.getUriForFile(this@MainActivity, "$packageName.fileprovider", java.io.File(path))
+                            startActivity(Intent(Intent.ACTION_VIEW).setDataAndType(uri, if (isImage) "image/*" else "audio/*").addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION))
+                        } catch (_: Exception) {
+                            if (!isImage && path.isNotBlank()) {
+                                try { MediaPlayer().apply { setDataSource(path); setOnCompletionListener { it.release() }; prepare(); start() } } catch (_: Exception) {}
+                            } else Toast.makeText(this@MainActivity, "تعذر فتح المرفق", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+                row.addView(TextView(this).apply {
+                    text = "×"; textSize = 19f; setTextColor(Color.parseColor("#FFFF8A8A")); setPadding(dp(8), 0, dp(4), 0)
+                    setOnClickListener {
+                        val updated = org.json.JSONArray()
+                        for (j in 0 until items.length()) if (j != i) updated.put(items.getJSONObject(j))
+                        journalMediaPrefs().edit().putString(dateKey, updated.toString()).apply()
+                        if (!isImage && path.isNotBlank()) try { java.io.File(path).delete() } catch (_: Exception) {}
+                        refreshMediaList()
+                    }
+                })
+                mediaList.addView(row)
+            }
+            if (items.length() == 0) mediaList.addView(TextView(this).apply {
+                text = if (isArabic) "لسه مفيش مرفقات لليوم ده" else "No attachments yet"
+                textSize = 11f; setTextColor(textMutedColor())
+            })
+        }
+        page.addView(mediaList)
+        refreshMediaList()
+
+        val actions = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        actions.addView(createSettingsActionButton(if (isArabic) "إضافة صورة" else "Add image", "🖼") {
+            journalImagePickerLauncher.launch(arrayOf("image/*"))
+        }, LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(6) })
+        actions.addView(createSettingsActionButton(
+            if (isRecordingJournalAudio) (if (isArabic) "إيقاف التسجيل" else "Stop recording") else (if (isArabic) "تسجيل صوت" else "Record voice"),
+            if (isRecordingJournalAudio) "■" else "🎙"
+        ) {
+            if (isRecordingJournalAudio) stopJournalAudioRecording()
+            else {
+                activeJournalMediaDateKey = dateKey
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) startJournalAudioRecording()
+                else journalAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            }
+        }, LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginStart = dp(6) })
+        page.addView(actions, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(46)).apply { topMargin = dp(6); bottomMargin = dp(6) })
+
+        page.addView(Button(this).apply {
             text = if (isArabic) "حفظ يومياتي" else "Save journal"
             isAllCaps = false; setTextColor(Color.parseColor("#0B1417"))
             backgroundTintList = ColorStateList.valueOf(accentTealColor())
@@ -3561,8 +3728,7 @@ class MainActivity : AppCompatActivity() {
                 notesSubTab = 1
                 renderCurrentTab()
             }
-        }
-        page.addView(save, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)))
+        }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(46)))
         tabContentHost.removeAllViews()
         tabContentHost.addView(page, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
