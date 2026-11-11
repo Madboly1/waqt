@@ -1259,6 +1259,8 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_goal","minutes":120}
 {"type":"set_ambient_sound","sound":"off|rain|waves|fire|forest|water|library|wind|night"}
 {"type":"set_ambient_volume","volume":0-100}
+{"type":"set_theme","mode":"dark|light|toggle"}
+{"type":"set_language","language":"ar|en"}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
 لا تستخدم navigate_tab أو open_notes_section لمجرد ذكر قسم؛ استخدمهما عندما يطلب المستخدم فتحه أو الانتقال إليه صراحة.
@@ -1420,7 +1422,7 @@ class MainActivity : AppCompatActivity() {
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
-            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت",
+            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت", "غير المظهر", "غير الثيم", "الوضع الداكن", "الوضع الفاتح", "غير اللغة", "خلي التطبيق عربي", "خلي التطبيق انجليزي", "حوّل للعربي", "حوّل للإنجليزي",
             "play rain", "play ocean", "play ambient sound", "stop ambient sound", "change volume",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
@@ -1791,6 +1793,47 @@ class MainActivity : AppCompatActivity() {
                         getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
                             .putInt(ReminderRepository.KEY_SOUND_VOLUME, volume).apply()
                         note = "🔊 ضبطت مستوى الصوت المحيطي على $volume٪."
+                    }
+                }
+                "set_theme" -> {
+                    val requested = a.optString("mode", "toggle").trim().lowercase(Locale.ROOT)
+                    val targetDark = when (requested) {
+                        "dark", "داكن", "ليل" -> true
+                        "light", "فاتح", "نهاري" -> false
+                        "toggle", "بدّل", "تبديل" -> !isDarkMode
+                        else -> isDarkMode
+                    }
+                    if (requested !in listOf("dark", "داكن", "ليل", "light", "فاتح", "نهاري", "toggle", "بدّل", "تبديل")) {
+                        note = "⚠️ اختار الوضع الداكن أو الفاتح."
+                    } else if (targetDark == isDarkMode) {
+                        note = if (isArabic) "المظهر المطلوب مفعّل بالفعل." else "That appearance is already active."
+                    } else {
+                        isDarkMode = targetDark
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putBoolean(ReminderRepository.KEY_DARK_MODE, isDarkMode).apply()
+                        applySystemBarTheme()
+                        recreate()
+                        note = if (isDarkMode) "🌙 تم تفعيل الوضع الداكن." else "☀️ تم تفعيل الوضع الفاتح."
+                    }
+                }
+                "set_language" -> {
+                    val requested = a.optString("language").trim().lowercase(Locale.ROOT)
+                    val targetArabic = when (requested) {
+                        "ar", "arabic", "عربي", "العربية" -> true
+                        "en", "english", "انجليزي", "إنجليزي", "الإنجليزية" -> false
+                        else -> isArabic
+                    }
+                    if (requested !in listOf("ar", "arabic", "عربي", "العربية", "en", "english", "انجليزي", "إنجليزي", "الإنجليزية")) {
+                        note = "⚠️ اختار العربية أو الإنجليزية."
+                    } else if (targetArabic == isArabic) {
+                        note = if (isArabic) "لغة التطبيق عربية بالفعل." else "The app is already in English."
+                    } else {
+                        isArabic = targetArabic
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putBoolean("is_arabic", isArabic).apply()
+                        window.decorView.layoutDirection = if (isArabic) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+                        renderCurrentTab()
+                        note = if (isArabic) "🌐 تم تحويل التطبيق للعربية." else "🌐 App language changed to English."
                     }
                 }
                 "set_goal" -> {
