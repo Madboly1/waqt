@@ -1260,10 +1260,10 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_focus_duration","minutes":25}
 {"type":"set_break_duration","minutes":5}
 {"type":"set_tick_tock","enabled":true}
-{"type":"choose_alarm_ringtone"
+{"type":"choose_alarm_ringtone"}
 {"type":"choose_custom_audio"}
 {"type":"preview_custom_audio"}
-{"type":"stop_custom_audio"}}
+{"type":"stop_custom_audio"}
 {"type":"set_goal","minutes":120}
 {"type":"set_ambient_sound","sound":"off|rain|waves|fire|forest|water|library|wind|night"}
 {"type":"set_ambient_volume","volume":0-100}
