@@ -1244,6 +1244,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
 {"type":"start_focus","minutes":25}
 {"type":"set_goal","minutes":120}
+{"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
+{"type":"open_notes_section","section":"notes|journal"}
+لا تستخدم navigate_tab أو open_notes_section لمجرد ذكر قسم؛ استخدمهما عندما يطلب المستخدم فتحه أو الانتقال إليه صراحة.
 لو لا يوجد إجراء مطلوب، أرسل actions كمصفوفة فارغة.
 
     """.trimIndent()
@@ -1403,6 +1406,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
+            "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
         ).any { message.contains(it) }
@@ -1550,6 +1554,38 @@ class MainActivity : AppCompatActivity() {
                     val m = a.optInt("minutes", 120).coerceIn(15, 720)
                     getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putInt(ReminderRepository.KEY_DAILY_FOCUS_GOAL_MINS, m).apply()
                     note = "🎯 هدف التركيز: $m دقيقة"
+                }
+                "navigate_tab" -> {
+                    val requested = a.optString("tab").trim().lowercase(Locale.ROOT)
+                    val target = when (requested) {
+                        "tasks", "task", "المهام" -> 0
+                        "habits", "habit", "العادات" -> 1
+                        "focus", "pomodoro", "التركيز" -> 2
+                        "notes", "note", "journal", "المدونة", "مدونتي", "الملاحظات" -> 3
+                        else -> -1
+                    }
+                    if (target >= 0) {
+                        if (target != currentTab) performLiquidWaveTransitionToTab(target)
+                        note = "↗️ فتحت قسم ${when (target) { 0 -> "المهام"; 1 -> "العادات"; 2 -> "التركيز"; else -> "مدونتي" }}"
+                    } else {
+                        note = "⚠️ مش قادر أحدد القسم المطلوب فتحه."
+                    }
+                }
+                "open_notes_section" -> {
+                    val section = a.optString("section").trim().lowercase(Locale.ROOT)
+                    if (section in listOf("notes", "note", "الملاحظات")) {
+                        notesSubTab = 0
+                        currentTab = 3
+                        renderCurrentTab()
+                        note = "📝 فتحت الملاحظات."
+                    } else if (section in listOf("journal", "diary", "اليوميات", "مدونتي")) {
+                        notesSubTab = 1
+                        currentTab = 3
+                        renderCurrentTab()
+                        note = "📔 فتحت اليوميات."
+                    } else {
+                        note = "⚠️ اختار الملاحظات أو اليوميات."
+                    }
                 }
             }
             if (note != null) {
