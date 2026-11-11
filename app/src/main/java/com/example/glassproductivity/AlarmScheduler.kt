@@ -784,12 +784,39 @@ object AlarmScheduler {
     const val ACTION_COMPLETE_FROM_NOTIF = "com.example.glassproductivity.ACTION_COMPLETE_FROM_NOTIF"
     const val ACTION_SNOOZE_10M_FROM_NOTIF = "com.example.glassproductivity.ACTION_SNOOZE_10M_FROM_NOTIF"
     const val ACTION_SNOOZE_1H_FROM_NOTIF = "com.example.glassproductivity.ACTION_SNOOZE_1H_FROM_NOTIF"
+    const val ACTION_POMODORO_END = "com.example.glassproductivity.ACTION_POMODORO_END"
+    const val EXTRA_POMODORO_BREAK = "extra_pomodoro_break"
+    const val EXTRA_POMODORO_SESSION = "extra_pomodoro_session"
 
     const val EXTRA_ITEM_ID = "extra_item_id"
     const val EXTRA_TITLE = "extra_title"
     const val EXTRA_IS_HABIT = "extra_is_habit"
     const val EXTRA_STREAK_COUNT = "extra_streak_count"
     const val EXTRA_STREAK_GOAL = "extra_streak_goal"
+
+
+    fun schedulePomodoroEnd(context: Context, triggerAtMillis: Long, isBreak: Boolean, sessionId: String) {
+        val intent = Intent(context, AlarmReceiver::class.java).apply {
+            action = ACTION_POMODORO_END
+            putExtra(EXTRA_POMODORO_BREAK, isBreak)
+            putExtra(EXTRA_POMODORO_SESSION, sessionId)
+        }
+        val requestCode = 73000 + if (isBreak) 1 else 0
+        val pending = PendingIntent.getBroadcast(context, requestCode, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        setAlarmClockSafely(context, manager, triggerAtMillis.coerceAtLeast(System.currentTimeMillis() + 1000L), pending)
+    }
+
+    fun cancelPomodoroEnd(context: Context) {
+        val manager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        for (isBreak in listOf(false, true)) {
+            val intent = Intent(context, AlarmReceiver::class.java).apply { action = ACTION_POMODORO_END }
+            val pending = PendingIntent.getBroadcast(context, 73000 + if (isBreak) 1 else 0, intent,
+                PendingIntent.FLAG_NO_CREATE or PendingIntent.FLAG_IMMUTABLE)
+            if (pending != null) { manager.cancel(pending); pending.cancel() }
+        }
+    }
 
     fun scheduleNextOccurrence(
         context: Context,
@@ -815,14 +842,31 @@ object AlarmScheduler {
             set(Calendar.MILLISECOND, 0)
         }
 
-        if (forceTomorrow) {
+        // Habit day IDs are stored in Saturday-first order: Sat=1, Sun=2, ... Fri=7.
+        // Find the next enabled day instead of blindly scheduling tomorrow.
+        if (forceTomorrow || calendar.timeInMillis <= nowMillis) {
             calendar.add(Calendar.DAY_OF_YEAR, 1)
-        } else if (calendar.timeInMillis <= nowMillis) {
-            val diffSeconds = (nowMillis - calendar.timeInMillis) / 1000L
-            if (diffSeconds < 60L) {
-                calendar.timeInMillis = nowMillis + 5000L
-            } else {
+        }
+        if (item.isHabit) {
+            val allowedDays = item.customDaysCsv.split(",")
+                .mapNotNull { it.trim().toIntOrNull() }
+                .filter { it in 1..7 }
+                .toSet()
+            if (allowedDays.isEmpty()) {
+                cancelAlarm(context, item.id)
+                return -1L
+            }
+            var attempts = 0
+            while (attempts < 7) {
+                val calendarDay = calendar.get(Calendar.DAY_OF_WEEK)
+                val saturdayFirstDayId = ((calendarDay + 5) % 7) + 1
+                if (saturdayFirstDayId in allowedDays) break
                 calendar.add(Calendar.DAY_OF_YEAR, 1)
+                attempts++
+            }
+            if (attempts >= 7) {
+                cancelAlarm(context, item.id)
+                return -1L
             }
         }
 

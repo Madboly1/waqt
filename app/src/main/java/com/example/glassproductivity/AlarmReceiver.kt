@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.media.AudioAttributes
+import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
 import android.os.PowerManager
@@ -24,6 +25,8 @@ class AlarmReceiver : BroadcastReceiver() {
         const val MOTIVATION_CHANNEL_ID = "waqt_motivation_channel"
         const val NOTIF_ID_ALARM = 9091
         const val NOTIF_ID_MOTIVATION = 8082
+        const val POMODORO_CHANNEL_ID = "waqt_pomodoro_channel"
+        const val NOTIF_ID_POMODORO = 7077
     }
 
     override fun onReceive(context: Context, intent: Intent?) {
@@ -39,6 +42,10 @@ class AlarmReceiver : BroadcastReceiver() {
                         AlarmScheduler.scheduleNextOccurrence(context, item)
                     }
                 }
+            }
+
+            AlarmScheduler.ACTION_POMODORO_END -> {
+                showPomodoroEndNotification(context, intent)
             }
 
             AlarmScheduler.ACTION_COMPLETE_FROM_NOTIF -> {
@@ -67,9 +74,61 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             AlarmScheduler.ACTION_TRIGGER_REMINDER -> {
+                // Re-arm recurring habits immediately so the next reminder survives
+                // even when the user dismisses the notification without completing it.
+                val itemId = intent.getStringExtra(AlarmScheduler.EXTRA_ITEM_ID).orEmpty()
+                val item = ReminderRepository.getItemById(context, itemId)
+                if (item != null && item.isHabit && !item.isPaused && item.hasReminder) {
+                    AlarmScheduler.scheduleNextOccurrence(context, item, forceTomorrow = true)
+                }
                 triggerFullSystemAlarm(context, intent)
             }
         }
+    }
+
+
+    private fun showPomodoroEndNotification(context: Context, intent: Intent) {
+        val prefs = context.getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        val isArabic = prefs.getBoolean("is_arabic", Locale.getDefault().language == "ar")
+        val isBreak = intent.getBooleanExtra(AlarmScheduler.EXTRA_POMODORO_BREAK, false)
+        val sessionId = intent.getStringExtra(AlarmScheduler.EXTRA_POMODORO_SESSION).orEmpty()
+        val active = ReminderRepository.getActiveFocusState(context)
+        // Ignore alarms from a paused/reset timer or a different phase.
+        if (!active.optBoolean("isRunning", false) || active.optBoolean("isBreak", false) != isBreak) return
+        val title = if (isBreak) {
+            if (isArabic) "☕ انتهت الراحة — وقت التركيز" else "☕ Break finished — time to focus"
+        } else {
+            if (isArabic) "🎉 انتهى وقت التركيز — خذ استراحة" else "🎉 Focus finished — take a break"
+        }
+        val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+                ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+            val attrs = AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_ALARM)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build()
+            manager.createNotificationChannel(NotificationChannel(POMODORO_CHANNEL_ID,
+                if (isArabic) "تنبيهات التركيز والاستراحة" else "Focus and break alerts",
+                NotificationManager.IMPORTANCE_HIGH).apply {
+                description = if (isArabic) "تنبيه عند انتهاء التركيز أو الاستراحة" else "Alerts when focus or break ends"
+                setSound(sound, attrs)
+                enableVibration(true)
+                vibrationPattern = longArrayOf(0, 500, 250, 500)
+            })
+        }
+        val open = PendingIntent.getActivity(context, NOTIF_ID_POMODORO,
+            Intent(context, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP),
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        val notification = NotificationCompat.Builder(context, POMODORO_CHANNEL_ID)
+            .setSmallIcon(R.drawable.logo_waqt)
+            .setContentTitle(title)
+            .setContentText(if (isArabic) "افتح وَقْت للانتقال للمرحلة التالية." else "Open WAQT to continue to the next phase.")
+            .setCategory(NotificationCompat.CATEGORY_ALARM)
+            .setPriority(NotificationCompat.PRIORITY_MAX)
+            .setAutoCancel(true)
+            .setContentIntent(open)
+            .setVibrate(longArrayOf(0, 500, 250, 500))
+            .build()
+        manager.notify(NOTIF_ID_POMODORO, notification)
     }
 
     private fun handleSnoozeFromNotification(context: Context, intent: Intent, minutes: Int) {

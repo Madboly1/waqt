@@ -1120,6 +1120,15 @@ class MainActivity : AppCompatActivity() {
         val goal = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).getInt(ReminderRepository.KEY_DAILY_FOCUS_GOAL_MINS, 120)
         val hist = ReminderRepository.getFocusHistory(this)
         sb.append("التركيز النهارده: ${ReminderRepository.getTodayFocusMinutes(this)} دقيقة من هدف $goal دقيقة، جلسات اليوم: ${hist.count { it.epochDay == today }}\n")
+        val notes = ReminderRepository.getAllNotes(this)
+        sb.append("المدونة والملاحظات (${notes.size}):\n")
+        notes.take(8).forEach { sb.append("- ${it.title.take(60)}: ${it.content.take(100).replace('\n', ' ')}\n") }
+        val journal = getDiaryPreferences()
+        val journalKeys = journal.all.keys.filter { it.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) }.sortedDescending().take(3)
+        if (journalKeys.isNotEmpty()) {
+            sb.append("آخر اليوميات المحفوظة:\n")
+            journalKeys.forEach { key -> sb.append("- $key: ${journal.getString(key, "").orEmpty().take(180).replace('\n', ' ')}\n") }
+        }
         return sb.toString()
     }
 
@@ -1169,6 +1178,8 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
+{"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
+{"type":"complete_habit","title":"جزء مميز من اسم العادة"}
 {"type":"start_focus","minutes":25}
 {"type":"set_goal","minutes":120}
 لو لا يوجد إجراء مطلوب، أرسل actions كمصفوفة فارغة.
@@ -1409,6 +1420,22 @@ class MainActivity : AppCompatActivity() {
                     val t = a.optString("title").ifBlank { "ملاحظة" }
                     ReminderRepository.addOrUpdateNote(this, NoteItem(id = UUID.randomUUID().toString(), title = t, content = a.optString("content")))
                     note = "📝 حفظت ملاحظة: $t"
+                }
+                "save_journal_entry" -> {
+                    val dateKey = a.optString("date", java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(java.util.Date()))
+                    val value = a.optString("content").trim()
+                    if (dateKey.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) && value.isNotBlank()) {
+                        getDiaryPreferences().edit().putString(dateKey, value).apply()
+                        note = "📔 حفظت تدوينة يوم $dateKey"
+                    }
+                }
+                "complete_habit" -> {
+                    val q = a.optString("title").trim()
+                    val habit = ReminderRepository.getAllItems(this).firstOrNull { it.isHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true) }
+                    if (habit != null) {
+                        ReminderRepository.addOrUpdateItem(this, habit.copy(isCompletedToday = true, lastCompletedEpochDay = today, currentProgressToday = habit.targetValue, completionPercentage = 100))
+                        note = "🌱 سجلت إنجاز العادة: ${habit.title}"
+                    }
                 }
                 "start_focus" -> {
                     val m = a.optInt("minutes", 25).coerceIn(1, 180)
@@ -3021,6 +3048,11 @@ class MainActivity : AppCompatActivity() {
                 val csv = currentDays.sorted().joinToString(",")
                 val u = habit.copy(customDaysCsv = csv)
                 ReminderRepository.addOrUpdateItem(this@MainActivity, u)
+                if (!u.isPaused && u.hasReminder) {
+                    AlarmScheduler.scheduleNextOccurrence(this@MainActivity, u)
+                } else {
+                    AlarmScheduler.cancelAlarm(this@MainActivity, u.id)
+                }
                 d.dismiss()
                 renderCurrentTab()
             }
@@ -3485,7 +3517,10 @@ class MainActivity : AppCompatActivity() {
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createGlassCardDrawable(true, false)
-            setPadding(dp(16), dp(12), dp(16), dp(16))
+            // Reserve space for WAQT's persistent bottom navigation so the
+            // save action never sits underneath the tab bar.
+            setPadding(dp(16), dp(12), dp(16), dp(88))
+            clipToPadding = false
         }
         val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         toolbar.addView(TextView(this).apply {
@@ -3511,6 +3546,9 @@ class MainActivity : AppCompatActivity() {
         page.addView(editor, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f).apply {
             topMargin = dp(12); bottomMargin = dp(12)
         })
+        // Keep long entries scrollable while the save button remains reachable.
+        editor.isVerticalScrollBarEnabled = true
+        editor.overScrollMode = View.OVER_SCROLL_IF_CONTENT_SCROLLS
         val save = Button(this).apply {
             text = if (isArabic) "حفظ يومياتي" else "Save journal"
             isAllCaps = false; setTextColor(Color.parseColor("#0B1417"))
@@ -5607,6 +5645,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setPomodoroDuration(minutes: Int) {
         inAppCountDownTimer?.cancel()
+        AlarmScheduler.cancelPomodoroEnd(this)
         isPomodoroRunning = false
         ReminderRepository.clearActiveFocusState(this)
         isBreakSession = false
@@ -5620,6 +5659,7 @@ class MainActivity : AppCompatActivity() {
     private fun toggleInAppPomodoro() {
         if (isPomodoroRunning) {
             inAppCountDownTimer?.cancel()
+            AlarmScheduler.cancelPomodoroEnd(this)
             isPomodoroRunning = false
             ReminderRepository.saveActiveFocusState(
                 this,
@@ -5651,6 +5691,7 @@ class MainActivity : AppCompatActivity() {
             linkedTaskId = selectedFocusTaskId,
             isBreakMode = isBreakSession
         )
+        AlarmScheduler.schedulePomodoroEnd(this, pomodoroStartWallClockMs + durationMs, isBreakSession, activeFocusSessionId)
 
         inAppCountDownTimer = object : CountDownTimer(durationMs, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
@@ -5663,6 +5704,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                AlarmScheduler.cancelPomodoroEnd(this@MainActivity)
                 isPomodoroRunning = false
                 ReminderRepository.clearActiveFocusState(this@MainActivity)
                 triggerGentleHaptic()
