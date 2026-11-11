@@ -1236,6 +1236,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
+{"type":"update_task","title":"عنوان المهمة الحالية","new_title":"العنوان الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
+{"type":"update_habit","title":"اسم العادة الحالية","new_title":"الاسم الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"category":"health|study|religion|sports","target_value":1,"target_unit":"صفحة أو دقيقة أو كوب","has_reminder":true}
+{"type":"update_note","title":"عنوان الملاحظة الحالية","new_title":"العنوان الجديد اختياري","content":"المحتوى الجديد"}
 {"type":"delete_task","title":"جزء مميز من عنوان المهمة — يتطلب تأكيد المستخدم"}
 {"type":"delete_habit","title":"جزء مميز من اسم العادة — يتطلب تأكيد المستخدم"}
 {"type":"delete_note","title":"عنوان الملاحظة — يتطلب تأكيد المستخدم"}
@@ -1486,6 +1489,54 @@ class MainActivity : AppCompatActivity() {
                         note = "✅ خلّصت: ${hit.title}"
                     }
                 }
+                "update_task", "update_habit" -> {
+                    val wantHabit = a.optString("type") == "update_habit"
+                    val query = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllItems(this).filter {
+                        it.isHabit == wantHabit && query.isNotBlank() && it.title.contains(query, ignoreCase = true)
+                    }
+                    val hit = matches.firstOrNull { it.title.equals(query, ignoreCase = true) }
+                        ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من عنصر مطابق؛ اكتب اسمًا أدق." else "ℹ️ ملقتش العنصر المطلوب تعديله."
+                    } else {
+                        val newTitle = a.optString("new_title").trim().ifBlank { hit.title }.take(100)
+                        val requestedPriority = a.optString("priority").trim().lowercase(Locale.ROOT)
+                        val priority = if (requestedPriority in listOf("high", "medium", "low")) requestedPriority else hit.priority
+                        val updated = if (wantHabit) {
+                            val requestedCategory = a.optString("category").trim()
+                            val categories = ReminderRepository.getAllHabitCategories(this)
+                            val category = categories.firstOrNull {
+                                requestedCategory.isNotBlank() && (it.id.equals(requestedCategory, true) || it.name.equals(requestedCategory, true))
+                            }?.id ?: hit.category
+                            hit.copy(
+                                title = newTitle,
+                                priority = priority,
+                                hour = if (a.has("hour")) a.optInt("hour", hit.hour).coerceIn(0, 23) else hit.hour,
+                                minute = if (a.has("minute")) a.optInt("minute", hit.minute).coerceIn(0, 59) else hit.minute,
+                                category = category,
+                                targetValue = if (a.has("target_value")) a.optInt("target_value", hit.targetValue).coerceIn(1, 1000) else hit.targetValue,
+                                targetUnit = a.optString("target_unit").trim().takeIf { it.isNotBlank() }?.take(20) ?: hit.targetUnit,
+                                hasReminder = if (a.has("has_reminder")) a.optBoolean("has_reminder", hit.hasReminder) else hit.hasReminder
+                            )
+                        } else {
+                            val offset = if (a.has("day_offset")) a.optInt("day_offset", 0).coerceIn(0, 30) else -1
+                            hit.copy(
+                                title = newTitle,
+                                priority = priority,
+                                hour = if (a.has("hour")) a.optInt("hour", hit.hour).coerceIn(0, 23) else hit.hour,
+                                minute = if (a.has("minute")) a.optInt("minute", hit.minute).coerceIn(0, 59) else hit.minute,
+                                dueDateEpochDay = if (offset >= 0) shiftEpoch(today, offset) else hit.dueDateEpochDay
+                            )
+                        }
+                        ReminderRepository.addOrUpdateItem(this, updated)
+                        AlarmScheduler.cancelAlarm(this, hit.id)
+                        if (!wantHabit || updated.hasReminder) {
+                            try { AlarmScheduler.scheduleNextOccurrence(this, updated) } catch (_: Exception) {}
+                        }
+                        note = if (wantHabit) "🌱 عدّلت العادة: ${updated.title}" else "✏️ عدّلت المهمة: ${updated.title}"
+                    }
+                }
                 "delete_task", "delete_habit" -> {
                     val actionType = a.optString("type")
                     val q = a.optString("title").trim()
@@ -1526,6 +1577,21 @@ class MainActivity : AppCompatActivity() {
                     val t = a.optString("title").ifBlank { "ملاحظة" }
                     ReminderRepository.addOrUpdateNote(this, NoteItem(id = UUID.randomUUID().toString(), title = t, content = a.optString("content")))
                     note = "📝 حفظت ملاحظة: $t"
+                }
+                "update_note" -> {
+                    val query = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllNotes(this).filter {
+                        query.isNotBlank() && (it.title.contains(query, true) || it.content.contains(query, true))
+                    }
+                    val hit = matches.firstOrNull { it.title.equals(query, true) } ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من ملاحظة مطابقة؛ اكتب عنوانًا أدق." else "ℹ️ ملقتش الملاحظة المطلوبة."
+                    } else {
+                        val updatedTitle = a.optString("new_title").trim().ifBlank { hit.title }.take(120)
+                        val updatedContent = if (a.has("content")) a.optString("content") else hit.content
+                        ReminderRepository.addOrUpdateNote(this, hit.copy(title = updatedTitle, content = updatedContent))
+                        note = "📝 عدّلت الملاحظة: $updatedTitle"
+                    }
                 }
                 "save_journal_entry" -> {
                     val dateKey = a.optString("date", java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(java.util.Date()))
