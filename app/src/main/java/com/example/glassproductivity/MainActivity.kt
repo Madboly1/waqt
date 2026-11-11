@@ -1292,7 +1292,7 @@ class MainActivity : AppCompatActivity() {
 
         fun isValidResponse(candidate: org.json.JSONObject): Boolean {
             val reply = candidate.opt("reply")
-            if (reply !is String) return false
+            if (reply !is String || reply.isBlank()) return false
             if (candidate.has("actions") && candidate.opt("actions") !is org.json.JSONArray) return false
             return true
         }
@@ -1378,7 +1378,7 @@ class MainActivity : AppCompatActivity() {
                 var malformedActionCount = 0
                 val structuredResponse = extractAssistantResponseObject(raw)
                 if (structuredResponse != null) {
-                    replyText = structuredResponse.optString("reply").takeIf { it.isNotBlank() } ?: raw
+                    replyText = structuredResponse.optString("reply")
                     val returnedActions = structuredResponse.optJSONArray("actions")
                     if (returnedActions != null) {
                         actions = org.json.JSONArray()
@@ -1390,6 +1390,12 @@ class MainActivity : AppCompatActivity() {
                                 malformedActionCount++
                             }
                         }
+                    }
+                } else if (raw.trimStart().startsWith("{") || raw.trimStart().startsWith("```")) {
+                    replyText = if (isArabic) {
+                        "⚠️ وصلني رد بتنسيق غير سليم من Gemini، فمقدرتش أعرضه أو أنفذ أي أوامر منه. جرّب تبعت رسالتك تاني."
+                    } else {
+                        "⚠️ Gemini returned an invalid response format, so I couldn't display it or execute any actions. Please try again."
                     }
                 }
                 geminiHistory.add("user" to (cleanUserText.ifBlank { "ابدأ بتقييم يومي الحالي." }))
