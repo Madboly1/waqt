@@ -1572,13 +1572,16 @@ class MainActivity : AppCompatActivity() {
         fun hasBoolean(key: String): Boolean = action.has(key) && action.opt(key) is Boolean
         fun numberInRange(key: String, range: IntRange): Boolean =
             !action.has(key) || (hasNumber(key) && action.optDouble(key).let { it.isFinite() && it % 1.0 == 0.0 && it.toInt() in range })
+        fun valueIn(key: String, allowed: Set<String>): Boolean =
+            !action.has(key) || (hasText(key) && action.optString(key).trim() in allowed)
         fun validDate(key: String): Boolean {
             if (!hasText(key)) return false
             val value = action.optString(key).trim()
             if (!value.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) return false
             return try {
                 val format = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).apply { isLenient = false }
-                format.parse(value) != null && format.format(format.parse(value)!!) == value
+                val parsed = format.parse(value) ?: return false
+                format.format(parsed) == value
             } catch (_: Exception) { false }
         }
 
@@ -1634,7 +1637,13 @@ class MainActivity : AppCompatActivity() {
             "start_focus" -> numberInRange("minutes", 1..180)
             "set_goal" -> numberInRange("minutes", 15..720)
             else -> true
-        }
+        } && valueIn("priority", setOf("high", "medium", "low")) &&
+            valueIn("category", setOf("health", "study", "religion", "sports")) &&
+            valueIn("sound", setOf("off", "rain", "waves", "fire", "forest", "water", "library", "wind", "night")) &&
+            valueIn("mode", setOf("dark", "light", "toggle")) &&
+            valueIn("language", setOf("ar", "en")) &&
+            valueIn("tab", setOf("tasks", "habits", "focus", "notes")) &&
+            valueIn("section", setOf("notes", "journal"))
     }
 
     private fun applyAssistantActions(actions: org.json.JSONArray, box: LinearLayout) {
