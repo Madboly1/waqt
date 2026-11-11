@@ -67,6 +67,13 @@ class AlarmReceiver : BroadcastReceiver() {
             }
 
             AlarmScheduler.ACTION_TRIGGER_REMINDER -> {
+                // Re-arm recurring habits immediately so the next reminder survives
+                // even when the user dismisses the notification without completing it.
+                val itemId = intent.getStringExtra(AlarmScheduler.EXTRA_ITEM_ID).orEmpty()
+                val item = ReminderRepository.getItemById(context, itemId)
+                if (item != null && item.isHabit && !item.isPaused && item.hasReminder) {
+                    AlarmScheduler.scheduleNextOccurrence(context, item, forceTomorrow = true)
+                }
                 triggerFullSystemAlarm(context, intent)
             }
         }
