@@ -1229,6 +1229,18 @@ class MainActivity : AppCompatActivity() {
 - لا تكرر إضافة مهمة موجودة بالفعل.
 - عند إكمال أو حذف مهمة أو عادة أو ملاحظة، لا تختَر أول نتيجة عشوائيًا. استخدم تطابق الاسم الكامل، أو نتيجة جزئية وحيدة فقط؛ إذا تعددت النتائج اطلب من المستخدم تحديد الاسم.
 
+- التزم حرفيًا بمخطط الإجراءات والأسماء والقيم المسموح بها أدناه؛ لا تخترع أنواع إجراءات أو أسماء حقول أو قيمًا غير مذكورة.
+- add_task: title مطلوب؛ الحقول الاختيارية الوحيدة هي priority (high/medium/low) وhour (0–23) وminute (0–59) وday_offset (0–30). لا ترسل description مع المهمة.
+- add_habit: title مطلوب؛ category واحدة من health/study/religion/sports، وpriority واحدة من high/medium/low، وhour من 0–23، وminute من 0–59، وtarget_value عدد صحيح من 1–1000، وtarget_unit نص غير فارغ، وhas_reminder قيمة true/false. لا ترسل أي حقل اختياري بقيمة فارغة أو بنوع خاطئ.
+- update_task: title يحدد المهمة الحالية، ويجب إرسال حقل تغيير واحد على الأقل من new_title أو priority أو hour أو minute أو day_offset. أرسل فقط الحقول التي يريد المستخدم تغييرها، مع الالتزام بنفس الحدود أعلاه.
+- update_habit: title يحدد العادة الحالية، ويجب إرسال حقل تغيير واحد على الأقل من new_title أو priority أو hour أو minute أو category أو target_value أو target_unit أو has_reminder. category من القيم الأربع المذكورة، وtarget_value من 1–1000.
+- add_note يتطلب content غير فارغ. update_note يتطلب title للملاحظة الحالية، ومعه new_title غير فارغ أو content غير فارغ على الأقل. لا ترسل محتوى فارغًا.
+- set_task_progress يستخدم percentage من 0 إلى 100 فقط؛ set_habit_progress يستخدم progress من 0 إلى 1000 فقط. لا تخلط بين الحقلين أو النطاقين.
+- save_journal_entry يتطلب content غير فارغ، ويمكنه استخدام date بصيغة yyyy-MM-dd؛ update_journal_entry يتطلب date صالحًا وcontent غير فارغ؛ delete_journal_entry يتطلب date صالحًا. لا تخمّن تاريخًا غير معروف.
+- set_ambient_volume من 0 إلى 100؛ set_focus_duration وset_break_duration من 1 إلى 240 دقيقة؛ start_focus من 1 إلى 180 دقيقة؛ set_goal من 15 إلى 720 دقيقة.
+- كل حقل اختياري إذا أُرسل يجب أن يكون من النوع الصحيح وغير فارغ للنصوص. لا تضع أمثلة القيم الوصفية مثل "high|medium|low" كنص فعلي؛ اختر قيمة واحدة فقط.
+- عند عدم معرفة معلومة مطلوبة، اسأل المستخدم بدل اختراعها أو إصدار action ناقص. لا ترسل action لمجرد شرح ما ستفعله؛ أرسلها فقط عند طلب التنفيذ الصريح أو الموافقة الواضحة.
+
 تنسيق الرد:
 أخرج JSON صالحًا فقط دون Markdown fences أو أي نص خارجه، بالشكل:
 {"reply":"الرد الطبيعي للمستخدم","actions":[]}
