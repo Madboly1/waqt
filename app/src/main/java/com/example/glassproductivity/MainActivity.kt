@@ -1591,7 +1591,7 @@ class MainActivity : AppCompatActivity() {
         return when (type) {
             "add_task", "add_habit", "reopen_task", "complete_task", "update_task",
             "update_habit", "delete_task", "delete_habit", "delete_note", "pin_note",
-            "unpin_note", "set_task_progress", "set_habit_progress", "complete_habit" -> hasText("title")
+            "unpin_note", "complete_habit" -> hasText("title")
             "update_note" -> hasText("title")
             "update_journal_entry", "delete_journal_entry" -> hasText("date") &&
                 action.optString("date").matches(Regex("\\d{4}-\\d{2}-\\d{2}")) &&
