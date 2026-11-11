@@ -3021,6 +3021,11 @@ class MainActivity : AppCompatActivity() {
                 val csv = currentDays.sorted().joinToString(",")
                 val u = habit.copy(customDaysCsv = csv)
                 ReminderRepository.addOrUpdateItem(this@MainActivity, u)
+                if (!u.isPaused && u.hasReminder) {
+                    AlarmScheduler.scheduleNextOccurrence(this@MainActivity, u)
+                } else {
+                    AlarmScheduler.cancelAlarm(this@MainActivity, u.id)
+                }
                 d.dismiss()
                 renderCurrentTab()
             }
