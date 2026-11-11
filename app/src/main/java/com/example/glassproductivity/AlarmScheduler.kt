@@ -815,14 +815,31 @@ object AlarmScheduler {
             set(Calendar.MILLISECOND, 0)
         }
 
-        if (forceTomorrow) {
+        // Habit day IDs are stored in Saturday-first order: Sat=1, Sun=2, ... Fri=7.
+        // Find the next enabled day instead of blindly scheduling tomorrow.
+        if (forceTomorrow || calendar.timeInMillis <= nowMillis) {
             calendar.add(Calendar.DAY_OF_YEAR, 1)
-        } else if (calendar.timeInMillis <= nowMillis) {
-            val diffSeconds = (nowMillis - calendar.timeInMillis) / 1000L
-            if (diffSeconds < 60L) {
-                calendar.timeInMillis = nowMillis + 5000L
-            } else {
+        }
+        if (item.isHabit) {
+            val allowedDays = item.customDaysCsv.split(",")
+                .mapNotNull { it.trim().toIntOrNull() }
+                .filter { it in 1..7 }
+                .toSet()
+            if (allowedDays.isEmpty()) {
+                cancelAlarm(context, item.id)
+                return -1L
+            }
+            var attempts = 0
+            while (attempts < 7) {
+                val calendarDay = calendar.get(Calendar.DAY_OF_WEEK)
+                val saturdayFirstDayId = ((calendarDay + 5) % 7) + 1
+                if (saturdayFirstDayId in allowedDays) break
                 calendar.add(Calendar.DAY_OF_YEAR, 1)
+                attempts++
+            }
+            if (attempts >= 7) {
+                cancelAlarm(context, item.id)
+                return -1L
             }
         }
 
