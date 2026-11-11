@@ -1269,6 +1269,8 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_theme","mode":"dark|light|toggle"}
 {"type":"set_language","language":"ar|en"}
 {"type":"open_app_settings"}
+{"type":"set_auto_update_check","enabled":true}
+{"type":"check_for_updates"}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
 لا تستخدم navigate_tab أو open_notes_section لمجرد ذكر قسم؛ استخدمهما عندما يطلب المستخدم فتحه أو الانتقال إليه صراحة.
@@ -1435,7 +1437,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
-            "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
+            "فعّل الفحص التلقائي للتحديثات", "شغل الفحص التلقائي للتحديثات", "وقف الفحص التلقائي للتحديثات", "عطّل الفحص التلقائي للتحديثات", "افحص التحديثات", "افحص وجود تحديث", "check for updates", "enable automatic updates check", "disable automatic updates check", "turn on update checks", "turn off update checks", "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
         ).any { message.contains(it) }
@@ -1925,6 +1927,26 @@ class MainActivity : AppCompatActivity() {
                     val m = a.optInt("minutes", 120).coerceIn(15, 720)
                     getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putInt(ReminderRepository.KEY_DAILY_FOCUS_GOAL_MINS, m).apply()
                     note = "🎯 هدف التركيز: $m دقيقة"
+                }
+                "set_auto_update_check" -> {
+                    if (!a.has("enabled")) {
+                        note = if (isArabic) "⚠️ حدد تشغيل أو إيقاف الفحص التلقائي للتحديثات." else "⚠️ Specify whether automatic update checks should be enabled or disabled."
+                    } else {
+                        val enabled = a.optBoolean("enabled")
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putBoolean("ota_auto_check", enabled).apply()
+                        note = if (enabled) {
+                            if (isArabic) "🔄 فعّلت الفحص التلقائي عن تحديثات وَقْت." else "🔄 Automatic WAQT update checks are enabled."
+                        } else {
+                            if (isArabic) "🔕 أوقفت الفحص التلقائي عن التحديثات." else "🔕 Automatic update checks are disabled."
+                        }
+                    }
+                }
+                "check_for_updates" -> {
+                    triggerGentleHaptic()
+                    Toast.makeText(this, if (isArabic) "جاري فحص التحديث من GitHub..." else "Checking GitHub for updates...", Toast.LENGTH_SHORT).show()
+                    checkForOnlineUpdates(manual = true)
+                    note = if (isArabic) "🔄 بدأت فحص التحديثات أونلاين." else "🔄 Started checking for online updates."
                 }
                 "open_app_settings" -> {
                     showAccordionSettingsDialog()
