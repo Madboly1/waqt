@@ -449,6 +449,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        if (isRecordingJournalAudio) {
+            try { stopJournalAudioRecording() } catch (_: Exception) {
+                try { journalAudioRecorder?.release() } catch (_: Exception) {}
+                journalAudioRecorder = null
+                journalAudioFile = null
+                isRecordingJournalAudio = false
+            }
+        }
         super.onDestroy()
         try { unregisterReceiver(dataUpdateReceiver) } catch (_: Exception) {}
         inAppCountDownTimer?.cancel()
@@ -1471,8 +1479,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 "delete_task", "delete_habit" -> {
+                    val actionType = a.optString("type")
                     val q = a.optString("title").trim()
-                    val wantHabit = a.optString("type") == "delete_habit"
+                    val wantHabit = actionType == "delete_habit"
                     val hit = ReminderRepository.getAllItems(this).firstOrNull {
                         it.isHabit == wantHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true)
                     }
