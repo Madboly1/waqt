@@ -1331,7 +1331,14 @@ class MainActivity : AppCompatActivity() {
                 lastAssistantReply = replyText
                 chatHistoryStore.addMessage(activeChatId, "model", replyText)
                 box.addView(createAIMessageBubble(replyText))
-                if (actions != null && shouldAllowAssistantActions(cleanUserText, previousAssistantReply)) applyAssistantActions(actions, box)
+                // A submitted voice recording is itself the user's message. The transcription is inside
+                // Gemini's media input, so cleanUserText only contains the generic audio instruction.
+                // Allow actions returned from that voice request while keeping the normal text-intent
+                // and explicit-approval gate for ordinary chat turns.
+                val isExplicitVoiceRequest = media?.label == "voice"
+                if (actions != null && (isExplicitVoiceRequest || shouldAllowAssistantActions(cleanUserText, previousAssistantReply))) {
+                    applyAssistantActions(actions, box)
+                }
                 if (autoSpeakAssistantReply) {
                     autoSpeakAssistantReply = false
                     speakLastAssistantReply()
