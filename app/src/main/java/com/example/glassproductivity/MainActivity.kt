@@ -1122,12 +1122,12 @@ class MainActivity : AppCompatActivity() {
         sb.append("التركيز النهارده: ${ReminderRepository.getTodayFocusMinutes(this)} دقيقة من هدف $goal دقيقة، جلسات اليوم: ${hist.count { it.epochDay == today }}\n")
         val notes = ReminderRepository.getAllNotes(this)
         sb.append("المدونة والملاحظات (${notes.size}):\n")
-        notes.take(8).forEach { sb.append("- ${it.title.take(60)}: ${it.content.take(100).replace('\\n', ' ')}\n") }
+        notes.take(8).forEach { sb.append("- ${it.title.take(60)}: ${it.content.take(100).replace('\n', ' ')}\n") }
         val journal = getDiaryPreferences()
         val journalKeys = journal.all.keys.filter { it.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) }.sortedDescending().take(3)
         if (journalKeys.isNotEmpty()) {
             sb.append("آخر اليوميات المحفوظة:\n")
-            journalKeys.forEach { key -> sb.append("- $key: ${journal.getString(key, "").orEmpty().take(180).replace('\\n', ' ')}\n") }
+            journalKeys.forEach { key -> sb.append("- $key: ${journal.getString(key, "").orEmpty().take(180).replace('\n', ' ')}\n") }
         }
         return sb.toString()
     }
