@@ -1236,6 +1236,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
+{"type":"update_task","title":"عنوان المهمة الحالية","new_title":"العنوان الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
+{"type":"update_habit","title":"اسم العادة الحالية","new_title":"الاسم الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"category":"health|study|religion|sports","target_value":1,"target_unit":"صفحة أو دقيقة أو كوب","has_reminder":true}
+{"type":"update_note","title":"عنوان الملاحظة الحالية","new_title":"العنوان الجديد اختياري","content":"المحتوى الجديد"}
 {"type":"delete_task","title":"جزء مميز من عنوان المهمة — يتطلب تأكيد المستخدم"}
 {"type":"delete_habit","title":"جزء مميز من اسم العادة — يتطلب تأكيد المستخدم"}
 {"type":"delete_note","title":"عنوان الملاحظة — يتطلب تأكيد المستخدم"}
@@ -1243,6 +1246,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
 {"type":"start_focus","minutes":25}
+{"type":"pause_focus"}
+{"type":"resume_focus"}
+{"type":"stop_focus"}
 {"type":"set_goal","minutes":120}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
@@ -1406,6 +1412,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
+            "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
             "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
@@ -1482,6 +1489,54 @@ class MainActivity : AppCompatActivity() {
                         note = "✅ خلّصت: ${hit.title}"
                     }
                 }
+                "update_task", "update_habit" -> {
+                    val wantHabit = a.optString("type") == "update_habit"
+                    val query = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllItems(this).filter {
+                        it.isHabit == wantHabit && query.isNotBlank() && it.title.contains(query, ignoreCase = true)
+                    }
+                    val hit = matches.firstOrNull { it.title.equals(query, ignoreCase = true) }
+                        ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من عنصر مطابق؛ اكتب اسمًا أدق." else "ℹ️ ملقتش العنصر المطلوب تعديله."
+                    } else {
+                        val newTitle = a.optString("new_title").trim().ifBlank { hit.title }.take(100)
+                        val requestedPriority = a.optString("priority").trim().lowercase(Locale.ROOT)
+                        val priority = if (requestedPriority in listOf("high", "medium", "low")) requestedPriority else hit.priority
+                        val updated = if (wantHabit) {
+                            val requestedCategory = a.optString("category").trim()
+                            val categories = ReminderRepository.getAllHabitCategories(this)
+                            val category = categories.firstOrNull {
+                                requestedCategory.isNotBlank() && (it.id.equals(requestedCategory, true) || it.name.equals(requestedCategory, true))
+                            }?.id ?: hit.category
+                            hit.copy(
+                                title = newTitle,
+                                priority = priority,
+                                hour = if (a.has("hour")) a.optInt("hour", hit.hour).coerceIn(0, 23) else hit.hour,
+                                minute = if (a.has("minute")) a.optInt("minute", hit.minute).coerceIn(0, 59) else hit.minute,
+                                category = category,
+                                targetValue = if (a.has("target_value")) a.optInt("target_value", hit.targetValue).coerceIn(1, 1000) else hit.targetValue,
+                                targetUnit = a.optString("target_unit").trim().takeIf { it.isNotBlank() }?.take(20) ?: hit.targetUnit,
+                                hasReminder = if (a.has("has_reminder")) a.optBoolean("has_reminder", hit.hasReminder) else hit.hasReminder
+                            )
+                        } else {
+                            val offset = if (a.has("day_offset")) a.optInt("day_offset", 0).coerceIn(0, 30) else -1
+                            hit.copy(
+                                title = newTitle,
+                                priority = priority,
+                                hour = if (a.has("hour")) a.optInt("hour", hit.hour).coerceIn(0, 23) else hit.hour,
+                                minute = if (a.has("minute")) a.optInt("minute", hit.minute).coerceIn(0, 59) else hit.minute,
+                                dueDateEpochDay = if (offset >= 0) shiftEpoch(today, offset) else hit.dueDateEpochDay
+                            )
+                        }
+                        ReminderRepository.addOrUpdateItem(this, updated)
+                        AlarmScheduler.cancelAlarm(this, hit.id)
+                        if (!wantHabit || updated.hasReminder) {
+                            try { AlarmScheduler.scheduleNextOccurrence(this, updated) } catch (_: Exception) {}
+                        }
+                        note = if (wantHabit) "🌱 عدّلت العادة: ${updated.title}" else "✏️ عدّلت المهمة: ${updated.title}"
+                    }
+                }
                 "delete_task", "delete_habit" -> {
                     val actionType = a.optString("type")
                     val q = a.optString("title").trim()
@@ -1523,6 +1578,21 @@ class MainActivity : AppCompatActivity() {
                     ReminderRepository.addOrUpdateNote(this, NoteItem(id = UUID.randomUUID().toString(), title = t, content = a.optString("content")))
                     note = "📝 حفظت ملاحظة: $t"
                 }
+                "update_note" -> {
+                    val query = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllNotes(this).filter {
+                        query.isNotBlank() && (it.title.contains(query, true) || it.content.contains(query, true))
+                    }
+                    val hit = matches.firstOrNull { it.title.equals(query, true) } ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من ملاحظة مطابقة؛ اكتب عنوانًا أدق." else "ℹ️ ملقتش الملاحظة المطلوبة."
+                    } else {
+                        val updatedTitle = a.optString("new_title").trim().ifBlank { hit.title }.take(120)
+                        val updatedContent = if (a.has("content")) a.optString("content") else hit.content
+                        ReminderRepository.addOrUpdateNote(this, hit.copy(title = updatedTitle, content = updatedContent))
+                        note = "📝 عدّلت الملاحظة: $updatedTitle"
+                    }
+                }
                 "save_journal_entry" -> {
                     val dateKey = a.optString("date", java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(java.util.Date()))
                     val value = a.optString("content").trim()
@@ -1541,13 +1611,45 @@ class MainActivity : AppCompatActivity() {
                 }
                 "start_focus" -> {
                     val m = a.optInt("minutes", 25).coerceIn(1, 180)
-                    if (!isPomodoroRunning) {
+                    currentTab = 2
+                    if (isPomodoroRunning) {
+                        note = "ℹ️ جلسة التركيز شغالة بالفعل."
+                    } else {
                         isBreakSession = false
                         selectedPomodoroMinutes = m
                         pomodoroTotalMillis = m * 60 * 1000L
                         pomodoroRemainingMillis = pomodoroTotalMillis
+                        activeFocusSessionId = UUID.randomUUID().toString()
+                        renderCurrentTab()
+                        startWallClockCountDown(pomodoroRemainingMillis)
+                        note = "🍅 بدأت جلسة تركيز لمدة $m دقيقة."
+                    }
+                }
+                "pause_focus" -> {
+                    if (isPomodoroRunning) {
+                        toggleInAppPomodoro()
+                        note = "⏸️ أوقفت جلسة التركيز مؤقتًا."
+                    } else {
+                        note = "ℹ️ مفيش جلسة تركيز شغالة حاليًا."
+                    }
+                }
+                "resume_focus" -> {
+                    if (!isPomodoroRunning && pomodoroRemainingMillis > 0L) {
                         currentTab = 2
-                        note = "🍅 جهّزت جلسة تركيز $m دقيقة"
+                        toggleInAppPomodoro()
+                        note = "▶️ استأنفت جلسة التركيز."
+                    } else if (isPomodoroRunning) {
+                        note = "ℹ️ جلسة التركيز شغالة بالفعل."
+                    } else {
+                        note = "ℹ️ مفيش جلسة متوقفة لاستئنافها."
+                    }
+                }
+                "stop_focus" -> {
+                    if (isPomodoroRunning || pomodoroRemainingMillis < pomodoroTotalMillis) {
+                        setPomodoroDuration(selectedPomodoroMinutes)
+                        note = "⏹️ أنهيت جلسة التركيز وأعدت ضبط المؤقت."
+                    } else {
+                        note = "ℹ️ مفيش جلسة نشطة لإيقافها."
                     }
                 }
                 "set_goal" -> {
