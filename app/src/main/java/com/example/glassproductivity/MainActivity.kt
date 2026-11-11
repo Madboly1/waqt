@@ -1269,6 +1269,8 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_theme","mode":"dark|light|toggle"}
 {"type":"set_language","language":"ar|en"}
 {"type":"open_app_settings"}
+{"type":"open_app_tour"}
+{"type":"export_backup"}
 {"type":"open_notification_settings"}
 {"type":"set_auto_update_check","enabled":true}
 {"type":"check_for_updates"}
@@ -1952,6 +1954,21 @@ class MainActivity : AppCompatActivity() {
                 "open_app_settings" -> {
                     showAccordionSettingsDialog()
                     note = if (isArabic) "⚙️ فتحت لك إعدادات وَقْت." else "⚙️ Opened WAQT settings."
+                }
+                "open_app_tour" -> {
+                    showOnboarding(false)
+                    note = if (isArabic) "🧭 فتحت لك الجولة التعريفية في وَقْت." else "🧭 Opened the WAQT app tour."
+                }
+                "export_backup" -> {
+                    try {
+                        pendingBackupJson = ReminderRepository.exportCloudBackupJson(this)
+                        val stamp = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
+                        backupExportLauncher.launch("waqt-backup-$stamp.json")
+                        note = if (isArabic) "💾 جهزت النسخة الاحتياطية. اختار مكان حفظ الملف من النافذة." else "💾 Backup is ready. Choose where to save the file."
+                    } catch (_: Exception) {
+                        pendingBackupJson = null
+                        note = if (isArabic) "⚠️ تعذر تجهيز النسخة الاحتياطية." else "⚠️ Could not prepare the backup."
+                    }
                 }
                 "open_notification_settings" -> {
                     try {
