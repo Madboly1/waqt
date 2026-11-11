@@ -92,8 +92,8 @@ class AlarmReceiver : BroadcastReceiver() {
         val isBreak = intent.getBooleanExtra(AlarmScheduler.EXTRA_POMODORO_BREAK, false)
         val sessionId = intent.getStringExtra(AlarmScheduler.EXTRA_POMODORO_SESSION).orEmpty()
         val active = ReminderRepository.getActiveFocusState(context)
-        // Ignore stale alarms left behind by a pause, reset, or a newer session.
-        if (active == null || active.sessionId != sessionId) return
+        // Ignore alarms from a paused/reset timer or a different phase.
+        if (!active.optBoolean("isRunning", false) || active.optBoolean("isBreak", false) != isBreak) return
         val title = if (isBreak) {
             if (isArabic) "☕ انتهت الراحة — وقت التركيز" else "☕ Break finished — time to focus"
         } else {
