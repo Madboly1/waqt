@@ -1236,15 +1236,20 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
+{"type":"reopen_task","title":"عنوان المهمة لإعادة فتحها"}
+{"type":"set_task_progress","title":"عنوان المهمة","percentage":0-100}
 {"type":"update_task","title":"عنوان المهمة الحالية","new_title":"العنوان الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"update_habit","title":"اسم العادة الحالية","new_title":"الاسم الجديد اختياري","priority":"high|medium|low","hour":0-23,"minute":0-59,"category":"health|study|religion|sports","target_value":1,"target_unit":"صفحة أو دقيقة أو كوب","has_reminder":true}
 {"type":"update_note","title":"عنوان الملاحظة الحالية","new_title":"العنوان الجديد اختياري","content":"المحتوى الجديد"}
+{"type":"pin_note","title":"عنوان الملاحظة لتثبيتها"}
+{"type":"unpin_note","title":"عنوان الملاحظة لإلغاء تثبيتها"}
 {"type":"delete_task","title":"جزء مميز من عنوان المهمة — يتطلب تأكيد المستخدم"}
 {"type":"delete_habit","title":"جزء مميز من اسم العادة — يتطلب تأكيد المستخدم"}
 {"type":"delete_note","title":"عنوان الملاحظة — يتطلب تأكيد المستخدم"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
+{"type":"set_habit_progress","title":"اسم العادة","progress":0-1000}
 {"type":"start_focus","minutes":25}
 {"type":"pause_focus"}
 {"type":"resume_focus"}
@@ -1481,6 +1486,33 @@ class MainActivity : AppCompatActivity() {
                         }
                     }
                 }
+                "reopen_task" -> {
+                    val q = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllItems(this).filter { !it.isHabit && q.isNotBlank() && it.title.contains(q, true) }
+                    val hit = matches.firstOrNull { it.title.equals(q, true) } ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من مهمة مطابقة؛ اكتب اسمًا أدق." else "ℹ️ ملقتش المهمة المطلوبة."
+                    } else {
+                        ReminderRepository.addOrUpdateItem(this, hit.copy(isCompletedToday = false, completionPercentage = 0, lastCompletedEpochDay = -1))
+                        note = "↩️ رجّعت المهمة لقائمة غير المنجز: ${hit.title}"
+                    }
+                }
+                "set_task_progress" -> {
+                    val q = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllItems(this).filter { !it.isHabit && q.isNotBlank() && it.title.contains(q, true) }
+                    val hit = matches.firstOrNull { it.title.equals(q, true) } ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ فيه أكتر من مهمة مطابقة؛ حدد اسمها بدقة." else "ℹ️ ملقتش المهمة."
+                    } else {
+                        val percentage = a.optInt("percentage", hit.completionPercentage).coerceIn(0, 100)
+                        ReminderRepository.addOrUpdateItem(this, hit.copy(
+                            completionPercentage = percentage,
+                            isCompletedToday = percentage >= 100,
+                            lastCompletedEpochDay = if (percentage >= 100) today else hit.lastCompletedEpochDay
+                        ))
+                        note = "📊 حدّثت تقدم «${hit.title}» إلى $percentage٪."
+                    }
+                }
                 "complete_task" -> {
                     val q = a.optString("title").trim()
                     val hit = ReminderRepository.getAllItems(this).firstOrNull { !it.isHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true) }
@@ -1593,12 +1625,42 @@ class MainActivity : AppCompatActivity() {
                         note = "📝 عدّلت الملاحظة: $updatedTitle"
                     }
                 }
+                "pin_note", "unpin_note" -> {
+                    val q = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllNotes(this).filter { q.isNotBlank() && (it.title.contains(q, true) || it.content.contains(q, true)) }
+                    val hit = matches.firstOrNull { it.title.equals(q, true) } ?: matches.singleOrNull()
+                    if (hit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من ملاحظة مطابقة؛ اكتب عنوانًا أدق." else "ℹ️ ملقتش الملاحظة."
+                    } else {
+                        val pinned = a.optString("type") == "pin_note"
+                        ReminderRepository.addOrUpdateNote(this, hit.copy(isPinned = pinned))
+                        note = if (pinned) "📌 ثبّت الملاحظة: ${hit.title}" else "📍 ألغيت تثبيت الملاحظة: ${hit.title}"
+                    }
+                }
                 "save_journal_entry" -> {
                     val dateKey = a.optString("date", java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(java.util.Date()))
                     val value = a.optString("content").trim()
                     if (dateKey.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) && value.isNotBlank()) {
                         getDiaryPreferences().edit().putString(dateKey, value).apply()
                         note = "📔 حفظت تدوينة يوم $dateKey"
+                    }
+                }
+                "set_habit_progress" -> {
+                    val q = a.optString("title").trim()
+                    val matches = ReminderRepository.getAllItems(this).filter { it.isHabit && q.isNotBlank() && it.title.contains(q, true) }
+                    val habit = matches.firstOrNull { it.title.equals(q, true) } ?: matches.singleOrNull()
+                    if (habit == null) {
+                        note = if (matches.size > 1) "⚠️ لقيت أكتر من عادة مطابقة؛ اكتب اسمًا أدق." else "ℹ️ ملقتش العادة."
+                    } else {
+                        val progress = a.optInt("progress", habit.currentProgressToday).coerceIn(0, 1000)
+                        val percentage = ((progress.toFloat() / habit.targetValue.coerceAtLeast(1)) * 100f).toInt().coerceIn(0, 100)
+                        ReminderRepository.addOrUpdateItem(this, habit.copy(
+                            currentProgressToday = progress,
+                            completionPercentage = percentage,
+                            isCompletedToday = percentage >= 100,
+                            lastCompletedEpochDay = if (percentage >= 100) today else habit.lastCompletedEpochDay
+                        ))
+                        note = "🌱 حدّثت تقدم عادة «${habit.title}»: $progress ${habit.targetUnit} ($percentage٪)."
                     }
                 }
                 "complete_habit" -> {
