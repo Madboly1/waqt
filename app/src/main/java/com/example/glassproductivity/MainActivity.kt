@@ -1256,6 +1256,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"pause_focus"}
 {"type":"resume_focus"}
 {"type":"stop_focus"}
+{"type":"set_focus_duration","minutes":25}
+{"type":"set_break_duration","minutes":5}
+{"type":"set_tick_tock","enabled":true}
 {"type":"set_goal","minutes":120}
 {"type":"set_ambient_sound","sound":"off|rain|waves|fire|forest|water|library|wind|night"}
 {"type":"set_ambient_volume","volume":0-100}
@@ -1422,7 +1425,7 @@ class MainActivity : AppCompatActivity() {
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
-            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت", "غير المظهر", "غير الثيم", "الوضع الداكن", "الوضع الفاتح", "غير اللغة", "خلي التطبيق عربي", "خلي التطبيق انجليزي", "حوّل للعربي", "حوّل للإنجليزي",
+            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت", "غير المظهر", "غير الثيم", "الوضع الداكن", "الوضع الفاتح", "غير اللغة", "خلي التطبيق عربي", "خلي التطبيق انجليزي", "حوّل للعربي", "حوّل للإنجليزي", "غير مدة التركيز", "مدة التركيز", "غير مدة الراحة", "مدة الراحة", "شغل صوت الساعة", "شغل تيك تاك", "وقف تيك تاك", "صوت تيك تاك",
             "play rain", "play ocean", "play ambient sound", "stop ambient sound", "change volume",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
@@ -1834,6 +1837,47 @@ class MainActivity : AppCompatActivity() {
                         window.decorView.layoutDirection = if (isArabic) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
                         renderCurrentTab()
                         note = if (isArabic) "🌐 تم تحويل التطبيق للعربية." else "🌐 App language changed to English."
+                    }
+                }
+                "set_focus_duration" -> {
+                    val minutes = a.optInt("minutes", -1)
+                    if (minutes !in 1..240) {
+                        note = "⚠️ مدة التركيز لازم تكون من 1 إلى 240 دقيقة."
+                    } else {
+                        selectedPomodoroMinutes = minutes
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putInt(ReminderRepository.KEY_DEFAULT_FOCUS_MINS, minutes).apply()
+                        if (!isPomodoroRunning && !isBreakSession) {
+                            pomodoroTotalMillis = minutes * 60 * 1000L
+                            pomodoroRemainingMillis = pomodoroTotalMillis
+                        }
+                        note = "🍅 تم ضبط مدة التركيز الافتراضية على $minutes دقيقة."
+                    }
+                }
+                "set_break_duration" -> {
+                    val minutes = a.optInt("minutes", -1)
+                    if (minutes !in 1..240) {
+                        note = "⚠️ مدة الراحة لازم تكون من 1 إلى 240 دقيقة."
+                    } else {
+                        selectedBreakMinutes = minutes
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putInt(ReminderRepository.KEY_DEFAULT_BREAK_MINS, minutes).apply()
+                        if (!isPomodoroRunning && isBreakSession) {
+                            pomodoroTotalMillis = minutes * 60 * 1000L
+                            pomodoroRemainingMillis = pomodoroTotalMillis
+                        }
+                        note = "☕ تم ضبط مدة الراحة الافتراضية على $minutes دقيقة."
+                    }
+                }
+                "set_tick_tock" -> {
+                    if (!a.has("enabled")) {
+                        note = "⚠️ حدد تشغيل أو إيقاف صوت تيك-تاك."
+                    } else {
+                        isTickTockSoundActive = a.optBoolean("enabled")
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putBoolean(ReminderRepository.KEY_TICK_TOCK_ENABLED, isTickTockSoundActive).apply()
+                        syncTickTock()
+                        note = if (isTickTockSoundActive) "⏱️ تم تشغيل صوت تيك-تاك أثناء التركيز." else "🔕 تم إيقاف صوت تيك-تاك أثناء التركيز."
                     }
                 }
                 "set_goal" -> {
