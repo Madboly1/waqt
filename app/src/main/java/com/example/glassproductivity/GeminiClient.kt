@@ -204,8 +204,11 @@ object GeminiClient {
                 .put("temperature", 0.55).put("max_tokens", 1600)
                 .put("response_format", JSONObject().put("type", "json_object"))
             connection = (URL(endpoint).openConnection() as HttpURLConnection).apply {
-                requestMethod = "POST"; connectTimeout = 10000; readTimeout = 28000
+                requestMethod = "POST"; connectTimeout = 20000; readTimeout = 45000
                 doOutput = true; useCaches = false
+                instanceFollowRedirects = true
+                setRequestProperty("Connection", "close")
+                setRequestProperty("User-Agent", "WAQT-Android/5.6.27")
                 setRequestProperty("Content-Type", "application/json; charset=utf-8")
                 setRequestProperty("Accept", "application/json")
                 setRequestProperty("Authorization", "Bearer $apiKey")
