@@ -1283,25 +1283,32 @@ class MainActivity : AppCompatActivity() {
     """.trimIndent()
 
     /**
-     * Extracts the structured response even when Gemini wraps its JSON in
-     * Markdown fences or adds a short sentence before/after the object.
-     * Braces inside quoted strings are ignored.
+     * Finds a valid WAQT response object, tolerating Markdown fences and
+     * surrounding prose while rejecting unrelated or malformed JSON objects.
      */
     private fun extractAssistantResponseObject(raw: String): org.json.JSONObject? {
         val text = raw.trim()
         if (text.isEmpty()) return null
 
+        fun isValidResponse(candidate: org.json.JSONObject): Boolean {
+            val reply = candidate.opt("reply")
+            if (reply !is String) return false
+            if (candidate.has("actions") && candidate.opt("actions") !is org.json.JSONArray) return false
+            return true
+        }
+
         try {
-            return org.json.JSONObject(text.removePrefix("```json").removePrefix("```").removeSuffix("```").trim())
+            val whole = org.json.JSONObject(
+                text.removePrefix("```json").removePrefix("```").removeSuffix("```").trim()
+            )
+            if (isValidResponse(whole)) return whole
         } catch (_: Exception) { }
 
-        val start = text.indexOf('{')
-        if (start < 0) return null
-
         var depth = 0
+        var start = -1
         var inString = false
         var escaped = false
-        for (index in start until text.length) {
+        for (index in text.indices) {
             val ch = text[index]
             if (inString) {
                 if (escaped) escaped = false
@@ -1311,12 +1318,19 @@ class MainActivity : AppCompatActivity() {
             }
             when (ch) {
                 '"' -> inString = true
-                '{' -> depth++
+                '{' -> {
+                    if (depth == 0) start = index
+                    depth++
+                }
                 '}' -> {
-                    depth--
-                    if (depth == 0) {
-                        val candidate = text.substring(start, index + 1)
-                        return try { org.json.JSONObject(candidate) } catch (_: Exception) { null }
+                    if (depth > 0) depth--
+                    if (depth == 0 && start >= 0) {
+                        val candidateText = text.substring(start, index + 1)
+                        try {
+                            val candidate = org.json.JSONObject(candidateText)
+                            if (isValidResponse(candidate)) return candidate
+                        } catch (_: Exception) { }
+                        start = -1
                     }
                 }
             }
@@ -1361,10 +1375,22 @@ class MainActivity : AppCompatActivity() {
             result.onSuccess { raw ->
                 var replyText = raw
                 var actions: org.json.JSONArray? = null
+                var malformedActionCount = 0
                 val structuredResponse = extractAssistantResponseObject(raw)
                 if (structuredResponse != null) {
                     replyText = structuredResponse.optString("reply").takeIf { it.isNotBlank() } ?: raw
-                    actions = structuredResponse.optJSONArray("actions")
+                    val returnedActions = structuredResponse.optJSONArray("actions")
+                    if (returnedActions != null) {
+                        actions = org.json.JSONArray()
+                        for (actionIndex in 0 until returnedActions.length()) {
+                            val action = returnedActions.optJSONObject(actionIndex)
+                            if (action != null && action.optString("type").isNotBlank()) {
+                                actions.put(action)
+                            } else {
+                                malformedActionCount++
+                            }
+                        }
+                    }
                 }
                 geminiHistory.add("user" to (cleanUserText.ifBlank { "ابدأ بتقييم يومي الحالي." }))
                 geminiHistory.add("model" to replyText)
@@ -1391,6 +1417,12 @@ class MainActivity : AppCompatActivity() {
                             }
                         ))
                     }
+                }
+                if (malformedActionCount > 0) {
+                    box.addView(createAIMessageBubble(
+                        if (isArabic) "⚠️ تجاهلت $malformedActionCount أمر غير مكتمل من رد المساعد، ولم أنفذه."
+                        else "⚠️ Ignored $malformedActionCount malformed action(s); nothing was executed for them."
+                    ))
                 }
                 if (autoSpeakAssistantReply) {
                     autoSpeakAssistantReply = false
