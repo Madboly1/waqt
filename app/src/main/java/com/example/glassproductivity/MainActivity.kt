@@ -1231,7 +1231,7 @@ class MainActivity : AppCompatActivity() {
 
 - التزم حرفيًا بمخطط الإجراءات والأسماء والقيم المسموح بها أدناه؛ لا تخترع أنواع إجراءات أو أسماء حقول أو قيمًا غير مذكورة.
 - add_task: title مطلوب؛ الحقول الاختيارية الوحيدة هي priority (high/medium/low) وhour (0–23) وminute (0–59) وday_offset (0–30). لا ترسل description مع المهمة.
-- add_habit: title مطلوب؛ category واحدة من health/study/religion/sports، وpriority واحدة من high/medium/low، وhour من 0–23، وminute من 0–59، وtarget_value عدد صحيح من 1–1000، وtarget_unit نص غير فارغ، وhas_reminder قيمة true/false. لا ترسل أي حقل اختياري بقيمة فارغة أو بنوع خاطئ.
+- add_habit: title مطلوب؛ category اختيارية. استخدم health/study/religion/sports للفئات الافتراضية، أو اسم/معرّف فئة مخصصة موجودة بالفعل في التطبيق إذا ذكرها المستخدم. لا تخترع فئة مخصصة. وpriority واحدة من high/medium/low، وhour من 0–23، وminute من 0–59، وtarget_value عدد صحيح من 1–1000، وtarget_unit نص غير فارغ، وhas_reminder قيمة true/false. لا ترسل أي حقل اختياري بقيمة فارغة أو بنوع خاطئ.
 - update_task: title يحدد المهمة الحالية، ويجب إرسال حقل تغيير واحد على الأقل من new_title أو priority أو hour أو minute أو day_offset. أرسل فقط الحقول التي يريد المستخدم تغييرها، مع الالتزام بنفس الحدود أعلاه.
 - update_habit: title يحدد العادة الحالية، ويجب إرسال حقل تغيير واحد على الأقل من new_title أو priority أو hour أو minute أو category أو target_value أو target_unit أو has_reminder. category من القيم الأربع المذكورة، وtarget_value من 1–1000.
 - add_note يتطلب content غير فارغ. update_note يتطلب title للملاحظة الحالية، ومعه new_title غير فارغ أو content غير فارغ على الأقل. لا ترسل محتوى فارغًا.
@@ -1661,7 +1661,7 @@ class MainActivity : AppCompatActivity() {
             optionalText("description") && optionalText("content") &&
             optionalBoolean("has_reminder") &&
             valueIn("priority", setOf("high", "medium", "low")) &&
-            valueIn("category", setOf("health", "study", "religion", "sports")) &&
+            optionalText("category") &&
             valueIn("sound", setOf("off", "rain", "waves", "fire", "forest", "water", "library", "wind", "night")) &&
             valueIn("mode", setOf("dark", "light", "toggle")) &&
             valueIn("language", setOf("ar", "en")) &&
