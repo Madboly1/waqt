@@ -5618,6 +5618,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setPomodoroDuration(minutes: Int) {
         inAppCountDownTimer?.cancel()
+        AlarmScheduler.cancelPomodoroEnd(this)
         isPomodoroRunning = false
         ReminderRepository.clearActiveFocusState(this)
         isBreakSession = false
@@ -5631,6 +5632,7 @@ class MainActivity : AppCompatActivity() {
     private fun toggleInAppPomodoro() {
         if (isPomodoroRunning) {
             inAppCountDownTimer?.cancel()
+            AlarmScheduler.cancelPomodoroEnd(this)
             isPomodoroRunning = false
             ReminderRepository.saveActiveFocusState(
                 this,
@@ -5662,6 +5664,7 @@ class MainActivity : AppCompatActivity() {
             linkedTaskId = selectedFocusTaskId,
             isBreakMode = isBreakSession
         )
+        AlarmScheduler.schedulePomodoroEnd(this, pomodoroStartWallClockMs + durationMs, isBreakSession, activeFocusSessionId)
 
         inAppCountDownTimer = object : CountDownTimer(durationMs, 1000L) {
             override fun onTick(millisUntilFinished: Long) {
@@ -5674,6 +5677,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                AlarmScheduler.cancelPomodoroEnd(this@MainActivity)
                 isPomodoroRunning = false
                 ReminderRepository.clearActiveFocusState(this@MainActivity)
                 triggerGentleHaptic()
