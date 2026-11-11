@@ -1248,6 +1248,7 @@ class MainActivity : AppCompatActivity() {
 {"type":"delete_note","title":"عنوان الملاحظة — يتطلب تأكيد المستخدم"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
+{"type":"update_journal_entry","date":"yyyy-MM-dd","content":"النص الكامل الجديد للتدوينة الموجودة"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
 {"type":"set_habit_progress","title":"اسم العادة","progress":0-1000}
 {"type":"start_focus","minutes":25}
@@ -1417,6 +1418,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
+            "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
             "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
@@ -1635,6 +1637,20 @@ class MainActivity : AppCompatActivity() {
                         val pinned = a.optString("type") == "pin_note"
                         ReminderRepository.addOrUpdateNote(this, hit.copy(isPinned = pinned))
                         note = if (pinned) "📌 ثبّت الملاحظة: ${hit.title}" else "📍 ألغيت تثبيت الملاحظة: ${hit.title}"
+                    }
+                }
+                "update_journal_entry" -> {
+                    val dateKey = a.optString("date").trim()
+                    val value = a.optString("content").trim()
+                    val diary = getDiaryPreferences()
+                    val validDate = dateKey.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))
+                    if (!validDate || value.isBlank()) {
+                        note = "⚠️ لازم تحدد تاريخًا صحيحًا ومحتوى غير فارغ للتدوينة."
+                    } else if (!diary.contains(dateKey)) {
+                        note = "ℹ️ مفيش تدوينة محفوظة بتاريخ $dateKey عشان أعدّلها."
+                    } else {
+                        diary.edit().putString(dateKey, value).apply()
+                        note = "✏️ حدّثت تدوينة يوم $dateKey."
                     }
                 }
                 "save_journal_entry" -> {
