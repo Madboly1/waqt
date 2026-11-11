@@ -1004,28 +1004,29 @@ class MainActivity : AppCompatActivity() {
         chatLogContainer.addView(chatScroll)
         root.addView(chatLogContainer)
 
+        // Modern WAQT composer: one integrated glass capsule instead of a row of detached controls.
         val inputRow = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
-            setPadding(0, dp(8), 0, 0)
+            background = createPillDrawable(
+                if (isDarkMode) Color.parseColor("#D91A2A38") else Color.parseColor("#F2FFFFFF"),
+                dp(27),
+                if (isDarkMode) "#557D9EAC" else "#A8B9C8D2"
+            )
+            setPadding(dp(7), dp(6), dp(7), dp(6))
+            elevation = dp(3).toFloat()
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                topMargin = dp(10)
+            }
         }
-
-        val etMsg = EditText(this).apply {
-            hint = if (isArabic) "فضفض أو اكتب مهامك هنا..." else "Type ideas or tasks..."
-            setHintTextColor(textMutedColor())
-            setTextColor(textPrimaryColor())
-            textSize = 13f
-            background = createPillDrawable(bgElevatedColor(), dp(14), null)
-            setPadding(dp(12), dp(10), dp(12), dp(10))
-            layoutParams = LinearLayout.LayoutParams(0, dp(46), 1f).apply { marginEnd = dp(6) }
-        }
-        inputRow.addView(etMsg)
 
         val btnImage = TextView(this).apply {
-            text = "🖼"
-            textSize = 18f
+            text = "＋"
+            textSize = 25f
             gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(42), dp(46)).apply { marginEnd = dp(4) }
+            setTextColor(textMutedColor())
+            contentDescription = if (isArabic) "إرفاق صورة" else "Attach image"
+            layoutParams = LinearLayout.LayoutParams(dp(38), dp(42))
             setOnClickListener {
                 if (geminiKey().isBlank()) {
                     showGeminiKeyDialog()
@@ -1038,11 +1039,32 @@ class MainActivity : AppCompatActivity() {
         }
         inputRow.addView(btnImage)
 
+        val etMsg = EditText(this).apply {
+            hint = if (isArabic) "اكتب رسالتك..." else "Message WAQT..."
+            setHintTextColor(textMutedColor())
+            setTextColor(textPrimaryColor())
+            textSize = 14f
+            background = null
+            setPadding(dp(8), dp(7), dp(8), dp(7))
+            minHeight = dp(42)
+            minWidth = 0
+            maxLines = 4
+            isSingleLine = false
+            gravity = Gravity.CENTER_VERTICAL
+            inputType = android.text.InputType.TYPE_CLASS_TEXT or
+                android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
+                android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+        }
+        inputRow.addView(etMsg)
+
         val btnMic = TextView(this).apply {
             text = "🎙"
-            textSize = 18f
+            textSize = 17f
             gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(42), dp(46)).apply { marginEnd = dp(4) }
+            setTextColor(textMutedColor())
+            contentDescription = if (isArabic) "تسجيل رسالة صوتية" else "Record voice message"
+            layoutParams = LinearLayout.LayoutParams(dp(36), dp(42))
             chatRecordButton = this
             setOnClickListener {
                 if (geminiKey().isBlank()) {
@@ -1061,20 +1083,28 @@ class MainActivity : AppCompatActivity() {
 
         val btnSpeak = TextView(this).apply {
             text = "🔊"
-            textSize = 17f
+            textSize = 15f
             gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(dp(38), dp(46)).apply { marginEnd = dp(4) }
+            setTextColor(textMutedColor())
+            contentDescription = if (isArabic) "قراءة آخر رد" else "Read last reply"
+            layoutParams = LinearLayout.LayoutParams(dp(32), dp(42))
             setOnClickListener { speakLastAssistantReply() }
         }
         inputRow.addView(btnSpeak)
 
         val btnSend = TextView(this).apply {
-            text = "🚀"
-            textSize = 18f
+            text = "➤"
+            textSize = 21f
             gravity = Gravity.CENTER
-            background = createPillDrawable(accentOrangeColor(), dp(14), null)
-            val s = dp(46)
-            layoutParams = LinearLayout.LayoutParams(s, s)
+            setTextColor(Color.WHITE)
+            background = GradientDrawable().apply {
+                shape = GradientDrawable.OVAL
+                setColor(accentOrangeColor())
+            }
+            elevation = dp(2).toFloat()
+            val s = dp(42)
+            layoutParams = LinearLayout.LayoutParams(s, s).apply { marginStart = dp(3) }
+            contentDescription = if (isArabic) "إرسال الرسالة" else "Send message"
             setOnClickListener {
                 val userText = etMsg.text.toString().trim()
                 if (userText.isNotBlank()) {
@@ -1430,10 +1460,12 @@ class MainActivity : AppCompatActivity() {
 - لا تكرر مهام المستخدم ولا تفترض أن كل هدف يجب أن يتحول إلى مهام يومية.
 - فرّق بين النقاش، والتعلّم، والتخطيط، وطلب تنفيذ إجراء داخل التطبيق.
 
-قواعد تنفيذ الإجراءات (مهمة جدًا):
+قواعد فهم النية وتنفيذ الإجراءات (مهمة جدًا):
+- افهم طلب المستخدم من سياق المحادثة كاملة، وليس من آخر رسالة وحدها. اربط الضمائر والإشارات مثل «دي»، «كده»، «الخطوات»، «الخطة»، «خلينا نبدأ» بما اتفقنا عليه قبل ذلك. لا تشترط أن يستخدم المستخدم كلمة أمر محددة مثل «ضيف».
+- إذا عبّر المستخدم بوضوح عن رغبته في تنظيم شيء داخل WAQT، أو وافق برد طبيعي مختصر على عرضك السابق بإضافة الخطوات/المهام أو تنفيذها، أنشئ الإجراءات المناسبة مباشرة حتى لو لم يقل حرفيًا «ضيف مهمة».
+- إذا كان المستخدم يناقش فكرة أو يطلب نصيحة/خطة فقط، فلا تنشئ بيانات داخل التطبيق تلقائيًا. اعرض الخطة أولًا، واسأل سؤالًا واحدًا واضحًا إذا لم يكن مفهومًا هل يريد تنفيذها داخل WAQT أم مجرد مناقشتها.
+- لا تعتبر «تمام» أو «يلا» موافقة عامة من تلقاء نفسها؛ اعتبرها موافقة فقط إذا كان ردك السابق يعرض إجراءً محددًا بوضوح وينتظر موافقته عليه.
 - لا تضف أو تكمل أو تحذف أو تعدّل أي مهمة لمجرد أن المستخدم ذكرها أو ناقشها.
-- عند اقتراح خطة، اعرضها أولًا للمراجعة. لا تنشئ مهامًا إلا إذا طلب المستخدم صراحة إضافة الخطوات إلى WAQT أو وافق بوضوح على خطة سبق عرضها.
-- طلب خطة أو مناقشة هدف لا يعني الموافقة على إنشاء المهام.
 - لا تنفذ إجراءً غير متاح لك، ولا تدّعِ أنك نفذته.
 - لا تكرر إضافة مهمة موجودة بالفعل.
 - عند إكمال أو حذف مهمة أو عادة أو ملاحظة، لا تختَر أول نتيجة عشوائيًا. استخدم تطابق الاسم الكامل، أو نتيجة جزئية وحيدة فقط؛ إذا تعددت النتائج اطلب من المستخدم تحديد الاسم.
@@ -1448,13 +1480,13 @@ class MainActivity : AppCompatActivity() {
 - save_journal_entry يتطلب content غير فارغ، ويمكنه استخدام date بصيغة yyyy-MM-dd؛ update_journal_entry يتطلب date صالحًا وcontent غير فارغ؛ delete_journal_entry يتطلب date صالحًا. لا تخمّن تاريخًا غير معروف.
 - set_ambient_volume من 0 إلى 100؛ set_focus_duration وset_break_duration من 1 إلى 240 دقيقة؛ start_focus من 1 إلى 180 دقيقة؛ set_goal من 15 إلى 720 دقيقة.
 - كل حقل اختياري إذا أُرسل يجب أن يكون من النوع الصحيح وغير فارغ للنصوص. لا تضع أمثلة القيم الوصفية مثل "high|medium|low" كنص فعلي؛ اختر قيمة واحدة فقط.
-- عند عدم معرفة معلومة مطلوبة، اسأل المستخدم بدل اختراعها أو إصدار action ناقص. لا ترسل action لمجرد شرح ما ستفعله؛ أرسلها فقط عند طلب التنفيذ الصريح أو الموافقة الواضحة.
+- عند عدم معرفة معلومة مطلوبة، اسأل المستخدم بدل اختراعها أو إصدار action ناقص. لا ترسل action لمجرد شرح ما ستفعله؛ أرسلها عند وضوح نية التنفيذ من كلام المستخدم أو موافقته السياقية على عرض محدد. إذا لم تتأكد، اسأله بدل التخمين.
 
 تنسيق الرد:
 أخرج JSON صالحًا فقط دون Markdown fences أو أي نص خارجه، بالشكل:
 {"reply":"الرد الطبيعي للمستخدم","actions":[]}
 اكتب داخل reply إجابة مفيدة ومنظمة. عند بناء خطة استخدم عناوين ومراحل ونقاط قصيرة داخل النص، ولا تختصر الخطة في ٤ سطور إذا كانت تحتاج تفصيلًا.
-الـ actions اختيارية، ولا تستخدمها إلا بعد طلب صريح أو موافقة واضحة:
+الـ actions اختيارية؛ استخدمها عند وجود طلب واضح أو موافقة سياقية مفهومة من المحادثة، ولا تستخدمها أثناء النقاش أو التخطيط فقط:
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
@@ -1644,9 +1676,9 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         box.addView(createAIMessageBubble(
                             if (isArabic) {
-                                "🔒 فهمت إن فيه إجراء ممكن يتنفذ، لكن مش هغيّر بياناتك من غير طلب واضح منك. اكتب الأمر صراحة، زي: «ضيف المهمة» أو «حدّث العادة»."
+                                "🔒 أقدر أنفّذ ده داخل WAQT، بس محتاج أتأكد من قصدك: تحب أحوّل الخطوات دي لمهام فعلية، ولا نكمل مناقشتها بس؟"
                             } else {
-                                "🔒 I detected a possible app action, but I won't change your data without a clear request. Please state the action explicitly."
+                                "🔒 I can carry this out in WAQT; just to confirm, would you like me to turn these steps into actual tasks, or keep discussing the plan?"
                             }
                         ))
                     }
@@ -1778,6 +1810,12 @@ class MainActivity : AppCompatActivity() {
     private fun shouldAllowAssistantActions(userText: String, previousReply: String): Boolean {
         val message = userText.trim().lowercase(Locale.ROOT)
         if (message.isBlank()) return false
+        val negatedIntent = listOf(
+            "مش عايز", "مش عاوز", "مش محتاج", "متضيفش", "ما تضيفش", "ما تضفش",
+            "بلاش تضيف", "لا تضيف", "مش موافق", "مش دلوقتي", "مش عايز أنفذ",
+            "don't add", "do not add", "not now", "don't do that"
+        ).any { message.contains(it) }
+        if (negatedIntent) return false
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
@@ -1802,13 +1840,31 @@ class MainActivity : AppCompatActivity() {
             "complete task", "finish task", "mark task complete", "complete habit", "finish habit", "mark habit complete",
             "reopen task", "update task", "edit task", "update habit", "edit habit", "set task progress", "set habit progress",
             "add note", "create note", "update note", "edit note", "pin note", "unpin note", "delete note",
-            "save journal", "save journal entry", "update journal entry", "delete journal entry", "set daily focus goal"
+            "save journal", "save journal entry", "update journal entry", "delete journal entry", "set daily focus goal",
+            "رتبلي", "نظملي", "حطها في المهام", "حطهم في المهام", "خليها في مهامي", "خليهم في مهامي",
+            "قسمها لمهام", "قسمهم لمهام", "حول الخطة لمهام", "حوّل الخطة لمهام", "جدولها", "وزعها على أيام",
+            "امشي على الخطة", "ابدأ بالخطة", "خلينا نبدأ بالخطة", "نفذ الخطة", "نفّذ الخطة",
+            "put it in my tasks", "add it to my schedule", "turn this into tasks", "organize this in my plan"
         ).any { message.contains(it) }
         if (directIntent) return true
-        val approval = listOf("موافق", "موافقة", "تمام", "اعتمد", "نفذها", "يلا", "yes", "okay", "ok", "approved", "go ahead")
-            .any { message == it || message.startsWith("$it ") }
-        val previousAssistantAskedForApproval = listOf("أحولها لمهام", "أضيفها للمهام", "أضيف الخطوات", "أضيف الخطة", "تحب أضيف", "shall i add", "add these to your tasks")
-            .any { previousReply.contains(it, ignoreCase = true) }
+
+        // A natural "yes / let's do it" is sufficient when the assistant's immediately
+        // preceding message clearly offered a concrete in-app action.
+        val approval = listOf(
+            "موافق", "موافقة", "تمام", "ماشي", "أيوه", "ايوه", "اه", "يلا", "يلا بينا",
+            "اعتمد", "نفذها", "نفذ", "نفّذ", "ابدأ", "خلينا", "اعمل كده", "كده تمام",
+            "كمل", "كمّل", "yes", "yeah", "okay", "ok", "approved", "go ahead", "let's do it"
+        ).any { message == it || message.startsWith("$it ") }
+
+        val previousAssistantAskedForApproval = listOf(
+            "تحب أضيف", "تحب اضيف", "هل أضيف", "هل اضيف", "أقدر أضيف", "اقدر اضيف",
+            "ممكن أضيف", "ممكن اضيف", "أضيفها للمهام", "اضيفها للمهام", "أضيف الخطوات",
+            "اضيف الخطوات", "أحولها لمهام", "احولها لمهام", "أحوّلها لمهام", "أضيف الخطة",
+            "اضيف الخطة", "أرتبها في مهام", "ارتبها في مهام", "أحطها في جدولك", "احطها في جدولك",
+            "تحب أحول", "تحب احول", "تحب أجهز", "تحب اجهز", "نبدأ ننفذ", "نبدأ بتنفيذ",
+            "would you like me to add", "shall i add", "want me to add", "should i add",
+            "add these to your tasks", "turn this into tasks"
+        ).any { previousReply.contains(it, ignoreCase = true) }
         return approval && previousAssistantAskedForApproval
     }
 
