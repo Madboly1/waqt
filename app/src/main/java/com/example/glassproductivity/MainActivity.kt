@@ -182,6 +182,8 @@ class MainActivity : AppCompatActivity() {
     private val chatHistoryStore by lazy { ChatHistoryStore(this) }
     private var activeChatId: String = ""
     private var activeAIChatDialog: Dialog? = null
+    private var activeAssistantAvatarView: ImageView? = null
+    private var activeAssistantNameView: TextView? = null
 
     private lateinit var rootFrameLayout: FrameLayout
     private lateinit var mainContentContainer: LinearLayout
@@ -252,6 +254,23 @@ class MainActivity : AppCompatActivity() {
             } catch (e: Exception) {
                 Toast.makeText(this, e.message ?: if (isArabic) "تعذر إرفاق الصورة" else "Could not attach image", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private val assistantAvatarPickerLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            try {
+                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            } catch (_: Exception) { }
+            getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                .putString("assistant_avatar_uri", uri.toString()).apply()
+            activeAssistantAvatarView?.let {
+                it.setImageURI(uri)
+                it.visibility = View.VISIBLE
+            }
+            Toast.makeText(this, if (isArabic) "تم تحديث صورة المساعد" else "Assistant photo updated", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -891,12 +910,22 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER_VERTICAL
             setPadding(0, 0, 0, dp(10))
         }
+        header.addView(createAssistantAvatarView())
         header.addView(TextView(this).apply {
-            text = if (isArabic) "✨ WAQT Mentor | مرشدك الذكي" else "✨ WAQT Mentor | Your AI Coach"
+            text = assistantName()
             setTextColor(textPrimaryColor())
-            textSize = 18f
+            textSize = 17f
             setTypeface(typeface, Typeface.BOLD)
+            activeAssistantNameView = this
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+            setOnClickListener { showAssistantProfileDialog() }
+        })
+        header.addView(TextView(this).apply {
+            text = "👤"
+            textSize = 17f
+            setPadding(dp(7), 0, dp(7), 0)
+            contentDescription = if (isArabic) "تخصيص شخصية المساعد" else "Customize assistant"
+            setOnClickListener { showAssistantProfileDialog() }
         })
         header.addView(TextView(this).apply {
             text = "🕘"
@@ -1077,6 +1106,134 @@ class MainActivity : AppCompatActivity() {
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
     }
 
+
+    private fun assistantName(): String =
+        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+            .getString("assistant_name", if (isArabic) "صاحبي" else "My WAQT Buddy")
+            ?.trim()?.takeIf { it.isNotBlank() } ?: if (isArabic) "صاحبي" else "My WAQT Buddy"
+
+    private fun createAssistantAvatarView(): FrameLayout {
+        val size = dp(42)
+        return FrameLayout(this).apply {
+            layoutParams = LinearLayout.LayoutParams(size, size).apply { marginEnd = dp(10) }
+            background = createGlass3DDrawable(dp(21))
+            clipToOutline = true
+            val fallback = TextView(this@MainActivity).apply {
+                text = "✦"
+                textSize = 21f
+                gravity = Gravity.CENTER
+                setTextColor(accentTealColor())
+            }
+            addView(fallback, FrameLayout.LayoutParams(size, size))
+            val image = ImageView(this@MainActivity).apply {
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                visibility = View.GONE
+            }
+            addView(image, FrameLayout.LayoutParams(size, size))
+            val savedUri = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+                .getString("assistant_avatar_uri", null)
+            if (!savedUri.isNullOrBlank()) {
+                try {
+                    image.setImageURI(Uri.parse(savedUri))
+                    if (image.drawable != null) {
+                        image.visibility = View.VISIBLE
+                        fallback.visibility = View.GONE
+                    }
+                } catch (_: Exception) { }
+            }
+            activeAssistantAvatarView = image
+            setOnClickListener { showAssistantProfileDialog() }
+        }
+    }
+
+    private fun buildAssistantSystemPrompt(): String {
+        val name = assistantName().take(30)
+        val tone = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+            .getString("assistant_personality", "friendly") ?: "friendly"
+        val style = when (tone) {
+            "playful" -> "استخدم روحًا مرحة وخفة ظل طبيعية باعتدال، من غير مبالغة أو تهريج وقت الجد."
+            "direct" -> "كن مباشرًا وحاسمًا وعمليًا، مع الحفاظ على الود والاحترام."
+            "calm" -> "كن هادئًا ومطمئنًا ومتزنًا، ولا تستعجل المستخدم."
+            else -> "كن ودودًا وقريبًا من المستخدم، كصديق ذكي يعرف متى يستمع ومتى ينصح."
+        }
+        return geminiSystemPrompt + "\n\nهوية المستخدم المخصصة: اسمك الذي اختاره المستخدم هو «$name». عرّف نفسك بهذا الاسم عند الحاجة فقط، ولا تكرر الاسم في كل رد. أسلوبك المفضل: $style"
+    }
+
+    private fun showAssistantProfileDialog() {
+        val prefs = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        val panel = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(20), dp(8), dp(20), dp(4))
+        }
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "اسم المساعد" else "Assistant name"
+            textSize = 13f
+            setTextColor(textPrimaryColor())
+        })
+        val nameInput = EditText(this).apply {
+            setText(assistantName())
+            hint = if (isArabic) "اكتب الاسم اللي تحبه" else "Choose a name"
+            setSingleLine(true)
+            setTextColor(textPrimaryColor())
+            setPadding(dp(12), dp(10), dp(12), dp(10))
+            background = createPillDrawable(bgElevatedColor(), dp(12), null)
+        }
+        panel.addView(nameInput)
+        val avatarButton = TextView(this).apply {
+            text = if (isArabic) "🖼  تغيير صورة المساعد" else "🖼  Change assistant photo"
+            textSize = 14f
+            setTextColor(accentTealColor())
+            setPadding(0, dp(16), 0, dp(10))
+            setOnClickListener { assistantAvatarPickerLauncher.launch(arrayOf("image/*")) }
+        }
+        panel.addView(avatarButton)
+
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "الصوت" else "Voice"
+            textSize = 13f
+            setTextColor(textPrimaryColor())
+            setPadding(0, dp(10), 0, dp(4))
+        })
+        val voiceOptions = if (isArabic) listOf("صوت نسائي", "صوت رجالي") else listOf("Female voice", "Male voice")
+        val voiceSpinner = Spinner(this)
+        voiceSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, voiceOptions)
+        voiceSpinner.setSelection(if ((prefs.getString("assistant_voice_gender", "female") ?: "female") == "male") 1 else 0)
+        panel.addView(voiceSpinner)
+
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "أسلوب الشخصية" else "Personality style"
+            textSize = 13f
+            setTextColor(textPrimaryColor())
+            setPadding(0, dp(12), 0, dp(4))
+        })
+        val toneOptions = if (isArabic) listOf("ودود وقريب", "مرح وخفيف الظل", "مباشر وعملي", "هادئ ومتزن")
+            else listOf("Friendly", "Playful", "Direct and practical", "Calm")
+        val toneValues = listOf("friendly", "playful", "direct", "calm")
+        val toneSpinner = Spinner(this)
+        toneSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, toneOptions)
+        toneSpinner.setSelection(toneValues.indexOf(prefs.getString("assistant_personality", "friendly")).coerceAtLeast(0))
+        panel.addView(toneSpinner)
+
+        AlertDialog.Builder(this)
+            .setTitle(if (isArabic) "تخصيص شخصية المساعد" else "Customize assistant")
+            .setView(panel)
+            .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
+                val gender = if (voiceSpinner.selectedItemPosition == 1) "male" else "female"
+                prefs.edit()
+                    .putString("assistant_name", nameInput.text.toString().trim().take(30).ifBlank { if (isArabic) "صاحبي" else "My WAQT Buddy" })
+                    .putString("assistant_voice_gender", gender)
+                    .putString("assistant_personality", toneValues[toneSpinner.selectedItemPosition.coerceIn(0, toneValues.lastIndex)])
+                    .apply()
+                activeAssistantNameView?.text = assistantName()
+                chatTts?.stop()
+                chatTts?.shutdown()
+                chatTts = null
+                Toast.makeText(this, if (isArabic) "تم حفظ شخصية المساعد" else "Assistant profile saved", Toast.LENGTH_SHORT).show()
+            }
+            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+            .show()
+    }
+
     private fun showChatHistoryDialog(parentDialog: Dialog) {
         val chats = chatHistoryStore.listChats()
         if (chats.isEmpty()) {
@@ -1130,12 +1287,31 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(22), dp(8), dp(22), dp(4))
         }
 
-        fun addProviderField(title: String, hint: String, value: String): EditText {
-            panel.addView(TextView(this).apply {
-                text = title
-                textSize = 13f
-                setTextColor(textPrimaryColor())
+        fun addProviderField(title: String, hint: String, value: String, helpUrl: String): EditText {
+            panel.addView(LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
                 setPadding(0, dp(10), 0, dp(4))
+                addView(TextView(this@MainActivity).apply {
+                    text = title
+                    textSize = 13f
+                    setTextColor(textPrimaryColor())
+                    layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+                })
+                addView(TextView(this@MainActivity).apply {
+                    text = "↗"
+                    textSize = 18f
+                    setTextColor(accentTealColor())
+                    setPadding(dp(10), dp(2), dp(4), dp(2))
+                    contentDescription = if (isArabic) "الحصول على مفتاح API" else "Get API key"
+                    setOnClickListener {
+                        try {
+                            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(helpUrl)))
+                        } catch (_: Exception) {
+                            Toast.makeText(this@MainActivity, if (isArabic) "تعذر فتح صفحة المفاتيح" else "Could not open API key page", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
             })
             return EditText(this).apply {
                 this.hint = hint
@@ -1147,9 +1323,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val geminiInput = addProviderField("Gemini API key", if (isArabic) "مفتاح Gemini" else "Paste Gemini API key", geminiKey())
-        val groqInput = addProviderField("Groq API key — fallback 1", if (isArabic) "مفتاح Groq المجاني" else "Paste Groq API key", groqKey())
-        val routerInput = addProviderField("OpenRouter API key — fallback 2", if (isArabic) "مفتاح OpenRouter المجاني" else "Paste OpenRouter API key", openRouterKey())
+        val geminiInput = addProviderField("Gemini API key", if (isArabic) "مفتاح Gemini" else "Paste Gemini API key", geminiKey(), "https://aistudio.google.com/app/apikey")
+        val groqInput = addProviderField("Groq API key — fallback 1", if (isArabic) "مفتاح Groq المجاني" else "Paste Groq API key", groqKey(), "https://console.groq.com/keys")
+        val routerInput = addProviderField("OpenRouter API key — fallback 2", if (isArabic) "مفتاح OpenRouter المجاني" else "Paste OpenRouter API key", openRouterKey(), "https://openrouter.ai/settings/keys")
 
         panel.addView(TextView(this).apply {
             text = if (isArabic) "موديل Gemini الأساسي" else "Primary Gemini model"
@@ -1420,7 +1596,7 @@ class MainActivity : AppCompatActivity() {
         val requestHistory = geminiHistory.takeLast(6).toMutableList().apply { add("user" to prompt) }
         val previousAssistantReply = lastAssistantReply
 
-        GeminiClient.generate(geminiKey(), geminiModel(), geminiSystemPrompt, requestHistory, media, groqKey(), openRouterKey()) { result ->
+        GeminiClient.generate(geminiKey(), geminiModel(), buildAssistantSystemPrompt(), requestHistory, media, groqKey(), openRouterKey()) { result ->
             box.removeView(typing)
             result.onSuccess { raw ->
                 var replyText = raw
@@ -1567,15 +1743,32 @@ class MainActivity : AppCompatActivity() {
         }
         if (chatTts == null) {
             chatTts = TextToSpeech(this) { status ->
-                if (status == TextToSpeech.SUCCESS) {
-                    chatTts?.language = if (isArabic) Locale("ar", "EG") else Locale.US
-                    chatTts?.speak(lastAssistantReply, TextToSpeech.QUEUE_FLUSH, null, "waqt_ai_reply")
-                } else Toast.makeText(this, if (isArabic) "تحويل النص لصوت غير متاح على الجهاز" else "Text-to-speech is unavailable", Toast.LENGTH_SHORT).show()
+                if (status == TextToSpeech.SUCCESS) speakWithSelectedAssistantVoice(lastAssistantReply)
+                else Toast.makeText(this, if (isArabic) "تحويل النص لصوت غير متاح على الجهاز" else "Text-to-speech is unavailable", Toast.LENGTH_SHORT).show()
             }
         } else {
-            chatTts?.language = if (isArabic) Locale("ar", "EG") else Locale.US
-            chatTts?.speak(lastAssistantReply, TextToSpeech.QUEUE_FLUSH, null, "waqt_ai_reply")
+            speakWithSelectedAssistantVoice(lastAssistantReply)
         }
+    }
+
+    private fun speakWithSelectedAssistantVoice(text: String) {
+        val tts = chatTts ?: return
+        val locale = if (isArabic) Locale("ar", "EG") else Locale.US
+        val gender = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+            .getString("assistant_voice_gender", "female") ?: "female"
+        val candidates = tts.voices.orEmpty().filter { it.locale.language == locale.language }
+        val matchingVoice = candidates.firstOrNull { voice ->
+            val voiceName = voice.name.lowercase(Locale.ROOT)
+            if (gender == "male") voiceName.contains("male") && !voiceName.contains("female")
+            else voiceName.contains("female")
+        }
+        if (matchingVoice != null) {
+            tts.voice = matchingVoice
+        } else {
+            tts.language = locale
+        }
+        tts.setSpeechRate(0.96f)
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "waqt_ai_reply")
     }
 
     private fun shouldAllowAssistantActions(userText: String, previousReply: String): Boolean {
@@ -2601,14 +2794,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createAIMessageBubble(text: String): View {
-        return TextView(this).apply {
-            this.text = text
-            setTextColor(textPrimaryColor())
-            textSize = 13f
-            background = createPillDrawable(bgElevatedColor(), dp(14), COLOR_TEAL_DEEP)
-            setPadding(dp(12), dp(10), dp(12), dp(10))
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                bottomMargin = dp(8)
+        return LinearLayout(this).apply {
+            gravity = Gravity.START
+            val bubble = TextView(this@MainActivity).apply {
+                this.text = text
+                setTextColor(textPrimaryColor())
+                textSize = 14f
+                setLineSpacing(dp(2).toFloat(), 1.02f)
+                background = createPillDrawable(bgElevatedColor(), dp(17), COLOR_TEAL_DEEP)
+                setPadding(dp(14), dp(11), dp(14), dp(11))
+                maxWidth = (resources.displayMetrics.widthPixels * 0.82f).toInt()
+            }
+            addView(bubble)
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                bottomMargin = dp(9)
             }
         }
     }
@@ -2616,17 +2815,19 @@ class MainActivity : AppCompatActivity() {
     private fun createUserMessageBubble(text: String): View {
         return LinearLayout(this).apply {
             gravity = Gravity.END
-            val tv = TextView(this@MainActivity).apply {
+            val bubble = TextView(this@MainActivity).apply {
                 this.text = text
                 setTextColor(Color.parseColor("#0B1417"))
-                textSize = 13f
+                textSize = 14f
                 setTypeface(typeface, Typeface.BOLD)
-                background = createPillDrawable(accentOrangeColor(), dp(14), null)
-                setPadding(dp(12), dp(10), dp(12), dp(10))
+                setLineSpacing(dp(2).toFloat(), 1.02f)
+                background = createPillDrawable(accentOrangeColor(), dp(17), null)
+                setPadding(dp(14), dp(11), dp(14), dp(11))
+                maxWidth = (resources.displayMetrics.widthPixels * 0.82f).toInt()
             }
-            addView(tv)
+            addView(bubble)
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                bottomMargin = dp(8)
+                bottomMargin = dp(9)
             }
         }
     }
