@@ -1570,6 +1570,17 @@ class MainActivity : AppCompatActivity() {
             action.has(key) && !action.isNull(key) && action.optString(key).trim().isNotBlank()
         fun hasNumber(key: String): Boolean = action.has(key) && action.opt(key) is Number
         fun hasBoolean(key: String): Boolean = action.has(key) && action.opt(key) is Boolean
+        fun numberInRange(key: String, range: IntRange): Boolean =
+            !action.has(key) || (hasNumber(key) && action.optDouble(key).let { it.isFinite() && it % 1.0 == 0.0 && it.toInt() in range })
+        fun validDate(key: String): Boolean {
+            if (!hasText(key)) return false
+            val value = action.optString(key).trim()
+            if (!value.matches(Regex("\\d{4}-\\d{2}-\\d{2}"))) return false
+            return try {
+                val format = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).apply { isLenient = false }
+                format.parse(value) != null && format.format(format.parse(value)!!) == value
+            } catch (_: Exception) { false }
+        }
 
         val type = action.optString("type").trim()
         if (type.isBlank()) return false
@@ -1588,16 +1599,14 @@ class MainActivity : AppCompatActivity() {
         )
         if (type !in supportedTypes) return false
 
-        return when (type) {
+        val requiredFieldsValid = when (type) {
             "add_task", "add_habit", "reopen_task", "complete_task", "update_task",
             "update_habit", "delete_task", "delete_habit", "delete_note", "pin_note",
             "unpin_note", "complete_habit" -> hasText("title")
             "update_note" -> hasText("title")
-            "update_journal_entry", "delete_journal_entry" -> hasText("date") &&
-                action.optString("date").matches(Regex("\\d{4}-\\d{2}-\\d{2}")) &&
-                (type == "delete_journal_entry" || hasText("content"))
-            "save_journal_entry" -> hasText("content") &&
-                (!action.has("date") || action.optString("date").matches(Regex("\\d{4}-\\d{2}-\\d{2}")))
+            "update_journal_entry" -> validDate("date") && hasText("content")
+            "delete_journal_entry" -> validDate("date")
+            "save_journal_entry" -> hasText("content") && (!action.has("date") || validDate("date"))
             "set_ambient_sound" -> hasText("sound")
             "set_ambient_volume" -> hasNumber("volume")
             "set_language" -> hasText("language")
@@ -1605,8 +1614,25 @@ class MainActivity : AppCompatActivity() {
             "set_tick_tock", "set_auto_update_check" -> hasBoolean("enabled")
             "navigate_tab" -> hasText("tab")
             "open_notes_section" -> hasText("section")
-            "set_task_progress" -> hasNumber("percentage")
-            "set_habit_progress" -> hasNumber("progress")
+            "set_task_progress" -> hasText("title") && hasNumber("percentage")
+            "set_habit_progress" -> hasText("title") && hasNumber("progress")
+            else -> true
+        }
+        if (!requiredFieldsValid) return false
+
+        return when (type) {
+            "add_task", "update_task" ->
+                numberInRange("hour", 0..23) && numberInRange("minute", 0..59) &&
+                    numberInRange("day_offset", 0..30)
+            "add_habit", "update_habit" ->
+                numberInRange("hour", 0..23) && numberInRange("minute", 0..59) &&
+                    numberInRange("target_value", 1..1000)
+            "set_task_progress" -> numberInRange("percentage", 0..100)
+            "set_habit_progress" -> numberInRange("progress", 0..1000)
+            "set_ambient_volume" -> numberInRange("volume", 0..100)
+            "set_focus_duration", "set_break_duration" -> numberInRange("minutes", 1..240)
+            "start_focus" -> numberInRange("minutes", 1..180)
+            "set_goal" -> numberInRange("minutes", 15..720)
             else -> true
         }
     }
