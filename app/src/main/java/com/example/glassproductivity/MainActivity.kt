@@ -3490,7 +3490,10 @@ class MainActivity : AppCompatActivity() {
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createGlassCardDrawable(true, false)
-            setPadding(dp(16), dp(12), dp(16), dp(16))
+            // Reserve space for WAQT's persistent bottom navigation so the
+            // save action never sits underneath the tab bar.
+            setPadding(dp(16), dp(12), dp(16), dp(88))
+            clipToPadding = false
         }
         val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
         toolbar.addView(TextView(this).apply {
@@ -3516,6 +3519,9 @@ class MainActivity : AppCompatActivity() {
         page.addView(editor, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f).apply {
             topMargin = dp(12); bottomMargin = dp(12)
         })
+        // Keep long entries scrollable while the save button remains reachable.
+        editor.isVerticalScrollBarEnabled = true
+        editor.overScrollMode = View.OVER_SCROLL_IF_CONTENT_SCROLLS
         val save = Button(this).apply {
             text = if (isArabic) "حفظ يومياتي" else "Save journal"
             isAllCaps = false; setTextColor(Color.parseColor("#0B1417"))
