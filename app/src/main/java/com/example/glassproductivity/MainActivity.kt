@@ -1583,7 +1583,8 @@ class MainActivity : AppCompatActivity() {
         val persistedUserText = when {
             cleanUserText.isNotBlank() -> cleanUserText
             media?.label == "image" -> "🖼 ${if (isArabic) "صورة مرفقة" else "Image attached"}"
-            media?.label == "voice" -> "🎙 ${if (isArabic) "رسالة صوتية" else "Voice message"}"
+            media?.label == "voice" -> media.localPath?.let { "WAQT_AUDIO:" + it }
+                ?: "🎙 ${if (isArabic) "رسالة صوتية" else "Voice message"}"
             else -> ""
         }
         if (persistedUserText.isNotBlank()) chatHistoryStore.addMessage(activeChatId, "user", persistedUserText)
@@ -1723,11 +1724,14 @@ class MainActivity : AppCompatActivity() {
             val box = activeChatMessagesBox
             val scroll = activeChatScroll
             if (box != null && scroll != null) {
-                box.addView(createUserMessageBubble("🎙 ${if (isArabic) "رسالة صوتية" else "Voice message"}"))
                 if (bytes.size > 18 * 1024 * 1024) throw IllegalArgumentException("التسجيل طويل جدًا؛ جرّب رسالة أقصر")
+                val audioFolder = java.io.File(filesDir, "chat_audio").apply { mkdirs() }
+                val savedAudio = java.io.File(audioFolder, "voice_${System.currentTimeMillis()}.m4a")
+                file.copyTo(savedAudio, overwrite = true)
+                box.addView(createUserMessageBubble("WAQT_AUDIO:" + savedAudio.absolutePath))
                 autoSpeakAssistantReply = true
                 sendToAssistant(if (isArabic) "استمع للرسالة الصوتية وافهم مقصدي ورد عليّ بالمصري. لو فيها طلب لتنظيم يومي تعامل معه كرسالة شات عادية." else "Listen to this voice message, understand it, and respond conversationally.",
-                    box, scroll, GeminiClient.MediaInput(bytes, "audio/mp4", "voice"))
+                    box, scroll, GeminiClient.MediaInput(bytes, "audio/mp4", "voice", savedAudio.absolutePath))
             }
         } catch (e: Exception) {
             Toast.makeText(this, if (isArabic) "تعذر قراءة التسجيل" else "Could not read recording", Toast.LENGTH_SHORT).show()
@@ -2813,6 +2817,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createUserMessageBubble(text: String): View {
+        if (text.startsWith("WAQT_AUDIO:")) return createChatAudioBubble(text.removePrefix("WAQT_AUDIO:"))
         return LinearLayout(this).apply {
             gravity = Gravity.END
             val bubble = TextView(this@MainActivity).apply {
@@ -2829,6 +2834,91 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 bottomMargin = dp(9)
             }
+        }
+    }
+
+
+    private fun createChatAudioBubble(path: String): View {
+        val file = java.io.File(path)
+        val bubble = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            background = createPillDrawable(if (isDarkMode) Color.parseColor("#CC1B4055") else Color.parseColor("#E3EAF5F8"), dp(20), if (isDarkMode) "#8ADCF0" else "#328AA5")
+            setPadding(dp(10), dp(8), dp(12), dp(8))
+            layoutParams = LinearLayout.LayoutParams((resources.displayMetrics.widthPixels * 0.78f).toInt(), dp(66)).apply {
+                gravity = Gravity.END
+                bottomMargin = dp(9)
+            }
+        }
+        val play = TextView(this).apply {
+            text = "▶"
+            textSize = 17f
+            gravity = Gravity.CENTER
+            setTextColor(Color.parseColor("#07111F"))
+            background = GradientDrawable().apply { shape = GradientDrawable.OVAL; setColor(accentTealColor()) }
+            layoutParams = LinearLayout.LayoutParams(dp(42), dp(42)).apply { marginEnd = dp(10) }
+        }
+        val details = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER_VERTICAL
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f)
+        }
+        val wave = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(27))
+        }
+        repeat(25) { i ->
+            val bar = View(this).apply {
+                background = GradientDrawable().apply {
+                    cornerRadius = dp(3).toFloat()
+                    setColor(if (isDarkMode) Color.parseColor("#8ADCF0") else Color.parseColor("#328AA5"))
+                }
+                layoutParams = LinearLayout.LayoutParams(0, dp(6 + ((i * 11 + i * i) % 17)), 1f).apply {
+                    marginStart = dp(1); marginEnd = dp(1)
+                }
+            }
+            wave.addView(bar)
+        }
+        val time = TextView(this).apply {
+            text = if (file.exists()) (if (isArabic) "رسالة صوتية" else "Voice message") else (if (isArabic) "الملف غير موجود" else "File unavailable")
+            textSize = 10f
+            setTextColor(textMutedColor())
+        }
+        details.addView(wave)
+        details.addView(time)
+        bubble.addView(play)
+        bubble.addView(details)
+        play.setOnClickListener {
+            if (!file.exists()) {
+                Toast.makeText(this, if (isArabic) "ملف الرسالة الصوتية غير موجود" else "Voice message file not found", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            try {
+                val player = MediaPlayer()
+                player.setDataSource(file.absolutePath)
+                player.setOnPreparedListener { mp ->
+                    mp.start()
+                    play.text = "Ⅱ"
+                    time.text = String.format(Locale.US, "%02d:%02d", mp.duration / 60000, (mp.duration / 1000) % 60)
+                }
+                player.setOnCompletionListener { mp ->
+                    play.text = "▶"
+                    time.text = String.format(Locale.US, "%02d:%02d", mp.duration / 60000, (mp.duration / 1000) % 60)
+                    mp.release()
+                }
+                player.setOnErrorListener { mp, _, _ -> play.text = "▶"; mp.release(); true }
+                player.prepareAsync()
+                play.text = "…"
+            } catch (_: Exception) {
+                play.text = "▶"
+                Toast.makeText(this, if (isArabic) "تعذر تشغيل الرسالة الصوتية" else "Could not play voice message", Toast.LENGTH_SHORT).show()
+            }
+        }
+        return LinearLayout(this).apply {
+            gravity = Gravity.END
+            addView(bubble)
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
         }
     }
 
