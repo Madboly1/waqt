@@ -194,6 +194,35 @@ class MainActivity : AppCompatActivity() {
     private lateinit var gtaRadialOverlayView: GTARadialWheelView
     private lateinit var floatingAIChatBubble: FrameLayout
 
+    private var activeJournalMediaDateKey: String = ""
+    private var journalAudioRecorder: MediaRecorder? = null
+    private var journalAudioFile: java.io.File? = null
+    private var isRecordingJournalAudio: Boolean = false
+
+    private val journalImagePickerLauncher = registerForActivityResult(
+        ActivityResultContracts.OpenDocument()
+    ) { uri: Uri? ->
+        if (uri != null && activeJournalMediaDateKey.isNotBlank()) {
+            try {
+                contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                val prefs = getSharedPreferences("waqt_daily_journal_media", Context.MODE_PRIVATE)
+                val current = try { org.json.JSONArray(prefs.getString(activeJournalMediaDateKey, "[]") ?: "[]") } catch (_: Exception) { org.json.JSONArray() }
+                current.put(org.json.JSONObject().put("type", "image").put("uri", uri.toString()).put("name", getFileNameFromUri(uri)))
+                prefs.edit().putString(activeJournalMediaDateKey, current.toString()).apply()
+                showDailyJournalEntryPage(activeJournalMediaDateKey)
+            } catch (e: Exception) {
+                Toast.makeText(this, if (isArabic) "تعذر إرفاق الصورة" else "Could not attach image", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private val journalAudioPermissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { granted ->
+        if (granted) startJournalAudioRecording()
+        else Toast.makeText(this, if (isArabic) "لازم تسمح بالميكروفون لتسجيل الصوت" else "Microphone permission is needed", Toast.LENGTH_SHORT).show()
+    }
+
     private val noteImagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.OpenDocument()
     ) { uri: Uri? ->
@@ -1073,23 +1102,45 @@ class MainActivity : AppCompatActivity() {
 
     private fun geminiKey(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).getString("gemini_api_key", "") ?: ""
 
-    private fun geminiModel(): String = GeminiClient.DEFAULT_MODEL
+    private fun geminiModel(): String = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        .getString("gemini_model", GeminiClient.DEFAULT_MODEL) ?: GeminiClient.DEFAULT_MODEL
 
     private fun showGeminiKeyDialog(onSaved: (() -> Unit)? = null) {
         val prefs = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        val panel = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(22), dp(8), dp(22), dp(4))
+        }
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "مفتاح API" else "API key"
+            textSize = 13f; setTextColor(textPrimaryColor())
+        })
         val et = EditText(this).apply {
             hint = if (isArabic) "الصق مفتاح Gemini هنا" else "Paste your Gemini API key"
-            setText(geminiKey())
-            setSingleLine(true)
-            setPadding(dp(24), dp(16), dp(24), dp(16))
+            setText(geminiKey()); setSingleLine(true)
+            inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+            setPadding(dp(14), dp(12), dp(14), dp(12))
         }
+        panel.addView(et)
+        panel.addView(TextView(this).apply {
+            text = if (isArabic) "موديل الذكاء الاصطناعي" else "AI model"
+            textSize = 13f; setTextColor(textPrimaryColor()); setPadding(0, dp(14), 0, dp(4))
+        })
+        val models = listOf(GeminiClient.DEFAULT_MODEL, GeminiClient.FALLBACK_MODEL)
+        val spinner = Spinner(this)
+        spinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, models)
+        spinner.setSelection(models.indexOf(geminiModel()).coerceAtLeast(0))
+        panel.addView(spinner)
         AlertDialog.Builder(this)
-            .setTitle(if (isArabic) "🔑 مفتاح Gemini" else "🔑 Gemini API key")
-            .setMessage(if (isArabic) "مجاني من aistudio.google.com/apikey — المفتاح بيتحفظ على موبايلك بس." else "Free at aistudio.google.com/apikey. Stored on this device only.")
-            .setView(et)
+            .setTitle(if (isArabic) "إعدادات المساعد الذكي" else "AI assistant settings")
+            .setMessage(if (isArabic) "المفتاح بيتحفظ على موبايلك فقط. تقدر تغيّر الموديل من هنا." else "Your key stays on this device. Choose the model here.")
+            .setView(panel)
             .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
-                prefs.edit().putString("gemini_api_key", et.text.toString().trim()).apply()
-                Toast.makeText(this, if (isArabic) "✅ اتحفظ المفتاح" else "Saved", Toast.LENGTH_SHORT).show()
+                prefs.edit()
+                    .putString("gemini_api_key", et.text.toString().trim())
+                    .putString("gemini_model", models[spinner.selectedItemPosition.coerceIn(0, models.lastIndex)])
+                    .apply()
+                Toast.makeText(this, if (isArabic) "✅ اتحفظت إعدادات المساعد" else "Assistant settings saved", Toast.LENGTH_SHORT).show()
                 onSaved?.invoke()
             }
             .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
@@ -1177,6 +1228,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"add_task","title":"عنوان واضح وقابل للتنفيذ","priority":"high|medium|low","hour":0-23,"minute":0-59,"day_offset":0}
 {"type":"add_habit","title":"اسم العادة","category":"health|study|religion|sports","priority":"high|medium|low","hour":0-23,"minute":0-59,"has_reminder":true,"target_value":1,"target_unit":"صفحة أو دقيقة أو كوب"}
 {"type":"complete_task","title":"جزء مميز من عنوان مهمة موجودة"}
+{"type":"delete_task","title":"جزء مميز من عنوان المهمة — يتطلب تأكيد المستخدم"}
+{"type":"delete_habit","title":"جزء مميز من اسم العادة — يتطلب تأكيد المستخدم"}
+{"type":"delete_note","title":"عنوان الملاحظة — يتطلب تأكيد المستخدم"}
 {"type":"add_note","title":"عنوان","content":"المحتوى"}
 {"type":"save_journal_entry","date":"yyyy-MM-dd","content":"نص اليوميات"}
 {"type":"complete_habit","title":"جزء مميز من اسم العادة"}
@@ -1338,7 +1392,7 @@ class MainActivity : AppCompatActivity() {
         val message = userText.trim().lowercase(Locale.ROOT)
         if (message.isBlank()) return false
         val directIntent = listOf(
-            "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "حوّلها لمهام", "حولها لمهام",
+            "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "add habit", "create a habit", "add this habit", "save as habit",
@@ -1414,6 +1468,41 @@ class MainActivity : AppCompatActivity() {
                     if (hit != null) {
                         ReminderRepository.addOrUpdateItem(this, hit.copy(isCompletedToday = true, completionPercentage = 100, lastCompletedEpochDay = today))
                         note = "✅ خلّصت: ${hit.title}"
+                    }
+                }
+                "delete_task", "delete_habit" -> {
+                    val q = a.optString("title").trim()
+                    val wantHabit = a.optString("type") == "delete_habit"
+                    val hit = ReminderRepository.getAllItems(this).firstOrNull {
+                        it.isHabit == wantHabit && q.isNotBlank() && it.title.contains(q, ignoreCase = true)
+                    }
+                    if (hit != null) {
+                        AlertDialog.Builder(this)
+                            .setTitle(if (isArabic) "تأكيد الحذف" else "Confirm deletion")
+                            .setMessage(if (isArabic) "المساعد بيطلب حذف «${hit.title}». متأكد؟" else "The assistant wants to delete “${hit.title}”. Continue?")
+                            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+                            .setPositiveButton(if (isArabic) "حذف" else "Delete") { _, _ ->
+                                ReminderRepository.deleteItem(this, hit.id)
+                                AlarmScheduler.cancelAlarm(this, hit.id)
+                                Toast.makeText(this, if (isArabic) "تم حذف ${hit.title}" else "Deleted ${hit.title}", Toast.LENGTH_SHORT).show()
+                                renderCurrentTab()
+                            }.show()
+                        note = "⚠️ طلبت تأكيد حذف: ${hit.title}"
+                    } else note = if (isArabic) "ملقتش عنصر بالاسم ده." else "I couldn't find that item."
+                }
+                "delete_note" -> {
+                    val q = a.optString("title").trim()
+                    val hit = ReminderRepository.getAllNotes(this).firstOrNull { q.isNotBlank() && (it.title.contains(q, true) || it.content.contains(q, true)) }
+                    if (hit != null) {
+                        AlertDialog.Builder(this)
+                            .setTitle(if (isArabic) "تأكيد حذف الملاحظة" else "Confirm note deletion")
+                            .setMessage(if (isArabic) "تحذف «${hit.title}»؟" else "Delete “${hit.title}”?")
+                            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+                            .setPositiveButton(if (isArabic) "حذف" else "Delete") { _, _ ->
+                                ReminderRepository.deleteNote(this, hit.id)
+                                renderCurrentTab()
+                            }.show()
+                        note = "⚠️ طلبت تأكيد حذف الملاحظة: ${hit.title}"
                     }
                 }
                 "add_note" -> {
@@ -3505,7 +3594,65 @@ class MainActivity : AppCompatActivity() {
         return outer
     }
 
+    private fun journalMediaPrefs() = getSharedPreferences("waqt_daily_journal_media", Context.MODE_PRIVATE)
+
+    private fun readJournalMedia(dateKey: String): org.json.JSONArray =
+        try { org.json.JSONArray(journalMediaPrefs().getString(dateKey, "[]") ?: "[]") } catch (_: Exception) { org.json.JSONArray() }
+
+    private fun startJournalAudioRecording() {
+        if (isRecordingJournalAudio) return
+        try {
+            val dir = java.io.File(filesDir, "journal_audio").apply { mkdirs() }
+            val file = java.io.File(dir, "journal_${activeJournalMediaDateKey}_${System.currentTimeMillis()}.m4a")
+            val recorder = if (Build.VERSION.SDK_INT >= 31) MediaRecorder(this) else @Suppress("DEPRECATION") MediaRecorder()
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            recorder.setAudioEncodingBitRate(96000)
+            recorder.setAudioSamplingRate(44100)
+            recorder.setOutputFile(file.absolutePath)
+            recorder.prepare()
+            recorder.start()
+            journalAudioRecorder = recorder
+            journalAudioFile = file
+            isRecordingJournalAudio = true
+            showDailyJournalEntryPage(activeJournalMediaDateKey)
+        } catch (e: Exception) {
+            try { journalAudioRecorder?.release() } catch (_: Exception) {}
+            journalAudioRecorder = null
+            journalAudioFile?.delete()
+            journalAudioFile = null
+            isRecordingJournalAudio = false
+            Toast.makeText(this, if (isArabic) "فشل بدء التسجيل الصوتي" else "Could not start recording", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun stopJournalAudioRecording() {
+        val recorder = journalAudioRecorder ?: return
+        try {
+            recorder.stop()
+            val file = journalAudioFile
+            if (file != null && file.exists() && file.length() > 0L) {
+                val media = readJournalMedia(activeJournalMediaDateKey)
+                media.put(org.json.JSONObject().put("type", "audio").put("path", file.absolutePath)
+                    .put("name", file.name).put("duration", ""))
+                journalMediaPrefs().edit().putString(activeJournalMediaDateKey, media.toString()).apply()
+                Toast.makeText(this, if (isArabic) "تم حفظ التسجيل الصوتي في يومياتك" else "Voice recording saved", Toast.LENGTH_SHORT).show()
+            }
+        } catch (_: Exception) {
+            journalAudioFile?.delete()
+            Toast.makeText(this, if (isArabic) "التسجيل لم يكتمل، حاول مرة تانية" else "Recording did not complete", Toast.LENGTH_SHORT).show()
+        } finally {
+            try { recorder.reset(); recorder.release() } catch (_: Exception) {}
+            journalAudioRecorder = null
+            journalAudioFile = null
+            isRecordingJournalAudio = false
+            showDailyJournalEntryPage(activeJournalMediaDateKey)
+        }
+    }
+
     private fun showDailyJournalEntryPage(dateKey: String) {
+        activeJournalMediaDateKey = dateKey
         val prefs = getDiaryPreferences()
         val existingText = prefs.getString(dateKey, "") ?: ""
         val date = try {
@@ -3517,8 +3664,6 @@ class MainActivity : AppCompatActivity() {
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createGlassCardDrawable(true, false)
-            // Reserve space for WAQT's persistent bottom navigation so the
-            // save action never sits underneath the tab bar.
             setPadding(dp(16), dp(12), dp(16), dp(88))
             clipToPadding = false
         }
@@ -3526,7 +3671,10 @@ class MainActivity : AppCompatActivity() {
         toolbar.addView(TextView(this).apply {
             text = "‹"; textSize = 30f; gravity = Gravity.CENTER
             setTextColor(textPrimaryColor()); layoutParams = LinearLayout.LayoutParams(dp(44), dp(48))
-            setOnClickListener { notesSubTab = 1; renderCurrentTab() }
+            setOnClickListener {
+                if (isRecordingJournalAudio) stopJournalAudioRecording()
+                notesSubTab = 1; renderCurrentTab()
+            }
         })
         toolbar.addView(TextView(this).apply {
             text = date; textSize = 16f; setTypeface(typeface, Typeface.BOLD)
@@ -3539,17 +3687,96 @@ class MainActivity : AppCompatActivity() {
             setText(existingText)
             setTextColor(textPrimaryColor()); setHintTextColor(textMutedColor())
             textSize = 16f; gravity = Gravity.TOP or Gravity.START
-            minLines = 10
+            minLines = 7
             background = createGlass3DDrawable(dp(18))
             setPadding(dp(16), dp(16), dp(16), dp(16))
         }
         page.addView(editor, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f).apply {
-            topMargin = dp(12); bottomMargin = dp(12)
+            topMargin = dp(12); bottomMargin = dp(8)
         })
-        // Keep long entries scrollable while the save button remains reachable.
         editor.isVerticalScrollBarEnabled = true
         editor.overScrollMode = View.OVER_SCROLL_IF_CONTENT_SCROLLS
-        val save = Button(this).apply {
+
+        val mediaHeader = TextView(this).apply {
+            text = if (isArabic) "المرفقات" else "Attachments"
+            textSize = 13f; setTypeface(typeface, Typeface.BOLD); setTextColor(textPrimaryColor())
+            setPadding(dp(2), dp(4), dp(2), dp(4))
+        }
+        page.addView(mediaHeader)
+        val mediaList = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        fun refreshMediaList() {
+            mediaList.removeAllViews()
+            val items = readJournalMedia(dateKey)
+            for (i in 0 until items.length()) {
+                val item = items.optJSONObject(i) ?: continue
+                val isImage = item.optString("type") == "image"
+                val path = item.optString("path")
+                val uriText = item.optString("uri")
+                val label = item.optString("name").ifBlank { if (isImage) "صورة" else "تسجيل صوتي" }
+                val row = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+                    background = createPillDrawable(bgElevatedColor(), dp(12), null)
+                    setPadding(dp(10), dp(7), dp(10), dp(7))
+                    layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(5) }
+                }
+                row.addView(TextView(this).apply {
+                    text = (if (isImage) "🖼  " else "🎙  ") + label
+                    textSize = 12f; setTextColor(textPrimaryColor()); maxLines = 1
+                    ellipsize = android.text.TextUtils.TruncateAt.END
+                    layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+                })
+                if (isImage || path.isNotBlank()) row.addView(TextView(this).apply {
+                    text = if (isImage) "فتح" else "▶"
+                    textSize = 13f; setTextColor(accentTealColor()); setPadding(dp(8), dp(4), dp(8), dp(4))
+                    setOnClickListener {
+                        try {
+                            val uri = if (isImage) Uri.parse(uriText) else androidx.core.content.FileProvider.getUriForFile(this@MainActivity, "$packageName.fileprovider", java.io.File(path))
+                            startActivity(Intent(Intent.ACTION_VIEW).setDataAndType(uri, if (isImage) "image/*" else "audio/*").addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION))
+                        } catch (_: Exception) {
+                            if (!isImage && path.isNotBlank()) {
+                                try { MediaPlayer().apply { setDataSource(path); setOnCompletionListener { it.release() }; prepare(); start() } } catch (_: Exception) {}
+                            } else Toast.makeText(this@MainActivity, "تعذر فتح المرفق", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                })
+                row.addView(TextView(this).apply {
+                    text = "×"; textSize = 19f; setTextColor(Color.parseColor("#FFFF8A8A")); setPadding(dp(8), 0, dp(4), 0)
+                    setOnClickListener {
+                        val updated = org.json.JSONArray()
+                        for (j in 0 until items.length()) if (j != i) updated.put(items.getJSONObject(j))
+                        journalMediaPrefs().edit().putString(dateKey, updated.toString()).apply()
+                        if (!isImage && path.isNotBlank()) try { java.io.File(path).delete() } catch (_: Exception) {}
+                        refreshMediaList()
+                    }
+                })
+                mediaList.addView(row)
+            }
+            if (items.length() == 0) mediaList.addView(TextView(this).apply {
+                text = if (isArabic) "لسه مفيش مرفقات لليوم ده" else "No attachments yet"
+                textSize = 11f; setTextColor(textMutedColor())
+            })
+        }
+        page.addView(mediaList)
+        refreshMediaList()
+
+        val actions = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        actions.addView(createSettingsActionButton(if (isArabic) "إضافة صورة" else "Add image", "🖼") {
+            journalImagePickerLauncher.launch(arrayOf("image/*"))
+        }, LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(6) })
+        actions.addView(createSettingsActionButton(
+            if (isRecordingJournalAudio) (if (isArabic) "إيقاف التسجيل" else "Stop recording") else (if (isArabic) "تسجيل صوت" else "Record voice"),
+            if (isRecordingJournalAudio) "■" else "🎙"
+        ) {
+            if (isRecordingJournalAudio) stopJournalAudioRecording()
+            else {
+                activeJournalMediaDateKey = dateKey
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) startJournalAudioRecording()
+                else journalAudioPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            }
+        }, LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginStart = dp(6) })
+        page.addView(actions, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(46)).apply { topMargin = dp(6); bottomMargin = dp(6) })
+
+        page.addView(Button(this).apply {
             text = if (isArabic) "حفظ يومياتي" else "Save journal"
             isAllCaps = false; setTextColor(Color.parseColor("#0B1417"))
             backgroundTintList = ColorStateList.valueOf(accentTealColor())
@@ -3561,8 +3788,7 @@ class MainActivity : AppCompatActivity() {
                 notesSubTab = 1
                 renderCurrentTab()
             }
-        }
-        page.addView(save, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)))
+        }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(46)))
         tabContentHost.removeAllViews()
         tabContentHost.addView(page, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))
     }
@@ -4893,6 +5119,20 @@ class MainActivity : AppCompatActivity() {
         appearanceCard.addView(appearanceActions)
         body.addView(appearanceCard)
 
+        body.addView(createAccordionSection(if (isArabic) "✨ إعدادات المساعد الذكي" else "✨ AI Assistant") { container ->
+            container.addView(TextView(this@MainActivity).apply {
+                text = if (isArabic) "إعدادات المساعد مستقلة عن باقي التطبيق. غيّر مفتاح Gemini والموديل من هنا أو من أيقونة المفتاح داخل المحادثة." else "Assistant settings are separate from the rest of the app. Manage Gemini key and model here or from the key icon in chat."
+                textSize = 12f; setTextColor(textMutedColor()); setPadding(dp(8), dp(4), dp(8), dp(10))
+            })
+            container.addView(createSettingsActionButton(if (isArabic) "مفتاح API واختيار الموديل" else "API key & model", "🔑") {
+                showGeminiKeyDialog()
+            })
+            container.addView(TextView(this@MainActivity).apply {
+                text = if (isArabic) "الموديل الحالي: ${geminiModel()}" else "Current model: ${geminiModel()}"
+                textSize = 11f; setTextColor(textMutedColor()); setPadding(dp(12), dp(8), dp(12), dp(4))
+            })
+        })
+
         body.addView(createAccordionSection(if (isArabic) "🍅 التركيز والاستراحة" else "🍅 Focus & Breaks") { container ->
             fun addDurationRow(label: String, value: Int, onChoose: () -> Unit) {
                 val row = LinearLayout(this@MainActivity).apply {
@@ -5009,16 +5249,9 @@ class MainActivity : AppCompatActivity() {
                 val stamp = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US).format(Date())
                 backupExportLauncher.launch("waqt-backup-$stamp.json")
             })
-            container.addView(createSettingsActionButton(
-                if (isArabic) "✨ مفتاح مساعد Gemini" else "✨ Gemini assistant key",
-                "🔑"
-            ) {
-                showGeminiKeyDialog()
-            })
             container.addView(TextView(this@MainActivity).apply {
-                text = if (isArabic) "🤖 المحرك: Gemini Flash Lite (اختيار تلقائي ثابت)" else "🤖 Engine: Gemini Flash Lite (fixed automatic selection)"
-                setTextColor(textMutedColor())
-                textSize = 12f
+                text = if (isArabic) "إعدادات المساعد الذكي موجودة في قسم مستقل أعلى هذه الصفحة." else "AI assistant settings are in their own section above."
+                setTextColor(textMutedColor()); textSize = 12f
                 setPadding(dp(12), dp(10), dp(12), dp(10))
             })
             container.addView(createSettingsActionButton(
