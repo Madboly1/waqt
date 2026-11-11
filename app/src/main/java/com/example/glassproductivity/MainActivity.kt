@@ -1282,6 +1282,48 @@ class MainActivity : AppCompatActivity() {
 
     """.trimIndent()
 
+    /**
+     * Extracts the structured response even when Gemini wraps its JSON in
+     * Markdown fences or adds a short sentence before/after the object.
+     * Braces inside quoted strings are ignored.
+     */
+    private fun extractAssistantResponseObject(raw: String): org.json.JSONObject? {
+        val text = raw.trim()
+        if (text.isEmpty()) return null
+
+        try {
+            return org.json.JSONObject(text.removePrefix("```json").removePrefix("```").removeSuffix("```").trim())
+        } catch (_: Exception) { }
+
+        val start = text.indexOf('{')
+        if (start < 0) return null
+
+        var depth = 0
+        var inString = false
+        var escaped = false
+        for (index in start until text.length) {
+            val ch = text[index]
+            if (inString) {
+                if (escaped) escaped = false
+                else if (ch == '\\\\') escaped = true
+                else if (ch == '"') inString = false
+                continue
+            }
+            when (ch) {
+                '"' -> inString = true
+                '{' -> depth++
+                '}' -> {
+                    depth--
+                    if (depth == 0) {
+                        val candidate = text.substring(start, index + 1)
+                        return try { org.json.JSONObject(candidate) } catch (_: Exception) { null }
+                    }
+                }
+            }
+        }
+        return null
+    }
+
     private fun sendToAssistant(userText: String?, box: LinearLayout, scroll: ScrollView, media: GeminiClient.MediaInput? = null) {
         if (geminiKey().isBlank()) {
             if (media != null) {
@@ -1319,12 +1361,11 @@ class MainActivity : AppCompatActivity() {
             result.onSuccess { raw ->
                 var replyText = raw
                 var actions: org.json.JSONArray? = null
-                try {
-                    val clean = raw.trim().removePrefix("```json").removePrefix("```").removeSuffix("```").trim()
-                    val obj = org.json.JSONObject(clean)
-                    replyText = obj.optString("reply", raw)
-                    actions = obj.optJSONArray("actions")
-                } catch (_: Exception) {}
+                val structuredResponse = extractAssistantResponseObject(raw)
+                if (structuredResponse != null) {
+                    replyText = structuredResponse.optString("reply").takeIf { it.isNotBlank() } ?: raw
+                    actions = structuredResponse.optJSONArray("actions")
+                }
                 geminiHistory.add("user" to (cleanUserText.ifBlank { "ابدأ بتقييم يومي الحالي." }))
                 geminiHistory.add("model" to replyText)
                 while (geminiHistory.size > 6) geminiHistory.removeAt(0)
@@ -2060,6 +2101,9 @@ class MainActivity : AppCompatActivity() {
                     } else {
                         note = "⚠️ اختار الملاحظات أو اليوميات."
                     }
+                }
+                else -> {
+                    note = if (isArabic) "⚠️ المساعد أرسل أمرًا غير مدعوم: ${a.optString("type", "غير معروف")}" else "⚠️ Unsupported assistant action: ${a.optString("type", "unknown")}"
                 }
             }
             if (note != null) {
