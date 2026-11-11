@@ -1260,7 +1260,9 @@ class MainActivity : AppCompatActivity() {
 {"type":"set_break_duration","minutes":5}
 {"type":"set_tick_tock","enabled":true}
 {"type":"choose_alarm_ringtone"
-{"type":"choose_custom_audio"}}
+{"type":"choose_custom_audio"}
+{"type":"preview_custom_audio"}
+{"type":"stop_custom_audio"}}
 {"type":"set_goal","minutes":120}
 {"type":"set_ambient_sound","sound":"off|rain|waves|fire|forest|water|library|wind|night"}
 {"type":"set_ambient_volume","volume":0-100}
@@ -1427,7 +1429,7 @@ class MainActivity : AppCompatActivity() {
         val directIntent = listOf(
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
-            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت", "غير المظهر", "غير الثيم", "الوضع الداكن", "الوضع الفاتح", "غير اللغة", "خلي التطبيق عربي", "خلي التطبيق انجليزي", "حوّل للعربي", "حوّل للإنجليزي", "غير مدة التركيز", "مدة التركيز", "غير مدة الراحة", "مدة الراحة", "شغل صوت الساعة", "شغل تيك تاك", "وقف تيك تاك", "صوت تيك تاك", "غير نغمة المنبه", "غيّر نغمة المنبه", "اختار نغمة المنبه", "اختار صوت المنبه", "change alarm ringtone", "choose alarm sound", "اختار صوت من الجهاز", "اختار ملف صوتي", "ضيف صوت من موبايلي", "اختيار صوت للتركيز", "choose local audio", "pick audio from device",
+            "شغل صوت", "شغّل صوت", "شغل المطر", "شغل صوت المطر", "شغل الأمواج", "شغل صوت البحر", "شغل صوت النار", "شغل الغابة", "شغل أصوات الليل", "وقف الصوت", "اقفل الصوت", "اطفي الصوت", "غير مستوى الصوت", "قلل الصوت", "علي الصوت", "زوّد الصوت", "زود الصوت", "غير المظهر", "غير الثيم", "الوضع الداكن", "الوضع الفاتح", "غير اللغة", "خلي التطبيق عربي", "خلي التطبيق انجليزي", "حوّل للعربي", "حوّل للإنجليزي", "غير مدة التركيز", "مدة التركيز", "غير مدة الراحة", "مدة الراحة", "شغل صوت الساعة", "شغل تيك تاك", "وقف تيك تاك", "صوت تيك تاك", "غير نغمة المنبه", "غيّر نغمة المنبه", "اختار نغمة المنبه", "اختار صوت المنبه", "change alarm ringtone", "choose alarm sound", "اختار صوت من الجهاز", "اختار ملف صوتي", "ضيف صوت من موبايلي", "اختيار صوت للتركيز", "choose local audio", "pick audio from device", "شغل الصوت المخصص", "شغل الصوت اللي اخترته", "عاين الصوت المختار", "معاينة الصوت", "وقف الصوت المخصص", "وقف صوت التركيز", "preview custom audio", "play selected audio", "stop custom audio",
             "play rain", "play ocean", "play ambient sound", "stop ambient sound", "change volume",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
@@ -1880,6 +1882,18 @@ class MainActivity : AppCompatActivity() {
                         isPickingAudioFromConsole = false
                         note = if (isArabic) "⚠️ مش قادر أفتح ملفات الصوت على الجهاز." else "⚠️ Could not open audio files on this device."
                     }
+                }
+                "preview_custom_audio" -> {
+                    if (customAudioUri == null) {
+                        note = if (isArabic) "⚠️ اختار ملف صوتي الأول، وبعدها أقدر أشغّله لك." else "⚠️ Choose an audio file first, then I can play it for you."
+                    } else {
+                        playCustomAudio()
+                        note = if (isArabic) "▶️ شغّلت معاينة الصوت المخصص." else "▶️ Playing your selected custom audio."
+                    }
+                }
+                "stop_custom_audio" -> {
+                    stopCustomAudio()
+                    note = if (isArabic) "⏹️ وقفت الصوت المخصص." else "⏹️ Stopped the custom audio."
                 }
                 "choose_alarm_ringtone" -> {
                     try {
