@@ -11,7 +11,7 @@ import kotlin.concurrent.thread
 
 /** Gemini is primary; text requests fall back to Groq and then OpenRouter. */
 object GeminiClient {
-    data class MediaInput(val bytes: ByteArray, val mimeType: String, val label: String)
+    data class MediaInput(val bytes: ByteArray, val mimeType: String, val label: String, val localPath: String? = null)
     const val DEFAULT_MODEL = "gemini-3.5-flash-lite"
     const val FALLBACK_MODEL = "gemini-3.8-flash"
     const val GROQ_MODEL = "openai/gpt-oss-120b"
@@ -42,7 +42,7 @@ object GeminiClient {
                 } else {
                     var result: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
                     for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
-                        result = callGemini(geminiKey, candidate, systemPrompt, history, media)
+                        result = retryTransient { callGemini(geminiKey, candidate, systemPrompt, history, media) }
                         if (result.isSuccess || !isRetryable(result.exceptionOrNull())) break
                     }
                     attempts += Attempt("Gemini", result)
@@ -51,7 +51,7 @@ object GeminiClient {
                 if (geminiKey.isNotBlank()) {
                     var result: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
                     for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
-                        result = callGemini(geminiKey, candidate, systemPrompt, history, null)
+                        result = retryTransient { callGemini(geminiKey, candidate, systemPrompt, history, null) }
                         if (result.isSuccess || !isRetryable(result.exceptionOrNull())) break
                     }
                     attempts += Attempt("Gemini", result)
@@ -61,10 +61,10 @@ object GeminiClient {
                     }
                 }
                 if (groqKey.isNotBlank()) {
-                    val result = callOpenAiCompatible(
+                    val result = retryTransient { callOpenAiCompatible(
                         "https://api.groq.com/openai/v1/chat/completions", groqKey,
                         GROQ_MODEL, systemPrompt, history, "Groq"
-                    )
+                    ) }
                     attempts += Attempt("Groq", result)
                     if (result.isSuccess) {
                         main.post { callback(result) }
@@ -72,10 +72,10 @@ object GeminiClient {
                     }
                 }
                 if (routerKey.isNotBlank()) {
-                    val result = callOpenAiCompatible(
+                    val result = retryTransient { callOpenAiCompatible(
                         "https://openrouter.ai/api/v1/chat/completions", routerKey,
                         OPENROUTER_MODEL, systemPrompt, history, "OpenRouter"
-                    )
+                    ) }
                     attempts += Attempt("OpenRouter", result)
                     if (result.isSuccess) {
                         main.post { callback(result) }
@@ -89,6 +89,23 @@ object GeminiClient {
             }.ifBlank { "No provider API key is configured." }
             main.post { callback(Result.failure(Exception(details))) }
         }
+    }
+
+
+    /** Retry transient DNS/socket failures once; provider errors (4xx) are never retried. */
+    private fun retryTransient(request: () -> Result<String>): Result<String> {
+        var result = request()
+        repeat(1) {
+            val error = result.exceptionOrNull()
+            val transient = error is java.net.UnknownHostException ||
+                error is java.net.ConnectException ||
+                error is java.net.SocketTimeoutException ||
+                (error is java.net.SocketException && error.message.orEmpty().contains("abort", ignoreCase = true))
+            if (!transient) return result
+            try { Thread.sleep(650L) } catch (_: InterruptedException) { Thread.currentThread().interrupt(); return result }
+            result = request()
+        }
+        return result
     }
 
     private fun isRetryable(error: Throwable?): Boolean =
@@ -129,8 +146,11 @@ object GeminiClient {
 
             connection = (URL("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent")
                 .openConnection() as HttpURLConnection).apply {
-                requestMethod = "POST"; connectTimeout = 10000; readTimeout = 28000
+                requestMethod = "POST"; connectTimeout = 20000; readTimeout = 45000
                 doOutput = true; useCaches = false
+                instanceFollowRedirects = true
+                setRequestProperty("Connection", "close")
+                setRequestProperty("User-Agent", "WAQT-Android/5.6.27")
                 setRequestProperty("Content-Type", "application/json; charset=utf-8")
                 setRequestProperty("Accept", "application/json")
                 setRequestProperty("x-goog-api-key", apiKey)
