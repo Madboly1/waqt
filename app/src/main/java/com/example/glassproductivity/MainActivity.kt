@@ -1449,8 +1449,22 @@ class MainActivity : AppCompatActivity() {
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
             "فعّل الفحص التلقائي للتحديثات", "شغل الفحص التلقائي للتحديثات", "وقف الفحص التلقائي للتحديثات", "عطّل الفحص التلقائي للتحديثات", "افحص التحديثات", "افحص وجود تحديث", "check for updates", "enable automatic updates check", "disable automatic updates check", "turn on update checks", "turn off update checks", "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ", "افتح الجولة التعريفية", "افتح شرح التطبيق", "اعرض الجولة", "صدّر نسخة احتياطية", "صدر نسخة احتياطية", "اعمل نسخة احتياطية", "export backup", "open app tour",
+            // Task and habit lifecycle commands
             "add habit", "create a habit", "add this habit", "save as habit",
-            "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
+            "كمل المهمة", "كمّل المهمة", "خلص المهمة", "انه المهمة", "أنهِ المهمة", "علّم المهمة", "علم المهمة", "اعتبر المهمة خلصت",
+            "كمل العادة", "كمّل العادة", "خلص العادة", "انه العادة", "أنهِ العادة", "سجل إنجاز العادة", "سجل انجاز العادة",
+            "رجع المهمة", "رجّع المهمة", "افتح المهمة تاني", "إعادة فتح المهمة", "اعادة فتح المهمة",
+            "حدث تقدم المهمة", "حدّث تقدم المهمة", "نسبة إنجاز المهمة", "نسبة انجاز المهمة", "تقدم العادة", "حدّث تقدم العادة", "حدث تقدم العادة",
+            "عدل المهمة", "عدّل المهمة", "عدل العادة", "عدّل العادة", "غير اسم المهمة", "غير اسم العادة",
+            "احذف المهمة", "امسح المهمة", "احذف العادة", "امسح العادة", "احذف الملاحظة", "امسح الملاحظة",
+            "ضيف ملاحظة", "أضف ملاحظة", "احفظ ملاحظة", "ثبت الملاحظة", "ثبّت الملاحظة", "الغ تثبيت الملاحظة", "ألغ تثبيت الملاحظة", "فك تثبيت الملاحظة",
+            "احفظ يومياتي", "سجل يومياتي", "ضيف تدوينة", "أضف تدوينة", "احفظ تدوينة", "احذف التدوينة", "امسح التدوينة",
+            "حدد هدف التركيز", "ظبط هدف التركيز", "اضبط هدف التركيز", "غير هدف التركيز", "غيّر هدف التركيز",
+            "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan",
+            "complete task", "finish task", "mark task complete", "complete habit", "finish habit", "mark habit complete",
+            "reopen task", "update task", "edit task", "update habit", "edit habit", "set task progress", "set habit progress",
+            "add note", "create note", "update note", "edit note", "pin note", "unpin note", "delete note",
+            "save journal", "save journal entry", "update journal entry", "delete journal entry", "set daily focus goal"
         ).any { message.contains(it) }
         if (directIntent) return true
         val approval = listOf("موافق", "موافقة", "تمام", "اعتمد", "نفذها", "يلا", "yes", "okay", "ok", "approved", "go ahead")
