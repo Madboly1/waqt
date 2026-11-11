@@ -882,8 +882,9 @@ class MainActivity : AppCompatActivity() {
 
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlass3DDrawable(dp(24))
-            setPadding(dp(18), dp(16), dp(18), dp(18))
+            background = createGlass3DDrawable(dp(26))
+            elevation = dp(24).toFloat()
+            setPadding(dp(18), dp(16), dp(18), dp(16))
         }
 
         val header = LinearLayout(this).apply {
@@ -892,9 +893,9 @@ class MainActivity : AppCompatActivity() {
             setPadding(0, 0, 0, dp(10))
         }
         header.addView(TextView(this).apply {
-            text = if (isArabic) "✨ WAQT Mentor | مرشدك الذكي" else "✨ WAQT Mentor | Your AI Coach"
+            text = if (isArabic) "WAQT Mentor" else "WAQT Mentor"
             setTextColor(textPrimaryColor())
-            textSize = 18f
+            textSize = 19f
             setTypeface(typeface, Typeface.BOLD)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         })
@@ -943,7 +944,7 @@ class MainActivity : AppCompatActivity() {
 
         val chatLogContainer = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(330))
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0).apply { weight = 1f }
         }
         val chatScroll = ScrollView(this).apply {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
@@ -1068,10 +1069,28 @@ class MainActivity : AppCompatActivity() {
             if (activeAIChatDialog === dialog) activeAIChatDialog = null
             floatingAIChatBubble.visibility = View.VISIBLE
         }
-        dialog.setContentView(root)
+        val outsideLayer = FrameLayout(this).apply {
+            setBackgroundColor(Color.argb(112, 3, 9, 15))
+            setOnClickListener {
+                if (chatIsRecording) stopChatVoiceRecording(discard = true)
+                dialog.hide()
+                floatingAIChatBubble.visibility = View.VISIBLE
+            }
+            addView(root, FrameLayout.LayoutParams(
+                (resources.displayMetrics.widthPixels * 0.94f).toInt(),
+                (resources.displayMetrics.heightPixels * 0.80f).toInt()
+            ).apply {
+                gravity = Gravity.CENTER
+                leftMargin = dp(10); rightMargin = dp(10)
+            })
+        }
+        root.setOnClickListener { /* Keep taps inside the chat from minimizing it. */ }
+        dialog.setCanceledOnTouchOutside(false)
+        dialog.setContentView(outsideLayer)
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        dialog.window?.setLayout((resources.displayMetrics.widthPixels * 0.94).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
         activeAIChatDialog = dialog
         floatingAIChatBubble.visibility = View.GONE
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
@@ -1221,10 +1240,16 @@ class MainActivity : AppCompatActivity() {
 - لا تكرر مهام المستخدم ولا تفترض أن كل هدف يجب أن يتحول إلى مهام يومية.
 - فرّق بين النقاش، والتعلّم، والتخطيط، وطلب تنفيذ إجراء داخل التطبيق.
 
-قواعد تنفيذ الإجراءات (مهمة جدًا):
-- لا تضف أو تكمل أو تحذف أو تعدّل أي مهمة لمجرد أن المستخدم ذكرها أو ناقشها.
-- عند اقتراح خطة، اعرضها أولًا للمراجعة. لا تنشئ مهامًا إلا إذا طلب المستخدم صراحة إضافة الخطوات إلى WAQT أو وافق بوضوح على خطة سبق عرضها.
-- طلب خطة أو مناقشة هدف لا يعني الموافقة على إنشاء المهام.
+قواعد فهم النية وتنفيذ الإجراءات (مهمة جدًا):
+- افهم الكلام الطبيعي من سياق المحادثة، ولا تشترط أن يستخدم المستخدم صيغة أمر مباشرة أو يقول "نفّذ" حرفيًا.
+- استنتج المقصود من الرسائل السابقة، وضمائر الإشارة مثل "دي/ده/ها"، والردود المختصرة مثل "خليها بكرة" أو "تمام كده"؛ اربطها بآخر موضوع أو عنصر واضح في الحوار.
+- إذا كان المقصود واضحًا بدرجة كافية، نفّذ الإجراء المناسب حتى لو صيغ الكلام كتلميح أو متابعة طبيعية، مثل "عايز أصحى بدري كل يوم" في سياق إعداد عادة، أو "المهمة دي خليها الساعة ٦".
+- إذا كان المستخدم يناقش فكرة أو يسأل عن رأيك أو يطلب خطة فقط، فلا تعتبر ذلك موافقة تلقائية على إنشاء عناصر. اعرض الخطة أولًا.
+- إذا كان هناك أكثر من تفسير معقول أو أكثر من عنصر محتمل، اسأل سؤال توضيح واحدًا بدل التخمين.
+- الردود القصيرة مثل "تمام/ماشي/اعمل كده" تُعد موافقة فقط إذا كان المساعد قد عرض إجراءً محددًا بوضوح في الرسالة السابقة.
+- لا تضف أو تكمل أو تحذف أو تعدّل عنصرًا لمجرد ذكره؛ لكن لا تتجاهل نية تنفيذ واضحة لمجرد أن المستخدم لم يستخدم فعل أمر.
+- عند اقتراح خطة، اعرضها أولًا للمراجعة. لا تنشئ مهامًا لمجرد طلب الخطة؛ نفّذها عندما يوافق المستخدم بوضوح أو يطلب إضافتها.
+- الحذف يظل محتاجًا تأكيدًا صريحًا داخل التطبيق، والتطابق الملتبس يظل محتاجًا توضيحًا.
 - لا تنفذ إجراءً غير متاح لك، ولا تدّعِ أنك نفذته.
 - لا تكرر إضافة مهمة موجودة بالفعل.
 - عند إكمال أو حذف مهمة أو عادة أو ملاحظة، لا تختَر أول نتيجة عشوائيًا. استخدم تطابق الاسم الكامل، أو نتيجة جزئية وحيدة فقط؛ إذا تعددت النتائج اطلب من المستخدم تحديد الاسم.
@@ -1570,9 +1595,22 @@ class MainActivity : AppCompatActivity() {
             "save journal", "save journal entry", "update journal entry", "delete journal entry", "set daily focus goal"
         ).any { message.contains(it) }
         if (directIntent) return true
-        val approval = listOf("موافق", "موافقة", "تمام", "اعتمد", "نفذها", "يلا", "yes", "okay", "ok", "approved", "go ahead")
+        // Natural follow-ups can imply an action when they clearly refer to the active conversation.
+        // The model still has to produce a valid, schema-checked action; destructive actions retain
+        // their in-app confirmation and ambiguous item matches are rejected by their handlers.
+        val contextualIntent = listOf(
+            "خليها", "خليه", "خليهم", "خلي ده", "خلي دي", "بدلها", "بدله", "بدلهم",
+            "انقلها", "انقله", "انقلهم", "قدمها", "أخرها", "اخرها", "زودها", "قللها",
+            "غير معادها", "غير وقتها", "على الساعة", "كل يوم", "يوميًا", "يوميا",
+            "بكرة", "غدا", "النهارده", "النهاردة", "احسبها", "سجلها", "اعتبرها",
+            "فك التثبيت", "ثبتها", "افتحها", "كملها", "خلصتها", "عملتها",
+            "make it", "move it", "change it to", "set it to", "every day",
+            "tomorrow", "today", "mark it", "i did it", "i finished it", "reschedule it"
+        ).any { message.contains(it) }
+        if (contextualIntent) return true
+        val approval = listOf("موافق", "موافقة", "تمام", "اعتمد", "نفذها", "يلا", "yes", "okay", "ok", "approved", "go ahead", "اعمل كده", "اعملها", "نفذ كده")
             .any { message == it || message.startsWith("$it ") }
-        val previousAssistantAskedForApproval = listOf("أحولها لمهام", "أضيفها للمهام", "أضيف الخطوات", "أضيف الخطة", "تحب أضيف", "shall i add", "add these to your tasks")
+        val previousAssistantAskedForApproval = listOf("أحولها لمهام", "أضيفها للمهام", "أضيف الخطوات", "أضيف الخطة", "تحب أضيف", "shall i add", "add these to your tasks", "هل تريد أن أضيف", "تحب أنفذ")
             .any { previousReply.contains(it, ignoreCase = true) }
         return approval && previousAssistantAskedForApproval
     }
@@ -2563,14 +2601,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createAIMessageBubble(text: String): View {
-        return TextView(this).apply {
-            this.text = text
-            setTextColor(textPrimaryColor())
-            textSize = 13f
-            background = createPillDrawable(bgElevatedColor(), dp(14), COLOR_TEAL_DEEP)
-            setPadding(dp(12), dp(10), dp(12), dp(10))
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                bottomMargin = dp(8)
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.TOP or Gravity.START
+            val avatar = TextView(this@MainActivity).apply {
+                text = "✦"
+                textSize = 13f
+                gravity = Gravity.CENTER
+                setTextColor(Color.WHITE)
+                background = GradientDrawable().apply {
+                    shape = GradientDrawable.OVAL
+                    setColor(Color.parseColor("#315B70"))
+                    setStroke(dp(1), Color.parseColor("#668BD0D8"))
+                }
+                layoutParams = LinearLayout.LayoutParams(dp(28), dp(28)).apply { marginEnd = dp(7) }
+            }
+            addView(avatar)
+            addView(TextView(this@MainActivity).apply {
+                this.text = text
+                setTextColor(textPrimaryColor())
+                textSize = 14f
+                setLineSpacing(dp(2).toFloat(), 1.04f)
+                background = GradientDrawable().apply {
+                    setColor(if (isDarkMode) Color.parseColor("#E61A2A35") else Color.parseColor("#F2FFFFFF"))
+                    cornerRadii = floatArrayOf(dp(5).toFloat(),dp(5).toFloat(),dp(18).toFloat(),dp(18).toFloat(),dp(18).toFloat(),dp(18).toFloat(),dp(18).toFloat(),dp(18).toFloat())
+                    setStroke(dp(1), if (isDarkMode) Color.parseColor("#334D8998") else Color.parseColor("#223C7180"))
+                }
+                setPadding(dp(14), dp(11), dp(14), dp(11))
+                maxWidth = (resources.displayMetrics.widthPixels * 0.76f).toInt()
+            })
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                bottomMargin = dp(12)
             }
         }
     }
@@ -2580,15 +2641,20 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.END
             val tv = TextView(this@MainActivity).apply {
                 this.text = text
-                setTextColor(Color.parseColor("#0B1417"))
-                textSize = 13f
-                setTypeface(typeface, Typeface.BOLD)
-                background = createPillDrawable(accentOrangeColor(), dp(14), null)
-                setPadding(dp(12), dp(10), dp(12), dp(10))
+                setTextColor(Color.parseColor("#17130D"))
+                textSize = 14f
+                setTypeface(typeface, Typeface.MEDIUM)
+                setLineSpacing(dp(2).toFloat(), 1.04f)
+                background = GradientDrawable().apply {
+                    setColor(accentOrangeColor())
+                    cornerRadii = floatArrayOf(dp(18).toFloat(),dp(18).toFloat(),dp(5).toFloat(),dp(5).toFloat(),dp(18).toFloat(),dp(18).toFloat(),dp(18).toFloat(),dp(18).toFloat())
+                }
+                setPadding(dp(14), dp(11), dp(14), dp(11))
+                maxWidth = (resources.displayMetrics.widthPixels * 0.78f).toInt()
             }
             addView(tv)
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                bottomMargin = dp(8)
+                bottomMargin = dp(12)
             }
         }
     }
