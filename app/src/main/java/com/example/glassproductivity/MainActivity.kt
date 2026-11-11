@@ -1406,6 +1406,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف", "اضيف", "أضيف", "أضف", "اضف", "سجل", "نفذ", "نفّذ", "احذف", "امسح", "الغ", "ألغ", "عدّل", "عدل", "غيّر", "غير", "حوّلها لمهام", "حولها لمهام",
             "اعمل مهام", "أنشئ مهام", "انشئ مهام", "ضيفها للمهام", "أضفها للمهام", "ابدأ جلسة تركيز",
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
+            "افتح", "افتحلي", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ",
             "add habit", "create a habit", "add this habit", "save as habit",
             "add these tasks", "add them to my tasks", "create the tasks", "add to my tasks", "do it", "execute the plan"
         ).any { message.contains(it) }
