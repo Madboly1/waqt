@@ -177,6 +177,7 @@ class MainActivity : AppCompatActivity() {
     private var chatIsRecording: Boolean = false
     private var chatRecordButton: TextView? = null
     private var chatTts: TextToSpeech? = null
+    private var assistantTtsPlayer: MediaPlayer? = null
     private var lastAssistantReply: String = ""
     private var autoSpeakAssistantReply: Boolean = false
     private val chatHistoryStore by lazy { ChatHistoryStore(this) }
@@ -485,6 +486,9 @@ class MainActivity : AppCompatActivity() {
         previewRingtone?.stop()
         try { chatRecorder?.release() } catch (_: Exception) {}
         chatRecorder = null
+        try { assistantTtsPlayer?.stop() } catch (_: Exception) {}
+        try { assistantTtsPlayer?.release() } catch (_: Exception) {}
+        assistantTtsPlayer = null
         chatTts?.stop()
         chatTts?.shutdown()
         chatTts = null
@@ -837,7 +841,7 @@ class MainActivity : AppCompatActivity() {
                     visibility = View.GONE
                     minimizedDialog.show()
                 } else {
-                    showAIChatCopilotModal()
+                    showAIChatCopilotModal(activeChatId.takeIf { it.isNotBlank() })
                 }
             }
         }
@@ -1131,6 +1135,7 @@ class MainActivity : AppCompatActivity() {
         dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
         dialog.window?.setLayout((resources.displayMetrics.widthPixels * 0.94).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
+        dialog.setCanceledOnTouchOutside(false)
         activeAIChatDialog = dialog
         floatingAIChatBubble.visibility = View.GONE
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
@@ -1777,34 +1782,48 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, if (isArabic) "لسه مفيش رد أقراه" else "No reply to read yet", Toast.LENGTH_SHORT).show()
             return
         }
-        if (chatTts == null) {
-            chatTts = TextToSpeech(this) { status ->
-                if (status == TextToSpeech.SUCCESS) speakWithSelectedAssistantVoice(lastAssistantReply)
-                else Toast.makeText(this, if (isArabic) "تحويل النص لصوت غير متاح على الجهاز" else "Text-to-speech is unavailable", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            speakWithSelectedAssistantVoice(lastAssistantReply)
+        val key = geminiKey().trim()
+        if (key.isBlank()) {
+            Toast.makeText(this, if (isArabic) "الصوت الطبيعي محتاج مفتاح Gemini من زر 🔑" else "Natural voice needs a Gemini API key", Toast.LENGTH_LONG).show()
+            return
         }
-    }
-
-    private fun speakWithSelectedAssistantVoice(text: String) {
-        val tts = chatTts ?: return
-        val locale = if (isArabic) Locale("ar", "EG") else Locale.US
+        try { assistantTtsPlayer?.stop() } catch (_: Exception) {}
+        try { assistantTtsPlayer?.release() } catch (_: Exception) {}
+        assistantTtsPlayer = null
+        Toast.makeText(this, if (isArabic) "بحضّر صوت طبيعي..." else "Generating natural voice...", Toast.LENGTH_SHORT).show()
         val gender = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
             .getString("assistant_voice_gender", "female") ?: "female"
-        val candidates = tts.voices.orEmpty().filter { it.locale.language == locale.language }
-        val matchingVoice = candidates.firstOrNull { voice ->
-            val voiceName = voice.name.lowercase(Locale.ROOT)
-            if (gender == "male") voiceName.contains("male") && !voiceName.contains("female")
-            else voiceName.contains("female")
+        val voice = if (gender == "male") "Puck" else "Kore"
+        GeminiClient.generateSpeech(key, lastAssistantReply, voice) { result ->
+            result.onSuccess { wavBytes ->
+                try {
+                    val folder = java.io.File(cacheDir, "waqt_tts").apply { mkdirs() }
+                    val audioFile = java.io.File(folder, "reply_${System.currentTimeMillis()}.wav")
+                    audioFile.writeBytes(wavBytes)
+                    val player = MediaPlayer()
+                    assistantTtsPlayer = player
+                    player.setDataSource(audioFile.absolutePath)
+                    player.setOnPreparedListener { it.start() }
+                    player.setOnCompletionListener {
+                        it.release()
+                        if (assistantTtsPlayer === it) assistantTtsPlayer = null
+                        audioFile.delete()
+                    }
+                    player.setOnErrorListener { mp, _, _ ->
+                        mp.release()
+                        if (assistantTtsPlayer === mp) assistantTtsPlayer = null
+                        audioFile.delete()
+                        Toast.makeText(this, if (isArabic) "تعذر تشغيل الصوت الناتج" else "Could not play generated audio", Toast.LENGTH_LONG).show()
+                        true
+                    }
+                    player.prepareAsync()
+                } catch (e: Exception) {
+                    Toast.makeText(this, (if (isArabic) "تعذر تشغيل الصوت: " else "Audio playback failed: ") + (e.message ?: ""), Toast.LENGTH_LONG).show()
+                }
+            }.onFailure { error ->
+                Toast.makeText(this, (if (isArabic) "تعذر إنشاء الصوت الطبيعي: " else "Natural voice failed: ") + (error.message ?: "Unknown error"), Toast.LENGTH_LONG).show()
+            }
         }
-        if (matchingVoice != null) {
-            tts.voice = matchingVoice
-        } else {
-            tts.language = locale
-        }
-        tts.setSpeechRate(0.96f)
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "waqt_ai_reply")
     }
 
     private fun shouldAllowAssistantActions(userText: String, previousReply: String): Boolean {
