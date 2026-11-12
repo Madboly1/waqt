@@ -193,7 +193,7 @@ object GeminiClient {
             input.put(JSONObject()
                 .put("type", "audio")
                 .put("data", Base64.encodeToString(media.bytes, Base64.NO_WRAP))
-                .put("mime_type", "audio/mp4"))
+                .put("mime_type", if (media.mimeType == "audio/mp4") "audio/m4a" else media.mimeType))
             val body = JSONObject()
                 .put("model", "gemini-3.8-flash")
                 .put("system_instruction", systemPrompt)
