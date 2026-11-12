@@ -1786,6 +1786,29 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun playAssistantSpeechFile(audioFile: java.io.File) {
+        try {
+            val player = MediaPlayer()
+            assistantTtsPlayer = player
+            player.setDataSource(audioFile.absolutePath)
+            player.setOnPreparedListener { it.start() }
+            player.setOnCompletionListener {
+                it.release()
+                if (assistantTtsPlayer === it) assistantTtsPlayer = null
+            }
+            player.setOnErrorListener { mp, _, _ ->
+                mp.release()
+                if (assistantTtsPlayer === mp) assistantTtsPlayer = null
+                audioFile.delete()
+                Toast.makeText(this, if (isArabic) "تعذر تشغيل الصوت الناتج" else "Could not play generated audio", Toast.LENGTH_LONG).show()
+                true
+            }
+            player.prepareAsync()
+        } catch (e: Exception) {
+            Toast.makeText(this, (if (isArabic) "تعذر تشغيل الصوت: " else "Audio playback failed: ") + (e.message ?: ""), Toast.LENGTH_LONG).show()
+        }
+    }
+
     private fun speakLastAssistantReply() {
         if (lastAssistantReply.isBlank()) {
             Toast.makeText(this, if (isArabic) "لسه مفيش رد أقراه" else "No reply to read yet", Toast.LENGTH_SHORT).show()
@@ -1799,35 +1822,32 @@ class MainActivity : AppCompatActivity() {
         try { assistantTtsPlayer?.stop() } catch (_: Exception) {}
         try { assistantTtsPlayer?.release() } catch (_: Exception) {}
         assistantTtsPlayer = null
-        Toast.makeText(this, if (isArabic) "بحضّر صوت طبيعي..." else "Generating natural voice...", Toast.LENGTH_SHORT).show()
+
         val gender = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
             .getString("assistant_voice_gender", "female") ?: "female"
         val voice = if (gender == "male") "Puck" else "Kore"
+        val folder = java.io.File(cacheDir, "waqt_tts").apply { mkdirs() }
+        val digest = java.security.MessageDigest.getInstance("SHA-256")
+            .digest((voice + "|" + lastAssistantReply).toByteArray(Charsets.UTF_8))
+            .joinToString("") { "%02x".format(it) }
+        val audioFile = java.io.File(folder, "reply_${digest}.wav")
+
+        // Replaying the same assistant reply is instant and does not call Gemini again.
+        if (audioFile.exists() && audioFile.length() > 44) {
+            playAssistantSpeechFile(audioFile)
+            return
+        }
+
+        Toast.makeText(this, if (isArabic) "بحضّر صوت طبيعي..." else "Generating natural voice...", Toast.LENGTH_SHORT).show()
         GeminiClient.generateSpeech(key, lastAssistantReply, voice) { result ->
             result.onSuccess { wavBytes ->
                 try {
-                    val folder = java.io.File(cacheDir, "waqt_tts").apply { mkdirs() }
-                    val audioFile = java.io.File(folder, "reply_${System.currentTimeMillis()}.wav")
                     audioFile.writeBytes(wavBytes)
-                    val player = MediaPlayer()
-                    assistantTtsPlayer = player
-                    player.setDataSource(audioFile.absolutePath)
-                    player.setOnPreparedListener { it.start() }
-                    player.setOnCompletionListener {
-                        it.release()
-                        if (assistantTtsPlayer === it) assistantTtsPlayer = null
-                        audioFile.delete()
-                    }
-                    player.setOnErrorListener { mp, _, _ ->
-                        mp.release()
-                        if (assistantTtsPlayer === mp) assistantTtsPlayer = null
-                        audioFile.delete()
-                        Toast.makeText(this, if (isArabic) "تعذر تشغيل الصوت الناتج" else "Could not play generated audio", Toast.LENGTH_LONG).show()
-                        true
-                    }
-                    player.prepareAsync()
+                    folder.listFiles()?.filter { it.isFile && it.name.endsWith(".wav") }
+                        ?.sortedByDescending { it.lastModified() }?.drop(20)?.forEach { it.delete() }
+                    playAssistantSpeechFile(audioFile)
                 } catch (e: Exception) {
-                    Toast.makeText(this, (if (isArabic) "تعذر تشغيل الصوت: " else "Audio playback failed: ") + (e.message ?: ""), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, (if (isArabic) "تعذر حفظ الصوت: " else "Could not save audio: ") + (e.message ?: ""), Toast.LENGTH_LONG).show()
                 }
             }.onFailure { error ->
                 Toast.makeText(this, (if (isArabic) "تعذر إنشاء الصوت الطبيعي: " else "Natural voice failed: ") + (error.message ?: "Unknown error"), Toast.LENGTH_LONG).show()

@@ -27,8 +27,9 @@ object GeminiClient {
         val main = Handler(Looper.getMainLooper())
         thread(name = "waqt-gemini-tts") {
             var finalResult: Result<ByteArray> = Result.failure(IllegalStateException("TTS was not started"))
-            val style = "Speak naturally in Egyptian Arabic (Masri), with a warm, friendly, conversational tone and authentic Egyptian pronunciation. Read the supplied text exactly; do not translate, summarize, or add words. Use natural pauses and expressive intonation, not a robotic or news-announcer voice."
-            for (candidate in listOf("gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview")) {
+            val style = "Natural Egyptian Arabic (Masri), warm conversational delivery, authentic pronunciation, expressive but concise. Read exactly; do not add or omit words."
+            // Flash-Lite TTS is optimized for low-latency conversational speech.
+            for (candidate in listOf("gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview")) {
                 var connection: HttpURLConnection? = null
                 val attempt = try {
                     val textPart = JSONObject()
@@ -50,8 +51,8 @@ object GeminiClient {
                     connection = (URL("https://generativelanguage.googleapis.com/v1beta/interactions")
                         .openConnection() as HttpURLConnection).apply {
                         requestMethod = "POST"
-                        connectTimeout = 20000
-                        readTimeout = 90000
+                        connectTimeout = 15000
+                        readTimeout = 60000
                         doOutput = true
                         useCaches = false
                         instanceFollowRedirects = true
@@ -148,7 +149,19 @@ object GeminiClient {
                     attempts += Attempt("Gemini", Result.failure(IllegalStateException("Image and voice messages currently require a Gemini API key.")))
                 } else {
                     val result = if (media.label == "voice") {
-                        retryTransient { callGeminiAudio(geminiKey, systemPrompt, history, media) }
+                        // Fall back to the standard multimodal endpoint when Interactions is overloaded.
+                        var voiceResult = retryTransient { callGeminiAudio(geminiKey, systemPrompt, history, media) }
+                        val voiceError = voiceResult.exceptionOrNull()?.message.orEmpty()
+                        if (voiceResult.isFailure && (
+                                voiceError.contains("HTTP 503") || voiceError.contains("HTTP 502") ||
+                                voiceError.contains("HTTP 500") || voiceError.contains("HTTP 504") ||
+                                voiceError.contains("HTTP 404") || voiceError.contains("HTTP 429")
+                            )) {
+                            voiceResult = retryTransient {
+                                callGemini(geminiKey, "gemini-3.1-flash-lite", systemPrompt, history, media)
+                            }
+                        }
+                        voiceResult
                     } else {
                         var imageResult: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
                         for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
