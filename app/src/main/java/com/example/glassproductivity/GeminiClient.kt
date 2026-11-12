@@ -158,7 +158,7 @@ object GeminiClient {
                                 voiceError.contains("HTTP 404")
                             )) {
                             voiceResult = retryTransient {
-                                callGemini(geminiKey, "gemini-3.5-flash-lite", systemPrompt, history, media)
+                                callGemini(geminiKey, "gemini-3.1-flash-lite", systemPrompt, history, media)
                             }
                         }
                         voiceResult
