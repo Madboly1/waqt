@@ -1798,7 +1798,7 @@ class MainActivity : AppCompatActivity() {
             result.onSuccess { wavBytes ->
                 try {
                     val folder = java.io.File(cacheDir, "waqt_tts").apply { mkdirs() }
-                    val audioFile = java.io.File(folder, "reply_\${System.currentTimeMillis()}.wav")
+                    val audioFile = java.io.File(folder, "reply_${System.currentTimeMillis()}.wav")
                     audioFile.writeBytes(wavBytes)
                     val player = MediaPlayer()
                     assistantTtsPlayer = player
