@@ -54,6 +54,7 @@ object GeminiClient {
                         readTimeout = 90000
                         doOutput = true
                         useCaches = false
+                        instanceFollowRedirects = true
                         setRequestProperty("Connection", "close")
                         setRequestProperty("Content-Type", "application/json; charset=utf-8")
                         setRequestProperty("Accept", "application/json")
@@ -68,16 +69,51 @@ object GeminiClient {
                     if (status !in 200..299) {
                         val detail = try {
                             JSONObject(response).optJSONObject("error")?.optString("message")
-                                ?.takeIf { it.isNotBlank() } ?: response.take(300)
-                        } catch (_: Exception) { response.take(300) }
-                        Result.failure(Exception("HTTP $status: $detail"))
+                                ?.takeIf { it.isNotBlank() } ?: response.take(400)
+                        } catch (_: Exception) { response.take(400) }
+                        Result.failure(Exception("Gemini TTS HTTP $status: $detail"))
                     } else {
-                        val audioData = JSONObject(response).optJSONObject("output_audio")?.optString("data").orEmpty()
-                        if (audioData.isBlank()) Result.failure(Exception("Gemini TTS returned no audio data"))
-                        else Result.success(Base64.decode(audioData, Base64.DEFAULT))
+                        val root = JSONObject(response)
+                        // Interactions REST returns audio in steps[].content[]; some SDK-shaped
+                        // responses expose the same final block as output_audio.data.
+                        var audioData = root.optJSONObject("output_audio")?.optString("data").orEmpty()
+                        if (audioData.isBlank()) {
+                            val steps = root.optJSONArray("steps")
+                            if (steps != null) {
+                                for (i in steps.length() - 1 downTo 0) {
+                                    val content = steps.optJSONObject(i)?.optJSONArray("content") ?: continue
+                                    for (j in content.length() - 1 downTo 0) {
+                                        val part = content.optJSONObject(j) ?: continue
+                                        if (part.optString("type") == "audio") {
+                                            audioData = part.optString("data")
+                                            if (audioData.isNotBlank()) break
+                                        }
+                                    }
+                                    if (audioData.isNotBlank()) break
+                                }
+                            }
+                        }
+                        if (audioData.isBlank()) {
+                            val detail = buildString {
+                                append("Gemini TTS response contained no audio block")
+                                val statusText = root.optString("status")
+                                if (statusText.isNotBlank()) append(" (status=").append(statusText).append(")")
+                                append(": ").append(response.take(450))
+                            }
+                            Result.failure(Exception(detail))
+                        } else {
+                            val decoded = Base64.decode(audioData, Base64.DEFAULT)
+                            if (decoded.size < 44 || decoded[0] != 'R'.code.toByte() ||
+                                decoded[1] != 'I'.code.toByte() || decoded[2] != 'F'.code.toByte() ||
+                                decoded[3] != 'F'.code.toByte()) {
+                                Result.failure(Exception("Gemini TTS audio was not a complete WAV file (received ${decoded.size} bytes)"))
+                            } else {
+                                Result.success(decoded)
+                            }
+                        }
                     }
                 } catch (e: Exception) {
-                    Result.failure(e)
+                    Result.failure(Exception("Gemini TTS ${e.javaClass.simpleName}: ${e.message ?: "no details"}", e))
                 } finally {
                     connection?.disconnect()
                 }
