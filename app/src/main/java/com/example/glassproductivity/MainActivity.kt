@@ -1702,8 +1702,17 @@ class MainActivity : AppCompatActivity() {
                 autoSpeakAssistantReply = false
                 val m = e.message ?: ""
                 val friendly = when {
+                    media?.label == "voice" && m.contains("HTTP 429") ->
+                        if (isArabic) "Gemini رفض معالجة الرسالة الصوتية بسبب حد الاستخدام أو الحصة. دي تفاصيل الخطأ من Google: ${m.take(280)}"
+                        else "Gemini rate-limited the voice request or its quota was reached. Google error: ${m.take(280)}"
+                    media?.label == "voice" && (m.contains("HTTP 500") || m.contains("HTTP 502") || m.contains("HTTP 503") || m.contains("HTTP 504")) ->
+                        if (isArabic) "خدمة Gemini واجهت عطلًا مؤقتًا أثناء تحليل الصوت. تفاصيل Google: ${m.take(280)}"
+                        else "Gemini had a temporary server error while processing audio. Google details: ${m.take(280)}"
+                    media?.label == "voice" ->
+                        if (isArabic) "تعذر على Gemini تحليل الرسالة الصوتية. السبب الفعلي: ${m.take(320)}"
+                        else "Gemini could not process the voice message. Actual error: ${m.take(320)}"
                     m.contains("HTTP 400") || m.contains("HTTP 403") -> if (isArabic) "المفتاح مش شغال. اضغطي 🔑 فوق وحطي مفتاح صحيح." else "Invalid key."
-                    m.contains("HTTP 429") -> if (isArabic) "المزودين المتاحين وصلوا للحد المجاني أو مشغولين حاليًا. جرّب بعد شوية أو أضف مفتاح مزود تاني." else "Available providers are rate-limited or busy. Try again later or add another provider key."
+                    m.contains("HTTP 429") -> if (isArabic) "المزود النصي وصل لحد الاستخدام أو مشغول حاليًا. جرّب بعد شوية." else "The text provider is rate-limited or busy. Try again later."
                     m.contains("HTTP 503") || m.contains("HTTP 500") || m.contains("HTTP 502") || m.contains("HTTP 504") -> if (isArabic) "خدمة Gemini مشغولة مؤقتًا. جرّبي تاني بعد لحظة." else "Gemini is temporarily busy. Please try again shortly."
                     m.contains("HTTP 404") -> if (isArabic) "موديل Gemini المختار مش متاح للمفتاح ده. افتحي 🔑 ثم اختاري موديل متاح." else "The selected Gemini model is unavailable for this key. Choose another model."
                     m.contains("HTTP 400") || m.contains("HTTP 401") || m.contains("HTTP 403") || m.contains("API key") -> if (isArabic) "في مشكلة في مفاتيح مزودي الذكاء الاصطناعي. راجع مفاتيح Gemini وGroq وOpenRouter من زر 🔑." else "One or more AI provider keys are invalid. Check your Gemini, Groq, and OpenRouter keys."
