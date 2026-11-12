@@ -155,7 +155,7 @@ object GeminiClient {
                         if (voiceResult.isFailure && (
                                 voiceError.contains("HTTP 503") || voiceError.contains("HTTP 502") ||
                                 voiceError.contains("HTTP 500") || voiceError.contains("HTTP 504") ||
-                                voiceError.contains("HTTP 404")
+                                voiceError.contains("HTTP 404") || voiceError.contains("HTTP 429")
                             )) {
                             voiceResult = retryTransient {
                                 callGemini(geminiKey, "gemini-3.1-flash-lite", systemPrompt, history, media)
