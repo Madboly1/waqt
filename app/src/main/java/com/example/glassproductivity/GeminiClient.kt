@@ -111,10 +111,15 @@ object GeminiClient {
                 if (geminiKey.isBlank()) {
                     attempts += Attempt("Gemini", Result.failure(IllegalStateException("Image and voice messages currently require a Gemini API key.")))
                 } else {
-                    var result: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
-                    for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
-                        result = retryTransient { callGemini(geminiKey, candidate, systemPrompt, history, media) }
-                        if (result.isSuccess || !isRetryable(result.exceptionOrNull())) break
+                    val result = if (media.label == "voice") {
+                        retryTransient { callGeminiAudio(geminiKey, systemPrompt, history, media) }
+                    } else {
+                        var imageResult: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
+                        for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
+                            imageResult = retryTransient { callGemini(geminiKey, candidate, systemPrompt, history, media) }
+                            if (imageResult.isSuccess || !isRetryable(imageResult.exceptionOrNull())) break
+                        }
+                        imageResult
                     }
                     attempts += Attempt("Gemini", result)
                 }
@@ -156,13 +161,112 @@ object GeminiClient {
             }
 
             val details = attempts.joinToString(" | ") {
-                "${it.provider}: ${it.result.exceptionOrNull()?.message ?: "unknown error"}"
+                val error = it.result.exceptionOrNull()
+                "${it.provider}: ${error?.message?.takeIf { message -> message.isNotBlank() } ?: error?.javaClass?.simpleName ?: "unknown error"}"
             }.ifBlank { "No provider API key is configured." }
             main.post { callback(Result.failure(Exception(details))) }
         }
     }
 
 
+    /**
+     * Voice notes use Gemini's documented Interactions audio input schema.
+     * This is separate from the Live API and keeps the existing one-shot voice-message flow.
+     */
+    private fun callGeminiAudio(
+        apiKey: String,
+        systemPrompt: String,
+        history: List<Pair<String, String>>,
+        media: MediaInput
+    ): Result<String> {
+        var connection: HttpURLConnection? = null
+        return try {
+            require(apiKey.isNotBlank()) { "Gemini API key is empty" }
+            require(media.bytes.isNotEmpty()) { "Voice recording is empty" }
+            val input = JSONArray()
+            history.takeLast(8).forEach { (role, message) ->
+                if (message.isNotBlank()) {
+                    val speaker = if (role == "model") "المساعد" else "المستخدم"
+                    input.put(JSONObject().put("type", "text").put("text", "$speaker: $message"))
+                }
+            }
+            input.put(JSONObject()
+                .put("type", "audio")
+                .put("data", Base64.encodeToString(media.bytes, Base64.NO_WRAP))
+                .put("mime_type", "audio/mp4"))
+            val body = JSONObject()
+                .put("model", "gemini-3.8-flash")
+                .put("system_instruction", systemPrompt)
+                .put("input", input)
+                .put("store", false)
+            connection = (URL("https://generativelanguage.googleapis.com/v1beta/interactions")
+                .openConnection() as HttpURLConnection).apply {
+                requestMethod = "POST"
+                connectTimeout = 20000
+                readTimeout = 90000
+                doOutput = true
+                useCaches = false
+                instanceFollowRedirects = true
+                setRequestProperty("Connection", "close")
+                setRequestProperty("User-Agent", "WAQT-Android/5.6.30")
+                setRequestProperty("Content-Type", "application/json; charset=utf-8")
+                setRequestProperty("Accept", "application/json")
+                setRequestProperty("x-goog-api-key", apiKey)
+            }
+            val payload = body.toString().toByteArray(Charsets.UTF_8)
+            connection.setFixedLengthStreamingMode(payload.size)
+            connection.outputStream.use { it.write(payload) }
+            val status = connection.responseCode
+            val response = (if (status in 200..299) connection.inputStream else connection.errorStream)
+                ?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }.orEmpty()
+            if (status !in 200..299) {
+                val detail = try {
+                    val error = JSONObject(response).optJSONObject("error")
+                    error?.optString("message")?.takeIf { it.isNotBlank() }
+                        ?: error?.optString("status")?.takeIf { it.isNotBlank() }
+                        ?: response.take(500)
+                } catch (_: Exception) { response.take(500) }
+                Result.failure(Exception("Gemini audio HTTP $status: $detail"))
+            } else {
+                val root = JSONObject(response)
+                val directText = root.optString("output_text").takeIf { it.isNotBlank() }
+                val output = StringBuilder()
+                if (directText != null) {
+                    output.append(directText)
+                } else {
+                    val steps = root.optJSONArray("steps")
+                    if (steps != null) {
+                        for (i in 0 until steps.length()) {
+                            val step = steps.optJSONObject(i) ?: continue
+                            if (step.optString("type") != "model_output") continue
+                            val content = step.optJSONArray("content") ?: continue
+                            for (j in 0 until content.length()) {
+                                val part = content.optJSONObject(j) ?: continue
+                                if (part.optString("type") == "text") output.append(part.optString("text"))
+                            }
+                        }
+                    }
+                    if (output.isBlank()) {
+                        val legacy = root.optJSONArray("outputs")
+                        if (legacy != null) for (i in 0 until legacy.length()) {
+                            val part = legacy.optJSONObject(i) ?: continue
+                            if (part.optString("type") == "text") output.append(part.optString("text"))
+                        }
+                    }
+                }
+                val answer = output.toString().trim()
+                if (answer.isNotBlank()) Result.success(answer)
+                else {
+                    val statusText = root.optString("status")
+                    Result.failure(Exception("Gemini audio returned no text (status=${statusText.ifBlank { "unknown" }}): ${response.take(350)}"))
+                }
+            }
+        } catch (e: Exception) {
+            Result.failure(Exception("Gemini audio ${e.javaClass.simpleName}: ${e.message?.takeIf { it.isNotBlank() } ?: "no exception details"}", e))
+        } finally {
+            connection?.disconnect()
+        }
+    }
     /** Retry transient DNS/socket failures once; provider errors (4xx) are never retried. */
     private fun retryTransient(request: () -> Result<String>): Result<String> {
         var result = request()
