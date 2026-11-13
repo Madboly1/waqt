@@ -1700,7 +1700,13 @@ class MainActivity : AppCompatActivity() {
                 }
             }.onFailure { e ->
                 autoSpeakAssistantReply = false
-                val m = e.message ?: ""
+                val m = e.message?.takeIf { it.isNotBlank() }
+                    ?: e.cause?.message?.takeIf { it.isNotBlank() }
+                    ?: e.cause?.javaClass?.simpleName
+                    ?: e.javaClass.simpleName
+                if (media?.label == "voice") {
+                    android.util.Log.e("WAQT_VOICE", "Voice message failed: $m", e)
+                }
                 val friendly = when {
                     media?.label == "voice" && m.contains("HTTP 429") ->
                         if (isArabic) "Gemini رفض معالجة الرسالة الصوتية بسبب حد الاستخدام أو الحصة. دي تفاصيل الخطأ من Google: ${m.take(280)}"
