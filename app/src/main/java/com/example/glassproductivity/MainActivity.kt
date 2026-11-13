@@ -177,9 +177,7 @@ class MainActivity : AppCompatActivity() {
     private var chatIsRecording: Boolean = false
     private var chatRecordButton: TextView? = null
     private var chatTts: TextToSpeech? = null
-    private var assistantTtsPlayer: MediaPlayer? = null
     private var lastAssistantReply: String = ""
-    private var autoSpeakAssistantReply: Boolean = false
     private val chatHistoryStore by lazy { ChatHistoryStore(this) }
     private var activeChatId: String = ""
     private var activeAIChatDialog: Dialog? = null
@@ -486,9 +484,6 @@ class MainActivity : AppCompatActivity() {
         previewRingtone?.stop()
         try { chatRecorder?.release() } catch (_: Exception) {}
         chatRecorder = null
-        try { assistantTtsPlayer?.stop() } catch (_: Exception) {}
-        try { assistantTtsPlayer?.release() } catch (_: Exception) {}
-        assistantTtsPlayer = null
         chatTts?.stop()
         chatTts?.shutdown()
         chatTts = null
@@ -1085,17 +1080,6 @@ class MainActivity : AppCompatActivity() {
         }
         inputRow.addView(btnMic)
 
-        val btnSpeak = TextView(this).apply {
-            text = "🔊"
-            textSize = 15f
-            gravity = Gravity.CENTER
-            setTextColor(textMutedColor())
-            contentDescription = if (isArabic) "قراءة آخر رد" else "Read last reply"
-            layoutParams = LinearLayout.LayoutParams(dp(32), dp(42))
-            setOnClickListener { speakLastAssistantReply() }
-        }
-        inputRow.addView(btnSpeak)
-
         val btnSend = TextView(this).apply {
             text = "➤"
             textSize = 21f
@@ -1224,18 +1208,6 @@ class MainActivity : AppCompatActivity() {
         panel.addView(avatarButton)
 
         panel.addView(TextView(this).apply {
-            text = if (isArabic) "الصوت" else "Voice"
-            textSize = 13f
-            setTextColor(textPrimaryColor())
-            setPadding(0, dp(10), 0, dp(4))
-        })
-        val voiceOptions = if (isArabic) listOf("صوت نسائي", "صوت رجالي") else listOf("Female voice", "Male voice")
-        val voiceSpinner = Spinner(this)
-        voiceSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, voiceOptions)
-        voiceSpinner.setSelection(if ((prefs.getString("assistant_voice_gender", "female") ?: "female") == "male") 1 else 0)
-        panel.addView(voiceSpinner)
-
-        panel.addView(TextView(this).apply {
             text = if (isArabic) "أسلوب الشخصية" else "Personality style"
             textSize = 13f
             setTextColor(textPrimaryColor())
@@ -1253,10 +1225,8 @@ class MainActivity : AppCompatActivity() {
             .setTitle(if (isArabic) "تخصيص شخصية المساعد" else "Customize assistant")
             .setView(panel)
             .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
-                val gender = if (voiceSpinner.selectedItemPosition == 1) "male" else "female"
                 prefs.edit()
                     .putString("assistant_name", nameInput.text.toString().trim().take(30).ifBlank { if (isArabic) "صاحبي" else "My WAQT Buddy" })
-                    .putString("assistant_voice_gender", gender)
                     .putString("assistant_personality", toneValues[toneSpinner.selectedItemPosition.coerceIn(0, toneValues.lastIndex)])
                     .apply()
                 activeAssistantNameView?.text = assistantName()
@@ -1703,12 +1673,7 @@ class MainActivity : AppCompatActivity() {
                         else "⚠️ Ignored $malformedActionCount malformed action(s); nothing was executed for them."
                     ))
                 }
-                if (autoSpeakAssistantReply) {
-                    autoSpeakAssistantReply = false
-                    speakLastAssistantReply()
-                }
             }.onFailure { e ->
-                autoSpeakAssistantReply = false
                 val m = e.message?.takeIf { it.isNotBlank() }
                     ?: e.cause?.message?.takeIf { it.isNotBlank() }
                     ?: e.cause?.javaClass?.simpleName
@@ -1790,7 +1755,6 @@ class MainActivity : AppCompatActivity() {
                 val savedAudio = java.io.File(audioFolder, "voice_${System.currentTimeMillis()}.aac")
                 file.copyTo(savedAudio, overwrite = true)
                 box.addView(createUserMessageBubble("WAQT_AUDIO:" + savedAudio.absolutePath))
-                autoSpeakAssistantReply = true
                 sendToAssistant(if (isArabic) "استمع للرسالة الصوتية وافهم مقصدي ورد عليّ بالمصري. لو فيها طلب لتنظيم يومي تعامل معه كرسالة شات عادية." else "Listen to this voice message, understand it, and respond conversationally.",
                     box, scroll, GeminiClient.MediaInput(bytes, "audio/aac", "voice", savedAudio.absolutePath))
             }
@@ -1798,75 +1762,6 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, if (isArabic) "تعذر قراءة التسجيل" else "Could not read recording", Toast.LENGTH_SHORT).show()
         } finally {
             file.delete()
-        }
-    }
-
-    private fun playAssistantSpeechFile(audioFile: java.io.File) {
-        try {
-            val player = MediaPlayer()
-            assistantTtsPlayer = player
-            player.setDataSource(audioFile.absolutePath)
-            player.setOnPreparedListener { it.start() }
-            player.setOnCompletionListener {
-                it.release()
-                if (assistantTtsPlayer === it) assistantTtsPlayer = null
-            }
-            player.setOnErrorListener { mp, _, _ ->
-                mp.release()
-                if (assistantTtsPlayer === mp) assistantTtsPlayer = null
-                audioFile.delete()
-                Toast.makeText(this, if (isArabic) "تعذر تشغيل الصوت الناتج" else "Could not play generated audio", Toast.LENGTH_LONG).show()
-                true
-            }
-            player.prepareAsync()
-        } catch (e: Exception) {
-            Toast.makeText(this, (if (isArabic) "تعذر تشغيل الصوت: " else "Audio playback failed: ") + (e.message ?: ""), Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun speakLastAssistantReply() {
-        if (lastAssistantReply.isBlank()) {
-            Toast.makeText(this, if (isArabic) "لسه مفيش رد أقراه" else "No reply to read yet", Toast.LENGTH_SHORT).show()
-            return
-        }
-        val key = geminiKey().trim()
-        if (key.isBlank()) {
-            Toast.makeText(this, if (isArabic) "الصوت الطبيعي محتاج مفتاح Gemini من زر 🔑" else "Natural voice needs a Gemini API key", Toast.LENGTH_LONG).show()
-            return
-        }
-        try { assistantTtsPlayer?.stop() } catch (_: Exception) {}
-        try { assistantTtsPlayer?.release() } catch (_: Exception) {}
-        assistantTtsPlayer = null
-
-        val gender = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
-            .getString("assistant_voice_gender", "female") ?: "female"
-        val voice = if (gender == "male") "Puck" else "Kore"
-        val folder = java.io.File(cacheDir, "waqt_tts").apply { mkdirs() }
-        val digest = java.security.MessageDigest.getInstance("SHA-256")
-            .digest((voice + "|" + lastAssistantReply).toByteArray(Charsets.UTF_8))
-            .joinToString("") { "%02x".format(it) }
-        val audioFile = java.io.File(folder, "reply_${digest}.wav")
-
-        // Replaying the same assistant reply is instant and does not call Gemini again.
-        if (audioFile.exists() && audioFile.length() > 44) {
-            playAssistantSpeechFile(audioFile)
-            return
-        }
-
-        Toast.makeText(this, if (isArabic) "بحضّر صوت طبيعي..." else "Generating natural voice...", Toast.LENGTH_SHORT).show()
-        GeminiClient.generateSpeech(key, lastAssistantReply, voice) { result ->
-            result.onSuccess { wavBytes ->
-                try {
-                    audioFile.writeBytes(wavBytes)
-                    folder.listFiles()?.filter { it.isFile && it.name.endsWith(".wav") }
-                        ?.sortedByDescending { it.lastModified() }?.drop(20)?.forEach { it.delete() }
-                    playAssistantSpeechFile(audioFile)
-                } catch (e: Exception) {
-                    Toast.makeText(this, (if (isArabic) "تعذر حفظ الصوت: " else "Could not save audio: ") + (e.message ?: ""), Toast.LENGTH_LONG).show()
-                }
-            }.onFailure { error ->
-                Toast.makeText(this, (if (isArabic) "تعذر إنشاء الصوت الطبيعي: " else "Natural voice failed: ") + (error.message ?: "Unknown error"), Toast.LENGTH_LONG).show()
-            }
         }
     }
 
