@@ -286,7 +286,7 @@ object GeminiClient {
             val response = (if (status in 200..299) connection.inputStream else connection.errorStream)
                 ?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }.orEmpty()
             if (media?.label == "voice") {
-                android.util.Log.i("WAQT_VOICE", "Gemini generateContent HTTP $status, model=$model, audioBytes=${media.bytes.size}, mime=${media.mimeType}, responseChars=${response.length}")
+                android.util.Log.i("WAQT_VOICE", "Gemini audio endpoint HTTP $status, audioBytes=${media.bytes.size}, mime=${media.mimeType}, responseChars=${response.length}")
             }
             if (status !in 200..299) {
                 val detail = try {
@@ -424,7 +424,7 @@ object GeminiClient {
                     val detail = when {
                         blocked.isNotBlank() -> "Gemini blocked the voice prompt: $blocked"
                         reason.isNotBlank() -> "Gemini returned no text; finishReason=$reason"
-                        else -> "Gemini returned HTTP 200 without candidate text (model=$model, responseChars=${response.length})"
+                        else -> "Gemini returned HTTP 200 without candidate text (responseChars=${response.length})"
                     }
                     if (media?.label == "voice") android.util.Log.e("WAQT_VOICE", detail)
                     Result.failure(Exception(detail))
