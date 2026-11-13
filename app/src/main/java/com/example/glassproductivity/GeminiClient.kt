@@ -157,11 +157,26 @@ object GeminiClient {
                             FALLBACK_MODEL,
                             "gemini-3.1-flash-lite"
                         ).distinct()
+                        val voiceFailures = mutableListOf<String>()
+                        android.util.Log.i("WAQT_VOICE", "Starting Gemini voice request: bytes=${media.bytes.size}, mime=${media.mimeType}, historyItems=${history.size}, models=${voiceModels.joinToString()}")
                         for (candidate in voiceModels) {
                             voiceResult = retryTransient {
                                 callGemini(geminiKey, candidate, systemPrompt, history, media)
                             }
-                            if (voiceResult.isSuccess || !isRetryable(voiceResult.exceptionOrNull())) break
+                            if (voiceResult.isSuccess) {
+                                android.util.Log.i("WAQT_VOICE", "Voice request succeeded with model=$candidate")
+                                break
+                            }
+                            val error = voiceResult.exceptionOrNull()
+                            val detail = error?.message?.takeIf { it.isNotBlank() }
+                                ?: error?.javaClass?.simpleName
+                                ?: "Unknown throwable"
+                            voiceFailures += "$candidate: $detail"
+                            android.util.Log.e("WAQT_VOICE", "Voice request failed with model=$candidate: $detail", error)
+                            if (!isRetryable(error)) break
+                        }
+                        if (voiceResult.isFailure && voiceFailures.isNotEmpty()) {
+                            voiceResult = Result.failure(Exception("Gemini voice attempts: " + voiceFailures.joinToString(" | "), voiceResult.exceptionOrNull()))
                         }
                         voiceResult
                     } else {
@@ -270,6 +285,9 @@ object GeminiClient {
             val status = connection.responseCode
             val response = (if (status in 200..299) connection.inputStream else connection.errorStream)
                 ?.bufferedReader(Charsets.UTF_8)?.use { it.readText() }.orEmpty()
+            if (media?.label == "voice") {
+                android.util.Log.i("WAQT_VOICE", "Gemini generateContent HTTP $status, model=$model, audioBytes=${media.bytes.size}, mime=${media.mimeType}, responseChars=${response.length}")
+            }
             if (status !in 200..299) {
                 val detail = try {
                     val error = JSONObject(response).optJSONObject("error")
@@ -403,7 +421,13 @@ object GeminiClient {
                 if (answer.isNotBlank()) Result.success(answer) else {
                     val reason = candidate?.optString("finishReason").orEmpty()
                     val blocked = root.optJSONObject("promptFeedback")?.optString("blockReason").orEmpty()
-                    Result.failure(Exception(blocked.ifBlank { reason.ifBlank { "Gemini returned an empty response" } }))
+                    val detail = when {
+                        blocked.isNotBlank() -> "Gemini blocked the voice prompt: $blocked"
+                        reason.isNotBlank() -> "Gemini returned no text; finishReason=$reason"
+                        else -> "Gemini returned HTTP 200 without candidate text (model=$model, responseChars=${response.length})"
+                    }
+                    if (media?.label == "voice") android.util.Log.e("WAQT_VOICE", detail)
+                    Result.failure(Exception(detail))
                 }
             }
         } catch (e: Exception) {
