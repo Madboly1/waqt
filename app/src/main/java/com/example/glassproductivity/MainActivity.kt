@@ -1631,7 +1631,7 @@ class MainActivity : AppCompatActivity() {
             "[لقطة اليوم الحالية]\n$snapshot\n[رسالة المستخدم]\n$cleanUserText"
         // Do not resend old day snapshots: they make every turn slower and inflate the request.
         // Keep only the last three exchanges, then append the latest snapshot and message.
-        val requestHistory = geminiHistory.takeLast(6).toMutableList().apply { add("user" to prompt) }
+        val requestHistory = geminiHistory.takeLast(if (media?.label == "voice") 2 else 6).toMutableList().apply { add("user" to prompt) }
         val previousAssistantReply = lastAssistantReply
 
         android.util.Log.i("WAQT_VOICE", "Assistant request dispatch: mediaLabel=${media?.label ?: "none"}, bytes=${media?.bytes?.size ?: 0}")
@@ -1748,8 +1748,8 @@ class MainActivity : AppCompatActivity() {
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
             recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS)
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-            recorder.setAudioEncodingBitRate(64000)
-            recorder.setAudioSamplingRate(22050)
+            recorder.setAudioEncodingBitRate(32000)
+            recorder.setAudioSamplingRate(16000)
             recorder.setOutputFile(file.absolutePath)
             recorder.prepare()
             recorder.start()
