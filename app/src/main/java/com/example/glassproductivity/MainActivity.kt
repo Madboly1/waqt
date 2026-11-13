@@ -1734,10 +1734,10 @@ class MainActivity : AppCompatActivity() {
     private fun startChatVoiceRecording() {
         if (chatIsRecording) return
         try {
-            val file = java.io.File(cacheDir, "waqt_chat_${System.currentTimeMillis()}.m4a")
+            val file = java.io.File(cacheDir, "waqt_chat_${System.currentTimeMillis()}.aac")
             val recorder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) MediaRecorder(this) else @Suppress("DEPRECATION") MediaRecorder()
             recorder.setAudioSource(MediaRecorder.AudioSource.MIC)
-            recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.AAC_ADTS)
             recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
             recorder.setAudioEncodingBitRate(64000)
             recorder.setAudioSamplingRate(22050)
@@ -1778,12 +1778,12 @@ class MainActivity : AppCompatActivity() {
             if (box != null && scroll != null) {
                 if (bytes.size > 18 * 1024 * 1024) throw IllegalArgumentException("التسجيل طويل جدًا؛ جرّب رسالة أقصر")
                 val audioFolder = java.io.File(filesDir, "chat_audio").apply { mkdirs() }
-                val savedAudio = java.io.File(audioFolder, "voice_${System.currentTimeMillis()}.m4a")
+                val savedAudio = java.io.File(audioFolder, "voice_${System.currentTimeMillis()}.aac")
                 file.copyTo(savedAudio, overwrite = true)
                 box.addView(createUserMessageBubble("WAQT_AUDIO:" + savedAudio.absolutePath))
                 autoSpeakAssistantReply = true
                 sendToAssistant(if (isArabic) "استمع للرسالة الصوتية وافهم مقصدي ورد عليّ بالمصري. لو فيها طلب لتنظيم يومي تعامل معه كرسالة شات عادية." else "Listen to this voice message, understand it, and respond conversationally.",
-                    box, scroll, GeminiClient.MediaInput(bytes, "audio/mp4", "voice", savedAudio.absolutePath))
+                    box, scroll, GeminiClient.MediaInput(bytes, "audio/aac", "voice", savedAudio.absolutePath))
             }
         } catch (e: Exception) {
             Toast.makeText(this, if (isArabic) "تعذر قراءة التسجيل" else "Could not read recording", Toast.LENGTH_SHORT).show()
