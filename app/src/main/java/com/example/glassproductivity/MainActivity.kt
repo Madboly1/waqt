@@ -1634,7 +1634,16 @@ class MainActivity : AppCompatActivity() {
         val requestHistory = geminiHistory.takeLast(6).toMutableList().apply { add("user" to prompt) }
         val previousAssistantReply = lastAssistantReply
 
-        GeminiClient.generate(geminiKey(), geminiModel(), buildAssistantSystemPrompt(), requestHistory, media, groqKey(), openRouterKey()) { result ->
+        android.util.Log.i("WAQT_VOICE", "Assistant request dispatch: mediaLabel=${media?.label ?: "none"}, bytes=${media?.bytes?.size ?: 0}")
+        GeminiClient.generate(
+            apiKey = geminiKey(),
+            model = geminiModel(),
+            systemPrompt = buildAssistantSystemPrompt(),
+            history = requestHistory,
+            media = media,
+            groqApiKey = groqKey(),
+            openRouterApiKey = openRouterKey()
+        ) { result ->
             box.removeView(typing)
             result.onSuccess { raw ->
                 var replyText = raw

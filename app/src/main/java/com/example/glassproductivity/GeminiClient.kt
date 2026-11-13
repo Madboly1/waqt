@@ -187,7 +187,17 @@ object GeminiClient {
                         }
                         imageResult
                     }
-                    attempts += Attempt("Gemini", result)
+                    // Media requests (especially voice) are Gemini-only. Never route them to
+                    // Groq/OpenRouter, even if a transport error occurs.
+                    val mediaResult = if (result.isFailure) {
+                        val error = result.exceptionOrNull()
+                        Result.failure<String>(Exception(
+                            "Gemini: ${error?.message?.takeIf { it.isNotBlank() } ?: error?.javaClass?.simpleName ?: "unknown error"}",
+                            error
+                        ))
+                    } else result
+                    main.post { callback(mediaResult) }
+                    return@thread
                 }
             } else {
                 if (geminiKey.isNotBlank()) {
@@ -336,17 +346,30 @@ object GeminiClient {
             connection?.disconnect()
         }
     }
-    /** Retry transient DNS/socket failures once; provider errors (4xx) are never retried. */
+    /** Retry transient transport failures, including OkHttp's "unexpected end of stream". */
     private fun retryTransient(request: () -> Result<String>): Result<String> {
         var result = request()
-        repeat(1) {
+        repeat(2) { retryIndex ->
             val error = result.exceptionOrNull()
-            val transient = error is java.net.UnknownHostException ||
-                error is java.net.ConnectException ||
-                error is java.net.SocketTimeoutException ||
-                (error is java.net.SocketException && error.message.orEmpty().contains("abort", ignoreCase = true))
-            if (!transient) return result
-            try { Thread.sleep(650L) } catch (_: InterruptedException) { Thread.currentThread().interrupt(); return result }
+            var cause: Throwable? = error
+            var transportFailure = false
+            while (cause != null) {
+                if (cause is java.io.IOException ||
+                    cause is java.net.UnknownHostException ||
+                    cause is java.net.ConnectException ||
+                    cause is java.net.SocketTimeoutException) {
+                    transportFailure = true
+                    break
+                }
+                cause = cause.cause
+            }
+            if (!transportFailure) return result
+            try {
+                Thread.sleep(if (retryIndex == 0) 800L else 1600L)
+            } catch (_: InterruptedException) {
+                Thread.currentThread().interrupt()
+                return result
+            }
             result = request()
         }
         return result
@@ -390,10 +413,9 @@ object GeminiClient {
 
             connection = (URL("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent")
                 .openConnection() as HttpURLConnection).apply {
-                requestMethod = "POST"; connectTimeout = 20000; readTimeout = 45000
+                requestMethod = "POST"; connectTimeout = 30000; readTimeout = if (media?.label == "voice") 120000 else 45000
                 doOutput = true; useCaches = false
                 instanceFollowRedirects = true
-                setRequestProperty("Connection", "close")
                 setRequestProperty("User-Agent", "WAQT-Android/5.6.27")
                 setRequestProperty("Content-Type", "application/json; charset=utf-8")
                 setRequestProperty("Accept", "application/json")
