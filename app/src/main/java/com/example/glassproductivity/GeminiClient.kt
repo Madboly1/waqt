@@ -31,6 +31,8 @@ object GeminiClient {
             // Flash-Lite TTS is optimized for low-latency conversational speech.
             for (candidate in listOf("gemini-3.8-flash-lite-tts", "gemini-3.8-flash-tts", "gemini-3.1-flash-tts-preview")) {
                 var connection: HttpURLConnection? = null
+                val attemptStartedAt = System.currentTimeMillis()
+                android.util.Log.i("WAQT_VOICE", "TTS attempt started: model=$candidate, chars=${text.length}")
                 val attempt = try {
                     val textPart = JSONObject()
                         .put("type", "text")
@@ -56,7 +58,6 @@ object GeminiClient {
                         doOutput = true
                         useCaches = false
                         instanceFollowRedirects = true
-                        setRequestProperty("Connection", "close")
                         setRequestProperty("Content-Type", "application/json; charset=utf-8")
                         setRequestProperty("Accept", "application/json")
                         setRequestProperty("x-goog-api-key", apiKey.trim())
@@ -119,6 +120,7 @@ object GeminiClient {
                     connection?.disconnect()
                 }
                 finalResult = attempt
+                android.util.Log.i("WAQT_VOICE", "TTS attempt finished: model=$candidate, elapsedMs=${System.currentTimeMillis() - attemptStartedAt}, success=${attempt.isSuccess}")
                 if (attempt.isSuccess) break
             }
             main.post { callback(finalResult) }
@@ -409,7 +411,7 @@ object GeminiClient {
                 .put("contents", contents)
                 .put("generationConfig", JSONObject()
                     .put("responseMimeType", "application/json")
-                    .put("temperature", 0.55).put("topP", 0.9).put("maxOutputTokens", 1600))
+                    .put("temperature", 0.55).put("topP", 0.9).put("maxOutputTokens", if (media?.label == "voice") 900 else 1600))
 
             connection = (URL("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent")
                 .openConnection() as HttpURLConnection).apply {
