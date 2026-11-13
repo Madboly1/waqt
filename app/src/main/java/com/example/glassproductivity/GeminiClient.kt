@@ -149,17 +149,19 @@ object GeminiClient {
                     attempts += Attempt("Gemini", Result.failure(IllegalStateException("Image and voice messages currently require a Gemini API key.")))
                 } else {
                     val result = if (media.label == "voice") {
-                        // Fall back to the standard multimodal endpoint when Interactions is overloaded.
-                        var voiceResult = retryTransient { callGeminiAudio(geminiKey, systemPrompt, history, media) }
-                        val voiceError = voiceResult.exceptionOrNull()?.message.orEmpty()
-                        if (voiceResult.isFailure && (
-                                voiceError.contains("HTTP 503") || voiceError.contains("HTTP 502") ||
-                                voiceError.contains("HTTP 500") || voiceError.contains("HTTP 504") ||
-                                voiceError.contains("HTTP 404") || voiceError.contains("HTTP 429")
-                            )) {
+                        // Keep recorded voice on the same Gemini generateContent audio path
+                        // that was used before the Interactions API switch.
+                        var voiceResult: Result<String> = Result.failure(IllegalStateException("No Gemini voice model attempt was made"))
+                        val voiceModels = listOf(
+                            model.trim().ifBlank { DEFAULT_MODEL },
+                            FALLBACK_MODEL,
+                            "gemini-3.1-flash-lite"
+                        ).distinct()
+                        for (candidate in voiceModels) {
                             voiceResult = retryTransient {
-                                callGemini(geminiKey, "gemini-3.1-flash-lite", systemPrompt, history, media)
+                                callGemini(geminiKey, candidate, systemPrompt, history, media)
                             }
+                            if (voiceResult.isSuccess || !isRetryable(voiceResult.exceptionOrNull())) break
                         }
                         voiceResult
                     } else {
