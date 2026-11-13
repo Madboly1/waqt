@@ -484,9 +484,6 @@ class MainActivity : AppCompatActivity() {
         previewRingtone?.stop()
         try { chatRecorder?.release() } catch (_: Exception) {}
         chatRecorder = null
-        try { assistantTtsPlayer?.stop() } catch (_: Exception) {}
-        try { assistantTtsPlayer?.release() } catch (_: Exception) {}
-        assistantTtsPlayer = null
         chatTts?.stop()
         chatTts?.shutdown()
         chatTts = null
