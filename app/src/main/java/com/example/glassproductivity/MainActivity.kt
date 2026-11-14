@@ -1566,6 +1566,24 @@ class MainActivity : AppCompatActivity() {
         return null
     }
 
+    /**
+     * Attach live WAQT data only when the user is asking about or changing something
+     * inside the app. Casual conversation should not trigger repository reads on every turn.
+     */
+    private fun shouldIncludeDaySnapshot(message: String): Boolean {
+        val text = message.lowercase(Locale.ROOT)
+        val keywords = listOf(
+            "مهمة", "مهام", "مهامي", "مهمتي", "عادة", "عادات", "تركيز", "جلسة",
+            "مدونة", "ملاحظ", "يوميات", "النهارده", "النهاردة", "اليوم", "جدول",
+            "مواعيد", "إنجاز", "انجاز", "خلص", "أضف", "ضيف", "احذف", "امسح",
+            "عدّل", "عدل", "غيّر", "غير", "سجل", "سجّل", "نظّم", "نظم",
+            "task", "tasks", "habit", "habits", "focus", "pomodoro", "note",
+            "notes", "journal", "schedule", "today", "progress", "complete", "delete",
+            "add task", "add habit", "update task", "update habit"
+        )
+        return keywords.any { text.contains(it) }
+    }
+
     private fun sendToAssistant(userText: String?, box: LinearLayout, scroll: ScrollView, media: GeminiClient.MediaInput? = null) {
         if (media != null && geminiKey().isBlank()) {
             box.addView(createAIMessageBubble(
@@ -1585,8 +1603,9 @@ class MainActivity : AppCompatActivity() {
         box.addView(typing)
         scroll.post { scroll.fullScroll(View.FOCUS_DOWN) }
 
-        val snapshot = buildDaySnapshot()
         val cleanUserText = userText?.trim().orEmpty()
+        val needsDaySnapshot = userText == null || shouldIncludeDaySnapshot(cleanUserText)
+        val snapshot = if (needsDaySnapshot) buildDaySnapshot() else ""
         val persistedUserText = when {
             cleanUserText.isNotBlank() -> cleanUserText
             media?.label == "image" -> "🖼 ${if (isArabic) "صورة مرفقة" else "Image attached"}"
@@ -1595,10 +1614,11 @@ class MainActivity : AppCompatActivity() {
             else -> ""
         }
         if (persistedUserText.isNotBlank()) chatHistoryStore.addMessage(activeChatId, "user", persistedUserText)
+        val dayContext = if (needsDaySnapshot) "[لقطة اليوم الحالية]\n$snapshot\n" else ""
         val prompt = if (userText == null)
-            "[لقطة اليوم الحالية]\n$snapshot\nابدأ كـ WAQT Mentor: رحّب بالمستخدم باختصار، ووضّح أنك تساعده في التفكير والتعلم وتحقيق الأهداف، ثم اسأله سؤالًا واحدًا مفتوحًا: إيه أهم حاجة حابب نشتغل عليها دلوقتي؟ لا تنشئ مهامًا."
+            "${dayContext}ابدأ كـ WAQT Mentor: رحّب بالمستخدم باختصار، ووضّح أنك تساعده في التفكير والتعلم وتحقيق الأهداف، ثم اسأله سؤالًا واحدًا مفتوحًا: إيه أهم حاجة حابب نشتغل عليها دلوقتي؟ لا تنشئ مهامًا."
         else
-            "[لقطة اليوم الحالية]\n$snapshot\n[رسالة المستخدم]\n$cleanUserText"
+            "${dayContext}[رسالة المستخدم]\n$cleanUserText"
         // Do not resend old day snapshots: they make every turn slower and inflate the request.
         // Keep only the last three exchanges, then append the latest snapshot and message.
         val requestHistory = geminiHistory.takeLast(if (media?.label == "voice") 2 else 6).toMutableList().apply { add("user" to prompt) }

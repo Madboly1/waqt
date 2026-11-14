@@ -93,11 +93,12 @@ object GeminiClient {
                 }
             } else {
                 if (geminiKey.isNotBlank()) {
-                    var result: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
-                    for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
-                        result = retryTransient { callGemini(geminiKey, candidate, systemPrompt, history, null) }
-                        if (result.isSuccess || !isRetryable(result.exceptionOrNull())) break
-                    }
+                    // One fast primary-model attempt for text. If it fails, fall back to
+                    // Groq/OpenRouter instead of waiting through a second Gemini model.
+                    val result = callGemini(
+                        geminiKey, model.trim().ifBlank { DEFAULT_MODEL },
+                        systemPrompt, history, null
+                    )
                     attempts += Attempt("Gemini", result)
                     if (result.isSuccess) {
                         main.post { callback(result) }
@@ -301,11 +302,11 @@ object GeminiClient {
                 .put("contents", contents)
                 .put("generationConfig", JSONObject()
                     .put("responseMimeType", "application/json")
-                    .put("temperature", 0.55).put("topP", 0.9).put("maxOutputTokens", if (media?.label == "voice") 900 else 1600))
+                    .put("temperature", 0.55).put("topP", 0.9).put("maxOutputTokens", if (media?.label == "voice") 900 else 1100))
 
             connection = (URL("https://generativelanguage.googleapis.com/v1beta/models/$model:generateContent")
                 .openConnection() as HttpURLConnection).apply {
-                requestMethod = "POST"; connectTimeout = 30000; readTimeout = if (media?.label == "voice") 120000 else 45000
+                requestMethod = "POST"; connectTimeout = 15000; readTimeout = if (media?.label == "voice") 120000 else 30000
                 doOutput = true; useCaches = false
                 instanceFollowRedirects = true
                 setRequestProperty("User-Agent", "WAQT-Android/5.6.27")
