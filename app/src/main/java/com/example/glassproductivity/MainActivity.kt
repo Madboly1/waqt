@@ -5577,6 +5577,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun focusQuietDrawable(radiusDp: Int = 18): android.graphics.drawable.Drawable {
+        return GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(Color.parseColor("#AA263B52"), Color.parseColor("#99202F43"))
+        ).apply {
+            cornerRadius = dp(radiusDp).toFloat()
+            setStroke(dp(1), Color.parseColor("#304E6A82"))
+        }
+    }
+
     private fun buildPomodoroScreenView(): View {
         val root = FrameLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -8418,7 +8428,7 @@ class MainActivity : AppCompatActivity() {
         private val trackPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
             strokeWidth = dp(14).toFloat()
-            color = Color.argb(150, 0, 0, 0)
+            color = Color.argb(105, 105, 139, 151)
             strokeCap = Paint.Cap.ROUND
         }
 
@@ -8467,7 +8477,7 @@ class MainActivity : AppCompatActivity() {
             val m = totalSec / 60L
             val s = totalSec % 60L
             timeString = String.format(Locale.US, "%02d:%02d", m, s)
-            progressPaint.color = if (isBreakSession) Color.parseColor("#FF65E6B2") else Color.parseColor("#FF83DFFF")
+            progressPaint.color = if (isBreakSession) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF75CFC8")
             textPaint.color = textPrimaryColor()
             invalidate()
         }
@@ -8484,8 +8494,8 @@ class MainActivity : AppCompatActivity() {
             // The light theme uses a clean soft-glass bezel: no black software shadow.
             bezelPaint.shader = android.graphics.LinearGradient(
                 0f, 0f, 0f, height.toFloat(),
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF3C6685"), Color.parseColor("#FF0B1B31"))
-                else intArrayOf(Color.parseColor("#FFF5FCFF"), Color.parseColor("#FFBBD9EE")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF29465A"), Color.parseColor("#FF172B3D"))
+                else intArrayOf(Color.parseColor("#FFEAF6F4"), Color.parseColor("#FFB9D8D4")),
                 null, Shader.TileMode.CLAMP
             )
             if (isDarkMode) bezelPaint.setShadowLayer(dp(12).toFloat(), 0f, dp(4).toFloat(), Color.argb(85, 0, 0, 0))
@@ -8496,22 +8506,22 @@ class MainActivity : AppCompatActivity() {
             // Recessed glass disc inside the ring, adapted to the active appearance.
             discPaint.shader = RadialGradient(
                 cx0, cy0 - outerR * 0.25f, outerR,
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF244968"), Color.parseColor("#FF0C1D35"), Color.parseColor("#FF071226"))
-                else intArrayOf(Color.parseColor("#FFFFFFFF"), Color.parseColor("#FFEAF7FF"), Color.parseColor("#FFD1E8F8")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF203A4B"), Color.parseColor("#FF122638"), Color.parseColor("#FF0B1927"))
+                else intArrayOf(Color.parseColor("#FFF8FCFB"), Color.parseColor("#FFE7F2F0"), Color.parseColor("#FFCADFDB")),
                 floatArrayOf(0f, 0.65f, 1f), Shader.TileMode.CLAMP
             )
             canvas.drawCircle(cx0, cy0, outerR - dp(7), discPaint)
 
             canvas.drawArc(ovalRect, 0f, 360f, false, trackPaint)
 
-            // Glowing orange progress with gradient (bright head, deeper tail)
+            // Soft mint progress with a restrained glass glow
             val sweepAngle = 360f * progressFraction
             val baseColor = progressPaint.color
             glowPaint.strokeWidth = progressPaint.strokeWidth
             glowPaint.color = baseColor
             glowPaint.shader = android.graphics.SweepGradient(
                 cx0, cy0,
-                intArrayOf(Color.parseColor("#FF477FBE"), baseColor, Color.parseColor("#FFD6F8FF"), Color.parseColor("#FF477FBE")),
+                intArrayOf(Color.parseColor("#FF397D7A"), baseColor, Color.parseColor("#FFE3FFF8"), Color.parseColor("#FF397D7A")),
                 floatArrayOf(0f, 0.55f, 0.9f, 1f)
             )
             if (isDarkMode) glowPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(115, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor)))
