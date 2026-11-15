@@ -900,7 +900,7 @@ class MainActivity : AppCompatActivity() {
 
         val root = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlass3DDrawable(dp(24))
+            background = createRefinedFrostedDrawable(dp(24))
             setPadding(dp(18), dp(16), dp(18), dp(18))
         }
 
@@ -1120,6 +1120,7 @@ class MainActivity : AppCompatActivity() {
         dialog.window?.setLayout((resources.displayMetrics.widthPixels * 0.94).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
         dialog.setCanceledOnTouchOutside(false)
+        animateSoftEntrance(root)
         activeAIChatDialog = dialog
         floatingAIChatBubble.visibility = View.GONE
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
@@ -2831,6 +2832,21 @@ class MainActivity : AppCompatActivity() {
         onboardingRefresh?.invoke()
     }
 
+    // Short, consistent motion language shared by Focus, Mentor and Journal.
+    private fun animateSoftEntrance(view: View, delayMs: Long = 0L) {
+        view.alpha = 0f
+        view.translationY = dp(14).toFloat()
+        view.scaleX = 0.985f
+        view.scaleY = 0.985f
+        view.animate().cancel()
+        view.animate()
+            .alpha(1f).translationY(0f).scaleX(1f).scaleY(1f)
+            .setStartDelay(delayMs)
+            .setDuration(360L)
+            .setInterpolator(android.view.animation.DecelerateInterpolator(1.6f))
+            .start()
+    }
+
     private fun createAIMessageBubble(text: String): View {
         return LinearLayout(this).apply {
             gravity = Gravity.START
@@ -2847,6 +2863,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 bottomMargin = dp(9)
             }
+            animateSoftEntrance(this)
         }
     }
 
@@ -2868,6 +2885,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 bottomMargin = dp(9)
             }
+            animateSoftEntrance(this)
         }
     }
 
@@ -4538,6 +4556,7 @@ class MainActivity : AppCompatActivity() {
             })
         }
         content.addView(switcher)
+        animateSoftEntrance(switcher, 35L)
 
         if (notesSubTab == 0) {
             content.addView(buildNoteCategoryRow())
@@ -4564,6 +4583,7 @@ class MainActivity : AppCompatActivity() {
             root.addView(content)
             root.addView(buildNotesLeftSlideOutDock())
         }
+        animateSoftEntrance(content, 70L)
         return root
     }
 
@@ -4748,7 +4768,7 @@ class MainActivity : AppCompatActivity() {
 
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlassCardDrawable(true, false)
+            background = createRefinedFrostedDrawable(dp(24))
             setPadding(dp(16), dp(12), dp(16), dp(88))
             clipToPadding = false
         }
@@ -4935,8 +4955,9 @@ class MainActivity : AppCompatActivity() {
         if (activeIdx + 1 < total) stackContainer.addView(buildSingleNoteCardView(notes[activeIdx + 1], false).apply { styleRearCard(this, 1) })
         val frontCard = buildSingleNoteCardView(notes[activeIdx], true).apply {
             prepareStackCard(this)
-            scaleX = 1f; scaleY = 1f; translationY = dp(24).toFloat(); translationX = 0f
-            rotationY = 0f; alpha = 1f; elevation = dp(22).toFloat()
+            scaleX = 0.975f; scaleY = 0.975f; translationY = dp(34).toFloat(); translationX = 0f
+            rotationY = 0f; alpha = 0.72f; elevation = dp(22).toFloat()
+            post { animate().alpha(1f).scaleX(1f).scaleY(1f).translationY(dp(24).toFloat()).setDuration(420L).setInterpolator(android.view.animation.OvershootInterpolator(0.85f)).start() }
         }
         setupCardSwipeNavigation(frontCard) { direction ->
             if (direction > 0 && currentNoteCarouselIndex < total - 1) {
@@ -4965,11 +4986,7 @@ class MainActivity : AppCompatActivity() {
         val cardColor = if (isDarkMode) Color.parseColor("#B8203B50") else Color.parseColor("#C9FFFFFF")
         val card = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = GradientDrawable().apply {
-                shape = GradientDrawable.RECTANGLE; cornerRadius = dp(22).toFloat()
-                setColor(cardColor)
-                setStroke(dp(1), if (isDarkMode) Color.parseColor("#665DD5E8") else Color.parseColor("#6680B8C4"))
-            }
+            background = createRefinedFrostedDrawable(dp(22))
             setPadding(dp(13), dp(12), dp(13), dp(13))
             isClickable = true; isFocusable = true; elevation = dp(1).toFloat()
             setOnClickListener { showNoteDetailsPage(note) }
@@ -5033,7 +5050,7 @@ class MainActivity : AppCompatActivity() {
     private fun showNoteDetailsPage(note: NoteItem) {
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlassCardDrawable(true, false)
+            background = createRefinedFrostedDrawable(dp(24))
             setPadding(dp(18), dp(12), dp(18), dp(16))
         }
         val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
@@ -5067,6 +5084,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         page.addView(toolbar)
+        animateSoftEntrance(page, 40L)
 
         val scroll = ScrollView(this).apply { isFillViewport = true; overScrollMode = View.OVER_SCROLL_NEVER }
         val body = LinearLayout(this).apply {
@@ -5277,7 +5295,7 @@ class MainActivity : AppCompatActivity() {
         noteImageUri = existingNote?.imageUri ?: ""
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlassCardDrawable(true, false)
+            background = createRefinedFrostedDrawable(dp(24))
             setPadding(dp(16), dp(12), dp(16), dp(16))
         }
         val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
@@ -5293,9 +5311,10 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         })
         page.addView(toolbar)
+        animateSoftEntrance(page, 40L)
         val v = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createPillDrawable(bgCardColor(), dp(22), COLOR_TEAL)
+            background = createRefinedFrostedDrawable(dp(22))
             setPadding(dp(20), dp(20), dp(20), dp(20))
         }
 
@@ -5557,6 +5576,49 @@ class MainActivity : AppCompatActivity() {
         dialog.setOnCancelListener { if (isRecordingNoteAudio) discardRecording() }
     }
 
+    // Lightweight frosted surface: translucent neutral glass, a fine rim and a
+    // restrained top reflection. Avoids the heavy opaque brown/black faux-3D look.
+    private fun createRefinedFrostedDrawable(radiusPx: Int): android.graphics.drawable.LayerDrawable {
+        val radius = radiusPx.toFloat()
+        val fill = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            if (isDarkMode) intArrayOf(
+                Color.argb(142, 42, 39, 36),
+                Color.argb(116, 31, 30, 29),
+                Color.argb(132, 25, 25, 25)
+            ) else intArrayOf(
+                Color.argb(164, 255, 255, 255),
+                Color.argb(132, 250, 247, 241),
+                Color.argb(146, 237, 232, 222)
+            )
+        ).apply {
+            cornerRadius = radius
+            setStroke(dp(1), Color.argb(if (isDarkMode) 112 else 150, 255, 255, 255))
+        }
+        val reflection = GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(
+                Color.argb(if (isDarkMode) 48 else 108, 255, 255, 255),
+                Color.argb(18, 255, 255, 255),
+                Color.TRANSPARENT
+            )
+        ).apply {
+            cornerRadius = radius
+            setStroke(dp(1), Color.argb(if (isDarkMode) 52 else 78, 255, 255, 255))
+        }
+        val lowerTint = GradientDrawable(
+            GradientDrawable.Orientation.BOTTOM_TOP,
+            intArrayOf(
+                Color.argb(if (isDarkMode) 24 else 30, 178, 148, 112),
+                Color.TRANSPARENT
+            )
+        ).apply { cornerRadius = radius }
+        return android.graphics.drawable.LayerDrawable(arrayOf(fill, lowerTint, reflection)).apply {
+            setLayerInset(1, dp(2), dp(2), dp(2), dp(2))
+            setLayerInset(2, dp(2), dp(2), dp(2), dp(2))
+        }
+    }
+
     private fun focusGlassDrawable(radiusDp: Int = 22): android.graphics.drawable.Drawable {
         return GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
@@ -5669,6 +5731,7 @@ class MainActivity : AppCompatActivity() {
             setPadding(0, dp(5), 0, 0)
         })
         content.addView(focusIntro)
+        animateSoftEntrance(focusIntro, 45L)
 
         if (isPomodoroLinkedToTask && selectedFocusTaskId != null) {
             val task = ReminderRepository.getItemById(this, selectedFocusTaskId ?: "")
@@ -5684,7 +5747,7 @@ class MainActivity : AppCompatActivity() {
         val timerCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            background = focusGlassDrawable(30)
+            background = createRefinedFrostedDrawable(dp(30))
             elevation = 0f
             setPadding(dp(10), dp(16), dp(10), dp(14))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
@@ -5736,6 +5799,7 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(8), dp(2), dp(8), dp(2))
         })
         content.addView(timerCard)
+        animateSoftEntrance(timerCard, 90L)
 
         val controlsRow = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -5777,6 +5841,7 @@ class MainActivity : AppCompatActivity() {
         }
         controlsRow.addView(btnTickTock)
         content.addView(controlsRow)
+        animateSoftEntrance(controlsRow, 150L)
 
         val btnModeSwitch = TextView(this).apply {
             text = if (isBreakSession) (if (isArabic) "🎯 رجوع للتركيز" else "🎯 Back to focus") else (if (isArabic) "☕ ابدأ استراحة" else "☕ Start a break")
@@ -5802,7 +5867,9 @@ class MainActivity : AppCompatActivity() {
         }
         content.addView(btnModeSwitch)
 
-        content.addView(buildFocusDashboard())
+        val dashboard = buildFocusDashboard()
+        content.addView(dashboard)
+        animateSoftEntrance(dashboard, 210L)
 
         root.addView(ScrollView(this).apply {
             isFillViewport = true
