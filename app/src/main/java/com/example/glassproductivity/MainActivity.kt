@@ -589,7 +589,10 @@ class MainActivity : AppCompatActivity() {
             val h = dp(36)
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, h).apply { marginEnd = dp(8) }
             setPadding(dp(12), 0, dp(12), 0)
-            setOnClickListener { toggleLanguage() }
+            setOnClickListener {
+                animateTapFeedback(this)
+                toggleLanguage()
+            }
         }
         headerBarLayout.addView(btnLang)
 
@@ -600,11 +603,15 @@ class MainActivity : AppCompatActivity() {
             background = createGlass3DDrawable(dp(14)); elevation = dp(6).toFloat()
             val s = dp(36)
             layoutParams = LinearLayout.LayoutParams(s, s)
-            setOnClickListener { showAccordionSettingsDialog() }
+            setOnClickListener {
+                animateTapFeedback(this)
+                showAccordionSettingsDialog()
+            }
         }
         headerBarLayout.addView(btnSettings)
 
         mainContentContainer.addView(headerBarLayout)
+        animateSoftEntrance(headerBarLayout, 40L)
 
         tabContentHost = FrameLayout(this).apply {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
@@ -673,6 +680,7 @@ class MainActivity : AppCompatActivity() {
                     setTextColor(if (sel) Color.parseColor("#0B1417") else textMutedColor())
                 })
                 setOnClickListener {
+                    animateTapFeedback(this)
                     if (idx != currentTab) performLiquidWaveTransitionToTab(idx)
                 }
             })
@@ -732,6 +740,7 @@ class MainActivity : AppCompatActivity() {
             else -> buildTasksScreenView()
         }
         tabContentHost.addView(view)
+        animateScreenEntrance(view)
     }
 
     private var radialTouchStartX = 0f
@@ -2862,6 +2871,58 @@ class MainActivity : AppCompatActivity() {
             .setStartDelay(delayMs)
             .setDuration(360L)
             .setInterpolator(android.view.animation.DecelerateInterpolator(1.6f))
+            .start()
+    }
+
+    // WAQT Motion System: restrained iOS-inspired motion with short, responsive easing.
+    private fun animateScreenEntrance(view: View) {
+        view.animate().cancel()
+        view.alpha = 0f
+        view.translationY = dp(18).toFloat()
+        view.scaleX = 0.985f
+        view.scaleY = 0.985f
+        view.animate()
+            .alpha(1f)
+            .translationY(0f)
+            .scaleX(1f)
+            .scaleY(1f)
+            .setDuration(380L)
+            .setInterpolator(android.view.animation.DecelerateInterpolator(1.5f))
+            .start()
+
+        if (view is ViewGroup) {
+            for (index in 0 until view.childCount) {
+                val child = view.getChildAt(index)
+                if (child.visibility != View.VISIBLE) continue
+                child.animate().cancel()
+                child.alpha = 0f
+                child.translationY = dp(9).toFloat()
+                child.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setStartDelay((index * 34L).coerceAtMost(170L))
+                    .setDuration(280L)
+                    .setInterpolator(android.view.animation.DecelerateInterpolator(1.35f))
+                    .start()
+            }
+        }
+    }
+
+    private fun animateTapFeedback(view: View) {
+        view.animate().cancel()
+        view.animate()
+            .scaleX(0.94f)
+            .scaleY(0.94f)
+            .setDuration(85L)
+            .setInterpolator(AccelerateDecelerateInterpolator())
+            .withEndAction {
+                view.animate()
+                    .scaleX(1f)
+                    .scaleY(1f)
+                    .setDuration(230L)
+                    .setInterpolator(android.view.animation.OvershootInterpolator(1.35f))
+                    .start()
+            }
             .start()
     }
 
