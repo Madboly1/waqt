@@ -1,6 +1,7 @@
 package com.example.glassproductivity
 
 import android.Manifest
+import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.AlertDialog
@@ -5761,6 +5762,7 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(8) }
             setOnClickListener {
+                animateTapFeedback(this)
                 triggerGentleHaptic()
                 isPomodoroLinkedToTask = true
                 showTaskPickerSortedByTime()
@@ -5779,6 +5781,7 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f)
             setOnClickListener {
+                animateTapFeedback(this)
                 triggerGentleHaptic()
                 isPomodoroLinkedToTask = false
                 selectedFocusTaskId = null
@@ -5896,6 +5899,7 @@ class MainActivity : AppCompatActivity() {
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(148), dp(48)).apply { marginEnd = dp(10) }
             setOnClickListener {
+                animateTapFeedback(this)
                 triggerGentleHaptic()
                 toggleInAppPomodoro()
             }
@@ -5912,6 +5916,7 @@ class MainActivity : AppCompatActivity() {
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(120), dp(48))
             setOnClickListener {
+                animateTapFeedback(this)
                 triggerGentleHaptic()
                 isTickTockSoundActive = !isTickTockSoundActive
                 getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putBoolean(ReminderRepository.KEY_TICK_TOCK_ENABLED, isTickTockSoundActive).apply()
@@ -5933,6 +5938,7 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(18), 0, dp(18), 0)
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(40)).apply { bottomMargin = dp(12) }
             setOnClickListener {
+                animateTapFeedback(this)
                 if (isPomodoroRunning) {
                     Toast.makeText(this@MainActivity, if (isArabic) "أوقف الجلسة الأول" else "Pause the session first", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
@@ -8611,6 +8617,7 @@ class MainActivity : AppCompatActivity() {
 
     inner class CircularTimerRingView(context: Context) : View(context) {
         private var progressFraction: Float = 1f
+        private var progressAnimator: ValueAnimator? = null
         private var timeString: String = "25:00"
 
         private val trackPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -8660,7 +8667,16 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun updateTimerDisplay(remainingMs: Long, totalMs: Long) {
-            progressFraction = if (totalMs > 0) (remainingMs.toFloat() / totalMs.toFloat()).coerceIn(0f, 1f) else 0f
+            val targetProgress = if (totalMs > 0) (remainingMs.toFloat() / totalMs.toFloat()).coerceIn(0f, 1f) else 0f
+            progressAnimator?.cancel()
+            progressAnimator = ValueAnimator.ofFloat(progressFraction, targetProgress).apply {
+                duration = 260L
+                addUpdateListener { animation ->
+                    progressFraction = animation.animatedValue as Float
+                    invalidate()
+                }
+                start()
+            }
             val totalSec = (remainingMs / 1000L).coerceAtLeast(0L)
             val m = totalSec / 60L
             val s = totalSec % 60L
@@ -8668,6 +8684,12 @@ class MainActivity : AppCompatActivity() {
             progressPaint.color = if (isBreakSession) Color.parseColor("#FFEED7B8") else Color.parseColor("#FFC5A57E")
             textPaint.color = textPrimaryColor()
             invalidate()
+        }
+
+        override fun onDetachedFromWindow() {
+            progressAnimator?.cancel()
+            progressAnimator = null
+            super.onDetachedFromWindow()
         }
 
         override fun onDraw(canvas: Canvas) {
