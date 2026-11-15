@@ -98,22 +98,22 @@ class MainActivity : AppCompatActivity() {
     private var isDarkMode: Boolean = true
     private var currentTab: Int = 0 // 0: المهام, 1: العادات, 2: التركيز, 3: مدونتي
 
-    // ألوان البترولي والبرتقالي
-    private val COLOR_BG_DARK = "#07111F"
-    private val COLOR_CARD_DARK = "#B31B3048"
-    private val COLOR_ELEVATED_DARK = "#CC243D59"
-    private val COLOR_ORANGE = "#FF9DCEFF"
-    private val COLOR_ORANGE_LIGHT = "#FFD7F0FF"
-    private val COLOR_TEAL = "#FF65D9F2"
-    private val COLOR_TEAL_DEEP = "#FF9BEAFF"
-    private val COLOR_TEXT_PRIMARY = "#FFF5FAFF"
-    private val COLOR_TEXT_MUTED = "#FFB8C9DC"
+    // WAQT Warm Liquid Glass palette: warm stone, cream, sand and muted bronze.
+    private val COLOR_BG_DARK = "#211C18"
+    private val COLOR_CARD_DARK = "#B83B3028"
+    private val COLOR_ELEVATED_DARK = "#D6534437"
+    private val COLOR_ORANGE = "#FFD5A36C"
+    private val COLOR_ORANGE_LIGHT = "#FFFFE0B8"
+    private val COLOR_TEAL = "#FFC5B49A"
+    private val COLOR_TEAL_DEEP = "#FFE6D2B2"
+    private val COLOR_TEXT_PRIMARY = "#FFFFF7EC"
+    private val COLOR_TEXT_MUTED = "#FFD0C1AF"
 
-    private fun bgPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_BG_DARK else "#F0F6F4")
-    private fun bgCardColor(): Int = Color.parseColor(if (isDarkMode) COLOR_CARD_DARK else "#EFFFFFFF")
-    private fun bgElevatedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_ELEVATED_DARK else "#DFFFFFFF")
-    private fun textPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_PRIMARY else "#0B1417")
-    private fun textMutedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_MUTED else "#526C6C")
+    private fun bgPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_BG_DARK else "#F3EBDD")
+    private fun bgCardColor(): Int = Color.parseColor(if (isDarkMode) COLOR_CARD_DARK else "#DDFBF5EA")
+    private fun bgElevatedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_ELEVATED_DARK else "#EAFEF9F0")
+    private fun textPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_PRIMARY else "#382D24")
+    private fun textMutedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_MUTED else "#806F5D")
     private fun accentOrangeColor(): Int = Color.parseColor(COLOR_ORANGE)
     private fun accentTealColor(): Int = Color.parseColor(COLOR_TEAL)
 
@@ -533,7 +533,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             setBackgroundColor(bgPrimaryColor())
         }
-        // Liquid-glass atmosphere: layered cool light blooms behind translucent surfaces.
+        // Warm Liquid Glass atmosphere: soft amber and cream light blooms behind translucent surfaces.
         rootFrameLayout.addView(AtmosphereBackgroundView(this), FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT
         ))
@@ -567,7 +567,7 @@ class MainActivity : AppCompatActivity() {
             setTextColor(textPrimaryColor())
             textSize = 26f
             setTypeface(typeface, Typeface.BOLD)
-            setShadowLayer(dp(10).toFloat(), 0f, 0f, Color.argb(160, 255, 138, 61))
+            setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(90, 196, 145, 91))
         }
         tvBrandSubtitle = TextView(this).apply {
             text = getTabSubtitleText()
@@ -1008,9 +1008,9 @@ class MainActivity : AppCompatActivity() {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             background = createPillDrawable(
-                if (isDarkMode) Color.parseColor("#D91A2A38") else Color.parseColor("#F2FFFFFF"),
+                if (isDarkMode) Color.parseColor("#D94A3B30") else Color.parseColor("#EFFFFAF0"),
                 dp(27),
-                if (isDarkMode) "#557D9EAC" else "#A8B9C8D2"
+                if (isDarkMode) "#88D8B98F" else "#B8C5A985"
             )
             setPadding(dp(7), dp(6), dp(7), dp(6))
             elevation = dp(3).toFloat()
@@ -3113,7 +3113,7 @@ class MainActivity : AppCompatActivity() {
                     background = GradientDrawable().apply {
                         shape = GradientDrawable.OVAL
                         setColor(if (isSel) (if (key == "overdue") Color.parseColor("#F16D68") else accentOrangeColor()) else bgCardColor())
-                        setStroke(dp(1), Color.parseColor(if (key == "overdue") "#F16D68" else "#2635B6AD"))
+                        setStroke(dp(1), Color.parseColor(if (key == "overdue") "#F16D68" else "#268F755B"))
                     }
                     elevation = if (isSel) dp(6).toFloat() else dp(2).toFloat()
                 }
@@ -3189,7 +3189,7 @@ class MainActivity : AppCompatActivity() {
 
         val navCounter = TextView(this).apply {
             text = if (isArabic) "${activeIdx + 1} من $total" else "${activeIdx + 1} of $total"
-            setTextColor(Color.parseColor("#D9F5F0"))
+            setTextColor(Color.parseColor("#FFF4E7D2"))
             textSize = 11f
             typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
             gravity = Gravity.CENTER
@@ -3197,8 +3197,8 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
                 cornerRadius = dp(18).toFloat()
-                setColor(Color.parseColor("#CC142A2E"))
-                setStroke(dp(1), Color.parseColor("#6650C9C0"))
+                setColor(Color.parseColor("#CC403126"))
+                setStroke(dp(1), Color.parseColor("#668F755B"))
             }
             elevation = dp(4).toFloat()
             layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
@@ -3465,7 +3465,7 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
                 setColor(bgElevatedColor())
-                setStroke(dp(1), Color.parseColor("#3335B6AD"))
+                setStroke(dp(1), Color.parseColor("#338F755B"))
             }
             setOnClickListener {
                 triggerGentleHaptic()
@@ -3555,7 +3555,7 @@ class MainActivity : AppCompatActivity() {
             val tvHandle = TextView(this).apply {
                 text = "▸"
                 textSize = 22f
-                setTextColor(Color.parseColor("#FF4FD6C9"))
+                setTextColor(Color.parseColor("#FFD7B487"))
                 gravity = Gravity.CENTER
             }
             dockLayout.addView(tvHandle)
@@ -3839,7 +3839,7 @@ class MainActivity : AppCompatActivity() {
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
                 setTextColor(if (isSel) Color.parseColor("#0B1417") else textPrimaryColor())
-                background = createPillDrawable(if (isSel) accentOrangeColor() else bgCardColor(), dp(14), if (isSel) null else "#2635B6AD")
+                background = createPillDrawable(if (isSel) accentOrangeColor() else bgCardColor(), dp(14), if (isSel) null else "#268F755B")
                 setPadding(dp(14), dp(8), dp(14), dp(8))
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(6) }
                 setOnClickListener {
@@ -3934,7 +3934,7 @@ class MainActivity : AppCompatActivity() {
         }
         val navCounter = TextView(this).apply {
             text = if (isArabic) "${activeIdx + 1} من $total" else "${activeIdx + 1} of $total"
-            setTextColor(Color.parseColor("#D9F5F0"))
+            setTextColor(Color.parseColor("#FFF4E7D2"))
             textSize = 11f
             typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
             gravity = Gravity.CENTER
@@ -3942,8 +3942,8 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
                 cornerRadius = dp(18).toFloat()
-                setColor(Color.parseColor("#CC142A2E"))
-                setStroke(dp(1), Color.parseColor("#6650C9C0"))
+                setColor(Color.parseColor("#CC403126"))
+                setStroke(dp(1), Color.parseColor("#668F755B"))
             }
             elevation = dp(4).toFloat()
             layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
@@ -4257,7 +4257,7 @@ class MainActivity : AppCompatActivity() {
             val tvHandle = TextView(this).apply {
                 text = "▸"
                 textSize = 22f
-                setTextColor(Color.parseColor("#FF4FD6C9"))
+                setTextColor(Color.parseColor("#FFD7B487"))
                 gravity = Gravity.CENTER
             }
             dockLayout.addView(tvHandle)
@@ -4889,7 +4889,7 @@ class MainActivity : AppCompatActivity() {
         }
         stackContainer.addView(TextView(this).apply {
             text = if (isArabic) "${activeIdx + 1} من $total" else "${activeIdx + 1} of $total"
-            setTextColor(Color.parseColor("#D9F5F0"))
+            setTextColor(Color.parseColor("#FFF4E7D2"))
             textSize = 11f
             typeface = Typeface.create("sans-serif-medium", Typeface.BOLD)
             gravity = Gravity.CENTER
@@ -4897,8 +4897,8 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 shape = GradientDrawable.RECTANGLE
                 cornerRadius = dp(18).toFloat()
-                setColor(Color.parseColor("#CC142A2E"))
-                setStroke(dp(1), Color.parseColor("#6650C9C0"))
+                setColor(Color.parseColor("#CC403126"))
+                setStroke(dp(1), Color.parseColor("#668F755B"))
             }
             elevation = dp(4).toFloat()
             layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
@@ -5570,7 +5570,7 @@ class MainActivity : AppCompatActivity() {
     private fun focusActiveDrawable(radiusDp: Int = 18): android.graphics.drawable.Drawable {
         return GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.parseColor("#FFBDEDE7"), Color.parseColor("#FF75CFC8"))
+            intArrayOf(Color.parseColor("#FFEED7B8"), Color.parseColor("#FFC5A57E"))
         ).apply {
             cornerRadius = dp(radiusDp).toFloat()
             setStroke(dp(1), Color.parseColor("#80E7FFF8"))
@@ -5614,7 +5614,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#102C34") else textPrimaryColor())
+            setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#3B2B20") else textPrimaryColor())
             background = if (isPomodoroLinkedToTask) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             setPadding(dp(14), dp(8), dp(14), dp(8))
@@ -5632,7 +5632,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#102C34") else textPrimaryColor())
+            setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#3B2B20") else textPrimaryColor())
             background = if (!isPomodoroLinkedToTask) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             setPadding(dp(14), dp(8), dp(14), dp(8))
@@ -5764,7 +5764,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isTickTockSoundActive) Color.parseColor("#102C34") else textPrimaryColor())
+            setTextColor(if (isTickTockSoundActive) Color.parseColor("#3B2B20") else textPrimaryColor())
             background = if (isTickTockSoundActive) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(120), dp(48))
@@ -5864,7 +5864,7 @@ class MainActivity : AppCompatActivity() {
             val tvHandle = TextView(this).apply {
                 text = "▸"
                 textSize = 22f
-                setTextColor(Color.parseColor("#FF4FD6C9"))
+                setTextColor(Color.parseColor("#FFD7B487"))
                 gravity = Gravity.CENTER
             }
             dockLayout.addView(tvHandle)
@@ -6064,7 +6064,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             setTextColor(Color.WHITE)
             setPadding(dp(12), dp(6), dp(12), dp(6))
-            background = createPillDrawable(Color.parseColor("#1B383C"), dp(12), null)
+            background = createPillDrawable(Color.parseColor("#49382B"), dp(12), null)
             setOnClickListener {
                 fullscreenClockType = if (fullscreenClockType == "flip") "hourglass" else "flip"
                 renderCurrentTab()
@@ -6130,7 +6130,7 @@ class MainActivity : AppCompatActivity() {
             setTextColor(Color.WHITE)
             background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
-                setColor(Color.parseColor("#1B383C"))
+                setColor(Color.parseColor("#49382B"))
             }
             val s = dp(64)
             layoutParams = FrameLayout.LayoutParams(s, s).apply {
@@ -6185,7 +6185,7 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 setColor(bgPrimaryColor())
                 cornerRadius = dp(26).toFloat()
-                setStroke(dp(1), Color.parseColor("#5535B6AD"))
+                setStroke(dp(1), Color.parseColor("#557F684F"))
             }
             clipToOutline = true
         }
@@ -6245,7 +6245,7 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 setColor(bgCardColor())
                 cornerRadius = dp(18).toFloat()
-                setStroke(dp(1), Color.parseColor("#3335B6AD"))
+                setStroke(dp(1), Color.parseColor("#338F755B"))
             }
             setPadding(dp(14), dp(12), dp(14), dp(12))
             layoutParams = LinearLayout.LayoutParams(
@@ -6269,7 +6269,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTextColor(textPrimaryColor())
-            background = createPillDrawable(bgElevatedColor(), dp(14), "#5535B6AD")
+            background = createPillDrawable(bgElevatedColor(), dp(14), "#557F684F")
             setPadding(dp(12), dp(10), dp(12), dp(10))
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply {
                 marginEnd = dp(8)
@@ -6547,7 +6547,7 @@ class MainActivity : AppCompatActivity() {
         return LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
-            background = createPillDrawable(bgCardColor(), dp(13), "#3335B6AD")
+            background = createPillDrawable(bgCardColor(), dp(13), "#338F755B")
             setPadding(dp(13), dp(12), dp(13), dp(12))
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT
@@ -6577,7 +6577,7 @@ class MainActivity : AppCompatActivity() {
             background = GradientDrawable().apply {
                 setColor(bgCardColor())
                 cornerRadius = dp(20).toFloat()
-                setStroke(dp(1), Color.parseColor("#5535B6AD"))
+                setStroke(dp(1), Color.parseColor("#557F684F"))
             }
             setPadding(dp(20), dp(18), dp(20), dp(18))
         }
@@ -6731,7 +6731,7 @@ class MainActivity : AppCompatActivity() {
         return LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            background = createPillDrawable(bgCardColor(), dp(20), "#2635B6AD")
+            background = createPillDrawable(bgCardColor(), dp(20), "#268F755B")
             setPadding(dp(20), dp(36), dp(20), dp(36))
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 topMargin = dp(24)
@@ -6755,39 +6755,38 @@ class MainActivity : AppCompatActivity() {
 
     private fun createGlassCardDrawable(isForeground: Boolean, warm: Boolean): android.graphics.drawable.LayerDrawable {
         val radius = dp(24).toFloat()
-        val accent = if (warm) Color.parseColor("#FFFFC58E")
-            else if (isForeground) Color.parseColor("#FFBDEEFF")
-            else Color.parseColor("#88A8DFFF")
+        val accent = if (warm || isForeground) Color.parseColor("#FFE5C59B")
+            else Color.parseColor("#99C8AD8B")
         val shadow = GradientDrawable().apply {
             cornerRadius = radius
-            setColor(Color.argb(if (isDarkMode) 70 else 24, 0, 0, 0))
-            setStroke(dp(2), Color.argb(if (isForeground) 105 else 55, 160, 220, 255))
+            setColor(Color.argb(if (isDarkMode) 76 else 22, 30, 22, 15))
+            setStroke(dp(1), Color.argb(if (isForeground) 125 else 76, 211, 177, 132))
         }
         val glass = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
             if (isDarkMode) intArrayOf(
-                Color.argb(190, 112, 166, 205),
-                Color.argb(142, 45, 83, 126),
-                Color.argb(176, 14, 31, 57)
+                Color.argb(218, 133, 106, 79),
+                Color.argb(180, 91, 69, 51),
+                Color.argb(194, 52, 41, 32)
             ) else intArrayOf(
-                Color.argb(218, 255, 255, 255),
-                Color.argb(178, 220, 239, 255),
-                Color.argb(198, 188, 218, 244)
+                Color.argb(224, 255, 252, 244),
+                Color.argb(190, 244, 232, 211),
+                Color.argb(202, 226, 208, 181)
             )
         ).apply {
             cornerRadius = radius
-            setStroke(dp(if (isForeground) 1.6f.toInt() else 1), accent)
+            setStroke(dp(if (isForeground) 2 else 1), accent)
         }
         val topReflection = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.argb(105, 255, 255, 255), Color.argb(28, 235, 248, 255), Color.TRANSPARENT)
+            intArrayOf(Color.argb(118, 255, 250, 239), Color.argb(35, 255, 242, 220), Color.TRANSPARENT)
         ).apply {
             cornerRadius = radius
-            setStroke(dp(1), Color.argb(80, 255, 255, 255))
+            setStroke(dp(1), Color.argb(92, 255, 242, 220))
         }
         val bottomTint = GradientDrawable(
             GradientDrawable.Orientation.BOTTOM_TOP,
-            intArrayOf(Color.argb(42, 90, 185, 255), Color.TRANSPARENT)
+            intArrayOf(Color.argb(54, 190, 143, 91), Color.TRANSPARENT)
         ).apply { cornerRadius = radius }
         return android.graphics.drawable.LayerDrawable(arrayOf(shadow, glass, bottomTint, topReflection)).apply {
             setLayerInset(1, dp(2), dp(2), dp(2), dp(2))
@@ -6805,21 +6804,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createOrange3DDrawable(radiusPx: Int) = create3DButtonDrawable(
-        Color.parseColor("#FFFFA65E"), Color.parseColor("#FFE8641C"), radiusPx, Color.parseColor("#FFFFC48F")
+        Color.parseColor("#FFE8C49A"), Color.parseColor("#FFB98554"), radiusPx, Color.parseColor("#FFFFE4BE")
     )
 
     private fun createGlass3DDrawable(radiusPx: Int): android.graphics.drawable.LayerDrawable {
         val body = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            if (isDarkMode) intArrayOf(Color.argb(205, 104, 160, 202), Color.argb(165, 28, 62, 101), Color.argb(188, 10, 25, 48))
-            else intArrayOf(Color.argb(230, 255, 255, 255), Color.argb(205, 220, 239, 255))
+            if (isDarkMode) intArrayOf(
+                Color.argb(218, 112, 91, 70), Color.argb(190, 75, 59, 46), Color.argb(205, 48, 38, 31)
+            ) else intArrayOf(
+                Color.argb(224, 255, 250, 239), Color.argb(194, 238, 224, 201), Color.argb(178, 222, 203, 174)
+            )
         ).apply {
             cornerRadius = radiusPx.toFloat()
-            setStroke(dp(1), Color.argb(210, 180, 230, 255))
+            setStroke(dp(1), Color.argb(if (isDarkMode) 150 else 185, 229, 202, 165))
         }
         val shine = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.argb(100, 255, 255, 255), Color.argb(18, 255, 255, 255), Color.TRANSPARENT)
+            intArrayOf(Color.argb(118, 255, 250, 238), Color.argb(30, 255, 246, 228), Color.TRANSPARENT)
         ).apply { cornerRadius = radiusPx.toFloat() }
         return android.graphics.drawable.LayerDrawable(arrayOf(body, shine)).apply {
             setLayerInset(1, dp(2), dp(2), dp(2), dp(2))
@@ -6832,8 +6834,8 @@ class MainActivity : AppCompatActivity() {
     private fun createRailDrawable(edge: Int = railEdge()): GradientDrawable =
         GradientDrawable(
             if (edge >= 2) GradientDrawable.Orientation.LEFT_RIGHT else GradientDrawable.Orientation.TOP_BOTTOM,
-            if (isDarkMode) intArrayOf(Color.argb(224, 52, 91, 132), Color.argb(205, 16, 37, 67), Color.argb(220, 8, 20, 40))
-            else intArrayOf(Color.argb(224, 245, 251, 255), Color.argb(210, 210, 231, 249))
+            if (isDarkMode) intArrayOf(Color.argb(226, 112, 88, 65), Color.argb(210, 66, 51, 39), Color.argb(220, 39, 31, 25))
+            else intArrayOf(Color.argb(232, 255, 250, 239), Color.argb(218, 232, 216, 191))
         ).apply {
             val r = dp(24).toFloat()
             cornerRadii = when (edge) {
@@ -6842,7 +6844,7 @@ class MainActivity : AppCompatActivity() {
                 2 -> floatArrayOf(0f, 0f, 0f, 0f, r, r, r, r)
                 else -> floatArrayOf(r, r, r, r, 0f, 0f, 0f, 0f)
             }
-            setStroke(dp(1), Color.argb(210, 184, 224, 255))
+            setStroke(dp(1), Color.argb(205, 229, 202, 165))
         }
 
     private fun positionRail(dock: View) {
@@ -7000,8 +7002,8 @@ class MainActivity : AppCompatActivity() {
     private fun railTint(icon: String): Int = Color.parseColor(
         when (icon) {
             "➕" -> "#FFFF8A3D"; "⚡" -> "#FFFFC93C"; "🔍" -> "#FF5AC8FA"; "📊" -> "#FFB085F5"
-            "🏆" -> "#FFFFD166"; "🎧" -> "#FF4FD6C9"; "⛶" -> "#FF42C98A"; "🪟" -> "#FFFF7AA2"
-            "🏷" -> "#FF7BD88F"; "🔔" -> "#FFFFB347"; "🔇" -> "#FFF16D68"; else -> "#FF4FD6C9"
+            "🏆" -> "#FFFFD166"; "🎧" -> "#FFD7B487"; "⛶" -> "#FF42C98A"; "🪟" -> "#FFFF7AA2"
+            "🏷" -> "#FF7BD88F"; "🔔" -> "#FFFFB347"; "🔇" -> "#FFF16D68"; else -> "#FFD7B487"
         }
     )
 
@@ -7380,7 +7382,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(10))
         }
         barRow.addView(View(this).apply {
-            background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.parseColor("#FF75CFC8"), Color.parseColor("#FFBDEDE7"))).apply { cornerRadius = dp(6).toFloat() }
+            background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.parseColor("#FFC5A57E"), Color.parseColor("#FFEED7B8"))).apply { cornerRadius = dp(6).toFloat() }
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, pct.coerceAtLeast(1).toFloat())
         })
         barRow.addView(View(this).apply {
@@ -7413,7 +7415,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isAmbientPlaying) Color.parseColor("#102C34") else textMutedColor())
+            setTextColor(if (isAmbientPlaying) Color.parseColor("#3B2B20") else textMutedColor())
             background = if (isAmbientPlaying) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             setPadding(dp(14), 0, dp(14), 0)
@@ -7433,7 +7435,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 13f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (active) Color.parseColor("#102C34") else textPrimaryColor())
+                setTextColor(if (active) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = if (active) focusActiveDrawable(18) else focusQuietDrawable(18)
                 elevation = 0f
                 setPadding(dp(14), 0, dp(14), 0)
@@ -7575,8 +7577,8 @@ class MainActivity : AppCompatActivity() {
                 val barH = (chartH * (mins / maxVal)).coerceAtLeast(dp(4).toFloat())
                 val top = topPad + chartH - barH
                 rect.set(cx - barW / 2f, top, cx + barW / 2f, topPad + chartH)
-                val c1 = if (isToday) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF75CFC8")
-                val c2 = if (isToday) Color.parseColor("#FF4D9D99") else Color.parseColor("#FF397D7A")
+                val c1 = if (isToday) Color.parseColor("#FFEED7B8") else Color.parseColor("#FFC5A57E")
+                val c2 = if (isToday) Color.parseColor("#FF9D7955") else Color.parseColor("#FF806348")
                 barPaint.shader = android.graphics.LinearGradient(0f, top, 0f, topPad + chartH, c1, c2, Shader.TileMode.CLAMP)
                 if (mins > 0) barPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(120, Color.red(c1), Color.green(c1), Color.blue(c1)))
                 else barPaint.clearShadowLayer()
@@ -7584,7 +7586,7 @@ class MainActivity : AppCompatActivity() {
                 canvas.drawRoundRect(rect, dp(7).toFloat(), dp(7).toFloat(), barPaint)
                 barPaint.clearShadowLayer()
 
-                labelPaint.color = if (isToday) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF9CB7B8")
+                labelPaint.color = if (isToday) Color.parseColor("#FFEED7B8") else Color.parseColor("#FFD6C2A7")
                 canvas.drawText(name, cx, h - dp(3).toFloat(), labelPaint)
                 if (mins > 0) {
                     labelPaint.color = Color.WHITE
@@ -8143,36 +8145,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class AtmosphereBackgroundView(context: Context) : View(context) {
-        private val petrolPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        private val orangePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        private val lowerPetrolPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val warmGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val sandGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val creamGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            canvas.drawColor(Color.parseColor(if (isDarkMode) "#07111F" else "#DCEBFA"))
+            canvas.drawColor(Color.parseColor(if (isDarkMode) "#211C18" else "#F3EBDD"))
             val w = width.toFloat()
             val h = height.toFloat()
-            petrolPaint.shader = RadialGradient(
-                w * 0.88f, h * 0.18f, w * 0.72f,
-                intArrayOf(Color.argb(155, 70, 168, 255), Color.argb(65, 47, 117, 205), Color.TRANSPARENT),
-                floatArrayOf(0f, 0.48f, 1f), Shader.TileMode.CLAMP
-            )
-            orangePaint.shader = RadialGradient(
-                w * 0.02f, h * 0.66f, w * 0.62f,
-                intArrayOf(Color.argb(82, 156, 105, 255), Color.argb(25, 125, 85, 220), Color.TRANSPARENT),
-                floatArrayOf(0f, 0.45f, 1f), Shader.TileMode.CLAMP
-            )
-            lowerPetrolPaint.shader = RadialGradient(
-                w * 0.62f, h * 0.92f, w * 0.78f,
-                intArrayOf(Color.argb(110, 43, 205, 220), Color.argb(30, 30, 130, 190), Color.TRANSPARENT),
+            warmGlowPaint.shader = RadialGradient(
+                w * 0.92f, h * 0.12f, w * 0.78f,
+                intArrayOf(Color.argb(if (isDarkMode) 92 else 118, 210, 157, 101), Color.argb(34, 174, 124, 76), Color.TRANSPARENT),
                 floatArrayOf(0f, 0.5f, 1f), Shader.TileMode.CLAMP
             )
-            canvas.drawRect(0f, 0f, w, h, petrolPaint)
-            canvas.drawRect(0f, 0f, w, h, orangePaint)
-            canvas.drawRect(0f, 0f, w, h, lowerPetrolPaint)
-            petrolPaint.shader = null
-            orangePaint.shader = null
-            lowerPetrolPaint.shader = null
+            sandGlowPaint.shader = RadialGradient(
+                w * 0.02f, h * 0.58f, w * 0.68f,
+                intArrayOf(Color.argb(if (isDarkMode) 58 else 92, 180, 139, 98), Color.argb(22, 151, 112, 77), Color.TRANSPARENT),
+                floatArrayOf(0f, 0.48f, 1f), Shader.TileMode.CLAMP
+            )
+            creamGlowPaint.shader = RadialGradient(
+                w * 0.58f, h * 0.94f, w * 0.82f,
+                intArrayOf(Color.argb(if (isDarkMode) 46 else 76, 244, 220, 183), Color.argb(18, 220, 190, 150), Color.TRANSPARENT),
+                floatArrayOf(0f, 0.52f, 1f), Shader.TileMode.CLAMP
+            )
+            canvas.drawRect(0f, 0f, w, h, warmGlowPaint)
+            canvas.drawRect(0f, 0f, w, h, sandGlowPaint)
+            canvas.drawRect(0f, 0f, w, h, creamGlowPaint)
+            warmGlowPaint.shader = null
+            sandGlowPaint.shader = null
+            creamGlowPaint.shader = null
         }
     }
 
@@ -8287,8 +8289,8 @@ class MainActivity : AppCompatActivity() {
                 val labelR = (outerR + innerR) / 2f
                 val x = cx + labelR * cos(mid).toFloat()
                 val y = cy + labelR * sin(mid).toFloat()
-                iconPaint.color = if (selected) Color.parseColor("#102326") else Color.parseColor("#D9F5F0")
-                labelPaint.color = if (selected) Color.parseColor("#102326") else Color.parseColor("#F0F7F4")
+                iconPaint.color = if (selected) Color.parseColor("#3B2B20") else Color.parseColor("#FFF4E7D2")
+                labelPaint.color = if (selected) Color.parseColor("#3B2B20") else Color.parseColor("#FFF9F1E5")
                 iconPaint.setShadowLayer(if (selected) dp(4).toFloat() else dp(2).toFloat(), 0f, dp(1).toFloat(), Color.argb(90, 0, 0, 0))
                 canvas.drawText(labels[i].first, x, y - dp(1), iconPaint)
                 canvas.drawText(labels[i].second, x, y + dp(17), labelPaint)
@@ -8477,7 +8479,7 @@ class MainActivity : AppCompatActivity() {
             val m = totalSec / 60L
             val s = totalSec % 60L
             timeString = String.format(Locale.US, "%02d:%02d", m, s)
-            progressPaint.color = if (isBreakSession) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF75CFC8")
+            progressPaint.color = if (isBreakSession) Color.parseColor("#FFEED7B8") else Color.parseColor("#FFC5A57E")
             textPaint.color = textPrimaryColor()
             invalidate()
         }
@@ -8521,7 +8523,7 @@ class MainActivity : AppCompatActivity() {
             glowPaint.color = baseColor
             glowPaint.shader = android.graphics.SweepGradient(
                 cx0, cy0,
-                intArrayOf(Color.parseColor("#FF397D7A"), baseColor, Color.parseColor("#FFE3FFF8"), Color.parseColor("#FF397D7A")),
+                intArrayOf(Color.parseColor("#FF806348"), baseColor, Color.parseColor("#FFE3FFF8"), Color.parseColor("#FF806348")),
                 floatArrayOf(0f, 0.55f, 0.9f, 1f)
             )
             if (isDarkMode) glowPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(115, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor)))
