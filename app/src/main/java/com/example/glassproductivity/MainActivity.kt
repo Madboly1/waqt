@@ -5604,8 +5604,8 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = focusActiveDrawable(18)
+            setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#102C34") else textPrimaryColor())
+            background = if (isPomodoroLinkedToTask) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(8) }
@@ -5622,8 +5622,8 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = focusActiveDrawable(18)
+            setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#102C34") else textPrimaryColor())
+            background = if (!isPomodoroLinkedToTask) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f)
@@ -5754,8 +5754,8 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isTickTockSoundActive) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = focusActiveDrawable(18)
+            setTextColor(if (isTickTockSoundActive) Color.parseColor("#102C34") else textPrimaryColor())
+            background = if (isTickTockSoundActive) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(120), dp(48))
             setOnClickListener {
@@ -7403,8 +7403,8 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isAmbientPlaying) Color.parseColor("#0B1417") else textMutedColor())
-            background = focusActiveDrawable(18)
+            setTextColor(if (isAmbientPlaying) Color.parseColor("#102C34") else textMutedColor())
+            background = if (isAmbientPlaying) focusActiveDrawable(18) else focusQuietDrawable(18)
             elevation = 0f
             setPadding(dp(14), 0, dp(14), 0)
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(8); bottomMargin = dp(6) }
@@ -7423,8 +7423,8 @@ class MainActivity : AppCompatActivity() {
                 textSize = 13f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (active) Color.parseColor("#0B1417") else textPrimaryColor())
-                background = focusActiveDrawable(18)
+                setTextColor(if (active) Color.parseColor("#102C34") else textPrimaryColor())
+                background = if (active) focusActiveDrawable(18) else focusQuietDrawable(18)
                 elevation = 0f
                 setPadding(dp(14), 0, dp(14), 0)
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(8); bottomMargin = dp(6) }
