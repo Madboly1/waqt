@@ -5857,7 +5857,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = FrameLayout.LayoutParams(w, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 gravity = Gravity.CENTER_VERTICAL or Gravity.LEFT
             }
-            elevation = 0f
+            elevation = dp(16).toFloat()
         }
 
         if (!isPomodoroLeftDockOpen) {
@@ -6991,7 +6991,7 @@ class MainActivity : AppCompatActivity() {
         dock.layoutParams = (if (horizontal) FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, thick)
         else FrameLayout.LayoutParams(thick, ViewGroup.LayoutParams.WRAP_CONTENT)).apply { gravity = Gravity.TOP or Gravity.LEFT }
         if (!isOpen) { if (horizontal) dock.minimumWidth = dp(96) else dock.minimumHeight = dp(96) }
-        dock.elevation = 0f
+        dock.elevation = dp(16).toFloat()
         dock.alpha = 0f
         attachRailDrag(grip ?: dock, dock, isOpen, setOpen)
         dock.post { positionRail(dock) }
@@ -7584,7 +7584,7 @@ class MainActivity : AppCompatActivity() {
                 canvas.drawRoundRect(rect, dp(7).toFloat(), dp(7).toFloat(), barPaint)
                 barPaint.clearShadowLayer()
 
-                labelPaint.color = if (isToday) Color.parseColor("#FFFFA65E") else Color.parseColor("#FF9CB7B8")
+                labelPaint.color = if (isToday) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF9CB7B8")
                 canvas.drawText(name, cx, h - dp(3).toFloat(), labelPaint)
                 if (mins > 0) {
                     labelPaint.color = Color.WHITE
