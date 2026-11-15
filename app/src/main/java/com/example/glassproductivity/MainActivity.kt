@@ -5557,6 +5557,36 @@ class MainActivity : AppCompatActivity() {
         dialog.setOnCancelListener { if (isRecordingNoteAudio) discardRecording() }
     }
 
+    private fun focusGlassDrawable(radiusDp: Int = 22): android.graphics.drawable.Drawable {
+        return GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(Color.parseColor("#D91A2B43"), Color.parseColor("#C9101C30"))
+        ).apply {
+            cornerRadius = dp(radiusDp).toFloat()
+            setStroke(dp(1), Color.parseColor("#354F718C"))
+        }
+    }
+
+    private fun focusActiveDrawable(radiusDp: Int = 18): android.graphics.drawable.Drawable {
+        return GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(Color.parseColor("#FFBDEDE7"), Color.parseColor("#FF75CFC8"))
+        ).apply {
+            cornerRadius = dp(radiusDp).toFloat()
+            setStroke(dp(1), Color.parseColor("#80E7FFF8"))
+        }
+    }
+
+    private fun focusQuietDrawable(radiusDp: Int = 18): android.graphics.drawable.Drawable {
+        return GradientDrawable(
+            GradientDrawable.Orientation.TOP_BOTTOM,
+            intArrayOf(Color.parseColor("#AA263B52"), Color.parseColor("#99202F43"))
+        ).apply {
+            cornerRadius = dp(radiusDp).toFloat()
+            setStroke(dp(1), Color.parseColor("#304E6A82"))
+        }
+    }
+
     private fun buildPomodoroScreenView(): View {
         val root = FrameLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
@@ -5570,7 +5600,7 @@ class MainActivity : AppCompatActivity() {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER_HORIZONTAL
             layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.WRAP_CONTENT)
-            setPadding(dp(16), dp(12), dp(16), dp(120))
+            setPadding(dp(18), dp(14), dp(18), dp(128))
         }
 
         val modeRow = LinearLayout(this).apply {
@@ -5584,9 +5614,9 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = if (isPomodoroLinkedToTask) create3DButtonDrawable(Color.parseColor("#FF9DEBFF"), Color.parseColor("#FF477FBE"), dp(14), Color.parseColor("#FFC9F7FF")) else createGlass3DDrawable(dp(14))
-            elevation = dp(6).toFloat()
+            setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#102C34") else textPrimaryColor())
+            background = if (isPomodoroLinkedToTask) focusActiveDrawable(18) else focusQuietDrawable(18)
+            elevation = 0f
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(8) }
             setOnClickListener {
@@ -5602,9 +5632,9 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = if (!isPomodoroLinkedToTask) create3DButtonDrawable(Color.parseColor("#FF9DEBFF"), Color.parseColor("#FF477FBE"), dp(14), Color.parseColor("#FFC9F7FF")) else createGlass3DDrawable(dp(14))
-            elevation = dp(6).toFloat()
+            setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#102C34") else textPrimaryColor())
+            background = if (!isPomodoroLinkedToTask) focusActiveDrawable(18) else focusQuietDrawable(18)
+            elevation = 0f
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f)
             setOnClickListener {
@@ -5654,8 +5684,8 @@ class MainActivity : AppCompatActivity() {
         val timerCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
-            background = createGlass3DDrawable(dp(30))
-            elevation = dp(10).toFloat()
+            background = focusGlassDrawable(30)
+            elevation = 0f
             setPadding(dp(10), dp(16), dp(10), dp(14))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 topMargin = dp(2)
@@ -5671,7 +5701,7 @@ class MainActivity : AppCompatActivity() {
             setTypeface(typeface, Typeface.BOLD)
         })
         val ringView = CircularTimerRingView(this).apply {
-            val s = dp(258)
+            val s = dp(238)
             layoutParams = LinearLayout.LayoutParams(s, s).apply {
                 topMargin = dp(8)
                 bottomMargin = dp(4)
@@ -5719,8 +5749,8 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(Color.parseColor("#0B1417"))
-            background = create3DButtonDrawable(Color.parseColor("#FF9DEBFF"), Color.parseColor("#FF477FBE"), dp(24), Color.parseColor("#FFC9F7FF"))
-            elevation = dp(12).toFloat()
+            background = focusActiveDrawable(18)
+            elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(148), dp(48)).apply { marginEnd = dp(10) }
             setOnClickListener {
                 triggerGentleHaptic()
@@ -5734,9 +5764,9 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isTickTockSoundActive) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = if (isTickTockSoundActive) create3DButtonDrawable(Color.parseColor("#FF4FD6C9"), Color.parseColor("#FF168A84"), dp(24), Color.parseColor("#FF9CFFF0")) else createGlass3DDrawable(dp(24))
-            elevation = dp(8).toFloat()
+            setTextColor(if (isTickTockSoundActive) Color.parseColor("#102C34") else textPrimaryColor())
+            background = if (isTickTockSoundActive) focusActiveDrawable(18) else focusQuietDrawable(18)
+            elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(120), dp(48))
             setOnClickListener {
                 triggerGentleHaptic()
@@ -5754,8 +5784,8 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(textPrimaryColor())
-            background = createGlass3DDrawable(dp(20))
-            elevation = dp(6).toFloat()
+            background = focusGlassDrawable(20)
+            elevation = 0f
             setPadding(dp(18), 0, dp(18), 0)
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(40)).apply { bottomMargin = dp(12) }
             setOnClickListener {
@@ -7315,8 +7345,8 @@ class MainActivity : AppCompatActivity() {
         // ---- stats + goal card (tap the card to change the daily goal)
         val statsCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlass3DDrawable(dp(22))
-            elevation = dp(8).toFloat()
+            background = focusGlassDrawable(22)
+            elevation = 0f
             setPadding(dp(16), dp(14), dp(16), dp(14))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(12) }
             setOnClickListener {
@@ -7350,7 +7380,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(10))
         }
         barRow.addView(View(this).apply {
-            background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.parseColor("#FFB8501A"), Color.parseColor("#FFFFA65E"))).apply { cornerRadius = dp(6).toFloat() }
+            background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.parseColor("#FF75CFC8"), Color.parseColor("#FFBDEDE7"))).apply { cornerRadius = dp(6).toFloat() }
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, pct.coerceAtLeast(1).toFloat())
         })
         barRow.addView(View(this).apply {
@@ -7383,9 +7413,9 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isAmbientPlaying) Color.parseColor("#0B1417") else textMutedColor())
-            background = if (isAmbientPlaying) create3DButtonDrawable(Color.parseColor("#FFFF8E88"), Color.parseColor("#FFD64B45"), dp(18), Color.parseColor("#FFFFB5B0")) else createGlass3DDrawable(dp(18))
-            elevation = dp(5).toFloat()
+            setTextColor(if (isAmbientPlaying) Color.parseColor("#102C34") else textMutedColor())
+            background = if (isAmbientPlaying) focusActiveDrawable(18) else focusQuietDrawable(18)
+            elevation = 0f
             setPadding(dp(14), 0, dp(14), 0)
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(8); bottomMargin = dp(6) }
             setOnClickListener {
@@ -7403,9 +7433,9 @@ class MainActivity : AppCompatActivity() {
                 textSize = 13f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (active) Color.parseColor("#0B1417") else textPrimaryColor())
-                background = if (active) createOrange3DDrawable(dp(18)) else createGlass3DDrawable(dp(18))
-                elevation = dp(5).toFloat()
+                setTextColor(if (active) Color.parseColor("#102C34") else textPrimaryColor())
+                background = if (active) focusActiveDrawable(18) else focusQuietDrawable(18)
+                elevation = 0f
                 setPadding(dp(14), 0, dp(14), 0)
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(8); bottomMargin = dp(6) }
                 setOnClickListener {
@@ -7431,7 +7461,7 @@ class MainActivity : AppCompatActivity() {
         val personalAudioRow = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
-            background = createGlass3DDrawable(dp(16))
+            background = focusGlassDrawable(16)
             setPadding(dp(12), dp(8), dp(12), dp(8))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8); bottomMargin = dp(10) }
         }
@@ -7489,8 +7519,8 @@ class MainActivity : AppCompatActivity() {
         }
         val chartCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlass3DDrawable(dp(22))
-            elevation = dp(8).toFloat()
+            background = focusGlassDrawable(22)
+            elevation = 0f
             setPadding(dp(16), dp(14), dp(16), dp(10))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8) }
         }
@@ -7517,7 +7547,7 @@ class MainActivity : AppCompatActivity() {
         private val goalPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
             strokeWidth = dp(1).toFloat()
-            color = Color.argb(120, 79, 214, 201)
+            color = Color.argb(75, 117, 207, 200)
             pathEffect = android.graphics.DashPathEffect(floatArrayOf(dp(5).toFloat(), dp(4).toFloat()), 0f)
         }
         private val rect = RectF()
@@ -7545,8 +7575,8 @@ class MainActivity : AppCompatActivity() {
                 val barH = (chartH * (mins / maxVal)).coerceAtLeast(dp(4).toFloat())
                 val top = topPad + chartH - barH
                 rect.set(cx - barW / 2f, top, cx + barW / 2f, topPad + chartH)
-                val c1 = if (isToday) Color.parseColor("#FFFFA65E") else Color.parseColor("#FF4FD6C9")
-                val c2 = if (isToday) Color.parseColor("#FFB8501A") else Color.parseColor("#FF146E69")
+                val c1 = if (isToday) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF75CFC8")
+                val c2 = if (isToday) Color.parseColor("#FF4D9D99") else Color.parseColor("#FF397D7A")
                 barPaint.shader = android.graphics.LinearGradient(0f, top, 0f, topPad + chartH, c1, c2, Shader.TileMode.CLAMP)
                 if (mins > 0) barPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(120, Color.red(c1), Color.green(c1), Color.blue(c1)))
                 else barPaint.clearShadowLayer()
@@ -7554,7 +7584,7 @@ class MainActivity : AppCompatActivity() {
                 canvas.drawRoundRect(rect, dp(7).toFloat(), dp(7).toFloat(), barPaint)
                 barPaint.clearShadowLayer()
 
-                labelPaint.color = if (isToday) Color.parseColor("#FFFFA65E") else Color.parseColor("#FF9DB5B2")
+                labelPaint.color = if (isToday) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF9CB7B8")
                 canvas.drawText(name, cx, h - dp(3).toFloat(), labelPaint)
                 if (mins > 0) {
                     labelPaint.color = Color.WHITE
@@ -8398,7 +8428,7 @@ class MainActivity : AppCompatActivity() {
         private val trackPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
             strokeWidth = dp(14).toFloat()
-            color = Color.argb(150, 0, 0, 0)
+            color = Color.argb(105, 105, 139, 151)
             strokeCap = Paint.Cap.ROUND
         }
 
@@ -8447,7 +8477,7 @@ class MainActivity : AppCompatActivity() {
             val m = totalSec / 60L
             val s = totalSec % 60L
             timeString = String.format(Locale.US, "%02d:%02d", m, s)
-            progressPaint.color = if (isBreakSession) Color.parseColor("#FF65E6B2") else Color.parseColor("#FF83DFFF")
+            progressPaint.color = if (isBreakSession) Color.parseColor("#FFBDEDE7") else Color.parseColor("#FF75CFC8")
             textPaint.color = textPrimaryColor()
             invalidate()
         }
@@ -8464,8 +8494,8 @@ class MainActivity : AppCompatActivity() {
             // The light theme uses a clean soft-glass bezel: no black software shadow.
             bezelPaint.shader = android.graphics.LinearGradient(
                 0f, 0f, 0f, height.toFloat(),
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF3C6685"), Color.parseColor("#FF0B1B31"))
-                else intArrayOf(Color.parseColor("#FFF5FCFF"), Color.parseColor("#FFBBD9EE")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF29465A"), Color.parseColor("#FF172B3D"))
+                else intArrayOf(Color.parseColor("#FFEAF6F4"), Color.parseColor("#FFB9D8D4")),
                 null, Shader.TileMode.CLAMP
             )
             if (isDarkMode) bezelPaint.setShadowLayer(dp(12).toFloat(), 0f, dp(4).toFloat(), Color.argb(85, 0, 0, 0))
@@ -8476,22 +8506,22 @@ class MainActivity : AppCompatActivity() {
             // Recessed glass disc inside the ring, adapted to the active appearance.
             discPaint.shader = RadialGradient(
                 cx0, cy0 - outerR * 0.25f, outerR,
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF244968"), Color.parseColor("#FF0C1D35"), Color.parseColor("#FF071226"))
-                else intArrayOf(Color.parseColor("#FFFFFFFF"), Color.parseColor("#FFEAF7FF"), Color.parseColor("#FFD1E8F8")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF203A4B"), Color.parseColor("#FF122638"), Color.parseColor("#FF0B1927"))
+                else intArrayOf(Color.parseColor("#FFF8FCFB"), Color.parseColor("#FFE7F2F0"), Color.parseColor("#FFCADFDB")),
                 floatArrayOf(0f, 0.65f, 1f), Shader.TileMode.CLAMP
             )
             canvas.drawCircle(cx0, cy0, outerR - dp(7), discPaint)
 
             canvas.drawArc(ovalRect, 0f, 360f, false, trackPaint)
 
-            // Glowing orange progress with gradient (bright head, deeper tail)
+            // Soft mint progress with a restrained glass glow
             val sweepAngle = 360f * progressFraction
             val baseColor = progressPaint.color
             glowPaint.strokeWidth = progressPaint.strokeWidth
             glowPaint.color = baseColor
             glowPaint.shader = android.graphics.SweepGradient(
                 cx0, cy0,
-                intArrayOf(Color.parseColor("#FF477FBE"), baseColor, Color.parseColor("#FFD6F8FF"), Color.parseColor("#FF477FBE")),
+                intArrayOf(Color.parseColor("#FF397D7A"), baseColor, Color.parseColor("#FFE3FFF8"), Color.parseColor("#FF397D7A")),
                 floatArrayOf(0f, 0.55f, 0.9f, 1f)
             )
             if (isDarkMode) glowPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(115, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor)))
