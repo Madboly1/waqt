@@ -276,7 +276,7 @@ class MainActivity : AppCompatActivity() {
     private val chatMicPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { granted ->
-        if (granted) startChatVoiceRecording()
+        if (granted) Toast.makeText(this, if (isArabic) "تمام! اضغط مطولًا على زر الميكروفون للتسجيل." else "Microphone ready. Press and hold to record.", Toast.LENGTH_SHORT).show()
         else Toast.makeText(this, if (isArabic) "الميكروفون مطلوب لتسجيل الرسالة الصوتية فقط" else "Microphone permission is needed only for voice messages", Toast.LENGTH_LONG).show()
     }
 
@@ -1057,32 +1057,9 @@ class MainActivity : AppCompatActivity() {
         }
         inputRow.addView(etMsg)
 
-        val btnMic = TextView(this).apply {
+        val btnSendVoice = TextView(this).apply {
             text = "🎙"
-            textSize = 17f
-            gravity = Gravity.CENTER
-            setTextColor(textMutedColor())
-            contentDescription = if (isArabic) "تسجيل رسالة صوتية" else "Record voice message"
-            layoutParams = LinearLayout.LayoutParams(dp(36), dp(42))
-            chatRecordButton = this
-            setOnClickListener {
-                if (geminiKey().isBlank()) {
-                    showGeminiKeyDialog()
-                    return@setOnClickListener
-                }
-                activeChatMessagesBox = messagesBox
-                activeChatScroll = chatScroll
-                if (chatIsRecording) stopChatVoiceRecording() else {
-                    if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) startChatVoiceRecording()
-                    else chatMicPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
-                }
-            }
-        }
-        inputRow.addView(btnMic)
-
-        val btnSend = TextView(this).apply {
-            text = "➤"
-            textSize = 21f
+            textSize = 19f
             gravity = Gravity.CENTER
             setTextColor(Color.WHITE)
             background = GradientDrawable().apply {
@@ -1090,10 +1067,11 @@ class MainActivity : AppCompatActivity() {
                 setColor(accentOrangeColor())
             }
             elevation = dp(2).toFloat()
-            val s = dp(42)
-            layoutParams = LinearLayout.LayoutParams(s, s).apply { marginStart = dp(3) }
-            contentDescription = if (isArabic) "إرسال الرسالة" else "Send message"
-            setOnClickListener {
+            val size = dp(42)
+            layoutParams = LinearLayout.LayoutParams(size, size).apply { marginStart = dp(3) }
+            contentDescription = if (isArabic) "اضغط مطولًا لتسجيل رسالة صوتية" else "Press and hold to record a voice message"
+            chatRecordButton = this
+            fun sendTypedMessage() {
                 val userText = etMsg.text.toString().trim()
                 if (userText.isNotBlank()) {
                     messagesBox.addView(createUserMessageBubble(userText))
@@ -1102,8 +1080,48 @@ class MainActivity : AppCompatActivity() {
                     sendToAssistant(userText, messagesBox, chatScroll)
                 }
             }
+            setOnClickListener { if (etMsg.text.toString().isNotBlank()) sendTypedMessage() }
+            setOnTouchListener { view, event ->
+                val hasText = etMsg.text.toString().isNotBlank()
+                when (event.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> {
+                        if (hasText) return@setOnTouchListener true
+                        if (geminiKey().isBlank()) {
+                            showGeminiKeyDialog()
+                            return@setOnTouchListener true
+                        }
+                        activeChatMessagesBox = messagesBox
+                        activeChatScroll = chatScroll
+                        if (ContextCompat.checkSelfPermission(this@MainActivity, Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                            startChatVoiceRecording()
+                        } else {
+                            chatMicPermissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+                        }
+                        true
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        if (hasText) view.performClick() else if (chatIsRecording) stopChatVoiceRecording()
+                        true
+                    }
+                    MotionEvent.ACTION_CANCEL -> {
+                        if (chatIsRecording) stopChatVoiceRecording(discard = true)
+                        true
+                    }
+                    else -> true
+                }
+            }
+            etMsg.addTextChangedListener(object : TextWatcher {
+                override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {}
+                override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
+                    val typed = !text.isNullOrBlank()
+                    this@apply.text = if (chatIsRecording) "●" else if (typed) "➤" else "🎙"
+                    this@apply.textSize = if (typed) 21f else 19f
+                    contentDescription = if (typed) (if (isArabic) "إرسال الرسالة" else "Send message") else (if (isArabic) "اضغط مطولًا لتسجيل رسالة صوتية" else "Press and hold to record a voice message")
+                }
+                override fun afterTextChanged(text: Editable?) {}
+            })
         }
-        inputRow.addView(btnSend)
+        inputRow.addView(btnSendVoice)
         root.addView(inputRow)
 
         activeChatMessagesBox = messagesBox
@@ -1742,8 +1760,8 @@ class MainActivity : AppCompatActivity() {
             chatRecorder = recorder
             chatRecordingFile = file
             chatIsRecording = true
-            chatRecordButton?.text = "⏹"
-            Toast.makeText(this, if (isArabic) "جاري تسجيل الرسالة... اضغط ⏹ للإرسال" else "Recording... tap ⏹ to send", Toast.LENGTH_LONG).show()
+            chatRecordButton?.text = "●"
+            Toast.makeText(this, if (isArabic) "جاري التسجيل... ارفع صباعك للإرسال" else "Recording... release to send", Toast.LENGTH_SHORT).show()
         } catch (e: Exception) {
             chatRecorder?.release()
             chatRecorder = null
@@ -7466,53 +7484,83 @@ class MainActivity : AppCompatActivity() {
             setTypeface(typeface, Typeface.BOLD)
             setPadding(dp(4), 0, dp(4), dp(6))
         })
-        val chips = listOf(
-            Triple(1, "🌧", if (isArabic) "مطر" else "Rain"),
-            Triple(2, "🌊", if (isArabic) "شاطئ البحر" else "Sea"),
-            Triple(3, "🔥", if (isArabic) "نار مشتعلة" else "Fire"),
-            Triple(4, "🌲", if (isArabic) "البرية" else "Forest"),
-            Triple(5, "💧", if (isArabic) "تيار" else "Stream"),
-            Triple(6, "📚", if (isArabic) "مكتبة" else "Library"),
-            Triple(7, "🍃", if (isArabic) "رياح" else "Wind"),
-            Triple(8, "🐸", if (isArabic) "ضفادع ليلاً" else "Night")
+        val ambientTracks = listOf(
+            Triple(1, "🌧", if (isArabic) "صوت المطر" else "Rain"),
+            Triple(2, "🌊", if (isArabic) "أمواج البحر" else "Ocean waves"),
+            Triple(3, "🔥", if (isArabic) "نار المخيم" else "Campfire"),
+            Triple(4, "🌲", if (isArabic) "أصوات الغابة" else "Forest"),
+            Triple(5, "💧", if (isArabic) "جدول الماء" else "Water stream"),
+            Triple(6, "📚", if (isArabic) "المكتبة" else "Library"),
+            Triple(7, "🍃", if (isArabic) "صوت الرياح" else "Wind"),
+            Triple(8, "🐸", if (isArabic) "ليل هادئ" else "Night ambience")
         )
-        val chipRow = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
-        chipRow.addView(TextView(this).apply {
-            text = if (isArabic) "⏹ إيقاف الصوت" else "⏹ Stop sound"
-            textSize = 13f
-            gravity = Gravity.CENTER
-            setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (isAmbientPlaying) Color.parseColor("#3B2B20") else textMutedColor())
-            background = if (isAmbientPlaying) focusActiveDrawable(18) else focusQuietDrawable(18)
-            elevation = 0f
-            setPadding(dp(14), 0, dp(14), 0)
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(8); bottomMargin = dp(6) }
-            setOnClickListener {
-                triggerGentleHaptic()
-                stopAmbientSound()
-                selectedAmbientIndex = 0
-                prefs.edit().putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, 0).apply()
-                renderCurrentTab()
-            }
-        })
-        chips.forEach { (idx, icon, name) ->
+        val ambientPlayerList = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            background = focusGlassDrawable(18)
+            setPadding(dp(10), dp(6), dp(10), dp(6))
+        }
+        ambientTracks.forEach { (idx, icon, name) ->
             val active = isAmbientPlaying && selectedAmbientIndex == idx
-            chipRow.addView(TextView(this).apply {
-                text = "$icon $name"
-                textSize = 13f
+            val trackRow = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                setPadding(dp(7), dp(8), dp(7), dp(8))
+                background = if (active) focusActiveDrawable(14) else focusQuietDrawable(14)
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(58)).apply { bottomMargin = dp(5) }
+            }
+            trackRow.addView(TextView(this).apply {
+                text = icon
+                textSize = 19f
                 gravity = Gravity.CENTER
+                layoutParams = LinearLayout.LayoutParams(dp(38), ViewGroup.LayoutParams.MATCH_PARENT)
+            })
+            val info = LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                gravity = Gravity.CENTER_VERTICAL
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply { marginStart = dp(7) }
+            }
+            info.addView(TextView(this).apply {
+                text = name
+                textSize = 13f
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (active) Color.parseColor("#3B2B20") else textPrimaryColor())
-                background = if (active) focusActiveDrawable(18) else focusQuietDrawable(18)
-                elevation = 0f
-                setPadding(dp(14), 0, dp(14), 0)
-                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(8); bottomMargin = dp(6) }
+                setTextColor(textPrimaryColor())
+            })
+            info.addView(TextView(this).apply {
+                text = if (active) (if (isArabic) "يعمل الآن • تشغيل مستمر" else "Now playing • Loop") else (if (isArabic) "صوت محيطي • تشغيل مستمر" else "Ambient audio • Loop")
+                textSize = 10f
+                setTextColor(textMutedColor())
+            })
+            trackRow.addView(info)
+            val waveform = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER
+                layoutParams = LinearLayout.LayoutParams(dp(48), dp(30)).apply { marginEnd = dp(7) }
+            }
+            val heights = intArrayOf(8, 15, 22, 12, 26, 14, 20, 9)
+            heights.forEach { height ->
+                waveform.addView(View(this).apply {
+                    background = GradientDrawable().apply {
+                        cornerRadius = dp(3).toFloat()
+                        setColor(if (active) accentOrangeColor() else textMutedColor())
+                    }
+                    layoutParams = LinearLayout.LayoutParams(dp(3), dp(if (active) height else (height * 0.65f).toInt().coerceAtLeast(5))).apply { marginStart = dp(1); marginEnd = dp(1) }
+                })
+            }
+            trackRow.addView(waveform)
+            trackRow.addView(TextView(this).apply {
+                text = if (active) "Ⅱ" else "▶"
+                textSize = 17f
+                gravity = Gravity.CENTER
+                setTextColor(if (active) Color.parseColor("#3B2B20") else accentTealColor())
+                layoutParams = LinearLayout.LayoutParams(dp(36), dp(36))
+                contentDescription = if (active) (if (isArabic) "إيقاف الصوت" else "Stop sound") else (if (isArabic) "تشغيل الصوت" else "Play sound")
                 setOnClickListener {
                     triggerGentleHaptic()
                     if (active) {
                         stopAmbientSound()
                         selectedAmbientIndex = 0
                     } else {
+                        stopCustomAudio()
                         selectedAmbientIndex = idx
                         startRichAmbientSound(idx)
                     }
@@ -7520,11 +7568,21 @@ class MainActivity : AppCompatActivity() {
                     renderCurrentTab()
                 }
             })
+            ambientPlayerList.addView(trackRow)
         }
-        wrap.addView(HorizontalScrollView(this).apply {
-            isHorizontalScrollBarEnabled = false
-            overScrollMode = View.OVER_SCROLL_NEVER
-            addView(chipRow)
+        wrap.addView(ambientPlayerList)
+        wrap.addView(TextView(this).apply {
+            text = if (isArabic) "إيقاف كل الأصوات" else "Stop all sounds"
+            textSize = 12f
+            gravity = Gravity.CENTER
+            setTextColor(textMutedColor())
+            setPadding(0, dp(8), 0, dp(4))
+            setOnClickListener {
+                stopAmbientSound()
+                selectedAmbientIndex = 0
+                prefs.edit().putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, 0).apply()
+                renderCurrentTab()
+            }
         })
         // User-selected audio sits beside the ambient presets, while selection remains in the left dock.
         val personalAudioRow = LinearLayout(this).apply {
@@ -7540,7 +7598,7 @@ class MainActivity : AppCompatActivity() {
             setPadding(0, 0, dp(10), 0)
         })
         personalAudioRow.addView(TextView(this).apply {
-            text = customAudioName ?: (if (isArabic) "ملف صوتي من جهازك" else "Audio from your device")
+            text = customAudioName ?: (if (isArabic) "مشغل MP3 من جهازك" else "Your MP3 player")
             textSize = 13f
             setTextColor(textPrimaryColor())
             maxLines = 1
