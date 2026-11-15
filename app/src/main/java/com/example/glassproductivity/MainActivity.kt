@@ -5050,7 +5050,7 @@ class MainActivity : AppCompatActivity() {
     private fun showNoteDetailsPage(note: NoteItem) {
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlassCardDrawable(true, false)
+            background = createRefinedFrostedDrawable(dp(24))
             setPadding(dp(18), dp(12), dp(18), dp(16))
         }
         val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
@@ -5084,6 +5084,7 @@ class MainActivity : AppCompatActivity() {
             }
         })
         page.addView(toolbar)
+        animateSoftEntrance(page, 40L)
 
         val scroll = ScrollView(this).apply { isFillViewport = true; overScrollMode = View.OVER_SCROLL_NEVER }
         val body = LinearLayout(this).apply {
@@ -5294,7 +5295,7 @@ class MainActivity : AppCompatActivity() {
         noteImageUri = existingNote?.imageUri ?: ""
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createGlassCardDrawable(true, false)
+            background = createRefinedFrostedDrawable(dp(24))
             setPadding(dp(16), dp(12), dp(16), dp(16))
         }
         val toolbar = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
@@ -5310,9 +5311,10 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         })
         page.addView(toolbar)
+        animateSoftEntrance(page, 40L)
         val v = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = createPillDrawable(bgCardColor(), dp(22), COLOR_TEAL)
+            background = createRefinedFrostedDrawable(dp(22))
             setPadding(dp(20), dp(20), dp(20), dp(20))
         }
 
