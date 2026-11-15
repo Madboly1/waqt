@@ -5617,6 +5617,29 @@ class MainActivity : AppCompatActivity() {
         modeRow.addView(btnFree)
         content.addView(modeRow)
 
+        val focusIntro = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            setPadding(dp(8), dp(4), dp(8), dp(14))
+        }
+        focusIntro.addView(TextView(this).apply {
+            text = if (isArabic) "مساحة هادئة لعقلك" else "A QUIET SPACE FOR YOUR MIND"
+            textSize = 11f
+            letterSpacing = 0.16f
+            gravity = Gravity.CENTER
+            setTextColor(accentTealColor())
+            setTypeface(typeface, Typeface.BOLD)
+        })
+        focusIntro.addView(TextView(this).apply {
+            text = if (isArabic) "خد نفس… وابدأ" else "Breathe in. Find your flow."
+            textSize = 21f
+            gravity = Gravity.CENTER
+            setTextColor(textPrimaryColor())
+            setTypeface(typeface, Typeface.BOLD)
+            setPadding(0, dp(5), 0, 0)
+        })
+        content.addView(focusIntro)
+
         if (isPomodoroLinkedToTask && selectedFocusTaskId != null) {
             val task = ReminderRepository.getItemById(this, selectedFocusTaskId ?: "")
             content.addView(TextView(this).apply {
@@ -5628,21 +5651,61 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        val ringView = CircularTimerRingView(this).apply {
-            val s = dp(230)
-            layoutParams = LinearLayout.LayoutParams(s, s).apply {
-                topMargin = dp(6)
+        val timerCard = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER
+            background = createGlass3DDrawable(dp(30))
+            elevation = dp(10).toFloat()
+            setPadding(dp(10), dp(16), dp(10), dp(14))
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                topMargin = dp(2)
                 bottomMargin = dp(14)
+            }
+        }
+        timerCard.addView(TextView(this).apply {
+            text = if (isBreakSession) (if (isArabic) "وقت استعادة طاقتك" else "TIME TO RECHARGE") else (if (isArabic) "جلسة تركيز عميق" else "DEEP FOCUS SESSION")
+            textSize = 10f
+            letterSpacing = 0.14f
+            gravity = Gravity.CENTER
+            setTextColor(accentTealColor())
+            setTypeface(typeface, Typeface.BOLD)
+        })
+        val ringView = CircularTimerRingView(this).apply {
+            val s = dp(258)
+            layoutParams = LinearLayout.LayoutParams(s, s).apply {
+                topMargin = dp(8)
+                bottomMargin = dp(4)
             }
             updateTimerDisplay(pomodoroRemainingMillis, pomodoroTotalMillis)
             setOnClickListener {
                 if (!isPomodoroRunning) {
+                    triggerGentleHaptic()
                     showSetTimeInsideDialDialog()
                 }
             }
+            setOnTouchListener { view, event ->
+                when (event.actionMasked) {
+                    android.view.MotionEvent.ACTION_DOWN -> {
+                        view.animate().scaleX(0.975f).scaleY(0.975f).setDuration(100).start()
+                    }
+                    android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL -> {
+                        view.animate().scaleX(1f).scaleY(1f).setDuration(220).setInterpolator(android.view.animation.OvershootInterpolator(1.2f)).start()
+                    }
+                }
+                false
+            }
         }
         circularTimerView = ringView
-        content.addView(ringView)
+        timerCard.addView(ringView)
+        timerCard.addView(TextView(this).apply {
+            text = if (isPomodoroRunning) (if (isArabic) "أنت في المنطقة — كمّل بنفس الهدوء" else "You're in the zone — keep your flow")
+                else (if (isArabic) "اضغط على الساعة لتغيير مدة الجلسة" else "Tap the dial to adjust your session")
+            textSize = 11f
+            gravity = Gravity.CENTER
+            setTextColor(textMutedColor())
+            setPadding(dp(8), dp(2), dp(8), dp(2))
+        })
+        content.addView(timerCard)
 
         val controlsRow = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -7238,6 +7301,15 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
+        val dashboardHeading = TextView(this).apply {
+            text = if (isArabic) "ملخص تقدمك" else "YOUR PROGRESS"
+            textSize = 11f
+            letterSpacing = 0.14f
+            setTextColor(accentTealColor())
+            setTypeface(typeface, Typeface.BOLD)
+            setPadding(dp(4), dp(8), dp(4), dp(8))
+        }
+        wrap.addView(dashboardHeading)
         wrap.addView(buildRankPill("focus"))
 
         // ---- stats + goal card (tap the card to change the daily goal)
