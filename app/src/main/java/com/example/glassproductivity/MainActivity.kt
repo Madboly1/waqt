@@ -98,22 +98,22 @@ class MainActivity : AppCompatActivity() {
     private var isDarkMode: Boolean = true
     private var currentTab: Int = 0 // 0: المهام, 1: العادات, 2: التركيز, 3: مدونتي
 
-    // ألوان البترولي والبرتقالي
-    private val COLOR_BG_DARK = "#07111F"
-    private val COLOR_CARD_DARK = "#B31B3048"
-    private val COLOR_ELEVATED_DARK = "#CC243D59"
-    private val COLOR_ORANGE = "#FF9DCEFF"
-    private val COLOR_ORANGE_LIGHT = "#FFD7F0FF"
-    private val COLOR_TEAL = "#FF65D9F2"
-    private val COLOR_TEAL_DEEP = "#FF9BEAFF"
-    private val COLOR_TEXT_PRIMARY = "#FFF5FAFF"
-    private val COLOR_TEXT_MUTED = "#FFB8C9DC"
+    // WAQT Warm Liquid Glass palette: warm stone, cream, sand and muted bronze.
+    private val COLOR_BG_DARK = "#211C18"
+    private val COLOR_CARD_DARK = "#B83B3028"
+    private val COLOR_ELEVATED_DARK = "#D6534437"
+    private val COLOR_ORANGE = "#FFD5A36C"
+    private val COLOR_ORANGE_LIGHT = "#FFFFE0B8"
+    private val COLOR_TEAL = "#FFC5B49A"
+    private val COLOR_TEAL_DEEP = "#FFE6D2B2"
+    private val COLOR_TEXT_PRIMARY = "#FFFFF7EC"
+    private val COLOR_TEXT_MUTED = "#FFD0C1AF"
 
-    private fun bgPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_BG_DARK else "#F0F6F4")
-    private fun bgCardColor(): Int = Color.parseColor(if (isDarkMode) COLOR_CARD_DARK else "#EFFFFFFF")
-    private fun bgElevatedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_ELEVATED_DARK else "#DFFFFFFF")
-    private fun textPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_PRIMARY else "#0B1417")
-    private fun textMutedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_MUTED else "#526C6C")
+    private fun bgPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_BG_DARK else "#F3EBDD")
+    private fun bgCardColor(): Int = Color.parseColor(if (isDarkMode) COLOR_CARD_DARK else "#DDFBF5EA")
+    private fun bgElevatedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_ELEVATED_DARK else "#EAFEF9F0")
+    private fun textPrimaryColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_PRIMARY else "#382D24")
+    private fun textMutedColor(): Int = Color.parseColor(if (isDarkMode) COLOR_TEXT_MUTED else "#806F5D")
     private fun accentOrangeColor(): Int = Color.parseColor(COLOR_ORANGE)
     private fun accentTealColor(): Int = Color.parseColor(COLOR_TEAL)
 
@@ -533,7 +533,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
             setBackgroundColor(bgPrimaryColor())
         }
-        // Liquid-glass atmosphere: layered cool light blooms behind translucent surfaces.
+        // Warm Liquid Glass atmosphere: soft amber and cream light blooms behind translucent surfaces.
         rootFrameLayout.addView(AtmosphereBackgroundView(this), FrameLayout.LayoutParams(
             FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT
         ))
@@ -567,7 +567,7 @@ class MainActivity : AppCompatActivity() {
             setTextColor(textPrimaryColor())
             textSize = 26f
             setTypeface(typeface, Typeface.BOLD)
-            setShadowLayer(dp(10).toFloat(), 0f, 0f, Color.argb(160, 255, 138, 61))
+            setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(90, 196, 145, 91))
         }
         tvBrandSubtitle = TextView(this).apply {
             text = getTabSubtitleText()
@@ -1008,9 +1008,9 @@ class MainActivity : AppCompatActivity() {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             background = createPillDrawable(
-                if (isDarkMode) Color.parseColor("#D91A2A38") else Color.parseColor("#F2FFFFFF"),
+                if (isDarkMode) Color.parseColor("#D94A3B30") else Color.parseColor("#EFFFFAF0"),
                 dp(27),
-                if (isDarkMode) "#557D9EAC" else "#A8B9C8D2"
+                if (isDarkMode) "#88D8B98F" else "#B8C5A985"
             )
             setPadding(dp(7), dp(6), dp(7), dp(6))
             elevation = dp(3).toFloat()
@@ -6805,21 +6805,24 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createOrange3DDrawable(radiusPx: Int) = create3DButtonDrawable(
-        Color.parseColor("#FFFFA65E"), Color.parseColor("#FFE8641C"), radiusPx, Color.parseColor("#FFFFC48F")
+        Color.parseColor("#FFE8C49A"), Color.parseColor("#FFB98554"), radiusPx, Color.parseColor("#FFFFE4BE")
     )
 
     private fun createGlass3DDrawable(radiusPx: Int): android.graphics.drawable.LayerDrawable {
         val body = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            if (isDarkMode) intArrayOf(Color.argb(205, 104, 160, 202), Color.argb(165, 28, 62, 101), Color.argb(188, 10, 25, 48))
-            else intArrayOf(Color.argb(230, 255, 255, 255), Color.argb(205, 220, 239, 255))
+            if (isDarkMode) intArrayOf(
+                Color.argb(218, 112, 91, 70), Color.argb(190, 75, 59, 46), Color.argb(205, 48, 38, 31)
+            ) else intArrayOf(
+                Color.argb(224, 255, 250, 239), Color.argb(194, 238, 224, 201), Color.argb(178, 222, 203, 174)
+            )
         ).apply {
             cornerRadius = radiusPx.toFloat()
-            setStroke(dp(1), Color.argb(210, 180, 230, 255))
+            setStroke(dp(1), Color.argb(if (isDarkMode) 150 else 185, 229, 202, 165))
         }
         val shine = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.argb(100, 255, 255, 255), Color.argb(18, 255, 255, 255), Color.TRANSPARENT)
+            intArrayOf(Color.argb(118, 255, 250, 238), Color.argb(30, 255, 246, 228), Color.TRANSPARENT)
         ).apply { cornerRadius = radiusPx.toFloat() }
         return android.graphics.drawable.LayerDrawable(arrayOf(body, shine)).apply {
             setLayerInset(1, dp(2), dp(2), dp(2), dp(2))
@@ -6832,8 +6835,8 @@ class MainActivity : AppCompatActivity() {
     private fun createRailDrawable(edge: Int = railEdge()): GradientDrawable =
         GradientDrawable(
             if (edge >= 2) GradientDrawable.Orientation.LEFT_RIGHT else GradientDrawable.Orientation.TOP_BOTTOM,
-            if (isDarkMode) intArrayOf(Color.argb(224, 52, 91, 132), Color.argb(205, 16, 37, 67), Color.argb(220, 8, 20, 40))
-            else intArrayOf(Color.argb(224, 245, 251, 255), Color.argb(210, 210, 231, 249))
+            if (isDarkMode) intArrayOf(Color.argb(226, 112, 88, 65), Color.argb(210, 66, 51, 39), Color.argb(220, 39, 31, 25))
+            else intArrayOf(Color.argb(232, 255, 250, 239), Color.argb(218, 232, 216, 191))
         ).apply {
             val r = dp(24).toFloat()
             cornerRadii = when (edge) {
@@ -6842,7 +6845,7 @@ class MainActivity : AppCompatActivity() {
                 2 -> floatArrayOf(0f, 0f, 0f, 0f, r, r, r, r)
                 else -> floatArrayOf(r, r, r, r, 0f, 0f, 0f, 0f)
             }
-            setStroke(dp(1), Color.argb(210, 184, 224, 255))
+            setStroke(dp(1), Color.argb(205, 229, 202, 165))
         }
 
     private fun positionRail(dock: View) {
@@ -8143,36 +8146,36 @@ class MainActivity : AppCompatActivity() {
     }
 
     inner class AtmosphereBackgroundView(context: Context) : View(context) {
-        private val petrolPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        private val orangePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-        private val lowerPetrolPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val warmGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val sandGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
+        private val creamGlowPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
-            canvas.drawColor(Color.parseColor(if (isDarkMode) "#07111F" else "#DCEBFA"))
+            canvas.drawColor(Color.parseColor(if (isDarkMode) "#211C18" else "#F3EBDD"))
             val w = width.toFloat()
             val h = height.toFloat()
-            petrolPaint.shader = RadialGradient(
-                w * 0.88f, h * 0.18f, w * 0.72f,
-                intArrayOf(Color.argb(155, 70, 168, 255), Color.argb(65, 47, 117, 205), Color.TRANSPARENT),
-                floatArrayOf(0f, 0.48f, 1f), Shader.TileMode.CLAMP
-            )
-            orangePaint.shader = RadialGradient(
-                w * 0.02f, h * 0.66f, w * 0.62f,
-                intArrayOf(Color.argb(82, 156, 105, 255), Color.argb(25, 125, 85, 220), Color.TRANSPARENT),
-                floatArrayOf(0f, 0.45f, 1f), Shader.TileMode.CLAMP
-            )
-            lowerPetrolPaint.shader = RadialGradient(
-                w * 0.62f, h * 0.92f, w * 0.78f,
-                intArrayOf(Color.argb(110, 43, 205, 220), Color.argb(30, 30, 130, 190), Color.TRANSPARENT),
+            warmGlowPaint.shader = RadialGradient(
+                w * 0.92f, h * 0.12f, w * 0.78f,
+                intArrayOf(Color.argb(if (isDarkMode) 92 else 118, 210, 157, 101), Color.argb(34, 174, 124, 76), Color.TRANSPARENT),
                 floatArrayOf(0f, 0.5f, 1f), Shader.TileMode.CLAMP
             )
-            canvas.drawRect(0f, 0f, w, h, petrolPaint)
-            canvas.drawRect(0f, 0f, w, h, orangePaint)
-            canvas.drawRect(0f, 0f, w, h, lowerPetrolPaint)
-            petrolPaint.shader = null
-            orangePaint.shader = null
-            lowerPetrolPaint.shader = null
+            sandGlowPaint.shader = RadialGradient(
+                w * 0.02f, h * 0.58f, w * 0.68f,
+                intArrayOf(Color.argb(if (isDarkMode) 58 else 92, 180, 139, 98), Color.argb(22, 151, 112, 77), Color.TRANSPARENT),
+                floatArrayOf(0f, 0.48f, 1f), Shader.TileMode.CLAMP
+            )
+            creamGlowPaint.shader = RadialGradient(
+                w * 0.58f, h * 0.94f, w * 0.82f,
+                intArrayOf(Color.argb(if (isDarkMode) 46 else 76, 244, 220, 183), Color.argb(18, 220, 190, 150), Color.TRANSPARENT),
+                floatArrayOf(0f, 0.52f, 1f), Shader.TileMode.CLAMP
+            )
+            canvas.drawRect(0f, 0f, w, h, warmGlowPaint)
+            canvas.drawRect(0f, 0f, w, h, sandGlowPaint)
+            canvas.drawRect(0f, 0f, w, h, creamGlowPaint)
+            warmGlowPaint.shader = null
+            sandGlowPaint.shader = null
+            creamGlowPaint.shader = null
         }
     }
 
