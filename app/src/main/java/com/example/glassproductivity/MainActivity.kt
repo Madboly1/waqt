@@ -5585,7 +5585,7 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(if (isPomodoroLinkedToTask) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = if (isPomodoroLinkedToTask) createOrange3DDrawable(dp(14)) else createGlass3DDrawable(dp(14))
+            background = if (isPomodoroLinkedToTask) create3DButtonDrawable(Color.parseColor("#FF9DEBFF"), Color.parseColor("#FF477FBE"), dp(14), Color.parseColor("#FFC9F7FF")) else createGlass3DDrawable(dp(14))
             elevation = dp(6).toFloat()
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(8) }
@@ -5603,7 +5603,7 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(if (!isPomodoroLinkedToTask) Color.parseColor("#0B1417") else textPrimaryColor())
-            background = if (!isPomodoroLinkedToTask) createOrange3DDrawable(dp(14)) else createGlass3DDrawable(dp(14))
+            background = if (!isPomodoroLinkedToTask) create3DButtonDrawable(Color.parseColor("#FF9DEBFF"), Color.parseColor("#FF477FBE"), dp(14), Color.parseColor("#FFC9F7FF")) else createGlass3DDrawable(dp(14))
             elevation = dp(6).toFloat()
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f)
@@ -5719,7 +5719,7 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
             setTextColor(Color.parseColor("#0B1417"))
-            background = createOrange3DDrawable(dp(24))
+            background = create3DButtonDrawable(Color.parseColor("#FF9DEBFF"), Color.parseColor("#FF477FBE"), dp(24), Color.parseColor("#FFC9F7FF"))
             elevation = dp(12).toFloat()
             layoutParams = LinearLayout.LayoutParams(dp(148), dp(48)).apply { marginEnd = dp(10) }
             setOnClickListener {
@@ -8447,7 +8447,7 @@ class MainActivity : AppCompatActivity() {
             val m = totalSec / 60L
             val s = totalSec % 60L
             timeString = String.format(Locale.US, "%02d:%02d", m, s)
-            progressPaint.color = if (isBreakSession) Color.parseColor("#42C98A") else accentOrangeColor()
+            progressPaint.color = if (isBreakSession) Color.parseColor("#FF65E6B2") else Color.parseColor("#FF83DFFF")
             textPaint.color = textPrimaryColor()
             invalidate()
         }
@@ -8464,8 +8464,8 @@ class MainActivity : AppCompatActivity() {
             // The light theme uses a clean soft-glass bezel: no black software shadow.
             bezelPaint.shader = android.graphics.LinearGradient(
                 0f, 0f, 0f, height.toFloat(),
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF2E5A5E"), Color.parseColor("#FF0A1A1D"))
-                else intArrayOf(Color.parseColor("#FFEAF4FC"), Color.parseColor("#FFB8D0E6")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF3C6685"), Color.parseColor("#FF0B1B31"))
+                else intArrayOf(Color.parseColor("#FFF5FCFF"), Color.parseColor("#FFBBD9EE")),
                 null, Shader.TileMode.CLAMP
             )
             if (isDarkMode) bezelPaint.setShadowLayer(dp(12).toFloat(), 0f, dp(4).toFloat(), Color.argb(85, 0, 0, 0))
@@ -8476,8 +8476,8 @@ class MainActivity : AppCompatActivity() {
             // Recessed glass disc inside the ring, adapted to the active appearance.
             discPaint.shader = RadialGradient(
                 cx0, cy0 - outerR * 0.25f, outerR,
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF16363A"), Color.parseColor("#FF081518"), Color.parseColor("#FF050E10"))
-                else intArrayOf(Color.parseColor("#FFFFFFFF"), Color.parseColor("#FFF0F7FD"), Color.parseColor("#FFDCEAF6")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF244968"), Color.parseColor("#FF0C1D35"), Color.parseColor("#FF071226"))
+                else intArrayOf(Color.parseColor("#FFFFFFFF"), Color.parseColor("#FFEAF7FF"), Color.parseColor("#FFD1E8F8")),
                 floatArrayOf(0f, 0.65f, 1f), Shader.TileMode.CLAMP
             )
             canvas.drawCircle(cx0, cy0, outerR - dp(7), discPaint)
@@ -8491,7 +8491,7 @@ class MainActivity : AppCompatActivity() {
             glowPaint.color = baseColor
             glowPaint.shader = android.graphics.SweepGradient(
                 cx0, cy0,
-                intArrayOf(Color.parseColor("#FFB8501A"), baseColor, Color.parseColor("#FFFFC48F"), Color.parseColor("#FFB8501A")),
+                intArrayOf(Color.parseColor("#FF477FBE"), baseColor, Color.parseColor("#FFD6F8FF"), Color.parseColor("#FF477FBE")),
                 floatArrayOf(0f, 0.55f, 0.9f, 1f)
             )
             if (isDarkMode) glowPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(115, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor)))
