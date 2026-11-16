@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity() {
     private var isArabic: Boolean = true
     private var isDarkMode: Boolean = true
     private var currentTab: Int = 0 // 0: المهام, 1: العادات, 2: التركيز, 3: مدونتي
+    private var animateTabSelectionOnNextRefresh = false
 
     // WAQT Warm Liquid Glass palette: warm stone, cream, sand and muted bronze.
     private val COLOR_BG_DARK = "#211C18"
@@ -641,6 +642,8 @@ class MainActivity : AppCompatActivity() {
     private fun refreshTabBar() {
         if (!::gtaRadialTriggerButton.isInitialized) return
         val bar = gtaRadialTriggerButton
+        val shouldAnimateSelection = animateTabSelectionOnNextRefresh
+        animateTabSelectionOnNextRefresh = false
         bar.removeAllViews()
         bar.background = createGlass3DDrawable(dp(33))
         val tabs = listOf(
@@ -657,7 +660,7 @@ class MainActivity : AppCompatActivity() {
         }
         tabs.forEach { (idx, icon, label) ->
             val sel = idx == currentTab
-            row.addView(LinearLayout(this).apply {
+            val tabItem = LinearLayout(this).apply {
                 orientation = LinearLayout.VERTICAL
                 gravity = Gravity.CENTER
                 layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply { marginStart = dp(2); marginEnd = dp(2) }
@@ -677,7 +680,22 @@ class MainActivity : AppCompatActivity() {
                 setOnClickListener {
                     if (idx != currentTab) switchToTab(idx)
                 }
-            })
+            }
+            if (sel && shouldAnimateSelection) {
+                tabItem.alpha = 0f
+                tabItem.scaleX = 0.94f
+                tabItem.scaleY = 0.88f
+                tabItem.post {
+                    tabItem.animate()
+                        .alpha(1f)
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(230L)
+                        .setInterpolator(android.view.animation.DecelerateInterpolator(1.5f))
+                        .start()
+                }
+            }
+            row.addView(tabItem)
         }
         bar.addView(row)
 
@@ -785,6 +803,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun switchToTab(targetTab: Int) {
         currentTab = targetTab
+        animateTabSelectionOnNextRefresh = true
         triggerGentleHaptic()
         renderCurrentTab()
     }
