@@ -856,8 +856,7 @@ class MainActivity : AppCompatActivity() {
                 this,
                 oldScreen,
                 newScreen,
-                isArabic,
-                dp(3).toFloat()
+                (dp(5).toFloat() / 2f)
             ) { finished ->
                 rootFrameLayout.removeView(finished)
                 if (activeTabTransitionView === finished) activeTabTransitionView = null
@@ -8746,24 +8745,31 @@ private class LiquidTabTransitionView(
     context: Context,
     private val oldScreen: Bitmap,
     private val newScreen: Bitmap,
-    private val revealFromRight: Boolean,
-    private val edgeWidth: Float,
+    private val softEdgeWidth: Float,
     private val onFinished: (LiquidTabTransitionView) -> Unit
 ) : View(context) {
     private val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
-    private val edgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+    private val softEdgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.STROKE
-        strokeWidth = edgeWidth
-        color = Color.argb(185, 255, 239, 216)
-        setShadowLayer(edgeWidth * 5f, 0f, 0f, Color.argb(150, 255, 190, 118))
+        strokeWidth = softEdgeWidth * 5f
+        color = Color.argb(105, 255, 235, 210)
+        maskFilter = android.graphics.BlurMaskFilter(
+            softEdgeWidth * 5f,
+            android.graphics.BlurMaskFilter.Blur.NORMAL
+        )
+    }
+    private val rimPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = (softEdgeWidth * 0.65f).coerceAtLeast(1f)
+        color = Color.argb(92, 255, 248, 235)
     }
     private val revealPath = Path()
     private val edgePath = Path()
     private var progress = 0f
     private var disposed = false
     private val animator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
-        duration = 520L
-        interpolator = android.view.animation.DecelerateInterpolator(1.15f)
+        duration = 640L
+        interpolator = android.view.animation.DecelerateInterpolator(1.35f)
         addUpdateListener {
             progress = it.animatedValue as Float
             invalidate()
@@ -8777,7 +8783,8 @@ private class LiquidTabTransitionView(
 
     init {
         isClickable = true
-        setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        // Software rendering enables the subtle feathered blur around the liquid edge.
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
     fun start() {
@@ -8790,6 +8797,7 @@ private class LiquidTabTransitionView(
         animator.cancel()
         if (!oldScreen.isRecycled) oldScreen.recycle()
         if (!newScreen.isRecycled) newScreen.recycle()
+        softEdgePaint.maskFilter = null
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -8800,51 +8808,50 @@ private class LiquidTabTransitionView(
         val h = height.toFloat()
         if (w <= 0f || h <= 0f) return
 
-        canvas.drawBitmap(oldScreen, null, RectF(0f, 0f, w, h), bitmapPaint)
+        val bounds = RectF(0f, 0f, w, h)
+        canvas.drawBitmap(oldScreen, null, bounds, bitmapPaint)
 
-        val waveEnvelope = kotlin.math.sin(Math.PI * progress).toFloat()
-        val waveAmplitude = (height * 0.035f).coerceAtMost(34f) * waveEnvelope
-        val front = if (revealFromRight) w * (1f - progress) else w * progress
-        val phase = progress * (Math.PI.toFloat() * 2f)
+        // A liquid bloom grows from the exact center and expands beyond all four corners.
+        val centerX = w * 0.5f
+        val centerY = h * 0.5f
+        val maxRadius = kotlin.math.hypot(centerX, centerY) + softEdgeWidth * 14f
+        val envelope = kotlin.math.sin(Math.PI * progress).toFloat()
+        val waveAmplitude = (kotlin.math.min(w, h) * 0.018f * envelope)
+            .coerceAtMost(softEdgeWidth * 7f)
+        val radius = maxRadius * progress
+        val phase = progress * 2.4f
 
         revealPath.reset()
         edgePath.reset()
-        val firstX = liquidEdgeX(front, 0f, waveAmplitude, phase, h)
-        revealPath.moveTo(firstX, 0f)
-        edgePath.moveTo(firstX, 0f)
-
-        val step = (h / 90f).coerceAtLeast(6f)
-        var y = step
-        while (y < h) {
-            val x = liquidEdgeX(front, y, waveAmplitude, phase, h)
-            revealPath.lineTo(x, y)
-            edgePath.lineTo(x, y)
-            y += step
-        }
-        val lastX = liquidEdgeX(front, h, waveAmplitude, phase, h)
-        revealPath.lineTo(lastX, h)
-        edgePath.lineTo(lastX, h)
-
-        if (revealFromRight) {
-            revealPath.lineTo(w, h)
-            revealPath.lineTo(w, 0f)
-        } else {
-            revealPath.lineTo(0f, h)
-            revealPath.lineTo(0f, 0f)
+        val points = 144
+        for (i in 0..points) {
+            val angle = (Math.PI * 2.0 * i / points)
+            val organicWave =
+                kotlin.math.sin(angle * 3.0 + phase).toFloat() * waveAmplitude +
+                kotlin.math.sin(angle * 5.0 - phase * 0.72f).toFloat() * waveAmplitude * 0.32f
+            val r = (radius + organicWave).coerceAtLeast(0f)
+            val x = centerX + kotlin.math.cos(angle).toFloat() * r
+            val y = centerY + kotlin.math.sin(angle).toFloat() * r
+            if (i == 0) {
+                revealPath.moveTo(x, y)
+                edgePath.moveTo(x, y)
+            } else {
+                revealPath.lineTo(x, y)
+                edgePath.lineTo(x, y)
+            }
         }
         revealPath.close()
+        edgePath.close()
 
         val save = canvas.save()
         canvas.clipPath(revealPath)
-        canvas.drawBitmap(newScreen, null, RectF(0f, 0f, w, h), bitmapPaint)
+        canvas.drawBitmap(newScreen, null, bounds, bitmapPaint)
         canvas.restoreToCount(save)
 
-        if (waveAmplitude > 1f) canvas.drawPath(edgePath, edgePaint)
-    }
-
-    private fun liquidEdgeX(front: Float, y: Float, amplitude: Float, phase: Float, h: Float): Float {
-        val wave = kotlin.math.sin((y / h) * (Math.PI * 4.2) + phase).toFloat()
-        return (front + wave * amplitude).coerceIn(0f, width.toFloat())
+        // A broad, low-opacity feather replaces the old hard, bright dividing line.
+        if (progress < 0.995f && waveAmplitude > 0.25f) {
+            canvas.drawPath(edgePath, softEdgePaint)
+            canvas.drawPath(edgePath, rimPaint)
+        }
     }
 }
-
