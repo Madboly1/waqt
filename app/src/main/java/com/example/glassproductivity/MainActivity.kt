@@ -632,10 +632,13 @@ class MainActivity : AppCompatActivity() {
                         if (excluded) return false
                         val dx = event.x - downX
                         val dy = event.y - downY
-                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 1.35f &&
-                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.25f) {
+                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 1.10f &&
+                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.12f) {
                             tracking = true
                             beginInteractiveTabSwipe(dx)
+                            // Include the movement that triggered interception so the liquid
+                            // edge immediately follows the finger instead of starting at zero.
+                            updateInteractiveTabSwipe(dx)
                             parent?.requestDisallowInterceptTouchEvent(true)
                             return true
                         }
@@ -858,12 +861,21 @@ class MainActivity : AppCompatActivity() {
             return view
         }
         var target = hit(container, x, y) ?: return true
+        val touchedView = target
         while (target !== container) {
+            // Preserve gestures owned by the carousel and controls that directly receive
+            // the touch. A clickable ancestor (for example, a whole content card) must not
+            // block tab navigation across the entire card surface.
             if (carouselSwipeViews.containsKey(target) ||
                 target is android.widget.HorizontalScrollView ||
                 target is android.widget.SeekBar ||
                 target is android.widget.EditText ||
-                target.isClickable || target.isLongClickable) return true
+                (target === touchedView && (
+                    target is android.widget.Button ||
+                    target is android.widget.Spinner ||
+                    target is android.widget.Switch ||
+                    target.isClickable || target.isLongClickable
+                ))) return true
             val parent = target.parent
             target = parent as? View ?: break
         }
@@ -946,7 +958,7 @@ class MainActivity : AppCompatActivity() {
         val swipe = pendingInteractiveSwipe ?: return
         val width = tabContentHost.width.coerceAtLeast(1).toFloat()
         val distance = kotlin.math.abs(swipe.latestDx)
-        val commit = !cancelled && (distance >= width * 0.28f)
+        val commit = !cancelled && (distance >= width * 0.22f)
         swipe.finishRequested = true
         swipe.commitAfterRelease = commit
         swipe.transition?.settle(commit) { committed ->
