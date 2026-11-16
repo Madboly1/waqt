@@ -829,8 +829,15 @@ object AlarmScheduler {
         }
 
         val settingsPrefs = context.getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
-        if (item.isHabit && !settingsPrefs.getBoolean(ReminderRepository.KEY_NOTIF_HABITS, true)) return -1L
-        if (!item.isHabit && !settingsPrefs.getBoolean(ReminderRepository.KEY_NOTIF_TASKS, true)) return -1L
+        val notificationsEnabled = if (item.isHabit) {
+            settingsPrefs.getBoolean(ReminderRepository.KEY_NOTIF_HABITS, true)
+        } else {
+            settingsPrefs.getBoolean(ReminderRepository.KEY_NOTIF_TASKS, true)
+        }
+        if (!notificationsEnabled) {
+            cancelAlarm(context, item.id)
+            return -1L
+        }
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val nowMillis = System.currentTimeMillis()
@@ -907,6 +914,19 @@ object AlarmScheduler {
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
         alarmManager.cancel(pendingIntent)
+
+        // A reminder has a separate PendingIntent for its pre-alert. Cancel both
+        // so disabling a reminder or deleting an item cannot leave a stale alert.
+        val preAlertIntent = Intent(context, AlarmReceiver::class.java).apply {
+            action = ACTION_PRE_NOTIFY
+        }
+        val preAlertPendingIntent = PendingIntent.getBroadcast(
+            context,
+            itemId.hashCode() + 1,
+            preAlertIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+        alarmManager.cancel(preAlertPendingIntent)
     }
 
     private fun buildAlarmPendingIntent(context: Context, item: ReminderItem, actionString: String): PendingIntent {
