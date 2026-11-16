@@ -678,7 +678,7 @@ class MainActivity : AppCompatActivity() {
                     textSize = 10f
                     gravity = Gravity.CENTER
                     setTypeface(typeface, if (sel) Typeface.BOLD else Typeface.NORMAL)
-                    setTextColor(if (sel) Color.parseColor("#0B1417") else textMutedColor())
+                    setTextColor(if (sel) Color.parseColor("#3B2B20") else textMutedColor())
                 })
                 setOnClickListener {
                     animateTapFeedback(this)
@@ -1071,7 +1071,7 @@ class MainActivity : AppCompatActivity() {
             text = "🎙"
             textSize = 19f
             gravity = Gravity.CENTER
-            setTextColor(Color.WHITE)
+            setTextColor(textPrimaryColor())
             background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
                 setColor(accentOrangeColor())
@@ -2698,7 +2698,7 @@ class MainActivity : AppCompatActivity() {
             text = if (isArabic) "تخطي ✕" else "Skip ✕"
             textSize = 13f
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(Color.parseColor("#FFB9D8F2"))
+            setTextColor(textMutedColor())
             setPadding(dp(10), dp(4), dp(10), dp(4))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { gravity = Gravity.END }
         }
@@ -2740,7 +2740,7 @@ class MainActivity : AppCompatActivity() {
             text = (if (ok) "✅  " else "⚠️  ") + label
             textSize = 13f
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(if (ok) Color.parseColor("#FF42C98A") else Color.parseColor("#FFE8F7F5"))
+            setTextColor(if (ok) Color.parseColor("#FF42C98A") else textMutedColor())
             gravity = Gravity.CENTER_VERTICAL
             background = createGlass3DDrawable(dp(14))
             setPadding(dp(14), 0, dp(14), 0)
@@ -2772,7 +2772,7 @@ class MainActivity : AppCompatActivity() {
                 text = if (isArabic) sl.ar else sl.en
                 textSize = 20f
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(Color.parseColor("#FFEAF6FF"))
+                setTextColor(textPrimaryColor())
             })
             body.addView(headerRow)
             body.addView(TextView(this).apply {
@@ -2780,7 +2780,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 14f
                 gravity = Gravity.CENTER
                 setLineSpacing(0f, 1.2f)
-                setTextColor(Color.parseColor("#FFEAF4FF"))
+                setTextColor(textPrimaryColor())
                 setPadding(dp(6), dp(8), dp(6), dp(4))
             })
             if (cur == slides.lastIndex) {
@@ -2793,7 +2793,7 @@ class MainActivity : AppCompatActivity() {
                     else "On Xiaomi/Oppo/Samsung also enable Autostart and set battery to Unrestricted in App info."
                     textSize = 12f
                     gravity = Gravity.CENTER
-                    setTextColor(Color.parseColor("#FFB9D8F2"))
+                    setTextColor(textMutedColor())
                     setPadding(dp(6), dp(12), dp(6), dp(4))
                 })
                 body.addView(permRow(if (isArabic) "فتح إعدادات التطبيق" else "Open app settings", false) {
@@ -2809,7 +2809,7 @@ class MainActivity : AppCompatActivity() {
                 dots.addView(View(this).apply {
                     background = GradientDrawable().apply {
                         cornerRadius = dp(5).toFloat()
-                        setColor(if (i == cur) Color.parseColor("#FF8BD5FF") else Color.parseColor("#55FFFFFF"))
+                        setColor(if (i == cur) accentOrangeColor() else Color.parseColor("#55FFFFFF"))
                     }
                     layoutParams = LinearLayout.LayoutParams(if (i == cur) dp(22) else dp(8), dp(8)).apply { marginStart = dp(4); marginEnd = dp(4) }
                     setOnClickListener { cur = i; render() }
@@ -2821,7 +2821,7 @@ class MainActivity : AppCompatActivity() {
                     text = if (isArabic) "رجوع" else "Back"
                     textSize = 15f
                     gravity = Gravity.CENTER
-                    setTextColor(Color.parseColor("#FFEAF4FF"))
+                    setTextColor(textPrimaryColor())
                     background = createGlass3DDrawable(dp(27))
                     layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply { marginEnd = dp(10) }
                     setOnClickListener { cur--; render() }
@@ -2832,7 +2832,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 17f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(Color.parseColor("#FFF3FAFF"))
+                setTextColor(textPrimaryColor())
                 background = createGlass3DDrawable(dp(27))
                 elevation = dp(10).toFloat()
                 layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 2f)
@@ -2953,7 +2953,7 @@ class MainActivity : AppCompatActivity() {
             gravity = Gravity.END
             val bubble = TextView(this@MainActivity).apply {
                 this.text = text
-                setTextColor(Color.parseColor("#0B1417"))
+                setTextColor(Color.parseColor("#3B2B20"))
                 textSize = 14f
                 setTypeface(typeface, Typeface.BOLD)
                 setLineSpacing(dp(2).toFloat(), 1.02f)
@@ -2975,7 +2975,7 @@ class MainActivity : AppCompatActivity() {
         val bubble = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
-            background = createPillDrawable(if (isDarkMode) Color.parseColor("#CC1B4055") else Color.parseColor("#E3EAF5F8"), dp(20), if (isDarkMode) "#8ADCF0" else "#328AA5")
+            background = createPillDrawable(bgCardColor(), dp(20), COLOR_TEAL)
             setPadding(dp(10), dp(8), dp(12), dp(8))
             layoutParams = LinearLayout.LayoutParams((resources.displayMetrics.widthPixels * 0.78f).toInt(), dp(66)).apply {
                 gravity = Gravity.END
@@ -2986,7 +2986,7 @@ class MainActivity : AppCompatActivity() {
             text = "▶"
             textSize = 17f
             gravity = Gravity.CENTER
-            setTextColor(Color.parseColor("#07111F"))
+            setTextColor(Color.parseColor("#3B2B20"))
             background = GradientDrawable().apply { shape = GradientDrawable.OVAL; setColor(accentTealColor()) }
             layoutParams = LinearLayout.LayoutParams(dp(42), dp(42)).apply { marginEnd = dp(10) }
         }
@@ -3004,7 +3004,7 @@ class MainActivity : AppCompatActivity() {
             val bar = View(this).apply {
                 background = GradientDrawable().apply {
                     cornerRadius = dp(3).toFloat()
-                    setColor(if (isDarkMode) Color.parseColor("#8ADCF0") else Color.parseColor("#328AA5"))
+                    setColor(accentTealColor())
                 }
                 layoutParams = LinearLayout.LayoutParams(0, dp(6 + ((i * 11 + i * i) % 17)), 1f).apply {
                     marginStart = dp(1); marginEnd = dp(1)
@@ -3086,7 +3086,7 @@ class MainActivity : AppCompatActivity() {
                     textSize = 11f
                     gravity = Gravity.CENTER
                     setTypeface(typeface, Typeface.BOLD)
-                    setTextColor(Color.parseColor("#0B1417"))
+                    setTextColor(Color.parseColor("#3B2B20"))
                     background = createPillDrawable(accentOrangeColor(), dp(10), null)
                     setPadding(dp(10), dp(6), dp(10), dp(6))
                     layoutParams = LinearLayout.LayoutParams(0, dp(34), 1f).apply { marginEnd = dp(6) }
@@ -3207,7 +3207,7 @@ class MainActivity : AppCompatActivity() {
                     setTypeface(typeface, Typeface.BOLD)
                     val s = dp(50)
                     layoutParams = LinearLayout.LayoutParams(s, s)
-                    setTextColor(if (isSel) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTextColor(if (isSel) Color.parseColor("#3B2B20") else textPrimaryColor())
                     background = GradientDrawable().apply {
                         shape = GradientDrawable.OVAL
                         setColor(if (isSel) (if (key == "overdue") Color.parseColor("#F16D68") else accentOrangeColor()) else bgCardColor())
@@ -3618,7 +3618,7 @@ class MainActivity : AppCompatActivity() {
         val btnSave = Button(this).apply {
             text = if (isArabic) "حفظ النسبة" else "Save"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44)).apply { topMargin = dp(12) }
             setOnClickListener {
@@ -3732,7 +3732,7 @@ class MainActivity : AppCompatActivity() {
         val btn = Button(this).apply {
             text = if (isArabic) "بحث" else "Search"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentTealColor())
             setOnClickListener {
                 taskSearchQuery = et.text.toString().trim()
@@ -3848,7 +3848,7 @@ class MainActivity : AppCompatActivity() {
                     textSize = 12f
                     gravity = Gravity.CENTER
                     setTypeface(typeface, Typeface.BOLD)
-                    setTextColor(if (sel) Color.parseColor("#0B1417") else Color.parseColor(hex))
+                    setTextColor(if (sel) Color.parseColor("#3B2B20") else Color.parseColor(hex))
                     background = createPillDrawable(if (sel) Color.parseColor(hex) else bgElevatedColor(), dp(12), if (sel) null else hex)
                     layoutParams = LinearLayout.LayoutParams(0, dp(40), 1f).apply { marginEnd = dp(6) }
                     setOnClickListener {
@@ -3865,7 +3865,7 @@ class MainActivity : AppCompatActivity() {
         val btnSave = Button(this).apply {
             text = if (isArabic) "حفظ وضبط المنبه" else "Save Task"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)).apply { topMargin = dp(16) }
             setOnClickListener {
@@ -3936,7 +3936,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 13f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (isSel) Color.parseColor("#0B1417") else textPrimaryColor())
+                setTextColor(if (isSel) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = createPillDrawable(if (isSel) accentOrangeColor() else bgCardColor(), dp(14), if (isSel) null else "#268F755B")
                 setPadding(dp(14), dp(8), dp(14), dp(8))
                 layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(38)).apply { marginEnd = dp(6) }
@@ -4002,7 +4002,7 @@ class MainActivity : AppCompatActivity() {
         val btn = Button(this).apply {
             text = if (isArabic) "+ إضافة التصنيف" else "+ Add"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             setOnClickListener {
                 val name = et.text.toString().trim()
@@ -4295,14 +4295,14 @@ class MainActivity : AppCompatActivity() {
                 textSize = 12f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (isSelected) Color.parseColor("#0B1417") else textPrimaryColor())
+                setTextColor(if (isSelected) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = createPillDrawable(if (isSelected) accentOrangeColor() else bgElevatedColor(), dp(12), null)
                 val s = dp(40)
                 layoutParams = LinearLayout.LayoutParams(0, s, 1f).apply { marginEnd = dp(4) }
                 setOnClickListener {
                     if (currentDays.contains(dayId)) currentDays.remove(dayId) else currentDays.add(dayId)
                     val active = currentDays.contains(dayId)
-                    setTextColor(if (active) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTextColor(if (active) Color.parseColor("#3B2B20") else textPrimaryColor())
                     background = createPillDrawable(if (active) accentOrangeColor() else bgElevatedColor(), dp(12), null)
                 }
             }
@@ -4313,7 +4313,7 @@ class MainActivity : AppCompatActivity() {
         val btnSave = Button(this).apply {
             text = if (isArabic) "حفظ الأيام" else "Save"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(44)).apply { topMargin = dp(16) }
             setOnClickListener {
@@ -4440,14 +4440,14 @@ class MainActivity : AppCompatActivity() {
                 textSize = 11f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (isSel) Color.parseColor("#0B1417") else textPrimaryColor())
+                setTextColor(if (isSel) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = createPillDrawable(if (isSel) accentOrangeColor() else bgElevatedColor(), dp(12), null)
                 val s = dp(38)
                 layoutParams = LinearLayout.LayoutParams(0, s, 1f).apply { marginEnd = dp(4) }
                 setOnClickListener {
                     if (selectedDaysSet.contains(dId)) selectedDaysSet.remove(dId) else selectedDaysSet.add(dId)
                     val active = selectedDaysSet.contains(dId)
-                    setTextColor(if (active) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTextColor(if (active) Color.parseColor("#3B2B20") else textPrimaryColor())
                     background = createPillDrawable(if (active) accentOrangeColor() else bgElevatedColor(), dp(12), null)
                 }
             }
@@ -4476,7 +4476,7 @@ class MainActivity : AppCompatActivity() {
                     textSize = 13f
                     gravity = Gravity.CENTER
                     setTypeface(typeface, Typeface.BOLD)
-                    setTextColor(if (sel) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTextColor(if (sel) Color.parseColor("#3B2B20") else textPrimaryColor())
                     background = if (sel) createOrange3DDrawable(dp(17)) else createGlass3DDrawable(dp(17))
                     setPadding(dp(14), 0, dp(14), 0)
                     layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(36)).apply { marginEnd = dp(8) }
@@ -4548,7 +4548,7 @@ class MainActivity : AppCompatActivity() {
                     textSize = 12f
                     gravity = Gravity.CENTER
                     setTypeface(typeface, Typeface.BOLD)
-                    setTextColor(if (sel) Color.parseColor("#0B1417") else Color.parseColor(hex))
+                    setTextColor(if (sel) Color.parseColor("#3B2B20") else Color.parseColor(hex))
                     background = createPillDrawable(if (sel) Color.parseColor(hex) else bgElevatedColor(), dp(12), if (sel) null else hex)
                     layoutParams = LinearLayout.LayoutParams(0, dp(40), 1f).apply { marginEnd = dp(6) }
                     setOnClickListener {
@@ -4565,7 +4565,7 @@ class MainActivity : AppCompatActivity() {
         val btnSave = Button(this).apply {
             text = if (isArabic) "حفظ العادة وربطها بالمهام" else "Save Habit"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)).apply { topMargin = dp(16) }
             setOnClickListener {
@@ -4627,7 +4627,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 13f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, if (notesSubTab == index) Typeface.BOLD else Typeface.NORMAL)
-                setTextColor(if (notesSubTab == index) Color.parseColor("#0B1417") else textPrimaryColor())
+                setTextColor(if (notesSubTab == index) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = if (notesSubTab == index) createOrange3DDrawable(dp(18)) else null
                 layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply {
                     marginStart = dp(2); marginEnd = dp(2)
@@ -4753,14 +4753,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 addView(TextView(this@MainActivity).apply {
                     text = day.toString(); textSize = 14f; gravity = Gravity.CENTER
-                    setTextColor(if (selected) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTextColor(if (selected) Color.parseColor("#3B2B20") else textPrimaryColor())
                     setTypeface(typeface, if (selected || hasEntry) Typeface.BOLD else Typeface.NORMAL)
                 })
                 addView(View(this@MainActivity).apply {
                     visibility = if (hasEntry) View.VISIBLE else View.INVISIBLE
                     background = GradientDrawable().apply {
                         shape = GradientDrawable.OVAL
-                        setColor(if (selected) Color.parseColor("#0B1417") else accentTealColor())
+                        setColor(if (selected) Color.parseColor("#3B2B20") else accentTealColor())
                     }
                     layoutParams = LinearLayout.LayoutParams(dp(5), dp(5)).apply { topMargin = dp(2) }
                 })
@@ -4963,7 +4963,7 @@ class MainActivity : AppCompatActivity() {
 
         page.addView(Button(this).apply {
             text = if (isArabic) "حفظ يومياتي" else "Save journal"
-            isAllCaps = false; setTextColor(Color.parseColor("#0B1417"))
+            isAllCaps = false; setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentTealColor())
             setOnClickListener {
                 val value = editor.text.toString().trim()
@@ -5063,7 +5063,7 @@ class MainActivity : AppCompatActivity() {
         val preview = note.content.trim()
         val pinned = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
             .getStringSet("waqt_pinned_notes", emptySet())?.contains(note.id) == true
-        val cardColor = if (isDarkMode) Color.parseColor("#B8203B50") else Color.parseColor("#C9FFFFFF")
+        val cardColor = if (isDarkMode) bgCardColor() else Color.parseColor("#C9FFFFFF")
         val card = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createRefinedFrostedDrawable(dp(22))
@@ -5075,7 +5075,7 @@ class MainActivity : AppCompatActivity() {
         if (note.category.isNotBlank() && note.category != "general") {
             top.addView(TextView(this).apply {
                 text = note.category; textSize = 10f
-                setTextColor(if (isDarkMode) Color.parseColor("#FFD3E3EF") else Color.parseColor("#FF52616C"))
+                setTextColor(textMutedColor())
                 maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.END
                 layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
             })
@@ -5095,14 +5095,14 @@ class MainActivity : AppCompatActivity() {
         card.addView(top)
         card.addView(TextView(this).apply {
             text = displayTitle
-            setTextColor(if (isDarkMode) Color.parseColor("#FFF4F7FA") else Color.parseColor("#FF20262C"))
+            setTextColor(textPrimaryColor())
             textSize = 16f; setTypeface(typeface, Typeface.BOLD); maxLines = 4
             ellipsize = android.text.TextUtils.TruncateAt.END
             setPadding(0, dp(8), 0, dp(5))
         })
         if (preview.isNotBlank()) card.addView(TextView(this).apply {
             text = preview
-            setTextColor(if (isDarkMode) Color.parseColor("#FFD5E0E8") else Color.parseColor("#FF414B54"))
+            setTextColor(textMutedColor())
             textSize = 13f; maxLines = 3; ellipsize = android.text.TextUtils.TruncateAt.END
             setLineSpacing(dp(3).toFloat(), 1.02f)
         })
@@ -5111,7 +5111,7 @@ class MainActivity : AppCompatActivity() {
                 card.addView(ImageView(this).apply {
                     setImageURI(Uri.parse(note.imageUri)); scaleType = ImageView.ScaleType.CENTER_CROP
                     layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(118)).apply { topMargin = dp(9) }
-                    background = GradientDrawable().apply { cornerRadius = dp(10).toFloat(); setColor(if (isDarkMode) Color.parseColor("#FF18232D") else Color.WHITE) }
+                    background = GradientDrawable().apply { cornerRadius = dp(10).toFloat(); setColor(bgPrimaryColor()) }
                     clipToOutline = true
                 })
             }
@@ -5120,7 +5120,7 @@ class MainActivity : AppCompatActivity() {
             card.addView(TextView(this).apply {
                 text = "🎙  ${if (isArabic) "تسجيل صوتي" else "Voice note"}"
                 textSize = 11f
-                setTextColor(if (isDarkMode) Color.parseColor("#FFB9E7E3") else Color.parseColor("#FF236C67"))
+                setTextColor(accentTealColor())
                 setPadding(0, dp(10), 0, 0)
             })
         }
@@ -5204,7 +5204,7 @@ class MainActivity : AppCompatActivity() {
                         val preview = Dialog(this@MainActivity)
                         val full = ImageView(this@MainActivity).apply {
                             setImageURI(Uri.parse(note.imageUri)); scaleType = ImageView.ScaleType.FIT_CENTER
-                            setBackgroundColor(Color.BLACK)
+                            setBackgroundColor(bgPrimaryColor())
                             setOnClickListener { preview.dismiss() }
                         }
                         preview.setContentView(full)
@@ -5310,7 +5310,7 @@ class MainActivity : AppCompatActivity() {
                     topMargin = dp(6)
                     bottomMargin = dp(10)
                 }
-                setBackgroundColor(Color.parseColor("#4DA5B4B4"))
+                setBackgroundColor(Color.argb(77, 190, 143, 91))
             }
             dockLayout.addView(divider)
 
@@ -5354,7 +5354,7 @@ class MainActivity : AppCompatActivity() {
         val btn = Button(this).apply {
             text = if (isArabic) "بحث" else "Search"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentTealColor())
             setOnClickListener {
                 noteSearchQuery = et.text.toString().trim()
@@ -5448,7 +5448,7 @@ class MainActivity : AppCompatActivity() {
                         text = c ?: (if (isArabic) "بدون" else "None")
                         textSize = 13f
                         gravity = Gravity.CENTER
-                        setTextColor(if (sel) Color.parseColor("#0B1417") else textPrimaryColor())
+                        setTextColor(if (sel) Color.parseColor("#3B2B20") else textPrimaryColor())
                         background = if (sel) createOrange3DDrawable(dp(16)) else createGlass3DDrawable(dp(16))
                         setPadding(dp(12), 0, dp(12), 0)
                         layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(34)).apply { marginEnd = dp(6) }
@@ -5498,7 +5498,7 @@ class MainActivity : AppCompatActivity() {
         val btnSave = Button(this).apply {
             text = if (isArabic) "حفظ التدوينة" else "Save entry"
             isAllCaps = false
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentTealColor())
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(48)).apply { topMargin = dp(16) }
             setOnClickListener {
@@ -5576,12 +5576,12 @@ class MainActivity : AppCompatActivity() {
         }
         val startBtn = TextView(this).apply {
             text = if (isArabic) "● بدء" else "● Start"; gravity = Gravity.CENTER
-            setTextColor(Color.WHITE); background = createPillDrawable(Color.parseColor("#FF248B72"), dp(16), null)
+            setTextColor(Color.WHITE); background = createPillDrawable(accentTealColor(), dp(16), null)
             setPadding(dp(22), dp(13), dp(22), dp(13))
         }
         val stopBtn = TextView(this).apply {
             text = if (isArabic) "✓ إيقاف وحفظ" else "✓ Stop & Save"; gravity = Gravity.CENTER
-            setTextColor(Color.WHITE); background = createPillDrawable(Color.parseColor("#FF3679B8"), dp(16), null)
+            setTextColor(Color.WHITE); background = createPillDrawable(accentOrangeColor(), dp(16), null)
             setPadding(dp(18), dp(13), dp(18), dp(13)); alpha = 0.45f; isEnabled = false
         }
         actions.addView(startBtn); actions.addView(stopBtn)
@@ -5702,30 +5702,26 @@ class MainActivity : AppCompatActivity() {
     private fun focusGlassDrawable(radiusDp: Int = 22): android.graphics.drawable.Drawable {
         return GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.parseColor("#D91A2B43"), Color.parseColor("#C9101C30"))
+            if (isDarkMode) intArrayOf(Color.parseColor(COLOR_CARD_DARK), Color.parseColor(COLOR_BG_DARK))
+            else intArrayOf(Color.parseColor("#EAFEF9F0"), Color.parseColor("#F3EBDD"))
         ).apply {
             cornerRadius = dp(radiusDp).toFloat()
-            setStroke(dp(1), Color.parseColor("#354F718C"))
+            setStroke(dp(1), accentTealColor())
         }
     }
 
     private fun focusActiveDrawable(radiusDp: Int = 18): android.graphics.drawable.Drawable {
-        return GradientDrawable(
-            GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.parseColor("#FFEED7B8"), Color.parseColor("#FFC5A57E"))
-        ).apply {
-            cornerRadius = dp(radiusDp).toFloat()
-            setStroke(dp(1), Color.parseColor("#80E7FFF8"))
-        }
+        return createOrange3DDrawable(dp(radiusDp))
     }
 
     private fun focusQuietDrawable(radiusDp: Int = 18): android.graphics.drawable.Drawable {
         return GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
-            intArrayOf(Color.parseColor("#AA263B52"), Color.parseColor("#99202F43"))
+            if (isDarkMode) intArrayOf(Color.parseColor(COLOR_ELEVATED_DARK), Color.parseColor(COLOR_BG_DARK))
+            else intArrayOf(Color.parseColor("#EAFEF9F0"), Color.parseColor("#F3EBDD"))
         ).apply {
             cornerRadius = dp(radiusDp).toFloat()
-            setStroke(dp(1), Color.parseColor("#304E6A82"))
+            setStroke(dp(1), Color.argb(if (isDarkMode) 150 else 185, 229, 202, 165))
         }
     }
 
@@ -5894,7 +5890,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 15f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             background = focusActiveDrawable(18)
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(148), dp(48)).apply { marginEnd = dp(10) }
@@ -6136,7 +6132,7 @@ class MainActivity : AppCompatActivity() {
             text = if (customAudioName != null) "🎵 $customAudioName" else (if (isArabic) "📁 اختيار ملف صوتي أو موسيقى من جهازي" else "📁 Pick Audio/MP3 from Device")
             isAllCaps = false
             textSize = 13f
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             setOnClickListener {
                 isPickingAudioFromConsole = true
@@ -6201,7 +6197,7 @@ class MainActivity : AppCompatActivity() {
     private fun buildFullscreenClockView(): View {
         val root = FrameLayout(this).apply {
             layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
-            setBackgroundColor(Color.BLACK)
+            setBackgroundColor(bgPrimaryColor())
         }
 
         val topBar = LinearLayout(this).apply {
@@ -6216,7 +6212,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 13f
             setTextColor(Color.WHITE)
             setPadding(dp(12), dp(6), dp(12), dp(6))
-            background = createPillDrawable(Color.parseColor("#49382B"), dp(12), null)
+            background = createPillDrawable(bgCardColor(), dp(12), COLOR_ORANGE)
             setOnClickListener {
                 fullscreenClockType = if (fullscreenClockType == "flip") "hourglass" else "flip"
                 renderCurrentTab()
@@ -6282,7 +6278,7 @@ class MainActivity : AppCompatActivity() {
             setTextColor(Color.WHITE)
             background = GradientDrawable().apply {
                 shape = GradientDrawable.OVAL
-                setColor(Color.parseColor("#49382B"))
+                setColor(bgCardColor())
             }
             val s = dp(64)
             layoutParams = FrameLayout.LayoutParams(s, s).apply {
@@ -6306,14 +6302,14 @@ class MainActivity : AppCompatActivity() {
             val h = dp(160)
             layoutParams = LinearLayout.LayoutParams(w, h).apply { marginStart = dp(6); marginEnd = dp(6) }
             background = GradientDrawable().apply {
-                setColor(Color.parseColor("#121820"))
+                setColor(Color.parseColor(COLOR_BG_DARK))
                 cornerRadius = dp(16).toFloat()
             }
 
             val tv = TextView(context).apply {
                 text = ch.toString()
                 textSize = 88f
-                setTextColor(Color.parseColor("#D0D7DE"))
+                setTextColor(textPrimaryColor())
                 setTypeface(typeface, Typeface.BOLD)
                 gravity = Gravity.CENTER
                 layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT)
@@ -6322,7 +6318,7 @@ class MainActivity : AppCompatActivity() {
 
             val divider = View(context).apply {
                 layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, dp(2), Gravity.CENTER)
-                setBackgroundColor(Color.BLACK)
+                setBackgroundColor(bgPrimaryColor())
             }
             addView(divider)
         }
@@ -7151,13 +7147,11 @@ class MainActivity : AppCompatActivity() {
         dock.post { positionRail(dock) }
     }
 
-    private fun railTint(icon: String): Int = Color.parseColor(
-        when (icon) {
-            "➕" -> "#FFFF8A3D"; "⚡" -> "#FFFFC93C"; "🔍" -> "#FF5AC8FA"; "📊" -> "#FFB085F5"
-            "🏆" -> "#FFFFD166"; "🎧" -> "#FFD7B487"; "⛶" -> "#FF42C98A"; "🪟" -> "#FFFF7AA2"
-            "🏷" -> "#FF7BD88F"; "🔔" -> "#FFFFB347"; "🔇" -> "#FFF16D68"; else -> "#FFD7B487"
-        }
-    )
+    private fun railTint(icon: String): Int = when (icon) {
+        "🔍", "📊", "🎧", "⛶" -> accentTealColor()
+        "🔇" -> Color.parseColor("#F16D68")
+        else -> accentOrangeColor()
+    }
 
     private fun attachDockSwipe(v: View, isOpen: Boolean, onChange: (Boolean) -> Unit) {
         var downX = 0f
@@ -7994,7 +7988,7 @@ class MainActivity : AppCompatActivity() {
                     textSize = 13f
                     gravity = Gravity.CENTER
                     setTypeface(typeface, Typeface.BOLD)
-                    setTextColor(if (sel) Color.parseColor("#0B1417") else textPrimaryColor())
+                    setTextColor(if (sel) Color.parseColor("#3B2B20") else textPrimaryColor())
                     background = if (sel) createOrange3DDrawable(dp(16)) else createGlass3DDrawable(dp(16))
                     layoutParams = LinearLayout.LayoutParams(0, dp(36), 1f).apply { marginEnd = dp(6) }
                     setOnClickListener {
@@ -8138,7 +8132,7 @@ class MainActivity : AppCompatActivity() {
         textSize = 30f
         gravity = Gravity.CENTER
         setTypeface(typeface, Typeface.BOLD)
-        setTextColor(Color.parseColor("#0B1417"))
+        setTextColor(Color.parseColor("#3B2B20"))
         background = createOrange3DDrawable(dp(30))
         elevation = dp(14).toFloat()
         layoutParams = FrameLayout.LayoutParams(dp(60), dp(60)).apply {
@@ -8170,7 +8164,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 12f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (sel) Color.parseColor("#0B1417") else textPrimaryColor())
+                setTextColor(if (sel) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = if (sel) createOrange3DDrawable(dp(15)) else createGlass3DDrawable(dp(15))
                 layoutParams = LinearLayout.LayoutParams(0, dp(32), 1f).apply { marginEnd = dp(5) }
                 setOnClickListener {
@@ -8212,7 +8206,7 @@ class MainActivity : AppCompatActivity() {
                 textSize = 13f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(if (sel) Color.parseColor("#0B1417") else textPrimaryColor())
+                setTextColor(if (sel) Color.parseColor("#3B2B20") else textPrimaryColor())
                 background = if (sel) createOrange3DDrawable(dp(17)) else createGlass3DDrawable(dp(17))
                 elevation = dp(4).toFloat()
                 setPadding(dp(14), 0, dp(14), 0)
@@ -8313,7 +8307,7 @@ class MainActivity : AppCompatActivity() {
             textSize = 15f
             gravity = Gravity.CENTER
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(Color.parseColor("#0B1417"))
+            setTextColor(Color.parseColor("#3B2B20"))
             background = createOrange3DDrawable(dp(16))
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(44)).apply { topMargin = dp(10) }
             setOnClickListener {
