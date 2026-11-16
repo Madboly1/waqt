@@ -54,6 +54,7 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.MotionEvent
+import android.util.Log
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.ViewGroup
@@ -93,6 +94,42 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
+
+    private fun touchTrace(event: MotionEvent, source: String, result: String = "") {
+        Log.d("WAQT_TOUCH_TRACE", source + " action=" + event.actionMasked + " x=" + event.x + " y=" + event.y + " rawX=" + event.rawX + " rawY=" + event.rawY + " tab=" + currentTab + " " + result)
+    }
+
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        touchTrace(ev, "ACTIVITY_DISPATCH")
+        val handled = super.dispatchTouchEvent(ev)
+        Log.d("WAQT_TOUCH_TRACE", "ACTIVITY_RESULT action=" + ev.actionMasked + " handled=" + handled)
+        return handled
+    }
+
+    private fun describeTabSwipeCandidate(container: ViewGroup, x: Float, y: Float): String {
+        fun hit(view: View, localX: Float, localY: Float): View? {
+            if (localX < 0f || localY < 0f || localX >= view.width || localY >= view.height) return null
+            if (view is ViewGroup) {
+                for (i in view.childCount - 1 downTo 0) {
+                    val child = view.getChildAt(i)
+                    val found = hit(child, localX - child.left, localY - child.top)
+                    if (found != null) return found
+                }
+            }
+            return view
+        }
+        val target = hit(container, x, y) ?: return "candidate=NULL"
+        val path = mutableListOf<String>()
+        var node: View? = target
+        while (node != null && node !== container) {
+            path += node.javaClass.simpleName + "(id=" + node.id + ",size=" + node.width + "x" + node.height +
+                ",click=" + node.isClickable + ",long=" + node.isLongClickable + ",vis=" + node.visibility +
+                ",tx=" + node.translationX + ",ty=" + node.translationY + ",scroll=" + node.scrollX + "," +
+                node.scrollY + ",elev=" + node.elevation + ")"
+            node = node.parent as? View
+        }
+        return "candidatePath=" + path.joinToString(" <- ")
+    }
 
     private var isArabic: Boolean = true
     private var isDarkMode: Boolean = true
@@ -623,7 +660,15 @@ class MainActivity : AppCompatActivity() {
             // Keep that request from disabling this host's horizontal tab gesture; vertical
             // movement still stays with the child because onInterceptTouchEvent only claims
             // clearly horizontal gestures, and explicitly excluded controls remain protected.
+            override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+                touchTrace(ev, "HOST_DISPATCH_IN")
+                val handled = super.dispatchTouchEvent(ev)
+                Log.d("WAQT_TOUCH_TRACE", "HOST_DISPATCH_OUT action=" + ev.actionMasked + " handled=" + handled + " tab=" + currentTab)
+                return handled
+            }
+
             override fun requestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                Log.d("WAQT_TOUCH_TRACE", "HOST_DISALLOW requested=" + disallowIntercept + " tab=" + currentTab)
                 if (!disallowIntercept) {
                     super.requestDisallowInterceptTouchEvent(false)
                 }
@@ -636,14 +681,19 @@ class MainActivity : AppCompatActivity() {
                         downY = event.y
                         tracking = false
                         excluded = isPrimaryTabSwipeExcluded(this, event.x, event.y)
+                        Log.d("WAQT_TOUCH_TRACE", "HOST_DOWN excluded=" + excluded + " " + describeTabSwipeCandidate(this, event.x, event.y))
                         return false
                     }
                     MotionEvent.ACTION_MOVE -> {
-                        if (excluded) return false
+                        if (excluded) {
+                            Log.d("WAQT_TOUCH_TRACE", "HOST_MOVE_BLOCKED excluded=true dx=" + (event.x - downX) + " dy=" + (event.y - downY))
+                            return false
+                        }
                         val dx = event.x - downX
                         val dy = event.y - downY
                         if (!tracking && kotlin.math.abs(dx) > touchSlop * 1.10f &&
                             kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.12f) {
+                            Log.d("WAQT_TOUCH_TRACE", "HOST_INTERCEPT dx=" + dx + " dy=" + dy + " tab=" + currentTab)
                             tracking = true
                             beginInteractiveTabSwipe(dx)
                             // Include the movement that triggered interception so the liquid
@@ -662,6 +712,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTouchEvent(event: MotionEvent): Boolean {
+                touchTrace(event, "HOST_TOUCH")
                 when (event.actionMasked) {
                     MotionEvent.ACTION_MOVE -> updateInteractiveTabSwipe(event.x - downX)
                     MotionEvent.ACTION_UP -> {
@@ -893,6 +944,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun beginInteractiveTabSwipe(dx: Float) {
+        Log.d("WAQT_TOUCH_TRACE", "SWIPE_BEGIN tab=" + currentTab + " dx=" + dx + " pending=" + (pendingInteractiveSwipe?.let { System.identityHashCode(it) }))
         if (pendingInteractiveSwipe != null || activeTabTransitionView != null) return
         val logicalDirection = (if (dx < 0f) 1 else -1) * (if (isArabic) -1 else 1)
         val targetTab = (currentTab + logicalDirection).coerceIn(0, 3)
@@ -915,6 +967,7 @@ class MainActivity : AppCompatActivity() {
         renderCurrentTab()
 
         val swipe = InteractiveTabSwipe(oldTab, targetTab, dx < 0f, oldScreen, holdingLayer)
+        Log.d("WAQT_TOUCH_TRACE", "SWIPE_CREATED id=" + System.identityHashCode(swipe) + " from=" + oldTab + " to=" + targetTab)
         pendingInteractiveSwipe = swipe
         rootFrameLayout.post {
             if (pendingInteractiveSwipe !== swipe || isFinishing || isDestroyed) {
@@ -957,6 +1010,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateInteractiveTabSwipe(dx: Float) {
         val swipe = pendingInteractiveSwipe ?: return
+        Log.d("WAQT_TOUCH_TRACE", "SWIPE_UPDATE id=" + System.identityHashCode(swipe) + " from=" + swipe.oldTab + " to=" + swipe.targetTab + " dx=" + dx)
         swipe.latestDx = dx
         val width = tabContentHost.width.coerceAtLeast(1).toFloat()
         val progress = (kotlin.math.abs(dx) / width).coerceIn(0f, 0.92f)
@@ -966,6 +1020,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun finishInteractiveTabSwipe(cancelled: Boolean) {
         val swipe = pendingInteractiveSwipe ?: return
+        Log.d("WAQT_TOUCH_TRACE", "SWIPE_FINISH id=" + System.identityHashCode(swipe) + " cancelled=" + cancelled + " latestDx=" + swipe.latestDx)
         val width = tabContentHost.width.coerceAtLeast(1).toFloat()
         val distance = kotlin.math.abs(swipe.latestDx)
         val commit = !cancelled && (distance >= width * 0.22f)
