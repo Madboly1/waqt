@@ -1,7 +1,6 @@
 package com.example.glassproductivity
 
 import android.Manifest
-import android.animation.ValueAnimator
 import android.app.Activity
 import android.app.AlarmManager
 import android.app.AlertDialog
@@ -59,7 +58,6 @@ import android.view.ViewConfiguration
 import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -591,7 +589,6 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, h).apply { marginEnd = dp(8) }
             setPadding(dp(12), 0, dp(12), 0)
             setOnClickListener {
-                animateTapFeedback(this)
                 toggleLanguage()
             }
         }
@@ -605,15 +602,12 @@ class MainActivity : AppCompatActivity() {
             val s = dp(36)
             layoutParams = LinearLayout.LayoutParams(s, s)
             setOnClickListener {
-                animateTapFeedback(this)
                 showAccordionSettingsDialog()
             }
         }
         headerBarLayout.addView(btnSettings)
 
         mainContentContainer.addView(headerBarLayout)
-        animateSoftEntrance(headerBarLayout, 40L)
-
         tabContentHost = FrameLayout(this).apply {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
         }
@@ -681,8 +675,7 @@ class MainActivity : AppCompatActivity() {
                     setTextColor(if (sel) Color.parseColor("#3B2B20") else textMutedColor())
                 })
                 setOnClickListener {
-                    animateTapFeedback(this)
-                    if (idx != currentTab) performLiquidWaveTransitionToTab(idx)
+                    if (idx != currentTab) switchToTab(idx)
                 }
             })
         }
@@ -701,7 +694,7 @@ class MainActivity : AppCompatActivity() {
                         val dir = if (dx > 0) -1 else 1
                         val rtlFlip = if (isArabic) -1 else 1
                         val next = (currentTab + dir * rtlFlip).coerceIn(0, 3)
-                        if (next != currentTab) performLiquidWaveTransitionToTab(next)
+                        if (next != currentTab) switchToTab(next)
                     }
                 }
             }
@@ -741,7 +734,6 @@ class MainActivity : AppCompatActivity() {
             else -> buildTasksScreenView()
         }
         tabContentHost.addView(view)
-        animateScreenEntrance(view)
     }
 
     private var radialTouchStartX = 0f
@@ -785,34 +777,16 @@ class MainActivity : AppCompatActivity() {
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 gtaRadialOverlayView.visibility = View.GONE
                 if (selectedRadialSector != -1 && selectedRadialSector != currentTab) {
-                    performLiquidWaveTransitionToTab(selectedRadialSector)
+                    switchToTab(selectedRadialSector)
                 }
             }
         }
     }
 
-    private fun performLiquidWaveTransitionToTab(targetTab: Int) {
+    private fun switchToTab(targetTab: Int) {
         currentTab = targetTab
         triggerGentleHaptic()
-
-        tabContentHost.animate()
-            .scaleX(0.96f)
-            .scaleY(0.96f)
-            .alpha(0.3f)
-            .setDuration(120)
-            .withEndAction {
-                renderCurrentTab()
-                tabContentHost.scaleX = 1.04f
-                tabContentHost.scaleY = 1.04f
-                tabContentHost.animate()
-                    .scaleX(1f)
-                    .scaleY(1f)
-                    .alpha(1f)
-                    .setDuration(180)
-                    .setInterpolator(AccelerateDecelerateInterpolator())
-                    .start()
-            }
-            .start()
+        renderCurrentTab()
     }
 
     private fun setupFloatingAIChatHeadBubble() {
@@ -1148,7 +1122,6 @@ class MainActivity : AppCompatActivity() {
         dialog.window?.setLayout((resources.displayMetrics.widthPixels * 0.94).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
         dialog.show()
         dialog.setCanceledOnTouchOutside(false)
-        animateSoftEntrance(root)
         activeAIChatDialog = dialog
         floatingAIChatBubble.visibility = View.GONE
         if (geminiKey().isNotBlank() && savedMessages.isEmpty()) sendToAssistant(null, messagesBox, chatScroll)
@@ -2537,7 +2510,7 @@ class MainActivity : AppCompatActivity() {
                         else -> -1
                     }
                     if (target >= 0) {
-                        if (target != currentTab) performLiquidWaveTransitionToTab(target)
+                        if (target != currentTab) switchToTab(target)
                         note = "↗️ فتحت قسم ${when (target) { 0 -> "المهام"; 1 -> "العادات"; 2 -> "التركيز"; else -> "مدونتي" }}"
                     } else {
                         note = "⚠️ مش قادر أحدد القسم المطلوب فتحه."
@@ -2800,9 +2773,6 @@ class MainActivity : AppCompatActivity() {
                     openSettingsSafely(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
                 })
             }
-            body.alpha = 0f
-            body.translationY = dp(22).toFloat()
-            body.animate().alpha(1f).translationY(0f).setDuration(260).start()
 
             dots.removeAllViews()
             for (i in slides.indices) {
@@ -2860,73 +2830,6 @@ class MainActivity : AppCompatActivity() {
         onboardingRefresh?.invoke()
     }
 
-    // Short, consistent motion language shared by Focus, Mentor and Journal.
-    private fun animateSoftEntrance(view: View, delayMs: Long = 0L) {
-        view.alpha = 0f
-        view.translationY = dp(14).toFloat()
-        view.scaleX = 0.985f
-        view.scaleY = 0.985f
-        view.animate().cancel()
-        view.animate()
-            .alpha(1f).translationY(0f).scaleX(1f).scaleY(1f)
-            .setStartDelay(delayMs)
-            .setDuration(360L)
-            .setInterpolator(android.view.animation.DecelerateInterpolator(1.6f))
-            .start()
-    }
-
-    // WAQT Motion System: restrained iOS-inspired motion with short, responsive easing.
-    private fun animateScreenEntrance(view: View) {
-        view.animate().cancel()
-        view.alpha = 0f
-        view.translationY = dp(18).toFloat()
-        view.scaleX = 0.985f
-        view.scaleY = 0.985f
-        view.animate()
-            .alpha(1f)
-            .translationY(0f)
-            .scaleX(1f)
-            .scaleY(1f)
-            .setDuration(380L)
-            .setInterpolator(android.view.animation.DecelerateInterpolator(1.5f))
-            .start()
-
-        if (view is ViewGroup) {
-            for (index in 0 until view.childCount) {
-                val child = view.getChildAt(index)
-                if (child.visibility != View.VISIBLE) continue
-                child.animate().cancel()
-                child.alpha = 0f
-                child.translationY = dp(9).toFloat()
-                child.animate()
-                    .alpha(1f)
-                    .translationY(0f)
-                    .setStartDelay((index * 34L).coerceAtMost(170L))
-                    .setDuration(280L)
-                    .setInterpolator(android.view.animation.DecelerateInterpolator(1.35f))
-                    .start()
-            }
-        }
-    }
-
-    private fun animateTapFeedback(view: View) {
-        view.animate().cancel()
-        view.animate()
-            .scaleX(0.94f)
-            .scaleY(0.94f)
-            .setDuration(85L)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .withEndAction {
-                view.animate()
-                    .scaleX(1f)
-                    .scaleY(1f)
-                    .setDuration(230L)
-                    .setInterpolator(android.view.animation.OvershootInterpolator(1.35f))
-                    .start()
-            }
-            .start()
-    }
-
     private fun createAIMessageBubble(text: String): View {
         return LinearLayout(this).apply {
             gravity = Gravity.START
@@ -2943,7 +2846,6 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 bottomMargin = dp(9)
             }
-            animateSoftEntrance(this)
         }
     }
 
@@ -2965,7 +2867,6 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
                 bottomMargin = dp(9)
             }
-            animateSoftEntrance(this)
         }
     }
 
@@ -3357,15 +3258,13 @@ class MainActivity : AppCompatActivity() {
         }
         setupCardSwipeNavigation(frontCard) { direction ->
             if (direction > 0 && currentTaskCarouselIndex < total - 1) {
-                animateCarouselExit(frontCard, direction)
                 currentTaskCarouselIndex++
                 triggerGentleHaptic()
-                stackContainer.postDelayed({ renderCurrentTab() }, 90)
+                renderCurrentTab()
             } else if (direction < 0 && currentTaskCarouselIndex > 0) {
-                animateCarouselExit(frontCard, direction)
                 currentTaskCarouselIndex--
                 triggerGentleHaptic()
-                stackContainer.postDelayed({ renderCurrentTab() }, 90)
+                renderCurrentTab()
             }
         }
         stackContainer.addView(frontCard)
@@ -4094,15 +3993,13 @@ class MainActivity : AppCompatActivity() {
         }
         setupCardSwipeNavigation(frontCard) { direction ->
             if (direction > 0 && currentHabitCarouselIndex < total - 1) {
-                animateCarouselExit(frontCard, direction)
                 currentHabitCarouselIndex++
                 triggerGentleHaptic()
-                stackContainer.postDelayed({ renderCurrentTab() }, 90)
+                renderCurrentTab()
             } else if (direction < 0 && currentHabitCarouselIndex > 0) {
-                animateCarouselExit(frontCard, direction)
                 currentHabitCarouselIndex--
                 triggerGentleHaptic()
-                stackContainer.postDelayed({ renderCurrentTab() }, 90)
+                renderCurrentTab()
             }
         }
         stackContainer.addView(frontCard)
@@ -4114,16 +4011,6 @@ class MainActivity : AppCompatActivity() {
         if (view is ViewGroup) {
             for (i in 0 until view.childCount) setCardTreeEnabled(view.getChildAt(i), enabled)
         }
-    }
-
-    private fun animateCarouselExit(card: View, direction: Int) {
-        card.animate()
-            .translationX((direction * -dp(70)).toFloat())
-            .rotationY(direction * 7f)
-            .alpha(0.25f)
-            .setDuration(90L)
-            .setInterpolator(AccelerateDecelerateInterpolator())
-            .start()
     }
 
     private fun buildSingleHabitCardView(habit: ReminderItem, isForeground: Boolean): View {
@@ -4636,8 +4523,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
         content.addView(switcher)
-        animateSoftEntrance(switcher, 35L)
-
         if (notesSubTab == 0) {
             content.addView(buildNoteCategoryRow())
             val notes = ReminderRepository.getAllNotes(this).filter {
@@ -4663,7 +4548,6 @@ class MainActivity : AppCompatActivity() {
             root.addView(content)
             root.addView(buildNotesLeftSlideOutDock())
         }
-        animateSoftEntrance(content, 70L)
         return root
     }
 
@@ -5041,15 +4925,13 @@ class MainActivity : AppCompatActivity() {
         }
         setupCardSwipeNavigation(frontCard) { direction ->
             if (direction > 0 && currentNoteCarouselIndex < total - 1) {
-                animateCarouselExit(frontCard, direction)
                 currentNoteCarouselIndex++
                 triggerGentleHaptic()
-                stackContainer.postDelayed({ renderCurrentTab() }, 90)
+                renderCurrentTab()
             } else if (direction < 0 && currentNoteCarouselIndex > 0) {
-                animateCarouselExit(frontCard, direction)
                 currentNoteCarouselIndex--
                 triggerGentleHaptic()
-                stackContainer.postDelayed({ renderCurrentTab() }, 90)
+                renderCurrentTab()
             }
         }
         stackContainer.addView(frontCard)
@@ -5164,8 +5046,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
         page.addView(toolbar)
-        animateSoftEntrance(page, 40L)
-
         val scroll = ScrollView(this).apply { isFillViewport = true; overScrollMode = View.OVER_SCROLL_NEVER }
         val body = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
@@ -5391,7 +5271,6 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         })
         page.addView(toolbar)
-        animateSoftEntrance(page, 40L)
         val v = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createRefinedFrostedDrawable(dp(22))
@@ -5758,7 +5637,6 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f).apply { marginEnd = dp(8) }
             setOnClickListener {
-                animateTapFeedback(this)
                 triggerGentleHaptic()
                 isPomodoroLinkedToTask = true
                 showTaskPickerSortedByTime()
@@ -5777,7 +5655,6 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(14), dp(8), dp(14), dp(8))
             layoutParams = LinearLayout.LayoutParams(0, dp(42), 1f)
             setOnClickListener {
-                animateTapFeedback(this)
                 triggerGentleHaptic()
                 isPomodoroLinkedToTask = false
                 selectedFocusTaskId = null
@@ -5809,8 +5686,6 @@ class MainActivity : AppCompatActivity() {
             setPadding(0, dp(5), 0, 0)
         })
         content.addView(focusIntro)
-        animateSoftEntrance(focusIntro, 45L)
-
         if (isPomodoroLinkedToTask && selectedFocusTaskId != null) {
             val task = ReminderRepository.getItemById(this, selectedFocusTaskId ?: "")
             content.addView(TextView(this).apply {
@@ -5854,17 +5729,6 @@ class MainActivity : AppCompatActivity() {
                     showSetTimeInsideDialDialog()
                 }
             }
-            setOnTouchListener { view, event ->
-                when (event.actionMasked) {
-                    android.view.MotionEvent.ACTION_DOWN -> {
-                        view.animate().scaleX(0.975f).scaleY(0.975f).setDuration(100).start()
-                    }
-                    android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL -> {
-                        view.animate().scaleX(1f).scaleY(1f).setDuration(220).setInterpolator(android.view.animation.OvershootInterpolator(1.2f)).start()
-                    }
-                }
-                false
-            }
         }
         circularTimerView = ringView
         timerCard.addView(ringView)
@@ -5877,8 +5741,6 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(8), dp(2), dp(8), dp(2))
         })
         content.addView(timerCard)
-        animateSoftEntrance(timerCard, 90L)
-
         val controlsRow = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER
@@ -5895,7 +5757,6 @@ class MainActivity : AppCompatActivity() {
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(148), dp(48)).apply { marginEnd = dp(10) }
             setOnClickListener {
-                animateTapFeedback(this)
                 triggerGentleHaptic()
                 toggleInAppPomodoro()
             }
@@ -5912,7 +5773,6 @@ class MainActivity : AppCompatActivity() {
             elevation = 0f
             layoutParams = LinearLayout.LayoutParams(dp(120), dp(48))
             setOnClickListener {
-                animateTapFeedback(this)
                 triggerGentleHaptic()
                 isTickTockSoundActive = !isTickTockSoundActive
                 getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putBoolean(ReminderRepository.KEY_TICK_TOCK_ENABLED, isTickTockSoundActive).apply()
@@ -5921,8 +5781,6 @@ class MainActivity : AppCompatActivity() {
         }
         controlsRow.addView(btnTickTock)
         content.addView(controlsRow)
-        animateSoftEntrance(controlsRow, 150L)
-
         val btnModeSwitch = TextView(this).apply {
             text = if (isBreakSession) (if (isArabic) "🎯 رجوع للتركيز" else "🎯 Back to focus") else (if (isArabic) "☕ ابدأ استراحة" else "☕ Start a break")
             textSize = 13f
@@ -5934,7 +5792,6 @@ class MainActivity : AppCompatActivity() {
             setPadding(dp(18), 0, dp(18), 0)
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, dp(40)).apply { bottomMargin = dp(12) }
             setOnClickListener {
-                animateTapFeedback(this)
                 if (isPomodoroRunning) {
                     Toast.makeText(this@MainActivity, if (isArabic) "أوقف الجلسة الأول" else "Pause the session first", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
@@ -5950,8 +5807,6 @@ class MainActivity : AppCompatActivity() {
 
         val dashboard = buildFocusDashboard()
         content.addView(dashboard)
-        animateSoftEntrance(dashboard, 210L)
-
         root.addView(ScrollView(this).apply {
             isFillViewport = true
             overScrollMode = View.OVER_SCROLL_NEVER
@@ -6257,7 +6112,7 @@ class MainActivity : AppCompatActivity() {
             rowBottomDigits.addView(createFlipDigitCard(sStr[1]))
             centerBox.addView(rowBottomDigits)
         } else {
-            centerBox.addView(HourglassAnimatedView(this).apply {
+            centerBox.addView(HourglassView(this).apply {
                 val s = dp(240)
                 layoutParams = LinearLayout.LayoutParams(s, s)
                 progressFraction = if (pomodoroTotalMillis > 0) (pomodoroRemainingMillis.toFloat() / pomodoroTotalMillis.toFloat()) else 0f
@@ -7045,7 +6900,6 @@ class MainActivity : AppCompatActivity() {
         val longPress = Runnable {
             dragging = true
             triggerGentleHaptic()
-            dock.animate().scaleX(1.08f).scaleY(1.08f).setDuration(120).start()
         }
         target.setOnTouchListener { _, e ->
           try {
@@ -7081,7 +6935,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     dock.removeCallbacks(longPress)
-                    dock.animate().scaleX(1f).scaleY(1f).setDuration(120).start()
                     val wasDragging = dragging
                     dragging = false
                     if (wasDragging && moved && parent != null) {
@@ -8494,7 +8347,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    inner class HourglassAnimatedView(context: Context) : View(context) {
+    inner class HourglassView(context: Context) : View(context) {
         var progressFraction: Float = 1f
         private val glassStroke = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             style = Paint.Style.STROKE
@@ -8506,19 +8359,8 @@ class MainActivity : AppCompatActivity() {
             color = Color.argb(30, 160, 235, 228)
         }
         private val sandPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
-        private val streamPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            style = Paint.Style.STROKE
-            strokeWidth = dp(2).toFloat()
-            strokeCap = Paint.Cap.ROUND
-            color = Color.parseColor("#FFFFC48F")
-        }
-        private val grainPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            style = Paint.Style.FILL
-            color = Color.parseColor("#FFFFD9A8")
-        }
         private val capPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply { style = Paint.Style.FILL }
         private val path = Path()
-        private var phase = 0f
 
         override fun onDraw(canvas: Canvas) {
             super.onDraw(canvas)
@@ -8570,17 +8412,6 @@ class MainActivity : AppCompatActivity() {
                 path.close()
                 canvas.drawPath(path, sandPaint)
             }
-            // falling stream while the timer runs
-            if (isPomodoroRunning && p > 0.01f && p < 0.995f) {
-                val targetY = bottom - pile - (pile * 0.35f).coerceAtMost(dp(26).toFloat()) * 0.4f
-                streamPaint.pathEffect = android.graphics.DashPathEffect(floatArrayOf(dp(5).toFloat(), dp(4).toFloat()), phase)
-                canvas.drawLine(cx, mid - dp(2), cx, targetY, streamPaint)
-                for (i in 0 until 5) {
-                    val ty = mid + ((phase * 3f + i * 37f) % (targetY - mid).coerceAtLeast(10f))
-                    canvas.drawCircle(cx + ((i % 3) - 1) * (1.5f * resources.displayMetrics.density), ty, (1.4f * resources.displayMetrics.density), grainPaint)
-                }
-                phase += dp(3).toFloat() * 0.6f
-            }
             canvas.restore()
 
             // rebuild outline for the glass stroke
@@ -8605,13 +8436,11 @@ class MainActivity : AppCompatActivity() {
                 style = Paint.Style.STROKE; strokeWidth = dp(2).toFloat(); strokeCap = Paint.Cap.ROUND; color = Color.argb(90, 255, 255, 255)
             })
 
-            if (isPomodoroRunning) postInvalidateOnAnimation()
         }
     }
 
     inner class CircularTimerRingView(context: Context) : View(context) {
         private var progressFraction: Float = 1f
-        private var progressAnimator: ValueAnimator? = null
         private var timeString: String = "25:00"
 
         private val trackPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -8662,15 +8491,7 @@ class MainActivity : AppCompatActivity() {
 
         fun updateTimerDisplay(remainingMs: Long, totalMs: Long) {
             val targetProgress = if (totalMs > 0) (remainingMs.toFloat() / totalMs.toFloat()).coerceIn(0f, 1f) else 0f
-            progressAnimator?.cancel()
-            progressAnimator = ValueAnimator.ofFloat(progressFraction, targetProgress).apply {
-                duration = 260L
-                addUpdateListener { animation ->
-                    progressFraction = animation.animatedValue as Float
-                    invalidate()
-                }
-                start()
-            }
+            progressFraction = targetProgress
             val totalSec = (remainingMs / 1000L).coerceAtLeast(0L)
             val m = totalSec / 60L
             val s = totalSec % 60L
@@ -8678,12 +8499,6 @@ class MainActivity : AppCompatActivity() {
             progressPaint.color = if (isBreakSession) Color.parseColor("#FFEED7B8") else Color.parseColor("#FFC5A57E")
             textPaint.color = textPrimaryColor()
             invalidate()
-        }
-
-        override fun onDetachedFromWindow() {
-            progressAnimator?.cancel()
-            progressAnimator = null
-            super.onDetachedFromWindow()
         }
 
         override fun onDraw(canvas: Canvas) {
