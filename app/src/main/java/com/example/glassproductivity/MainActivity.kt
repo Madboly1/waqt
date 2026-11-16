@@ -619,6 +619,16 @@ class MainActivity : AppCompatActivity() {
             private var excluded = false
             private val touchSlop = android.view.ViewConfiguration.get(context).scaledTouchSlop
 
+            // Nested scrolling children often disallow parent interception on ACTION_DOWN.
+            // Keep that request from disabling this host's horizontal tab gesture; vertical
+            // movement still stays with the child because onInterceptTouchEvent only claims
+            // clearly horizontal gestures, and explicitly excluded controls remain protected.
+            override fun requestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {
+                if (!disallowIntercept) {
+                    super.requestDisallowInterceptTouchEvent(false)
+                }
+            }
+
             override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
                 when (event.actionMasked) {
                     MotionEvent.ACTION_DOWN -> {
