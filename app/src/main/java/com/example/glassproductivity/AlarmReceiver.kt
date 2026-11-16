@@ -89,6 +89,7 @@ class AlarmReceiver : BroadcastReceiver() {
 
     private fun showPomodoroEndNotification(context: Context, intent: Intent) {
         val prefs = context.getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+        if (!prefs.getBoolean(ReminderRepository.KEY_NOTIF_SESSION_END, true)) return
         val isArabic = prefs.getBoolean("is_arabic", Locale.getDefault().language == "ar")
         val isBreak = intent.getBooleanExtra(AlarmScheduler.EXTRA_POMODORO_BREAK, false)
         val sessionId = intent.getStringExtra(AlarmScheduler.EXTRA_POMODORO_SESSION).orEmpty()
