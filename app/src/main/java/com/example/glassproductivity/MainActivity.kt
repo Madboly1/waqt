@@ -810,17 +810,43 @@ class MainActivity : AppCompatActivity() {
 
         clearActiveTabTransition()
         val oldScreen = captureTabScreen()
+        if (oldScreen == null) {
+            currentTab = targetTab
+            triggerGentleHaptic()
+            renderCurrentTab()
+            return
+        }
+
+        // Keep the previous tab visible while rendering the destination underneath it.
+        // This avoids showing the new tab before the liquid transition is ready.
+        val holdingLayer = ImageView(this).apply {
+            setImageBitmap(oldScreen)
+            scaleType = ImageView.ScaleType.FIT_XY
+            isClickable = true
+            isFocusable = true
+        }
+        rootFrameLayout.addView(holdingLayer, FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        ))
+
         currentTab = targetTab
         triggerGentleHaptic()
         renderCurrentTab()
 
-        if (oldScreen == null) return
         rootFrameLayout.post {
             if (isFinishing || isDestroyed) {
+                rootFrameLayout.removeView(holdingLayer)
                 if (!oldScreen.isRecycled) oldScreen.recycle()
                 return@post
             }
+
+            // Capture the destination synchronously while the holding layer is hidden.
+            // The transition overlay is installed before Android can draw another frame.
+            holdingLayer.visibility = View.INVISIBLE
             val newScreen = captureTabScreen()
+            rootFrameLayout.removeView(holdingLayer)
+
             if (newScreen == null) {
                 if (!oldScreen.isRecycled) oldScreen.recycle()
                 return@post
