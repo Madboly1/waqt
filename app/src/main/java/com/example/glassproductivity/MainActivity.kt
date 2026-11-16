@@ -2554,7 +2554,11 @@ class MainActivity : AppCompatActivity() {
                                 if (!enabled) {
                                     AlarmScheduler.cancelAlarm(this, item.id)
                                 } else if (!item.isPaused && item.hasReminder && (item.isHabit || !item.isCompletedToday)) {
-                                    try { AlarmScheduler.scheduleNextOccurrence(this, item) } catch (_: Exception) {}
+                                    try {
+                                        AlarmScheduler.scheduleNextOccurrence(
+                                            this, item, forceTomorrow = item.isHabit && item.isCompletedToday
+                                        )
+                                    } catch (_: Exception) {}
                                 }
                             }
                         }
