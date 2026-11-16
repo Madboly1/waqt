@@ -16,6 +16,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -96,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     private var isArabic: Boolean = true
     private var isDarkMode: Boolean = true
     private var currentTab: Int = 0 // 0: المهام, 1: العادات, 2: التركيز, 3: مدونتي
-    private var animateTabSelectionOnNextRefresh = false
+    private var activeTabTransitionView: LiquidTabTransitionView? = null
 
     // WAQT Warm Liquid Glass palette: warm stone, cream, sand and muted bronze.
     private val COLOR_BG_DARK = "#211C18"
@@ -642,8 +643,6 @@ class MainActivity : AppCompatActivity() {
     private fun refreshTabBar() {
         if (!::gtaRadialTriggerButton.isInitialized) return
         val bar = gtaRadialTriggerButton
-        val shouldAnimateSelection = animateTabSelectionOnNextRefresh
-        animateTabSelectionOnNextRefresh = false
         bar.removeAllViews()
         bar.background = createGlass3DDrawable(dp(33))
         val tabs = listOf(
@@ -679,20 +678,6 @@ class MainActivity : AppCompatActivity() {
                 })
                 setOnClickListener {
                     if (idx != currentTab) switchToTab(idx)
-                }
-            }
-            if (sel && shouldAnimateSelection) {
-                tabItem.alpha = 0f
-                tabItem.scaleX = 0.94f
-                tabItem.scaleY = 0.88f
-                tabItem.post {
-                    tabItem.animate()
-                        .alpha(1f)
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(230L)
-                        .setInterpolator(android.view.animation.DecelerateInterpolator(1.5f))
-                        .start()
                 }
             }
             row.addView(tabItem)
@@ -801,11 +786,64 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun captureTabScreen(): Bitmap? {
+        if (!::rootFrameLayout.isInitialized || rootFrameLayout.width <= 0 || rootFrameLayout.height <= 0) return null
+        return try {
+            Bitmap.createBitmap(rootFrameLayout.width, rootFrameLayout.height, Bitmap.Config.ARGB_8888).also { bitmap ->
+                rootFrameLayout.draw(Canvas(bitmap))
+            }
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    private fun clearActiveTabTransition() {
+        activeTabTransitionView?.let { transition ->
+            rootFrameLayout.removeView(transition)
+            transition.dispose()
+        }
+        activeTabTransitionView = null
+    }
+
     private fun switchToTab(targetTab: Int) {
+        if (targetTab !in 0..3 || targetTab == currentTab) return
+
+        clearActiveTabTransition()
+        val oldScreen = captureTabScreen()
         currentTab = targetTab
-        animateTabSelectionOnNextRefresh = true
         triggerGentleHaptic()
         renderCurrentTab()
+
+        if (oldScreen == null) return
+        rootFrameLayout.post {
+            if (isFinishing || isDestroyed) {
+                if (!oldScreen.isRecycled) oldScreen.recycle()
+                return@post
+            }
+            val newScreen = captureTabScreen()
+            if (newScreen == null) {
+                if (!oldScreen.isRecycled) oldScreen.recycle()
+                return@post
+            }
+
+            val transition = LiquidTabTransitionView(
+                this,
+                oldScreen,
+                newScreen,
+                isArabic,
+                dp(3).toFloat()
+            ) { finished ->
+                rootFrameLayout.removeView(finished)
+                if (activeTabTransitionView === finished) activeTabTransitionView = null
+                finished.dispose()
+            }
+            activeTabTransitionView = transition
+            rootFrameLayout.addView(transition, FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            ))
+            transition.start()
+        }
     }
 
     private fun setupFloatingAIChatHeadBubble() {
@@ -2263,7 +2301,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 "start_focus" -> {
                     val m = a.optInt("minutes", 25).coerceIn(1, 180)
-                    currentTab = 2
+                    if (currentTab != 2) switchToTab(2)
                     if (isPomodoroRunning) {
                         note = "ℹ️ جلسة التركيز شغالة بالفعل."
                     } else {
@@ -2287,7 +2325,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 "resume_focus" -> {
                     if (!isPomodoroRunning && pomodoroRemainingMillis > 0L) {
-                        currentTab = 2
+                        if (currentTab != 2) switchToTab(2)
                         toggleInAppPomodoro()
                         note = "▶️ استأنفت جلسة التركيز."
                     } else if (isPomodoroRunning) {
@@ -2539,13 +2577,11 @@ class MainActivity : AppCompatActivity() {
                     val section = a.optString("section").trim().lowercase(Locale.ROOT)
                     if (section in listOf("notes", "note", "الملاحظات")) {
                         notesSubTab = 0
-                        currentTab = 3
-                        renderCurrentTab()
+                        if (currentTab != 3) switchToTab(3) else renderCurrentTab()
                         note = "📝 فتحت الملاحظات."
                     } else if (section in listOf("journal", "diary", "اليوميات", "مدونتي")) {
                         notesSubTab = 1
-                        currentTab = 3
-                        renderCurrentTab()
+                        if (currentTab != 3) switchToTab(3) else renderCurrentTab()
                         note = "📔 فتحت اليوميات."
                     } else {
                         note = "⚠️ اختار الملاحظات أو اليوميات."
@@ -3443,8 +3479,7 @@ class MainActivity : AppCompatActivity() {
         iconsRow.addView(createCardActionCircle("🍅", "Focus") {
             selectedFocusTaskId = item.id
             isPomodoroLinkedToTask = true
-            currentTab = 2
-            renderCurrentTab()
+            if (currentTab != 2) switchToTab(2) else renderCurrentTab()
         })
 
         if (item.isHabit) {
@@ -8680,3 +8715,110 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+ 
+private class LiquidTabTransitionView(
+    context: Context,
+    private val oldScreen: Bitmap,
+    private val newScreen: Bitmap,
+    private val revealFromRight: Boolean,
+    private val edgeWidth: Float,
+    private val onFinished: (LiquidTabTransitionView) -> Unit
+) : View(context) {
+    private val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+    private val edgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = edgeWidth
+        color = Color.argb(185, 255, 239, 216)
+        setShadowLayer(edgeWidth * 5f, 0f, 0f, Color.argb(150, 255, 190, 118))
+    }
+    private val revealPath = Path()
+    private val edgePath = Path()
+    private var progress = 0f
+    private var disposed = false
+    private val animator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
+        duration = 520L
+        interpolator = android.view.animation.DecelerateInterpolator(1.15f)
+        addUpdateListener {
+            progress = it.animatedValue as Float
+            invalidate()
+        }
+        addListener(object : android.animation.AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                if (!disposed) onFinished(this@LiquidTabTransitionView)
+            }
+        })
+    }
+
+    init {
+        isClickable = true
+        setLayerType(View.LAYER_TYPE_HARDWARE, null)
+    }
+
+    fun start() {
+        if (!disposed) animator.start()
+    }
+
+    fun dispose() {
+        if (disposed) return
+        disposed = true
+        animator.cancel()
+        if (!oldScreen.isRecycled) oldScreen.recycle()
+        if (!newScreen.isRecycled) newScreen.recycle()
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        if (disposed || oldScreen.isRecycled || newScreen.isRecycled) return
+
+        val w = width.toFloat()
+        val h = height.toFloat()
+        if (w <= 0f || h <= 0f) return
+
+        canvas.drawBitmap(oldScreen, null, RectF(0f, 0f, w, h), bitmapPaint)
+
+        val waveEnvelope = kotlin.math.sin(Math.PI * progress).toFloat()
+        val waveAmplitude = (height * 0.035f).coerceAtMost(34f) * waveEnvelope
+        val front = if (revealFromRight) w * (1f - progress) else w * progress
+        val phase = progress * (Math.PI.toFloat() * 2f)
+
+        revealPath.reset()
+        edgePath.reset()
+        val firstX = liquidEdgeX(front, 0f, waveAmplitude, phase, h)
+        revealPath.moveTo(firstX, 0f)
+        edgePath.moveTo(firstX, 0f)
+
+        val step = (h / 90f).coerceAtLeast(6f)
+        var y = step
+        while (y < h) {
+            val x = liquidEdgeX(front, y, waveAmplitude, phase, h)
+            revealPath.lineTo(x, y)
+            edgePath.lineTo(x, y)
+            y += step
+        }
+        val lastX = liquidEdgeX(front, h, waveAmplitude, phase, h)
+        revealPath.lineTo(lastX, h)
+        edgePath.lineTo(lastX, h)
+
+        if (revealFromRight) {
+            revealPath.lineTo(w, h)
+            revealPath.lineTo(w, 0f)
+        } else {
+            revealPath.lineTo(0f, h)
+            revealPath.lineTo(0f, 0f)
+        }
+        revealPath.close()
+
+        val save = canvas.save()
+        canvas.clipPath(revealPath)
+        canvas.drawBitmap(newScreen, null, RectF(0f, 0f, w, h), bitmapPaint)
+        canvas.restoreToCount(save)
+
+        if (waveAmplitude > 1f) canvas.drawPath(edgePath, edgePaint)
+    }
+
+    private fun liquidEdgeX(front: Float, y: Float, amplitude: Float, phase: Float, h: Float): Float {
+        val wave = kotlin.math.sin((y / h) * (Math.PI * 4.2) + phase).toFloat()
+        return (front + wave * amplitude).coerceIn(0f, width.toFloat())
+    }
+}
+
