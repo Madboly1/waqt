@@ -912,14 +912,7 @@ class MainActivity : AppCompatActivity() {
             }
             val transition = InteractiveLiquidTabSwipeView(
                 this, oldScreen, newScreen, swipe.revealFromRight
-            ) { committed ->
-                if (!committed) {
-                    currentTab = oldTab
-                    renderCurrentTab()
-                }
-                if (pendingInteractiveSwipe === swipe) pendingInteractiveSwipe = null
-                swipe.transition = null
-            }
+            )
             swipe.transition = transition
             rootFrameLayout.addView(transition, FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
