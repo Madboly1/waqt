@@ -18,6 +18,7 @@ object GeminiClient {
     const val OPENROUTER_MODEL = "openrouter/free"
 
     private data class Attempt(val provider: String, val result: Result<String>)
+    private class HttpStatusException(val statusCode: Int, message: String) : Exception(message)
 
     fun generate(
         apiKey: String,
@@ -65,7 +66,7 @@ object GeminiClient {
                                 ?: "Unknown throwable"
                             voiceFailures += "$candidate: $detail"
                             android.util.Log.e("WAQT_VOICE", "Voice request failed with model=$candidate: $detail", error)
-                            if (!isRetryable(error)) break
+                            if (!shouldTryNextGeminiModel(error)) break
                         }
                         if (voiceResult.isFailure && voiceFailures.isNotEmpty()) {
                             voiceResult = Result.failure(Exception("Gemini voice attempts: " + voiceFailures.joinToString(" | "), voiceResult.exceptionOrNull()))
@@ -75,7 +76,7 @@ object GeminiClient {
                         var imageResult: Result<String> = Result.failure(IllegalStateException("No Gemini model attempt was made"))
                         for (candidate in listOf(model.trim().ifBlank { DEFAULT_MODEL }, FALLBACK_MODEL).distinct()) {
                             imageResult = retryTransient { callGemini(geminiKey, candidate, systemPrompt, history, media) }
-                            if (imageResult.isSuccess || !isRetryable(imageResult.exceptionOrNull())) break
+                            if (imageResult.isSuccess || !shouldTryNextGeminiModel(imageResult.exceptionOrNull())) break
                         }
                         imageResult
                     }
@@ -243,20 +244,7 @@ object GeminiClient {
     private fun retryTransient(request: () -> Result<String>): Result<String> {
         var result = request()
         repeat(2) { retryIndex ->
-            val error = result.exceptionOrNull()
-            var cause: Throwable? = error
-            var transportFailure = false
-            while (cause != null) {
-                if (cause is java.io.IOException ||
-                    cause is java.net.UnknownHostException ||
-                    cause is java.net.ConnectException ||
-                    cause is java.net.SocketTimeoutException) {
-                    transportFailure = true
-                    break
-                }
-                cause = cause.cause
-            }
-            if (!transportFailure) return result
+            if (!isTransportRetryable(result.exceptionOrNull())) return result
             try {
                 Thread.sleep(if (retryIndex == 0) 800L else 1600L)
             } catch (_: InterruptedException) {
@@ -268,13 +256,23 @@ object GeminiClient {
         return result
     }
 
-    private fun isRetryable(error: Throwable?): Boolean =
-        error != null && (
-            error.message.orEmpty().startsWith("HTTP ") ||
-            error is java.net.SocketTimeoutException ||
-            error is java.net.ConnectException ||
-            error is java.io.IOException
-        )
+    private fun isTransportRetryable(error: Throwable?): Boolean {
+        var cause = error
+        while (cause != null) {
+            if (cause is java.io.IOException) return true
+            cause = cause.cause
+        }
+        return false
+    }
+
+    private fun shouldTryNextGeminiModel(error: Throwable?): Boolean {
+        var cause = error
+        while (cause != null) {
+            if (cause is HttpStatusException) return cause.statusCode == 404
+            cause = cause.cause
+        }
+        return false
+    }
 
     private fun callGemini(
         apiKey: String, model: String, systemPrompt: String,
@@ -325,7 +323,7 @@ object GeminiClient {
                     JSONObject(response).optJSONObject("error")?.optString("message")
                         ?.takeIf { it.isNotBlank() } ?: response.take(240)
                 } catch (_: Exception) { response.take(240) }
-                Result.failure(Exception("HTTP $status: $detail"))
+                Result.failure(HttpStatusException(status, "HTTP $status: $detail"))
             } else {
                 val root = JSONObject(response)
                 val candidate = root.optJSONArray("candidates")?.optJSONObject(0)
@@ -393,7 +391,7 @@ object GeminiClient {
                     JSONObject(response).optJSONObject("error")?.optString("message")
                         ?.takeIf { it.isNotBlank() } ?: response.take(240)
                 } catch (_: Exception) { response.take(240) }
-                Result.failure(Exception("HTTP $status: $detail"))
+                Result.failure(HttpStatusException(status, "HTTP $status: $detail"))
             } else {
                 val message = JSONObject(response).optJSONArray("choices")?.optJSONObject(0)?.optJSONObject("message")
                 val content = when (val raw = message?.opt("content")) {
