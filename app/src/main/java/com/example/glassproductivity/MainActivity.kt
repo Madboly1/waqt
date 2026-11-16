@@ -189,6 +189,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var mainContentContainer: LinearLayout
     private lateinit var headerBarLayout: LinearLayout
     private lateinit var tabContentHost: FrameLayout
+    private val carouselSwipeViews = java.util.WeakHashMap<View, Boolean>()
+    private var pendingInteractiveSwipe: InteractiveTabSwipe? = null
     private lateinit var tvBrandTitle: TextView
     private lateinit var tvBrandSubtitle: TextView
 
@@ -610,7 +612,64 @@ class MainActivity : AppCompatActivity() {
         headerBarLayout.addView(btnSettings)
 
         mainContentContainer.addView(headerBarLayout)
-        tabContentHost = FrameLayout(this).apply {
+        tabContentHost = object : FrameLayout(this) {
+            private var downX = 0f
+            private var downY = 0f
+            private var tracking = false
+            private var excluded = false
+            private val touchSlop = android.view.ViewConfiguration.get(context).scaledTouchSlop
+
+            override fun onInterceptTouchEvent(event: MotionEvent): Boolean {
+                when (event.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> {
+                        downX = event.x
+                        downY = event.y
+                        tracking = false
+                        excluded = isPrimaryTabSwipeExcluded(this, event.x, event.y)
+                        return false
+                    }
+                    MotionEvent.ACTION_MOVE -> {
+                        if (excluded) return false
+                        val dx = event.x - downX
+                        val dy = event.y - downY
+                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 1.35f &&
+                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.25f) {
+                            tracking = true
+                            beginInteractiveTabSwipe(dx)
+                            parent?.requestDisallowInterceptTouchEvent(true)
+                            return true
+                        }
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        tracking = false
+                        excluded = false
+                    }
+                }
+                return tracking
+            }
+
+            override fun onTouchEvent(event: MotionEvent): Boolean {
+                when (event.actionMasked) {
+                    MotionEvent.ACTION_MOVE -> updateInteractiveTabSwipe(event.x - downX)
+                    MotionEvent.ACTION_UP -> {
+                        finishInteractiveTabSwipe(cancelled = false)
+                        tracking = false
+                        excluded = false
+                    }
+                    MotionEvent.ACTION_CANCEL -> {
+                        finishInteractiveTabSwipe(cancelled = true)
+                        tracking = false
+                        excluded = false
+                    }
+                }
+                return true
+            }
+
+            override fun onDetachedFromWindow() {
+                finishInteractiveTabSwipe(cancelled = true)
+                super.onDetachedFromWindow()
+            }
+        }.apply {
             layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1f)
         }
         mainContentContainer.addView(tabContentHost)
@@ -785,6 +844,129 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun isPrimaryTabSwipeExcluded(container: ViewGroup, x: Float, y: Float): Boolean {
+        fun hit(view: View, localX: Float, localY: Float): View? {
+            if (localX < 0f || localY < 0f || localX >= view.width || localY >= view.height) return null
+            if (view is ViewGroup) {
+                for (i in view.childCount - 1 downTo 0) {
+                    val child = view.getChildAt(i)
+                    val found = hit(child, localX - child.left, localY - child.top)
+                    if (found != null) return found
+                }
+            }
+            return view
+        }
+        var target = hit(container, x, y) ?: return true
+        while (target !== container) {
+            if (carouselSwipeViews.containsKey(target) ||
+                target is android.widget.HorizontalScrollView ||
+                target is android.widget.SeekBar ||
+                target is android.widget.EditText ||
+                target.isClickable || target.isLongClickable) return true
+            val parent = target.parent
+            target = parent as? View ?: break
+        }
+        return false
+    }
+
+    private fun beginInteractiveTabSwipe(dx: Float) {
+        if (pendingInteractiveSwipe != null || activeTabTransitionView != null) return
+        val logicalDirection = (if (dx < 0f) 1 else -1) * (if (isArabic) -1 else 1)
+        val targetTab = (currentTab + logicalDirection).coerceIn(0, 3)
+        if (targetTab == currentTab) return
+
+        val oldTab = currentTab
+        val oldScreen = captureTabScreen() ?: return
+        val holdingLayer = ImageView(this).apply {
+            setImageBitmap(oldScreen)
+            scaleType = ImageView.ScaleType.FIT_XY
+            isClickable = true
+            isFocusable = true
+        }
+        rootFrameLayout.addView(holdingLayer, FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.MATCH_PARENT
+        ))
+        currentTab = targetTab
+        triggerGentleHaptic()
+        renderCurrentTab()
+
+        val swipe = InteractiveTabSwipe(oldTab, targetTab, dx < 0f, oldScreen, holdingLayer)
+        pendingInteractiveSwipe = swipe
+        rootFrameLayout.post {
+            if (pendingInteractiveSwipe !== swipe || isFinishing || isDestroyed) {
+                rootFrameLayout.removeView(holdingLayer)
+                if (!oldScreen.isRecycled) oldScreen.recycle()
+                return@post
+            }
+            holdingLayer.visibility = View.INVISIBLE
+            val newScreen = captureTabScreen()
+            rootFrameLayout.removeView(holdingLayer)
+            if (newScreen == null) {
+                if (!oldScreen.isRecycled) oldScreen.recycle()
+                pendingInteractiveSwipe = null
+                currentTab = oldTab
+                renderCurrentTab()
+                return@post
+            }
+            val transition = InteractiveLiquidTabSwipeView(
+                this, oldScreen, newScreen, swipe.revealFromRight
+            ) { finished ->
+                rootFrameLayout.removeView(finished)
+                if (swipe.transition === finished) swipe.transition = null
+                finished.dispose()
+                if (pendingInteractiveSwipe === swipe) pendingInteractiveSwipe = null
+                if (swipe.cancelAfterReady) {
+                    currentTab = oldTab
+                    renderCurrentTab()
+                }
+            }
+            swipe.transition = transition
+            rootFrameLayout.addView(transition, FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.MATCH_PARENT
+            ))
+            transition.progress = (kotlin.math.abs(swipe.latestDx) / tabContentHost.width.coerceAtLeast(1))
+                .coerceIn(0f, 0.92f)
+            if (swipe.finishRequested) {
+                transition.settle(swipe.commitAfterRelease)
+            }
+        }
+    }
+
+    private fun updateInteractiveTabSwipe(dx: Float) {
+        val swipe = pendingInteractiveSwipe ?: return
+        swipe.latestDx = dx
+        val width = tabContentHost.width.coerceAtLeast(1).toFloat()
+        val progress = (kotlin.math.abs(dx) / width).coerceIn(0f, 0.92f)
+        swipe.transition?.progress = progress
+        swipe.transition?.invalidate()
+    }
+
+    private fun finishInteractiveTabSwipe(cancelled: Boolean) {
+        val swipe = pendingInteractiveSwipe ?: return
+        val width = tabContentHost.width.coerceAtLeast(1).toFloat()
+        val distance = kotlin.math.abs(swipe.latestDx)
+        val commit = !cancelled && (distance >= width * 0.28f)
+        swipe.finishRequested = true
+        swipe.commitAfterRelease = commit
+        swipe.transition?.settle(commit)
+        if (swipe.transition == null && !commit) swipe.cancelAfterReady = true
+    }
+
+    private data class InteractiveTabSwipe(
+        val oldTab: Int,
+        val targetTab: Int,
+        val revealFromRight: Boolean,
+        val oldScreen: Bitmap,
+        val holdingLayer: ImageView,
+        var latestDx: Float = 0f,
+        var transition: InteractiveLiquidTabSwipeView? = null,
+        var finishRequested: Boolean = false,
+        var commitAfterRelease: Boolean = false,
+        var cancelAfterReady: Boolean = false
+    )
 
     private fun captureTabScreen(): Bitmap? {
         if (!::rootFrameLayout.isInitialized || rootFrameLayout.width <= 0 || rootFrameLayout.height <= 0) return null
@@ -6822,6 +7004,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupCardSwipeNavigation(card: View, onSwipe: (direction: Int) -> Unit) {
+        carouselSwipeViews[card] = true
         var startX = 0f
         var startY = 0f
 
@@ -8896,6 +9079,124 @@ private class LiquidTabTransitionView(
         // A broad, low-opacity feather replaces the old hard, bright dividing line.
         if (progress < 0.995f && waveAmplitude > 0.25f) {
             canvas.drawPath(edgePath, softEdgePaint)
+            canvas.drawPath(edgePath, rimPaint)
+        }
+    }
+}
+
+private class InteractiveLiquidTabSwipeView(
+    context: Context,
+    private val oldScreen: Bitmap,
+    private val newScreen: Bitmap,
+    private val revealFromRight: Boolean
+) : View(context) {
+    private val bitmapPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+    private val edgePaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = 9f
+        color = Color.argb(90, 255, 235, 210)
+        maskFilter = android.graphics.BlurMaskFilter(12f, android.graphics.BlurMaskFilter.Blur.NORMAL)
+    }
+    private val rimPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+        style = Paint.Style.STROKE
+        strokeWidth = 1.5f
+        color = Color.argb(65, 255, 248, 235)
+    }
+    private val revealPath = Path()
+    private val edgePath = Path()
+    var progress: Float = 0f
+        set(value) {
+            field = value.coerceIn(0f, 1f)
+            invalidate()
+        }
+    private var disposed = false
+    private var settling = false
+    private var settleAnimator: android.animation.ValueAnimator? = null
+
+    init {
+        isClickable = true
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+    }
+
+    fun settle(commit: Boolean) {
+        if (disposed || settling) return
+        settling = true
+        val start = progress
+        val end = if (commit) 1f else 0f
+        settleAnimator = android.animation.ValueAnimator.ofFloat(start, end).apply {
+            duration = (220L + (kotlin.math.abs(end - start) * 180L)).toLong()
+            interpolator = android.view.animation.DecelerateInterpolator(1.35f)
+            addUpdateListener { progress = it.animatedValue as Float }
+            addListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    if (!disposed) {
+                        progress = end
+                        // Parent owns removal and bitmap disposal after the gesture settles.
+                        (parent as? ViewGroup)?.removeView(this@InteractiveLiquidTabSwipeView)
+                        dispose()
+                    }
+                }
+            })
+            start()
+        }
+    }
+
+    fun dispose() {
+        if (disposed) return
+        disposed = true
+        settleAnimator?.cancel()
+        settleAnimator = null
+        if (!oldScreen.isRecycled) oldScreen.recycle()
+        if (!newScreen.isRecycled) newScreen.recycle()
+        edgePaint.maskFilter = null
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        if (disposed || oldScreen.isRecycled || newScreen.isRecycled) return
+        val w = width.toFloat()
+        val h = height.toFloat()
+        if (w <= 0f || h <= 0f) return
+        val bounds = RectF(0f, 0f, w, h)
+        canvas.drawBitmap(oldScreen, null, bounds, bitmapPaint)
+
+        val envelope = kotlin.math.sin(Math.PI * progress).toFloat()
+        val amplitude = h * 0.028f * envelope
+        val front = if (revealFromRight) w * (1f - progress) else w * progress
+        val phase = progress * (Math.PI.toFloat() * 2f)
+        revealPath.reset()
+        edgePath.reset()
+        val step = (h / 120f).coerceAtLeast(3f)
+        var y = 0f
+        while (y <= h) {
+            val wave = kotlin.math.sin((y / h) * (Math.PI * 4.2) + phase).toFloat() * amplitude +
+                kotlin.math.sin((y / h) * (Math.PI * 7.1) - phase * 0.7f).toFloat() * amplitude * 0.22f
+            val x = (front + wave).coerceIn(0f, w)
+            if (y == 0f) {
+                revealPath.moveTo(x, y)
+                edgePath.moveTo(x, y)
+            } else {
+                revealPath.lineTo(x, y)
+                edgePath.lineTo(x, y)
+            }
+            y += step
+        }
+        val finalWave = kotlin.math.sin(Math.PI * 4.2 + phase).toFloat() * amplitude
+        val finalX = (front + finalWave).coerceIn(0f, w)
+        revealPath.lineTo(finalX, h)
+        edgePath.lineTo(finalX, h)
+        if (revealFromRight) {
+            revealPath.lineTo(w, h); revealPath.lineTo(w, 0f)
+        } else {
+            revealPath.lineTo(0f, h); revealPath.lineTo(0f, 0f)
+        }
+        revealPath.close()
+        val save = canvas.save()
+        canvas.clipPath(revealPath)
+        canvas.drawBitmap(newScreen, null, bounds, bitmapPaint)
+        canvas.restoreToCount(save)
+        if (progress in 0.01f..0.99f) {
+            canvas.drawPath(edgePath, edgePaint)
             canvas.drawPath(edgePath, rimPaint)
         }
     }
