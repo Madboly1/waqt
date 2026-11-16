@@ -1538,6 +1538,7 @@ class MainActivity : AppCompatActivity() {
 - set_task_progress يستخدم percentage من 0 إلى 100 فقط؛ set_habit_progress يستخدم progress من 0 إلى 1000 فقط. لا تخلط بين الحقلين أو النطاقين.
 - save_journal_entry يتطلب content غير فارغ، ويمكنه استخدام date بصيغة yyyy-MM-dd؛ update_journal_entry يتطلب date صالحًا وcontent غير فارغ؛ delete_journal_entry يتطلب date صالحًا. لا تخمّن تاريخًا غير معروف.
 - set_ambient_volume من 0 إلى 100؛ set_focus_duration وset_break_duration من 1 إلى 240 دقيقة؛ start_focus من 1 إلى 180 دقيقة؛ set_goal من 15 إلى 720 دقيقة.
+- set_notification_setting: setting واحدة من tasks أو habits أو focus_end أو quiet_hours أو auto_float، وenabled قيمة true/false. هذا يغيّر تذكيرات المهام أو العادات، أو إشعار نهاية التركيز، أو ساعات الهدوء، أو ظهور النافذة العائمة تلقائيًا. quiet_hours توقف التنبيه التمهيدي فقط بين 11 مساءً و7 صباحًا ولا توقف المنبه الأساسي.
 - كل حقل اختياري إذا أُرسل يجب أن يكون من النوع الصحيح وغير فارغ للنصوص. لا تضع أمثلة القيم الوصفية مثل "high|medium|low" كنص فعلي؛ اختر قيمة واحدة فقط.
 - عند عدم معرفة معلومة مطلوبة، اسأل المستخدم بدل اختراعها أو إصدار action ناقص. لا ترسل action لمجرد شرح ما ستفعله؛ أرسلها عند وضوح نية التنفيذ من كلام المستخدم أو موافقته السياقية على عرض محدد. إذا لم تتأكد، اسأله بدل التخمين.
 
@@ -1585,6 +1586,7 @@ class MainActivity : AppCompatActivity() {
 {"type":"open_app_tour"}
 {"type":"export_backup"}
 {"type":"open_notification_settings"}
+{"type":"set_notification_setting","setting":"tasks|habits|focus_end|quiet_hours|auto_float","enabled":true}
 {"type":"set_auto_update_check","enabled":true}
 {"type":"check_for_updates"}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
@@ -1886,6 +1888,7 @@ class MainActivity : AppCompatActivity() {
             "ضيف عادة", "أضف عادة", "اعمل عادة", "سجل عادة", "ضيف العادة", "أضف العادة", "سجل العادة",
             "عدّل اليوميات", "عدل اليوميات", "حدّث اليوميات", "حدث اليوميات", "عدّل التدوينة", "عدل التدوينة", "update journal", "edit journal",
             "ابدأ التركيز", "ابدأ جلسة", "شغل التركيز", "شغّل التركيز", "وقف التركيز", "أوقف التركيز", "وقف الجلسة", "استأنف التركيز", "كمل التركيز", "كمّل التركيز", "الغ جلسة التركيز", "ألغي جلسة التركيز",
+            "شغل إشعارات المهام", "فعّل إشعارات المهام", "فعل اشعارات المهام", "اقفل إشعارات المهام", "وقف إشعارات المهام", "عطل اشعارات المهام", "شغل إشعارات العادات", "فعّل إشعارات العادات", "اقفل إشعارات العادات", "وقف إشعارات العادات", "شغل تنبيه نهاية التركيز", "فعّل تنبيه نهاية التركيز", "اقفل تنبيه نهاية التركيز", "وقف تنبيه نهاية التركيز", "فعّل ساعات الهدوء", "فعل ساعات الهدوء", "الغ ساعات الهدوء", "ألغ ساعات الهدوء", "شغل النافذة العائمة تلقائيًا", "فعّل النافذة العائمة تلقائيًا", "وقف النافذة العائمة تلقائيًا", "عطل النافذة العائمة تلقائيًا", "enable task notifications", "disable task notifications", "enable habit notifications", "disable habit notifications", "enable focus end notifications", "disable focus end notifications", "turn on quiet hours", "turn off quiet hours", "enable floating reminders", "disable floating reminders",
             "فعّل الفحص التلقائي للتحديثات", "شغل الفحص التلقائي للتحديثات", "وقف الفحص التلقائي للتحديثات", "عطّل الفحص التلقائي للتحديثات", "افحص التحديثات", "افحص وجود تحديث", "check for updates", "enable automatic updates check", "disable automatic updates check", "turn on update checks", "turn off update checks", "افتح", "افتحلي", "افتح الإعدادات", "افتح الاعدادات", "روح للإعدادات", "روح للاعدادات", "settings", "open settings", "show settings", "انتقل", "روح لقسم", "روح على", "وديني", "اعرض قسم", "open ", "go to ", "navigate to ", "show me ", "افتح الجولة التعريفية", "افتح شرح التطبيق", "اعرض الجولة", "صدّر نسخة احتياطية", "صدر نسخة احتياطية", "اعمل نسخة احتياطية", "export backup", "open app tour",
             // Task and habit lifecycle commands
             "add habit", "create a habit", "add this habit", "save as habit",
@@ -1964,7 +1967,7 @@ class MainActivity : AppCompatActivity() {
             "set_ambient_volume", "set_theme", "set_language", "set_focus_duration",
             "set_break_duration", "choose_custom_audio", "preview_custom_audio",
             "stop_custom_audio", "choose_alarm_ringtone", "set_tick_tock", "set_goal",
-            "set_auto_update_check", "check_for_updates", "open_app_settings", "open_app_tour",
+            "set_notification_setting", "set_auto_update_check", "check_for_updates", "open_app_settings", "open_app_tour",
             "export_backup", "open_notification_settings", "navigate_tab", "open_notes_section"
         )
         if (type !in supportedTypes) return false
@@ -1987,6 +1990,7 @@ class MainActivity : AppCompatActivity() {
             "set_language" -> hasText("language")
             "set_focus_duration", "set_break_duration" -> hasNumber("minutes")
             "set_tick_tock", "set_auto_update_check" -> hasBoolean("enabled")
+            "set_notification_setting" -> hasText("setting") && hasBoolean("enabled")
             "navigate_tab" -> hasText("tab")
             "open_notes_section" -> hasText("section")
             "set_task_progress" -> hasText("title") && hasNumber("percentage")
@@ -2012,14 +2016,15 @@ class MainActivity : AppCompatActivity() {
         } &&
             optionalText("new_title") && optionalText("target_unit") &&
             optionalText("description") && optionalText("content") &&
-            optionalBoolean("has_reminder") &&
+            optionalBoolean("has_reminder") && optionalBoolean("enabled") &&
             valueIn("priority", setOf("high", "medium", "low")) &&
             optionalText("category") &&
             valueIn("sound", setOf("off", "rain", "waves", "fire", "forest", "water", "library", "wind", "night")) &&
             valueIn("mode", setOf("dark", "light", "toggle")) &&
             valueIn("language", setOf("ar", "en")) &&
             valueIn("tab", setOf("tasks", "habits", "focus", "notes")) &&
-            valueIn("section", setOf("notes", "journal"))
+            valueIn("section", setOf("notes", "journal")) &&
+            valueIn("setting", setOf("tasks", "habits", "focus_end", "quiet_hours", "auto_float"))
     }
 
     private fun applyAssistantActions(actions: org.json.JSONArray, box: LinearLayout) {
@@ -2526,6 +2531,46 @@ class MainActivity : AppCompatActivity() {
                     val m = a.optInt("minutes", 120).coerceIn(15, 720)
                     getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putInt(ReminderRepository.KEY_DAILY_FOCUS_GOAL_MINS, m).apply()
                     note = "🎯 هدف التركيز: $m دقيقة"
+                }
+                "set_notification_setting" -> {
+                    val setting = a.optString("setting").trim()
+                    val enabled = a.optBoolean("enabled")
+                    val preferenceKey = when (setting) {
+                        "tasks" -> ReminderRepository.KEY_NOTIF_TASKS
+                        "habits" -> ReminderRepository.KEY_NOTIF_HABITS
+                        "focus_end" -> ReminderRepository.KEY_NOTIF_SESSION_END
+                        "quiet_hours" -> ReminderRepository.KEY_QUIET_HOURS
+                        "auto_float" -> ReminderRepository.KEY_AUTO_FLOAT
+                        else -> null
+                    }
+                    if (preferenceKey == null) {
+                        note = "⚠️ اختار إعداد إشعارات مدعوم."
+                    } else {
+                        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                            .putBoolean(preferenceKey, enabled).apply()
+                        if (setting == "tasks" || setting == "habits") {
+                            val targetIsHabit = setting == "habits"
+                            ReminderRepository.getAllItems(this).filter { it.isHabit == targetIsHabit }.forEach { item ->
+                                if (!enabled) {
+                                    AlarmScheduler.cancelAlarm(this, item.id)
+                                } else if (!item.isPaused && item.hasReminder && (item.isHabit || !item.isCompletedToday)) {
+                                    try {
+                                        AlarmScheduler.scheduleNextOccurrence(
+                                            this, item, forceTomorrow = item.isHabit && item.isCompletedToday
+                                        )
+                                    } catch (_: Exception) {}
+                                }
+                            }
+                        }
+                        note = when (setting) {
+                            "tasks" -> if (enabled) "🔔 فعّلت تذكيرات المهام وأعدت جدولة مواعيدها." else "🔕 أوقفت تذكيرات المهام وألغيت تنبيهاتها المجدولة."
+                            "habits" -> if (enabled) "🔔 فعّلت تذكيرات العادات وأعدت جدولة مواعيدها." else "🔕 أوقفت تذكيرات العادات وألغيت تنبيهاتها المجدولة."
+                            "focus_end" -> if (enabled) "🍅 فعّلت إشعار نهاية جلسة التركيز." else "🔕 أوقفت إشعار نهاية جلسة التركيز."
+                            "quiet_hours" -> if (enabled) "🌙 فعّلت ساعات الهدوء: التنبيه التمهيدي فقط هيتوقف من 11 مساءً إلى 7 صباحًا، والمنبه الأساسي هيفضل شغال." else "☀️ أوقفت ساعات الهدوء."
+                            "auto_float" -> if (enabled && !Settings.canDrawOverlays(this)) "🪟 فعّلت ظهور النافذة العائمة تلقائيًا، لكن لازم تسمح لـ WAQT بالظهور فوق التطبيقات من الإعدادات عشان تشتغل." else if (enabled) "🪟 فعّلت ظهور النافذة العائمة تلقائيًا مع التنبيهات." else "🪟 أوقفت ظهور النافذة العائمة تلقائيًا."
+                            else -> null
+                        }
+                    }
                 }
                 "set_auto_update_check" -> {
                     if (!a.has("enabled")) {
