@@ -856,7 +856,7 @@ class MainActivity : AppCompatActivity() {
                 this,
                 oldScreen,
                 newScreen,
-                dp(2.5f).toFloat()
+                (dp(5).toFloat() / 2f)
             ) { finished ->
                 rootFrameLayout.removeView(finished)
                 if (activeTabTransitionView === finished) activeTabTransitionView = null
