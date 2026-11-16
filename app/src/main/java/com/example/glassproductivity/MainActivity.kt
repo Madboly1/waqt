@@ -912,15 +912,13 @@ class MainActivity : AppCompatActivity() {
             }
             val transition = InteractiveLiquidTabSwipeView(
                 this, oldScreen, newScreen, swipe.revealFromRight
-            ) { finished ->
-                rootFrameLayout.removeView(finished)
-                if (swipe.transition === finished) swipe.transition = null
-                finished.dispose()
-                if (pendingInteractiveSwipe === swipe) pendingInteractiveSwipe = null
-                if (swipe.cancelAfterReady) {
+            ) { committed ->
+                if (!committed) {
                     currentTab = oldTab
                     renderCurrentTab()
                 }
+                if (pendingInteractiveSwipe === swipe) pendingInteractiveSwipe = null
+                swipe.transition = null
             }
             swipe.transition = transition
             rootFrameLayout.addView(transition, FrameLayout.LayoutParams(
@@ -930,7 +928,14 @@ class MainActivity : AppCompatActivity() {
             transition.progress = (kotlin.math.abs(swipe.latestDx) / tabContentHost.width.coerceAtLeast(1))
                 .coerceIn(0f, 0.92f)
             if (swipe.finishRequested) {
-                transition.settle(swipe.commitAfterRelease)
+                transition.settle(swipe.commitAfterRelease) { committed ->
+                    if (!committed) {
+                        currentTab = oldTab
+                        renderCurrentTab()
+                    }
+                    if (pendingInteractiveSwipe === swipe) pendingInteractiveSwipe = null
+                    swipe.transition = null
+                }
             }
         }
     }
@@ -951,7 +956,14 @@ class MainActivity : AppCompatActivity() {
         val commit = !cancelled && (distance >= width * 0.28f)
         swipe.finishRequested = true
         swipe.commitAfterRelease = commit
-        swipe.transition?.settle(commit)
+        swipe.transition?.settle(commit) { committed ->
+            if (!committed) {
+                currentTab = swipe.oldTab
+                renderCurrentTab()
+            }
+            if (pendingInteractiveSwipe === swipe) pendingInteractiveSwipe = null
+            swipe.transition = null
+        }
         if (swipe.transition == null && !commit) swipe.cancelAfterReady = true
     }
 
@@ -9112,14 +9124,16 @@ private class InteractiveLiquidTabSwipeView(
     private var disposed = false
     private var settling = false
     private var settleAnimator: android.animation.ValueAnimator? = null
+    private var onSettled: ((Boolean) -> Unit)? = null
 
     init {
         isClickable = true
         setLayerType(View.LAYER_TYPE_SOFTWARE, null)
     }
 
-    fun settle(commit: Boolean) {
+    fun settle(commit: Boolean, callback: ((Boolean) -> Unit)? = null) {
         if (disposed || settling) return
+        onSettled = callback
         settling = true
         val start = progress
         val end = if (commit) 1f else 0f
@@ -9134,6 +9148,8 @@ private class InteractiveLiquidTabSwipeView(
                         // Parent owns removal and bitmap disposal after the gesture settles.
                         (parent as? ViewGroup)?.removeView(this@InteractiveLiquidTabSwipeView)
                         dispose()
+                        onSettled?.invoke(commit)
+                        onSettled = null
                     }
                 }
             })
