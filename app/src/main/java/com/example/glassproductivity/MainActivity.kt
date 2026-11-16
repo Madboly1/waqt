@@ -861,19 +861,21 @@ class MainActivity : AppCompatActivity() {
             return view
         }
         var target = hit(container, x, y) ?: return true
+        val touchedView = target
         while (target !== container) {
-            // Preserve gestures owned by real interactive controls and the card carousel.
-            // Do not exclude a whole card just because one of its ancestors is clickable:
-            // that made tab swipes unavailable across large parts of several tabs.
+            // Preserve gestures owned by the carousel and controls that directly receive
+            // the touch. A clickable ancestor (for example, a whole content card) must not
+            // block tab navigation across the entire card surface.
             if (carouselSwipeViews.containsKey(target) ||
                 target is android.widget.HorizontalScrollView ||
                 target is android.widget.SeekBar ||
                 target is android.widget.EditText ||
-                target is android.widget.Button ||
-                target is android.widget.Spinner ||
-                target is android.widget.Switch ||
-                target is android.widget.ScrollView ||
-                target.isClickable || target.isLongClickable) return true
+                (target === touchedView && (
+                    target is android.widget.Button ||
+                    target is android.widget.Spinner ||
+                    target is android.widget.Switch ||
+                    target.isClickable || target.isLongClickable
+                ))) return true
             val parent = target.parent
             target = parent as? View ?: break
         }
