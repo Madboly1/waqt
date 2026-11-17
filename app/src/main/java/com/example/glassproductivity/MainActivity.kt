@@ -933,9 +933,54 @@ class MainActivity : AppCompatActivity() {
         renderCurrentTab()
     }
 
+    // Subtle tactile feedback for every regular clickable control.
+    // The listener never consumes touch events, so normal click behavior stays intact.
+    private val pressAnimationAttached = java.util.WeakHashMap<View, Boolean>()
+
+    private fun applyPressAnimations(view: View) {
+        if (view.isClickable &&
+            !carouselSwipeViews.containsKey(view) &&
+            !pressAnimationAttached.containsKey(view)
+        ) {
+            pressAnimationAttached[view] = true
+            view.setOnTouchListener { touched, event ->
+                when (event.actionMasked) {
+                    MotionEvent.ACTION_DOWN -> {
+                        touched.animate().cancel()
+                        touched.animate()
+                            .scaleX(0.94f)
+                            .scaleY(0.94f)
+                            .alpha(0.88f)
+                            .setDuration(85L)
+                            .setInterpolator(android.view.animation.DecelerateInterpolator())
+                            .start()
+                    }
+                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                        touched.animate().cancel()
+                        touched.animate()
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .alpha(1f)
+                            .setDuration(190L)
+                            .setInterpolator(android.view.animation.OvershootInterpolator(1.15f))
+                            .start()
+                    }
+                }
+                false
+            }
+        }
+
+        if (view is ViewGroup) {
+            for (index in 0 until view.childCount) {
+                applyPressAnimations(view.getChildAt(index))
+            }
+        }
+    }
+
     private fun renderCurrentTab() {
         syncTickTock()
         refreshTabBar()
+        applyPressAnimations(gtaRadialTriggerButton)
         tvBrandTitle.text = if (isArabic) "وَقْت" else "WAQT"
         tvBrandSubtitle.text = getTabSubtitleText()
 
@@ -948,6 +993,7 @@ class MainActivity : AppCompatActivity() {
             else -> buildTasksScreenView()
         }
         tabContentHost.addView(view)
+        applyPressAnimations(view)
     }
 
     private var radialTouchStartX = 0f
