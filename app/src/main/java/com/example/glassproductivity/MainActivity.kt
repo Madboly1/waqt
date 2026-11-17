@@ -3674,6 +3674,93 @@ class MainActivity : AppCompatActivity() {
         return (hour * 60 + min) < nowM
     }
 
+
+    /**
+     * Depth-carousel transition: keep both cards alive during the gesture result.
+     * The outgoing card retreats, shrinks and blurs while the incoming card
+     * advances from the side, grows and becomes crisp at the same time.
+     */
+    private fun animateCarouselCardSwap(
+        container: FrameLayout,
+        outgoing: View,
+        incoming: View,
+        direction: Int,
+        onFinished: () -> Unit
+    ) {
+        setCardTreeEnabled(incoming, true)
+        incoming.bringToFront()
+        outgoing.bringToFront()
+        // Reorder so the incoming card remains visually above the outgoing one.
+        container.removeView(incoming)
+        container.addView(incoming)
+        val side = if (direction > 0) 1 else -1
+        val duration = 500L
+        val interpolator = android.view.animation.PathInterpolator(0.22f, 0.75f, 0.18f, 1f)
+
+        val blurAnimator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
+            duration = duration
+            interpolator = interpolator
+            addUpdateListener { animator ->
+                val p = animator.animatedValue as Float
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    val outBlur = dp(13).toFloat() * p
+                    val inBlur = dp(2).toFloat() * (1f - p)
+                    outgoing.setRenderEffect(
+                        if (outBlur > 0.2f) RenderEffect.createBlurEffect(outBlur, outBlur, Shader.TileMode.CLAMP) else null
+                    )
+                    incoming.setRenderEffect(
+                        if (inBlur > 0.2f) RenderEffect.createBlurEffect(inBlur, inBlur, Shader.TileMode.CLAMP) else null
+                    )
+                }
+            }
+        }
+
+        val incomingStartX = (side * dp(104)).toFloat()
+        incoming.translationX = incomingStartX
+        incoming.translationY = dp(42).toFloat()
+        incoming.scaleX = 0.94f
+        incoming.scaleY = 0.94f
+        incoming.rotationY = side * -10f
+        incoming.alpha = 0.70f
+        incoming.elevation = dp(23).toFloat()
+
+        val outgoingAnimator = android.animation.AnimatorSet().apply {
+            playTogether(
+                android.animation.ObjectAnimator.ofFloat(outgoing, View.TRANSLATION_X, (-side * dp(116)).toFloat()),
+                android.animation.ObjectAnimator.ofFloat(outgoing, View.TRANSLATION_Y, dp(42).toFloat()),
+                android.animation.ObjectAnimator.ofFloat(outgoing, View.SCALE_X, 0.84f),
+                android.animation.ObjectAnimator.ofFloat(outgoing, View.SCALE_Y, 0.84f),
+                android.animation.ObjectAnimator.ofFloat(outgoing, View.ALPHA, 0.12f),
+                android.animation.ObjectAnimator.ofFloat(outgoing, View.ROTATION_Y, -side * 13f)
+            )
+            duration = duration
+            interpolator = interpolator
+        }
+        val incomingAnimator = android.animation.AnimatorSet().apply {
+            playTogether(
+                android.animation.ObjectAnimator.ofFloat(incoming, View.TRANSLATION_X, 0f),
+                android.animation.ObjectAnimator.ofFloat(incoming, View.TRANSLATION_Y, dp(24).toFloat()),
+                android.animation.ObjectAnimator.ofFloat(incoming, View.SCALE_X, 1f),
+                android.animation.ObjectAnimator.ofFloat(incoming, View.SCALE_Y, 1f),
+                android.animation.ObjectAnimator.ofFloat(incoming, View.ALPHA, 1f),
+                android.animation.ObjectAnimator.ofFloat(incoming, View.ROTATION_Y, 0f)
+            )
+            duration = duration
+            interpolator = interpolator
+        }
+        android.animation.AnimatorSet().apply {
+            playTogether(outgoingAnimator, incomingAnimator, blurAnimator)
+            addListener(object : android.animation.AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    outgoing.setRenderEffect(null)
+                    incoming.setRenderEffect(null)
+                    onFinished()
+                }
+            })
+            start()
+        }
+    }
+
     private fun buildStackedTasksCarousel(tasks: List<ReminderItem>): View {
         val total = tasks.size
         val activeIdx = currentTaskCarouselIndex.coerceIn(0, total - 1)
@@ -3733,18 +3820,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        if (activeIdx > 0) {
-            val previous = buildSingleTaskCardView(tasks[activeIdx - 1], isForeground = false).apply {
-                styleRearCard(this, -1)
-            }
-            stackContainer.addView(previous)
-        }
-        if (activeIdx + 1 < total) {
-            val next = buildSingleTaskCardView(tasks[activeIdx + 1], isForeground = false).apply {
-                styleRearCard(this, 1)
-            }
-            stackContainer.addView(next)
-        }
+        val previousCard = if (activeIdx > 0) {
+            buildSingleTaskCardView(activeIdx - 1).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
+        } else null
+        val nextCard = if (activeIdx + 1 < total) {
+            buildSingleTaskCardView(activeIdx + 1).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
+        } else null
 
         val frontCard = buildSingleTaskCardView(tasks[activeIdx], isForeground = true).apply {
             prepareStackCard(this)
@@ -3757,14 +3838,16 @@ class MainActivity : AppCompatActivity() {
             elevation = dp(22).toFloat()
         }
         setupCardSwipeNavigation(frontCard) { direction ->
-            if (direction > 0 && currentTaskCarouselIndex < total - 1) {
-                currentTaskCarouselIndex++
+            val targetCard = if (direction > 0) nextCard else previousCard
+            val canMove = targetCard != null &&
+                ((direction > 0 && currentTaskCarouselIndex < total - 1) ||
+                 (direction < 0 && currentTaskCarouselIndex > 0))
+            if (canMove) {
+                if (direction > 0) currentTaskCarouselIndex++ else currentTaskCarouselIndex--
                 triggerGentleHaptic()
-                renderCurrentTab()
-            } else if (direction < 0 && currentTaskCarouselIndex > 0) {
-                currentTaskCarouselIndex--
-                triggerGentleHaptic()
-                renderCurrentTab()
+                animateCarouselCardSwap(stackContainer, frontCard, targetCard!!, direction) {
+                    renderCurrentTab()
+                }
             }
         }
         stackContainer.addView(frontCard)
@@ -4474,12 +4557,12 @@ class MainActivity : AppCompatActivity() {
                 card.setRenderEffect(RenderEffect.createBlurEffect(dp(2).toFloat(), dp(2).toFloat(), Shader.TileMode.CLAMP))
             }
         }
-        if (activeIdx > 0) {
-            stackContainer.addView(buildSingleHabitCardView(habits[activeIdx - 1], isForeground = false).apply { styleRearCard(this, -1) })
-        }
-        if (activeIdx + 1 < total) {
-            stackContainer.addView(buildSingleHabitCardView(habits[activeIdx + 1], isForeground = false).apply { styleRearCard(this, 1) })
-        }
+        val previousCard = if (activeIdx > 0) {
+            buildSingleHabitCardView(activeIdx - 1, false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
+        } else null
+        val nextCard = if (activeIdx + 1 < total) {
+            buildSingleHabitCardView(activeIdx + 1, false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
+        } else null
         val frontCard = buildSingleHabitCardView(habits[activeIdx], isForeground = true).apply {
             prepareStackCard(this)
             scaleX = 1f
@@ -4491,14 +4574,16 @@ class MainActivity : AppCompatActivity() {
             elevation = dp(22).toFloat()
         }
         setupCardSwipeNavigation(frontCard) { direction ->
-            if (direction > 0 && currentHabitCarouselIndex < total - 1) {
-                currentHabitCarouselIndex++
+            val targetCard = if (direction > 0) nextCard else previousCard
+            val canMove = targetCard != null &&
+                ((direction > 0 && currentHabitCarouselIndex < total - 1) ||
+                 (direction < 0 && currentHabitCarouselIndex > 0))
+            if (canMove) {
+                if (direction > 0) currentHabitCarouselIndex++ else currentHabitCarouselIndex--
                 triggerGentleHaptic()
-                renderCurrentTab()
-            } else if (direction < 0 && currentHabitCarouselIndex > 0) {
-                currentHabitCarouselIndex--
-                triggerGentleHaptic()
-                renderCurrentTab()
+                animateCarouselCardSwap(stackContainer, frontCard, targetCard!!, direction) {
+                    renderCurrentTab()
+                }
             }
         }
         stackContainer.addView(frontCard)
@@ -5414,8 +5499,12 @@ class MainActivity : AppCompatActivity() {
                 card.setRenderEffect(RenderEffect.createBlurEffect(dp(2).toFloat(), dp(2).toFloat(), Shader.TileMode.CLAMP))
             }
         }
-        if (activeIdx > 0) stackContainer.addView(buildSingleNoteCardView(notes[activeIdx - 1], false).apply { styleRearCard(this, -1) })
-        if (activeIdx + 1 < total) stackContainer.addView(buildSingleNoteCardView(notes[activeIdx + 1], false).apply { styleRearCard(this, 1) })
+        val previousCard = if (activeIdx > 0) {
+            buildSingleNoteCardView(activeIdx - 1, false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
+        } else null
+        val nextCard = if (activeIdx + 1 < total) {
+            buildSingleNoteCardView(activeIdx + 1, false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
+        } else null
         val frontCard = buildSingleNoteCardView(notes[activeIdx], true).apply {
             prepareStackCard(this)
             scaleX = 0.975f; scaleY = 0.975f; translationY = dp(34).toFloat(); translationX = 0f
@@ -5423,14 +5512,16 @@ class MainActivity : AppCompatActivity() {
             post { animate().alpha(1f).scaleX(1f).scaleY(1f).translationY(dp(24).toFloat()).setDuration(420L).setInterpolator(android.view.animation.OvershootInterpolator(0.85f)).start() }
         }
         setupCardSwipeNavigation(frontCard) { direction ->
-            if (direction > 0 && currentNoteCarouselIndex < total - 1) {
-                currentNoteCarouselIndex++
+            val targetCard = if (direction > 0) nextCard else previousCard
+            val canMove = targetCard != null &&
+                ((direction > 0 && currentNoteCarouselIndex < total - 1) ||
+                 (direction < 0 && currentNoteCarouselIndex > 0))
+            if (canMove) {
+                if (direction > 0) currentNoteCarouselIndex++ else currentNoteCarouselIndex--
                 triggerGentleHaptic()
-                renderCurrentTab()
-            } else if (direction < 0 && currentNoteCarouselIndex > 0) {
-                currentNoteCarouselIndex--
-                triggerGentleHaptic()
-                renderCurrentTab()
+                animateCarouselCardSwap(stackContainer, frontCard, targetCard!!, direction) {
+                    renderCurrentTab()
+                }
             }
         }
         stackContainer.addView(frontCard)
