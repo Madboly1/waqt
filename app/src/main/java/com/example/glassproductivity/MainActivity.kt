@@ -656,6 +656,12 @@ class MainActivity : AppCompatActivity() {
             private var excluded = false
             private val touchSlop = android.view.ViewConfiguration.get(context).scaledTouchSlop
 
+            init {
+                // Empty areas have no child to claim ACTION_DOWN. Make the host consume it
+                // so it continues receiving MOVE/UP and can start the tab swipe there too.
+                isClickable = true
+            }
+
             // Nested scrolling children often disallow parent interception on ACTION_DOWN.
             // Keep that request from disabling this host's horizontal tab gesture; vertical
             // movement still stays with the child because onInterceptTouchEvent only claims
@@ -691,8 +697,8 @@ class MainActivity : AppCompatActivity() {
                         }
                         val dx = event.x - downX
                         val dy = event.y - downY
-                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 1.10f &&
-                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.12f) {
+                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 0.70f &&
+                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.05f) {
                             Log.d("WAQT_TOUCH_TRACE", "HOST_INTERCEPT dx=" + dx + " dy=" + dy + " tab=" + currentTab)
                             tracking = true
                             beginInteractiveTabSwipe(dx)
@@ -1023,7 +1029,8 @@ class MainActivity : AppCompatActivity() {
         Log.d("WAQT_TOUCH_TRACE", "SWIPE_FINISH id=" + System.identityHashCode(swipe) + " cancelled=" + cancelled + " latestDx=" + swipe.latestDx)
         val width = tabContentHost.width.coerceAtLeast(1).toFloat()
         val distance = kotlin.math.abs(swipe.latestDx)
-        val commit = !cancelled && (distance >= width * 0.22f)
+        // A shorter release distance makes tab changes easier without changing the animation.
+        val commit = !cancelled && (distance >= width * 0.15f)
         swipe.finishRequested = true
         swipe.commitAfterRelease = commit
         swipe.transition?.settle(commit) { committed ->
