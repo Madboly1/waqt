@@ -98,6 +98,7 @@ class FloatingCardService : Service() {
     private var floatingNoteContainer: LinearLayout? = null
     private var etFloatingNoteTitle: EditText? = null
     private var etFloatingNoteContent: EditText? = null
+    private var isFloatingNoteInputEnabled: Boolean = false
 
     private var currentItemId: String = ""
     private var currentTitle: String = "WAQT Session"
@@ -267,6 +268,14 @@ class FloatingCardService : Service() {
         setupDragAndDropTouchListener(rootView)
 
         windowManager.addView(rootView, layoutParams)
+
+        // When the user switches to another app, immediately make the overlay
+        // non-focusable again so the other app receives keyboard input normally.
+        rootView.viewTreeObserver.addOnWindowFocusChangeListener { hasWindowFocus ->
+            if (!hasWindowFocus && isFloatingNoteMode && isFloatingNoteInputEnabled) {
+                setFloatingNoteInputEnabled(false)
+            }
+        }
     }
 
     private fun attachFloatingNoteViews(parent: LinearLayout) {
@@ -292,6 +301,9 @@ class FloatingCardService : Service() {
             }
         }
         floatingNoteContainer?.addView(etFloatingNoteTitle)
+        etFloatingNoteTitle?.setOnClickListener {
+            setFloatingNoteInputEnabled(true, etFloatingNoteTitle)
+        }
 
         etFloatingNoteContent = EditText(this).apply {
             hint = if (isArabic) "اكتب فكرتك أو الملاحظة هنا..." else "Type your note here..."
@@ -310,6 +322,9 @@ class FloatingCardService : Service() {
             }
         }
         floatingNoteContainer?.addView(etFloatingNoteContent)
+        etFloatingNoteContent?.setOnClickListener {
+            setFloatingNoteInputEnabled(true, etFloatingNoteContent)
+        }
 
         val btnSaveNote = Button(this).apply {
             text = if (isArabic) "💾 حفظ الملاحظة في وَقْت" else "💾 Save Note to WAQT"
@@ -324,6 +339,38 @@ class FloatingCardService : Service() {
         }
         floatingNoteContainer?.addView(btnSaveNote)
         parent.addView(floatingNoteContainer)
+    }
+
+    private fun setFloatingNoteInputEnabled(enabled: Boolean, target: EditText? = null) {
+        val view = floatingView ?: return
+        if (!view.isAttachedToWindow || !::layoutParams.isInitialized) return
+
+        isFloatingNoteInputEnabled = enabled
+        layoutParams.flags = if (enabled) {
+            layoutParams.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
+        } else {
+            layoutParams.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+        }
+        layoutParams.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        try {
+            windowManager.updateViewLayout(view, layoutParams)
+        } catch (_: Exception) {
+            return
+        }
+
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as android.view.inputmethod.InputMethodManager
+        if (enabled) {
+            target?.requestFocus()
+            target?.post {
+                try {
+                    imm.showSoftInput(target, android.view.inputmethod.InputMethodManager.SHOW_IMPLICIT)
+                } catch (_: Exception) {}
+            }
+        } else {
+            try {
+                imm.hideSoftInputFromWindow(view.windowToken, 0)
+            } catch (_: Exception) {}
+        }
     }
 
     private fun saveFloatingNote() {
@@ -399,9 +446,11 @@ class FloatingCardService : Service() {
             tvBubbleIcon.text = "📝"
             tvBubbleText.text = if (isArabic) "ملاحظة" else "Note"
 
-            // تمكين إدخال النصوص للملاحظة العائمة
-            layoutParams.flags = layoutParams.flags and WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE.inv()
-            layoutParams.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN
+            // Keep the overlay non-focusable until the user explicitly taps a note field.
+            // This prevents it from hijacking the keyboard in other apps.
+            layoutParams.flags = layoutParams.flags or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
+            isFloatingNoteInputEnabled = false
+            layoutParams.softInputMode = WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
             // On the first bind the view is not attached yet (addView comes after), and calling
             // updateViewLayout on a detached view throws and crashes the whole app.
             floatingView?.let {
