@@ -11,8 +11,8 @@ android {
         applicationId = "com.example.glassproductivity"
         minSdk = 26
         targetSdk = 34
-        versionCode = 84
-        versionName = "5.6.58"
+        versionCode = 85
+        versionName = "5.6.59"
     }
 
     signingConfigs {
