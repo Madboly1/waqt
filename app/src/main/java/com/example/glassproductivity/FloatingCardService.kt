@@ -278,12 +278,12 @@ class FloatingCardService : Service() {
 
         etFloatingNoteTitle = EditText(this).apply {
             hint = if (isArabic) "عنوان الملاحظة السريعة..." else "Quick Note Title..."
-            setHintTextColor(Color.parseColor("#A5B4B4"))
+            setHintTextColor(Color.parseColor("#D0C1AF"))
             setTextColor(Color.WHITE)
             textSize = 15f
             setTypeface(typeface, Typeface.BOLD)
             background = GradientDrawable().apply {
-                setColor(Color.parseColor("#1B383C"))
+                setColor(Color.parseColor("#49392D"))
                 cornerRadius = dpToPx(12).toFloat()
             }
             setPadding(dpToPx(12), dpToPx(10), dpToPx(12), dpToPx(10))
@@ -295,13 +295,13 @@ class FloatingCardService : Service() {
 
         etFloatingNoteContent = EditText(this).apply {
             hint = if (isArabic) "اكتب فكرتك أو الملاحظة هنا..." else "Type your note here..."
-            setHintTextColor(Color.parseColor("#A5B4B4"))
+            setHintTextColor(Color.parseColor("#D0C1AF"))
             setTextColor(Color.WHITE)
             textSize = 13f
             minLines = 3
             gravity = Gravity.TOP or Gravity.START
             background = GradientDrawable().apply {
-                setColor(Color.parseColor("#1B383C"))
+                setColor(Color.parseColor("#49392D"))
                 cornerRadius = dpToPx(12).toFloat()
             }
             setPadding(dpToPx(12), dpToPx(10), dpToPx(12), dpToPx(10))
@@ -316,8 +316,8 @@ class FloatingCardService : Service() {
             isAllCaps = false
             textSize = 13f
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(Color.parseColor("#0B1417"))
-            backgroundTintList = ColorStateList.valueOf(Color.parseColor("#FF8A3D"))
+            setTextColor(Color.parseColor("#211C18"))
+            backgroundTintList = ColorStateList.valueOf(Color.parseColor("#D9A66F"))
             setOnClickListener {
                 saveFloatingNote()
             }
@@ -338,7 +338,7 @@ class FloatingCardService : Service() {
             title = if (title.isNotBlank()) title else (if (isArabic) "ملاحظة سريعة" else "Quick Note"),
             content = content,
             category = "general",
-            colorHex = "#142A2E",
+            colorHex = "#3B3028",
             isPinned = true,
             timestampMillis = System.currentTimeMillis()
         )
@@ -367,18 +367,18 @@ class FloatingCardService : Service() {
     }
 
     private fun applyGlassSurfaceStyling() {
-        val bgColor = Color.argb(235, 14, 34, 45) // Petroleum Teal #142A2E with glass opacity
+        val bgColor = Color.argb(242, 48, 38, 30) // Warm Liquid Glass: translucent espresso brown
 
         val calmCardDrawable = GradientDrawable().apply {
             color = ColorStateList.valueOf(bgColor)
             cornerRadius = dpToPx(20).toFloat()
-            setStroke(dpToPx(1), Color.parseColor("#6635B6AD"))
+            setStroke(dpToPx(1), Color.parseColor("#80D5A36C"))
         }
 
         val calmBubbleDrawable = GradientDrawable().apply {
             color = ColorStateList.valueOf(bgColor)
             cornerRadius = dpToPx(24).toFloat()
-            setStroke(dpToPx(1), Color.parseColor("#FF8A3D"))
+            setStroke(dpToPx(1), Color.parseColor("#D9A66F"))
         }
 
         cardExpandedContainer.background = calmCardDrawable
