@@ -72,6 +72,25 @@ class ChatHistoryStore(context: Context) : SQLiteOpenHelper(context, "waqt_chat_
         return out
     }
 
+
+    @Synchronized fun updateMessageAndDeleteFollowing(chatId: String, messageId: Long, newContent: String): Boolean {
+        if (newContent.isBlank()) return false
+        writableDatabase.beginTransaction()
+        try {
+            val updated = writableDatabase.update(
+                "messages",
+                ContentValues().apply { put("content", newContent.trim()) },
+                "id=? AND chat_id=? AND role='user'",
+                arrayOf(messageId.toString(), chatId)
+            )
+            if (updated == 0) return false
+            writableDatabase.delete("messages", "chat_id=? AND id>?", arrayOf(chatId, messageId.toString()))
+            writableDatabase.update("chats", ContentValues().apply { put("updated_at", System.currentTimeMillis()) }, "id=?", arrayOf(chatId))
+            writableDatabase.setTransactionSuccessful()
+            return true
+        } finally { writableDatabase.endTransaction() }
+    }
+
     @Synchronized fun deleteChat(chatId: String) {
         writableDatabase.beginTransaction()
         try {
