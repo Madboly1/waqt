@@ -953,7 +953,13 @@ class MainActivity : AppCompatActivity() {
             }
             return view
         }
-        var target = hit(container, x, y) ?: return true
+        var target = hit(container, x, y) ?: run {
+            // A point with no child hit is an unclaimed blank area, not an interactive
+            // control. Let the parent tab-swipe gesture handle it instead of excluding it.
+            Log.d("WAQT_TOUCH_TRACE", "TAB_SWIPE_EMPTY_AREA_ALLOW x=" + x + " y=" + y +
+                " host=" + container.width + "x" + container.height)
+            return false
+        }
         val touchedView = target
         while (target !== container) {
             // Preserve gestures owned by the carousel and controls that directly receive
