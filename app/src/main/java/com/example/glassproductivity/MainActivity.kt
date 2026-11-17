@@ -6862,6 +6862,7 @@ class MainActivity : AppCompatActivity() {
                 setOnClickListener { action() }
             }
         }
+        lateinit var playPause: TextView
         val previous = controlButton("⏮", if (isArabic) "السابق" else "Previous") {
             val next = (focusSelectedTrackPosition - 1).coerceAtLeast(0)
             selectFocusAudioTrack(next, next != 0)
@@ -6870,7 +6871,7 @@ class MainActivity : AppCompatActivity() {
             playPause.text = if (next == 0) "▶" else "⏸"
         }
         controls.addView(previous)
-        val playPause = controlButton(if (customAudioPlayer?.isPlaying == true) "⏸" else "▶",
+        playPause = controlButton(if (customAudioPlayer?.isPlaying == true) "⏸" else "▶",
             if (isArabic) "تشغيل أو إيقاف مؤقت" else "Play or pause", 1.2f) {
             toggleFocusAudioPlayback()
             playPause.text = if (isAmbientPaused || customAudioPlayer?.isPlaying == false) "▶" else "⏸"
