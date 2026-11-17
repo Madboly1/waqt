@@ -3821,10 +3821,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         val previousCard = if (activeIdx > 0) {
-            buildSingleTaskCardView(activeIdx - 1).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
+            buildSingleTaskCardView(tasks[activeIdx - 1], isForeground = false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
         } else null
         val nextCard = if (activeIdx + 1 < total) {
-            buildSingleTaskCardView(activeIdx + 1).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
+            buildSingleTaskCardView(tasks[activeIdx + 1], isForeground = false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
         } else null
 
         val frontCard = buildSingleTaskCardView(tasks[activeIdx], isForeground = true).apply {
@@ -4558,10 +4558,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val previousCard = if (activeIdx > 0) {
-            buildSingleHabitCardView(activeIdx - 1, false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
+            buildSingleHabitCardView(habits[activeIdx - 1], isForeground = false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
         } else null
         val nextCard = if (activeIdx + 1 < total) {
-            buildSingleHabitCardView(activeIdx + 1, false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
+            buildSingleHabitCardView(habits[activeIdx + 1], isForeground = false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
         } else null
         val frontCard = buildSingleHabitCardView(habits[activeIdx], isForeground = true).apply {
             prepareStackCard(this)
@@ -5500,10 +5500,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
         val previousCard = if (activeIdx > 0) {
-            buildSingleNoteCardView(activeIdx - 1, false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
+            buildSingleNoteCardView(notes[activeIdx - 1], false).apply { styleRearCard(this, -1) }.also { stackContainer.addView(it) }
         } else null
         val nextCard = if (activeIdx + 1 < total) {
-            buildSingleNoteCardView(activeIdx + 1, false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
+            buildSingleNoteCardView(notes[activeIdx + 1], false).apply { styleRearCard(this, 1) }.also { stackContainer.addView(it) }
         } else null
         val frontCard = buildSingleNoteCardView(notes[activeIdx], true).apply {
             prepareStackCard(this)
