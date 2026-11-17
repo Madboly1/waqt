@@ -8945,17 +8945,17 @@ class MainActivity : AppCompatActivity() {
                 fillPaint.shader = if (selected) {
                     android.graphics.LinearGradient(
                         cx, cy - outerR, cx, cy - innerR,
-                        intArrayOf(Color.parseColor("#FFFFA65E"), Color.parseColor("#FFFF7A2F"), Color.parseColor("#CCDB5B22")),
+                        intArrayOf(Color.parseColor("#FFFFE0B8"), Color.parseColor("#FFD5A36C"), Color.parseColor("#CC9C7047")),
                         null, Shader.TileMode.CLAMP
                     )
                 } else {
                     android.graphics.LinearGradient(
                         cx, cy - outerR, cx, cy - innerR,
-                        intArrayOf(Color.parseColor("#E9274549"), Color.parseColor("#F2142D31"), Color.parseColor("#EE0C2024")),
+                        intArrayOf(Color.parseColor("#E94A3B30"), Color.parseColor("#F2352922"), Color.parseColor("#EE211C18")),
                         null, Shader.TileMode.CLAMP
                     )
                 }
-                if (selected) fillPaint.setShadowLayer(dp(18).toFloat(), 0f, 0f, Color.argb(190, 255, 112, 42))
+                if (selected) fillPaint.setShadowLayer(dp(18).toFloat(), 0f, 0f, Color.argb(150, 213, 163, 108))
                 else fillPaint.clearShadowLayer()
                 canvas.drawPath(path, fillPaint)
                 fillPaint.shader = null
@@ -9150,8 +9150,8 @@ class MainActivity : AppCompatActivity() {
             // The light theme uses a clean soft-glass bezel: no black software shadow.
             bezelPaint.shader = android.graphics.LinearGradient(
                 0f, 0f, 0f, height.toFloat(),
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF29465A"), Color.parseColor("#FF172B3D"))
-                else intArrayOf(Color.parseColor("#FFEAF6F4"), Color.parseColor("#FFB9D8D4")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF514034"), Color.parseColor("#FF2B231D"))
+                else intArrayOf(Color.parseColor("#FFFFF8ED"), Color.parseColor("#FFE6D6BF")),
                 null, Shader.TileMode.CLAMP
             )
             if (isDarkMode) bezelPaint.setShadowLayer(dp(12).toFloat(), 0f, dp(4).toFloat(), Color.argb(85, 0, 0, 0))
@@ -9162,8 +9162,8 @@ class MainActivity : AppCompatActivity() {
             // Recessed glass disc inside the ring, adapted to the active appearance.
             discPaint.shader = RadialGradient(
                 cx0, cy0 - outerR * 0.25f, outerR,
-                if (isDarkMode) intArrayOf(Color.parseColor("#FF203A4B"), Color.parseColor("#FF122638"), Color.parseColor("#FF0B1927"))
-                else intArrayOf(Color.parseColor("#FFF8FCFB"), Color.parseColor("#FFE7F2F0"), Color.parseColor("#FFCADFDB")),
+                if (isDarkMode) intArrayOf(Color.parseColor("#FF403229"), Color.parseColor("#FF2B231D"), Color.parseColor("#FF1B1713"))
+                else intArrayOf(Color.parseColor("#FFFFF9F0"), Color.parseColor("#FFF3EBDD"), Color.parseColor("#FFDCC8AD")),
                 floatArrayOf(0f, 0.65f, 1f), Shader.TileMode.CLAMP
             )
             canvas.drawCircle(cx0, cy0, outerR - dp(7), discPaint)
@@ -9177,7 +9177,7 @@ class MainActivity : AppCompatActivity() {
             glowPaint.color = baseColor
             glowPaint.shader = android.graphics.SweepGradient(
                 cx0, cy0,
-                intArrayOf(Color.parseColor("#FF806348"), baseColor, Color.parseColor("#FFE3FFF8"), Color.parseColor("#FF806348")),
+                intArrayOf(Color.parseColor("#FF806348"), baseColor, Color.parseColor("#FFFFE0B8"), Color.parseColor("#FF806348")),
                 floatArrayOf(0f, 0.55f, 0.9f, 1f)
             )
             if (isDarkMode) glowPaint.setShadowLayer(dp(8).toFloat(), 0f, 0f, Color.argb(115, Color.red(baseColor), Color.green(baseColor), Color.blue(baseColor)))
