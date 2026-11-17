@@ -8373,166 +8373,107 @@ class MainActivity : AppCompatActivity() {
         statsCard.addView(barRow)
         wrap.addView(statsCard)
 
-        // ---- quick ambient sounds
+        // ---- Unified MP3-style audio player with ambient presets + unlimited personal tracks
         wrap.addView(TextView(this).apply {
-            text = if (isArabic) "🎧 الصوت المحيطي" else "🎧 Ambient sound"
-            textSize = 13f
+            text = if (isArabic) "🎧 مشغل الأصوات" else "🎧 Audio player"
+            textSize = 14f
             setTextColor(textMutedColor())
             setTypeface(typeface, Typeface.BOLD)
-            setPadding(dp(4), 0, dp(4), dp(6))
+            setPadding(dp(4), 0, dp(4), dp(8))
         })
-        val ambientTracks = listOf(
-            Triple(1, "🌧", if (isArabic) "صوت المطر" else "Rain"),
-            Triple(2, "🌊", if (isArabic) "أمواج البحر" else "Ocean waves"),
-            Triple(3, "🔥", if (isArabic) "نار المخيم" else "Campfire"),
-            Triple(4, "🌲", if (isArabic) "أصوات الغابة" else "Forest"),
-            Triple(5, "💧", if (isArabic) "جدول الماء" else "Water stream"),
-            Triple(6, "📚", if (isArabic) "المكتبة" else "Library"),
-            Triple(7, "🍃", if (isArabic) "صوت الرياح" else "Wind"),
-            Triple(8, "🐸", if (isArabic) "ليل هادئ" else "Night ambience")
-        )
-        val ambientPlayerList = LinearLayout(this).apply {
+        val audioCard = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            background = focusGlassDrawable(18)
-            setPadding(dp(10), dp(6), dp(10), dp(6))
+            background = focusGlassDrawable(20)
+            setPadding(dp(14), dp(12), dp(14), dp(12))
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(12) }
         }
-        ambientTracks.forEach { (idx, icon, name) ->
-            val active = isAmbientPlaying && selectedAmbientIndex == idx
-            val trackRow = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER_VERTICAL
-                setPadding(dp(7), dp(8), dp(7), dp(8))
-                background = if (active) focusActiveDrawable(14) else focusQuietDrawable(14)
-                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(58)).apply { bottomMargin = dp(5) }
-            }
-            trackRow.addView(TextView(this).apply {
-                text = icon
-                textSize = 19f
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(dp(38), ViewGroup.LayoutParams.MATCH_PARENT)
-            })
-            val info = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER_VERTICAL
-                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply { marginStart = dp(7) }
-            }
-            info.addView(TextView(this).apply {
-                text = name
-                textSize = 13f
-                setTypeface(typeface, Typeface.BOLD)
-                setTextColor(textPrimaryColor())
-            })
-            info.addView(TextView(this).apply {
-                text = if (active) (if (isArabic) "يعمل الآن • تشغيل مستمر" else "Now playing • Loop") else (if (isArabic) "صوت محيطي • تشغيل مستمر" else "Ambient audio • Loop")
-                textSize = 10f
-                setTextColor(textMutedColor())
-            })
-            trackRow.addView(info)
-            val waveform = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(dp(48), dp(30)).apply { marginEnd = dp(7) }
-            }
-            val heights = intArrayOf(8, 15, 22, 12, 26, 14, 20, 9)
-            heights.forEach { height ->
-                waveform.addView(View(this).apply {
-                    background = GradientDrawable().apply {
-                        cornerRadius = dp(3).toFloat()
-                        setColor(if (active) accentOrangeColor() else textMutedColor())
-                    }
-                    layoutParams = LinearLayout.LayoutParams(dp(3), dp(if (active) height else (height * 0.65f).toInt().coerceAtLeast(5))).apply { marginStart = dp(1); marginEnd = dp(1) }
-                })
-            }
-            trackRow.addView(waveform)
-            trackRow.addView(TextView(this).apply {
-                text = if (active) "Ⅱ" else "▶"
-                textSize = 17f
-                gravity = Gravity.CENTER
-                setTextColor(if (active) Color.parseColor("#3B2B20") else accentTealColor())
-                layoutParams = LinearLayout.LayoutParams(dp(36), dp(36))
-                contentDescription = if (active) (if (isArabic) "إيقاف الصوت" else "Stop sound") else (if (isArabic) "تشغيل الصوت" else "Play sound")
-                setOnClickListener {
-                    triggerGentleHaptic()
-                    if (active) {
-                        stopAmbientSound()
-                        selectedAmbientIndex = 0
-                    } else {
-                        stopCustomAudio()
-                        selectedAmbientIndex = idx
-                        startRichAmbientSound(idx)
-                    }
-                    prefs.edit().putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, selectedAmbientIndex).apply()
-                    renderCurrentTab()
-                }
-            })
-            ambientPlayerList.addView(trackRow)
-        }
-        wrap.addView(ambientPlayerList)
-        wrap.addView(TextView(this).apply {
-            text = if (isArabic) "إيقاف كل الأصوات" else "Stop all sounds"
-            textSize = 12f
-            gravity = Gravity.CENTER
-            setTextColor(textMutedColor())
-            setPadding(0, dp(8), 0, dp(4))
-            setOnClickListener {
-                stopAmbientSound()
-                selectedAmbientIndex = 0
-                prefs.edit().putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, 0).apply()
-                renderCurrentTab()
-            }
-        })
-        // User-selected audio sits beside the ambient presets, while selection remains in the left dock.
-        val personalAudioRow = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
-            background = focusGlassDrawable(16)
-            setPadding(dp(12), dp(8), dp(12), dp(8))
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(8); bottomMargin = dp(10) }
-        }
-        personalAudioRow.addView(TextView(this).apply {
-            text = "🎵"
-            textSize = 20f
-            setPadding(0, 0, dp(10), 0)
-        })
-        personalAudioRow.addView(TextView(this).apply {
-            text = customAudioName ?: (if (isArabic) "مشغل MP3 من جهازك" else "Your MP3 player")
-            textSize = 13f
+        val audioChoices = focusAudioTrackLabels()
+        val safePosition = focusSelectedTrackPosition.coerceIn(0, (audioChoices.size - 1).coerceAtLeast(0))
+        val selectedTitle = TextView(this).apply {
+            text = audioChoices.getOrNull(safePosition) ?: if (isArabic) "اختار صوت" else "Choose audio"
+            textSize = 14f
             setTextColor(textPrimaryColor())
+            setTypeface(typeface, Typeface.BOLD)
+            gravity = Gravity.CENTER
             maxLines = 1
             ellipsize = android.text.TextUtils.TruncateAt.END
-            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-        })
-        personalAudioRow.addView(TextView(this).apply {
-            text = if (customAudioPlayer?.isPlaying == true) "⏸" else "▶"
-            textSize = 18f
-            setTextColor(accentTealColor())
-            setPadding(dp(12), dp(6), dp(12), dp(6))
-            setOnClickListener {
-                if (customAudioPlayer?.isPlaying == true) {
-                    stopCustomAudio()
-                    isAmbientPlaying = false
-                } else if (customAudioUri != null) {
-                    stopAmbientSound()
-                    playCustomAudio()
-                    isAmbientPlaying = true
-                } else {
-                    isPickingAudioFromConsole = true
-                    localAudioPickerLauncher.launch(arrayOf("audio/*"))
-                }
-                renderCurrentTab()
+            setPadding(dp(8), dp(5), dp(8), dp(8))
+        }
+        audioCard.addView(selectedTitle)
+        val selector = android.widget.Spinner(this).apply {
+            adapter = android.widget.ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, audioChoices).also {
+                it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             }
+            setSelection(safePosition, false)
+            background = focusQuietDrawable(12)
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)).apply { bottomMargin = dp(12) }
+        }
+        selector.onItemSelectedListener = object : android.widget.AdapterView.OnItemSelectedListener {
+            private var firstSelection = true
+            override fun onNothingSelected(parent: android.widget.AdapterView<*>?) = Unit
+            override fun onItemSelected(parent: android.widget.AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (firstSelection) { firstSelection = false; return }
+                if (position != focusSelectedTrackPosition) {
+                    selectFocusAudioTrack(position, true)
+                    selectedTitle.text = focusAudioTrackTitle(position)
+                    renderCurrentTab()
+                }
+            }
+        }
+        audioCard.addView(selector)
+        val controls = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER }
+        fun playerControl(label: String, description: String, weight: Float = 1f, action: () -> Unit): TextView {
+            return TextView(this).apply {
+                text = label
+                textSize = 20f
+                gravity = Gravity.CENTER
+                setTextColor(textPrimaryColor())
+                background = focusQuietDrawable(14)
+                contentDescription = description
+                layoutParams = LinearLayout.LayoutParams(0, dp(48), weight).apply { marginStart = dp(4); marginEnd = dp(4) }
+                setOnClickListener { triggerGentleHaptic(); action() }
+            }
+        }
+        controls.addView(playerControl("⏮", if (isArabic) "الصوت السابق" else "Previous audio") {
+            val count = 8 + focusCustomAudioTracks.size
+            val current = focusSelectedTrackPosition.coerceIn(1, count.coerceAtLeast(1))
+            selectFocusAudioTrack(if (current <= 1) count.coerceAtLeast(1) else current - 1, true)
+            renderCurrentTab()
         })
-        personalAudioRow.addView(TextView(this).apply {
-            text = "＋"
-            textSize = 20f
+        controls.addView(playerControl(if (customAudioPlayer?.isPlaying == true) "Ⅱ" else "▶",
+            if (isArabic) "تشغيل أو إيقاف" else "Play or pause", 1.25f) {
+            toggleFocusAudioPlayback()
+            renderCurrentTab()
+        })
+        controls.addView(playerControl("⏭", if (isArabic) "الصوت التالي" else "Next audio") {
+            val count = 8 + focusCustomAudioTracks.size
+            val current = focusSelectedTrackPosition.coerceIn(1, count.coerceAtLeast(1))
+            selectFocusAudioTrack(if (current >= count) 1 else current + 1, true)
+            renderCurrentTab()
+        })
+        audioCard.addView(controls)
+        val addAudio = TextView(this).apply {
+            text = if (isArabic) "＋ إضافة أصوات من الجهاز" else "＋ Add audio from device"
+            textSize = 12f
+            gravity = Gravity.CENTER
             setTextColor(textPrimaryColor())
-            setPadding(dp(8), dp(4), 0, dp(4))
+            background = focusActiveDrawable(14)
+            setPadding(dp(12), dp(11), dp(12), dp(11))
+            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { topMargin = dp(10) }
             setOnClickListener {
                 isPickingAudioFromConsole = true
                 localAudioPickerLauncher.launch(arrayOf("audio/*"))
             }
+        }
+        audioCard.addView(addAudio)
+        audioCard.addView(TextView(this).apply {
+            text = if (isArabic) "أضف أي عدد من ملفات الصوت؛ هتظهر كلها في القائمة وتفضل محفوظة." else "Add as many audio files as you like; they stay in your list."
+            textSize = 10f
+            gravity = Gravity.CENTER
+            setTextColor(textMutedColor())
+            setPadding(dp(4), dp(9), dp(4), 0)
         })
-        wrap.addView(personalAudioRow)
+        wrap.addView(audioCard)
 
         // ---- 7-day chart
         val weekTotals = (6 downTo 0).map { back ->
