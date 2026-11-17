@@ -1391,7 +1391,7 @@ class MainActivity : AppCompatActivity() {
         geminiHistory.clear()
         chatHistoryStore.getMessages(activeChatId).forEach { msg ->
             if (msg.role == "user" || msg.role == "model") {
-                val historyContent = if (msg.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + msg.content.substringAfter("\\n", "") else msg.content
+                val historyContent = if (msg.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + msg.content.substringAfter("\n", "") else msg.content
                 geminiHistory.add(msg.role to historyContent)
             }
         }
@@ -2156,7 +2156,7 @@ class MainActivity : AppCompatActivity() {
         val needsDaySnapshot = userText == null || shouldIncludeDaySnapshot(cleanUserText)
         val snapshot = if (needsDaySnapshot) buildDaySnapshot() else ""
         val persistedUserText = when {
-            media?.label == "image" && !media.localPath.isNullOrBlank() -> "WAQT_IMAGE:${media.localPath}\\n$cleanUserText"
+            media?.label == "image" && !media.localPath.isNullOrBlank() -> "WAQT_IMAGE:${media.localPath}\n$cleanUserText"
             cleanUserText.isNotBlank() -> cleanUserText
             media?.label == "image" -> "🖼 ${if (isArabic) "صورة مرفقة" else "Image attached"}"
             media?.label == "voice" -> media.localPath?.let { "WAQT_AUDIO:" + it }
@@ -2555,8 +2555,8 @@ class MainActivity : AppCompatActivity() {
                         note = if (memories.isEmpty()) {
                             if (isArabic) "الذاكرة لسه فاضية." else "Your memory is empty."
                         } else {
-                            (if (isArabic) "🧠 دي المعلومات المحفوظة:\\n" else "🧠 Saved memories:\\n") +
-                                memories.take(20).joinToString("\\n") { "• ${it.content}" }
+                            (if (isArabic) "🧠 دي المعلومات المحفوظة:\n" else "🧠 Saved memories:\n") +
+                                memories.take(20).joinToString("\n") { "• ${it.content}" }
                         }
                     }
                 }
@@ -3498,7 +3498,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createUserMessageBubble(text: String): View {
         if (text.startsWith("WAQT_AUDIO:")) return createChatAudioBubble(text.removePrefix("WAQT_AUDIO:"))
-        if (text.startsWith("WAQT_IMAGE:")) { val p = text.removePrefix("WAQT_IMAGE:").split("\\n", limit = 2); return createUserImageMessageBubble(p[0], p.getOrElse(1) { "" }) }
+        if (text.startsWith("WAQT_IMAGE:")) { val p = text.removePrefix("WAQT_IMAGE:").split("\n", limit = 2); return createUserImageMessageBubble(p[0], p.getOrElse(1) { "" }) }
         return LinearLayout(this).apply {
             gravity = Gravity.END
             val bubble = TextView(this@MainActivity).apply {
@@ -3585,27 +3585,27 @@ class MainActivity : AppCompatActivity() {
             android.app.AlertDialog.Builder(this).setItems(opts) { _, which ->
                 if (which == 0) {
                     val isImage = content.startsWith("WAQT_IMAGE:")
-                    val path = if (isImage) content.removePrefix("WAQT_IMAGE:").substringBefore("\\n") else ""
-                    val oldText = if (isImage) content.substringAfter("\\n", "") else content
+                    val path = if (isImage) content.removePrefix("WAQT_IMAGE:").substringBefore("\n") else ""
+                    val oldText = if (isImage) content.substringAfter("\n", "") else content
                     val input = EditText(this).apply { setText(oldText); setSelection(text.length); setTextColor(textPrimaryColor()) }
                     android.app.AlertDialog.Builder(this).setTitle(if (isArabic) "تعديل رسالتك" else "Edit your message").setView(input)
                         .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
                         .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
                             val edited = input.text.toString().trim()
-                            val newContent = if (isImage) "WAQT_IMAGE:$path\\n$edited" else edited
+                            val newContent = if (isImage) "WAQT_IMAGE:$path\n$edited" else edited
                             if ((edited.isNotBlank() || isImage) && chatHistoryStore.updateMessageAndDeleteFollowing(activeChatId, id, newContent)) {
                                 geminiHistory.clear()
                                 val latest = chatHistoryStore.getMessages(activeChatId)
-                                latest.forEach { m -> if (m.role == "user" || m.role == "model") geminiHistory.add(m.role to if (m.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + m.content.substringAfter("\\n", "") else m.content) }
+                                latest.forEach { m -> if (m.role == "user" || m.role == "model") geminiHistory.add(m.role to if (m.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + m.content.substringAfter("\n", "") else m.content) }
                                 box.removeAllViews()
                                 latest.forEach { m -> if (m.role == "user") box.addView(createStoredUserMessageBubble(m.id, m.content, box, scroll)) else if (m.role == "model") box.addView(createAIMessageBubble(m.content)) }
                             }
                         }.show()
                 } else {
                     val isImage = content.startsWith("WAQT_IMAGE:")
-                    val reuse = if (isImage) content.substringAfter("\\\\n", "") else content
+                    val reuse = if (isImage) content.substringAfter("\\\n", "") else content
                     if (isImage) {
-                        val path = content.removePrefix("WAQT_IMAGE:").substringBefore("\\\\n")
+                        val path = content.removePrefix("WAQT_IMAGE:").substringBefore("\\\n")
                         val file = java.io.File(path)
                         if (file.exists()) {
                             pendingChatImageFile = file
@@ -7340,9 +7340,9 @@ class MainActivity : AppCompatActivity() {
         body.addView(createAccordionSection(if (isArabic) "ℹ️ عن وَقْت والتحديث السحابي" else "ℹ️ About WAQT & Cloud Update") { container ->
             container.addView(TextView(this@MainActivity).apply {
                 text = if (isArabic)
-                    "وَقْت — مساحة هادئة لمهامك وعاداتك وتركيزك.\\nالتحديث الأونلاين التلقائي مفعل (GitHub Cloud Sync)."
+                    "وَقْت — مساحة هادئة لمهامك وعاداتك وتركيزك.\nالتحديث الأونلاين التلقائي مفعل (GitHub Cloud Sync)."
                 else
-                    "WAQT — a calm space for your tasks, habits and focus.\\nAutomatic Online Cloud Update is enabled."
+                    "WAQT — a calm space for your tasks, habits and focus.\nAutomatic Online Cloud Update is enabled."
                 setTextColor(textMutedColor())
                 textSize = 13f
                 setLineSpacing(dp(3).toFloat(), 1f)
