@@ -8388,6 +8388,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(12) }
         }
         val audioChoices = focusAudioTrackLabels()
+        lateinit var playPauseButton: TextView
         val safePosition = focusSelectedTrackPosition.coerceIn(0, (audioChoices.size - 1).coerceAtLeast(0))
         val selectedTitle = TextView(this).apply {
             text = audioChoices.getOrNull(safePosition) ?: if (isArabic) "اختار صوت" else "Choose audio"
@@ -8416,7 +8417,7 @@ class MainActivity : AppCompatActivity() {
                 if (position != focusSelectedTrackPosition) {
                     selectFocusAudioTrack(position, true)
                     selectedTitle.text = focusAudioTrackTitle(position)
-                    renderCurrentTab()
+                    playPauseButton.text = if (isAmbientPlaying && !isAmbientPaused) "Ⅱ" else "▶"
                 }
             }
         }
@@ -8437,19 +8438,26 @@ class MainActivity : AppCompatActivity() {
         controls.addView(playerControl("⏮", if (isArabic) "الصوت السابق" else "Previous audio") {
             val count = 8 + focusCustomAudioTracks.size
             val current = focusSelectedTrackPosition.coerceIn(1, count.coerceAtLeast(1))
-            selectFocusAudioTrack(if (current <= 1) count.coerceAtLeast(1) else current - 1, true)
-            renderCurrentTab()
+            val next = if (current <= 1) count.coerceAtLeast(1) else current - 1
+            selectFocusAudioTrack(next, true)
+            selectedTitle.text = focusAudioTrackTitle(next)
+            selector.setSelection(next, false)
+            playPauseButton.text = if (isAmbientPlaying && !isAmbientPaused) "Ⅱ" else "▶"
         })
-        controls.addView(playerControl(if (customAudioPlayer?.isPlaying == true) "Ⅱ" else "▶",
+        playPauseButton = playerControl(if (isAmbientPlaying && !isAmbientPaused) "Ⅱ" else "▶",
             if (isArabic) "تشغيل أو إيقاف" else "Play or pause", 1.25f) {
             toggleFocusAudioPlayback()
-            renderCurrentTab()
-        })
+            playPauseButton.text = if (isAmbientPlaying && !isAmbientPaused) "Ⅱ" else "▶"
+        }
+        controls.addView(playPauseButton)
         controls.addView(playerControl("⏭", if (isArabic) "الصوت التالي" else "Next audio") {
             val count = 8 + focusCustomAudioTracks.size
             val current = focusSelectedTrackPosition.coerceIn(1, count.coerceAtLeast(1))
-            selectFocusAudioTrack(if (current >= count) 1 else current + 1, true)
-            renderCurrentTab()
+            val next = if (current >= count) 1 else current + 1
+            selectFocusAudioTrack(next, true)
+            selectedTitle.text = focusAudioTrackTitle(next)
+            selector.setSelection(next, false)
+            playPauseButton.text = if (isAmbientPlaying && !isAmbientPaused) "Ⅱ" else "▶"
         })
         audioCard.addView(controls)
         val addAudio = TextView(this).apply {
