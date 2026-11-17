@@ -3698,8 +3698,8 @@ class MainActivity : AppCompatActivity() {
         val interpolator = android.view.animation.PathInterpolator(0.22f, 0.75f, 0.18f, 1f)
 
         val blurAnimator = android.animation.ValueAnimator.ofFloat(0f, 1f).apply {
-            duration = duration
-            interpolator = interpolator
+            this.duration = duration
+            this.interpolator = interpolator
             addUpdateListener { animator ->
                 val p = animator.animatedValue as Float
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -3733,8 +3733,8 @@ class MainActivity : AppCompatActivity() {
                 android.animation.ObjectAnimator.ofFloat(outgoing, View.ALPHA, 0.12f),
                 android.animation.ObjectAnimator.ofFloat(outgoing, View.ROTATION_Y, -side * 13f)
             )
-            duration = duration
-            interpolator = interpolator
+            this.duration = duration
+            this.interpolator = interpolator
         }
         val incomingAnimator = android.animation.AnimatorSet().apply {
             playTogether(
@@ -3745,8 +3745,8 @@ class MainActivity : AppCompatActivity() {
                 android.animation.ObjectAnimator.ofFloat(incoming, View.ALPHA, 1f),
                 android.animation.ObjectAnimator.ofFloat(incoming, View.ROTATION_Y, 0f)
             )
-            duration = duration
-            interpolator = interpolator
+            this.duration = duration
+            this.interpolator = interpolator
         }
         android.animation.AnimatorSet().apply {
             playTogether(outgoingAnimator, incomingAnimator, blurAnimator)
