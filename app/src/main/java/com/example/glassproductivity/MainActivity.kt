@@ -941,7 +941,10 @@ class MainActivity : AppCompatActivity() {
                     target is android.widget.Button ||
                     target is android.widget.Spinner ||
                     target is android.widget.Switch ||
-                    target.isClickable || target.isLongClickable
+                    target is android.widget.CheckBox ||
+                    target is android.widget.RadioButton ||
+                    target is android.widget.ToggleButton ||
+                    target is android.widget.ImageButton
                 ))) return true
             val parent = target.parent
             target = parent as? View ?: break
