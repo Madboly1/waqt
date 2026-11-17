@@ -2029,6 +2029,10 @@ class MainActivity : AppCompatActivity() {
 {"type":"check_for_updates"}
 {"type":"navigate_tab","tab":"tasks|habits|focus|notes"}
 {"type":"open_notes_section","section":"notes|journal"}
+{"type":"remember_fact","content":"معلومة طلب المستخدم حفظها","category":"preference|goal|project|workflow|fact"}
+{"type":"forget_memory","query":"جزء مميز من المعلومة المطلوب نسيانها"}
+{"type":"clear_memory"}
+{"type":"list_memories"}
 لا تستخدم navigate_tab أو open_notes_section لمجرد ذكر قسم؛ استخدمهما عندما يطلب المستخدم فتحه أو الانتقال إليه صراحة.
 لو لا يوجد إجراء مطلوب، أرسل actions كمصفوفة فارغة.
 
