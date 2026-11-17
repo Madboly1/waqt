@@ -302,8 +302,21 @@ class FloatingCardService : Service() {
             }
         }
         floatingNoteContainer?.addView(etFloatingNoteTitle)
-        etFloatingNoteTitle?.setOnClickListener {
-            setFloatingNoteInputEnabled(true, etFloatingNoteTitle)
+        etFloatingNoteTitle?.apply {
+            isFocusable = true
+            isFocusableInTouchMode = true
+            showSoftInputOnFocus = true
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus && isFloatingNoteMode) {
+                    setFloatingNoteInputEnabled(true, this)
+                }
+            }
+            setOnTouchListener { view, event ->
+                if (event.actionMasked == MotionEvent.ACTION_DOWN && isFloatingNoteMode) {
+                    setFloatingNoteInputEnabled(true, this)
+                }
+                false
+            }
         }
 
         etFloatingNoteContent = EditText(this).apply {
@@ -312,6 +325,13 @@ class FloatingCardService : Service() {
             setTextColor(Color.WHITE)
             textSize = 13f
             minLines = 3
+            maxLines = 8
+            inputType = android.text.InputType.TYPE_CLASS_TEXT or
+                    android.text.InputType.TYPE_TEXT_FLAG_MULTI_LINE or
+                    android.text.InputType.TYPE_TEXT_FLAG_CAP_SENTENCES
+            isFocusable = true
+            isFocusableInTouchMode = true
+            showSoftInputOnFocus = true
             gravity = Gravity.TOP or Gravity.START
             background = GradientDrawable().apply {
                 setColor(Color.parseColor("#49392D"))
@@ -323,8 +343,18 @@ class FloatingCardService : Service() {
             }
         }
         floatingNoteContainer?.addView(etFloatingNoteContent)
-        etFloatingNoteContent?.setOnClickListener {
-            setFloatingNoteInputEnabled(true, etFloatingNoteContent)
+        etFloatingNoteContent?.apply {
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus && isFloatingNoteMode) {
+                    setFloatingNoteInputEnabled(true, this)
+                }
+            }
+            setOnTouchListener { _, event ->
+                if (event.actionMasked == MotionEvent.ACTION_DOWN && isFloatingNoteMode) {
+                    setFloatingNoteInputEnabled(true, this)
+                }
+                false
+            }
         }
 
         val btnSaveNote = Button(this).apply {
