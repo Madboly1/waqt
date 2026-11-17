@@ -284,6 +284,9 @@ class MainActivity : AppCompatActivity() {
     private var customAudioName: String? = null
     private var customAudioPlayer: MediaPlayer? = null
     private var isPickingAudioFromConsole: Boolean = false
+    private val focusCustomAudioTracks = mutableListOf<Pair<String, String>>()
+    private var focusSelectedTrackPosition: Int = 0
+    private var isAmbientPaused: Boolean = false
     private var audioManager: AudioManager? = null
     private var previewRingtone: Ringtone? = null
     private var noteAudioPath: String = ""
@@ -487,18 +490,27 @@ class MainActivity : AppCompatActivity() {
             try {
                 contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             } catch (_: Exception) { }
+            val name = getFileNameFromUri(uri) ?: if (isArabic) "صوت من الجهاز" else "Device audio"
+            val existing = focusCustomAudioTracks.indexOfFirst { it.second == uri.toString() }
+            if (existing >= 0) {
+                focusSelectedTrackPosition = 9 + existing
+            } else {
+                focusCustomAudioTracks.add(name to uri.toString())
+                saveFocusCustomAudioTracks()
+                focusSelectedTrackPosition = 8 + focusCustomAudioTracks.size
+            }
             customAudioUri = uri
-            customAudioName = getFileNameFromUri(uri)
+            customAudioName = name
             selectedAmbientIndex = -1
             getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
                 .putString("custom_audio_uri", uri.toString())
-                .putString("custom_audio_name", customAudioName)
+                .putString("custom_audio_name", name)
                 .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, -1)
+                .putInt("focus_selected_track_position", focusSelectedTrackPosition)
                 .apply()
-            Toast.makeText(this, if (isArabic) "🎵 تم اختيار: $customAudioName" else "🎵 Audio loaded: $customAudioName", Toast.LENGTH_SHORT).show()
-            if (isPickingAudioFromConsole) playCustomAudio()
+            Toast.makeText(this, if (isArabic) "🎵 تمت إضافة: $name" else "🎵 Added: $name", Toast.LENGTH_SHORT).show()
+            if (isPickingAudioFromConsole) selectFocusAudioTrack(focusSelectedTrackPosition, true)
             isPickingAudioFromConsole = false
-            renderCurrentTab()
         } else {
             isPickingAudioFromConsole = false
         }
@@ -546,6 +558,23 @@ class MainActivity : AppCompatActivity() {
         isTickTockSoundActive = prefs.getBoolean(ReminderRepository.KEY_TICK_TOCK_ENABLED, false)
         customAudioUri = prefs.getString("custom_audio_uri", null)?.let { runCatching { Uri.parse(it) }.getOrNull() }
         customAudioName = prefs.getString("custom_audio_name", null)
+        focusCustomAudioTracks.clear()
+        runCatching {
+            val savedTracks = org.json.JSONArray(prefs.getString("focus_custom_audio_tracks", "[]") ?: "[]")
+            for (i in 0 until savedTracks.length()) {
+                val item = savedTracks.optJSONObject(i) ?: continue
+                val name = item.optString("name").takeIf { it.isNotBlank() } ?: "Audio"
+                val uri = item.optString("uri").takeIf { it.isNotBlank() } ?: continue
+                focusCustomAudioTracks.add(name to uri)
+            }
+        }
+        if (focusCustomAudioTracks.isEmpty() && customAudioUri != null && selectedAmbientIndex == -1) {
+            focusCustomAudioTracks.add((customAudioName ?: "Audio") to customAudioUri.toString())
+        }
+        focusSelectedTrackPosition = prefs.getInt(
+            "focus_selected_track_position",
+            if (selectedAmbientIndex == -1 && focusCustomAudioTracks.isNotEmpty()) 8 + focusCustomAudioTracks.size else selectedAmbientIndex
+        ).coerceIn(0, 8 + focusCustomAudioTracks.size)
 
         pomodoroTotalMillis = selectedPomodoroMinutes * 60 * 1000L
         pomodoroRemainingMillis = pomodoroTotalMillis
@@ -6769,68 +6798,140 @@ class MainActivity : AppCompatActivity() {
     private fun showWhiteNoiseConsoleModal() {
         val d = Dialog(this)
         d.requestWindowFeature(Window.FEATURE_NO_TITLE)
-
         val scroll = ScrollView(this).apply {
-            background = createPillDrawable(bgCardColor(), dp(24), COLOR_TEAL)
+            background = createPillDrawable(bgCardColor(), dp(24), accentOrangeColor())
+            isFillViewport = true
         }
-        val v = LinearLayout(this).apply {
+        val panel = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(20), dp(18), dp(20), dp(24))
+            setPadding(dp(20), dp(18), dp(20), dp(22))
         }
-
-        val headerRow = LinearLayout(this).apply {
+        val header = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
         }
-        headerRow.addView(TextView(this).apply {
-            text = if (isArabic) "ضوضاء بيضاء" else "White Noise"
-            setTextColor(textPrimaryColor())
-            textSize = 20f
+        header.addView(TextView(this).apply {
+            text = if (isArabic) "مشغل الأصوات المحيطة" else "Ambient Audio Player"
+            setTextColor(textPrimaryColor()); textSize = 19f
             setTypeface(typeface, Typeface.BOLD)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         })
-        headerRow.addView(TextView(this).apply {
-            text = "✕"
-            textSize = 18f
-            setTextColor(textMutedColor())
+        header.addView(TextView(this).apply {
+            text = "✕"; textSize = 18f; setTextColor(textMutedColor())
+            setPadding(dp(10), dp(6), dp(4), dp(6))
             setOnClickListener { d.dismiss() }
         })
-        v.addView(headerRow)
+        panel.addView(header)
 
-        val volCol = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(0, dp(10), 0, dp(14))
-        }
-        volCol.addView(TextView(this).apply {
-            text = if (isArabic) "مستوي الصوت" else "Volume Level"
-            setTextColor(textPrimaryColor())
-            textSize = 14f
+        val nowPlaying = TextView(this).apply {
+            text = focusAudioTrackTitle(focusSelectedTrackPosition)
+            setTextColor(accentOrangeColor()); textSize = 15f
             setTypeface(typeface, Typeface.BOLD)
+            gravity = Gravity.CENTER
+            setPadding(dp(8), dp(22), dp(8), dp(14))
+        }
+        panel.addView(nowPlaying)
+
+        val trackLabels = focusAudioTrackLabels()
+        val spinner = Spinner(this).apply {
+            adapter = ArrayAdapter(this@MainActivity, android.R.layout.simple_spinner_dropdown_item, trackLabels).also {
+                it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            }
+            setSelection(focusSelectedTrackPosition.coerceIn(0, trackLabels.lastIndex))
+            background = createPillDrawable(bgElevatedColor(), dp(14), accentOrangeColor())
+        }
+        panel.addView(spinner, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(52)).apply {
+            bottomMargin = dp(14)
         })
-        val sb = SeekBar(this).apply {
+
+        val controls = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER
+        }
+        fun controlButton(label: String, description: String, weight: Float = 1f, action: () -> Unit): TextView {
+            return TextView(this).apply {
+                text = label
+                contentDescription = description
+                textSize = 23f
+                gravity = Gravity.CENTER
+                setTextColor(textPrimaryColor())
+                background = createGlass3DDrawable(dp(16))
+                layoutParams = LinearLayout.LayoutParams(0, dp(54), weight).apply {
+                    marginStart = dp(4); marginEnd = dp(4)
+                }
+                setOnClickListener { action() }
+            }
+        }
+        val previous = controlButton("⏮", if (isArabic) "السابق" else "Previous") {
+            val next = (focusSelectedTrackPosition - 1).coerceAtLeast(0)
+            selectFocusAudioTrack(next, next != 0)
+            spinner.setSelection(next)
+            nowPlaying.text = focusAudioTrackTitle(next)
+            playPause.text = if (next == 0) "▶" else "⏸"
+        }
+        controls.addView(previous)
+        val playPause = controlButton(if (customAudioPlayer?.isPlaying == true) "⏸" else "▶",
+            if (isArabic) "تشغيل أو إيقاف مؤقت" else "Play or pause", 1.2f) {
+            toggleFocusAudioPlayback()
+            playPause.text = if (isAmbientPaused || customAudioPlayer?.isPlaying == false) "▶" else "⏸"
+            nowPlaying.text = focusAudioTrackTitle(focusSelectedTrackPosition)
+        }
+        controls.addView(playPause)
+        controls.addView(controlButton("⏭", if (isArabic) "التالي" else "Next") {
+            val last = 8 + focusCustomAudioTracks.size
+            val next = (focusSelectedTrackPosition + 1).coerceAtMost(last)
+            selectFocusAudioTrack(next, next != 0)
+            spinner.setSelection(next)
+            nowPlaying.text = focusAudioTrackTitle(next)
+            playPause.text = if (next == 0) "▶" else "⏸"
+        })
+        controls.addView(controlButton("■", if (isArabic) "إيقاف" else "Stop") {
+            stopAmbientSound()
+            isAmbientPaused = false
+            nowPlaying.text = focusAudioTrackTitle(focusSelectedTrackPosition)
+            playPause.text = "▶"
+        })
+        panel.addView(controls)
+
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            private var first = true
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                if (first) { first = false; return }
+                selectFocusAudioTrack(position, position != 0)
+                nowPlaying.text = focusAudioTrackTitle(position)
+                playPause.text = if (position == 0) "▶" else "⏸"
+            }
+        }
+
+        val volumeLabel = TextView(this).apply {
+            text = if (isArabic) "مستوى الصوت" else "Volume"
+            setTextColor(textPrimaryColor()); textSize = 13f
+            setTypeface(typeface, Typeface.BOLD)
+            setPadding(0, dp(18), 0, dp(4))
+        }
+        panel.addView(volumeLabel)
+        panel.addView(SeekBar(this).apply {
             max = 100
             progress = (ambientVolume * 100).toInt()
-            progressTintList = ColorStateList.valueOf(Color.parseColor("#F16D68"))
-            thumbTintList = ColorStateList.valueOf(Color.parseColor("#F16D68"))
+            progressTintList = ColorStateList.valueOf(accentOrangeColor())
+            thumbTintList = ColorStateList.valueOf(accentOrangeColor())
             setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-                override fun onProgressChanged(s: SeekBar?, prog: Int, fromUser: Boolean) {
-                    ambientVolume = (prog / 100f).coerceIn(0.05f, 1f)
+                override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                    ambientVolume = (progress / 100f).coerceIn(0f, 1f)
                     soundEngine.setAmbientVolume(ambientVolume)
                     customAudioPlayer?.setVolume(ambientVolume, ambientVolume)
                     getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
-                        .putInt(ReminderRepository.KEY_SOUND_VOLUME, (ambientVolume * 100).toInt()).apply()
+                        .putInt(ReminderRepository.KEY_SOUND_VOLUME, progress).apply()
                 }
-                override fun onStartTrackingTouch(s: SeekBar?) {}
-                override fun onStopTrackingTouch(s: SeekBar?) {}
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {}
             })
-        }
-        volCol.addView(sb)
-        v.addView(volCol)
+        })
 
-        val btnAddLocal = Button(this).apply {
-            text = if (customAudioName != null) "🎵 $customAudioName" else (if (isArabic) "📁 اختيار ملف صوتي أو موسيقى من جهازي" else "📁 Pick Audio/MP3 from Device")
-            isAllCaps = false
-            textSize = 13f
+        panel.addView(Button(this).apply {
+            text = if (isArabic) "＋ إضافة صوت من الجهاز" else "＋ Add audio from device"
+            isAllCaps = false; textSize = 14f
             setTextColor(Color.parseColor("#3B2B20"))
             backgroundTintList = ColorStateList.valueOf(accentOrangeColor())
             setOnClickListener {
@@ -6838,59 +6939,91 @@ class MainActivity : AppCompatActivity() {
                 localAudioPickerLauncher.launch(arrayOf("audio/*"))
                 d.dismiss()
             }
-        }
-        v.addView(btnAddLocal)
+        }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(48)).apply {
+            topMargin = dp(14)
+        })
 
-        val soundTitles = if (isArabic) listOf(
-            "إيقاف", "المطر", "أمواج البحر", "نار المخيم", "الغابة",
-            "جدول الماء", "المكتبة", "الهواء", "أصوات الليل"
-        ) else listOf(
-            "Off", "Rain", "Ocean Waves", "Campfire", "Forest",
-            "Water Stream", "Library", "Wind", "Night Ambience"
-        )
-
-        soundTitles.forEachIndexed { idx, name ->
-            val isSel = (selectedAmbientIndex == idx)
-            val row = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER_VERTICAL
-                setPadding(0, dp(10), 0, dp(10))
-
-                val tvRadio = TextView(this@MainActivity).apply {
-                    text = if (isSel) "🔘" else "⚪"
-                    textSize = 16f
-                    setPadding(0, 0, dp(12), 0)
-                }
-                val tvName = TextView(this@MainActivity).apply {
-                    text = name
-                    textSize = 15f
-                    setTextColor(if (isSel) accentOrangeColor() else textPrimaryColor())
-                    layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
-                }
-                addView(tvRadio)
-                addView(tvName)
-
-                setOnClickListener {
-                    selectedAmbientIndex = idx
-                    getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
-                        .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, idx).apply()
-                    if (idx == 0) {
-                        stopAmbientSound()
-                        stopCustomAudio()
-                    } else startRichAmbientSound(idx)
-                    d.dismiss()
-                    renderCurrentTab()
-                }
-            }
-            v.addView(row)
-        }
-
-        scroll.addView(v)
+        scroll.addView(panel)
         d.setContentView(scroll)
         d.window?.setBackgroundDrawableResource(android.R.color.transparent)
-        d.window?.setLayout((resources.displayMetrics.widthPixels * 0.92).toInt(), (resources.displayMetrics.heightPixels * 0.85).toInt())
+        d.window?.setLayout((resources.displayMetrics.widthPixels * 0.92).toInt(),
+            (resources.displayMetrics.heightPixels * 0.72).toInt())
         d.show()
         styleGlassDialog(d)
+    }
+
+    private fun focusAudioTrackLabels(): List<String> {
+        val builtIns = if (isArabic) listOf("إيقاف الصوت", "المطر", "أمواج البحر", "نار المخيم",
+            "الغابة", "جدول الماء", "المكتبة", "الهواء", "أصوات الليل")
+        else listOf("Off", "Rain", "Ocean waves", "Campfire", "Forest", "Water stream",
+            "Library", "Wind", "Night ambience")
+        return builtIns + focusCustomAudioTracks.map { "🎵 ${it.first}" }
+    }
+
+    private fun focusAudioTrackTitle(position: Int): String {
+        val labels = focusAudioTrackLabels()
+        return labels.getOrNull(position) ?: labels.first()
+    }
+
+    private fun saveFocusCustomAudioTracks() {
+        val array = org.json.JSONArray()
+        focusCustomAudioTracks.forEach { (name, uri) ->
+            array.put(org.json.JSONObject().put("name", name).put("uri", uri))
+        }
+        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+            .putString("focus_custom_audio_tracks", array.toString()).apply()
+    }
+
+    private fun selectFocusAudioTrack(position: Int, autoplay: Boolean) {
+        val maxPosition = 8 + focusCustomAudioTracks.size
+        focusSelectedTrackPosition = position.coerceIn(0, maxPosition)
+        getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+            .putInt("focus_selected_track_position", focusSelectedTrackPosition).apply()
+        if (focusSelectedTrackPosition == 0) {
+            selectedAmbientIndex = 0
+            stopAmbientSound()
+            return
+        }
+        if (focusSelectedTrackPosition <= 8) {
+            selectedAmbientIndex = focusSelectedTrackPosition
+            getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, selectedAmbientIndex).apply()
+            if (autoplay) startRichAmbientSound(selectedAmbientIndex)
+        } else {
+            val local = focusCustomAudioTracks[focusSelectedTrackPosition - 9]
+            customAudioName = local.first
+            customAudioUri = Uri.parse(local.second)
+            selectedAmbientIndex = -1
+            getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                .putString("custom_audio_uri", local.second)
+                .putString("custom_audio_name", local.first)
+                .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, -1).apply()
+            if (autoplay) {
+                isAmbientPlaying = true
+                isAmbientPaused = false
+                playCustomAudio()
+            }
+        }
+    }
+
+    private fun toggleFocusAudioPlayback() {
+        val player = customAudioPlayer
+        if (player != null) {
+            if (player.isPlaying) {
+                player.pause()
+                isAmbientPaused = true
+            } else {
+                isAmbientPaused = false
+                runCatching { player.start() }.onFailure { playCustomAudio() }
+            }
+            return
+        }
+        if (focusSelectedTrackPosition == 0) {
+            val start = if (selectedAmbientIndex in 1..8) selectedAmbientIndex else 1
+            selectFocusAudioTrack(start, true)
+        } else {
+            selectFocusAudioTrack(focusSelectedTrackPosition, true)
+        }
     }
 
     private fun buildFullscreenClockView(): View {
@@ -8014,6 +8147,7 @@ class MainActivity : AppCompatActivity() {
     private fun startRichAmbientSound(modeIndex: Int) {
         stopAmbientSound()
         stopCustomAudio()
+        isAmbientPaused = false
         if (modeIndex == -1) {
             playCustomAudio()
             return
@@ -8045,7 +8179,7 @@ class MainActivity : AppCompatActivity() {
                 setDataSource(this@MainActivity, uri)
                 isLooping = true
                 setVolume(ambientVolume, ambientVolume)
-                setOnPreparedListener { player -> player.start() }
+                setOnPreparedListener { player -> if (!isAmbientPaused) player.start() }
                 setOnErrorListener { player, _, _ ->
                     try { player.reset(); player.release() } catch (_: Exception) { }
                     customAudioPlayer = null
@@ -8064,6 +8198,7 @@ class MainActivity : AppCompatActivity() {
         try { customAudioPlayer?.stop() } catch (_: Exception) { }
         try { customAudioPlayer?.release() } catch (_: Exception) { }
         customAudioPlayer = null
+        isAmbientPaused = false
     }
 
     private fun stopAmbientSound() {
