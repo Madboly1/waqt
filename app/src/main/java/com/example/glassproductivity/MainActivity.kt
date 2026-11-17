@@ -1300,10 +1300,16 @@ class MainActivity : AppCompatActivity() {
                 leftMargin = dp(16)
                 topMargin = dp(140)
             }
-            background = GradientDrawable().apply {
+            background = GradientDrawable(
+                GradientDrawable.Orientation.TOP_LEFT,
+                intArrayOf(
+                    Color.parseColor("#FFE7C596"),
+                    Color.parseColor("#FFB98250"),
+                    Color.parseColor("#FF765039")
+                )
+            ).apply {
                 shape = GradientDrawable.OVAL
-                setColor(Color.argb(178, 46, 116, 160))
-                setStroke(dp(1), Color.argb(220, 190, 238, 255))
+                setStroke(dp(1), Color.argb(235, 255, 231, 194))
             }
             elevation = dp(16).toFloat()
 
@@ -1495,9 +1501,9 @@ class MainActivity : AppCompatActivity() {
             orientation = LinearLayout.HORIZONTAL
             gravity = Gravity.CENTER_VERTICAL
             background = createPillDrawable(
-                if (isDarkMode) Color.parseColor("#D94A3B30") else Color.parseColor("#EFFFFAF0"),
+                if (isDarkMode) Color.parseColor("#D95B4634") else Color.parseColor("#EFFFF8EA"),
                 dp(27),
-                if (isDarkMode) "#88D8B98F" else "#B8C5A985"
+                if (isDarkMode) "#B8E0BC91" else "#B8C5A985"
             )
             setPadding(dp(7), dp(6), dp(7), dp(6))
             elevation = dp(3).toFloat()
@@ -6171,40 +6177,39 @@ class MainActivity : AppCompatActivity() {
         dialog.setOnCancelListener { if (isRecordingNoteAudio) discardRecording() }
     }
 
-    // Lightweight frosted surface: translucent neutral glass, a fine rim and a
-    // restrained top reflection. Avoids the heavy opaque brown/black faux-3D look.
+    // Warm Liquid Glass surface shared by the assistant and floating panels.
     private fun createRefinedFrostedDrawable(radiusPx: Int): android.graphics.drawable.LayerDrawable {
         val radius = radiusPx.toFloat()
         val fill = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
             if (isDarkMode) intArrayOf(
-                Color.argb(142, 42, 39, 36),
-                Color.argb(116, 31, 30, 29),
-                Color.argb(132, 25, 25, 25)
+                Color.argb(190, 91, 68, 48),
+                Color.argb(174, 65, 47, 34),
+                Color.argb(184, 43, 32, 24)
             ) else intArrayOf(
-                Color.argb(164, 255, 255, 255),
-                Color.argb(132, 250, 247, 241),
-                Color.argb(146, 237, 232, 222)
+                Color.argb(224, 255, 249, 237),
+                Color.argb(208, 247, 235, 214),
+                Color.argb(218, 231, 211, 181)
             )
         ).apply {
             cornerRadius = radius
-            setStroke(dp(1), Color.argb(if (isDarkMode) 112 else 150, 255, 255, 255))
+            setStroke(dp(1), Color.argb(if (isDarkMode) 178 else 190, 224, 188, 143))
         }
         val reflection = GradientDrawable(
             GradientDrawable.Orientation.TOP_BOTTOM,
             intArrayOf(
-                Color.argb(if (isDarkMode) 48 else 108, 255, 255, 255),
-                Color.argb(18, 255, 255, 255),
+                Color.argb(if (isDarkMode) 76 else 132, 255, 246, 229),
+                Color.argb(24, 255, 235, 205),
                 Color.TRANSPARENT
             )
         ).apply {
             cornerRadius = radius
-            setStroke(dp(1), Color.argb(if (isDarkMode) 52 else 78, 255, 255, 255))
+            setStroke(dp(1), Color.argb(if (isDarkMode) 86 else 112, 255, 226, 190))
         }
         val lowerTint = GradientDrawable(
             GradientDrawable.Orientation.BOTTOM_TOP,
             intArrayOf(
-                Color.argb(if (isDarkMode) 24 else 30, 178, 148, 112),
+                Color.argb(if (isDarkMode) 58 else 46, 190, 143, 91),
                 Color.TRANSPARENT
             )
         ).apply { cornerRadius = radius }
