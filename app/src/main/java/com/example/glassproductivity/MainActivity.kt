@@ -99,8 +99,77 @@ class MainActivity : AppCompatActivity() {
         Log.d("WAQT_TOUCH_TRACE", source + " action=" + event.actionMasked + " x=" + event.x + " y=" + event.y + " rawX=" + event.rawX + " rawY=" + event.rawY + " tab=" + currentTab + " " + result)
     }
 
+    private var activitySwipeEligible = false
+    private var activitySwipeTracking = false
+    private var activitySwipeDownX = 0f
+    private var activitySwipeDownY = 0f
+    private val activitySwipeSlop by lazy { ViewConfiguration.get(this).scaledTouchSlop * 0.70f }
+
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         touchTrace(ev, "ACTIVITY_DISPATCH")
+
+        // Route blank-area swipes at the Activity boundary. This is deliberately
+        // above child dispatch so nested views cannot swallow the gesture by
+        // requesting that their parents disallow interception.
+        when (ev.actionMasked) {
+            MotionEvent.ACTION_DOWN -> {
+                activitySwipeEligible = false
+                activitySwipeTracking = false
+                if (::tabContentHost.isInitialized && tabContentHost.isShown) {
+                    val location = IntArray(2)
+                    tabContentHost.getLocationOnScreen(location)
+                    val localX = ev.rawX - location[0]
+                    val localY = ev.rawY - location[1]
+                    val insideHost = localX >= 0f && localY >= 0f &&
+                        localX < tabContentHost.width && localY < tabContentHost.height
+                    if (insideHost) {
+                        activitySwipeEligible = !isPrimaryTabSwipeExcluded(tabContentHost, localX, localY)
+                        activitySwipeDownX = ev.rawX
+                        activitySwipeDownY = ev.rawY
+                        Log.d("WAQT_TOUCH_TRACE", "ACTIVITY_SWIPE_DOWN eligible=" + activitySwipeEligible +
+                            " local=" + localX + "," + localY + " host=" + tabContentHost.width + "x" + tabContentHost.height)
+                    }
+                }
+            }
+            MotionEvent.ACTION_MOVE -> {
+                if (activitySwipeTracking) {
+                    val dx = ev.rawX - activitySwipeDownX
+                    updateInteractiveTabSwipe(dx)
+                    return true
+                }
+                if (activitySwipeEligible) {
+                    val dx = ev.rawX - activitySwipeDownX
+                    val dy = ev.rawY - activitySwipeDownY
+                    if (abs(dx) > activitySwipeSlop && abs(dx) > abs(dy) * 1.05f) {
+                        // Cancel the child gesture exactly once before taking ownership.
+                        val cancel = MotionEvent.obtain(ev).apply { action = MotionEvent.ACTION_CANCEL }
+                        super.dispatchTouchEvent(cancel)
+                        cancel.recycle()
+                        activitySwipeTracking = true
+                        beginInteractiveTabSwipe(dx)
+                        updateInteractiveTabSwipe(dx)
+                        Log.d("WAQT_TOUCH_TRACE", "ACTIVITY_SWIPE_INTERCEPT dx=" + dx + " dy=" + dy)
+                        return true
+                    }
+                }
+            }
+            MotionEvent.ACTION_UP -> {
+                if (activitySwipeTracking) {
+                    finishInteractiveTabSwipe(cancelled = false)
+                    activitySwipeTracking = false
+                    activitySwipeEligible = false
+                    return true
+                }
+                activitySwipeEligible = false
+            }
+            MotionEvent.ACTION_CANCEL -> {
+                if (activitySwipeTracking) finishInteractiveTabSwipe(cancelled = true)
+                activitySwipeTracking = false
+                activitySwipeEligible = false
+                return true
+            }
+        }
+
         val handled = super.dispatchTouchEvent(ev)
         Log.d("WAQT_TOUCH_TRACE", "ACTIVITY_RESULT action=" + ev.actionMasked + " handled=" + handled)
         return handled
