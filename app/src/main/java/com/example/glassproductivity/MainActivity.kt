@@ -3603,9 +3603,9 @@ class MainActivity : AppCompatActivity() {
                         }.show()
                 } else {
                     val isImage = content.startsWith("WAQT_IMAGE:")
-                    val reuse = if (isImage) content.substringAfter("\\\n", "") else content
+                    val reuse = if (isImage) content.substringAfter("\n", "") else content
                     if (isImage) {
-                        val path = content.removePrefix("WAQT_IMAGE:").substringBefore("\\\n")
+                        val path = content.removePrefix("WAQT_IMAGE:").substringBefore("\n")
                         val file = java.io.File(path)
                         if (file.exists()) {
                             pendingChatImageFile = file
