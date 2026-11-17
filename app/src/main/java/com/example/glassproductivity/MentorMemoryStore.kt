@@ -53,12 +53,14 @@ object MentorMemoryStore {
         val q = query.trim()
         if (q.length < 2) return 0
         val current = list(context)
-        val remaining = current.filterNot {
+        val matches = current.filter {
             it.content.contains(q, ignoreCase = true) || q.contains(it.content, ignoreCase = true)
         }
-        val removed = current.size - remaining.size
-        if (removed > 0) save(context, remaining)
-        return removed
+        // Never delete multiple memories from an ambiguous query.
+        if (matches.size != 1) return 0
+        val remaining = current.filterNot { it.id == matches.single().id }
+        save(context, remaining)
+        return 1
     }
 
     fun clear(context: Context): Int {
