@@ -1301,7 +1301,7 @@ class MainActivity : AppCompatActivity() {
                 topMargin = dp(140)
             }
             background = GradientDrawable(
-                GradientDrawable.Orientation.TOP_LEFT,
+                GradientDrawable.Orientation.TL_BR,
                 intArrayOf(
                     Color.parseColor("#FFE7C596"),
                     Color.parseColor("#FFB98250"),
