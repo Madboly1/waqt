@@ -235,6 +235,7 @@ class FloatingCardService : Service() {
         // (without it, the note window swallows every touch and the whole screen feels frozen).
         var windowFlags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE or
                 WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL or
+                WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH or
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 
@@ -390,6 +391,7 @@ class FloatingCardService : Service() {
             timestampMillis = System.currentTimeMillis()
         )
         ReminderRepository.addOrUpdateNote(this, note)
+        setFloatingNoteInputEnabled(false)
         sendBroadcast(Intent(ACTION_DATA_UPDATED).setPackage(packageName))
         triggerGentleHaptic()
         Toast.makeText(this, if (isArabic) "✓ تم حفظ الملاحظة في تطبيق وَقْت بنجاح!" else "✓ Note saved to WAQT!", Toast.LENGTH_SHORT).show()
@@ -531,6 +533,15 @@ class FloatingCardService : Service() {
 
         val dragListener = View.OnTouchListener { _, event ->
             when (event.actionMasked) {
+                MotionEvent.ACTION_OUTSIDE -> {
+                    // The user touched another app while the note overlay had keyboard focus.
+                    // Drop focus immediately so that app can receive text input.
+                    if (isFloatingNoteMode && isFloatingNoteInputEnabled) {
+                        setFloatingNoteInputEnabled(false)
+                    }
+                    false
+                }
+
                 MotionEvent.ACTION_DOWN -> {
                     initialX = layoutParams.x
                     initialY = layoutParams.y
