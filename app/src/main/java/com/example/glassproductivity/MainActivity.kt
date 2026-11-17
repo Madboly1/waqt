@@ -1390,7 +1390,10 @@ class MainActivity : AppCompatActivity() {
         activeChatId = chatHistoryStore.ensureChat(chatId)
         geminiHistory.clear()
         chatHistoryStore.getMessages(activeChatId).forEach { msg ->
-            if (msg.role == "user" || msg.role == "model") geminiHistory.add(msg.role to msg.content)
+            if (msg.role == "user" || msg.role == "model") {
+                val historyContent = if (msg.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + msg.content.substringAfter("\\n", "") else msg.content
+                geminiHistory.add(msg.role to historyContent)
+            }
         }
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
