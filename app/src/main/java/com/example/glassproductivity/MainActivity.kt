@@ -2213,7 +2213,7 @@ class MainActivity : AppCompatActivity() {
                         "⚠️ Gemini returned an invalid response format, so I couldn't display it or execute any actions. Please try again."
                     }
                 }
-                geminiHistory.add("user" to (cleanUserText.ifBlank { "ابدأ بتقييم يومي الحالي." }))
+                geminiHistory.add("user" to (cleanUserText.ifBlank { if (media?.label == "image") "[صورة مرفقة]" else "ابدأ بتقييم يومي الحالي." }))
                 geminiHistory.add("model" to replyText)
                 while (geminiHistory.size > 6) geminiHistory.removeAt(0)
                 lastAssistantReply = replyText
@@ -3620,7 +3620,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         fun attachLongPress(target: View) {
-            target.setOnLongClickListener(showActions)
+            target.setOnLongClickListener { showActions(it) }
             if (target is ViewGroup) for (index in 0 until target.childCount) attachLongPress(target.getChildAt(index))
         }
         attachLongPress(view)
