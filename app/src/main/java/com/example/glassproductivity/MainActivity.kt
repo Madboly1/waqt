@@ -6982,6 +6982,8 @@ class MainActivity : AppCompatActivity() {
             .putInt("focus_selected_track_position", focusSelectedTrackPosition).apply()
         if (focusSelectedTrackPosition == 0) {
             selectedAmbientIndex = 0
+            getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit()
+                .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, 0).apply()
             stopAmbientSound()
             return
         }
