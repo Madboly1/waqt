@@ -6799,7 +6799,7 @@ class MainActivity : AppCompatActivity() {
         val d = Dialog(this)
         d.requestWindowFeature(Window.FEATURE_NO_TITLE)
         val scroll = ScrollView(this).apply {
-            background = createPillDrawable(bgCardColor(), dp(24), accentOrangeColor())
+            background = createPillDrawable(bgCardColor(), dp(24), COLOR_ORANGE)
             isFillViewport = true
         }
         val panel = LinearLayout(this).apply {
@@ -6838,7 +6838,7 @@ class MainActivity : AppCompatActivity() {
                 it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             }
             setSelection(focusSelectedTrackPosition.coerceIn(0, trackLabels.lastIndex))
-            background = createPillDrawable(bgElevatedColor(), dp(14), accentOrangeColor())
+            background = createPillDrawable(bgElevatedColor(), dp(14), COLOR_ORANGE)
         }
         panel.addView(spinner, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(52)).apply {
             bottomMargin = dp(14)
