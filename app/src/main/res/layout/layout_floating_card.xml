@@ -34,7 +34,7 @@
                 android:paddingHorizontal="12dp"
                 android:paddingVertical="5dp"
                 android:text="🌱 Daily Habit"
-                android:textColor="#35B6AD"
+                android:textColor="#D5A36C"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
@@ -44,7 +44,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="WAQT"
-                android:textColor="#FFAA6B"
+                android:textColor="#FFD5A36C"
                 android:textSize="11sp"
                 android:textStyle="bold" />
 
@@ -64,7 +64,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="—"
-                android:textColor="#F5F5F0"
+                android:textColor="#FFF7EC"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -91,12 +91,12 @@
             android:layout_marginTop="14dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:shadowColor="#80101827"
+            android:shadowColor="#8030251B"
             android:shadowDx="0"
             android:shadowDy="2"
             android:shadowRadius="4"
             android:text="Focus &amp; Deep Work Session"
-            android:textColor="#F5F5F0"
+            android:textColor="#FFF7EC"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Due now • Tap (✕) to complete"
-            android:textColor="#B3F5F5F0"
+            android:textColor="#D0C1AF"
             android:textSize="12sp" />
 
         <!-- Habit Streak Section (Visible for Habits) -->
@@ -132,7 +132,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="🔥 5-day streak"
-                    android:textColor="#FFAA6B"
+                    android:textColor="#FFD5A36C"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -141,7 +141,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="5 / 7 days"
-                    android:textColor="#35B6AD"
+                    android:textColor="#D5A36C"
                     android:textSize="12sp" />
             </LinearLayout>
 
@@ -154,7 +154,7 @@
                 android:max="7"
                 android:progress="5"
                 android:progressBackgroundTint="#26FFFFFF"
-                android:progressTint="#FFAA6B" />
+                android:progressTint="#FFD5A36C" />
         </LinearLayout>
 
         <!-- Action Row (Pomodoro + Snooze) -->
@@ -176,7 +176,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="🍅 Start 25m"
-                android:textColor="#35B6AD"
+                android:textColor="#D5A36C"
                 android:textSize="13sp"
                 android:textStyle="bold" />
 
@@ -190,7 +190,7 @@
                 android:focusable="true"
                 android:gravity="center"
                 android:text="💤 10m"
-                android:textColor="#F5F5F0"
+                android:textColor="#FFF7EC"
                 android:textSize="13sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="🍅 Focus Session"
-                    android:textColor="#35B6AD"
+                    android:textColor="#D5A36C"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -229,7 +229,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="monospace"
                     android:text="25:00"
-                    android:textColor="#F5F5F0"
+                    android:textColor="#FFF7EC"
                     android:textSize="24sp"
                     android:textStyle="bold" />
             </LinearLayout>
@@ -243,7 +243,7 @@
                 android:max="1500"
                 android:progress="1500"
                 android:progressBackgroundTint="#26FFFFFF"
-                android:progressTint="#35B6AD" />
+                android:progressTint="#D5A36C" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -262,7 +262,7 @@
                     android:focusable="true"
                     android:gravity="center"
                     android:text="⏸ Pause"
-                    android:textColor="#F5F5F0"
+                    android:textColor="#FFF7EC"
                     android:textSize="13sp"
                     android:textStyle="bold" />
 
@@ -313,7 +313,7 @@
             android:layout_marginStart="6dp"
             android:fontFamily="monospace"
             android:text="25:00"
-            android:textColor="#F5F5F0"
+            android:textColor="#FFF7EC"
             android:textSize="14sp"
             android:textStyle="bold" />
     </LinearLayout>
