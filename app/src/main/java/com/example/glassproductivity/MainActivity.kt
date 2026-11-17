@@ -110,9 +110,22 @@ class MainActivity : AppCompatActivity() {
         fun hit(view: View, localX: Float, localY: Float): View? {
             if (localX < 0f || localY < 0f || localX >= view.width || localY >= view.height) return null
             if (view is ViewGroup) {
+                // Match Android's child-touch coordinate mapping: account for the
+                // parent's scroll offset and invert each child's visual transform.
                 for (i in view.childCount - 1 downTo 0) {
                     val child = view.getChildAt(i)
-                    val found = hit(child, localX - child.left, localY - child.top)
+                    if (child.visibility != View.VISIBLE) continue
+                    val point = floatArrayOf(
+                        localX + view.scrollX - child.left,
+                        localY + view.scrollY - child.top
+                    )
+                    val matrix = child.matrix
+                    if (!matrix.isIdentity) {
+                        val inverse = android.graphics.Matrix()
+                        if (!matrix.invert(inverse)) continue
+                        inverse.mapPoints(point)
+                    }
+                    val found = hit(child, point[0], point[1])
                     if (found != null) return found
                 }
             }
@@ -919,9 +932,22 @@ class MainActivity : AppCompatActivity() {
         fun hit(view: View, localX: Float, localY: Float): View? {
             if (localX < 0f || localY < 0f || localX >= view.width || localY >= view.height) return null
             if (view is ViewGroup) {
+                // Match Android's child-touch coordinate mapping: account for the
+                // parent's scroll offset and invert each child's visual transform.
                 for (i in view.childCount - 1 downTo 0) {
                     val child = view.getChildAt(i)
-                    val found = hit(child, localX - child.left, localY - child.top)
+                    if (child.visibility != View.VISIBLE) continue
+                    val point = floatArrayOf(
+                        localX + view.scrollX - child.left,
+                        localY + view.scrollY - child.top
+                    )
+                    val matrix = child.matrix
+                    if (!matrix.isIdentity) {
+                        val inverse = android.graphics.Matrix()
+                        if (!matrix.invert(inverse)) continue
+                        inverse.mapPoints(point)
+                    }
+                    val found = hit(child, point[0], point[1])
                     if (found != null) return found
                 }
             }
