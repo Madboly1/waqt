@@ -292,6 +292,11 @@ class MainActivity : AppCompatActivity() {
     private var isRecordingNoteAudio: Boolean = false
     private var activeChatMessagesBox: LinearLayout? = null
     private var activeChatScroll: ScrollView? = null
+    private var activeChatComposer: EditText? = null
+    private var pendingChatImageFile: java.io.File? = null
+    private var pendingChatImageBytes: ByteArray? = null
+    private var pendingChatImageMime: String = "image/jpeg"
+    private var chatImagePreviewContainer: LinearLayout? = null
     private var chatRecorder: MediaRecorder? = null
     private var chatRecordingFile: java.io.File? = null
     private var chatIsRecording: Boolean = false
@@ -361,17 +366,16 @@ class MainActivity : AppCompatActivity() {
     ) { uri: Uri? ->
         if (uri != null) {
             try {
-                val bytes = contentResolver.openInputStream(uri)?.use { it.readBytes() }
-                    ?: throw IllegalStateException("تعذر قراءة الصورة")
+                try { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } catch (_: Exception) { }
+                val bytes = contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: throw IllegalStateException("تعذر قراءة الصورة")
                 if (bytes.size > 12 * 1024 * 1024) throw IllegalArgumentException("حجم الصورة أكبر من 12 ميجابايت")
-                val mime = contentResolver.getType(uri)?.takeIf { it.startsWith("image/") } ?: "image/jpeg"
-                val box = activeChatMessagesBox
-                val scroll = activeChatScroll
-                if (box != null && scroll != null) {
-                    box.addView(createUserMessageBubble("🖼 ${if (isArabic) "تم إرفاق صورة" else "Image attached"}"))
-                    sendToAssistant(if (isArabic) "حلّل الصورة المرفقة واشرح لي أهم ما يظهر فيها." else "Analyze the attached image and describe what matters.", box, scroll,
-                        GeminiClient.MediaInput(bytes, mime, "image"))
-                }
+                pendingChatImageMime = contentResolver.getType(uri)?.takeIf { it.startsWith("image/") } ?: "image/jpeg"
+                val folder = java.io.File(filesDir, "chat_images").apply { mkdirs() }
+                val saved = java.io.File(folder, "image_${System.currentTimeMillis()}.jpg")
+                saved.writeBytes(bytes)
+                pendingChatImageFile = saved
+                pendingChatImageBytes = bytes
+                renderChatImagePreview()
             } catch (e: Exception) {
                 Toast.makeText(this, e.message ?: if (isArabic) "تعذر إرفاق الصورة" else "Could not attach image", Toast.LENGTH_LONG).show()
             }
@@ -1487,7 +1491,7 @@ class MainActivity : AppCompatActivity() {
 
         // Restore the selected conversation from the local database.
         savedMessages.forEach { saved ->
-            if (saved.role == "user") messagesBox.addView(createUserMessageBubble(saved.content))
+            if (saved.role == "user") messagesBox.addView(createStoredUserMessageBubble(saved.id, saved.content, messagesBox, chatScroll))
             else if (saved.role == "model") messagesBox.addView(createAIMessageBubble(saved.content))
         }
         if (savedMessages.isNotEmpty()) lastAssistantReply = savedMessages.lastOrNull { it.role == "model" }?.content.orEmpty()
@@ -1549,6 +1553,7 @@ class MainActivity : AppCompatActivity() {
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
         inputRow.addView(etMsg)
+        activeChatComposer = etMsg
 
         val btnSendVoice = TextView(this).apply {
             text = "🎙"
@@ -1566,11 +1571,17 @@ class MainActivity : AppCompatActivity() {
             chatRecordButton = this
             fun sendTypedMessage() {
                 val userText = etMsg.text.toString().trim()
-                if (userText.isNotBlank()) {
-                    messagesBox.addView(createUserMessageBubble(userText))
+                val imageFile = pendingChatImageFile
+                val imageBytes = pendingChatImageBytes
+                if (userText.isNotBlank() || imageBytes != null) {
+                    val bubble = if (imageFile != null) createUserImageMessageBubble(imageFile.absolutePath, userText) else createUserMessageBubble(userText)
+                    messagesBox.addView(bubble)
                     etMsg.text.clear()
+                    clearChatImageAttachment(false)
                     chatScroll.post { chatScroll.fullScroll(View.FOCUS_DOWN) }
-                    sendToAssistant(userText, messagesBox, chatScroll)
+                    val media = if (imageBytes != null) GeminiClient.MediaInput(imageBytes, pendingChatImageMime, "image", imageFile?.absolutePath) else null
+                    sendToAssistant(userText.ifBlank { if (isArabic) "حلّل الصورة المرفقة واشرح لي أهم ما يظهر فيها." else "Analyze the attached image." }, messagesBox, chatScroll, media)
+                    chatHistoryStore.getMessages(activeChatId).lastOrNull { it.role == "user" }?.let { attachUserMessageActions(bubble, it.id, it.content, messagesBox, chatScroll) }
                 }
             }
             setOnClickListener { if (etMsg.text.toString().isNotBlank()) sendTypedMessage() }
@@ -1615,14 +1626,21 @@ class MainActivity : AppCompatActivity() {
             })
         }
         inputRow.addView(btnSendVoice)
+        chatImagePreviewContainer = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; visibility = View.GONE }
+        root.addView(chatImagePreviewContainer)
         root.addView(inputRow)
 
         activeChatMessagesBox = messagesBox
         activeChatScroll = chatScroll
+        activeChatComposer = etMsg
         dialog.setOnDismissListener {
             if (chatIsRecording) stopChatVoiceRecording(discard = true)
             activeChatMessagesBox = null
             activeChatScroll = null
+            activeChatComposer = null
+            pendingChatImageFile = null
+            pendingChatImageBytes = null
+            chatImagePreviewContainer = null
             if (activeAIChatDialog === dialog) activeAIChatDialog = null
             floatingAIChatBubble.visibility = View.VISIBLE
         }
@@ -2135,6 +2153,7 @@ class MainActivity : AppCompatActivity() {
         val needsDaySnapshot = userText == null || shouldIncludeDaySnapshot(cleanUserText)
         val snapshot = if (needsDaySnapshot) buildDaySnapshot() else ""
         val persistedUserText = when {
+            media?.label == "image" && !media.localPath.isNullOrBlank() -> "WAQT_IMAGE:${media.localPath}\\n$cleanUserText"
             cleanUserText.isNotBlank() -> cleanUserText
             media?.label == "image" -> "🖼 ${if (isArabic) "صورة مرفقة" else "Image attached"}"
             media?.label == "voice" -> media.localPath?.let { "WAQT_AUDIO:" + it }
@@ -3474,6 +3493,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createUserMessageBubble(text: String): View {
         if (text.startsWith("WAQT_AUDIO:")) return createChatAudioBubble(text.removePrefix("WAQT_AUDIO:"))
+        if (text.startsWith("WAQT_IMAGE:")) { val p = text.removePrefix("WAQT_IMAGE:").split("\\n", limit = 2); return createUserImageMessageBubble(p[0], p.getOrElse(1) { "" }) }
         return LinearLayout(this).apply {
             gravity = Gravity.END
             val bubble = TextView(this@MainActivity).apply {
@@ -3493,6 +3513,97 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    private fun createStoredUserMessageBubble(id: Long, content: String, box: LinearLayout, scroll: ScrollView): View {
+        val view = createUserMessageBubble(content)
+        attachUserMessageActions(view, id, content, box, scroll)
+        return view
+    }
+
+    private fun createUserImageMessageBubble(path: String, caption: String): View {
+        val file = java.io.File(path)
+        return LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL; gravity = Gravity.END
+            val card = LinearLayout(this@MainActivity).apply {
+                orientation = LinearLayout.VERTICAL; background = createPillDrawable(accentOrangeColor(), dp(17), null)
+                setPadding(dp(8), dp(8), dp(8), dp(8))
+                layoutParams = LinearLayout.LayoutParams((resources.displayMetrics.widthPixels * 0.76f).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+            }
+            card.addView(ImageView(this@MainActivity).apply {
+                scaleType = ImageView.ScaleType.CENTER_CROP
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(180))
+                background = createGlass3DDrawable(dp(12)); clipToOutline = true
+                if (file.exists()) setImageURI(Uri.fromFile(file))
+                setOnClickListener {
+                    val d = Dialog(this@MainActivity)
+                    val full = ImageView(this@MainActivity).apply { setImageURI(Uri.fromFile(file)); scaleType = ImageView.ScaleType.FIT_CENTER; setBackgroundColor(Color.BLACK); setOnClickListener { d.dismiss() } }
+                    d.setContentView(full); d.window?.setBackgroundDrawableResource(android.R.color.black); d.show()
+                    d.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+                }
+            })
+            if (caption.isNotBlank()) card.addView(TextView(this@MainActivity).apply {
+                text = caption; setTextColor(Color.parseColor("#3B2B20")); textSize = 14f; setTypeface(typeface, Typeface.BOLD); setPadding(dp(5), dp(8), dp(5), dp(2))
+            })
+            addView(card)
+            layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { bottomMargin = dp(9) }
+        }
+    }
+
+    private fun renderChatImagePreview() {
+        val host = chatImagePreviewContainer ?: return
+        host.removeAllViews()
+        val file = pendingChatImageFile
+        if (file == null || !file.exists()) { host.visibility = View.GONE; return }
+        host.visibility = View.VISIBLE
+        host.addView(LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+            background = createPillDrawable(bgElevatedColor(), dp(14), null); setPadding(dp(8), dp(6), dp(8), dp(6))
+            addView(ImageView(this@MainActivity).apply { setImageURI(Uri.fromFile(file)); scaleType = ImageView.ScaleType.CENTER_CROP; layoutParams = LinearLayout.LayoutParams(dp(54), dp(54)); clipToOutline = true })
+            addView(TextView(this@MainActivity).apply {
+                text = if (isArabic) "الصورة جاهزة — اكتب رسالتك أو ابعتها لوحدها" else "Image ready — add a caption or send it"
+                setTextColor(textPrimaryColor()); textSize = 11f
+                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f).apply { marginStart = dp(10) }
+            })
+            addView(TextView(this@MainActivity).apply { text = "✕"; textSize = 19f; setTextColor(textMutedColor()); setPadding(dp(10), dp(8), dp(8), dp(8)); setOnClickListener { clearChatImageAttachment() } })
+        })
+    }
+
+    private fun clearChatImageAttachment(deleteFile: Boolean = true) {
+        if (deleteFile) pendingChatImageFile?.let { runCatching { it.delete() } }
+        pendingChatImageFile = null; pendingChatImageBytes = null
+        chatImagePreviewContainer?.removeAllViews(); chatImagePreviewContainer?.visibility = View.GONE
+    }
+
+    private fun attachUserMessageActions(view: View, id: Long, content: String, box: LinearLayout, scroll: ScrollView) {
+        view.setOnLongClickListener {
+            val opts = arrayOf(if (isArabic) "تعديل الرسالة" else "Edit message", if (isArabic) "إعادة إرسال" else "Forward / reuse")
+            android.app.AlertDialog.Builder(this).setItems(opts) { _, which ->
+                if (which == 0) {
+                    val isImage = content.startsWith("WAQT_IMAGE:")
+                    val path = if (isImage) content.removePrefix("WAQT_IMAGE:").substringBefore("\\n") else ""
+                    val oldText = if (isImage) content.substringAfter("\\n", "") else content
+                    val input = EditText(this).apply { setText(oldText); setSelection(text.length); setTextColor(textPrimaryColor()) }
+                    android.app.AlertDialog.Builder(this).setTitle(if (isArabic) "تعديل رسالتك" else "Edit your message").setView(input)
+                        .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+                        .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
+                            val edited = input.text.toString().trim()
+                            val newContent = if (isImage) "WAQT_IMAGE:$path\\n$edited" else edited
+                            if (edited.isNotBlank() && chatHistoryStore.updateMessageAndDeleteFollowing(activeChatId, id, newContent)) {
+                                geminiHistory.clear()
+                                val latest = chatHistoryStore.getMessages(activeChatId)
+                                latest.forEach { m -> if (m.role == "user" || m.role == "model") geminiHistory.add(m.role to if (m.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + m.content.substringAfter("\\n", "") else m.content) }
+                                box.removeAllViews()
+                                latest.forEach { m -> if (m.role == "user") box.addView(createStoredUserMessageBubble(m.id, m.content, box, scroll)) else if (m.role == "model") box.addView(createAIMessageBubble(m.content)) }
+                            }
+                        }.show()
+                } else {
+                    val reuse = if (content.startsWith("WAQT_IMAGE:")) content.substringAfter("\\n", "") else content
+                    activeChatComposer?.setText(reuse); activeChatComposer?.setSelection(activeChatComposer?.text?.length ?: 0)
+                }
+            }.show()
+            true
+        }
+    }
 
     private fun createChatAudioBubble(path: String): View {
         val file = java.io.File(path)
