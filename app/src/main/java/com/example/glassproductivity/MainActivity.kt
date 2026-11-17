@@ -1583,7 +1583,7 @@ class MainActivity : AppCompatActivity() {
                     clearChatImageAttachment(false)
                     chatScroll.post { chatScroll.fullScroll(View.FOCUS_DOWN) }
                     val media = if (imageBytes != null) GeminiClient.MediaInput(imageBytes, pendingChatImageMime, "image", imageFile?.absolutePath) else null
-                    sendToAssistant(userText.ifBlank { if (isArabic) "حلّل الصورة المرفقة واشرح لي أهم ما يظهر فيها." else "Analyze the attached image." }, messagesBox, chatScroll, media)
+                    sendToAssistant(userText, messagesBox, chatScroll, media)
                     chatHistoryStore.getMessages(activeChatId).lastOrNull { it.role == "user" }?.let { attachUserMessageActions(bubble, it.id, it.content, messagesBox, chatScroll) }
                 }
             }
@@ -2167,6 +2167,8 @@ class MainActivity : AppCompatActivity() {
         val dayContext = if (needsDaySnapshot) "[لقطة اليوم الحالية]\n$snapshot\n" else ""
         val prompt = if (userText == null)
             "${dayContext}ابدأ كـ WAQT Mentor: رحّب بالمستخدم باختصار، ووضّح أنك تساعده في التفكير والتعلم وتحقيق الأهداف، ثم اسأله سؤالًا واحدًا مفتوحًا: إيه أهم حاجة حابب نشتغل عليها دلوقتي؟ لا تنشئ مهامًا."
+        else if (media?.label == "image" && cleanUserText.isBlank())
+            "${dayContext}حلّل الصورة المرفقة واشرح أهم ما يظهر فيها."
         else
             "${dayContext}[رسالة المستخدم]\n$cleanUserText"
         // Do not resend old day snapshots: they make every turn slower and inflate the request.
@@ -3578,7 +3580,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun attachUserMessageActions(view: View, id: Long, content: String, box: LinearLayout, scroll: ScrollView) {
-        view.setOnLongClickListener {
+        val showActions: (View) -> Boolean = {
             val opts = arrayOf(if (isArabic) "تعديل الرسالة" else "Edit message", if (isArabic) "إعادة إرسال" else "Forward / reuse")
             android.app.AlertDialog.Builder(this).setItems(opts) { _, which ->
                 if (which == 0) {
@@ -3591,7 +3593,7 @@ class MainActivity : AppCompatActivity() {
                         .setPositiveButton(if (isArabic) "حفظ" else "Save") { _, _ ->
                             val edited = input.text.toString().trim()
                             val newContent = if (isImage) "WAQT_IMAGE:$path\\n$edited" else edited
-                            if (edited.isNotBlank() && chatHistoryStore.updateMessageAndDeleteFollowing(activeChatId, id, newContent)) {
+                            if ((edited.isNotBlank() || isImage) && chatHistoryStore.updateMessageAndDeleteFollowing(activeChatId, id, newContent)) {
                                 geminiHistory.clear()
                                 val latest = chatHistoryStore.getMessages(activeChatId)
                                 latest.forEach { m -> if (m.role == "user" || m.role == "model") geminiHistory.add(m.role to if (m.content.startsWith("WAQT_IMAGE:")) "[صورة مرفقة] " + m.content.substringAfter("\\n", "") else m.content) }
@@ -3600,12 +3602,28 @@ class MainActivity : AppCompatActivity() {
                             }
                         }.show()
                 } else {
-                    val reuse = if (content.startsWith("WAQT_IMAGE:")) content.substringAfter("\\n", "") else content
+                    val isImage = content.startsWith("WAQT_IMAGE:")
+                    val reuse = if (isImage) content.substringAfter("\\\\n", "") else content
+                    if (isImage) {
+                        val path = content.removePrefix("WAQT_IMAGE:").substringBefore("\\\\n")
+                        val file = java.io.File(path)
+                        if (file.exists()) {
+                            pendingChatImageFile = file
+                            pendingChatImageBytes = runCatching { file.readBytes() }.getOrNull()
+                            pendingChatImageMime = when (file.extension.lowercase(Locale.ROOT)) { "png" -> "image/png"; "webp" -> "image/webp"; else -> "image/jpeg" }
+                            renderChatImagePreview()
+                        }
+                    }
                     activeChatComposer?.setText(reuse); activeChatComposer?.setSelection(activeChatComposer?.text?.length ?: 0)
                 }
             }.show()
             true
         }
+        fun attachLongPress(target: View) {
+            target.setOnLongClickListener(showActions)
+            if (target is ViewGroup) for (index in 0 until target.childCount) attachLongPress(target.getChildAt(index))
+        }
+        attachLongPress(view)
     }
 
     private fun createChatAudioBubble(path: String): View {
