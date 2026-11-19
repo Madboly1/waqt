@@ -4288,8 +4288,13 @@ class MainActivity : AppCompatActivity() {
             }, item.hour, item.minute, false).show()
         })
 
-        iconsRow.addView(createCardActionCircle("💤", if (isArabic) "تأجيل" else "Defer") {
-            showTaskDeferDialog(item)
+        iconsRow.addView(createCardActionCircle("💤", if (item.isHabit) "Snooze" else (if (isArabic) "تأجيل" else "Defer")) {
+            if (item.isHabit) {
+                AlarmScheduler.scheduleSnooze(this, item, 10)
+                Toast.makeText(this, if (isArabic) "تم التأجيل 10 دقائق" else "Snoozed 10m", Toast.LENGTH_SHORT).show()
+            } else {
+                showTaskDeferDialog(item)
+            }
         })
 
         iconsRow.addView(createCardActionCircle("🍅", "Focus") {
