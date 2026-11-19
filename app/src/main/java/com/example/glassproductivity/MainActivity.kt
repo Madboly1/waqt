@@ -4262,68 +4262,85 @@ class MainActivity : AppCompatActivity() {
         pctRow.addView(tvPctNum)
         card.addView(pctRow)
 
-        val iconsRow = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
+        // Responsive action grid: every action stays visible and wraps into
+        // additional centered rows instead of being clipped off-screen.
+        val iconsGrid = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
             gravity = Gravity.CENTER
             setPadding(0, dp(10), 0, dp(4))
         }
-
-        if (item.isHabit) {
-            iconsRow.addView(createCardActionCircle("✏️", "Edit") { showAddOrEditHabitModal(item) })
-            iconsRow.addView(createCardActionCircle("🔥", "Streak") {
-                Toast.makeText(this, if (isArabic) "🔥 سلسلة مستمرة: ${item.streakCount} أيام!" else "Streak: ${item.streakCount} days", Toast.LENGTH_SHORT).show()
-            })
-        } else {
-            iconsRow.addView(createCardActionCircle("✏️", "Edit") {
-                showAddOrEditTaskModal(item)
-            })
+        var currentActionRow: LinearLayout? = null
+        var actionsInRow = 0
+        fun addCardAction(icon: String, label: String, onClick: () -> Unit) {
+            if (currentActionRow == null || actionsInRow >= 4) {
+                currentActionRow = LinearLayout(this).apply {
+                    orientation = LinearLayout.HORIZONTAL
+                    gravity = Gravity.CENTER
+                    layoutParams = LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
+                    )
+                }
+                iconsGrid.addView(currentActionRow)
+                actionsInRow = 0
+            }
+            currentActionRow!!.addView(createCardActionCircle(icon, label, onClick))
+            actionsInRow++
         }
 
-        iconsRow.addView(createCardActionCircle("⏰", "Alarm") {
+        if (item.isHabit) {
+            addCardAction("✏️", "Edit") { showAddOrEditHabitModal(item) }
+            addCardAction("🔥", "Streak") {
+                Toast.makeText(this, if (isArabic) "🔥 سلسلة مستمرة: ${item.streakCount} أيام!" else "Streak: ${item.streakCount} days", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            addCardAction("✏️", "Edit") { showAddOrEditTaskModal(item) }
+        }
+
+        addCardAction("⏰", "Alarm") {
             TimePickerDialog(this, { _, h, m ->
                 val updated = item.copy(hour = h, minute = m)
                 ReminderRepository.addOrUpdateItem(this, updated)
                 AlarmScheduler.scheduleNextOccurrence(this, updated)
                 renderCurrentTab()
             }, item.hour, item.minute, false).show()
-        })
+        }
 
-        iconsRow.addView(createCardActionCircle("💤", if (item.isHabit) "Snooze" else (if (isArabic) "تأجيل" else "Defer")) {
+        addCardAction("💤", if (item.isHabit) "Snooze" else (if (isArabic) "تأجيل" else "Defer")) {
             if (item.isHabit) {
                 AlarmScheduler.scheduleSnooze(this, item, 10)
                 Toast.makeText(this, if (isArabic) "تم التأجيل 10 دقائق" else "Snoozed 10m", Toast.LENGTH_SHORT).show()
             } else {
                 showTaskDeferDialog(item)
             }
-        })
+        }
 
-        iconsRow.addView(createCardActionCircle("🍅", "Focus") {
+        addCardAction("🍅", "Focus") {
             selectedFocusTaskId = item.id
             isPomodoroLinkedToTask = true
             if (currentTab != 2) switchToTab(2) else renderCurrentTab()
-        })
+        }
 
         if (item.isHabit) {
-            iconsRow.addView(createCardActionCircle("🎯", "+1") {
+            addCardAction("🎯", "+1") {
                 ReminderRepository.incrementHabitStep(this, item.id)
                 renderCurrentTab()
-            })
+            }
         } else {
-            iconsRow.addView(createCardActionCircle("％", "Progress") {
+            addCardAction("％", "Progress") {
                 showTaskPercentageDialog(item)
-            })
+            }
         }
 
         if (!item.isHabit && (isDone || item.completionPercentage > 0)) {
-            iconsRow.addView(createCardActionCircle("🔄", "Restart") {
+            addCardAction("🔄", "Restart") {
                 val restarted = item.copy(isCompletedToday = false, completionPercentage = 0, lastCompletedEpochDay = -1L)
                 ReminderRepository.addOrUpdateItem(this, restarted)
                 Toast.makeText(this, if (isArabic) "🔄 اتعادت المهمة من الأول" else "🔄 Task restarted", Toast.LENGTH_SHORT).show()
                 renderCurrentTab()
-            })
+            }
         }
 
-        card.addView(iconsRow)
+        card.addView(iconsGrid)
         return card
     }
 
