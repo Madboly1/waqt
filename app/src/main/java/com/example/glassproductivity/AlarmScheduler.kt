@@ -38,7 +38,8 @@ data class ReminderItem(
     val isPaused: Boolean = false,
     val hasReminder: Boolean = true,
     val completedDaysHistoryCsv: String = "",
-    val completionPercentage: Int = 0 // نسبة إنجاز المهمة (0% إلى 100%)
+    val completionPercentage: Int = 0, // نسبة إنجاز المهمة (0% إلى 100%)
+    val deferredUntilMillis: Long = 0L
 )
 
 data class NoteItem(
@@ -170,7 +171,8 @@ object ReminderRepository {
                         isPaused = isPaused,
                         hasReminder = obj.optBoolean("hasReminder", true),
                         completedDaysHistoryCsv = obj.optString("completedDaysHistoryCsv", ""),
-                        completionPercentage = compPct
+                        completionPercentage = compPct,
+                        deferredUntilMillis = obj.optLong("deferredUntilMillis", 0L)
                     )
                 )
             }
@@ -210,6 +212,7 @@ object ReminderRepository {
                 put("hasReminder", item.hasReminder)
                 put("completedDaysHistoryCsv", item.completedDaysHistoryCsv)
                 put("completionPercentage", item.completionPercentage)
+                put("deferredUntilMillis", item.deferredUntilMillis)
             }
             array.put(obj)
         }
