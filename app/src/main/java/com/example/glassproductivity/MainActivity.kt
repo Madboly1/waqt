@@ -3874,6 +3874,7 @@ class MainActivity : AppCompatActivity() {
             "all" to (if (isArabic) "الكل" else "All"),
             "today" to (if (isArabic) "اليوم" else "Today"),
             "overdue" to (if (isArabic) "متأخرة" else "Late"),
+            "deferred" to (if (isArabic) "مؤجلة" else "Deferred"),
             "habits" to (if (isArabic) "عادات" else "Habits"),
             "done" to (if (isArabic) "مكتملة" else "Done")
         )
@@ -3918,8 +3919,9 @@ class MainActivity : AppCompatActivity() {
             val isLate = !item.isCompletedToday && (item.dueDateEpochDay < todayEpoch || (item.dueDateEpochDay == todayEpoch && isHourPassed(item.hour, item.minute)))
             when (taskFilter) {
                 "habits" -> item.isHabit
-                "today" -> !item.isHabit && !item.isCompletedToday && item.dueDateEpochDay <= todayEpoch
-                "overdue" -> !item.isHabit && isLate
+                "today" -> !item.isHabit && !item.isCompletedToday && item.deferredUntilMillis <= System.currentTimeMillis() && item.dueDateEpochDay <= todayEpoch
+                "overdue" -> !item.isHabit && item.deferredUntilMillis <= System.currentTimeMillis() && isLate
+                "deferred" -> !item.isHabit && item.deferredUntilMillis > System.currentTimeMillis() && !item.isCompletedToday
                 "done" -> item.isCompletedToday
                 else -> true
             }
@@ -4214,7 +4216,10 @@ class MainActivity : AppCompatActivity() {
         })
         val dateStr = if (item.dueDateString.isNotBlank()) item.dueDateString else "اليوم"
         val tvDateBadge = TextView(this).apply {
-            text = "📅 $dateStr"
+            text = if (item.deferredUntilMillis > System.currentTimeMillis()) {
+                val deferredAt = SimpleDateFormat("dd/MM  hh:mm a", Locale.getDefault()).format(Date(item.deferredUntilMillis))
+                "💤 ${if (isArabic) "مؤجلة حتى" else "Deferred until"} $deferredAt"
+            } else "📅 $dateStr"
             textSize = 12f
             setTextColor(textMutedColor())
             setPadding(dp(8), dp(4), dp(8), dp(4))
@@ -4283,9 +4288,8 @@ class MainActivity : AppCompatActivity() {
             }, item.hour, item.minute, false).show()
         })
 
-        iconsRow.addView(createCardActionCircle("💤", "Snooze") {
-            AlarmScheduler.scheduleSnooze(this, item, 10)
-            Toast.makeText(this, if (isArabic) "تم التأجيل 10 دقائق" else "Snoozed 10m", Toast.LENGTH_SHORT).show()
+        iconsRow.addView(createCardActionCircle("💤", if (isArabic) "تأجيل" else "Defer") {
+            showTaskDeferDialog(item)
         })
 
         iconsRow.addView(createCardActionCircle("🍅", "Focus") {
@@ -4335,6 +4339,70 @@ class MainActivity : AppCompatActivity() {
                 onClick()
             }
         }
+    }
+
+    private fun showTaskDeferDialog(item: ReminderItem) {
+        val options = listOf(
+            10 to (if (isArabic) "بعد 10 دقائق" else "In 10 minutes"),
+            30 to (if (isArabic) "بعد 30 دقيقة" else "In 30 minutes"),
+            60 to (if (isArabic) "بعد ساعة" else "In 1 hour"),
+            180 to (if (isArabic) "بعد 3 ساعات" else "In 3 hours")
+        )
+        val labels = options.map { "⏰ ${it.second}" } +
+            listOf(if (isArabic) "🌅 بكرة الساعة 9 صباحًا" else "🌅 Tomorrow at 9 AM",
+                   if (isArabic) "📅 اختيار موعد..." else "📅 Choose date & time")
+        AlertDialog.Builder(this)
+            .setTitle(if (isArabic) "تأجيل المهمة" else "Defer task")
+            .setItems(labels.toTypedArray()) { _, which ->
+                when {
+                    which < options.size -> applyTaskDeferral(item, System.currentTimeMillis() + options[which].first * 60_000L)
+                    which == options.size -> {
+                        val tomorrow = Calendar.getInstance().apply {
+                            add(Calendar.DAY_OF_YEAR, 1)
+                            set(Calendar.HOUR_OF_DAY, 9)
+                            set(Calendar.MINUTE, 0)
+                            set(Calendar.SECOND, 0)
+                            set(Calendar.MILLISECOND, 0)
+                        }
+                        applyTaskDeferral(item, tomorrow.timeInMillis)
+                    }
+                    else -> {
+                        val now = Calendar.getInstance()
+                        DatePickerDialog(this, { _, year, month, day ->
+                            val picked = Calendar.getInstance().apply {
+                                set(Calendar.YEAR, year); set(Calendar.MONTH, month); set(Calendar.DAY_OF_MONTH, day)
+                            }
+                            TimePickerDialog(this, { _, hour, minute ->
+                                picked.set(Calendar.HOUR_OF_DAY, hour)
+                                picked.set(Calendar.MINUTE, minute)
+                                picked.set(Calendar.SECOND, 0)
+                                picked.set(Calendar.MILLISECOND, 0)
+                                if (picked.timeInMillis <= System.currentTimeMillis()) {
+                                    Toast.makeText(this, if (isArabic) "اختار موعد في المستقبل" else "Choose a future time", Toast.LENGTH_SHORT).show()
+                                } else applyTaskDeferral(item, picked.timeInMillis)
+                            }, now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE), false).show()
+                        }, now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)).show()
+                    }
+                }
+            }
+            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel", null)
+            .show()
+    }
+
+    private fun applyTaskDeferral(item: ReminderItem, untilMillis: Long) {
+        if (untilMillis <= System.currentTimeMillis()) return
+        val deferred = item.copy(deferredUntilMillis = untilMillis)
+        ReminderRepository.addOrUpdateItem(this, deferred)
+        AlarmScheduler.cancelAlarm(this, item.id)
+        AlarmScheduler.scheduleExactDelayMillis(this, deferred, untilMillis - System.currentTimeMillis())
+        val whenText = SimpleDateFormat("dd/MM  hh:mm a", Locale.getDefault()).format(Date(untilMillis))
+        Toast.makeText(
+            this,
+            if (isArabic) "💤 تم تأجيل «${item.title}» حتى $whenText" else "💤 ${item.title} deferred until $whenText",
+            Toast.LENGTH_LONG
+        ).show()
+        currentTaskCarouselIndex = 0
+        renderCurrentTab()
     }
 
     private fun showTaskPercentageDialog(item: ReminderItem) {
