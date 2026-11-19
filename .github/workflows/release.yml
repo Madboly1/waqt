@@ -12,6 +12,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: waqt-release-publish
+  cancel-in-progress: false
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -142,29 +146,35 @@ jobs:
               --notes "$NOTES"
           fi
 
-      # 11. Update OTA manifest
-      - name: Update OTA manifest
+      # 11. Push OTA manifest with race-safe retry
+      - name: Push OTA manifest
         env:
           VERSION_NAME: ${{ steps.meta.outputs.version_name }}
           VERSION_CODE: ${{ steps.meta.outputs.version_code }}
         run: |
           cd update-repo
 
-          test -f update.json || (echo "update.json not found" && exit 1)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          python3 - <<'PY'
+          # The OTA repository can receive commits from other workflows.
+          # Rebuild update.json on top of the latest remote main on every retry,
+          # preserving any unrelated fields added by those commits.
+          for attempt in 1 2 3 4 5; do
+            echo "Publishing OTA manifest (attempt $attempt/5)..."
+            git fetch origin main
+            git reset --hard origin/main
+
+            python3 - <<'PY'
           import json
           import os
 
           path = "update.json"
-
           with open(path, "r", encoding="utf-8") as f:
               data = json.load(f)
 
           version_name = os.environ["VERSION_NAME"]
-          version_code = int(os.environ["VERSION_CODE"])
-
-          data["versionCode"] = version_code
+          data["versionCode"] = int(os.environ["VERSION_CODE"])
           data["versionName"] = version_name
           data["updateMessage"] = "تحديث جديد متاح لتطبيق وَقْت ✨"
           data["apkDownloadUrl"] = (
@@ -174,30 +184,27 @@ jobs:
 
           with open(path, "w", encoding="utf-8") as f:
               json.dump(data, f, ensure_ascii=False, indent=2)
-              f.write("\n")
-
-          print("OTA manifest updated successfully.")
+              f.write("\\n")
           PY
 
-      # 12. Push updated manifest
-      - name: Push OTA manifest
-        env:
-          VERSION_NAME: ${{ steps.meta.outputs.version_name }}
-        run: |
-          cd update-repo
+            git add update.json
+            if git diff --cached --quiet; then
+              echo "OTA manifest already points to this version."
+              exit 0
+            fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Publish WAQT ${VERSION_NAME} update metadata"
+            if git push origin HEAD:main; then
+              echo "OTA manifest published successfully."
+              exit 0
+            fi
 
-          git add update.json
+            echo "Remote changed during push; retrying against latest main..."
+            sleep $((attempt * 2))
+          done
 
-          if git diff --cached --quiet; then
-            echo "No manifest changes detected."
-            exit 0
-          fi
-
-          git commit -m "Publish WAQT ${VERSION_NAME} update metadata"
-          git push origin main
+          echo "Failed to publish OTA manifest after 5 attempts."
+          exit 1
 
       # 13. Cleanup signing key
       - name: Cleanup signing key
