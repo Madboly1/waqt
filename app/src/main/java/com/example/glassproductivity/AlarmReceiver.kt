@@ -77,7 +77,12 @@ class AlarmReceiver : BroadcastReceiver() {
                 // Re-arm recurring habits immediately so the next reminder survives
                 // even when the user dismisses the notification without completing it.
                 val itemId = intent.getStringExtra(AlarmScheduler.EXTRA_ITEM_ID).orEmpty()
-                val item = ReminderRepository.getItemById(context, itemId)
+                var item = ReminderRepository.getItemById(context, itemId)
+                if (item != null && !item.isHabit && item.deferredUntilMillis > 0L && item.deferredUntilMillis <= System.currentTimeMillis()) {
+                    item = item.copy(deferredUntilMillis = 0L)
+                    ReminderRepository.addOrUpdateItem(context, item)
+                    context.sendBroadcast(Intent(FloatingCardService.ACTION_DATA_UPDATED).setPackage(context.packageName))
+                }
                 if (item != null && item.isHabit && !item.isPaused && item.hasReminder) {
                     AlarmScheduler.scheduleNextOccurrence(context, item, forceTomorrow = true)
                 }
