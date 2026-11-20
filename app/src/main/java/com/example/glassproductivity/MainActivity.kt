@@ -552,6 +552,12 @@ class MainActivity : AppCompatActivity() {
     private fun setupRootDoubleBackExit() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                val innerBack = innerPageBackAction
+                if (innerBack != null) {
+                    lastRootBackPressAt = 0L
+                    innerBack.invoke()
+                    return
+                }
                 val now = System.currentTimeMillis()
                 if (now - lastRootBackPressAt < 2500L) {
                     lastRootBackPressAt = 0L
@@ -1034,6 +1040,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun renderCurrentTab() {
+        innerPageBackAction = null
         syncTickTock()
         refreshTabBar()
         applyPressAnimations(gtaRadialTriggerButton)
@@ -3253,6 +3260,7 @@ class MainActivity : AppCompatActivity() {
     private var onboardingRefresh: (() -> Unit)? = null
     private var startupChecksDone = false
     private var lastRootBackPressAt = 0L
+    private var innerPageBackAction: (() -> Unit)? = null
 
     private fun installCrashReporter() {
         val prev = Thread.getDefaultUncaughtExceptionHandler()
@@ -5828,6 +5836,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun showDailyJournalEntryPage(dateKey: String) {
         activeJournalMediaDateKey = dateKey
+        innerPageBackAction = {
+            if (isRecordingJournalAudio) stopJournalAudioRecording()
+            notesSubTab = 1
+            renderCurrentTab()
+        }
         val prefs = getDiaryPreferences()
         val existingText = prefs.getString(dateKey, "") ?: ""
         val date = try {
@@ -6122,6 +6135,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showNoteDetailsPage(note: NoteItem) {
+        innerPageBackAction = { renderCurrentTab() }
         val page = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             background = createRefinedFrostedDrawable(dp(24))
@@ -6363,6 +6377,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showAddOrEditNoteModal(existingNote: NoteItem?) {
+        innerPageBackAction = { renderCurrentTab() }
         noteAudioPath = existingNote?.audioPath ?: ""
         noteImageUri = existingNote?.imageUri ?: ""
         val page = LinearLayout(this).apply {
