@@ -35,11 +35,26 @@ object WaqtCloudBackup {
         "ota_auto_check"
     )
 
-    /** API keys never leave the device. */
+    /** AI provider keys never leave the device. */
     private val EXCLUDED_KEYS = setOf(
         "gemini_api_key", "groq_api_key", "openrouter_api_key",
         "gemini_model", "groq_model", "openrouter_model"
     )
+
+    /**
+     * Any persistent secret- or token-like preference is excluded too,
+     * including future auth material. Worded tightly so ordinary settings
+     * like max_tokens or pomodoro sessions still back up.
+     */
+    private val EXCLUDED_KEY_PATTERN = Regex(
+        "(?i).*(api[-_]?key|apikey|secret|password|credential|oauth|bearer|(access|refresh|id|auth)[-_]?token).*"
+    )
+
+    /** Signed-in Google identity is device state: never backed up, never overwritten by a restore. */
+    private val IDENTITY_KEYS = setOf("waqt_google_email", "waqt_google_name")
+
+    private fun isExcludedKey(key: String): Boolean =
+        EXCLUDED_KEYS.contains(key) || IDENTITY_KEYS.contains(key) || EXCLUDED_KEY_PATTERN.matches(key)
 
     data class BackupSummary(
         val exportedAt: String?,
@@ -62,7 +77,7 @@ object WaqtCloudBackup {
                 val prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE)
                 val store = JSONObject()
                 for ((key, value) in prefs.all) {
-                    if (EXCLUDED_KEYS.contains(key)) continue
+                    if (isExcludedKey(key)) continue
                     when (value) {
                         is Boolean -> store.put(key, value)
                         is Int -> store.put(key, value)
@@ -299,7 +314,7 @@ object WaqtCloudBackup {
             val keys = store.keys()
             while (keys.hasNext()) {
                 val key = keys.next()
-                if (EXCLUDED_KEYS.contains(key)) continue
+                if (isExcludedKey(key)) continue
                 when (val value = store.get(key)) {
                     is Boolean -> editor.putBoolean(key, value)
                     is Int -> editor.putInt(key, value)
