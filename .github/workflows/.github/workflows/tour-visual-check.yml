@@ -1,0 +1,84 @@
+name: WAQT Tour Visual Check
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tour-visual:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+      - name: Compile debug APK
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
+      - name: Run tour on emulator and capture screenshots
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          profile: pixel_6
+          script: |
+            set -x
+            adb install -r app/build/outputs/apk/debug/app-debug.apk
+            adb shell pm clear com.example.glassproductivity
+            adb shell am start -n com.example.glassproductivity/.MainActivity
+            sleep 12
+            mkdir -p shots
+            tap_text() {
+              adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+              adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+              python3 - "$1" <<'PY' > /tmp/tap.txt
+            import re, sys
+            target = sys.argv[1]
+            xml = open('ui.xml', encoding='utf-8').read()
+            for m in re.finditer(r'text="([^"]*)"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', xml):
+                if target in m.group(1):
+                    x = (int(m.group(2)) + int(m.group(4))) // 2
+                    y = (int(m.group(3)) + int(m.group(5))) // 2
+                    print(x, y)
+                    break
+            PY
+            }
+            for i in 1 2 3 4 5 6 7; do
+              adb exec-out screencap -p > shots/step_$i.png
+              tap_text "التالي"
+              read X Y < /tmp/tap.txt || true
+              if [ -z "${X:-}" ]; then
+                tap_text "إنهاء"
+                read X Y < /tmp/tap.txt || true
+              fi
+              if [ -n "${X:-}" ]; then adb shell input tap $X $Y; fi
+              unset X Y
+              sleep 3
+            done
+            adb exec-out screencap -p > shots/final.png
+            # double-back exit check at root
+            adb shell input keyevent 4
+            sleep 1
+            adb exec-out screencap -p > shots/back_once.png
+            PID1=$(adb shell pidof com.example.glassproductivity || true)
+            echo "PID after single back: ${PID1:-gone}"
+            adb shell input keyevent 4
+            sleep 1
+            PID2=$(adb shell pidof com.example.glassproductivity || true)
+            echo "PID after double back: ${PID2:-gone}"
+            adb exec-out screencap -p > shots/back_twice.png
+            echo "SINGLE_BACK_PID=${PID1:-gone}" > shots/back_result.txt
+            echo "DOUBLE_BACK_PID=${PID2:-gone}" >> shots/back_result.txt
+      - name: Upload tour screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: tour-shots
+          path: shots/
