@@ -75,6 +75,7 @@ import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -529,6 +530,7 @@ class MainActivity : AppCompatActivity() {
         audioManager = getSystemService(Context.AUDIO_SERVICE) as? AudioManager
         loadSavedPreferences()
         applySystemBarTheme()
+        setupRootDoubleBackExit()
         buildMainLayoutStructure()
         syncActiveFocusTimerFromStorage()
         renderCurrentTab()
@@ -545,6 +547,26 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = if (isDarkMode) 0 else (
             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR
         )
+    }
+
+    private fun setupRootDoubleBackExit() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val now = System.currentTimeMillis()
+                if (now - lastRootBackPressAt < 2500L) {
+                    lastRootBackPressAt = 0L
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                } else {
+                    lastRootBackPressAt = now
+                    Toast.makeText(
+                        this@MainActivity,
+                        if (isArabic) "دوس رجوع تاني عشان تقفل التطبيق" else "Press back again to exit",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        })
     }
 
     private fun loadSavedPreferences() {
@@ -751,6 +773,7 @@ class MainActivity : AppCompatActivity() {
         headerBarLayout.addView(btnLang)
 
         val btnSettings = TextView(this).apply {
+            tag = "waqt_tour_settings"
             text = "⚙️"
             textSize = 18f
             gravity = Gravity.CENTER
@@ -3229,6 +3252,7 @@ class MainActivity : AppCompatActivity() {
     // ------------------------------------------------------------------
     private var onboardingRefresh: (() -> Unit)? = null
     private var startupChecksDone = false
+    private var lastRootBackPressAt = 0L
 
     private fun installCrashReporter() {
         val prev = Thread.getDefaultUncaughtExceptionHandler()
@@ -3312,72 +3336,153 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Guided coach-mark tour: each step dims the app and spotlights the real control it
+    // explains, with a glass panel matching WAQT's warm theme. Replayable from settings.
     private fun showOnboarding(jumpToPermissions: Boolean) {
-        data class Slide(val icon: String, val ar: String, val en: String, val bodyAr: String, val bodyEn: String, val targetTab: Int, val openSideDock: Boolean = false)
-        val slides = listOf(
-            Slide("⏳", "أهلاً بيك في وقت", "Welcome to WAQT", "تطبيق واحد لمهامك وعاداتك وتركيزك وملاحظاتك، هنتنقل معاك دلوقتي في كل تاب ونعرفك كل ميزة!", "One app for tasks, habits, focus and notes — let us walk through each tab live!", 0),
-            Slide("🎯", "تاب المهام", "Tasks Tab", "كل مهامك هنا مترتبة بالأهمية (عالية/متوسطة/منخفضة). اضغط (+) لإضافة مهمة وتحديد أهميتها، أو اضغط على شارة الأهمية بالكارت لتبديلها!", "Add tasks with the orange +, pick or tap priorities to filter, swipe cards, and earn ranks.", 0),
-            Slide("🌱", "تاب العادات", "Habits Tab", "ابني عاداتك يوم بيوم وتابع سلسلتك! اضغط (+) لإضافة عادة جديدة وتحديد أهميتها (مهمة/متوسطة/عادية) وتصنيفها وأيام تكرارها.", "Build streaks, choose habit priority & category, and track daily progress.", 1),
-            Slide("🍅", "تاب التركيز والأصوات", "Focus & Ambient Sounds", "مؤقت بومودورو بالساعة الرملية والتيك-تاك الهادي، وأصوات محيطية طبيعية بنقاء عالي ولوب ناعم، مع استراحة تلقائية وإحصائيات لهدفك اليومي.", "Pomodoro timer with seamless ambient sounds, auto breaks and daily goals.", 2),
-            Slide("📝", "تاب مدونتي", "My Journal", "اعمل تصنيفاتك بنفسك، ودون تدويناتك أو افتح تدوينة عائمة فوق أي تطبيق!", "Create your own categories and floating quick notes over any app.", 3),
-            Slide("✨", "المساعد الذكي", "Smart Assistant", "بيبص على يومك ويساعدك تحقق أهدافك. اربط Gemini أو Groq أو OpenRouter من أيقونة 🔑، وWAQT هيتنقل بينهم تلقائيًا.", "Understands your day, helps with goals, and can switch between Gemini, Groq, and OpenRouter.", 0),
-            Slide("🧭", "التنقل والشريط الجانبي", "Navigation & Side Rail", "الشريط السفلي للتنقل بين التابات، والشريط الجانبي فتحتهولك أهو: فيه بحث وإحصائيات وتذكيرات سريعة (واسحبه لأي حافة).", "Bottom bar to switch tabs. The side rail gives quick access to stats, search, and presets.", 0, openSideDock = true),
-            Slide("🔔", "الأذونات (اختيارية)", "Optional permissions", "تقدر تستخدم التطبيق من غير ما تفعّل أي إذن دلوقتي. فعّل الإذن وقت ما تحتاج الميزة المرتبطة بيه فقط؛ وتقدر تتخطى الخطوة دي عادي.", "Permissions are optional. WAQT works without enabling them now. Grant each permission only when you use the feature that needs it, or skip this step.", 0)
+        if (jumpToPermissions) {
+            showReminderPermissionsDialog()
+            return
+        }
+        data class TourStep(
+            val bodyAr: String,
+            val bodyEn: String,
+            val targetTab: Int,
+            val openSideDock: Boolean = false,
+            val target: String? = null,
+            val tipTop: Boolean = false
         )
+        val steps = listOf(
+            TourStep(
+                "أهلاً بيك في وَقْت. دقيقة واحدة نوريك فيها كل زرار بيعمل إيه، وتقدر تتخطى في أي لحظة.",
+                "Welcome to WAQT. One minute to show you what every control does, and you can skip anytime.",
+                0
+            ),
+            TourStep(
+                "زرار الإضافة: من هنا تضيف مهمة جديدة أو عادة جديدة، حسب القسم اللي إنت واقف فيه.",
+                "The add button: from here you add a new task or habit, depending on the section you are in.",
+                0, target = "fab", tipTop = true
+            ),
+            TourStep(
+                "شارة الأولوية: اضغط عليها من الكارت مباشرة عشان تبدّل بين عالية ومتوسطة ومنخفضة، من غير ما تفتح المهمة.",
+                "Priority badge: tap it right on the card to switch between high, medium and low, without opening the task.",
+                0, target = "prio"
+            ),
+            TourStep(
+                "الشريط السفلي: أربع أقسام، مهامك وعاداتك وتركيزك ومدونتك. اضغط أو اسحب بينهم.",
+                "The bottom bar: four sections, your tasks, habits, focus and journal. Tap or swipe between them.",
+                0, target = "tabs", tipTop = true
+            ),
+            TourStep(
+                "الشريط الجانبي: اسحبه من الحافة وتلاقي البحث والإحصائيات والتذكيرات السريعة، وتقدر تنقله للحافة التانية.",
+                "The side rail: drag it from the edge to find search, stats and quick reminders, and you can move it to the other edge.",
+                0, openSideDock = true, target = "dock"
+            ),
+            TourStep(
+                "المساعد الذكي: من الزرار العائم ده تفتح المحادثة في أي وقت، ومن ⚙️ الإعدادات تربط Gemini أو بدائله، والمساعد يفهم يومك ويساعدك تنفّذ.",
+                "Smart assistant: the floating button opens the chat anytime; link Gemini or an alternative from the settings, and the assistant understands your day and helps you get it done.",
+                0, target = "assistant"
+            ),
+            TourStep(
+                "خلصنا 🎓 الجولة دي موجودة دايمًا من الإعدادات تحت «شرح التطبيق»، تقدر ترجع لها في أي وقت.",
+                "Done. This tour always lives in settings under App tour, so you can come back to it anytime.",
+                0
+            )
+        )
+
         val dlg = Dialog(this, android.R.style.Theme_Translucent_NoTitleBar)
+        val overlay = object : View(this) {
+            var hole: RectF? = null
+            private val scrimPaint = Paint().apply { color = Color.argb(198, 12, 9, 6) }
+            private val ringPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                style = Paint.Style.STROKE
+                strokeWidth = dp(2).toFloat()
+                color = accentOrangeColor()
+            }
+            private val glowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
+                style = Paint.Style.STROKE
+                strokeWidth = dp(9).toFloat()
+                color = Color.argb(72, 255, 138, 61)
+                maskFilter = android.graphics.BlurMaskFilter(dp(9).toFloat(), android.graphics.BlurMaskFilter.Blur.NORMAL)
+            }
+            override fun onDraw(canvas: Canvas) {
+                super.onDraw(canvas)
+                val h = hole
+                if (h == null) {
+                    canvas.drawRect(0f, 0f, width.toFloat(), height.toFloat(), scrimPaint)
+                    return
+                }
+                val pad = dp(7).toFloat()
+                val r = dp(18).toFloat()
+                val hr = RectF(h.left - pad, h.top - pad, h.right + pad, h.bottom + pad)
+                canvas.drawRect(0f, 0f, width.toFloat(), hr.top, scrimPaint)
+                canvas.drawRect(0f, hr.bottom, width.toFloat(), height.toFloat(), scrimPaint)
+                canvas.drawRect(0f, hr.top, hr.left, hr.bottom, scrimPaint)
+                canvas.drawRect(hr.right, hr.top, width.toFloat(), hr.bottom, scrimPaint)
+                canvas.drawRoundRect(hr, r, r, glowPaint)
+                canvas.drawRoundRect(hr, r, r, ringPaint)
+            }
+        }.apply {
+            setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+            layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+        }
+
         val root = FrameLayout(this).apply {
             setBackgroundColor(Color.TRANSPARENT)
-            setPadding(dp(12), dp(24), dp(12), dp(86))
+            addView(overlay)
         }
-        val column = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER_HORIZONTAL
-            background = createGlassCardDrawable(false, false).mutate().also {
-                // Glass panel is intentionally translucent over the dimmed app backdrop.
-            }
-            elevation = dp(24).toFloat()
-            setPadding(dp(18), dp(14), dp(18), dp(16))
-            layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
-                gravity = Gravity.BOTTOM
-            }
-        }
-        root.addView(column)
 
-        val skip = TextView(this).apply {
-            text = if (isArabic) "تخطي ✕" else "Skip ✕"
+        val counterTv = TextView(this).apply {
+            textSize = 11f
+            setTextColor(Color.parseColor("#C9BCAC"))
+            gravity = Gravity.END
+        }
+        val bodyTv = TextView(this).apply {
+            textSize = 14f
+            setTextColor(Color.parseColor("#F6F1E7"))
+            setLineSpacing(0f, 1.35f)
+            gravity = Gravity.START
+            setPadding(0, dp(6), 0, dp(10))
+        }
+        val skipTv = TextView(this).apply {
+            text = if (isArabic) "تخطَّ" else "Skip"
             textSize = 13f
             setTypeface(typeface, Typeface.BOLD)
-            setTextColor(textMutedColor())
-            setPadding(dp(10), dp(4), dp(10), dp(4))
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { gravity = Gravity.END }
+            setTextColor(Color.parseColor("#C9BCAC"))
+            gravity = Gravity.CENTER
+            setPadding(dp(10), dp(6), dp(10), dp(6))
         }
-        column.addView(skip)
-
-        val body = LinearLayout(this).apply {
+        val nextTv = TextView(this).apply {
+            textSize = 14f
+            gravity = Gravity.CENTER
+            setTypeface(typeface, Typeface.BOLD)
+            setTextColor(Color.parseColor("#3B2B20"))
+            background = createOrange3DDrawable(dp(17))
+            elevation = dp(6).toFloat()
+            setPadding(dp(22), dp(8), dp(22), dp(8))
+        }
+        val navRow = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+            addView(skipTv)
+            addView(View(this@MainActivity).apply { layoutParams = LinearLayout.LayoutParams(0, dp(1), 1f) })
+            addView(nextTv)
+        }
+        val panel = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
-            gravity = Gravity.CENTER_HORIZONTAL
-            layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            background = GradientDrawable().apply {
+                cornerRadius = dp(18).toFloat()
+                setColor(Color.argb(158, 26, 18, 12))
+                setStroke(dp(1), Color.argb(84, 255, 138, 61))
+            }
+            elevation = dp(20).toFloat()
+            setPadding(dp(16), dp(12), dp(16), dp(12))
+            addView(counterTv)
+            addView(bodyTv)
+            addView(navRow)
         }
-        column.addView(ScrollView(this).apply {
-            isFillViewport = false
-            isVerticalScrollBarEnabled = false
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            addView(body)
-        })
-        val dots = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(20)).apply { topMargin = dp(6) }
-        }
-        column.addView(dots)
-        val btnRow = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER
-            layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(46)).apply { topMargin = dp(8) }
-        }
-        column.addView(btnRow)
+        root.addView(panel)
 
-        var cur = if (jumpToPermissions) slides.lastIndex else 0
+        var cur = 0
         fun closeTour() {
             isTasksLeftDockOpen = false
             getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().putBoolean("onboarding_done", true).apply()
@@ -3385,6 +3490,95 @@ class MainActivity : AppCompatActivity() {
             dlg.dismiss()
             renderCurrentTab()
         }
+        fun render() {
+            val st = steps[cur]
+            currentTab = st.targetTab
+            isTasksLeftDockOpen = st.openSideDock
+            renderCurrentTab()
+
+            counterTv.text = if (isArabic) "${cur + 1} من ${steps.size}" else "${cur + 1} of ${steps.size}"
+            bodyTv.text = if (isArabic) st.bodyAr else st.bodyEn
+            nextTv.text = when {
+                cur == 0 -> if (isArabic) "يلا نبدأ" else "Let's start"
+                cur == steps.lastIndex -> if (isArabic) "إنهاء" else "Finish"
+                else -> if (isArabic) "التالي" else "Next"
+            }
+            panel.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply {
+                gravity = if (st.tipTop) Gravity.TOP else Gravity.BOTTOM
+                marginStart = dp(14)
+                marginEnd = dp(14)
+                topMargin = if (st.tipTop) dp(28) else 0
+                bottomMargin = if (st.tipTop) 0 else dp(24)
+            }
+
+            overlay.hole = null
+            overlay.invalidate()
+            root.postDelayed({
+                if (!dlg.isShowing) return@postDelayed
+                val targetView: View? = when (st.target) {
+                    "fab" -> rootFrameLayout.findViewWithTag("waqt_tour_fab")
+                    "prio" -> rootFrameLayout.findViewWithTag("waqt_tour_prio")
+                    "tabs" -> if (::gtaRadialTriggerButton.isInitialized) gtaRadialTriggerButton else null
+                    "dock" -> rootFrameLayout.findViewWithTag("waqt_tour_dock")
+                    "assistant" -> if (::floatingAIChatBubble.isInitialized && floatingAIChatBubble.isShown) floatingAIChatBubble else rootFrameLayout.findViewWithTag("waqt_tour_settings")
+                    else -> null
+                }
+                if (targetView != null && targetView.isShown && targetView.width > 0 && targetView.height > 0) {
+                    val tLoc = IntArray(2)
+                    val oLoc = IntArray(2)
+                    targetView.getLocationOnScreen(tLoc)
+                    overlay.getLocationOnScreen(oLoc)
+                    overlay.hole = RectF(
+                        (tLoc[0] - oLoc[0]).toFloat(),
+                        (tLoc[1] - oLoc[1]).toFloat(),
+                        (tLoc[0] - oLoc[0] + targetView.width).toFloat(),
+                        (tLoc[1] - oLoc[1] + targetView.height).toFloat()
+                    )
+                } else {
+                    overlay.hole = null
+                }
+                overlay.invalidate()
+            }, 140)
+        }
+        skipTv.setOnClickListener { closeTour() }
+        nextTv.setOnClickListener { if (cur == steps.lastIndex) closeTour() else { cur++; render() } }
+        onboardingRefresh = null
+        dlg.setOnDismissListener { onboardingRefresh = null }
+        dlg.setCancelable(false)
+        dlg.setCanceledOnTouchOutside(false)
+        dlg.setContentView(root)
+        dlg.show()
+        dlg.window?.apply {
+            setBackgroundDrawableResource(android.R.color.transparent)
+            setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT)
+            clearFlags(android.view.WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+        }
+        render()
+    }
+
+    // Reminder-permissions checklist, opened from settings. Kept separate from the tour:
+    // permissions are requested when the related feature is used, not during the walkthrough.
+    private fun showReminderPermissionsDialog() {
+        val dlg = Dialog(this, android.R.style.Theme_Translucent_NoTitleBar)
+        val root = FrameLayout(this).apply {
+            setBackgroundColor(Color.TRANSPARENT)
+            setPadding(dp(12), dp(24), dp(12), dp(24))
+        }
+        val body = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
+        val column = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            gravity = Gravity.CENTER_HORIZONTAL
+            background = createGlassCardDrawable(false, false)
+            elevation = dp(24).toFloat()
+            setPadding(dp(18), dp(14), dp(18), dp(16))
+            layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT).apply { gravity = Gravity.CENTER }
+            addView(ScrollView(this@MainActivity).apply {
+                isVerticalScrollBarEnabled = false
+                addView(body)
+            })
+        }
+        root.addView(column)
+
         fun permRow(label: String, ok: Boolean, action: () -> Unit): View = TextView(this).apply {
             text = (if (ok) "✅  " else "⚠️  ") + label
             textSize = 13f
@@ -3398,98 +3592,51 @@ class MainActivity : AppCompatActivity() {
         }
 
         fun render() {
-            val sl = slides[cur]
-            currentTab = sl.targetTab
-            isTasksLeftDockOpen = sl.openSideDock
-            renderCurrentTab()
-
             body.removeAllViews()
-            val headerRow = LinearLayout(this).apply {
-                orientation = LinearLayout.HORIZONTAL
-                gravity = Gravity.CENTER
-                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
-            }
-            headerRow.addView(TextView(this).apply {
-                text = sl.icon
-                textSize = 26f
-                gravity = Gravity.CENTER
-                background = createGlass3DDrawable(dp(26)).also { }
-                clipToOutline = true
-                layoutParams = LinearLayout.LayoutParams(dp(52), dp(52)).apply { marginEnd = dp(12) }
-            })
-            headerRow.addView(TextView(this).apply {
-                text = if (isArabic) sl.ar else sl.en
-                textSize = 20f
+            body.addView(TextView(this).apply {
+                text = if (isArabic) "أذونات التنبيهات والخلفية" else "Reminder permissions"
+                textSize = 18f
                 setTypeface(typeface, Typeface.BOLD)
                 setTextColor(textPrimaryColor())
+                gravity = Gravity.CENTER
             })
-            body.addView(headerRow)
             body.addView(TextView(this).apply {
-                text = if (isArabic) sl.bodyAr else sl.bodyEn
-                textSize = 14f
+                text = if (isArabic) "فعّل كل إذن وقت ما تحتاجه؛ التطبيق يشتغل من غيرها، بس التذكيرات محتاجاها عشان توصل في ميعادها."
+                else "Enable each permission when you need it; the app works without them, but timely reminders need them."
+                textSize = 13f
                 gravity = Gravity.CENTER
                 setLineSpacing(0f, 1.2f)
                 setTextColor(textPrimaryColor())
-                setPadding(dp(6), dp(8), dp(6), dp(4))
+                setPadding(dp(6), dp(8), dp(6), dp(6))
             })
-            if (cur == slides.lastIndex) {
-                body.addView(permRow(if (isArabic) "السماح بالإشعارات" else "Allow notifications", isNotifOk()) { askNotifications() })
-                body.addView(permRow(if (isArabic) "تشغيل التطبيق في الخلفية (البطارية)" else "Run in background (battery)", isBatteryOk()) { askBattery() })
-                body.addView(permRow(if (isArabic) "المنبهات الدقيقة (التذكير في الميعاد بالظبط)" else "Exact alarms", isExactOk()) { askExactAlarm() })
-                body.addView(permRow(if (isArabic) "العرض فوق التطبيقات (للنوافذ العايمة)" else "Draw over apps (floating windows)", isOverlayOk()) { askOverlay() })
-                body.addView(TextView(this).apply {
-                    text = if (isArabic) "اختياري تمامًا: بعض الأجهزة قد تحتاج إعدادات البطارية لتحسين وصول التذكيرات في الخلفية."
-                    else "On Xiaomi/Oppo/Samsung also enable Autostart and set battery to Unrestricted in App info."
-                    textSize = 12f
-                    gravity = Gravity.CENTER
-                    setTextColor(textMutedColor())
-                    setPadding(dp(6), dp(12), dp(6), dp(4))
-                })
-                body.addView(permRow(if (isArabic) "فتح إعدادات التطبيق" else "Open app settings", false) {
-                    openSettingsSafely(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
-                })
-            }
-
-            dots.removeAllViews()
-            for (i in slides.indices) {
-                dots.addView(View(this).apply {
-                    background = GradientDrawable().apply {
-                        cornerRadius = dp(5).toFloat()
-                        setColor(if (i == cur) accentOrangeColor() else Color.parseColor("#55FFFFFF"))
-                    }
-                    layoutParams = LinearLayout.LayoutParams(if (i == cur) dp(22) else dp(8), dp(8)).apply { marginStart = dp(4); marginEnd = dp(4) }
-                    setOnClickListener { cur = i; render() }
-                })
-            }
-            btnRow.removeAllViews()
-            if (cur > 0) {
-                btnRow.addView(TextView(this).apply {
-                    text = if (isArabic) "رجوع" else "Back"
-                    textSize = 15f
-                    gravity = Gravity.CENTER
-                    setTextColor(textPrimaryColor())
-                    background = createGlass3DDrawable(dp(27))
-                    layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1f).apply { marginEnd = dp(10) }
-                    setOnClickListener { cur--; render() }
-                })
-            }
-            btnRow.addView(TextView(this).apply {
-                text = if (cur == slides.lastIndex) (if (isArabic) "يلا نبدأ 🚀" else "Let's go 🚀") else (if (isArabic) "التالي" else "Next")
-                textSize = 17f
+            body.addView(permRow(if (isArabic) "السماح بالإشعارات" else "Allow notifications", isNotifOk()) { askNotifications() })
+            body.addView(permRow(if (isArabic) "تشغيل التطبيق في الخلفية (البطارية)" else "Run in background (battery)", isBatteryOk()) { askBattery() })
+            body.addView(permRow(if (isArabic) "المنبهات الدقيقة (التذكير في الميعاد بالظبط)" else "Exact alarms", isExactOk()) { askExactAlarm() })
+            body.addView(permRow(if (isArabic) "العرض فوق التطبيقات (للنوافذ العايمة)" else "Draw over apps (floating windows)", isOverlayOk()) { askOverlay() })
+            body.addView(TextView(this).apply {
+                text = if (isArabic) "اختياري تمامًا: بعض الأجهزة قد تحتاج إعدادات البطارية لتحسين وصول التذكيرات في الخلفية."
+                else "On Xiaomi/Oppo/Samsung also enable Autostart and set battery to Unrestricted in App info."
+                textSize = 12f
+                gravity = Gravity.CENTER
+                setTextColor(textMutedColor())
+                setPadding(dp(6), dp(12), dp(6), dp(4))
+            })
+            body.addView(permRow(if (isArabic) "فتح إعدادات التطبيق" else "Open app settings", false) {
+                openSettingsSafely(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:$packageName")))
+            })
+            body.addView(TextView(this).apply {
+                text = if (isArabic) "تم" else "Done"
+                textSize = 15f
                 gravity = Gravity.CENTER
                 setTypeface(typeface, Typeface.BOLD)
-                setTextColor(textPrimaryColor())
-                background = createGlass3DDrawable(dp(27))
-                elevation = dp(10).toFloat()
-                layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 2f)
-                setOnClickListener { if (cur == slides.lastIndex) closeTour() else { cur++; render() } }
+                setTextColor(Color.parseColor("#3B2B20"))
+                background = createOrange3DDrawable(dp(22))
+                layoutParams = LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dp(44)).apply { topMargin = dp(12) }
+                setOnClickListener { dlg.dismiss() }
             })
         }
-        skip.setOnClickListener { if (cur < slides.lastIndex) { cur = slides.lastIndex; render() } else closeTour() }
-        onboardingRefresh = { if (cur == slides.lastIndex && dlg.isShowing) render() }
+        onboardingRefresh = { if (dlg.isShowing) render() }
         dlg.setOnDismissListener { onboardingRefresh = null }
-        dlg.setCancelable(false)
-        dlg.setCanceledOnTouchOutside(false)
         dlg.setContentView(root)
         dlg.show()
         dlg.window?.apply {
@@ -3948,7 +4095,7 @@ class MainActivity : AppCompatActivity() {
         }
         root.addView(content)
 
-        val leftDock = buildTasksLeftSlideOutDock()
+        val leftDock = buildTasksLeftSlideOutDock().apply { tag = "waqt_tour_dock" }
         root.addView(leftDock)
         root.addView(buildAddFab { showAddOrEditTaskModal(null) })
         return root
@@ -4189,6 +4336,7 @@ class MainActivity : AppCompatActivity() {
             else -> if (isArabic) "🟢 منخفضة" else "🟢 Low"
         }
         topRow.addView(TextView(this).apply {
+            tag = "waqt_tour_prio"
             val habitPrefix = if (item.isHabit) "🌱 " else ""
             text = if (isDone) (if (isArabic) "✅ مكتملة" else "✅ Done") else (habitPrefix + prioText)
             textSize = 12f
@@ -9003,6 +9151,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun buildAddFab(onTap: () -> Unit): View = TextView(this).apply {
+        tag = "waqt_tour_fab"
         text = "＋"
         textSize = 30f
         gravity = Gravity.CENTER
