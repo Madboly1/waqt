@@ -20,7 +20,7 @@ class GoogleAccountManager(private val activity: Activity) {
          * Credential Manager as the server client ID. Not a secret.
          * TODO(cloud-setup): fill in once the OAuth client exists.
          */
-        const val SERVER_CLIENT_ID: String = ""
+        const val SERVER_CLIENT_ID: String = "668845299175-bmcf43kph5uvncj106aj5kfh3od3bflk.apps.googleusercontent.com"
         val configured: Boolean get() = SERVER_CLIENT_ID.isNotBlank()
 
         private const val PREFS = "waqt_productivity_prefs"
