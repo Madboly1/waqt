@@ -2,6 +2,11 @@ name: WAQT Tour Visual Check
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - feature/waqt-guided-icon-tour
+    paths:
+      - .github/workflows/tour-visual-check.yml
 
 permissions:
   contents: read
