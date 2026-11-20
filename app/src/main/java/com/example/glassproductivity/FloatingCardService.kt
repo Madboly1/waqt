@@ -239,7 +239,9 @@ class FloatingCardService : Service() {
                 WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN or
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        // A floating quick note must never blur or visually disable the app underneath.
+        // Keep the glass blur only for the regular focus/reminder card.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && !isFloatingNoteMode) {
             windowFlags = windowFlags or WindowManager.LayoutParams.FLAG_BLUR_BEHIND
         }
 
@@ -259,7 +261,7 @@ class FloatingCardService : Service() {
             savedExpandedY = y
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                blurBehindRadius = 32
+                blurBehindRadius = if (isFloatingNoteMode) 0 else 32
             }
         }
 
@@ -436,7 +438,9 @@ class FloatingCardService : Service() {
             blurListener = Consumer<Boolean> { isBlurEnabled ->
                 floatingView?.let { view ->
                     if (view.isAttachedToWindow) {
-                        layoutParams.blurBehindRadius = if (isBlurEnabled) 32 else 0
+                        // Cross-window blur is intentionally disabled for quick notes so
+                        // users can keep interacting with the underlying app normally.
+                        layoutParams.blurBehindRadius = if (isBlurEnabled && !isFloatingNoteMode) 32 else 0
                         try { windowManager.updateViewLayout(view, layoutParams) } catch (_: Exception) {}
                     }
                 }
