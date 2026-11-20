@@ -7859,6 +7859,12 @@ class MainActivity : AppCompatActivity() {
                 showOnboarding(false)
             })
             container.addView(createSettingsActionButton(
+                if (isArabic) "💬 تواصل معنا" else "💬 Contact us",
+                "💬"
+            ) {
+                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/cadr_tech")))
+            })
+            container.addView(createSettingsActionButton(
                 if (isArabic) "مشاركة نسخة احتياطية (نص)" else "Share backup (text)",
                 "↗"
             ) {
