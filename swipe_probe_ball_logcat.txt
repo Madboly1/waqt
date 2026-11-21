@@ -1,0 +1,1413 @@
+--------- beginning of main
+11-21 15:35:38.748  1048  1837 E AuthPII : [GoogleAccountDataServiceImpl] getToken() -> BAD_AUTHENTICATION. App: com.google.android.gms, Service: oauth2:https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/account.capabilities https://www.googleapis.com/auth/account.service_flags
+11-21 15:35:38.748  1048  1837 E AuthPII : zkj: Long live credential not available.
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lfk.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lfq.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at ldx.l(:com.google.android.gms@225014047@22.50.14 (190800-499278674):47)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lcz.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):24)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lde.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lgd.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lgd.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lcg.hasFeatures(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:312)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:345)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.transact(Binder.java:1064)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at arlh.onTransact(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.transact(Binder.java:1064)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at alqf.onTransact(:com.google.android.gms@225014047@22.50.14 (190800-499278674):17)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 15:35:38.748  1048  1837 E AuthPII : Message is Long live credential not available.
+11-21 15:35:38.748  1048  1837 E AuthPII : zkj: Long live credential not available.
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lfk.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lfq.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at ldx.l(:com.google.android.gms@225014047@22.50.14 (190800-499278674):47)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lcz.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):24)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lde.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lgd.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lgd.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at lcg.hasFeatures(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.accounts.AbstractAccountAuthenticator$Transport.hasFeatures(AbstractAccountAuthenticator.java:312)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.accounts.IAccountAuthenticator$Stub.onTransact(IAccountAuthenticator.java:345)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.transact(Binder.java:1064)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at arlh.onTransact(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.transact(Binder.java:1064)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at alqf.onTransact(:com.google.android.gms@225014047@22.50.14 (190800-499278674):17)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 15:35:38.748  1048  1837 E AuthPII : 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 15:35:38.748  1048  1837 W Auth    : [AccountStateSyncher] Unable to look up account state from server: couldn't fetch accessToken [CONTEXT service_id=153 ]
+11-21 15:35:38.748  1048  1837 W Auth    : [GaiaServicesFlagManager] Services not available! [CONTEXT service_id=153 ]
+11-21 15:35:38.754  1048  1238 E bque    : Phenotype API error. Event # dtvv@3d014ce1, EventCode: 5 [CONTEXT service_id=51 ]
+11-21 15:35:38.754  1048  1238 E bque    : bqtg: 29501: Stale snapshot for com.google.android.libraries.communications.conference.device#com.google.android.gm(change count changed - expected 2  but was 0)
+11-21 15:35:38.754  1048  1238 E bque    : 	at bquj.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):14)
+11-21 15:35:38.754  1048  1238 E bque    : 	at bquh.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:35:38.754  1048  1238 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:35:38.754  1048  1238 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1238 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.754  1048  1238 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:35:38.754  1048  1238 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1238 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.754  1048  1238 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.754  1048  1238 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.754  1048  1238 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.754  1048  1238 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:35:38.754  1048  1238 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29501 [CONTEXT service_id=51 ]
+11-21 15:35:38.754  1048  1238 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.libraries.communications.conference.device#com.google.android.gm(change count changed - expected 2  but was 0), resolution=null}]
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:35:38.754  1048  1238 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:38.754  1048  1236 E bque    : Phenotype API error. Event # dtvv@9f636498, EventCode: 32 [CONTEXT service_id=51 ]
+11-21 15:35:38.754  1048  1236 E bque    : bqtg: 29503
+11-21 15:35:38.754  1048  1236 E bque    : 	at bqvt.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.754  1048  1236 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:35:38.754  1048  1236 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1236 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.754  1048  1236 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:35:38.754  1048  1236 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1236 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.754  1048  1236 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.754  1048  1236 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.754  1048  1236 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.754  1048  1236 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:35:38.754  1048  1236 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: operation=SetAppSpecificPropertiesOperationCall, opStatusCode=29503 [CONTEXT service_id=51 ]
+11-21 15:35:38.754  1048  1236 W AsyncOperation: OperationException[Status{statusCode=unknown status code: 29503, resolution=null}]
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:35:38.754  1048  1236 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:38.755  4387  4432 E yba     : Failed to setAppSpecificProperties.
+11-21 15:35:38.755  4387  4432 E yba     : okp: 29503: 
+11-21 15:35:38.755  4387  4432 E yba     : 	at orq.F(PG:2)
+11-21 15:35:38.755  4387  4432 E yba     : 	at orq.E(Unknown Source:1)
+11-21 15:35:38.755  4387  4432 E yba     : 	at pbs.l(Unknown Source:2)
+11-21 15:35:38.755  4387  4432 E yba     : 	at pbx.fZ(PG:3)
+11-21 15:35:38.755  4387  4432 E yba     : 	at gui.onTransact(PG:4)
+11-21 15:35:38.755  4387  4432 E yba     : 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 15:35:38.755  4387  4432 E yba     : 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 15:35:38.766  4387  4387 D CompatibilityChangeReporter: Compat change id reported: 119147584; UID 10119; state: ENABLED
+--------- beginning of system
+11-21 15:35:38.772   522   554 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:35:38.772   522   554 D PackageManager: Clear ephemeral installer activity
+11-21 15:35:38.777  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=118.0 y=604.0 rawX=118.0 rawY=604.0 tab=0 
+11-21 15:35:38.777  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=118.0,259.0 host=1080x1863
+11-21 15:35:38.777  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-21 15:35:38.791  1048  1238 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.libraries.notifications#com.google.android.gm) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 15:35:38.796  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=120.22858 y=605.02856 rawX=120.22858 rawY=605.02856 tab=0 
+11-21 15:35:38.796  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:38.813  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=129.88571 y=609.48566 rawX=129.88571 rawY=609.48566 tab=0 
+11-21 15:35:38.813  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: Could not register for notifications with InnerTube: 
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: tcg: sgv: Precondition check failed.
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at tbw.apply(Unknown Source:4)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at rnl.o(PG:5)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at rnl.b(PG:2)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at tby.d(PG:4)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at xas.c(PG:51)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at xaq.run(PG:2)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at nwe.run(PG:1)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at nvp.run(PG:2)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at nvh.run(PG:3)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: Caused by: sgv: Precondition check failed.
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at tau.e(PG:5)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at rux.c(PG:18)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at rty.run(PG:17)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at rmq.run(PG:12)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	... 1 more
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: Caused by: byd
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	at rty.run(PG:12)
+11-21 15:35:38.820  4105  4382 W YouTubeMusic: 	... 4 more
+11-21 15:35:38.823  1048  4391 I WakefulBroadcastRcvr: Processing wakeful broadcast: BootOrGmsUpdated
+11-21 15:35:38.830  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=136.20001 y=612.4 rawX=136.20001 rawY=612.4 tab=0 
+11-21 15:35:38.830  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:38.836  1048  4390 I NearbyConnections: Runtime state initialization complete. Nearby connections setting is enabled. [CONTEXT service_id=54 ]
+11-21 15:35:38.839  1048  1236 W AsyncOperation: operation=GetExperimentTokensOperationCall, opStatusCode=29505 [CONTEXT service_id=51 ]
+11-21 15:35:38.839  1048  1236 W AsyncOperation: OperationException[Status{statusCode=No config packages for log source, or config package not registered, resolution=null}]
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:35:38.839  1048  1236 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:38.844  1726  1726 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-21 15:35:38.845  1726  1726 I CalRefreshTaskCtrl: #onDeviceInstallOrBoot(): Starting calendar refresh task.
+11-21 15:35:38.845  1726  1726 I CalRefreshTaskCtrl: #refreshCalendarData()
+11-21 15:35:38.846  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=142.88573 y=615.48566 rawX=142.88573 rawY=615.48566 tab=0 
+11-21 15:35:38.846  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:38.855  1726  1726 I CalRefreshTaskCtrl: Do not refresh calendar data because Smartspace is not available on device.
+11-21 15:35:38.855  1726  1726 I CalWorkerScheduler: Scheduling calendar refresh task status check worker at device reboot or app install.
+11-21 15:35:38.865  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=148.27142 y=617.97144 rawX=148.27142 rawY=617.97144 tab=0 
+11-21 15:35:38.865  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:38.872   522  2366 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10123; state: DISABLED
+11-21 15:35:38.873  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.873  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.873  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.873  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.873  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.874  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.874  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.874  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.874  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.877  1726  1726 W A       : Account id is not cached
+11-21 15:35:38.878   522   568 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10123; state: ENABLED
+11-21 15:35:38.883   328   328 D Zygote  : Forked child process 4491
+11-21 15:35:38.883   522   568 I ActivityManager: Start proc 4491:com.android.chrome/u0a123 for service {com.android.chrome/org.chromium.chrome.browser.customtabs.CustomTabsConnectionService}
+11-21 15:35:38.884  1726  1726 I A       : Setting OMP browser to 2.
+11-21 15:35:38.885   522   808 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:35:38.885   522   808 D PackageManager: Clear ephemeral installer activity
+11-21 15:35:38.888  1726  1974 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:38.891  1726  1726 I A       : Scheduling growth periodic tasks
+11-21 15:35:38.891  1726  1726 I WeatherWorkerScheduler: Scheduling weather workers.
+11-21 15:35:38.893  1726  1955 I A       : NGA enabled in interactor.
+11-21 15:35:38.896  4491  4491 W .android.chrom: Unexpected CPU variant for X86 using defaults: x86_64
+11-21 15:35:38.900   423   444 I adbd    : jdwp connection from 4491
+11-21 15:35:38.906  1048  1249 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore default scan mode. [CONTEXT service_id=54 ]
+11-21 15:35:38.908   522  2092 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10123; state: DISABLED
+11-21 15:35:38.912  4491  4491 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10123; state: DISABLED
+11-21 15:35:38.918  4491  4491 V GraphicsEnvironment: ANGLE Developer option for 'com.android.chrome' set to: 'default'
+11-21 15:35:38.918  4491  4491 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-21 15:35:38.919  4491  4491 D NetworkSecurityConfig: Using Network Security Config from resource 0_resource_name_obfuscated debugBuild: false
+11-21 15:35:38.919  4491  4491 D NetworkSecurityConfig: Using Network Security Config from resource 0_resource_name_obfuscated debugBuild: false
+11-21 15:35:38.922   522  1049 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:35:38.922   522  1049 D PackageManager: Clear ephemeral installer activity
+11-21 15:35:38.929  1726  1726 I HotwordUpgradeTask: App version upgraded to 301154575: running speaker ID model upgrade tasks v2.
+11-21 15:35:38.931  1726  1726 I HotwordUpgradeTask: #shouldShowNotificationForUserUpgrade - false [isUserSpeakerIdEnabled: false, isUserUpgraded: true]
+11-21 15:35:38.932  2497  2551 D EGL_emulation: app_time_stats: avg=3602.38ms min=89.79ms max=7114.97ms count=2
+11-21 15:35:38.934  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=153.28572 y=620.2857 rawX=153.28572 rawY=620.2857 tab=0 
+11-21 15:35:38.935  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:38.937  1726  1726 I HotwordUpgradeTask: #shouldShowNotificationForModelDownload - false [shouldCheckHotwordModel: false, xGoogleHotwordModelPresent: true, isUserSpeakerIdEnabled: false]
+11-21 15:35:38.937  1726  1726 I HotwordUpgradeTask: Notification requirements not met. Do not show notification.
+11-21 15:35:38.939  1726  2148 I A       : #Utterance files for modelType-2 found-0
+11-21 15:35:38.939  1726  2148 I A       : Utterances rename task completed.
+11-21 15:35:38.996  1048  1249 I NearbyMediums: BluetoothAdapter's name was not set by Nearby Connections, ignoring call to restore device name [CONTEXT service_id=54 ]
+11-21 15:35:39.030  1048  2883 I FontLog : Received query Google Sans, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-21 15:35:39.031  1048  2883 I FontLog : Query [Google Sans] resolved to {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-21 15:35:39.059  1726  1726 V ClearcutMetricXmitter: Transmission is done.
+11-21 15:35:39.061  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=178.54285 y=631.9429 rawX=178.54285 rawY=631.9429 tab=0 
+11-21 15:35:39.061  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:39.086  1180  3899 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.games [CONTEXT service_id=231 ]
+11-21 15:35:39.087  1180  3899 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.maps#com.google.android.gms [CONTEXT service_id=231 ]
+11-21 15:35:39.087  1180  3899 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.cast [CONTEXT service_id=231 ]
+11-21 15:35:39.087  1180  3899 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.mobile_data_plan [CONTEXT service_id=231 ]
+11-21 15:35:39.088  1180  3899 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.udc [CONTEXT service_id=231 ]
+11-21 15:35:39.096  1726  1726 I A       : Util.isLowRamDevice: false, canUsePreemptibleAudioSource: true
+11-21 15:35:39.098  1726  1974 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.098  1726  1974 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.098  1726  1974 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.098  1726  1974 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.101  1048  2883 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-21 15:35:39.101  1048  2883 I FontLog : Fetch {Google Sans, wdth 100.0, wght 400, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-21 15:35:39.109  1726  1726 I Notifications: [ChimeBroadcastReceiver] Intent received for action [android.intent.action.BOOT_COMPLETED] package [com.google.android.googlequicksearchbox].
+11-21 15:35:39.109  1726  1726 I Notifications: [ChimeBroadcastReceiver] Phenotype initialized.
+11-21 15:35:39.109  1726  1974 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.111  1726  1726 I Notifications: [ChimeBroadcastReceiver] Validation OK for action [android.intent.action.BOOT_COMPLETED].
+11-21 15:35:39.120  4491  4505 W DynamiteModule: Local module descriptor class for com.google.android.gms.googlecertificates not found.
+11-21 15:35:39.123  1048  1063 I FontLog : Pulling font file for id = 10, cache size = 10 [CONTEXT service_id=132 ]
+11-21 15:35:39.126   522  1089 I ActivityManager: Killing 1097:com.android.settings/1000 (adj 975): empty #17
+11-21 15:35:39.133  4491  4505 I DynamiteModule: Considering local module com.google.android.gms.googlecertificates:0 and remote module com.google.android.gms.googlecertificates:7
+11-21 15:35:39.133  4491  4505 I DynamiteModule: Selected remote version of com.google.android.gms.googlecertificates, version >= 7
+11-21 15:35:39.156  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=225.7143 y=653.7143 rawX=225.7143 rawY=653.7143 tab=0 
+11-21 15:35:39.156  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:39.166   522   559 W ActivityManager: setHasOverlayUi called on unknown pid: 1097
+11-21 15:35:39.211   328   328 I Zygote  : Process 1097 exited due to signal 9 (Killed)
+11-21 15:35:39.279  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=262.1143 y=670.5143 rawX=262.1143 rawY=670.5143 tab=0 
+11-21 15:35:39.279  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:39.283   522   569 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 1097 in 154ms
+11-21 15:35:39.294  1048  1837 I FontLog : Received query Google Sans:500, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-21 15:35:39.294  1048  1837 I FontLog : Query [Google Sans:500] resolved to {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-21 15:35:39.306  1048  1837 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-21 15:35:39.310  1048  1837 I FontLog : Fetch {Google Sans, wdth 100.0, wght 500, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-21 15:35:39.319  4491  4505 W .android.chrom: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk*3546605366:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes2.dex*427536226:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes3.dex*1377648437:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes4.dex*3829351679:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes5.dex*2018427284:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes6.dex*3034128668:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes7.dex*1591795505:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes8.dex*3828276099:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes9.dex*2636273855:/data/app/~~tdQNyjL3-ktkWKYpZFIALg==/com.android.chrome-ioDNM0sr_jjU-qDihxQbBA==/Chrome.apk!classes10.dex*943475562]{PCL[/data/app/~~ShGaoMnU-sU-GW0CElr5ug==/com.google.android.trichromelibrary_447211487-utFvLJsGIK8YUqk1Rqnqcw==/TrichromeLibrary.apk*777460662]})
+11-21 15:35:39.332  1726  1726 I Notifications: [ChimeExecutorApiImpl-Tiktok] Submitting Broadcast execution [242431707] to tiktok executor.
+11-21 15:35:39.352  1726  2161 I Notifications: [ChimeBroadcastReceiver] Executing action in BroadcastReceiver [android.intent.action.BOOT_COMPLETED].
+11-21 15:35:39.353  1726  1726 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPLOAD_ASSISTANT_DEVICE_SETTINGS.
+11-21 15:35:39.367  1726  2148 I NotificationFullFlow: Step 8: NotificationFilterImpl:onEntryChange
+11-21 15:35:39.370  1726  1726 I BgTaskExecutorImpl: Starting EXCLUSIVE background task OPA_NOTIFICATION_DELAYED_TRIGGER_SYNC.
+11-21 15:35:39.373  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=314.85712 y=694.8571 rawX=314.85712 rawY=694.8571 tab=0 
+11-21 15:35:39.373  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:39.386  1180  1180 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdh.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-21 15:35:39.407  1180  1180 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdh.service.listener.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-21 15:35:39.412  1048  1059 I .gms.persisten: Background young concurrent copying GC freed 45424(2890KB) AllocSpace objects, 0(0B) LOS objects, 8% free, 28MB/31MB, paused 37us,20us total 164.095ms
+11-21 15:35:39.421  1048  1837 I FontLog : Pulling font file for id = 11, cache size = 11 [CONTEXT service_id=132 ]
+11-21 15:35:39.467  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=353.1143 y=712.5143 rawX=353.1143 rawY=712.5143 tab=0 
+11-21 15:35:39.467  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:39.476  1726  2059 W SearchServiceCore: Abort, client detached.
+11-21 15:35:39.476  1726  2059 W SearchServiceCore: Abort, client detached.
+11-21 15:35:39.476  1726  2148 E BistoWorker: Couldn't get logged in Google account.
+11-21 15:35:39.478  1048  1837 I FontLog : Received query Google Sans:700, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-21 15:35:39.478  1048  1837 I FontLog : Query [Google Sans:700] resolved to {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-21 15:35:39.479  1048  1837 I FontLog : Font PFD returned from cache for {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false} [CONTEXT service_id=132 ]
+11-21 15:35:39.479  1048  1837 I FontLog : Fetch {Google Sans, wdth 100.0, wght 700, ital 0.0, bestEffort false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-21 15:35:39.482  1048  1837 I FontLog : Pulling font file for id = 12, cache size = 12 [CONTEXT service_id=132 ]
+11-21 15:35:39.530  1726  2059 W SearchServiceCore: Abort, client detached.
+11-21 15:35:39.543  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.544  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.575  1726  1726 I A       : Start work
+11-21 15:35:39.577  1726  2004 W A       : Account id is not cached
+11-21 15:35:39.590  1726  1955 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=d0a33304-efad-4558-882f-493ba9eb6ae3, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.gsa.staticplugins.chime.registration.tasks.PeriodicChimeRegistrationWorker } ]
+11-21 15:35:39.593  1726  2149 I NetworkRecognitionRnr: Using pair HTTP connection
+11-21 15:35:39.597  1726  4512 W LocationOracle: getBestLocation(): no location is available
+11-21 15:35:39.597  1726  1955 I WM-GreedyScheduler: Ignoring schedule request in non-main process
+11-21 15:35:39.609  1726  1955 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.609  1726  1955 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=a201e60f-d937-4e35-b647-b6a35e71c800, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.gsa.smartspace.task.LoggerTask } ]
+11-21 15:35:39.611  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=376.51428 y=723.3143 rawX=376.51428 rawY=723.3143 tab=0 
+11-21 15:35:39.611  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:35:39.612  1726  4513 I A       : [Upload] Connected
+11-21 15:35:39.626  1726  1955 I WM-GreedyScheduler: Ignoring schedule request in non-main process
+11-21 15:35:39.633  1180  2669 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-21 15:35:39.634  1726  1955 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.634  1726  1955 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=fca2e5b8-2bcb-475f-90d2-6946d4296a2a, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.gsa.staticplugins.opa.worker.nudgeui.ResetOpaNgaQueryCounterTask } ]
+11-21 15:35:39.635  1726  1955 I WM-GreedyScheduler: Ignoring schedule request in non-main process
+11-21 15:35:39.644  1726  1955 I WM-GreedyScheduler: Ignoring schedule request in a secondary process
+11-21 15:35:39.653  1726  4513 I NetworkRecognitionRnr: Using pair HTTP connection
+11-21 15:35:39.663  1726  1726 E A       : onError
+11-21 15:35:39.663  1726  1726 E A       : com.google.android.apps.gsa.shared.speech.a.n: errorCode: 65561, engine: 2
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.staticplugins.di.a.e.a(SourceFile:3)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.s3.n.gF(SourceFile:1)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.ce.g.a.f.f(SourceFile:2)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(SourceFile:21)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.jG(SourceFile:6)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.s3.o.d(SourceFile:15)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.s3.p.run(SourceFile:1)
+11-21 15:35:39.663  1726  1726 E A       : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-21 15:35:39.663  1726  1726 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.e.run(SourceFile:2)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ay.run(SourceFile:1)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ay.run(SourceFile:1)
+11-21 15:35:39.663  1726  1726 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:39.663  1726  1726 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:39.663  1726  1726 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.h.run(SourceFile:4)
+11-21 15:35:39.663  1726  1726 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.p: errorCode: 65586, engine: 2
+11-21 15:35:39.663  1726  1726 E A       : 	... 15 more
+11-21 15:35:39.663  1726  1726 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.l: errorCode: 401, engine: 2
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.assistant.shared.m.h.a(SourceFile:5)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.s3.producers.j.gX(SourceFile:2)
+11-21 15:35:39.663  1726  1726 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(SourceFile:15)
+11-21 15:35:39.663  1726  1726 E A       : 	... 12 more
+11-21 15:35:39.663  2860  2893 I Bugle   : BugleStartup: Initializing with enabled individual init failures...
+11-21 15:35:39.663  2860  2893 I Bugle   : BugleStartup: Registering SIM change receiver...
+11-21 15:35:39.663  2860  2893 I Bugle   : BugleStartup: Updating app config...
+11-21 15:35:39.670  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.677  1726  4524 I A       : [Upload] Connected
+11-21 15:35:39.680  1726  1726 W A       : Failed to sync device settings.
+11-21 15:35:39.680  1726  1726 I A       : Retrying to sync device settings.
+11-21 15:35:39.681  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.685  1180  2669 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-21 15:35:39.686  1180  1180 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.cryptauth.cryptauthservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-21 15:35:39.695  2860  2893 I Bugle   : BugleStartup: Done with SIM change receiver & app config.
+11-21 15:35:39.695  2860  2893 I Bugle   : BugleStartup: Handling shared prefs upgrade & Load MMS Configuration...
+11-21 15:35:39.697  1180  2669 I Icing   : Indexing done com.google.android.gms-apps
+11-21 15:35:39.698  1180  2669 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-21 15:35:39.708  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.720  1726  1974 W CronetNetworkRqstWrppr: Upload request without a content type.
+11-21 15:35:39.725  1726  1974 W CronetNetworkRqstWrppr: Upload request without a content type.
+11-21 15:35:39.729  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=378.0 y=724.0 rawX=378.0 rawY=724.0 tab=0 
+11-21 15:35:39.729  2497  2497 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-21 15:35:39.819  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.821  2860  2893 I BugleRcsEngine: [40] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-21 15:35:39.821  2860  2893 I Bugle   : Upgrading shared prefs from -1 to 2
+11-21 15:35:39.838  2860  4527 I BugleRcsEngine: [105] aloh.c: do not delay first event
+11-21 15:35:39.852  2860  2938 W Bugle   : BuglePhoneNumberUtils: canonicalizeMccMnc: invalid mccmnc. mcc: null, mnc: null
+11-21 15:35:39.871  2860  4527 I BugleRcsEngine: [105] alod.j: (Sim): Processing an intent
+11-21 15:35:39.881  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.886  2860  4527 I BugleRcsEngine: [105] alod.w: (Sim): SIM state LOADED
+11-21 15:35:39.888  1180  1180 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-21 15:35:39.890  2860  4530 W BugleRcsEngine: [108] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED
+11-21 15:35:39.894  2860  2893 I Bugle   : BugleStartup: Initializing RCS availability...
+11-21 15:35:39.899  2860  4529 W BugleRcsEngine: [107] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED
+11-21 15:35:39.901  1048  1048 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-21 15:35:39.902  2860  2893 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-21 15:35:39.902  2860  2893 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-21 15:35:39.902  2860  2893 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityAsync, hint: NO_HINT
+11-21 15:35:39.902  2860  2893 I Bugle   : BugleStartup: Done with RCS availability.
+11-21 15:35:39.902  2860  2893 I Bugle   : BugleStartup: Initializing RBM downloads...
+11-21 15:35:39.903  2860  2893 I Bugle   : BugleDownloadManager: Marking BugleDownloadManager as initialized.
+11-21 15:35:39.903  2860  2893 I Bugle   : BugleStartup: Done initializing RBM downloads.
+11-21 15:35:39.903  2860  2893 I Bugle   : BugleStartup: Done initializing with enabled individual init failures.
+11-21 15:35:39.903  2860  4528 I BugleRcsEngine: [106] aloh.c: SIM delay is not enabled
+11-21 15:35:39.903  2860  4528 W BugleRcsEngine: [106] alod.a: (Sim): process intent: android.intent.action.SIM_STATE_CHANGED
+11-21 15:35:39.904  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.909  2860  4523 W AssistantConfig: appIntegrationDataInBase64 is null
+11-21 15:35:39.911  2860  4523 E AssistantConnector: Couldn't read whether gRPC is supported from public value
+11-21 15:35:39.911  2860  4523 E AssistantConnector: java.lang.IllegalStateException: Failed to query to AGSA.
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at amdj.call(PG:16)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at aypl.call(PG:2)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at bcic.c(PG:1)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at bchf.run(PG:4)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at bcid.run(PG:1)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:39.911  2860  4523 E AssistantConnector: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:39.911  2860  4523 I AssistantConnector: Fallback to Maestro connector
+11-21 15:35:39.920  2860  2899 W BugleRcsEngine: [43] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:39.920  2860  2899 I BugleRcsEngine: [43] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:39.920  2860  2899 W BugleRcsEngine: [43] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:39.920  2860  2899 I BugleRcsEngine: [43] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-21 15:35:39.921  2860  2893 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityAsync, trivialAvailability: null
+11-21 15:35:39.929  2860  2893 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:39.930  2860  2893 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:39.930  2860  2893 W BugleRcsEngine: [40] alsz.e: Service with meta data key: SignupServiceVersions is not compatible. Service Version 4 is not supported. Supported versions: []
+11-21 15:35:39.932  2860  2903 I BugleJobs: Icing index repair service is not scheduled. [CONTEXT class_name="IcingMonitoringUtils" ]
+11-21 15:35:39.935  2497  2551 D EGL_emulation: app_time_stats: avg=108.63ms min=88.16ms max=143.69ms count=9
+11-21 15:35:39.941  2860  2893 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:39.941  2860  2893 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:39.941  2860  2893 W BugleRcsEngine: [40] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:39.941  2860  2893 I BugleRcsEngine: [40] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-21 15:35:39.941  2860  2893 I BugleRcs: RcsAvailabilityUpdaterRemote: getRcsAvailabilityFromSignupServiceAsync
+11-21 15:35:39.942  2860  2907 I RcsClientLib: Connecting SignupService
+11-21 15:35:39.943  2860  2907 W RcsClientLib: No CS.apk RCS service found. Is RCS running in Bugle?
+11-21 15:35:39.953  2860  2907 W BugleRcsEngine: [48] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:39.953  2860  2907 I BugleRcsEngine: [48] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:39.954  2860  2898 I BugleJobs: Starts to observe table change.
+11-21 15:35:39.957  2860  2907 W BugleRcsEngine: [48] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:39.957  2860  2907 I BugleRcsEngine: [48] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-21 15:35:39.957  2860  2907 I RcsClientLib: shouldUseCarrierServicesJibeService: false, CarrierServices rcs service found: false
+11-21 15:35:39.963  2860  2898 V AssistantIntegClient: #getAssistantConfig()
+11-21 15:35:39.965  3400  3400 I BugleRcsEngine: [2] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-21 15:35:39.968  3400  4532 I BugleRcsEngine: [99] ajsa.a: Creating JibeServiceComponent
+11-21 15:35:39.970  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.970  3400  4532 I BugleRcsEngine: [99] alod.j: (Sim): Processing an intent
+11-21 15:35:39.970  3400  4532 I BugleRcsEngine: [99] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-21 15:35:39.970  3400  4532 I BugleRcsEngine: [99] ajre.b: Initializing Carrier Services Logging.
+11-21 15:35:39.970  3400  4532 D BugleRcsEngine: log_saver already enabled
+11-21 15:35:39.970  2860  4527 I BugleRcsEngine: [105] alod.w: (Sim): SIM changed: true. current id: redacted-pii:sim_id[20-chars]; stored id: redacted-pii:sim_id[0-chars]; isFiDevice: false; subId: 1; slotIndex: 0
+11-21 15:35:39.971  3400  4532 I BugleRcsEngine: [99] RcsEngineProxyImpl.initializeRcsEngine: RcsEngineProxy: Initializing RCS Engine.
+11-21 15:35:39.972  3400  4532 I BugleRcsEngine: [99] alod.j: (Sim): Processing an intent
+11-21 15:35:39.972  3400  4532 I BugleRcsEngine: [99] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-21 15:35:39.973  2860  4531 W AssistantConfig: appIntegrationDataInBase64 is null
+11-21 15:35:39.973  2860  2898 W Bugle   : AssistantIntegrationStartupTask: Error getting assistant availability.
+11-21 15:35:39.973  2860  2898 W Bugle   : java.lang.IllegalStateException: Failed to query to AGSA.
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at amdj.call(PG:16)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at aypl.call(PG:2)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at bcic.c(PG:1)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at bchf.run(PG:4)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at bcid.run(PG:1)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:39.973  2860  2898 W Bugle   : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:39.975  2860  2898 D CompatibilityChangeReporter: Compat change id reported: 147600208; UID 10100; state: ENABLED
+11-21 15:35:39.981  2860  4527 I BugleRcsEngine: [105] alod.w: (Sim): Skipping writing subId because this is main bugle process.
+11-21 15:35:39.990  2860  2911 I Forking : Starting analysis.
+11-21 15:35:39.990  2860  2911 I Misthreading: Starting analysis.
+11-21 15:35:39.992  2860  4527 I BugleRcsEngine: [105] alod.w: (Sim): Updated SIM info: currentSimId: redacted-pii:sim_id[20-chars]; imsi: redacted-pii:imsi[15-chars]; rawMsisdn: redacted-pii:phone_number[12-chars]; formattedMsisdn: redacted-pii:phone_number[0-chars]; mccmnc: redacted-pii:sim_operator[6-chars] isFiDevice: false; subId: 1; slotIndex: 0
+11-21 15:35:39.992  2860  4527 I BugleRcsEngine: [105] alod.w: (Sim): First update of the SIM info.
+11-21 15:35:39.992  2860  4527 I BugleRcsEngine: [105] alod.K: (Sim): Broadcasting Intent { act=com.google.android.ims.SIM_LOADED (has extras) }
+11-21 15:35:39.992  2860  2898 I BugleNetwork: FirebaseRegistrationStartupTask: Enabling Firebase component
+11-21 15:35:39.992  2860  2860 I Bugle   : SimChangeReceiver: action: com.google.android.ims.SIM_LOADED
+11-21 15:35:39.992  2860  2893 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-21 15:35:39.992  2860  2893 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-21 15:35:39.994   522  1914 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:35:39.994   522  1914 D PackageManager: Clear ephemeral installer activity
+11-21 15:35:39.997  3400  4536 I BugleRcsEngine: [103] aloh.c: SIM delay is not enabled
+11-21 15:35:39.998  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:39.998  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.002  3400  4532 I BugleRcsEngine: [99] ajre.b: Initializing Carrier Services Logging.
+11-21 15:35:40.002  3400  4532 D BugleRcsEngine: log_saver already enabled
+11-21 15:35:40.002  3400  4532 I BugleRcsEngine: [99] RcsEngineImpl.<init>: RcsEngine(DUAL_REG): Constructor running in com.google.android.apps.messaging
+11-21 15:35:40.003  2860  4527 I BugleRcsEngine: [105] alod.j: (Sim): Processing an intent
+11-21 15:35:40.003  2860  4527 I BugleRcsEngine: [105] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-21 15:35:40.004  3400  3602 I BugleRcsEngine: [58] EventHubProxy.subscribe: Adding event listener alah@13312a6 for category 8 with key 20124326 for hub ENGINE
+11-21 15:35:40.008  3400  4536 I BugleRcsEngine: [103] alod.j: (Sim): Processing an intent
+11-21 15:35:40.008  3400  4536 I BugleRcsEngine: [103] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-21 15:35:40.008  3400  4532 I BugleRcsEngine: [99] akua.u: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = false, currentProvisioningStrategy = akxp
+11-21 15:35:40.012  3400  4532 I BugleRcsEngine: [99] aktt.e: (PEv2-SM-68327572): start PEv2 [null]
+11-21 15:35:40.012  3400  4532 I BugleRcsEngine: [99] alck.b: Created new RcsProvisioningProtoDataStorage for sim redacted-pii:sim_id[20-chars]
+11-21 15:35:40.012  3400  4532 I BugleRcsEngine: [99] albk.o: RCS Configuration storage in Bugle is disabled by p/h flag, using ProvisioningEngineStateCacheUtil.getProvisioningConfigurationForGivenSimIfExist()
+11-21 15:35:40.012  3400  4532 I BugleRcsEngine: [99] aktt.e: (PEv2-SM-68327572): start [null]
+11-21 15:35:40.013  3400  4532 I BugleRcsEngine: [99] aksn.a: Sending ProvisioningEvent to Bugle [Request Bugle information (15)], no extra data
+11-21 15:35:40.013  3400  4532 I BugleRcsEngine: [99] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[83-chars]
+11-21 15:35:40.013  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): Enter EnabledState [null]
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: Could not register for notifications with InnerTube: 
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: tcg: sgv: Precondition check failed.
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at tbw.apply(Unknown Source:4)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at rnl.o(PG:5)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at rnl.b(PG:2)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at tby.d(PG:4)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at xas.c(PG:51)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at xaq.run(PG:2)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at nwe.run(PG:1)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at nvp.run(PG:2)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at nvh.run(PG:3)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: Caused by: sgv: Precondition check failed.
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at tau.e(PG:5)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at rux.c(PG:18)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at rty.run(PG:17)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at rmq.run(PG:12)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	... 1 more
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: Caused by: byd
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	at rty.run(PG:12)
+11-21 15:35:40.014  4105  4382 W YouTubeMusic: 	... 4 more
+11-21 15:35:40.019  3400  3850 W BugleRcsEngine: [78] ajnl.z: Unable to send diagnostic log
+11-21 15:35:40.028  2860  2899 W BugleRcsEngine: [43] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.028  2860  2899 I BugleRcsEngine: [43] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.028  2860  2899 W BugleRcsEngine: [43] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.028  2860  2899 I BugleRcsEngine: [43] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-21 15:35:40.028  2860  2899 W BugleAction: Null config in BugleSharedPrefs
+11-21 15:35:40.028  2860  2899 W BugleAction: Failed to get msisdn from Bugle
+11-21 15:35:40.029  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): Start a new provisioning session [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.029  3400  4535 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-21 15:35:40.030  3400  4532 D BugleRcsEngine: log_saver already enabled
+11-21 15:35:40.030  2860  2899 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-21 15:35:40.030  2860  2899 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-21 15:35:40.030  2860  2899 W BugleAction: Failed to get msisdn from RcsProfileService
+11-21 15:35:40.030  2860  2899 W BugleAction: awmw: Jibe SDK Service not available. Is the Jibe SDK service running? Did you call connect() and wait for the notification before calling an API function?
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at awmp.b(PG:2)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.g(PG:1)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.getMsisdn(PG:1)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at utg.F(PG:12)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at tmz.b(PG:1)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at pzo.d(PG:4)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at pzk.run(PG:5)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at aypj.run(PG:2)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at bcic.c(PG:1)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at bchf.run(PG:4)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at bcid.run(PG:1)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at aosz.run(PG:1)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at aosl.run(PG:2)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at aorz.run(PG:2)
+11-21 15:35:40.030  2860  2899 W BugleAction: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.030  2860  2899 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-21 15:35:40.030  2860  2899 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-21 15:35:40.030  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.031  2860  2899 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-21 15:35:40.031  2860  2899 W Bugle   : SubscriptionUtilsAsOfLMR1: getSelfRawNumber: subInfo is null for subscription{id:-1}
+11-21 15:35:40.031  2860  2899 W BugleAction: No default number, returning empty msisdn
+11-21 15:35:40.031  3400  4535 I BugleRcsEngine: [102] albk.b: Bugle is default SMS app: true
+11-21 15:35:40.032  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.032  2860  2899 W BugleAction: No default number, returning empty msisdn
+11-21 15:35:40.032  2860  2899 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-21 15:35:40.032  3400  4535 I BugleRcsEngine: [102] akxz.a: Bugle has minimum required RCS permissions: true
+11-21 15:35:40.033  2860  2899 W BugleNetwork: RcsMsisdnAccessor: Failed to access Rcs msisdn. subId: -2
+11-21 15:35:40.033  2860  2899 W BugleEtouffee: E2eeStartupTask: Skip prekey checking because MSISDN is empty.
+11-21 15:35:40.033  3400  4535 I BugleRcsEngine: [102] albk.a: Rcs is enabled from user settings: true
+11-21 15:35:40.035  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.036  3400  4535 W BugleRcsEngine: [102] alcv.a: No config URL. RCS will be disabled!
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.036  3400  4535 W BugleRcsEngine: [102] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.036  3400  4535 W BugleRcsEngine: [102] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): transitionViaMessage, srcState=EnabledState, destState = DisabledState [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] aksn.a: Sending ProvisioningEvent to Bugle [Update provisioning status (11)], redacted-pii:[85-chars]
+11-21 15:35:40.036  3400  4535 I BugleRcsEngine: [102] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[243-chars]
+11-21 15:35:40.041  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): EnabledState: Transition to disabled [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.041  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): transitionTo: destState=DisabledState [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.041  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): onTransitionRequested EnabledState [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.041  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): Exit EnabledState [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.043  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): Enter DisabledState [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.044  3400  3602 W BugleRcsEngine: [58] ajnl.z: Unable to send diagnostic log
+11-21 15:35:40.045  3400  4535 I BugleRcsEngine: [102] aldv.p: Provisioning state change [STATE_UNKNOWN -> CONFIGURATION UPDATED SUCCESSFULLY]
+11-21 15:35:40.045  3400  4535 I BugleRcsEngine: [102] aksn.a: Sending ProvisioningEvent to Bugle [Update provisioning status (11)], redacted-pii:[85-chars]
+11-21 15:35:40.045  3400  4535 I BugleRcsEngine: [102] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[243-chars]
+11-21 15:35:40.045  3400  4538 I BugleRcsEngine: [104] ajje.handleMessage: RCS engine STOP RCS stack
+11-21 15:35:40.045  3400  4538 I BugleRcsEngine: [104] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.045  3400  3850 W BugleRcsEngine: [78] ajnl.z: Unable to send diagnostic log
+11-21 15:35:40.045  3400  4538 W BugleRcsEngine: [104] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.045  3400  4538 I BugleRcsEngine: [104] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.045  3400  4538 W BugleRcsEngine: [104] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.046  3400  4535 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-21 15:35:40.047  2860  2860 I RcsClientLib: com.google.android.rcs.client.signup.SignupService connected
+11-21 15:35:40.048  3400  3419 I BugleRcsEngine: [39] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-21 15:35:40.050  3400  3602 I BugleRcsEngine: [58] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.050  3400  3602 W BugleRcsEngine: [58] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.050  3400  3602 I BugleRcsEngine: [58] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.050  3400  3602 W BugleRcsEngine: [58] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.050  3400  3602 W BugleRcsEngine: [58] ajnx.h: Unable to send RCS extension log
+11-21 15:35:40.050  3400  3602 W BugleRcsEngine: [58] akjn.run: ProvisioningEngineMetricsStorage, the wrapper class for proto data store, is null
+11-21 15:35:40.050  3400  3850 W BugleRcsEngine: [78] aldi.a: Unable to send provisioning event log
+11-21 15:35:40.051  3400  3419 I BugleRcsEngine: [39] albk.b: Bugle is default SMS app: true
+11-21 15:35:40.051  3400  3419 I BugleRcsEngine: [39] akxz.a: Bugle has minimum required RCS permissions: true
+11-21 15:35:40.052  3400  3419 I BugleRcsEngine: [39] albk.a: Rcs is enabled from user settings: true
+11-21 15:35:40.052  3400  3419 W BugleRcsEngine: [39] alcv.a: No config URL. RCS will be disabled!
+11-21 15:35:40.052  3400  3419 I BugleRcsEngine: [39] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.052  2860  2899 I BugleRcsProvisioning: RcsProvisioningTrigger: Schedule provisioning on app startup
+11-21 15:35:40.052  2860  2899 I BugleRcsProvisioning: RcsProvisioningTrigger: schedule provisioning
+11-21 15:35:40.052  2860  2899 I BugleRcsEngine: [43] jsj.run: Provisioning task in Bugle is disabled by P/H flag
+11-21 15:35:40.053  2860  2899 I BugleNetwork: Startup: registering tachyon.
+11-21 15:35:40.053  3400  3419 W BugleRcsEngine: [39] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.053  3400  3419 I BugleRcsEngine: [39] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.053  3400  3419 W BugleRcsEngine: [39] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.054  3400  4541 W BugleRcsEngine: [106] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED
+11-21 15:35:40.054  3400  4540 W BugleRcsEngine: [105] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED
+11-21 15:35:40.055  3400  3930 I BugleRcsEngine: [86] aloh.c: SIM delay is not enabled
+11-21 15:35:40.055  3400  3930 W BugleRcsEngine: [86] alod.a: (Sim): process intent: android.intent.action.SIM_STATE_CHANGED
+11-21 15:35:40.055  3400  3419 I BugleRcsEngine: [39] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-21 15:35:40.055  3400  3419 I BugleRcsEngine: [39] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-21 15:35:40.055  3400  3419 I BugleRcsEngine: [39] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-21 15:35:40.055  3400  3419 I BugleRcsEngine: [39] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-21 15:35:40.056  3400  4535 I BugleRcsEngine: [102] albk.b: Bugle is default SMS app: true
+11-21 15:35:40.057  3400  4535 I BugleRcsEngine: [102] akxz.a: Bugle has minimum required RCS permissions: true
+11-21 15:35:40.059  3400  3419 I BugleRcsEngine: [39] albk.b: Bugle is default SMS app: true
+11-21 15:35:40.061  1048  1048 I Wear_Controller: Wearable module requires a companion app to be installed.
+11-21 15:35:40.061  1048  1048 I WearableService: onCreate: Wearable Services not starting. Wear is not available on this device.
+11-21 15:35:40.065  3400  3419 I BugleRcsEngine: [39] akxz.a: Bugle has minimum required RCS permissions: true
+11-21 15:35:40.066  3400  3419 I BugleRcsEngine: [39] albk.a: Rcs is enabled from user settings: true
+11-21 15:35:40.066  3400  3419 W BugleRcsEngine: [39] alcv.a: No config URL. RCS will be disabled!
+11-21 15:35:40.066  3400  3419 I BugleRcsEngine: [39] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.066  3400  3419 W BugleRcsEngine: [39] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.067  3400  3419 I BugleRcsEngine: [39] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.067  3400  3419 W BugleRcsEngine: [39] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.068  3400  4536 I BugleRcsEngine: [103] alod.j: (Sim): Processing an intent
+11-21 15:35:40.068  3400  4536 I BugleRcsEngine: [103] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-21 15:35:40.068  3400  3419 I BugleRcsEngine: [39] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-21 15:35:40.068  3400  3419 I BugleRcsEngine: [39] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-21 15:35:40.068  3400  3419 I BugleRcsEngine: [39] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-21 15:35:40.068  3400  3419 W BugleRcsEngine: [39] akxz.b: SimId does not exist in map, could be uninitialized.
+11-21 15:35:40.068  2860  2907 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityPostProcess, Get Updated RcsAvailability, RcsAvailability: BUGLE_LOADING_AVAILABILITY_IN_PROGRESS, SimId: redacted-pii[0-chars]
+11-21 15:35:40.068  2860  2907 I RcsClientLib: Disconnecting SignupService
+11-21 15:35:40.069  2860  2903 I BugleRcsProvisioning: RcsProvisioningTrigger: onRcsAvailabilityUpdate : availability is updated to RCS state is pending. Check back in a moment. WAITING FOR ENGINE TO CONNECT, lastAvailability is null, simId hash = 7958814699445432059, isPev3Enabled = false
+11-21 15:35:40.070  2860  2899 I BugleNetwork: Startup: registering tachyon for phone.
+11-21 15:35:40.070  2860  2899 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-21 15:35:40.070  2860  2899 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-21 15:35:40.070  2860  2899 I BugleNetwork: Profile service is not connected at startup task.
+11-21 15:35:40.071  3400  3400 I BugleRcsEngine: [2] RcsEngineProxyImpl.destroyRcsEngine: RcsEngineProxy: Destroy RCS Engine.
+11-21 15:35:40.071  2860  2893 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability : success updating RCS availability async
+11-21 15:35:40.073  1048  1545 W WearableService: onGetService: Wear is not available on this device.
+11-21 15:35:40.074  1180  1180 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.constellation.service.START pkg=com.google.android.gms }
+11-21 15:35:40.074  1180  1180 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.constellation.service.START pkg=com.google.android.gms }
+11-21 15:35:40.075  2860  2937 D MDD WorkManagerTaskScheduler: Scheduling periodic tasks for MDD lib MDD.CHARGING.PERIODIC.TASK 21600
+11-21 15:35:40.076  3400  3400 E BugleRcsEngine: [2] alok.a: TelephonyChangeReceiver is not registered.
+11-21 15:35:40.076  3400  3400 I BugleRcsEngine: [2] EventHubProxy.unsubscribe: Removing event listener 20124326 for category 8 for hub ENGINE
+11-21 15:35:40.076  3400  3400 I BugleRcsEngine: [2] aktt.e: (PEv2-SM-68327572): quit [a970997a-aabd-4591-9628-6faa7fcc991f]
+11-21 15:35:40.077  3400  3400 D ConnectivityManager: NetworkCallback was already unregistered
+11-21 15:35:40.077  3400  3400 I BugleRcsEngine: [2] ajsa.c: Destroying JibeServiceComponent
+11-21 15:35:40.077  3400  4535 I BugleRcsEngine: [102] albk.a: Rcs is enabled from user settings: true
+11-21 15:35:40.077  3400  4535 W BugleRcsEngine: [102] alcv.a: No config URL. RCS will be disabled!
+11-21 15:35:40.078  3400  4535 I BugleRcsEngine: [102] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.080  3400  4535 W BugleRcsEngine: [102] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.080  3400  4535 I BugleRcsEngine: [102] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.080  3400  4535 W BugleRcsEngine: [102] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.080  3400  4535 I BugleRcsEngine: [102] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-21 15:35:40.080  3400  4535 I BugleRcsEngine: [102] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-21 15:35:40.080  3400  4535 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-21 15:35:40.082  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): transitionTo: destState=akbb [null]
+11-21 15:35:40.082  3400  4535 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-68327572): Exit DisabledState [null]
+11-21 15:35:40.082  2860  2903 D MDD WorkManagerTaskScheduler: Successfully updated periodic tasks for MDD lib MDD.CHARGING.PERIODIC.TASK 21600
+11-21 15:35:40.082  3400  4535 W BugleRcsEngine: [102] aktt.c: (PEv2-SM-68327572): onQuitting [null]
+11-21 15:35:40.082  3400  4535 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-21 15:35:40.082  3400  3602 W BugleRcsEngine: [58] ajnl.z: Unable to send diagnostic log
+11-21 15:35:40.082  2860  2937 D MDD WorkManagerTaskScheduler: Scheduling periodic tasks for MDD lib MDD.MAINTENANCE.PERIODIC.GCM.TASK 86400
+11-21 15:35:40.087  3400  4535 I BugleRcsEngine: [102] albk.b: Bugle is default SMS app: true
+11-21 15:35:40.089  2860  2893 D MDD WorkManagerTaskScheduler: Successfully updated periodic tasks for MDD lib MDD.MAINTENANCE.PERIODIC.GCM.TASK 86400
+11-21 15:35:40.090  3400  4535 I BugleRcsEngine: [102] akxz.a: Bugle has minimum required RCS permissions: true
+11-21 15:35:40.094  2860  2937 D MDD WorkManagerTaskScheduler: Scheduling periodic tasks for MDD lib MDD.CELLULAR.CHARGING.PERIODIC.TASK 21600
+11-21 15:35:40.095  3400  4535 I BugleRcsEngine: [102] albk.a: Rcs is enabled from user settings: true
+11-21 15:35:40.095  3400  4535 W BugleRcsEngine: [102] alcv.a: No config URL. RCS will be disabled!
+11-21 15:35:40.095  3400  4535 I BugleRcsEngine: [102] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-21 15:35:40.095  2860  2893 D MDD WorkManagerTaskScheduler: Successfully updated periodic tasks for MDD lib MDD.CELLULAR.CHARGING.PERIODIC.TASK 21600
+11-21 15:35:40.096  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.096  3400  4535 W BugleRcsEngine: [102] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.096  3400  4535 I BugleRcsEngine: [102] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.096  3400  4535 W BugleRcsEngine: [102] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.096  2860  2937 D MDD WorkManagerTaskScheduler: Scheduling periodic tasks for MDD lib MDD.WIFI.CHARGING.PERIODIC.TASK 21600
+11-21 15:35:40.096  2860  2937 I BugleMDD: MddBackgroundStartupTask: Scheduled MDD periodic tasks.
+11-21 15:35:40.098  3400  4535 I BugleRcsEngine: [102] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-21 15:35:40.098  3400  4535 I BugleRcsEngine: [102] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-21 15:35:40.098  3400  4535 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-21 15:35:40.099  2860  2893 D MDD WorkManagerTaskScheduler: Successfully updated periodic tasks for MDD lib MDD.WIFI.CHARGING.PERIODIC.TASK 21600
+11-21 15:35:40.103  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.103  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.110   522  1725 D ConnectivityService: requestNetwork for uid/pid:10100/2860 activeRequest: null callbackRequest: 107 [NetworkRequest [ REQUEST id=108, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10100 RequestorUid: 10100 RequestorPkg: com.google.android.apps.messaging] ]] callback flags: 0 priority: 2147483647
+11-21 15:35:40.110   522   694 D ConnectivityService: NetReassign [108 : null → 101]
+11-21 15:35:40.111   522   687 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=108, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10100 RequestorUid: 10100 RequestorPkg: com.google.android.apps.messaging] ]
+11-21 15:35:40.111   522   687 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=108, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10100 RequestorUid: 10100 RequestorPkg: com.google.android.apps.messaging] ]
+11-21 15:35:40.111   522   687 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=108, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10100 RequestorUid: 10100 RequestorPkg: com.google.android.apps.messaging] ]
+11-21 15:35:40.112  2860  2899 D MddListenableWorkerFactory: createWorker for class: com.google.android.libraries.mdi.download.workmanager.workers.PeriodicWorker
+11-21 15:35:40.113  2860  2860 D MddPeriodicWorker: PeriodicWorker: startWork
+11-21 15:35:40.113  2860  2899 D MddListenableWorkerFactory: createWorker for class: com.google.android.libraries.mdi.download.workmanager.workers.PeriodicWorker
+11-21 15:35:40.113  2860  2937 W MDD     : MDDManager Failed to init shared file metadata.
+11-21 15:35:40.113  2860  2860 D MddPeriodicWorker: PeriodicWorker: startWork
+11-21 15:35:40.114  2860  2899 D MddListenableWorkerFactory: createWorker for class: com.google.android.libraries.mdi.download.workmanager.workers.PeriodicWorker
+11-21 15:35:40.114  2860  2860 D MddPeriodicWorker: PeriodicWorker: startWork
+11-21 15:35:40.124  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.127  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.130  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.134  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.135  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@afcb2ed} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.136  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.136  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@d1e0bb3} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.136  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.136  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@57e90e9} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.136  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.136  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@d63b00f} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.136  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.136  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@12652a5} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.136  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.136  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@b53e2b} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.136  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.136  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.136  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.137  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@2ce7421} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.137  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.137  2860  2910 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.137  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@b479207} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.137  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.137  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@87d315d} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.137  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.137  2860  2910 E bcdt    : RuntimeException while executing runnable bcgm{arwo@5c147a3} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.137  2860  2910 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arcm.h(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.137  2860  2910 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.137  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@3de821e} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@76180cc} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@b6ca22a} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@f8bddb8} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@60ab6f6} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@3fd1d64} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.139  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@ba34c82} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.139  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.139  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.139  2860  2907 E PhFileGroupPop: Failed to add file group 
+11-21 15:35:40.140  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@420abd0} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.140  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.140  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@63daece} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.140  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.140  2860  2907 E bcdt    : RuntimeException while executing runnable bcgm{arwo@8acb4fc} with executor MoreExecutors.directExecutor()
+11-21 15:35:40.140  2860  2907 E bcdt    : java.lang.NullPointerException: Attempt to read from field 'java.lang.String aqxn.b' on a null object reference
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arwo.b(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcgm.run(PG:7)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcfq.execute(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcdt.p(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcdt.a(PG:6)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcgs.q(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arwq.h(PG:16)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at thv.h(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.p(PG:3)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.q(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arcm.h(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at arxl.a(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcib.c(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bchf.run(PG:4)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at bcid.run(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aosz.run(PG:1)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aosl.run(PG:2)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at aory.run(PG:3)
+11-21 15:35:40.140  2860  2907 E bcdt    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.163  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.166   324  4550 D resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10100 0}
+11-21 15:35:40.166   324  4550 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:35:40.170   324  4552 D resolv  : doQuery: (1, 1)
+11-21 15:35:40.170   324  4552 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 15:35:40.170   324  4552 D resolv  : res_nsend
+11-21 15:35:40.170   324  4552 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:40.170   324  4552 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751f109deed0
+11-21 15:35:40.170   324  4552 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:35:40.172  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.172   324  4551 D resolv  : doQuery: (1, 28)
+11-21 15:35:40.173   324  4551 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 15:35:40.173   324  4551 D resolv  : res_nsend
+11-21 15:35:40.173   324  4551 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:40.173   324  4551 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751f209e6ed0
+11-21 15:35:40.173   324  4551 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:35:40.188  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.212  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.216  2860  2893 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=9759ebc6-908b-4423-a2e1-1fd865faff82, tags={ MDD.MAINTENANCE.PERIODIC.GCM.TASK, com.google.android.libraries.mdi.download.workmanager.workers.PeriodicWorker } ]
+11-21 15:35:40.216  2860  2937 E MDD     : FileGroupManager: Trying to add expired group webref-model-local-index.
+11-21 15:35:40.217  2860  2937 W MDD     : MDDManager class arhp
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: Failed to add file group
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: arhp
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at arnq.a(PG:86)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at bcdv.e(PG:2)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at bcdx.run(PG:9)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at bchu.run(PG:4)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at aosz.run(PG:1)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at aosl.run(PG:2)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at aory.run(PG:3)
+11-21 15:35:40.217  2860  2937 E PhFileGroupPop: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:40.221  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.225  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.236  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.250  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.255  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.270  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.274  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.274  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.303  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.308  2860  2937 D PhFileGroupPop: Added file groups smart_actions_grammars
+11-21 15:35:40.310  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.311  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.322  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.327  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.331  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.342  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.342  2860  2937 D PhFileGroupPop: Added file groups smart_actions_ml_models
+11-21 15:35:40.345  2860  2937 D PhFileGroupPop: Added file groups text_classifier
+11-21 15:35:40.348  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.349  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.362  1048  1048 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.devicesyncservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-21 15:35:40.382  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.392  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.393  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.401  2860  2910 D asog    : Starting download: https://www.gstatic.com/compose/manifest_configs/manifest_20230622.pb
+11-21 15:35:40.401  2860  2910 V asog    : Is http uri, downloading (uri: https://www.gstatic.com/compose/manifest_configs/manifest_20230622.pb)
+11-21 15:35:40.403  2247  2607 I DynamiteModule: Considering local module com.google.android.gms.googlecertificates:7 and remote module com.google.android.gms.googlecertificates:7
+11-21 15:35:40.403  2247  2607 I DynamiteModule: Selected local version of com.google.android.gms.googlecertificates
+11-21 15:35:40.410  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.413  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.413  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.441  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.447   324  4562 D resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10102 0}
+11-21 15:35:40.447   324  4562 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:35:40.447   324  4562 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=10 ai_socktype=1 ai_protocol=6
+11-21 15:35:40.447   324  4562 D resolv  : explore_numeric_scope
+11-21 15:35:40.447   324  4562 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=2 ai_socktype=1 ai_protocol=6
+11-21 15:35:40.447   324  4562 D resolv  : explore_numeric_scope
+11-21 15:35:40.447   324  4562 I ResolverController: No valid NAT64 prefix (101, <unspecified>/0)
+11-21 15:35:40.448  2247  2247 W Binder:2247_2: type=1400 audit(0.0:45): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=246 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-21 15:35:40.460  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.461  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.462  2247  2264 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-21 15:35:40.462  2247  2264 W libc    : Access denied finding property "service.adb.tls.port"
+11-21 15:35:40.460  2247  2247 W Binder:2247_2: type=1400 audit(0.0:46): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=56 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-21 15:35:40.484   324  4565 D resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10100 0}
+11-21 15:35:40.484   324  4565 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:35:40.484   324  4566 D resolv  : doQuery: (1, 28)
+11-21 15:35:40.484   324  4566 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 15:35:40.484   324  4566 D resolv  : res_nsend
+11-21 15:35:40.484   324  4566 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:40.484   324  4566 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-21 15:35:40.484   324  4566 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:35:40.484   324  4566 I resolv  : res_stats_usable_server: NS stats: S 34 + E 0 + T 0 + I 0 = 34, rtt = 13, min_samples = 8
+11-21 15:35:40.484   324  4566 I resolv  : res_stats_usable_server: success rate 100
+11-21 15:35:40.484   324  4566 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-21 15:35:40.484   324  4566 D resolv  : send_dg: new DG socket
+11-21 15:35:40.484   324  4566 I resolv  : get_timeout: using timeout of 5000 msec
+11-21 15:35:40.484   324  4566 I resolv  : retrying_poll: 58 retrying_poll
+11-21 15:35:40.485   324  4567 D resolv  : doQuery: (1, 1)
+11-21 15:35:40.485   324  4567 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 15:35:40.485   324  4567 D resolv  : res_nsend
+11-21 15:35:40.485   324  4567 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:40.485   324  4567 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-21 15:35:40.485   324  4567 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:35:40.488   324  4567 I resolv  : res_stats_usable_server: NS stats: S 34 + E 0 + T 0 + I 0 = 34, rtt = 13, min_samples = 8
+11-21 15:35:40.488   324  4567 I resolv  : res_stats_usable_server: success rate 100
+11-21 15:35:40.488   324  4567 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-21 15:35:40.488   324  4567 D resolv  : send_dg: new DG socket
+11-21 15:35:40.488   324  4567 I resolv  : get_timeout: using timeout of 5000 msec
+11-21 15:35:40.488   324  4567 I resolv  : retrying_poll: 59 retrying_poll
+11-21 15:35:40.490  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.497   324  4566 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-21 15:35:40.497   324  4566 I resolv  : res_nsend: used send_dg 276 terrno: 0
+11-21 15:35:40.497   324  4566 I resolv  : res_stats_set_sample: rcode = 0, sec = 13
+11-21 15:35:40.497   324  4566 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 34, count = 34
+11-21 15:35:40.497   324  4566 D resolv  : res_nsend: got answer:
+11-21 15:35:40.498   324  4566 I resolv  : answer_getTTL: TTL = 300
+11-21 15:35:40.498   324  4566 I resolv  : _cache_add_p: entry 35 added (count=35)
+11-21 15:35:40.498   324  4566 I resolv  : cache_dump_mru_locked: MRU LIST (35):  35 22 21 1 4 8 7 34 33 32 31 5 6 30 29 9 10 13 14 19 20 18 17 28 27 26 25 24 23 3 2 11 12 16 15
+11-21 15:35:40.498   324  4566 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:35:40.508  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.510   324  4567 I resolv  : retrying_poll: 59 retrying_poll returning 1
+11-21 15:35:40.510   324  4567 I resolv  : res_nsend: used send_dg 180 terrno: 0
+11-21 15:35:40.510   324  4567 I resolv  : res_stats_set_sample: rcode = 0, sec = 22
+11-21 15:35:40.510   324  4567 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 35, count = 35
+11-21 15:35:40.510   324  4567 D resolv  : res_nsend: got answer:
+11-21 15:35:40.510   324  4567 I resolv  : answer_getTTL: TTL = 300
+11-21 15:35:40.510   324  4567 I resolv  : _cache_add_p: entry 36 added (count=36)
+11-21 15:35:40.510   324  4567 I resolv  : cache_dump_mru_locked: MRU LIST (36):  36 35 22 21 1 4 8 7 34 33 32 31 5 6 30 29 9 10 13 14 19 20 18 17 28 27 26 25 24 23 3 2 11 12 16 15
+11-21 15:35:40.510   324  4567 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:35:40.511  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.528  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.530  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.537  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.551  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.565  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.569  1048  2565 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.586  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.590  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.591  1048  1261 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.592  2860  2937 D PhFileGroupPop: Added file groups smart_actions_emotive_models
+11-21 15:35:40.605  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.607  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.607  1048  1238 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.627  1048  4539 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-21 15:35:40.871  2860  2893 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-21 15:35:40.871  2860  2893 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-21 15:35:40.872  2860  2893 W BugleRcsEngine: [40] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-21 15:35:40.872  2860  2893 I BugleRcsEngine: [40] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-21 15:35:40.873  2860  2893 I Bugle   : VerifiedSmsEnabledCheckerImpl: VSMS is disabled via Phenotype flag.
+11-21 15:35:40.878  2860  2899 I Bugle   : VerifiedSmsStartupTask: Checking if Verified SMS tasks should be enqueued. feature supported: false, feature enabled: false, eligible / has registered key: false, C11N: false
+11-21 15:35:40.878  2860  2899 I Bugle   : VerifiedSmsStartupTask: Not enqueuing VSMS periodic task, VSMS is disabled or not supported.
+11-21 15:35:40.878  2860  2911 I Bugle   : VerifiedSmsStartupTask: Not calling C11N to get phone numbers.
+11-21 15:35:41.038  1180  1180 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-21 15:35:41.098  1180  1180 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+11-21 15:35:41.108  1048  1048 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.nearby.exposurenotification.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-21 15:35:41.259  1048  1061 W System  : A resource failed to call end. 
+11-21 15:35:41.552  2860  2937 D PhFileGroupPop: Added file groups smarts_expressive_content_scoped_v1
+11-21 15:35:41.565  2860  2937 D PhFileGroupPop: Added file groups smart_actions_sensitive_classifier_models
+11-21 15:35:41.577  2860  2937 D PhFileGroupPop: Added file groups scripted_reply
+11-21 15:35:41.608  2860  2937 D PhFileGroupPop: Added file groups multitask_experiment
+11-21 15:35:41.612  2860  2937 D PhFileGroupPop: Added file groups spam_verdict_enforcement_policy_config
+11-21 15:35:41.617  2860  2937 D PhFileGroupPop: Added file groups smart_suggestion_reranker_models
+11-21 15:35:41.629  2860  2937 D PhFileGroupPop: Added file groups calendar_appointment_grammar
+11-21 15:35:41.639  2860  2937 D PhFileGroupPop: Added file groups birthday_grammars
+11-21 15:35:41.639  2860  2937 E MDD     : FileGroupManager: Trying to add expired group webref-model-local-index.
+11-21 15:35:41.639  2860  2937 W MDD     : MDDManager class arhp
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: Failed to add file group
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: arhp
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at arnq.a(PG:86)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at bcdv.e(PG:2)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at bcdx.run(PG:9)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at bchu.run(PG:4)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at aosz.run(PG:1)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at aosl.run(PG:2)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at aory.run(PG:3)
+11-21 15:35:41.639  2860  2937 E PhFileGroupPop: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:35:41.640  2860  2937 D PhFileGroupPop: Added file groups smart_actions_grammars
+11-21 15:35:41.640  2860  2937 D PhFileGroupPop: Added file groups smart_actions_ml_models
+11-21 15:35:41.640  2860  2937 D PhFileGroupPop: Added file groups text_classifier
+11-21 15:35:41.641  2860  2937 D PhFileGroupPop: Added file groups smart_actions_emotive_models
+11-21 15:35:41.657  2860  2937 D PhFileGroupPop: Added file groups smarts_expressive_content_scoped_v1
+11-21 15:35:41.658  2860  2937 D PhFileGroupPop: Added file groups smart_actions_sensitive_classifier_models
+11-21 15:35:41.658  2860  2937 D PhFileGroupPop: Added file groups scripted_reply
+11-21 15:35:41.659  2860  2937 D PhFileGroupPop: Added file groups multitask_experiment
+11-21 15:35:41.659  2860  2937 D PhFileGroupPop: Added file groups spam_verdict_enforcement_policy_config
+11-21 15:35:41.660  2860  2937 D PhFileGroupPop: Added file groups smart_suggestion_reranker_models
+11-21 15:35:41.660  2860  2937 D PhFileGroupPop: Added file groups calendar_appointment_grammar
+11-21 15:35:41.660  2860  2937 D PhFileGroupPop: Added file groups birthday_grammars
+11-21 15:35:41.667  2860  2937 D ManifestConfigHelper: Added file groups en_us
+11-21 15:35:41.801   344   344 D goldfish-address-space: claimShared: Ask to claim region [0x3f4000000 0x3f49a4000]
+11-21 15:35:41.806   522  1725 D ConnectivityService: requestNetwork for uid/pid:10101/1726 activeRequest: null callbackRequest: 109 [NetworkRequest [ REQUEST id=109, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]] callback flags: 0 priority: 2147483647
+11-21 15:35:41.810   522   694 D ConnectivityService: NetReassign [109 : null → 100]
+11-21 15:35:41.810   522   694 D ConnectivityService: Unsetting inactive [100 CELLULAR]
+11-21 15:35:41.811   522   694 D ConnectivityService: reportNetworkConnectivity(101, false) by 10101
+11-21 15:35:41.811   522   694 D ConnectivityService: reportNetworkConnectivity(101, false) by 10101
+11-21 15:35:41.811   897  1895 D NetworkMonitor/101: Forcing reevaluation for UID 10101. Dns signal count: 0
+11-21 15:35:41.818   324  4591 D resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+11-21 15:35:41.818   324  4591 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:35:41.818   324  4591 D resolv  : res_nsend
+11-21 15:35:41.818   324  4591 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.818   324  4591 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751ef09ec230
+11-21 15:35:41.819   174   174 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-21 15:35:41.819  4584  4586 I Gralloc4: mapper 4.x is not supported
+11-21 15:35:41.821   324  4592 D resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+11-21 15:35:41.821   324  4590 D resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+11-21 15:35:41.821   324  4590 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:35:41.821   324  4590 D resolv  : res_nsend
+11-21 15:35:41.821   324  4590 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.821   324  4590 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751f209e6b50
+11-21 15:35:41.826   324  4593 D resolv  : ResNSendHandler::run: 0 / {101 983141 101 983141 1073 1}
+11-21 15:35:41.826   324  4593 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:35:41.826   324  4593 D resolv  : res_nsend
+11-21 15:35:41.826   324  4593 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.826   324  4593 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751ef09eb430
+11-21 15:35:41.827   897  4589 D NetworkMonitor/101: PROBE_DNS connectivitycheck.gstatic.com 12ms OK 142.251.150.120,2001:4860:4826:7800::
+11-21 15:35:41.828   324  4592 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:35:41.828   324  4592 D resolv  : res_nsend
+11-21 15:35:41.828   324  4592 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.828   324  4592 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751f009e79f0
+11-21 15:35:41.832   324  4594 D resolv  : GetAddrInfoHandler::run: {101 983141 101 983141 1073 1}
+11-21 15:35:41.832   324  4594 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:35:41.832   897  4588 D NetworkMonitor/101: PROBE_DNS www.google.com 17ms OK 142.251.151.119,142.251.152.119,142.251.150.119,142.251.156.119,142.251.157.119,142.251.153.119,142.251.154.119,142.251.155.119,2001:4860:482d:7700::,2001:4860:4826:7700::,2001:4860:482a:7700::,2001:4860:4827:7700::,2001:4860:4828:7700::,2001:4860:482b:7700::,2001:4860:482c:7700::,2001:4860:4829:7700::
+11-21 15:35:41.833  4584  4586 D HostConnection: createUnique: call
+11-21 15:35:41.834  4584  4586 D HostConnection: HostConnection::get() New Host Connection established 0x75fc7d7b83d0, tid 4586
+11-21 15:35:41.834  4584  4586 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-21 15:35:41.835  4584  4586 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-21 15:35:41.838   324  4595 D resolv  : doQuery: (1, 28)
+11-21 15:35:41.839   324  4595 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 15:35:41.839   324  4595 D resolv  : res_nsend
+11-21 15:35:41.839   324  4595 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.839   324  4595 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751ef09ec230
+11-21 15:35:41.839   324  4595 D resolv  : doQuery: rcode=0, ancount=1
+11-21 15:35:41.843   324  4596 D resolv  : doQuery: (1, 1)
+11-21 15:35:41.843   324  4596 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 15:35:41.843   324  4596 D resolv  : res_nsend
+11-21 15:35:41.843   324  4596 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.843   324  4596 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751ef09eb430
+11-21 15:35:41.843   324  4596 D resolv  : doQuery: rcode=0, ancount=1
+11-21 15:35:41.846   324  4597 D resolv  : GetAddrInfoHandler::run: {101 983141 101 983141 1073 1}
+11-21 15:35:41.846   324  4597 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:35:41.850   324  4598 D resolv  : doQuery: (1, 28)
+11-21 15:35:41.850   324  4598 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 15:35:41.850   324  4598 D resolv  : res_nsend
+11-21 15:35:41.850   324  4598 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.850   324  4598 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751f209e6b50
+11-21 15:35:41.850   324  4598 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:35:41.852  4584  4586 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-21 15:35:41.853   324  4599 D resolv  : doQuery: (1, 1)
+11-21 15:35:41.853   324  4599 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 15:35:41.853   324  4599 D resolv  : res_nsend
+11-21 15:35:41.853   324  4599 I resolv  : resolv_cache_lookup: lookup
+11-21 15:35:41.853   324  4599 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x751f009e79f0
+11-21 15:35:41.853   324  4599 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:35:41.864   897  4589 D NetworkMonitor/101: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=35ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sat, 21 Nov 2026 15:35:42 GMT], X-Android-Received-Millis=[1795275341864], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1795275341854]}
+11-21 15:35:41.884   897  4588 D NetworkMonitor/101: PROBE_HTTPS https://www.google.com/generate_204 time=44ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Alt-Svc=[h3=":443"; ma=2592000,h3-29=":443"; ma=2592000], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sat, 21 Nov 2026 15:35:42 GMT], X-Android-Received-Millis=[1795275341884], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1795275341876]}
+11-21 15:35:41.885   897  4587 D NetworkMonitor/101: isCaptivePortal: isSuccessful()=true isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=71ms
+11-21 15:35:41.885   522   694 D ConnectivityService: [101 WIFI] validation passed
