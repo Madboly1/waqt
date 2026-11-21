@@ -321,7 +321,7 @@ object WaqtCloudBackup {
                     is Long -> editor.putLong(key, value)
                     is Double -> editor.putFloat(key, value.toFloat())
                     is String -> {
-                        var rewritten = value
+                        var rewritten: String = value
                         for ((original, replacement) in replacements) {
                             if (rewritten.contains(original)) rewritten = rewritten.replace(original, replacement)
                         }
