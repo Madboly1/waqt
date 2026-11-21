@@ -33,7 +33,7 @@ jobs:
         with:
           gradle-version: "8.7"
       - name: Run backup restore unit tests (JVM, no emulator, no signing)
-        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --tests 'com.example.glassproductivity.AlarmSchedulerFutureDueDateTest' --tests 'com.example.glassproductivity.BackupSafetyTest' --tests 'com.example.glassproductivity.BackupIntegrationTest' --no-daemon --stacktrace
+        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --tests 'com.example.glassproductivity.AlarmSchedulerFutureDueDateTest' --tests 'com.example.glassproductivity.BackupSafetyTest' --tests 'com.example.glassproductivity.BackupIntegrationTest' --tests 'com.example.glassproductivity.BackupWiringTest' --no-daemon --stacktrace
       - name: Show per-test results
         if: always()
         run: |
