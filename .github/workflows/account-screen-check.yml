@@ -465,30 +465,17 @@ jobs:
           cat shots/alarm_probe.txt
           [ "$DELIVERED" = "yes" ]
 
-      - name: Local backup restore round-trip (synthetic data)
+      - name: Tour pages walkthrough and mid-tour skip
         if: ${{ !cancelled() }}
         run: |
           set -e
-          # Local (non-Drive) backup round-trip with synthetic data:
-          # restore a crafted WAQT backup file through the real SAF picker UI,
-          # then verify prefs were REPLACED by the backup contents. This covers
-          # the local JSON path only; the Drive/ZIP path needs real OAuth and
-          # is intentionally not covered here.
-          python3 - <<'PYBAK'
-          import json
-          root = {"app":"WAQT","schemaVersion":4,"timestamp":1763800000000,
-                  "items":[{"id":"ci-restore-probe","title":"CI restore probe task","isHabit":False,"hour":8,"minute":15,"streakCount":0,"streakGoal":7,"priority":"high","category":"work","lastCompletedEpochDay":-1,"isCompletedToday":False,"description":"","dueDateEpochDay":741816,"dueDateString":"","expectedMinutes":25,"actualFocusedMinutes":0,"focusSessionsCount":0,"recurrence":"once","customDaysCsv":"1,2,3,4,5,6,7","targetValue":1,"currentProgressToday":0,"targetUnit":"","longestStreak":0,"isPaused":False,"hasReminder":False,"completedDaysHistoryCsv":"","completionPercentage":0,"deferredUntilMillis":0}],
-                  "notes":[],"habitCategories":[],"customQuotes":[],
-                  "settings":{"pref_dark_mode":True,"pref_accent_color":"#FF8A3D","pref_default_focus_mins":25,"pref_default_break_mins":5,"pref_daily_focus_goal_mins":120,"pref_notif_tasks":True,"pref_notif_habits":True}}
-          open("/tmp/waqt_ci_restore.json","w").write(json.dumps(root, indent=2))
-          PYBAK
-          adb push /tmp/waqt_ci_restore.json /sdcard/Download/waqt_ci_restore.json
-          adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Download/waqt_ci_restore.json >/dev/null 2>&1 || true
-
+          # Tour coverage beyond the first page: walk all 7 pages with
+          # screenshots, finish, then re-arm and skip mid-tour. Synthetic
+          # state on the disposable emulator only.
           tap_text() {
             adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
             adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
-            python3 - "$1" <<'PY' > /tmp/tap.txt
+            python3 - "$1" <<'PYTAP' > /tmp/tap.txt
           import re, sys
           target = sys.argv[1]
           xml = open('ui.xml', encoding='utf-8').read()
@@ -508,7 +495,7 @@ jobs:
                   if val.strip() == target:
                       score += 1
                   print(score, x, y)
-          PY
+          PYTAP
           }
           try_tap() {
             tap_text "$1"
@@ -524,7 +511,209 @@ jobs:
             done
             return 1
           }
+          set_onboarding() {
+            python3 - "$1" <<'PYTOUR'
+          import re, subprocess, base64, sys
+          want = sys.argv[1]
+          def sh(*args, inp=None):
+              r = subprocess.run(["adb"] + list(args), capture_output=True, text=True, input=inp)
+              return r.stdout
+          xml = sh("shell", "run-as", "com.example.glassproductivity", "cat", "shared_prefs/waqt_prefs.xml")
+          if 'name="onboarding_done"' in xml:
+              xml2 = re.sub(r'(<boolean name="onboarding_done" value=")(?:true|false)(" />)', r'\g<1>' + want + r'\g<2>', xml)
+          elif "</map>" in xml:
+              xml2 = xml.replace("</map>", '<boolean name="onboarding_done" value="' + want + '" /></map>')
+          else:
+              xml2 = "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map><boolean name=\"onboarding_done\" value=\"" + want + "\" /></map>\n"
+          sh("shell", "run-as", "com.example.glassproductivity", "sh", "-c", "base64 -d > shared_prefs/waqt_prefs.xml", inp=base64.b64encode(xml2.encode()).decode())
+          print("onboarding_done set to", want)
+          PYTOUR
+          }
+          tour_counter() {
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            grep -o '[0-9] من 7' ui.xml | head -1 || true
+          }
+          read_flag() {
+            adb shell run-as com.example.glassproductivity cat shared_prefs/waqt_prefs.xml | grep -o 'name="onboarding_done" value="[a-z]*"' || true
+          }
 
+          set_onboarding false
+          adb shell am force-stop com.example.glassproductivity
+          sleep 2
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 8
+          WALK=yes
+          for p in 1 2 3 4 5 6 7; do
+            STATE=$(tour_counter)
+            adb exec-out screencap -p > shots/2${p}_tour_p${p}.png
+            echo "TOUR_PAGE_${p}_COUNTER=${STATE:-none}" >> shots/tour_probe.txt
+            if [ "$STATE" != "$p من 7" ]; then WALK=broken_at_$p; break; fi
+            if [ "$p" = "1" ]; then try_tap "يلا نبدأ" || true; elif [ "$p" = "7" ]; then try_tap "إنهاء" || true; else try_tap "التالي" || true; fi
+            sleep 3
+          done
+          echo "TOUR_WALK=$WALK" >> shots/tour_probe.txt
+          FLAG=$(read_flag)
+          echo "TOUR_FINISH_FLAG=${FLAG:-none}" >> shots/tour_probe.txt
+          cat shots/tour_probe.txt
+          [ "$WALK" = "yes" ]
+          echo "$FLAG" | grep -q 'value="true"'
+
+          # Mid-tour skip: re-arm, advance one page, skip.
+          set_onboarding false
+          adb shell am force-stop com.example.glassproductivity
+          sleep 2
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 8
+          try_tap "يلا نبدأ" || true
+          sleep 3
+          adb exec-out screencap -p > shots/28_tour_mid.png
+          try_tap "تخطَّ" || true
+          sleep 3
+          adb exec-out screencap -p > shots/29_tour_skipped.png
+          FLAG2=$(read_flag)
+          echo "TOUR_SKIP_FLAG=${FLAG2:-none}" >> shots/tour_probe.txt
+          echo "$FLAG2" | grep -q 'value="true"'
+
+          # No reshow after reopen
+          adb shell am force-stop com.example.glassproductivity
+          sleep 2
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 8
+          adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+          adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+          if grep -q 'من 7' ui.xml; then echo "TOUR_RESHOW=yes" >> shots/tour_probe.txt; cat shots/tour_probe.txt; exit 1; fi
+          echo "TOUR_RESHOW=no" >> shots/tour_probe.txt
+          cat shots/tour_probe.txt
+
+      - name: Backup export and restore round-trip (real export content)
+        if: ${{ !cancelled() }}
+        run: |
+          set -e
+          # Real round-trip: export the app's OWN backup JSON through the real
+          # SAF save UI, mutate state, restore that exported file through the
+          # real SAF picker, and compare restored content against the actual
+          # export. The Drive/ZIP path needs real OAuth and stays untested;
+          # this covers the local JSON path only.
+          tap_text() {
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            python3 - "$1" <<'PYTAP' > /tmp/tap.txt
+          import re, sys
+          target = sys.argv[1]
+          xml = open('ui.xml', encoding='utf-8').read()
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              dm = re.search(r'content-desc="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              cm = re.search(r'clickable="(true|false)"', tag)
+              if not bm:
+                  continue
+              val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
+              if target in val:
+                  x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                  y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                  score = 10 if (cm and cm.group(1) == 'true') else 0
+                  if val.strip() == target:
+                      score += 1
+                  print(score, x, y)
+          PYTAP
+          }
+          try_tap() {
+            tap_text "$1"
+            read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
+            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
+            unset X Y; return 1
+          }
+          scroll_until() {
+            for i in $(seq 1 8); do
+              if try_tap "$1"; then return 0; fi
+              adb shell input swipe 540 1700 540 700
+              sleep 2
+            done
+            return 1
+          }
+          snapshot_prefs() {
+            adb shell run-as com.example.glassproductivity cat shared_prefs/waqt_productivity_prefs.xml > "$1" || true
+          }
+          compare_items() {
+            python3 - "$1" "$2" <<'PYCMP'
+          import json, re, sys
+          from xml.sax.saxutils import unescape as xu
+          def from_prefs(path):
+              xml = open(path, encoding="utf-8", errors="replace").read()
+              m = re.search(r'<string name="waqt_items_json">(.*?)</string>', xml, re.S)
+              return json.loads(xu(m.group(1), {"&quot;": chr(34), "&apos;": chr(39)})) if m else None
+          def from_backup(path):
+              d = json.load(open(path, encoding="utf-8"))
+              if d.get("app") != "WAQT" or d.get("schemaVersion") != 4:
+                  print("COMPARE_FAIL bad backup header"); sys.exit(1)
+              return d.get("items")
+          def load(path):
+              return from_prefs(path) if path.endswith(".xml") else from_backup(path)
+          a, b = load(sys.argv[1]), load(sys.argv[2])
+          if a is None or b is None:
+              print("COMPARE_FAIL missing side"); sys.exit(1)
+          ka = sorted(json.dumps(x, sort_keys=True, ensure_ascii=False) for x in a)
+          kb = sorted(json.dumps(x, sort_keys=True, ensure_ascii=False) for x in b)
+          if ka == kb:
+              print("COMPARE_OK items=%d" % len(a)); sys.exit(0)
+          print("COMPARE_MISMATCH %d vs %d" % (len(a), len(b))); sys.exit(1)
+          PYCMP
+          }
+          mutate_items() {
+            python3 - <<'PYMUT'
+          import json, re, subprocess, base64
+          def sh(*args, inp=None):
+              r = subprocess.run(["adb"] + list(args), capture_output=True, text=True, input=inp)
+              return r.stdout
+          marker = {"id":"ci-pre-restore-marker","title":"CI pre-restore marker","isHabit":False,"hour":8,"minute":15,"streakCount":0,"streakGoal":7,"priority":"low","category":"work","lastCompletedEpochDay":-1,"isCompletedToday":False,"description":"","dueDateEpochDay":741816,"dueDateString":"","expectedMinutes":25,"actualFocusedMinutes":0,"focusSessionsCount":0,"recurrence":"once","customDaysCsv":"1,2,3,4,5,6,7","targetValue":1,"currentProgressToday":0,"targetUnit":"","longestStreak":0,"isPaused":False,"hasReminder":False,"completedDaysHistoryCsv":"","completionPercentage":0,"deferredUntilMillis":0}
+          sh("shell", "am", "force-stop", "com.example.glassproductivity")
+          xml = sh("shell", "run-as", "com.example.glassproductivity", "cat", "shared_prefs/waqt_productivity_prefs.xml")
+          from xml.sax.saxutils import escape as xesc
+          new_json_xml = xesc(json.dumps([marker], separators=(",", ":")))
+          mobj = re.search(r'<string name="waqt_items_json">(.*?)</string>', xml, re.S)
+          if mobj:
+              xml2 = xml[:mobj.start(1)] + new_json_xml + xml[mobj.end(1):]
+          elif "</map>" in xml:
+              xml2 = xml.replace("</map>", '<string name="waqt_items_json">' + new_json_xml + '</string></map>')
+          else:
+              xml2 = "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map><string name=\"waqt_items_json\">" + new_json_xml + "</string></map>\n"
+          sh("shell", "run-as", "com.example.glassproductivity", "sh", "-c", "base64 -d > shared_prefs/waqt_productivity_prefs.xml", inp=base64.b64encode(xml2.encode()).decode())
+          print("state mutated to marker-only")
+          PYMUT
+          }
+
+          # Phase 1: real export of current state via the SAF save UI
+          snapshot_prefs /tmp/prefs_before_export.xml
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 6
+          try_tap "⚙" || adb shell input tap 111 252 || true
+          sleep 4
+          scroll_until "بياناتك والنسخ الاحتياطي"
+          sleep 3
+          scroll_until "حفظ نسخة في ملف / جوجل درايف"
+          sleep 6
+          adb exec-out screencap -p > shots/12_export_saf.png
+          try_tap "Save" || try_tap "حفظ" || true
+          sleep 5
+          EXPORTED=$(adb shell ls /sdcard/Download 2>/dev/null | grep -o 'waqt-backup-[^ ]*\.json' | head -1 || true)
+          if [ -z "$EXPORTED" ]; then EXPORTED=$(adb shell find /sdcard -name 'waqt-backup-*.json' 2>/dev/null | head -1 | sed 's#.*/##' || true); fi
+          if [ -z "$EXPORTED" ]; then echo "BACKUP_EXPORTED=no" | tee shots/backup_probe.txt; exit 1; fi
+          SRC=$(adb shell find /sdcard -name "$EXPORTED" 2>/dev/null | head -1)
+          adb pull "$SRC" /tmp/exported.json >/dev/null
+          echo "BACKUP_EXPORTED=yes FILE=$EXPORTED" > shots/backup_probe.txt
+          if compare_items /tmp/prefs_before_export.xml /tmp/exported.json >> shots/backup_probe.txt 2>&1; then
+            echo "BACKUP_EXPORT_MATCH=yes" >> shots/backup_probe.txt
+          else
+            echo "BACKUP_EXPORT_MATCH=no" >> shots/backup_probe.txt
+            cat shots/backup_probe.txt; exit 1
+          fi
+
+          # Phase 2: mutate state, then restore the real exported file
+          mutate_items
+          sleep 2
           adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
           sleep 6
           try_tap "⚙" || adb shell input tap 111 252 || true
@@ -533,38 +722,28 @@ jobs:
           sleep 3
           scroll_until "استعادة نسخة احتياطية من ملف"
           sleep 6
-          adb exec-out screencap -p > shots/12_saf_picker.png
-          try_tap "waqt_ci_restore.json"
+          adb exec-out screencap -p > shots/13_saf_picker.png
+          try_tap "waqt-backup-" || true
           sleep 4
-          adb exec-out screencap -p > shots/13_restore_confirm.png
-          try_tap "استعادة"
-          sleep 4
-          adb exec-out screencap -p > shots/14_restored.png
-
-          adb shell run-as com.example.glassproductivity cat shared_prefs/waqt_productivity_prefs.xml > /tmp/prefs_restored.xml
-          {
-            if grep -q 'CI restore probe task' /tmp/prefs_restored.xml && ! grep -q 'ci-future-due-probe' /tmp/prefs_restored.xml; then
-              echo "BACKUP_RESTORED=yes"
-            else
-              echo "BACKUP_RESTORED=no"
-            fi
-          } > shots/backup_probe.txt
-          cat shots/backup_probe.txt
-          grep -q '^BACKUP_RESTORED=yes$' shots/backup_probe.txt
-
-          # Export path evidence: the share sheet must open from the real button.
-          # Content past the share-sheet boundary is not machine-verifiable here;
-          # that limit is reported, not asserted.
-          scroll_until "مشاركة نسخة احتياطية (نص)"
+          adb exec-out screencap -p > shots/14_restore_confirm.png
+          try_tap "استعادة" || true
           sleep 5
-          adb shell uiautomator dump /sdcard/uishare.xml >/dev/null 2>&1
-          adb pull /sdcard/uishare.xml /tmp/uishare.xml >/dev/null 2>&1 || true
-          adb exec-out screencap -p > shots/15_share_sheet.png
-          if grep -qi 'intentresolver\|chooser\|نسخة وقت الاحتياطية' /tmp/uishare.xml 2>/dev/null; then
-            echo "BACKUP_EXPORT_SHEET=yes" >> shots/backup_probe.txt
+          adb exec-out screencap -p > shots/15_restored.png
+          snapshot_prefs /tmp/prefs_restored.xml
+          if compare_items /tmp/exported.json /tmp/prefs_restored.xml >> shots/backup_probe.txt 2>&1 && ! grep -q 'ci-pre-restore-marker' /tmp/prefs_restored.xml; then
+            echo "BACKUP_RESTORED=yes" >> shots/backup_probe.txt
           else
-            echo "BACKUP_EXPORT_SHEET=no" >> shots/backup_probe.txt
+            echo "BACKUP_RESTORED=no" >> shots/backup_probe.txt
+            cat shots/backup_probe.txt; exit 1
           fi
+
+          # Soft evidence: text share-sheet export still present (not fatal)
+          scroll_until "مشاركة نسخة احتياطية" || true
+          sleep 4
+          adb exec-out screencap -p > shots/16_share_sheet.png
+          adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+          adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+          if grep -qiE 'chooser|resolver|مشاركة عبر|Share' ui.xml; then echo "BACKUP_EXPORT_SHEET=yes" >> shots/backup_probe.txt; else echo "BACKUP_EXPORT_SHEET=unknown" >> shots/backup_probe.txt; fi
           adb shell input keyevent 4 || true
           cat shots/backup_probe.txt
 
