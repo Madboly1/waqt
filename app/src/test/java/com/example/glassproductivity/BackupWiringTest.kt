@@ -55,7 +55,7 @@ class BackupWiringTest {
 
     @Before
     fun setUp() {
-        activity = Robolectric.buildActivity(MainActivity::class.java).create().get()
+        activity = Robolectric.buildActivity(MainActivity::class.java).create().start().resume().get()
         prefs().edit().clear().commit()
         activity.getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).edit().clear().commit()
         activity.filesDir.listFiles()?.forEach { it.deleteRecursively() }
