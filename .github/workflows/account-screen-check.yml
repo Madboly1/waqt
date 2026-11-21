@@ -293,6 +293,117 @@ jobs:
             cat /tmp/tour_state.txt
           } > shots/results.txt
           cat shots/results.txt
+      - name: Alarm registration and delivery probe
+        run: |
+          set -e
+          # Reminder runtime probe on the disposable emulator:
+          #  A) a task due TOMORROW must register its alarm on tomorrow's date
+          #     (runtime evidence for the future-due-date fix, which unit tests
+          #     cover only at the Robolectric level)
+          #  B) a task due TODAY a few minutes ahead must actually DELIVER:
+          #     AlarmReceiver fires and the alarm notification is posted.
+          # Injection goes through shared_prefs on the debug build; no app
+          # code changes, no real accounts, no user data.
+          python3 - <<'PYINJ'
+          import json, re, subprocess, time, datetime, base64, sys
+
+          PKG = "com.example.glassproductivity"
+          PREFS = "shared_prefs/waqt_productivity_prefs.xml"
+
+          def sh(*args, inp=None):
+              r = subprocess.run(["adb"] + list(args), capture_output=True, text=True, input=inp)
+              return r.stdout
+
+          def app_epoch(y, m, d):
+                doy = datetime.date(y, m, d).timetuple().tm_yday
+                return y * 366 + doy
+
+          out = sh("shell", "date", "+%Y %m %d %H %M %s %z").split()
+          Y, M, D, H, Mi, now_s = int(out[0]), int(out[1]), int(out[2]), int(out[3]), int(out[4]), int(out[5])
+
+          # Delivery probe: today, ~3.5 min ahead
+          dt_now = datetime.datetime(Y, M, D, H, Mi)
+          dt_del = dt_now + datetime.timedelta(seconds=210)
+          del_epoch = app_epoch(dt_del.year, dt_del.month, dt_del.day)
+
+          # Future-due probe: tomorrow 09:30 emulator-local
+          dt_tom = dt_now + datetime.timedelta(days=1)
+          fut_epoch = app_epoch(dt_tom.year, dt_tom.month, dt_tom.day)
+          tzs = out[6]
+          sign = 1 if tzs[0] == "+" else -1
+          tz_off = sign * (int(tzs[1:3]) * 3600 + int(tzs[3:5]) * 60)
+          exp_trigger = int((datetime.datetime(dt_tom.year, dt_tom.month, dt_tom.day, 9, 30)
+                             - datetime.datetime(1970, 1, 1)).total_seconds()) - tz_off
+
+          def item(i, title, h, m, due):
+              return {"id": i, "title": title, "isHabit": False, "hour": h, "minute": m,
+                      "streakCount": 0, "streakGoal": 7, "priority": "medium", "category": "work",
+                      "lastCompletedEpochDay": -1, "isCompletedToday": False, "description": "",
+                      "dueDateEpochDay": due, "dueDateString": "", "expectedMinutes": 25,
+                      "actualFocusedMinutes": 0, "focusSessionsCount": 0, "recurrence": "once",
+                      "customDaysCsv": "1,2,3,4,5,6,7", "targetValue": 1, "currentProgressToday": 0,
+                      "targetUnit": "", "longestStreak": 0, "isPaused": False, "hasReminder": True,
+                      "completedDaysHistoryCsv": "", "completionPercentage": 0, "deferredUntilMillis": 0}
+
+          sh("shell", "am", "force-stop", PKG)
+          xml = sh("shell", "run-as", PKG, "cat", PREFS)
+          mobj = re.search(r'<string name="waqt_items_json">(.*)</string>', xml, re.S)
+          items = json.loads(mobj.group(1)) if mobj else []
+          items = [x for x in items if x.get("id") not in ("ci-future-due-probe", "ci-delivery-probe")]
+          items.append(item("ci-future-due-probe", "CI future due probe", 9, 30, fut_epoch))
+          items.append(item("ci-delivery-probe", "CI delivery probe", dt_del.hour, dt_del.minute, del_epoch))
+          new_json = json.dumps(items, separators=(",", ":"))
+          new_xml = (xml[:mobj.start(1)] + new_json + xml[mobj.end(1):]) if mobj else xml
+          b64 = base64.b64encode(new_xml.encode()).decode()
+          sh("shell", "run-as", PKG, "sh", "-c", "base64 -d > " + PREFS, inp=b64)
+
+          with open("/tmp/alarm_probe_env.txt", "w") as f:
+              f.write(f"EXP_TRIGGER={exp_trigger}\nDELIVERY_AT={dt_del.hour:02d}:{dt_del.minute:02d}\n")
+          print("injected", len(items), "items; expect future trigger", exp_trigger,
+                "delivery at", f"{dt_del.hour:02d}:{dt_del.minute:02d}")
+          PYINJ
+          cat /tmp/alarm_probe_env.txt
+
+          # Fresh app launch so notification channels exist and the process is
+          # out of stopped state, then a protected TIME_SET broadcast makes
+          # AlarmReceiver re-schedule every stored reminder.
+          adb root >/dev/null 2>&1 || true
+          sleep 3
+          adb wait-for-device
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 6
+          adb shell am broadcast -a android.intent.action.TIME_SET -p com.example.glassproductivity -f 32 >/dev/null
+          sleep 8
+
+          adb shell dumpsys alarm > shots/alarm_dump2.txt || true
+          grep -n 'com.example.glassproductivity' shots/alarm_dump2.txt > shots/alarm_hits2.txt || true
+          python3 - <<'PYVER'
+          import re, sys
+          exp = None
+          for line in open("/tmp/alarm_probe_env.txt"):
+              if line.startswith("EXP_TRIGGER="):
+                  exp = int(line.strip().split("=")[1])
+          hits = open("shots/alarm_hits2.txt").read()
+          nums = [int(n) for n in re.findall(r"\b(1[0-9]{12})\b", hits)]
+          ok = any(abs(n // 1000 - exp) <= 120 for n in nums)
+          with open("shots/alarm_probe.txt", "w") as f:
+              f.write("ALARM_PROBE_SETUP=ok\n")
+              f.write(f"FUTURE_DUE_EXPECTED={exp}\n")
+              f.write("FUTURE_DUE_FOUND_TRIGGERS=" + ",".join(str(n) for n in nums) + "\n")
+              f.write("FUTURE_DUE_REGISTERED=" + ("yes" if ok else "no") + "\n")
+          print(open("shots/alarm_probe.txt").read())
+          if not ok:
+              sys.exit(1)
+          PYVER
+
+          # Wait for the delivery probe to fire, then check posted notifications
+          sleep 230
+          adb shell dumpsys notification > shots/notif_dump.txt || true
+          HITS=$(grep -c 'com.example.glassproductivity' shots/notif_dump.txt || true)
+          echo "ALARM_DELIVERED=$([ "${HITS:-0}" -gt 0 ] && echo yes || echo no)" >> shots/alarm_probe.txt
+          cat shots/alarm_probe.txt
+          [ "${HITS:-0}" -gt 0 ]
+
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
