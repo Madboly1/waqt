@@ -32,4 +32,4 @@ jobs:
         with:
           gradle-version: "8.7"
       - name: Run backup restore unit tests (JVM, no emulator, no signing)
-        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --no-daemon --stacktrace
+        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --tests 'com.example.glassproductivity.AlarmSchedulerFutureDueDateTest' --no-daemon --stacktrace
