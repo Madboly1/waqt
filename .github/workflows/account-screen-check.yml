@@ -18,6 +18,9 @@ permissions:
 
 jobs:
   account-screens:
+    # Opt out of the emulator harness for a given push with [no-screens] in
+    # the commit message (e.g. signed-build-only runs).
+    if: ${{ !contains(github.event.head_commit.message, '[no-screens]') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
