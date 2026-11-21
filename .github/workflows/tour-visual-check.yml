@@ -9,7 +9,7 @@ on:
       - .github/workflows/tour-visual-check.yml
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   tour-visual:
@@ -128,6 +128,32 @@ jobs:
         with:
           name: tour-shots
           path: shots/
+
+      - name: Push shots to evidence branch
+        if: always()
+        run: |
+          set -e
+          BR="tour-evidence-r${{ github.run_id }}"
+          mkdir -p /tmp/ev
+          cp shots/*.png shots/*.txt /tmp/ev/ 2>/dev/null || true
+          cd /tmp/ev
+          for f in *.png; do
+            [ -f "$f" ] || continue
+            md5sum "$f"
+            python3 - "$f" <<'PYEOF'
+          import struct, sys
+          d = open(sys.argv[1], 'rb').read()
+          w, h = struct.unpack('>II', d[16:24])
+          print(f"{sys.argv[1]}: {w}x{h}, {len(d)} bytes")
+          PYEOF
+          done
+          git init -b "$BR" .
+          git config user.email "ci@waqt.local"
+          git config user.name "waqt-tour-ci"
+          git add .
+          git commit -m "Tour visual evidence for run ${{ github.run_id }} (head ${{ github.sha }})"
+          PUSH_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git push "$PUSH_URL" "$BR:$BR"
       - name: Emulator log on failure
         if: failure()
         run: tail -100 /tmp/emulator.log || true
