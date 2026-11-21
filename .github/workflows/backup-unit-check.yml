@@ -1,0 +1,35 @@
+name: WAQT Backup Unit Check
+
+on:
+  push:
+    branches:
+      - feature/google-drive-backup
+    paths:
+      - app/src/test/**
+      - app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt
+      - app/src/main/java/com/example/glassproductivity/BackupIntegrity.kt
+      - app/src/main/java/com/example/glassproductivity/ChatHistoryStore.kt
+      - app/build.gradle.kts
+      - .github/workflows/backup-unit-check.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+      - name: Run backup restore unit tests (JVM, no emulator, no signing)
+        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --no-daemon --stacktrace
