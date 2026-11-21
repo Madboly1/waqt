@@ -184,7 +184,7 @@ jobs:
             if grep -q 'ACTIVITY_SWIPE_DOWN eligible=false' shots/swipe_probe_ball_logcat.txt; then echo "BALL_DRAG_EXCLUDED=yes" | tee -a shots/swipe_probe.txt; else echo "BALL_DRAG_EXCLUDED=no" | tee -a shots/swipe_probe.txt; fi
             if grep -q 'SWIPE_CREATED' shots/swipe_probe_ball_logcat.txt; then echo "BALL_DRAG_TAB_SWITCH=yes_BUG" | tee -a shots/swipe_probe.txt; else echo "BALL_DRAG_TAB_SWITCH=no" | tee -a shots/swipe_probe.txt; fi
             adb logcat -c
-            adb shell input swipe 700 1780 250 1780 350
+            adb shell input swipe 250 1780 700 1780 350
             sleep 2
             adb exec-out screencap -p > shots/11_tab_swiped.png
             adb logcat -d > shots/swipe_probe_tab_logcat.txt
