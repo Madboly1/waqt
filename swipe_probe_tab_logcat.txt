@@ -1,0 +1,515 @@
+--------- beginning of main
+11-21 15:58:59.726  1706  2156 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-21 15:58:59.731  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.731  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.732  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.732  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.736  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.737  2614  2634 W GnpSdk  : [PhenotypeManagerImpl] Phenotype registration timed out [com.google.android.libraries.internal.growth.growthkit#com.google.android.apps.messaging].
+11-21 15:58:59.739  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.739  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.739  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.740  1706  2156 W SearchServiceCore: Abort, client detached.
+11-21 15:58:59.741  1706  2156 I MicroDetectionState: Should stop hotword detection immediately - true
+11-21 15:58:59.743  1706  2156 I MicroDetectionState: Should stop hotword detection immediately - true
+11-21 15:58:59.745  1479  3222 W MediaProvider: Didn't find any volume for getVolume(/product/media/audio/ringtones/Ring_Synth_04.ogg)
+11-21 15:58:59.746  1479  3222 I MediaProvider: Open with lower FS for /product/media/audio/ringtones/Ring_Synth_04.ogg. Uid: 10144
+11-21 15:58:59.748  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=250.0 y=1780.0 rawX=250.0 rawY=1780.0 tab=0 
+11-21 15:58:59.748  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=true local=250.0,1435.0 host=1080x1863
+11-21 15:58:59.748  2317  2317 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=250.0 y=1435.0 rawX=250.0 rawY=1780.0 tab=0 
+11-21 15:58:59.748  2317  2317 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=false candidatePath=LinearLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-21 15:58:59.749  2317  2317 D WAQT_TOUCH_TRACE: HOST_TOUCH action=0 x=250.0 y=1435.0 rawX=250.0 rawY=1780.0 tab=0 
+11-21 15:58:59.749  2317  2317 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=0
+11-21 15:58:59.749  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-21 15:58:59.754  1479  3222 W MediaProvider: Didn't find any volume for getVolume(/product/media/audio/notifications/pixiedust.ogg)
+11-21 15:58:59.754  1479  3222 I MediaProvider: Open with lower FS for /product/media/audio/notifications/pixiedust.ogg. Uid: 10144
+11-21 15:58:59.755  1706  1748 I earchbox:searc: Background concurrent copying GC freed 91432(4487KB) AllocSpace objects, 45(2188KB) LOS objects, 49% free, 11MB/23MB, paused 34us,19us total 145.567ms
+11-21 15:58:59.759  1479  3222 W MediaProvider: Didn't find any volume for getVolume(/product/media/audio/alarms/Alarm_Classic.ogg)
+11-21 15:58:59.759  1479  3222 I MediaProvider: Open with lower FS for /product/media/audio/alarms/Alarm_Classic.ogg. Uid: 10144
+11-21 15:58:59.762  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=253.85715 y=1780.0 rawX=253.85715 rawY=1780.0 tab=0 
+11-21 15:58:59.762  2317  2317 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=253.85715 y=1435.0 rawX=253.85715 rawY=1780.0 tab=0 
+11-21 15:58:59.762  2317  2317 D WAQT_TOUCH_TRACE: HOST_TOUCH action=2 x=253.85715 y=1435.0 rawX=253.85715 rawY=1780.0 tab=0 
+11-21 15:58:59.762  2317  2317 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=0
+11-21 15:58:59.762  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 15:58:59.769  1479  3222 W MediaProvider: isAppCloneUserPair for user 0: false
+11-21 15:58:59.770  1479  3222 W MediaProvider: isAppCloneUserPair for user 0: false
+11-21 15:58:59.777  1479  1633 E StorageManager: Failed to set extended attributes for /storage/emulated/0/Android to set project id.: Permission denied
+11-21 15:58:59.778  1479  1633 W MediaProvider: Failed to update quota type for /storage/emulated/0/Android
+11-21 15:58:59.778  1479  1633 W MediaProvider: java.io.IOException: Failed to update quota type for /storage/emulated/0/Android
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at android.os.storage.StorageManager.updateExternalStorageFileQuotaType(StorageManager.java:2596)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForFileInternal(MediaProvider.java:641)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForUri(MediaProvider.java:615)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider.access$1000(MediaProvider.java:254)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider$3.lambda$onInsert$0(MediaProvider.java:667)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider$3.$r8$lambda$tVGVTcDpunhoNiUjwQEahD_I1Jc(Unknown Source:0)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider$3$$ExternalSyntheticLambda2.run(Unknown Source:10)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at android.os.Handler.handleCallback(Handler.java:938)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at android.os.Looper.loop(Looper.java:288)
+11-21 15:58:59.778  1479  1633 W MediaProvider: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-21 15:58:59.779  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=277.64285 y=1780.0 rawX=277.64285 rawY=1780.0 tab=0 
+11-21 15:58:59.779  2317  2317 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=3 x=277.64285 y=1780.0 rawX=277.64285 rawY=1780.0 tab=0 
+11-21 15:58:59.779  2317  2317 D WAQT_TOUCH_TRACE: HOST_TOUCH action=3 x=277.64285 y=1780.0 rawX=277.64285 rawY=1780.0 tab=0 
+11-21 15:58:59.779  2317  2317 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=3 handled=true tab=0
+11-21 15:58:59.779  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_BEGIN tab=0 dx=27.642853 pending=null
+11-21 15:58:59.781  1479  1633 E StorageManager: Failed to set extended attributes for /storage/emulated/0/Android/media to set project id.: Permission denied
+11-21 15:58:59.781  1479  1633 W MediaProvider: Failed to update quota type for /storage/emulated/0/Android/media
+11-21 15:58:59.781  1479  1633 W MediaProvider: java.io.IOException: Failed to update quota type for /storage/emulated/0/Android/media
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at android.os.storage.StorageManager.updateExternalStorageFileQuotaType(StorageManager.java:2596)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForFileInternal(MediaProvider.java:641)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider.updateQuotaTypeForUri(MediaProvider.java:615)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider.access$1000(MediaProvider.java:254)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider$3.lambda$onInsert$0(MediaProvider.java:667)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider$3.$r8$lambda$tVGVTcDpunhoNiUjwQEahD_I1Jc(Unknown Source:0)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at com.android.providers.media.MediaProvider$3$$ExternalSyntheticLambda2.run(Unknown Source:10)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at android.os.Handler.handleCallback(Handler.java:938)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at android.os.Looper.loop(Looper.java:288)
+11-21 15:58:59.781  1479  1633 W MediaProvider: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-21 15:58:59.803  1479  3222 I MediaProvider: Scanned external_primary due to REASON_MOUNTED, found 19 items in 39ms, 2 inserts 4 updates 0 deletes
+11-21 15:58:59.805  1479  3222 I MediaProvider: End Intent { act=com.android.providers.media.action.SCAN_VOLUME (has extras) }
+11-21 15:58:59.806  1479  3222 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_MOUNTED dat=file:///storage/emulated/0 flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+11-21 15:58:59.806  1479  3222 I MediaProvider: Volume MediaVolume name: [external_primary] id: [emulated;0] user: [UserHandle{0}] path: [/storage/emulated/0] already attached
+11-21 15:58:59.806  1479  3222 I MediaProvider: End Intent { act=android.intent.action.MEDIA_MOUNTED dat=file:///storage/emulated/0 flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+11-21 15:58:59.806  1479  3222 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_MOUNTED dat=file:///storage/emulated/0 flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+11-21 15:58:59.806  1479  3222 I MediaProvider: Volume MediaVolume name: [external_primary] id: [emulated;0] user: [UserHandle{0}] path: [/storage/emulated/0] already attached
+11-21 15:58:59.806  1479  3222 I MediaProvider: End Intent { act=android.intent.action.MEDIA_MOUNTED dat=file:///storage/emulated/0 flg=0x5000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+11-21 15:58:59.807  1479  3222 I MediaProvider: Begin Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package:com.example.glassproductivity flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+11-21 15:58:59.807  1479  3222 D MediaProvider: Deleted 0 Android/media items belonging to com.example.glassproductivity on /data/user/0/com.google.android.providers.media.module/databases/external.db
+11-21 15:58:59.809  1479  3222 I MediaProvider: End Intent { act=android.intent.action.PACKAGE_DATA_CLEARED dat=package:com.example.glassproductivity flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService (has extras) }
+11-21 15:58:59.857   402   402 I android.hardware.vibrator-service.example: Vibrator on for timeoutMs: 35
+11-21 15:58:59.858   402   402 I android.hardware.vibrator-service.example: Vibrator set amplitude: 0.11
+11-21 15:58:59.860   402  4135 I android.hardware.vibrator-service.example: Starting on on another thread
+11-21 15:58:59.868  2317  2317 D CompatibilityChangeReporter: Compat change id reported: 171228096; UID 10145; state: ENABLED
+11-21 15:58:59.886  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_CREATED id=154805941 from=0 to=1
+11-21 15:58:59.886  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=154805941 from=0 to=1 dx=27.642853
+11-21 15:58:59.886  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_INTERCEPT dx=27.642853 dy=0.0
+11-21 15:58:59.895   402  4135 I android.hardware.vibrator-service.example: Notifying on complete
+11-21 15:58:59.896   402   402 I android.hardware.vibrator-service.example: Vibrator off
+11-21 15:58:59.918  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=428.7143 y=1780.0 rawX=428.7143 rawY=1780.0 tab=1 
+11-21 15:58:59.919  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=154805941 from=0 to=1 dx=178.7143
+11-21 15:59:00.036  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=471.14288 y=1780.0 rawX=471.14288 rawY=1780.0 tab=1 
+11-21 15:59:00.037  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=154805941 from=0 to=1 dx=221.14288
+11-21 15:59:00.045  2317  2382 D EGL_emulation: app_time_stats: avg=436.59ms min=109.30ms max=2633.98ms count=8
+11-21 15:59:00.053   759   810 D EGL_emulation: app_time_stats: avg=8208.36ms min=69.76ms max=16346.97ms count=2
+11-21 15:59:00.075  1055  1066 I .gms.persisten: Compiler allocated 4121KB to compile void dqhv.h(java.lang.Object, dqih, dqfh)
+11-21 15:59:00.077  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=624.1428 y=1780.0 rawX=624.1428 rawY=1780.0 tab=1 
+11-21 15:59:00.080  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=154805941 from=0 to=1 dx=374.14282
+--------- beginning of system
+11-21 15:59:00.178   524   679 I ActivityManager: Killing 3205:com.android.traceur/u0a71 (adj 985): empty #17
+11-21 15:59:00.186  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=688.4286 y=1780.0 rawX=688.4286 rawY=1780.0 tab=1 
+11-21 15:59:00.186  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=154805941 from=0 to=1 dx=438.4286
+11-21 15:59:00.200   327   327 I Zygote  : Process 3205 exited due to signal 9 (Killed)
+11-21 15:59:00.225   524   568 I libprocessgroup: Successfully killed process cgroup uid 10071 pid 3205 in 44ms
+11-21 15:59:00.259  1055  1476 E bqto    : Phenotype registration failed [CONTEXT service_id=51 ]
+11-21 15:59:00.259  1055  1476 E bqto    : java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-21 15:59:00.259  1055  1476 E bqto    : 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at bqto.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at asuo.call(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:00.259  1055  1476 E bqto    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:00.266  1055  1067 I .gms.persisten: Background young concurrent copying GC freed 117904(9463KB) AllocSpace objects, 0(0B) LOS objects, 36% free, 16MB/25MB, paused 5.634ms,19us total 32.399ms
+11-21 15:59:00.323  2317  2317 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=700.0 y=1780.0 rawX=700.0 rawY=1780.0 tab=1 
+11-21 15:59:00.323  2317  2317 D WAQT_TOUCH_TRACE: SWIPE_FINISH id=154805941 cancelled=false latestDx=438.4286
+11-21 15:59:00.750  1055  1055 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.devicesyncservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.gms.lockbox failed
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at bqro.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at bqro.i(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at bqro.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at com.google.android.gms.lockbox.LockboxIntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:00.899  1055  2816 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:00.976   524   695 D ConnectivityService: handleLingerComplete for [100 CELLULAR]
+11-21 15:59:00.978   323   323 I Netd    : Destroyed 3 sockets for netId 100 permission=1 in 853us
+11-21 15:59:00.980   323   323 I netd    : networkSetPermissionForNetwork(100, 1) <2.82ms>
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.libraries.consentverifier#com.google.android.calendar failed
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: 	at cal.qys.b(PG:10)
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: 	at cal.qtk.e(PG:6)
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: 	at cal.qtk.d(PG:2)
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: 	at cal.rgb.run(PG:1)
+11-21 15:59:00.985  3322  4087 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.006  1055  2671 I LockboxIntentOp: Completed task: true [CONTEXT service_id=26 ]
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.westworld failed
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at bqro.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at bqro.i(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at bqro.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at cfdn.F(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at com.google.android.gms.westworld.InitOperation.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at xqf.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.133  1164  3010 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.136  1164  3010 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+11-21 15:59:01.137  1164  3010 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+11-21 15:59:01.142   524  1660 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.142   524  1660 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.142   524  1660 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.142   524  1660 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.143   524   812 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.143   524   812 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.144   524  1660 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.144   524  1660 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.145   524   812 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.145   524   812 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.146   524  1660 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.146   524  1660 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.147  1164  3010 I NewModuleComplete: Received com.google.android.chimera.IntentOperation.NEW_MODULE(com.google.android.gms.chimera.GmsIntentOperationService,2,true)
+11-21 15:59:01.147   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.147   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.148   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.148   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.148   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.148   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.150  1164  3010 I NewModuleHelper: Received com.google.android.chimera.container.NEW_MODULE_FINALIZE(2/0): com.google.android.gms.chimera.GmsIntentOperationService,2,true
+11-21 15:59:01.151  1164  3010 I NewModuleHelper: Completed all new module init intents for all processes.
+11-21 15:59:01.152   524   812 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.152   524   812 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.152   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.152   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.153   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.153   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.153   524   812 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.153   524   812 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.154   524   812 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.154   524   812 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.154   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.154   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.155   524  2118 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-21 15:59:01.155   524  2118 D PackageManager: Clear ephemeral installer activity
+11-21 15:59:01.357  1164  1164 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-21 15:59:01.588  1055  1476 I bqwt    : Removed 0 invalid users [CONTEXT service_id=51 ]
+11-21 15:59:01.635  2614  2614 I BugleRcsEngine: [2] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-21 15:59:01.667  1055  1248 E bque    : Phenotype API error. Event # dtvv@3f095fd0, EventCode: 5 [CONTEXT service_id=51 ]
+11-21 15:59:01.667  1055  1248 E bque    : bqtg: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-21 15:59:01.667  1055  1248 E bque    : 	at bquj.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-21 15:59:01.667  1055  1248 E bque    : 	at bquh.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.667  1055  1248 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:01.667  1055  1248 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.667  1055  1248 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:59:01.667  1055  1248 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:59:01.667  1055  1248 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.667  1055  1248 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.667  1055  1248 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:01.667  1055  1248 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.667  1055  1248 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.667  1055  1248 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.667  1055  1248 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29500 [CONTEXT service_id=51 ]
+11-21 15:59:01.674  1055  1248 W AsyncOperation: OperationException[Status{statusCode=Empty (package not registered?) or malformed snapshot token for null: , resolution=null}]
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.674  1055  1248 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: Failed to commit to config
+11-21 15:59:01.675  1706  4125 E MendelPackageState: com.google.android.libraries.phenotype.client.a.e: 29500: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.libraries.phenotype.client.a.g.apply(SourceFile:1)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.a.d(SourceFile:2)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.c.run(SourceFile:11)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.az.execute(SourceFile:1)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.d.i(SourceFile:1)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.d.m(SourceFile:12)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.d.p(SourceFile:3)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.libraries.s.b.a(SourceFile:5)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.k.n.run(SourceFile:1)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.common.w.a.az.execute(SourceFile:1)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.k.o.a(SourceFile:3)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.k.ad.b(SourceFile:5)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.k.aj.u(SourceFile:4)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.common.api.internal.dg.b(SourceFile:4)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.phenotype.r.a(SourceFile:1)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.phenotype.a.a.dispatchTransaction(SourceFile:31)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.a.b.onTransact(SourceFile:2)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: Caused by: com.google.android.gms.common.api.n: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	at com.google.android.gms.common.api.internal.dg.b(SourceFile:3)
+11-21 15:59:01.675  1706  4125 E MendelPackageState: 	... 5 more
+11-21 15:59:01.691  1055  1250 E bque    : Phenotype API error. Event # dtvv@e095edcf, EventCode: 5 [CONTEXT service_id=51 ]
+11-21 15:59:01.691  1055  1250 E bque    : bqtg: 29501: Stale snapshot for assistant_auto_tng_libraries_device#com.google.android.googlequicksearchbox(change count changed - expected 3  but was 0)
+11-21 15:59:01.691  1055  1250 E bque    : 	at bquj.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):14)
+11-21 15:59:01.691  1055  1250 E bque    : 	at bquh.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.691  1055  1250 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:01.691  1055  1250 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.691  1055  1250 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:59:01.691  1055  1250 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:59:01.691  1055  1250 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.691  1055  1250 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.691  1055  1250 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:01.691  1055  1250 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.691  1055  1250 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.691  1055  1250 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.691  1055  1250 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29501 [CONTEXT service_id=51 ]
+11-21 15:59:01.691  1055  1250 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for assistant_auto_tng_libraries_device#com.google.android.googlequicksearchbox(change count changed - expected 3  but was 0), resolution=null}]
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.691  1055  1250 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.693  1055  1248 E bque    : Phenotype API error. Event # dtvv@e6468708, EventCode: 5 [CONTEXT service_id=51 ]
+11-21 15:59:01.693  1055  1248 E bque    : bqtg: 29501: Stale snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging(change count changed - expected 3  but was 0)
+11-21 15:59:01.693  1055  1248 E bque    : 	at bquj.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):14)
+11-21 15:59:01.693  1055  1248 E bque    : 	at bquh.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.693  1055  1248 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:01.693  1055  1248 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.693  1055  1248 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:59:01.693  1055  1248 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:59:01.693  1055  1248 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.693  1055  1248 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.693  1055  1248 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:01.693  1055  1248 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.693  1055  1248 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.693  1055  1248 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.693  1055  1248 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29501 [CONTEXT service_id=51 ]
+11-21 15:59:01.693  1055  1248 W AsyncOperation: OperationException[Status{statusCode=Stale snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging(change count changed - expected 3  but was 0), resolution=null}]
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.693  1055  1248 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:01.775  1355  1355 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():391 triggerSync() : isBundled = false
+11-21 15:59:01.775  1355  1355 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():391 triggerSync() : isBundled = false
+11-21 15:59:01.776  1355  1650 I SP      : Registering emoji.20210928, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20210928151924/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 20210928, current: -1
+11-21 15:59:01.777  1355  1650 I SP      : Registering emoji.20210928, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20210928151924/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 20210928, current: -1
+11-21 15:59:01.790  1355  1654 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdatesInternal():364 Latency of updating configurations from phenotype (experiment v4): 20
+11-21 15:59:01.790  1355  1355 I ClipboardDataExtension: ClipboardDataExtension.updateScreenshotsContentObserver():301 Disable the feature of handling screenshots in the clipboard.
+11-21 15:59:01.790  1355  1654 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdates():263 Latency of updating configurations from phenotype (ExperimentV4): 20
+11-21 15:59:01.791  1355  1654 I PhenotypeModule: PhenotypeModule.lambda$fetchAndUpdate$1():220 fetchAndUpdate() : Success, hasFlags=true, flagCount=763, lastFetchStatus=November 21, 3:58 PM {reason=2, isFullFetch=true, success=true, isEmpty=false, isDelta=false, fetchedFlagsCount=763, deletedFlagsCount=297, updatedFlagsCount=170, totalTime=5675}
+11-21 15:59:01.792  1355  1650 I SuperpacksManager: SuperpacksManager$3$1.onFailure():617 emoji.registerManifest() cancelled
+11-21 15:59:01.792  1355  1650 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/emoji/20210928151924/superpacks_manifest.zip to emoji-20210928.zip.fetched (constraints: m:b:u:l)
+11-21 15:59:01.793  1355  1355 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():352 initializeDelightSuperpacks()
+11-21 15:59:01.793  1355  1355 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1080 getDelightMetadataUriAndVersion(): Phenotype : 2021093005 : https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json
+11-21 15:59:01.793  1355  1355 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-21 15:59:01.794  1355  1655 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():514 Destroy existing keyboard group manager in fci
+11-21 15:59:01.794  1355  1655 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():123 Create keyboard group manager listenable future in fci
+11-21 15:59:01.794  1355  1662 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$4():504 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2021062400, required 2021093005
+11-21 15:59:01.794  1355  1650 I SP      : Registering delight.2021093005, url: https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json, constraints: m:*:*:*, flags: *, requested: 2021093005, current: 2021062400
+11-21 15:59:01.795  1355  1584 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():89 parseKeyboardGroupDef() 2132148499 -> 0_resource_name_obfuscated : WaitTime = 1 ms : RunTime = 0 ms
+11-21 15:59:01.797  1355  1650 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json to delight-2021093005.fetched (constraints: m:b:u:l)
+11-21 15:59:01.799  1355  1355 I UrgentSignalsProcessor: UrgentSignalsProcessor.flagUpdated():97 Received flagsUpdated for urgent signal
+11-21 15:59:01.799   323  4138 D resolv  : GetAddrInfoHandler::run: {101 101 101 983141 10114 0}
+11-21 15:59:01.799   323  4138 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:59:01.800   323  4139 D resolv  : doQuery: (1, 28)
+11-21 15:59:01.800   323  4139 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 15:59:01.800   323  4139 D resolv  : res_nsend
+11-21 15:59:01.800   323  4139 I resolv  : resolv_cache_lookup: lookup
+11-21 15:59:01.800   323  4139 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x790a4a0f5c10
+11-21 15:59:01.800   323  4139 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:59:01.805   323  4140 D resolv  : doQuery: (1, 1)
+11-21 15:59:01.805   323  4140 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 15:59:01.805   323  4140 D resolv  : res_nsend
+11-21 15:59:01.805   323  4140 I resolv  : resolv_cache_lookup: lookup
+11-21 15:59:01.805   323  4140 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x790a3a0f1df0
+11-21 15:59:01.805   323  4140 D resolv  : doQuery: rcode=0, ancount=8
+11-21 15:59:01.807  1355  1428 I JobSchedulerImpl: JobSchedulerImpl.schedule():90 Schedule task: ExpressionDataPrunePeriodicTask. Success.
+11-21 15:59:01.809  1355  1355 I UrgentSignalsProcessor: UrgentSignalsProcessor.processSignals():117 Received signal: id: 576379183
+11-21 15:59:01.809  1355  1355 I UrgentSignalsProcessor: UrgentSignalsProcessor.processSignals():126 Signal target module: 1
+11-21 15:59:01.809  1355  1355 I UrgentSignalsProcessor: UrgentSignalsProcessor.processSignals():126 Signal target module: 1
+11-21 15:59:01.810  1355  1650 I SP      : Registering content_cache.2021061512, url: https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2021061512, current: 2020101916
+11-21 15:59:01.811  1355  1662 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():352 initializeDelightSuperpacks()
+11-21 15:59:01.811  1355  1662 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1080 getDelightMetadataUriAndVersion(): Phenotype : 2021093005 : https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json
+11-21 15:59:01.811  1355  1662 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-21 15:59:01.811  1355  1355 I SpeechPackManager: SpeechPackManager.refreshManifest():343 refreshManifest()
+11-21 15:59:01.811  1355  1355 I SpeechPackManager: SpeechPackManager.registerManifest():441 registerManifest() : https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json
+11-21 15:59:01.812  1355  1355 I EmojiExtensionHelper: EmojiExtensionHelper.flagsUpdated():153 Received flag change: enable_emoji_tall_view{type=Boolean, finalValue=true, defaultValue=false, flagValue=true, overrideValue=null}.
+11-21 15:59:01.812  1355  1355 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():514 Destroy existing keyboard group manager in fau
+11-21 15:59:01.812  1355  1355 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():123 Create keyboard group manager listenable future in fau
+11-21 15:59:01.813  1355  1355 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():527 KeyboardGroupManager destroyed in fau.
+11-21 15:59:01.813  1355  1355 I DictionarySuperpacksManager: DictionarySuperpacksManager$1.onEnabledInputMethodEntriesChanged():60 onEnabledInputMethodEntriesChanged
+11-21 15:59:01.814  1355  1584 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():89 parseKeyboardGroupDef() 2132148496 -> 0_resource_name_obfuscated : WaitTime = 2 ms : RunTime = 0 ms
+11-21 15:59:01.814  1355  1493 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():89 parseKeyboardGroupDef() 2132148495 -> 0_resource_name_obfuscated : WaitTime = 1 ms : RunTime = 0 ms
+11-21 15:59:01.815  1355  1650 I SP      : Registering transformer_concept.2020102810, url: https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/superpacks_manifest.json, constraints: *:*:*:*, flags: *, requested: 2020102810, current: -1
+11-21 15:59:01.817  1355  1650 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/superpacks_manifest.json to content_cache-2021061512.fetched (constraints: W:b:u:l)
+11-21 15:59:01.818  1355  1650 W SP      : Manifest for delight is not available, version: 2021093005
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-21 15:59:01.818  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:01.819  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-21 15:59:01.819  1355  1662 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$4():504 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2021062400, required 2021093005
+11-21 15:59:01.819  1355  1642 I SpeechPackManager: SpeechPackManager.lambda$registerManifest$4():451 registerManifest() : Fetching hash 1327534105
+11-21 15:59:01.822  1355  1650 I SP      : Registering content_cache.2021061512, url: https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2021061512, current: 2020101916
+11-21 15:59:01.822  1355  1650 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/superpacks_manifest.json to transformer_concept-2020102810.fetched (constraints: m:b:u:l)
+11-21 15:59:01.825  1355  1650 I SP      : Registering delight.2021093005, url: https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json, constraints: m:*:*:*, flags: *, requested: 2021093005, current: 2021062400
+11-21 15:59:01.826  1355  1650 I SP      : Registering gboard-small-speech-packs.1327534105, url: https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json, constraints: m:b:*:*, flags: *, requested: 1327534105, current: 758538843
+11-21 15:59:01.826  1355  1650 I SuperpacksManager: SuperpacksManager$3$1.onFailure():617 content_cache.registerManifest() cancelled
+11-21 15:59:01.826  1355  1948 I AbstractSyncResultCallback: AbstractSyncResultCallback.onFailure():36 onFailure(): delight.sync cancelled; expected if new request supersedes pending one.
+11-21 15:59:01.835  1355  1650 I SuperpacksManager: SuperpacksManager$3$1.onFailure():617 delight.registerManifest() cancelled
+11-21 15:59:01.835  1355  1650 I SP      : Requesting download of URL https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json to gboard-small-speech-packs-1327534105.fetched (constraints: m:b:u:l)
+11-21 15:59:01.835  1355  1662 I SuperDelight: SuperDelightManager$4.onSuccess():669 delight sync success, adding to data file manager
+11-21 15:59:01.836  1355  1662 I DataFileManager: DataFileManager.addDataWithoutNotify():167 adding data en-US delight
+11-21 15:59:01.850  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->getAlpnSelectedProtocol()[B (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:01.851  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->getAlpnSelectedProtocol()[B (max-target-q, reflection, denied)
+11-21 15:59:01.929  1355  1650 I SP      : Successfully got manifest for emoji-manifest: manifests:emoji-20210928
+11-21 15:59:01.939  1355  1650 I EmojiSlicingStrategy: EmojiSlicingStrategy.matchEnabledLocalesWithPackLocales():136 matchEnabledLocalesWithPackLocales() : User enabled 1 locales; returning 1 slices
+11-21 15:59:01.939  1355  1650 I SP      : Syncing emoji (20210928) with slices: [{f3e8ef9a2eea15b0459d82fa3609b4c7, m:*:*:*}], metadata: false
+11-21 15:59:01.967  1355  1650 I SP      : Scheduling job with delay of 0s for {m:b:u:l, bg}, 1 candidates
+--------- beginning of kernel
+11-21 15:59:02.148     0     0 I init    : Sending signal 9 to service 'idmap2d' (pid 3587) process group...
+11-21 15:59:01.980   524   679 W OverlayManager: service 'idmap' died
+11-21 15:59:01.982  1355  1355 I SpBackgroundTask: SuperpacksBackgroundJobService.onStartJob():23 onStartJob: android.app.job.JobParameters@bfd7c57
+11-21 15:59:01.982  1355  1355 I SP      : ====> Starting job {m:b:u:l, bg}
+11-21 15:59:02.159     0     0 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 3587 in 5ms
+11-21 15:59:02.162     0     0 I init    : Control message: Processed ctl.stop for 'idmap2d' from pid: 524 (system_server)
+11-21 15:59:02.168     0     0 I init    : Service 'idmap2d' (pid 3587) received signal 9
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: Phenotype bulk platform registration failed. [CONTEXT service_id=204 ]
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at bqxg.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):20)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):15)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 15:59:01.997  1055  2759 W ConfiguratorPhenotypeUt: 	at java.lang.Thread.run(Thread.java:920)
+11-21 15:59:02.000  1355  1650 I SP      : Scheduling: download registered, 0 started, 0 paused, 1 scheduled, 1 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 * {m:b:u:l, bg}
+11-21 15:59:02.006  1355  1650 I SP      : Scheduling: job start ({m:b:u:l, bg}), 1 started, 0 paused, 0 scheduled, 1 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ * {m:b:u:l, bg}
+11-21 15:59:02.006  1355  1650 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/emoji/20210928151924/en_us.zip to f3e8ef9a2eea15b0459d82fa3609b4c7.zip.fetched (constraints: m:b:u:l)
+11-21 15:59:02.022  1355  1650 I SP      : Successfully got manifest for delight-manifest: manifests:delight-2021093005
+11-21 15:59:02.041  1355  1368 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2021062100_1[2]
+11-21 15:59:02.050  1164  1164 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+11-21 15:59:02.084   323  4142 D resolv  : GetAddrInfoHandler::run: {101 101 101 983141 10114 0}
+11-21 15:59:02.084   323  4142 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 15:59:02.085  1355  1650 I SuperDelight: SuperDelightDownloadMetadataParser.parse():183 SuperDelightDownloadMetadataParser#parse(delight): Manifest parsed with 885 packs
+11-21 15:59:02.086   323  4143 D resolv  : doQuery: (1, 28)
+11-21 15:59:02.086   323  4143 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 15:59:02.086   323  4143 D resolv  : res_nsend
+11-21 15:59:02.086   323  4143 I resolv  : resolv_cache_lookup: lookup
+11-21 15:59:02.086   323  4143 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-21 15:59:02.086   323  4143 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:59:02.086   323  4143 I resolv  : res_stats_usable_server: NS stats: S 34 + E 0 + T 0 + I 0 = 34, rtt = 17, min_samples = 8
+11-21 15:59:02.086   323  4143 I resolv  : res_stats_usable_server: success rate 100
+11-21 15:59:02.087   323  4143 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-21 15:59:02.087   323  4143 D resolv  : send_dg: new DG socket
+11-21 15:59:02.089  1355  1662 I SuperDelight: SuperDelightManager.lambda$syncDownloadableLanguageModels$6():600 SuperDelightManager#syncDownloadableLanguageModels(delight): [OnDevice] Syncing for version 2021093005
+11-21 15:59:02.090   323  4143 I resolv  : get_timeout: using timeout of 5000 msec
+11-21 15:59:02.090   323  4143 I resolv  : retrying_poll: 58 retrying_poll
+11-21 15:59:02.092   323  4143 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-21 15:59:02.092   323  4143 I resolv  : res_nsend: used send_dg 143 terrno: 0
+11-21 15:59:02.092   323  4143 I resolv  : res_stats_set_sample: rcode = 0, sec = 2
+11-21 15:59:02.092   323  4143 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 34, count = 34
+11-21 15:59:02.092   323  4143 D resolv  : res_nsend: got answer:
+11-21 15:59:02.092   323  4143 I resolv  : answer_getTTL: TTL = 70
+11-21 15:59:02.092   323  4143 I resolv  : _cache_add_p: entry 35 added (count=35)
+11-21 15:59:02.092   323  4143 I resolv  : cache_dump_mru_locked: MRU LIST (35):  35 21 22 20 19 28 27 34 33 32 31 9 10 30 29 24 25 26 23 2 1 4 3 13 14 18 17 16 15 12 11 8 7 6 5
+11-21 15:59:02.092   323  4143 D resolv  : doQuery: rcode=0, ancount=4
+11-21 15:59:02.097   323  4144 D resolv  : doQuery: (1, 1)
+11-21 15:59:02.098   323  4144 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 15:59:02.098   323  4144 D resolv  : res_nsend
+11-21 15:59:02.098   323  4144 I resolv  : resolv_cache_lookup: lookup
+11-21 15:59:02.098   323  4144 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-21 15:59:02.098   323  4144 I resolv  : resolv_populate_res_for_net: netid=101
+11-21 15:59:02.100   323  4144 I resolv  : res_stats_usable_server: NS stats: S 35 + E 0 + T 0 + I 0 = 35, rtt = 17, min_samples = 8
+11-21 15:59:02.100   323  4144 I resolv  : res_stats_usable_server: success rate 100
+11-21 15:59:02.100   323  4144 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-21 15:59:02.100   323  4144 D resolv  : send_dg: new DG socket
+11-21 15:59:02.100   323  4144 I resolv  : get_timeout: using timeout of 5000 msec
+11-21 15:59:02.100   323  4144 I resolv  : retrying_poll: 58 retrying_poll
+11-21 15:59:02.102   323  4144 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-21 15:59:02.102   323  4144 I resolv  : res_nsend: used send_dg 95 terrno: 0
+11-21 15:59:02.102   323  4144 I resolv  : res_stats_set_sample: rcode = 0, sec = 2
+11-21 15:59:02.102   323  4144 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 35, count = 35
+11-21 15:59:02.102   323  4144 D resolv  : res_nsend: got answer:
+11-21 15:59:02.102   323  4144 I resolv  : answer_getTTL: TTL = 70
+11-21 15:59:02.102   323  4144 I resolv  : _cache_add_p: entry 36 added (count=36)
+11-21 15:59:02.102   323  4144 I resolv  : cache_dump_mru_locked: MRU LIST (36):  36 35 21 22 20 19 28 27 34 33 32 31 9 10 30 29 24 25 26 23 2 1 4 3 13 14 18 17 16 15 12 11 8 7 6 5
+11-21 15:59:02.102   323  4144 D resolv  : doQuery: rcode=0, ancount=4
+11-21 15:59:02.120  1355  1650 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():82 DownloadSlicing#getSlices() : Locale = [en_US]
+11-21 15:59:02.122  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.122  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.122  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-21 15:59:02.122  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.122  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.122  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-21 15:59:02.123  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.123  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-21 15:59:02.131  1355  1650 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():229 DownloadSlicing#getSlices(): result {slices=[delight:main_en_us_2021062100_1, delight:main_en_840_2021081100_1], last batch=true, sync metadata=false}
+11-21 15:59:02.131  1355  1650 I SP      : Syncing delight (2021093005) with slices: [main_en_us_2021062100_1, main_en_840_2021081100_1], metadata: false
+11-21 15:59:02.161  1355  1368 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2021062100_1[2]
+11-21 15:59:02.162  1355  1650 I SP      : Pausing download emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, reason: PREEMPTED
+11-21 15:59:02.169  1355  1650 I SP      : Scheduling: download registered, 1 started, 1 paused, 0 scheduled, 2 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ * {m:b:u:l, bg}
+11-21 15:59:02.169  1355  1650 I SP      : Successfully got manifest for content_cache-manifest: manifests:content_cache-2021061512
+11-21 15:59:02.172  1355  1650 I SP      : Successfully got manifest for transformer_concept-manifest: manifests:transformer_concept-2020102810
+11-21 15:59:02.175  1355  1650 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/dictionarypack/prod/en-840_d3_2021081100_5b547qpqwyjy_jwsmain.dict to main_en_840_2021081100_1.fst-decompress.fetched (constraints: m:b:u:l)
+11-21 15:59:02.176  1355  1650 I SP      : Syncing content_cache (2021061512) with slices: [9e22973d4ff86e79a43b587d114f5a4e, 73c10eff89726f4122ae1887121fdee6], metadata: true
+11-21 15:59:02.176  1355  1650 I SP      : Syncing transformer_concept (2020102810) with slices: [2020102810_en], metadata: false
+11-21 15:59:02.202  1355  1650 I SP      : Scheduling: download registered, 0 started, 0 paused, 0 scheduled, 3 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}
+11-21 15:59:02.210  1355  1650 I SP      : Scheduling: download registered, 0 started, 0 paused, 0 scheduled, 4 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 {m:b:u:l, bg}
+11-21 15:59:02.228  1355  1650 I SP      : Scheduling: download registered, 0 started, 0 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 {m:b:u:l, bg}, transformer_concept:2020102810_en {m:b:u:l, bg}
+11-21 15:59:02.399   345   428 D goldfish-address-space: claimShared: Ask to claim region [0x3f765a000 0x3f7ffe000]
+11-21 15:59:02.409   175   175 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-21 15:59:02.409  4147  4148 I Gralloc4: mapper 4.x is not supported
+11-21 15:59:02.416  4147  4148 D HostConnection: createUnique: call
+11-21 15:59:02.417  4147  4148 D HostConnection: HostConnection::get() New Host Connection established 0x71cccff88c90, tid 4148
+11-21 15:59:02.417  4147  4148 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-21 15:59:02.417  4147  4148 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-21 15:59:02.428  4147  4148 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-21 15:59:02.626  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->getAlpnSelectedProtocol()[B (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.626  1355  1952 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->getAlpnSelectedProtocol()[B (max-target-q, reflection, denied)
+11-21 15:59:02.689  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.689  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.689  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-21 15:59:02.690  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.690  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.690  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-21 15:59:02.690  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-21 15:59:02.690  1355  4149 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-21 15:59:02.693  1355  1650 I SP      : Download for emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 was canceled
+11-21 15:59:02.693  1355  1650 I SP      : Download stopped: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, failed (retriable) paused, size: 0
+11-21 15:59:02.701  1355  1650 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 {m:b:u:l, bg}, transformer_concept:2020102810_en {m:b:u:l, bg}
+11-21 15:59:02.704  1355  1650 I SP      : Successfully got manifest for gboard-small-speech-packs-manifest: manifests:gboard-small-speech-packs-1327534105
+11-21 15:59:02.708  1355  1661 I SpeechPackManager: SpeechPackManager$2.onSuccess():350 refreshManifest() : Refreshed URL = https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json
+11-21 15:59:02.920     0     0 I logd    : logdr: UID=2000 GID=2000 PID=4150 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
