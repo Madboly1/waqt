@@ -27,6 +27,18 @@ class ChatHistoryStore(context: Context) : SQLiteOpenHelper(context, "waqt_chat_
         return id
     }
 
+    /** Restore path: recreates a chat with its original id so a repeated restore of the same backup stays a no-op. */
+    @Synchronized fun createChatWithId(id: String, title: String): String {
+        val exists = readableDatabase.rawQuery("SELECT id FROM chats WHERE id=?", arrayOf(id)).use { it.moveToFirst() }
+        if (exists) return id
+        writableDatabase.insert("chats", null, ContentValues().apply {
+            put("id", id)
+            put("title", title.replace("\n", " ").trim().take(42).ifBlank { "محادثة جديدة" })
+            put("updated_at", System.currentTimeMillis())
+        })
+        return id
+    }
+
     @Synchronized fun ensureChat(id: String?): String {
         if (!id.isNullOrBlank() && readableDatabase.rawQuery("SELECT id FROM chats WHERE id=?", arrayOf(id)).use { it.moveToFirst() }) return id
         return createChat()
