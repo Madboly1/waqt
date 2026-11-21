@@ -107,17 +107,23 @@ jobs:
             return 1
           }
 
-          # Dismiss first-run tour if present
-          try_tap "تخطّي" || true
+          # Dismiss first-run tour if present (button text is "تخطَّ" in the dump)
+          for i in 1 2 3 4; do
+            try_tap "تخط" && break
+            sleep 2
+          done
           sleep 3
+          adb shell uiautomator dump /sdcard/uit.xml >/dev/null 2>&1
+          adb pull /sdcard/uit.xml /tmp/uit.xml >/dev/null 2>&1 || true
+          if grep -q "من 7" /tmp/uit.xml 2>/dev/null; then echo "TOUR_DISMISSED=no" > /tmp/tour_state.txt; else echo "TOUR_DISMISSED=yes" > /tmp/tour_state.txt; fi
           adb exec-out screencap -p > shots/01_home.png
 
           # Record pre-test persisted state (debug build allows run-as)
-          adb shell run-as com.example.glassproductivity ls -R shared_prefs 2>/dev/null | sort > shots/prefs_before.txt || true
-          adb shell run-as com.example.glassproductivity cat shared_prefs/*.xml 2>/dev/null | md5sum > shots/prefs_before.md5 || true
+          adb shell "run-as com.example.glassproductivity sh -c 'ls -la shared_prefs'" > shots/prefs_before.txt 2>/dev/null || true
+          adb shell "run-as com.example.glassproductivity sh -c 'cat shared_prefs/*.xml 2>/dev/null'" | md5sum > shots/prefs_before.md5 || true
 
-          # Open settings via gear button
-          try_tap "⚙" || try_tap "الإعدادات" || true
+          # Open settings via gear button (home body is one custom view; gear at image (75,170) -> device (111,252))
+          try_tap "⚙" || adb shell input tap 111 252 || true
           sleep 4
           adb exec-out screencap -p > shots/02_settings_top.png
 
@@ -166,12 +172,12 @@ jobs:
           adb pull /sdcard/ui3.xml shots/ui_reopened.xml >/dev/null 2>&1 || true
           FOCUS3=$(adb shell dumpsys window | grep -m1 mCurrentFocus || true)
           PID3=$(adb shell pidof com.example.glassproductivity || true)
-          adb shell run-as com.example.glassproductivity ls -R shared_prefs 2>/dev/null | sort > shots/prefs_after.txt || true
-          adb shell run-as com.example.glassproductivity cat shared_prefs/*.xml 2>/dev/null | md5sum > shots/prefs_after.md5 || true
+          adb shell "run-as com.example.glassproductivity sh -c 'ls -la shared_prefs'" > shots/prefs_after.txt 2>/dev/null || true
+          adb shell "run-as com.example.glassproductivity sh -c 'cat shared_prefs/*.xml 2>/dev/null'" | md5sum > shots/prefs_after.md5 || true
 
           # Crash evidence from logcat
           adb logcat -d > shots/logcat_full.txt || true
-          grep -iE 'FATAL EXCEPTION|AndroidRuntime|beginning of crash' shots/logcat_full.txt > shots/crash_hits.txt || true
+          grep -E 'FATAL EXCEPTION|beginning of crash' shots/logcat_full.txt > shots/crash_hits.txt || true
 
           {
             echo "FOCUS_AFTER_SINGLE_BACK=$FOCUS1"
@@ -183,6 +189,7 @@ jobs:
             echo "PREFS_BEFORE_MD5=$(cat shots/prefs_before.md5 2>/dev/null)"
             echo "PREFS_AFTER_MD5=$(cat shots/prefs_after.md5 2>/dev/null)"
             echo "CRASH_HITS=$(wc -l < shots/crash_hits.txt)"
+            cat /tmp/tour_state.txt
           } > shots/results.txt
           cat shots/results.txt
       - name: Upload screenshots
