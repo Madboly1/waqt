@@ -86,6 +86,14 @@ jobs:
           adb shell am start -n com.example.glassproductivity/.MainActivity
           sleep 12
 
+          # Tour visual verification on first launch (before dismissal):
+          # overlay must be up with its pager; capture two pages as evidence.
+          adb shell uiautomator dump /sdcard/uiv.xml >/dev/null 2>&1
+          adb pull /sdcard/uiv.xml /tmp/uiv.xml >/dev/null 2>&1 || true
+          adb exec-out screencap -p > shots/00_tour_first_page.png
+          if grep -q "من 7" /tmp/uiv.xml 2>/dev/null; then echo "TOUR_SHOWN=yes" > /tmp/tour_visual.txt; else echo "TOUR_SHOWN=no" > /tmp/tour_visual.txt; fi
+          cat /tmp/tour_visual.txt
+
           tap_text() {
             adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
             adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
@@ -148,6 +156,8 @@ jobs:
             exit 1
           fi
           echo "TOUR_DISMISSED=yes" > /tmp/tour_state.txt
+          cat /tmp/tour_state.txt /tmp/tour_visual.txt
+          grep -q '^TOUR_SHOWN=yes$' /tmp/tour_visual.txt
 
           # Floating-ball drag + tab-swipe interaction probe (runtime evidence for
           # the tab-swipe steal fix: ball drags must not start tab swipes; real
@@ -332,8 +342,10 @@ jobs:
           tzs = out[6]
           sign = 1 if tzs[0] == "+" else -1
           tz_off = sign * (int(tzs[1:3]) * 3600 + int(tzs[3:5]) * 60)
-          exp_trigger = int((datetime.datetime(dt_tom.year, dt_tom.month, dt_tom.day, 9, 30)
+          exp_trigger = int((datetime.datetime(dt_tom.year, dt_tom.month, dt_tom.day, 9, 37)
                              - datetime.datetime(1970, 1, 1)).total_seconds()) - tz_off
+          exp_pre = int((datetime.datetime(dt_tom.year, dt_tom.month, dt_tom.day, 9, 24)
+                         - datetime.datetime(1970, 1, 1)).total_seconds()) - tz_off
 
           def item(i, title, h, m, due):
               return {"id": i, "title": title, "isHabit": False, "hour": h, "minute": m,
@@ -350,15 +362,20 @@ jobs:
           mobj = re.search(r'<string name="waqt_items_json">(.*)</string>', xml, re.S)
           items = json.loads(mobj.group(1)) if mobj else []
           items = [x for x in items if x.get("id") not in ("ci-future-due-probe", "ci-delivery-probe")]
-          items.append(item("ci-future-due-probe", "CI future due probe", 9, 30, fut_epoch))
+          items.append(item("ci-future-due-probe", "CI future due probe", 9, 37, fut_epoch))
           items.append(item("ci-delivery-probe", "CI delivery probe", dt_del.hour, dt_del.minute, del_epoch))
           new_json = json.dumps(items, separators=(",", ":"))
           new_xml = (xml[:mobj.start(1)] + new_json + xml[mobj.end(1):]) if mobj else xml
+          # Distinctive pre-alert (13 min instead of default 10) so the registration
+          # check can require the 09:37 trigger AND its 09:24 pre-alert, tying both
+          # alarms to the injected task rather than any other app alarm.
+          if 'name="waqt_pre_alert_minutes"' not in new_xml:
+              new_xml = new_xml.replace('</map>', '<int name="waqt_pre_alert_minutes" value="13" /></map>')
           b64 = base64.b64encode(new_xml.encode()).decode()
           sh("shell", "run-as", PKG, "sh", "-c", "base64 -d > " + PREFS, inp=b64)
 
           with open("/tmp/alarm_probe_env.txt", "w") as f:
-              f.write(f"EXP_TRIGGER={exp_trigger}\nDELIVERY_AT={dt_del.hour:02d}:{dt_del.minute:02d}\n")
+              f.write(f"EXP_TRIGGER={exp_trigger}\nEXP_PRE={exp_pre}\nDELIVERY_AT={dt_del.hour:02d}:{dt_del.minute:02d}\n")
           print("injected", len(items), "items; expect future trigger", exp_trigger,
                 "delivery at", f"{dt_del.hour:02d}:{dt_del.minute:02d}")
           PYINJ
@@ -372,6 +389,7 @@ jobs:
           adb wait-for-device
           adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
           sleep 6
+          adb shell dumpsys notification --noredact > shots/notif_baseline.txt || true
           adb shell am broadcast -a android.intent.action.TIME_SET -p com.example.glassproductivity -f 32 >/dev/null
           sleep 8
 
@@ -380,12 +398,16 @@ jobs:
           python3 - <<'PYVER'
           import re, sys
           exp = None
+          exp_pre = None
           for line in open("/tmp/alarm_probe_env.txt"):
               if line.startswith("EXP_TRIGGER="):
                   exp = int(line.strip().split("=")[1])
+              if line.startswith("EXP_PRE="):
+                  exp_pre = int(line.strip().split("=")[1])
           hits = open("shots/alarm_hits2.txt").read()
           nums = [int(n) for n in re.findall(r"\b(1[0-9]{12})\b", hits)]
-          ok = any(abs(n // 1000 - exp) <= 120 for n in nums)
+          ok = any(abs(n // 1000 - exp) <= 120 for n in nums) and \
+               any(abs(n // 1000 - exp_pre) <= 120 for n in nums)
           with open("shots/alarm_probe.txt", "w") as f:
               f.write("ALARM_PROBE_SETUP=ok\n")
               f.write(f"FUTURE_DUE_EXPECTED={exp}\n")
@@ -398,11 +420,121 @@ jobs:
 
           # Wait for the delivery probe to fire, then check posted notifications
           sleep 230
-          adb shell dumpsys notification > shots/notif_dump.txt || true
-          HITS=$(grep -c 'com.example.glassproductivity' shots/notif_dump.txt || true)
-          echo "ALARM_DELIVERED=$([ "${HITS:-0}" -gt 0 ] && echo yes || echo no)" >> shots/alarm_probe.txt
+          adb shell dumpsys notification --noredact > shots/notif_dump.txt || true
+          # Delivery evidence must name the injected probe task and be new
+          # relative to the pre-broadcast baseline, not any prior notification.
+          TITLE_HITS=$(grep -c 'CI delivery probe' shots/notif_dump.txt || true)
+          BASE_TITLE_HITS=$(grep -c 'CI delivery probe' shots/notif_baseline.txt || true)
+          PKG_AFTER=$(grep -c 'com.example.glassproductivity' shots/notif_dump.txt || true)
+          PKG_BEFORE=$(grep -c 'com.example.glassproductivity' shots/notif_baseline.txt || true)
+          DELIVERED=no
+          if [ "${TITLE_HITS:-0}" -gt "${BASE_TITLE_HITS:-0}" ] && [ "${PKG_AFTER:-0}" -gt "${PKG_BEFORE:-0}" ]; then DELIVERED=yes; fi
+          echo "ALARM_DELIVERED=$DELIVERED" >> shots/alarm_probe.txt
+          echo "NOTIF_TITLE_HITS=$TITLE_HITS BASELINE=$BASE_TITLE_HITS PKG_AFTER=$PKG_AFTER PKG_BEFORE=$PKG_BEFORE" >> shots/alarm_probe.txt
           cat shots/alarm_probe.txt
-          [ "${HITS:-0}" -gt 0 ]
+          [ "$DELIVERED" = "yes" ]
+
+      - name: Local backup restore round-trip (synthetic data)
+        run: |
+          set -e
+          # Local (non-Drive) backup round-trip with synthetic data:
+          # restore a crafted WAQT backup file through the real SAF picker UI,
+          # then verify prefs were REPLACED by the backup contents. This covers
+          # the local JSON path only; the Drive/ZIP path needs real OAuth and
+          # is intentionally not covered here.
+          python3 - <<'PYBAK'
+          import json
+          root = {"app":"WAQT","schemaVersion":4,"timestamp":1763800000000,
+                  "items":[{"id":"ci-restore-probe","title":"CI restore probe task","isHabit":False,"hour":8,"minute":15,"streakCount":0,"streakGoal":7,"priority":"high","category":"work","lastCompletedEpochDay":-1,"isCompletedToday":False,"description":"","dueDateEpochDay":741816,"dueDateString":"","expectedMinutes":25,"actualFocusedMinutes":0,"focusSessionsCount":0,"recurrence":"once","customDaysCsv":"1,2,3,4,5,6,7","targetValue":1,"currentProgressToday":0,"targetUnit":"","longestStreak":0,"isPaused":False,"hasReminder":False,"completedDaysHistoryCsv":"","completionPercentage":0,"deferredUntilMillis":0}],
+                  "notes":[],"habitCategories":[],"customQuotes":[],
+                  "settings":{"pref_dark_mode":True,"pref_accent_color":"#FF8A3D","pref_default_focus_mins":25,"pref_default_break_mins":5,"pref_daily_focus_goal_mins":120,"pref_notif_tasks":True,"pref_notif_habits":True}}
+          open("/tmp/waqt_ci_restore.json","w").write(json.dumps(root, indent=2))
+          PYBAK
+          adb push /tmp/waqt_ci_restore.json /sdcard/Download/waqt_ci_restore.json
+          adb shell am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/Download/waqt_ci_restore.json >/dev/null 2>&1 || true
+
+          tap_text() {
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            python3 - "$1" <<'PY' > /tmp/tap.txt
+          import re, sys
+          target = sys.argv[1]
+          xml = open('ui.xml', encoding='utf-8').read()
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              dm = re.search(r'content-desc="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              cm = re.search(r'clickable="(true|false)"', tag)
+              if not bm:
+                  continue
+              val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
+              if target in val:
+                  x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                  y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                  score = 10 if (cm and cm.group(1) == 'true') else 0
+                  if val.strip() == target:
+                      score += 1
+                  print(score, x, y)
+          PY
+          }
+          try_tap() {
+            tap_text "$1"
+            read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
+            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
+            unset X Y; return 1
+          }
+          scroll_until() {
+            for i in $(seq 1 8); do
+              if try_tap "$1"; then return 0; fi
+              adb shell input swipe 540 1700 540 700
+              sleep 2
+            done
+            return 1
+          }
+
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 6
+          try_tap "⚙" || adb shell input tap 111 252 || true
+          sleep 4
+          scroll_until "بياناتك والنسخ الاحتياطي"
+          sleep 3
+          scroll_until "استعادة نسخة احتياطية من ملف"
+          sleep 6
+          adb exec-out screencap -p > shots/12_saf_picker.png
+          try_tap "waqt_ci_restore.json"
+          sleep 4
+          adb exec-out screencap -p > shots/13_restore_confirm.png
+          try_tap "استعادة"
+          sleep 4
+          adb exec-out screencap -p > shots/14_restored.png
+
+          adb shell run-as com.example.glassproductivity cat shared_prefs/waqt_productivity_prefs.xml > /tmp/prefs_restored.xml
+          {
+            if grep -q 'CI restore probe task' /tmp/prefs_restored.xml && ! grep -q 'ci-future-due-probe' /tmp/prefs_restored.xml; then
+              echo "BACKUP_RESTORED=yes"
+            else
+              echo "BACKUP_RESTORED=no"
+            fi
+          } > shots/backup_probe.txt
+          cat shots/backup_probe.txt
+          grep -q '^BACKUP_RESTORED=yes$' shots/backup_probe.txt
+
+          # Export path evidence: the share sheet must open from the real button.
+          # Content past the share-sheet boundary is not machine-verifiable here;
+          # that limit is reported, not asserted.
+          scroll_until "مشاركة نسخة احتياطية (نص)"
+          sleep 5
+          adb shell uiautomator dump /sdcard/uishare.xml >/dev/null 2>&1
+          adb pull /sdcard/uishare.xml /tmp/uishare.xml >/dev/null 2>&1 || true
+          adb exec-out screencap -p > shots/15_share_sheet.png
+          if grep -qi 'intentresolver\|chooser\|نسخة وقت الاحتياطية' /tmp/uishare.xml 2>/dev/null; then
+            echo "BACKUP_EXPORT_SHEET=yes" >> shots/backup_probe.txt
+          else
+            echo "BACKUP_EXPORT_SHEET=no" >> shots/backup_probe.txt
+          fi
+          adb shell input keyevent 4 || true
+          cat shots/backup_probe.txt
 
       - name: Upload screenshots
         if: always()
