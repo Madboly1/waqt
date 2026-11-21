@@ -157,8 +157,9 @@ class BackupWiringTest {
 
         (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE).performClick()
 
+        val latestToast = org.robolectric.shadows.ShadowToast.getTextOfLatestToast()
         assertFalse(
-            "marker survived import - production callback did not run the real import",
+            "marker survived import (latestToast=" + latestToast + ")",
             ReminderRepository.getAllItems(activity).any { it.title == "WIRING_MARKER_TASK" }
         )
     }
