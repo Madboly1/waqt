@@ -3570,6 +3570,9 @@ class MainActivity : AppCompatActivity() {
         dlg.setCancelable(false)
         dlg.setCanceledOnTouchOutside(false)
         dlg.setContentView(root)
+        // showOnboarding is posted from onResume; on a heavily janked cold start the
+        // runnable can execute during an activity teardown and leak the dialog window.
+        if (isFinishing || isDestroyed) return
         dlg.show()
         dlg.window?.apply {
             setBackgroundDrawableResource(android.R.color.transparent)
