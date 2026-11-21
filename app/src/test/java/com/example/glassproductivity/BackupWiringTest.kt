@@ -5,6 +5,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Looper
 import androidx.activity.result.ActivityResultLauncher
 import org.json.JSONArray
 import org.json.JSONObject
@@ -130,12 +131,23 @@ class BackupWiringTest {
 
     @Test
     fun `import launcher production callback restores backup through confirm dialog`() {
+        // Backup source: a distinctive seeded item that export must capture.
+        val seed = JSONArray(prefs().getString("waqt_items_json", "[]"))
+        seed.put(JSONObject().apply {
+            put("id", "restore_src")
+            put("title", "RESTORE_SOURCE_TASK")
+            put("isHabit", false)
+            put("hour", 7)
+            put("minute", 15)
+        })
+        prefs().edit().putString("waqt_items_json", seed.toString()).commit()
         val baseline = ReminderRepository.exportCloudBackupJson(activity)
 
-        val items = JSONArray(prefs().getString("waqt_items_json", "[]"))
-        items.put(markerItem())
-        prefs().edit().putString("waqt_items_json", items.toString()).commit()
+        // Current state: only the marker; the seeded item must come back from the file.
+        prefs().edit().putString("waqt_items_json",
+            JSONArray().apply { put(markerItem()) }.toString()).commit()
         assertTrue(ReminderRepository.getAllItems(activity).any { it.title == "WIRING_MARKER_TASK" })
+        assertFalse(ReminderRepository.getAllItems(activity).any { it.title == "RESTORE_SOURCE_TASK" })
 
         val uri = Uri.parse("content://com.example.testdocs/document/import-source.json")
         shadowOf(activity.contentResolver).registerInputStreamSupplier(uri) {
@@ -156,11 +168,21 @@ class BackupWiringTest {
         )
 
         (dialog as AlertDialog).getButton(AlertDialog.BUTTON_POSITIVE).performClick()
+        // AlertDialog dispatches button clicks as Handler messages; Robolectric's
+        // main looper is paused, so drain it to execute the production listener.
+        shadowOf(Looper.getMainLooper()).idle()
 
-        val latestToast = org.robolectric.shadows.ShadowToast.getTextOfLatestToast()
         assertFalse(
-            "marker survived import (latestToast=" + latestToast + ")",
+            "dialog did not dismiss after restore confirmation - completion not observed",
+            (dialog as AlertDialog).isShowing
+        )
+        assertFalse(
+            "marker survived import - production callback did not run the real import",
             ReminderRepository.getAllItems(activity).any { it.title == "WIRING_MARKER_TASK" }
+        )
+        assertTrue(
+            "restored content missing - actual backup item was not imported",
+            ReminderRepository.getAllItems(activity).any { it.title == "RESTORE_SOURCE_TASK" }
         )
     }
 
@@ -184,7 +206,12 @@ class BackupWiringTest {
         val dialog = ShadowAlertDialog.getLatestAlertDialog()
         assertNotNull("production import callback did not show the restore confirmation dialog", dialog)
         (dialog as AlertDialog).getButton(AlertDialog.BUTTON_NEGATIVE).performClick()
+        shadowOf(Looper.getMainLooper()).idle()
 
+        assertFalse(
+            "dialog did not dismiss after cancel - click listener never ran",
+            (dialog as AlertDialog).isShowing
+        )
         assertTrue(
             "marker lost after dialog cancel - import ran without confirmation",
             ReminderRepository.getAllItems(activity).any { it.title == "WIRING_MARKER_TASK" }
