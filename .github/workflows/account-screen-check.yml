@@ -723,12 +723,20 @@ jobs:
           sleep 6
           try_tap "⚙" || adb shell input tap 111 252 || true
           sleep 4
-          scroll_until "بياناتك والنسخ الاحتياطي"
+          scroll_until "بياناتك والنسخ الاحتياطي" || echo "EXPORT_NAV_FAIL=section" | tee -a shots/tap_log.txt
           sleep 3
-          scroll_until "حفظ نسخة في ملف / جوجل درايف"
+          scroll_until "حفظ نسخة في ملف / جوجل درايف" || echo "EXPORT_NAV_FAIL=button" | tee -a shots/tap_log.txt
           sleep 6
           adb exec-out screencap -p > shots/12_export_saf.png
-          if try_resid "documentsui:id/save"; then echo "SAVE_TAP=resid" | tee -a shots/tap_log.txt; elif try_tap "Save"; then echo "SAVE_TAP=text" | tee -a shots/tap_log.txt; else try_tap "حفظ" || true; echo "SAVE_TAP=miss" | tee -a shots/tap_log.txt; fi
+          FOCUS=$(adb shell dumpsys window | grep -m1 mCurrentFocus || true)
+          echo "PRE_SAVE_FOCUS $FOCUS" | tee -a shots/tap_log.txt
+          if echo "$FOCUS" | grep -qi documentsui; then
+            adb shell input tap 620 1445
+            echo "SAVE_TAP=coord620,1445" | tee -a shots/tap_log.txt
+          else
+            try_tap "Save" || try_tap "حفظ" || true
+            echo "SAVE_TAP=text-fallback-nopicker" | tee -a shots/tap_log.txt
+          fi
           sleep 6
           adb exec-out screencap -p > shots/13_after_save.png
           adb shell dumpsys window | grep -m1 mCurrentFocus | tee -a shots/tap_log.txt
@@ -758,13 +766,15 @@ jobs:
           PYPRB
             adb push /tmp/restore_probe.json /sdcard/Download/waqt-restore-probe.json >/dev/null
           fi
+          adb shell input keyevent 4 || true
+          sleep 2
           adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
           sleep 6
           try_tap "⚙" || adb shell input tap 111 252 || true
           sleep 4
-          scroll_until "بياناتك والنسخ الاحتياطي"
+          scroll_until "بياناتك والنسخ الاحتياطي" || echo "RESTORE_NAV_FAIL=section" | tee -a shots/backup_probe.txt
           sleep 3
-          scroll_until "استعادة نسخة احتياطية من ملف"
+          scroll_until "استعادة نسخة احتياطية من ملف" || echo "RESTORE_NAV_FAIL=button" | tee -a shots/backup_probe.txt
           sleep 6
           adb exec-out screencap -p > shots/14_restore_picker.png
           if ! try_tap "$RESTORE_NAME"; then
