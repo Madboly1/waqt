@@ -2,6 +2,11 @@ name: WAQT Account Screen and Signed Build Check
 
 on:
   workflow_dispatch:
+    inputs:
+      build_signed:
+        description: 'Also run the signed-build-only job'
+        required: false
+        default: 'true'
   push:
     branches:
       - feature/google-drive-backup
@@ -84,17 +89,27 @@ jobs:
           import re, sys
           target = sys.argv[1]
           xml = open('ui.xml', encoding='utf-8').read()
-          for m in re.finditer(r'text="([^"]*)"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', xml):
-              if target in m.group(1):
-                  x = (int(m.group(2)) + int(m.group(4))) // 2
-                  y = (int(m.group(3)) + int(m.group(5))) // 2
-                  print(x, y)
-                  break
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              dm = re.search(r'content-desc="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              cm = re.search(r'clickable="(true|false)"', tag)
+              if not bm:
+                  continue
+              val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
+              if target in val:
+                  x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                  y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                  score = 10 if (cm and cm.group(1) == 'true') else 0
+                  if val.strip() == target:
+                      score += 1
+                  print(score, x, y)
           PY
           }
           try_tap() {
             tap_text "$1"
-            read X Y < /tmp/tap.txt || true
+            read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
             if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
             unset X Y; return 1
           }
@@ -107,16 +122,28 @@ jobs:
             return 1
           }
 
-          # Dismiss first-run tour if present (button text is "تخطَّ" in the dump)
+          # Dismiss first-run tour if present (skip button text is "تخطَّ" in the dump)
           for i in 1 2 3 4; do
             try_tap "تخط" && break
             sleep 2
           done
-          sleep 3
+          sleep 2
           adb shell uiautomator dump /sdcard/uit.xml >/dev/null 2>&1
           adb pull /sdcard/uit.xml /tmp/uit.xml >/dev/null 2>&1 || true
-          if grep -q "من 7" /tmp/uit.xml 2>/dev/null; then echo "TOUR_DISMISSED=no" > /tmp/tour_state.txt; else echo "TOUR_DISMISSED=yes" > /tmp/tour_state.txt; fi
+          if grep -q "من 7" /tmp/uit.xml 2>/dev/null; then
+            # Coordinate fallback; geometry verified from run 44846731442 dump: skip button bounds [82,2021][201,2072]
+            adb shell input tap 141 2046
+            sleep 3
+            adb shell uiautomator dump /sdcard/uit.xml >/dev/null 2>&1
+            adb pull /sdcard/uit.xml /tmp/uit.xml >/dev/null 2>&1 || true
+          fi
           adb exec-out screencap -p > shots/01_home.png
+          if grep -q "من 7" /tmp/uit.xml 2>/dev/null; then
+            echo "TOUR_DISMISSED=no" > shots/results.txt
+            cat shots/results.txt
+            exit 1
+          fi
+          echo "TOUR_DISMISSED=yes" > /tmp/tour_state.txt
 
           # Record pre-test persisted state (debug build allows run-as)
           adb shell "run-as com.example.glassproductivity sh -c 'ls -la shared_prefs'" > shots/prefs_before.txt 2>/dev/null || true
@@ -128,12 +155,26 @@ jobs:
           adb exec-out screencap -p > shots/02_settings_top.png
 
           # Account accordion section
-          scroll_until "حساب جوجل والنسخ السحابي" || true
+          if ! scroll_until "حساب جوجل والنسخ السحابي"; then
+            adb shell uiautomator dump /sdcard/uinav.xml >/dev/null 2>&1
+            adb pull /sdcard/uinav.xml shots/ui_nav_blocker.xml >/dev/null 2>&1 || true
+            adb exec-out screencap -p > shots/03_account_section.png
+            { cat /tmp/tour_state.txt; echo "NAV_BLOCKER=account_section"; } > shots/results.txt
+            cat shots/results.txt
+            exit 1
+          fi
           sleep 3
           adb exec-out screencap -p > shots/03_account_section.png
 
           # Tap sign-in: expect system Credential Manager / add-account UI, no account configured
-          try_tap "تسجيل الدخول بحساب جوجل" || true
+          if ! try_tap "تسجيل الدخول بحساب جوجل"; then
+            adb shell uiautomator dump /sdcard/uinav.xml >/dev/null 2>&1
+            adb pull /sdcard/uinav.xml shots/ui_nav_blocker.xml >/dev/null 2>&1 || true
+            adb exec-out screencap -p > shots/04_signin_prompt.png
+            { cat /tmp/tour_state.txt; echo "NAV_BLOCKER=signin_button"; } > shots/results.txt
+            cat shots/results.txt
+            exit 1
+          fi
           sleep 8
           adb exec-out screencap -p > shots/04_signin_prompt.png
           adb shell uiautomator dump /sdcard/ui2.xml >/dev/null 2>&1
@@ -218,6 +259,7 @@ jobs:
         run: tail -100 /tmp/emulator.log || true
 
   signed-build-only:
+    if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.build_signed == 'true' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
