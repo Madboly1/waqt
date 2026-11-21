@@ -383,13 +383,12 @@ object WaqtCloudBackup {
                     val chatId = chat.optString("id")
                     if (chatId.isBlank() || existing.contains(chatId)) continue
                     val messages = chat.optJSONArray("messages") ?: continue
-                    var newChatId: String? = null
+                    // Keep the original chat id: restoring the same backup twice
+                    // then skips these chats instead of duplicating them.
+                    store.createChatWithId(chatId, chat.optString("title").ifBlank { "محادثة" })
                     for (m in 0 until messages.length()) {
                         val message = messages.optJSONObject(m) ?: continue
-                        if (newChatId == null) {
-                            newChatId = store.createChat(chat.optString("title").ifBlank { "محادثة" })
-                        }
-                        store.addMessage(newChatId, message.optString("role"), message.optString("content"))
+                        store.addMessage(chatId, message.optString("role"), message.optString("content"))
                     }
                 }
             } catch (_: Exception) {}
