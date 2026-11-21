@@ -192,6 +192,19 @@ jobs:
           fi
           cat shots/swipe_probe.txt
 
+          # Acceptance assertions: the job must FAIL when the swipe-fix checks
+          # could not be verified - evidence alone is not a pass.
+          grep -q '^BALL_FOUND=yes' shots/swipe_probe.txt
+          grep -q '^BALL_DRAG_EXCLUDED=yes$' shots/swipe_probe.txt
+          grep -q '^BALL_DRAG_TAB_SWITCH=no$' shots/swipe_probe.txt
+          grep -q '^TAB_SWIPE_WORKS=yes$' shots/swipe_probe.txt
+
+          # Reminder-scheduling runtime signal (evidence only): capture pending
+          # alarms for the app after boot so the scheduled trigger times can be
+          # cross-checked against due dates outside the unit tests.
+          adb shell dumpsys alarm > shots/alarm_dump.txt || true
+          grep -n 'com.example.glassproductivity' shots/alarm_dump.txt > shots/alarm_hits.txt || true
+
           # Record pre-test persisted state (debug build allows run-as)
           adb shell "run-as com.example.glassproductivity sh -c 'ls -la shared_prefs'" > shots/prefs_before.txt 2>/dev/null || true
           adb shell "run-as com.example.glassproductivity sh -c 'cat shared_prefs/*.xml 2>/dev/null'" | md5sum > shots/prefs_before.md5 || true
