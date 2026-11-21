@@ -102,6 +102,10 @@ jobs:
             tap_text "التالي"
             read X Y < /tmp/tap.txt || true
             if [ -z "${X:-}" ]; then
+              tap_text "يلا نبدأ"
+              read X Y < /tmp/tap.txt || true
+            fi
+            if [ -z "${X:-}" ]; then
               tap_text "إنهاء"
               read X Y < /tmp/tap.txt || true
             fi
