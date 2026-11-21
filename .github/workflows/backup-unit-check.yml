@@ -41,4 +41,5 @@ jobs:
             echo "== $f"
             grep -oE '<testcase name="[^"]+"' "$f" | sed 's/<testcase name="/  case: /;s/"$//'
             echo "  failures_or_errors: $(grep -cE '<failure|<error' "$f" || true)"
+            grep -oE '<(failure|error)[^>]*message="[^"]{0,400}' "$f" | sed 's/^/  msg: /' | head -4
           done
