@@ -329,11 +329,22 @@ object WaqtCloudBackup {
                             original.startsWith("content://") -> Uri.fromFile(target).toString()
                             else -> target.absolutePath
                         }
-                        // Absolute file paths keep their original layout too.
+                        // Absolute file paths keep their original layout too,
+                        // but only inside this app's own directories: a backup
+                        // file must never be able to write anywhere else.
+                        // Confined entries still land in restored_media and
+                        // every stored reference is rewritten to that copy.
                         if (original.startsWith("/")) {
                             val originalFile = File(original)
-                            originalFile.parentFile?.mkdirs()
-                            originalFile.writeBytes(bytes)
+                            val canonical = try { originalFile.canonicalPath } catch (_: Exception) { null }
+                            val allowedRoots = listOfNotNull(
+                                try { context.filesDir.canonicalPath } catch (_: Exception) { null },
+                                try { context.getExternalFilesDir(null)?.canonicalPath } catch (_: Exception) { null }
+                            )
+                            if (canonical != null && allowedRoots.any { root -> canonical.startsWith("$root/") }) {
+                                originalFile.parentFile?.mkdirs()
+                                originalFile.writeBytes(bytes)
+                            }
                         }
                     }
                 } catch (_: Exception) {
