@@ -39,7 +39,7 @@ class AlarmSchedulerFutureDueDateTest {
 
     @Test
     fun `task with future due date rings on that date not tomorrow`() {
-        val dueDay = AlarmScheduler.currentEpochDay() + 3
+        val dueDay = ReminderRepository.currentEpochDay() + 3
         val item = taskItem(hour = 9, minute = 30, dueEpochDay = dueDay)
 
         val scheduled = AlarmScheduler.scheduleNextOccurrence(context, item)
@@ -56,7 +56,7 @@ class AlarmSchedulerFutureDueDateTest {
 
     @Test
     fun `task with next-day due date rings tomorrow not today`() {
-        val dueDay = AlarmScheduler.currentEpochDay() + 1
+        val dueDay = ReminderRepository.currentEpochDay() + 1
         val item = taskItem(hour = 9, minute = 30, dueEpochDay = dueDay)
 
         val scheduled = AlarmScheduler.scheduleNextOccurrence(context, item)
@@ -92,7 +92,7 @@ class AlarmSchedulerFutureDueDateTest {
         val item = taskItem(
             hour = near.get(Calendar.HOUR_OF_DAY),
             minute = near.get(Calendar.MINUTE),
-            dueEpochDay = AlarmScheduler.currentEpochDay() + 3,
+            dueEpochDay = ReminderRepository.currentEpochDay() + 3,
             isHabit = true
         )
 
