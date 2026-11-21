@@ -1,0 +1,419 @@
+--------- beginning of main
+11-21 16:03:31.350  1164  2263 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-21 16:03:31.395  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=250.0 y=1780.0 rawX=250.0 rawY=1780.0 tab=0 
+11-21 16:03:31.396  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=true local=250.0,1435.0 host=1080x1863
+11-21 16:03:31.396  1930  1930 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=250.0 y=1435.0 rawX=250.0 rawY=1780.0 tab=0 
+11-21 16:03:31.396  1930  1930 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=false candidatePath=LinearLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-21 16:03:31.396  1930  1930 D WAQT_TOUCH_TRACE: HOST_TOUCH action=0 x=250.0 y=1435.0 rawX=250.0 rawY=1780.0 tab=0 
+11-21 16:03:31.396  1930  1930 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=0
+11-21 16:03:31.396  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-21 16:03:31.416  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=253.85715 y=1780.0 rawX=253.85715 rawY=1780.0 tab=0 
+11-21 16:03:31.416  1930  1930 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=253.85715 y=1435.0 rawX=253.85715 rawY=1780.0 tab=0 
+11-21 16:03:31.416  1930  1930 D WAQT_TOUCH_TRACE: HOST_TOUCH action=2 x=253.85715 y=1435.0 rawX=253.85715 rawY=1780.0 tab=0 
+11-21 16:03:31.416  1930  1930 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=0
+11-21 16:03:31.416  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-21 16:03:31.433  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=288.5714 y=1780.0 rawX=288.5714 rawY=1780.0 tab=0 
+11-21 16:03:31.433  1930  1930 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=3 x=288.5714 y=1780.0 rawX=288.5714 rawY=1780.0 tab=0 
+11-21 16:03:31.433  1930  1930 D WAQT_TOUCH_TRACE: HOST_TOUCH action=3 x=288.5714 y=1780.0 rawX=288.5714 rawY=1780.0 tab=0 
+11-21 16:03:31.433  1930  1930 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=3 handled=true tab=0
+11-21 16:03:31.433  1930  1930 D WAQT_TOUCH_TRACE: SWIPE_BEGIN tab=0 dx=38.57141 pending=null
+11-21 16:03:31.450  1046  2685 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-21 16:03:31.450  1046  2685 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:31.450  1046  2685 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:31.499  3048  3076 W Bugle   : BugleFirebaseInstanceIDManagerImpl: Failed to refresh firebase instance ID
+11-21 16:03:31.499  3048  3076 W Bugle   : java.io.IOException: FIS_AUTH_ERROR
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at becu.a(PG:8)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aivz.run(PG:2)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at becl.execute(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aiwa.a(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aiwx.b(PG:5)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aixd.r(PG:3)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aivz.run(PG:7)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at agui.execute(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aiwa.a(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aiwx.b(PG:5)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aixd.r(PG:3)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at aiwz.a(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at agty.c(PG:3)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at agua.b(PG:2)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at agtp.handleMessage(PG:13)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at ahrd.b(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at ahrd.dispatchMessage(PG:1)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at android.os.Looper.loopOnce(Looper.java:201)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at android.os.Looper.loop(Looper.java:288)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at android.app.ActivityThread.main(ActivityThread.java:7839)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at java.lang.reflect.Method.invoke(Native Method)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-21 16:03:31.499  3048  3076 W Bugle   : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+11-21 16:03:31.500  3048  3082 W Bugle   : BugleFirebaseInstanceIDManagerImpl: Failed to refresh firebase instance ID
+11-21 16:03:31.500  3048  3082 W Bugle   : java.io.IOException: FIS_AUTH_ERROR
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at becu.a(PG:8)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aivz.run(PG:2)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at becl.execute(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aiwa.a(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aiwx.b(PG:5)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aixd.r(PG:3)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aivz.run(PG:7)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at agui.execute(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aiwa.a(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aiwx.b(PG:5)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aixd.r(PG:3)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at aiwz.a(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at agty.c(PG:3)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at agua.b(PG:2)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at agtp.handleMessage(PG:13)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at android.os.Handler.dispatchMessage(Handler.java:102)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at ahrd.b(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at ahrd.dispatchMessage(PG:1)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at android.os.Looper.loopOnce(Looper.java:201)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at android.os.Looper.loop(Looper.java:288)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at android.app.ActivityThread.main(ActivityThread.java:7839)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at java.lang.reflect.Method.invoke(Native Method)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-21 16:03:31.500  3048  3082 W Bugle   : 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+11-21 16:03:31.513  2534  2571 I DynamiteModule: Considering local module com.google.android.gms.googlecertificates:7 and remote module com.google.android.gms.googlecertificates:7
+11-21 16:03:31.514  2534  2571 I DynamiteModule: Selected local version of com.google.android.gms.googlecertificates
+11-21 16:03:31.554  1046  1046 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-21 16:03:31.582  2534  3847 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-21 16:03:31.582  2534  3847 W libc    : Access denied finding property "service.adb.tls.port"
+11-21 16:03:31.590   402   402 I android.hardware.vibrator-service.example: Vibrator on for timeoutMs: 35
+11-21 16:03:31.590   402   402 I android.hardware.vibrator-service.example: Vibrator set amplitude: 0.11
+11-21 16:03:31.593   402  4017 I android.hardware.vibrator-service.example: Starting on on another thread
+11-21 16:03:31.594   322  4016 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-21 16:03:31.594   322  4016 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 16:03:31.594   322  4016 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=10 ai_socktype=1 ai_protocol=6
+11-21 16:03:31.594   322  4016 D resolv  : explore_numeric_scope
+11-21 16:03:31.594   322  4016 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=2 ai_socktype=1 ai_protocol=6
+11-21 16:03:31.594   322  4016 D resolv  : explore_numeric_scope
+11-21 16:03:31.594   322  4016 I ResolverController: No valid NAT64 prefix (100, <unspecified>/0)
+11-21 16:03:31.602  1930  1930 D CompatibilityChangeReporter: Compat change id reported: 171228096; UID 10145; state: ENABLED
+11-21 16:03:31.617  1930  1930 D WAQT_TOUCH_TRACE: SWIPE_CREATED id=41675756 from=0 to=1
+11-21 16:03:31.618  1930  1930 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=41675756 from=0 to=1 dx=38.57141
+11-21 16:03:31.618  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_INTERCEPT dx=38.57141 dy=0.0
+11-21 16:03:31.629   402  4017 I android.hardware.vibrator-service.example: Notifying on complete
+11-21 16:03:31.629   402   402 I android.hardware.vibrator-service.example: Vibrator off
+11-21 16:03:31.580  2534  2534 W Binder:2534_6: type=1400 audit(0.0:43): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=246 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-21 16:03:31.580  2534  2534 W Binder:2534_6: type=1400 audit(0.0:44): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=56 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-21 16:03:31.674   322  4020 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10100 0}
+11-21 16:03:31.674   322  4020 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 16:03:31.674   322  4021 D resolv  : doQuery: (1, 28)
+11-21 16:03:31.674   322  4021 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 16:03:31.674   322  4021 D resolv  : res_nsend
+11-21 16:03:31.674   322  4021 I resolv  : resolv_cache_lookup: lookup
+11-21 16:03:31.674   322  4021 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-21 16:03:31.674   322  4021 I resolv  : resolv_populate_res_for_net: netid=100
+11-21 16:03:31.674   322  4021 I resolv  : res_stats_usable_server: NS stats: S 38 + E 0 + T 0 + I 0 = 38, rtt = 32, min_samples = 8
+11-21 16:03:31.674   322  4021 I resolv  : res_stats_usable_server: success rate 100
+11-21 16:03:31.674   322  4021 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-21 16:03:31.674   322  4021 D resolv  : send_dg: new DG socket
+11-21 16:03:31.676   322  4022 D resolv  : doQuery: (1, 1)
+11-21 16:03:31.676   322  4022 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 16:03:31.676   322  4022 D resolv  : res_nsend
+11-21 16:03:31.676   322  4022 I resolv  : resolv_cache_lookup: lookup
+11-21 16:03:31.676   322  4022 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-21 16:03:31.676   322  4022 I resolv  : resolv_populate_res_for_net: netid=100
+11-21 16:03:31.678   322  4021 I resolv  : get_timeout: using timeout of 5000 msec
+11-21 16:03:31.678   322  4021 I resolv  : retrying_poll: 58 retrying_poll
+11-21 16:03:31.679   322  4022 I resolv  : res_stats_usable_server: NS stats: S 38 + E 0 + T 0 + I 0 = 38, rtt = 32, min_samples = 8
+11-21 16:03:31.679   322  4022 I resolv  : res_stats_usable_server: success rate 100
+11-21 16:03:31.679   322  4022 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-21 16:03:31.679   322  4022 D resolv  : send_dg: new DG socket
+11-21 16:03:31.679   322  4022 I resolv  : get_timeout: using timeout of 5000 msec
+11-21 16:03:31.679   322  4022 I resolv  : retrying_poll: 59 retrying_poll
+11-21 16:03:31.704   322  4021 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-21 16:03:31.704   322  4021 I resolv  : res_nsend: used send_dg 276 terrno: 0
+11-21 16:03:31.704   322  4021 I resolv  : res_stats_set_sample: rcode = 0, sec = 26
+11-21 16:03:31.704   322  4021 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 38, count = 38
+11-21 16:03:31.704   322  4021 D resolv  : res_nsend: got answer:
+11-21 16:03:31.704   322  4021 I resolv  : answer_getTTL: TTL = 300
+11-21 16:03:31.704   322  4021 I resolv  : _cache_add_p: entry 39 added (count=39)
+11-21 16:03:31.704   322  4021 I resolv  : cache_dump_mru_locked: MRU LIST (39):  39 35 36 38 37 12 11 33 34 5 8 10 9 32 31 30 29 6 7 3 4 28 27 22 21 15 13 26 25 24 23 20 19 18 17 16 14 2 1
+11-21 16:03:31.704   322  4021 D resolv  : doQuery: rcode=0, ancount=8
+11-21 16:03:31.705   322  4022 I resolv  : retrying_poll: 59 retrying_poll returning 1
+11-21 16:03:31.705   322  4022 I resolv  : res_nsend: used send_dg 180 terrno: 0
+11-21 16:03:31.705   322  4022 I resolv  : res_stats_set_sample: rcode = 0, sec = 26
+11-21 16:03:31.705   322  4022 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 39, count = 39
+11-21 16:03:31.705   322  4022 D resolv  : res_nsend: got answer:
+11-21 16:03:31.705   322  4022 I resolv  : answer_getTTL: TTL = 300
+11-21 16:03:31.705   322  4022 I resolv  : _cache_add_p: entry 40 added (count=40)
+11-21 16:03:31.705   322  4022 I resolv  : cache_dump_mru_locked: MRU LIST (40):  40 39 35 36 38 37 12 11 33 34 5 8 10 9 32 31 30 29 6 7 3 4 28 27 22 21 15 13 26 25 24 23 20 19 18 17 16 14 2 1
+11-21 16:03:31.705   322  4022 D resolv  : doQuery: rcode=0, ancount=8
+11-21 16:03:31.737  1046  1071 W .gms.persisten: Suspending all threads took: 15.249ms
+11-21 16:03:31.756  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=540.5714 y=1780.0 rawX=540.5714 rawY=1780.0 tab=1 
+11-21 16:03:31.756  1930  1930 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=41675756 from=0 to=1 dx=290.5714
+11-21 16:03:31.783  3048  4025 I BugleNetwork: NewLightTickleFcmHandler: Handling firebase new token
+--------- beginning of system
+11-21 16:03:31.784   524  1904 I ActivityManager: Background started FGS: Allowed [callingPackage: com.google.android.apps.messaging; callingUid: 10100; uidState: RCVR; intent: Intent { cmp=com.google.android.apps.messaging/.shared.net.DittoForegroundService }; code:BACKGROUND_FGS_PERMISSION; tempAllowListReason:<broadcast:1000:android.intent.action.BOOT_COMPLETED,reason:,reasonCode:BOOT_COMPLETED,duration:20000,callingUid:1000>; targetSdkVersion:31; callerTargetSdkVersion:31; startForegroundCount:0; bindFromPackage:null]
+11-21 16:03:31.786   524  1904 W ProcessStats: Tracking association SourceState{25f4e67 com.google.android.apps.messaging/10100 BTopFgs #3566} whose proc state 2 is better than process ProcessState{64a75fc com.google.android.gms.persistent/10102 pkg=com.google.android.gms} proc state 3 (2856 skipped)
+11-21 16:03:31.827   524  1804 W ActivityManager: Foreground service started from background can not have location/camera/microphone access: service com.google.android.apps.messaging/.shared.net.DittoForegroundService
+11-21 16:03:31.829   524   524 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+11-21 16:03:31.843  1046  1071 I .gms.persisten: Background young concurrent copying GC freed 408543(25MB) AllocSpace objects, 6(180KB) LOS objects, 60% free, 15MB/39MB, paused 1.244ms,15.484ms total 192.419ms
+11-21 16:03:31.845  1930  2044 D EGL_emulation: app_time_stats: avg=528.52ms min=101.03ms max=2907.96ms count=7
+11-21 16:03:31.867   748   748 D InterruptionStateProvider: No bubble up: not allowed to bubble: 0|com.google.android.apps.messaging|1|null|10100
+11-21 16:03:31.868   748   748 D InterruptionStateProvider: No heads up: unimportant notification: 0|com.google.android.apps.messaging|1|null|10100
+11-21 16:03:31.868   748   836 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.apps.messaging
+11-21 16:03:31.925  1930  1930 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=700.0 y=1780.0 rawX=700.0 rawY=1780.0 tab=1 
+11-21 16:03:31.925  1930  1930 D WAQT_TOUCH_TRACE: SWIPE_FINISH id=41675756 cancelled=false latestDx=290.5714
+--------- beginning of kernel
+11-21 16:03:32.293     0     0 I init    : Sending signal 9 to service 'idmap2d' (pid 3417) process group...
+11-21 16:03:32.095   748   827 D EGL_emulation: app_time_stats: avg=1537.12ms min=7.91ms max=13010.67ms count=9
+11-21 16:03:32.302     0     0 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 3417 in 6ms
+11-21 16:03:32.316     0     0 I init    : Control message: Processed ctl.stop for 'idmap2d' from pid: 524 (system_server)
+11-21 16:03:32.114   524  3250 W OverlayManager: service 'idmap' died
+11-21 16:03:32.118  1046  1046 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.icing.LIGHTWEIGHT_INDEX_SERVICE dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-21 16:03:32.329     0     0 I init    : Service 'idmap2d' (pid 3417) received signal 9
+11-21 16:03:32.133  3048  4025 I BugleNetwork: NewLightTickleFcmHandler: Handling firebase new token
+11-21 16:03:32.150  3048  3082 I BugleNetwork: NewLightTickleFcmHandler: Successfully handled firebase new token.
+11-21 16:03:32.151  3048  3076 I BugleNetwork: RegistrationProvider: Refresh Tachyon Registration Now
+11-21 16:03:32.162  3048  3076 I BugleNetwork: RegistrationProvider: Tachyon registration token is null, ignore immediate refresh
+11-21 16:03:32.163  3048  3076 I BugleNetwork: NewLightTickleFcmHandler: Successfully handled firebase new token.
+11-21 16:03:32.222  3048  3093 W BugleNetwork: RegistrationProvider: Failed to register with Tachyon
+11-21 16:03:32.222  3048  3093 W BugleNetwork: bjod: INVALID_ARGUMENT: Request contains an invalid argument.
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at io.grpc.Status.i(PG:1)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bkds.a(PG:6)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bjru.run(PG:1)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bjrw.e(PG:4)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bjrw.a(PG:1)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bjql.a(PG:3)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bjrh.run(PG:2)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at bjze.run(PG:2)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:32.222  3048  3093 W BugleNetwork: 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: RegistrationProvider: Got error in StatusRuntimeException. Notifying tachyon registration error listeners, error: 1, status: INVALID_ARGUMENT
+11-21 16:03:32.223  3048  3093 W BugleNetwork: bjod: INVALID_ARGUMENT: Request contains an invalid argument.
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at io.grpc.Status.i(PG:1)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bkds.a(PG:6)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bjru.run(PG:1)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bjrw.e(PG:4)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bjrw.a(PG:1)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bjql.a(PG:3)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bjrh.run(PG:2)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at bjze.run(PG:2)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:32.223  3048  3093 W BugleNetwork: 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:32.230  3048  3077 I Bugle   : VerifiedSmsEnabledCheckerImpl: VSMS is disabled via Phenotype flag.
+11-21 16:03:32.242  3048  3076 I Bugle   : VerifiedSmsStartupTask: Checking if Verified SMS tasks should be enqueued. feature supported: false, feature enabled: false, eligible / has registered key: false, C11N: false
+11-21 16:03:32.242  3048  3076 I Bugle   : VerifiedSmsStartupTask: Not enqueuing VSMS periodic task, VSMS is disabled or not supported.
+11-21 16:03:32.243  3048  3094 I Bugle   : VerifiedSmsStartupTask: Not calling C11N to get phone numbers.
+11-21 16:03:32.419  1164  1164 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.cryptauth.cryptauthservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-21 16:03:32.530  2938  3042 W GnpSdk  : [PhenotypeManagerImpl] Phenotype registration timed out [com.google.android.libraries.internal.growth.growthkit#com.google.android.apps.docs].
+11-21 16:03:32.639  1046  1046 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.devicesyncservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-21 16:03:32.681  3802  3824 W ProtoDataStoreFlagStore: Unable to retrieve flag snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.messaging, using defaults.
+11-21 16:03:32.745  2938  3017 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-21 16:03:32.747  1046  1585 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-21 16:03:32.749  2938  3017 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module found. Local version is 0 and remote version is 0.
+11-21 16:03:32.760  3802  3802 V ClearcutMetricXmitter: Transmission is done.
+11-21 16:03:32.760  3802  3802 V ClearcutMetricXmitter: Transmission is done.
+11-21 16:03:32.761  3802  3802 V ClearcutMetricXmitter: Transmission is done.
+11-21 16:03:33.067  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.platform.statsd_java_boot) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.097  1046  1244 I DynamiteModule: Considering local module com.google.android.gms.cronet_dynamite:0 and remote module com.google.android.gms.cronet_dynamite:1611
+11-21 16:03:33.098  1046  1244 I DynamiteModule: Selected remote version of com.google.android.gms.cronet_dynamite, version >= 1611
+11-21 16:03:33.103  1046  1244 W .gms.persisten: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk*710115887:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes2.dex*2846691920:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes3.dex*2761815357:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes4.dex*685778569:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes5.dex*533941434:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes6.dex*2075164405:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes7.dex*1278043695:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes8.dex*1915487278:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes9.dex*3363323367:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes10.dex*2549418032]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]#PCL[/system/framework/com.android.media.remotedisplay.jar*3472798122]#PCL[/system/framework/com.android.location.provider.jar*3633238673]#PCL[/system_ext/framework/androidx.window.sidecar.jar*3539530913]})
+11-21 16:03:33.132  1164  1164 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+11-21 16:03:33.133   524  1891 D ConnectivityService: requestNetwork for uid/pid:10102/1046 activeRequest: null callbackRequest: 83 [NetworkRequest [ REQUEST id=84, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]] callback flags: 0 priority: 2147483647
+11-21 16:03:33.133   524   695 D ConnectivityService: NetReassign [84 : null → 100]
+11-21 16:03:33.134   524   688 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=84, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]
+11-21 16:03:33.134   524   688 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=84, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]
+11-21 16:03:33.135   524   688 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=84, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]
+11-21 16:03:33.136   524   695 D ConnectivityService: NetReassign [no changes]
+11-21 16:03:33.141  1046  1244 I cr_CronetLibraryLoader: Cronet version: 108.0.5359.61, arch: x86_64
+11-21 16:03:33.145  1046  1070 I .gms.persisten: Compiler allocated 6170KB to compile void bqwt.D(java.util.Set, java.util.List, dely, java.lang.String, boolean, dqfs, bqws, java.util.LinkedHashMap, czlq, boolean, dtvl)
+11-21 16:03:33.173   322  4042 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-21 16:03:33.174   322  4042 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-21 16:03:33.177   322  4044 D resolv  : doQuery: (1, 1)
+11-21 16:03:33.177   322  4044 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-21 16:03:33.177   322  4043 D resolv  : doQuery: (1, 28)
+11-21 16:03:33.178   322  4043 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-21 16:03:33.178   322  4044 D resolv  : res_nsend
+11-21 16:03:33.178   322  4043 D resolv  : res_nsend
+11-21 16:03:33.178   322  4043 I resolv  : resolv_cache_lookup: lookup
+11-21 16:03:33.178   322  4043 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x721e4f249110
+11-21 16:03:33.178   322  4044 I resolv  : resolv_cache_lookup: lookup
+11-21 16:03:33.178   322  4044 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x721e3f24a370
+11-21 16:03:33.178   322  4044 D resolv  : doQuery: rcode=0, ancount=8
+11-21 16:03:33.178   322  4043 D resolv  : doQuery: rcode=0, ancount=8
+11-21 16:03:33.200  1046  2178 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.libraries.onegoogle#com.google.android.youtube) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.201  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.apps.drive.android#com.google.android.apps.docs) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.202  1046  2178 I bqwt    : Removed 0 invalid users [CONTEXT service_id=51 ]
+11-21 16:03:33.209  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(16, com.google.apps.projector.android#com.google.android.apps.docs) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.223  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.libraries.notifications.platform#com.google.android.apps.docs) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.249  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.libraries.internal.growth.growthkit#com.google.android.apps.messaging) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.261  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(8, com.google.android.apps.messaging#com.google.android.apps.messaging) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.269  1046  2216 E bque    : Phenotype API error. Event # dtvv@28c75a18, EventCode: 32 [CONTEXT service_id=51 ]
+11-21 16:03:33.269  1046  2216 E bque    : bqtg: 29503
+11-21 16:03:33.269  1046  2216 E bque    : 	at bqvt.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 16:03:33.269  1046  2216 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 16:03:33.269  1046  2216 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.269  1046  2216 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.269  1046  2216 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.269  1046  2216 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.269  1046  2216 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.269  1046  2216 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.269  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.269  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.269  1046  2216 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.269  1046  2216 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: operation=SetAppSpecificPropertiesOperationCall, opStatusCode=29503 [CONTEXT service_id=51 ]
+11-21 16:03:33.270  1046  2216 W AsyncOperation: OperationException[Status{statusCode=unknown status code: 29503, resolution=null}]
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.270  1046  2216 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: setAppSpecificProperties failed [CONTEXT service_id=301 ]
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: yzt: 29503: 
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at ztv.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at zfl.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at zfl.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at bqtq.o(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at bqtq.eo(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at gjz.onTransact(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 16:03:33.273  1164  1164 W NnApiDriverManager: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 16:03:33.297  1046  2216 E bque    : Phenotype API error. Event # dtvv@3f095fd0, EventCode: 5 [CONTEXT service_id=51 ]
+11-21 16:03:33.297  1046  2216 E bque    : bqtg: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-21 16:03:33.297  1046  2216 E bque    : 	at bquj.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-21 16:03:33.297  1046  2216 E bque    : 	at bquh.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.297  1046  2216 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 16:03:33.297  1046  2216 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.297  1046  2216 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.297  1046  2216 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.297  1046  2216 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.297  1046  2216 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.297  1046  2216 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.297  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.297  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.297  1046  2216 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.297  1046  2216 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29500 [CONTEXT service_id=51 ]
+11-21 16:03:33.297  1046  2216 W AsyncOperation: OperationException[Status{statusCode=Empty (package not registered?) or malformed snapshot token for null: , resolution=null}]
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.297  1046  2216 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: Failed to commit to config
+11-21 16:03:33.298  1724  2720 E MendelPackageState: com.google.android.libraries.phenotype.client.a.e: 29500: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.libraries.phenotype.client.a.g.apply(SourceFile:1)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.a.d(SourceFile:2)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.c.run(SourceFile:11)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.az.execute(SourceFile:1)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.d.i(SourceFile:1)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.d.m(SourceFile:12)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.d.p(SourceFile:3)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.libraries.s.b.a(SourceFile:5)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.k.n.run(SourceFile:1)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.common.w.a.az.execute(SourceFile:1)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.k.o.a(SourceFile:3)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.k.ad.b(SourceFile:5)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.k.aj.u(SourceFile:4)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.common.api.internal.dg.b(SourceFile:4)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.phenotype.r.a(SourceFile:1)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.phenotype.a.a.dispatchTransaction(SourceFile:31)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.a.b.onTransact(SourceFile:2)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: Caused by: com.google.android.gms.common.api.n: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	at com.google.android.gms.common.api.internal.dg.b(SourceFile:3)
+11-21 16:03:33.298  1724  2720 E MendelPackageState: 	... 5 more
+11-21 16:03:33.299  1046  2216 E bque    : Phenotype API error. Event # dtvv@b723d822, EventCode: 32 [CONTEXT service_id=51 ]
+11-21 16:03:33.299  1046  2216 E bque    : bqtg: 29503
+11-21 16:03:33.299  1046  2216 E bque    : 	at bqvt.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 16:03:33.299  1046  2216 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 16:03:33.299  1046  2216 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.299  1046  2216 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.299  1046  2216 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.299  1046  2216 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.299  1046  2216 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.299  1046  2216 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.299  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.299  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.299  1046  2216 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.299  1046  2216 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: operation=SetAppSpecificPropertiesOperationCall, opStatusCode=29503 [CONTEXT service_id=51 ]
+11-21 16:03:33.299  1046  2216 W AsyncOperation: OperationException[Status{statusCode=unknown status code: 29503, resolution=null}]
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.299  1046  2216 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: setAppSpecificProperties failed [CONTEXT service_id=301 ]
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: yzt: 29503: 
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at ztv.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at zfl.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at zfl.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at bqtq.o(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at bqtq.eo(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at gjz.onTransact(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-21 16:03:33.300  1164  1164 W NnApiDriverManager: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-21 16:03:33.336  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.lockbox) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.362  1046  2216 E bque    : Phenotype API error. Event # dtvv@f033165e, EventCode: 32 [CONTEXT service_id=51 ]
+11-21 16:03:33.362  1046  2216 E bque    : bqtg: 29503
+11-21 16:03:33.362  1046  2216 E bque    : 	at bqvt.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-21 16:03:33.362  1046  2216 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-21 16:03:33.362  1046  2216 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.362  1046  2216 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.362  1046  2216 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.362  1046  2216 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.362  1046  2216 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.362  1046  2216 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.362  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.362  1046  2216 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.362  1046  2216 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.362  1046  2216 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: operation=SetAppSpecificPropertiesOperationCall, opStatusCode=29503 [CONTEXT service_id=51 ]
+11-21 16:03:33.364  1046  2216 W AsyncOperation: OperationException[Status{statusCode=unknown status code: 29503, resolution=null}]
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-21 16:03:33.364  1046  2216 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-21 16:03:33.384  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(7, com.google.lighter.android#com.google.android.gms) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.385  1164  1164 I LT_PhenotypeApiImplV12: Phenotype registration succeeded
+11-21 16:03:33.400  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.phenotype) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.421  1046  2216 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.gms.people) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-21 16:03:33.465  1631  1631 V ContactsProvider: Scheduled notifyChange started.
+11-21 16:03:33.466   744   744 D BluetoothPbapService:  onChange on contact uri 
+11-21 16:03:33.471   744  4046 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+11-21 16:03:33.478  1164  1164 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-21 16:03:33.653  1441  1629 W MediaProvider: getVolumePath for unknown volume: internal
+11-21 16:03:33.654  1441  1629 W MediaProvider: getVolumePath for unknown volume: internal
+11-21 16:03:33.654  1441  1629 W MediaProvider: getVolumePath for unknown volume: internal
+11-21 16:03:33.655  1441  1629 W MediaProvider: getVolumePath for unknown volume: internal
+11-21 16:03:33.737  1441  1629 W MediaProvider: getVolumePath for unknown volume: internal
+11-21 16:03:33.995   353   385 D goldfish-address-space: claimShared: Ask to claim region [0x3f8b5a000 0x3f94fe000]
+11-21 16:03:34.006   173   173 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-21 16:03:34.009  4050  4051 I Gralloc4: mapper 4.x is not supported
+11-21 16:03:34.020  4050  4051 D HostConnection: createUnique: call
+11-21 16:03:34.021  4050  4051 D HostConnection: HostConnection::get() New Host Connection established 0x71e253354c10, tid 4051
+11-21 16:03:34.024  4050  4051 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-21 16:03:34.024  4050  4051 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f7ffe000 size 0x2000
+11-21 16:03:34.039  4050  4051 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
