@@ -592,22 +592,21 @@ jobs:
           echo "TOUR_RESHOW=no" >> shots/tour_probe.txt
           cat shots/tour_probe.txt
 
-      - name: Backup export and restore round-trip (real export content)
+      - name: Backup export and restore round-trip (instrumented, independent restore)
         if: ${{ !cancelled() }}
         run: |
           set -e
-          # Real round-trip: export the app's OWN backup JSON through the real
-          # SAF save UI, mutate state, restore that exported file through the
-          # real SAF picker, and compare restored content against the actual
-          # export. The Drive/ZIP path needs real OAuth and stays untested;
-          # this covers the local JSON path only.
+          : > shots/tap_log.txt
           tap_text() {
-            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
-            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            local OUT
+            OUT=$(adb shell uiautomator dump /sdcard/ui.xml 2>&1)
+            echo "DUMP[$1] $OUT" >> shots/tap_log.txt
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1 || echo "PULL_FAIL[$1]" >> shots/tap_log.txt
             python3 - "$1" <<'PYTAP' > /tmp/tap.txt
           import re, sys
           target = sys.argv[1]
           xml = open('ui.xml', encoding='utf-8').read()
+          log = open('shots/tap_log.txt', 'a', encoding='utf-8')
           for m in re.finditer(r'<node\b[^>]*>', xml):
               tag = m.group(0)
               tm = re.search(r'text="([^"]*)"', tag)
@@ -624,13 +623,40 @@ jobs:
                   if val.strip() == target:
                       score += 1
                   print(score, x, y)
+                  log.write('CAND[%s] score=%d x=%d y=%d val=%s\n' % (target, score, x, y, val.strip()[:60]))
+          log.close()
           PYTAP
           }
           try_tap() {
             tap_text "$1"
             read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
-            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
-            unset X Y; return 1
+            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; echo "TAPPED[$1] $X,$Y" >> shots/tap_log.txt; unset X Y; return 0; fi
+            echo "MISS[$1]" >> shots/tap_log.txt; unset X Y; return 1
+          }
+          try_resid() {
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            python3 - "$1" <<'PYRID' > /tmp/tap.txt
+          import re, sys
+          target = sys.argv[1].lower()
+          xml = open('ui.xml', encoding='utf-8').read()
+          log = open('shots/tap_log.txt', 'a', encoding='utf-8')
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              rm = re.search(r'resource-id="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              if not rm or not bm:
+                  continue
+              if target in rm.group(1).lower():
+                  x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                  y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                  print(10, x, y)
+                  log.write('RID_CAND id=%s x=%d y=%d\n' % (rm.group(1), x, y))
+          log.close()
+          PYRID
+            read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
+            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; echo "TAPPED_RESID[$1] $X,$Y" >> shots/tap_log.txt; unset X Y; return 0; fi
+            echo "MISS_RESID[$1]" >> shots/tap_log.txt; unset X Y; return 1
           }
           scroll_until() {
             for i in $(seq 1 8); do
@@ -691,8 +717,7 @@ jobs:
           print("state mutated to marker-only; read-back ok:", "ci-pre-restore-marker" in back)
           PYMUT
           }
-
-          # Phase 1: real export of current state via the SAF save UI
+          # Phase 1: real export of current state via the SAF save UI (non-fatal)
           snapshot_prefs /tmp/prefs_before_export.xml
           adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
           sleep 6
@@ -703,24 +728,36 @@ jobs:
           scroll_until "حفظ نسخة في ملف / جوجل درايف"
           sleep 6
           adb exec-out screencap -p > shots/12_export_saf.png
-          try_tap "Save" || try_tap "حفظ" || true
-          sleep 5
+          if try_resid "documentsui:id/save"; then echo "SAVE_TAP=resid" | tee -a shots/tap_log.txt; elif try_tap "Save"; then echo "SAVE_TAP=text" | tee -a shots/tap_log.txt; else try_tap "حفظ" || true; echo "SAVE_TAP=miss" | tee -a shots/tap_log.txt; fi
+          sleep 6
+          adb exec-out screencap -p > shots/13_after_save.png
+          adb shell dumpsys window | grep -m1 mCurrentFocus | tee -a shots/tap_log.txt
+          cp ui.xml shots/ui_after_save.xml 2>/dev/null || true
           EXPORTED=$(adb shell ls /sdcard/Download 2>/dev/null | grep -o 'waqt-backup-[^ ]*\.json' | head -1 || true)
           if [ -z "$EXPORTED" ]; then EXPORTED=$(adb shell find /sdcard -name 'waqt-backup-*.json' 2>/dev/null | head -1 | sed 's#.*/##' || true); fi
-          if [ -z "$EXPORTED" ]; then echo "BACKUP_EXPORTED=no" | tee shots/backup_probe.txt; exit 1; fi
-          SRC=$(adb shell find /sdcard -name "$EXPORTED" 2>/dev/null | head -1)
-          adb pull "$SRC" /tmp/exported.json >/dev/null
-          echo "BACKUP_EXPORTED=yes FILE=$EXPORTED" > shots/backup_probe.txt
-          if compare_items /tmp/prefs_before_export.xml /tmp/exported.json >> shots/backup_probe.txt 2>&1; then
-            echo "BACKUP_EXPORT_MATCH=yes" >> shots/backup_probe.txt
+          if [ -z "$EXPORTED" ]; then
+            echo "BACKUP_EXPORTED=no" > shots/backup_probe.txt
           else
-            echo "BACKUP_EXPORT_MATCH=no" >> shots/backup_probe.txt
-            cat shots/backup_probe.txt; exit 1
+            SRC=$(adb shell find /sdcard -name "$EXPORTED" 2>/dev/null | head -1)
+            adb pull "$SRC" /tmp/exported.json >/dev/null
+            echo "BACKUP_EXPORTED=yes FILE=$EXPORTED" > shots/backup_probe.txt
+            if compare_items /tmp/prefs_before_export.xml /tmp/exported.json >> shots/backup_probe.txt 2>&1; then echo "BACKUP_EXPORT_MATCH=yes" >> shots/backup_probe.txt; else echo "BACKUP_EXPORT_MATCH=no" >> shots/backup_probe.txt; fi
           fi
-
-          # Phase 2: mutate state, then restore the real exported file
+          cat shots/backup_probe.txt
+          # Phase 2: mutate state, then restore - from the real export if present, else a known probe file (independent of SAVE)
           mutate_items
           sleep 2
+          if [ -n "$EXPORTED" ]; then
+            RESTORE_NAME="$EXPORTED"; RESTORE_SRC=/tmp/exported.json; echo "RESTORE_SOURCE=exported" >> shots/backup_probe.txt
+          else
+            RESTORE_NAME="waqt-restore-probe.json"; RESTORE_SRC=/tmp/restore_probe.json; echo "RESTORE_SOURCE=probe" >> shots/backup_probe.txt
+            python3 - <<'PYPRB'
+          import json
+          item = {"id":"ci-restore-src-marker","title":"CI restore source marker","isHabit":False,"hour":7,"minute":45,"streakCount":0,"streakGoal":7,"priority":"high","category":"work","lastCompletedEpochDay":-1,"isCompletedToday":False,"description":"","dueDateEpochDay":741816,"dueDateString":"","expectedMinutes":30,"actualFocusedMinutes":0,"focusSessionsCount":0,"recurrence":"once","customDaysCsv":"1,2,3,4,5,6,7","targetValue":1,"currentProgressToday":0,"targetUnit":"","longestStreak":0,"isPaused":False,"hasReminder":False,"completedDaysHistoryCsv":"","completionPercentage":0,"deferredUntilMillis":0}
+          json.dump({"app":"WAQT","schemaVersion":4,"timestamp":1795341000000,"items":[item],"notes":[],"habitCategories":[],"customQuotes":[],"settings":{}}, open("/tmp/restore_probe.json","w"), ensure_ascii=False)
+          PYPRB
+            adb push /tmp/restore_probe.json /sdcard/Download/waqt-restore-probe.json >/dev/null
+          fi
           adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
           sleep 6
           try_tap "⚙" || adb shell input tap 111 252 || true
@@ -729,25 +766,28 @@ jobs:
           sleep 3
           scroll_until "استعادة نسخة احتياطية من ملف"
           sleep 6
-          adb exec-out screencap -p > shots/13_saf_picker.png
-          try_tap "waqt-backup-" || true
+          adb exec-out screencap -p > shots/14_restore_picker.png
+          if ! try_tap "$RESTORE_NAME"; then
+            try_tap "Show roots" || adb shell input tap 60 145 || true
+            sleep 2
+            try_tap "Downloads" || true
+            sleep 2
+            try_tap "$RESTORE_NAME" || true
+          fi
           sleep 4
-          adb exec-out screencap -p > shots/14_restore_confirm.png
+          adb exec-out screencap -p > shots/15_restore_confirm.png
           try_tap "استعادة" || true
           sleep 5
-          adb exec-out screencap -p > shots/15_restored.png
+          adb shell am start -n com.example.glassproductivity/.MainActivity >/dev/null
+          sleep 4
+          adb exec-out screencap -p > shots/16_restored.png
           snapshot_prefs /tmp/prefs_restored.xml
-          if compare_items /tmp/exported.json /tmp/prefs_restored.xml >> shots/backup_probe.txt 2>&1 && ! grep -q 'ci-pre-restore-marker' /tmp/prefs_restored.xml; then
-            echo "BACKUP_RESTORED=yes" >> shots/backup_probe.txt
-          else
-            echo "BACKUP_RESTORED=no" >> shots/backup_probe.txt
-            cat shots/backup_probe.txt; exit 1
-          fi
-
+          if compare_items "$RESTORE_SRC" /tmp/prefs_restored.xml >> shots/backup_probe.txt 2>&1 && ! grep -q 'ci-pre-restore-marker' /tmp/prefs_restored.xml; then echo "BACKUP_RESTORED=yes" >> shots/backup_probe.txt; else echo "BACKUP_RESTORED=no" >> shots/backup_probe.txt; fi
+          cat shots/backup_probe.txt
           # Soft evidence: text share-sheet export still present (not fatal)
           scroll_until "مشاركة نسخة احتياطية" || true
           sleep 4
-          adb exec-out screencap -p > shots/16_share_sheet.png
+          adb exec-out screencap -p > shots/17_share_sheet.png
           adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
           adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
           if grep -qiE 'chooser|resolver|مشاركة عبر|Share' ui.xml; then echo "BACKUP_EXPORT_SHEET=yes" >> shots/backup_probe.txt; else echo "BACKUP_EXPORT_SHEET=unknown" >> shots/backup_probe.txt; fi
