@@ -68,8 +68,15 @@ object WaqtCloudBackup {
 
     class RestoreException(message: String) : Exception(message)
 
-    fun build(context: Context, account: String?): ByteArray {
+    data class BuildOutcome(val zipBytes: ByteArray, val report: BackupIntegrity.BuildReport)
+
+    fun build(context: Context, account: String?): ByteArray = buildWithReport(context, account).zipBytes
+
+    fun buildWithReport(context: Context, account: String?): BuildOutcome {
         val mediaManifest = JSONArray()
+        var appMediaCount = 0
+        var externalIncluded = 0
+        var externalSkipped = 0
         val out = ByteArrayOutputStream()
         ZipOutputStream(out).use { zip ->
             val prefsJson = JSONObject()
@@ -107,10 +114,17 @@ object WaqtCloudBackup {
             }.toString(2).toByteArray(Charsets.UTF_8))
             zip.closeEntry()
 
-            addAppFiles(context, zip, mediaManifest)
-            addExternalMedia(context, zip, mediaManifest)
+            appMediaCount = addAppFiles(context, zip, mediaManifest)
+            val external = addExternalMedia(context, zip, mediaManifest)
+            externalIncluded = external[0]
+            externalSkipped = external[1]
         }
 
+        val report = BackupIntegrity.BuildReport(
+            includedAppMedia = appMediaCount,
+            includedExternalMedia = externalIncluded,
+            skippedExternalMedia = externalSkipped
+        )
         // mediaManifest is filled after backup.json is written, so rebuild the
         // manifest entry as a second pass entry for readers.
         val finalOut = ByteArrayOutputStream()
@@ -127,8 +141,11 @@ object WaqtCloudBackup {
             zip.putNextEntry(ZipEntry("media-manifest.json"))
             zip.write(mediaManifest.toString(2).toByteArray(Charsets.UTF_8))
             zip.closeEntry()
+            zip.putNextEntry(ZipEntry(BackupIntegrity.REPORT_ENTRY))
+            zip.write(BackupIntegrity.reportJson(report).toByteArray(Charsets.UTF_8))
+            zip.closeEntry()
         }
-        return finalOut.toByteArray()
+        return BuildOutcome(finalOut.toByteArray(), report)
     }
 
     private fun exportChatHistory(context: Context): JSONObject {
@@ -158,7 +175,8 @@ object WaqtCloudBackup {
         return root
     }
 
-    private fun addAppFiles(context: Context, zip: ZipOutputStream, manifest: JSONArray) {
+    private fun addAppFiles(context: Context, zip: ZipOutputStream, manifest: JSONArray): Int {
+        var included = 0
         val dirs = mapOf(
             File(context.filesDir, "journal_audio") to "media/journal_audio",
             File(context.filesDir, "chat_images") to "media/chat_images"
@@ -175,6 +193,7 @@ object WaqtCloudBackup {
                 manifest.put(JSONObject()
                     .put("original", Uri.fromFile(file).toString())
                     .put("entry", entry))
+                included++
             }
         }
         context.filesDir.listFiles()
@@ -190,11 +209,15 @@ object WaqtCloudBackup {
                 manifest.put(JSONObject()
                     .put("original", Uri.fromFile(file).toString())
                     .put("entry", entry))
+                included++
             }
+        return included
     }
 
     /** Best-effort copy of gallery-referenced media (images/audio by content URI). */
-    private fun addExternalMedia(context: Context, zip: ZipOutputStream, manifest: JSONArray) {
+    private fun addExternalMedia(context: Context, zip: ZipOutputStream, manifest: JSONArray): IntArray {
+        var included = 0
+        var skipped = 0
         val uris = linkedSetOf<String>()
 
         // Journal media references (images by URI).
@@ -220,19 +243,24 @@ object WaqtCloudBackup {
 
         var index = 0
         for (uriString in uris) {
-            try {
-                val uri = Uri.parse(uriString)
-                val bytes = context.contentResolver.openInputStream(uri)?.use { it.readBytes() } ?: continue
-                if (bytes.isEmpty() || bytes.size > 25 * 1024 * 1024) continue
-                val entry = "media/external/ext_${index++}"
-                zip.putNextEntry(ZipEntry(entry))
-                zip.write(bytes)
-                zip.closeEntry()
-                manifest.put(JSONObject().put("original", uriString).put("entry", entry))
-            } catch (_: Exception) {
-                // Missing gallery items must never fail the backup.
+            val uri = Uri.parse(uriString)
+            val bytes = BackupIntegrity.readExternalOrNull(25 * 1024 * 1024) {
+                context.contentResolver.openInputStream(uri)?.use { it.readBytes() }
             }
+            if (bytes == null) {
+                // Missing or unreadable gallery items must never fail the
+                // backup, but they are counted so the user gets a warning.
+                skipped++
+                continue
+            }
+            val entry = "media/external/ext_${index++}"
+            zip.putNextEntry(ZipEntry(entry))
+            zip.write(bytes)
+            zip.closeEntry()
+            manifest.put(JSONObject().put("original", uriString).put("entry", entry))
+            included++
         }
+        return intArrayOf(included, skipped)
     }
 
     fun summarize(zipBytes: ByteArray): BackupSummary {
@@ -263,7 +291,7 @@ object WaqtCloudBackup {
      * Applies a user-confirmed restore: preferences (API keys excluded),
      * chat history, mentor memory, and media files with reference rewriting.
      */
-    fun restore(context: Context, zipBytes: ByteArray) {
+    fun restore(context: Context, zipBytes: ByteArray): BackupIntegrity.RestoreReport {
         val (backup, _) = readEntries(zipBytes)
         val root = try { JSONObject(String(backup, Charsets.UTF_8)) }
         catch (e: Exception) { throw RestoreException("ملف النسخة غير صالح") }
@@ -276,6 +304,9 @@ object WaqtCloudBackup {
         // 1. Media files first so references can point at restored paths.
         val restoredDir = File(context.filesDir, "restored_media").apply { mkdirs() }
         val replacements = mutableMapOf<String, String>()
+        var restoredMedia = 0
+        var failedMedia = 0
+        val countedEntries = HashSet<String>()
         val manifest = entries["media-manifest.json"]?.let {
             try { JSONArray(String(it, Charsets.UTF_8)) } catch (_: Exception) { null }
         }
@@ -284,10 +315,15 @@ object WaqtCloudBackup {
                 val item = manifest.optJSONObject(i) ?: continue
                 val original = item.optString("original")
                 val entry = item.optString("entry")
-                val bytes = entries[entry] ?: continue
+                val bytes = entries[entry]
+                if (bytes == null) {
+                    if (entry.isNotBlank() && countedEntries.add(entry)) failedMedia++
+                    continue
+                }
                 try {
                     val target = File(restoredDir, entry.substringAfterLast('/'))
                     target.writeBytes(bytes)
+                    if (countedEntries.add(entry)) restoredMedia++
                     if (original.isNotBlank()) {
                         replacements[original] = when {
                             original.startsWith("content://") -> Uri.fromFile(target).toString()
@@ -300,7 +336,9 @@ object WaqtCloudBackup {
                             originalFile.writeBytes(bytes)
                         }
                     }
-                } catch (_: Exception) {}
+                } catch (_: Exception) {
+                    if (countedEntries.add(entry)) failedMedia++
+                }
             }
         }
 
@@ -356,6 +394,15 @@ object WaqtCloudBackup {
                 }
             } catch (_: Exception) {}
         }
+
+        val skippedAtBackup = BackupIntegrity.parseReport(
+            entries[BackupIntegrity.REPORT_ENTRY]?.let { String(it, Charsets.UTF_8) }
+        ).skippedExternalMedia
+        return BackupIntegrity.RestoreReport(
+            restoredMedia = restoredMedia,
+            failedMedia = failedMedia,
+            skippedAtBackup = skippedAtBackup
+        )
     }
 
     private fun readEntries(zipBytes: ByteArray): Pair<ByteArray, Int> {
