@@ -33,4 +33,12 @@ jobs:
         with:
           gradle-version: "8.7"
       - name: Run backup restore unit tests (JVM, no emulator, no signing)
-        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --tests 'com.example.glassproductivity.AlarmSchedulerFutureDueDateTest' --no-daemon --stacktrace
+        run: gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --tests 'com.example.glassproductivity.AlarmSchedulerFutureDueDateTest' --tests 'com.example.glassproductivity.BackupSafetyTest' --no-daemon --stacktrace
+      - name: Show per-test results
+        if: always()
+        run: |
+          for f in app/build/test-results/testDebugUnitTest/TEST-*.xml; do
+            echo "== $f"
+            grep -oE '<testcase name="[^"]+"' "$f" | sed 's/<testcase name="/  case: /;s/"$//'
+            echo "  failures_or_errors: $(grep -cE '<failure|<error' "$f" || true)"
+          done
