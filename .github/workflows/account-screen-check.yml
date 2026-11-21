@@ -316,6 +316,7 @@ jobs:
           # code changes, no real accounts, no user data.
           python3 - <<'PYINJ'
           import json, re, subprocess, time, datetime, base64, sys
+          from xml.sax.saxutils import escape as xesc, unescape as xunesc
 
           PKG = "com.example.glassproductivity"
           PREFS = "shared_prefs/waqt_productivity_prefs.xml"
@@ -328,20 +329,34 @@ jobs:
                 doy = datetime.date(y, m, d).timetuple().tm_yday
                 return y * 366 + doy
 
-          out = sh("shell", "date", "+%Y %m %d %H %M %s %z").split()
-          Y, M, D, H, Mi, now_s = int(out[0]), int(out[1]), int(out[2]), int(out[3]), int(out[4]), int(out[5])
+          # Device clock. adb joins all args with spaces on the device shell,
+          # so a date format containing spaces arrives as several extra args
+          # and the command fails with empty stdout. Use a dash-separated
+          # format, and retry while the device settles.
+          raw = ""
+          mclock = None
+          for attempt in range(10):
+              raw = sh("shell", "date", "+%Y-%m-%d-%H-%M-%s-%z").strip()
+              mclock = re.match(r"^(\d{4})-(\d{2})-(\d{2})-(\d{2})-(\d{2})-(\d+)-([+-])(\d{2})(\d{2})$", raw)
+              if mclock:
+                  break
+              print("date attempt", attempt, "bad output:", repr(raw))
+              time.sleep(2)
+          if not mclock:
+              print("FATAL: could not read device clock; last output:", repr(raw))
+              sys.exit(1)
+          Y, M, D, H, Mi, now_s = (int(mclock.group(i)) for i in range(1, 7))
+          tzs_sign = 1 if mclock.group(7) == "+" else -1
+          tz_off = tzs_sign * (int(mclock.group(8)) * 3600 + int(mclock.group(9)) * 60)
 
           # Delivery probe: today, ~3.5 min ahead
           dt_now = datetime.datetime(Y, M, D, H, Mi)
           dt_del = dt_now + datetime.timedelta(seconds=210)
           del_epoch = app_epoch(dt_del.year, dt_del.month, dt_del.day)
 
-          # Future-due probe: tomorrow 09:30 emulator-local
+          # Future-due probe: tomorrow 09:37 emulator-local, pre-alert 09:24
           dt_tom = dt_now + datetime.timedelta(days=1)
           fut_epoch = app_epoch(dt_tom.year, dt_tom.month, dt_tom.day)
-          tzs = out[6]
-          sign = 1 if tzs[0] == "+" else -1
-          tz_off = sign * (int(tzs[1:3]) * 3600 + int(tzs[3:5]) * 60)
           exp_trigger = int((datetime.datetime(dt_tom.year, dt_tom.month, dt_tom.day, 9, 37)
                              - datetime.datetime(1970, 1, 1)).total_seconds()) - tz_off
           exp_pre = int((datetime.datetime(dt_tom.year, dt_tom.month, dt_tom.day, 9, 24)
@@ -358,14 +373,30 @@ jobs:
                       "completedDaysHistoryCsv": "", "completionPercentage": 0, "deferredUntilMillis": 0}
 
           sh("shell", "am", "force-stop", PKG)
+          time.sleep(2)
           xml = sh("shell", "run-as", PKG, "cat", PREFS)
-          mobj = re.search(r'<string name="waqt_items_json">(.*)</string>', xml, re.S)
-          items = json.loads(mobj.group(1)) if mobj else []
+          print("prefs bytes:", len(xml))
+          # Non-greedy capture: a greedy (.*) would run past this element to
+          # the last </string> in the file and corrupt the splice.
+          mobj = re.search(r'<string name="waqt_items_json">(.*?)</string>', xml, re.S)
+          items = []
+          if mobj:
+              try:
+                  items = json.loads(xunesc(mobj.group(1), {"&quot;": chr(34), "&apos;": chr(39)}))
+              except Exception as e:
+                  print("WARN: existing waqt_items_json unparsable:", repr(e))
+                  items = []
           items = [x for x in items if x.get("id") not in ("ci-future-due-probe", "ci-delivery-probe")]
           items.append(item("ci-future-due-probe", "CI future due probe", 9, 37, fut_epoch))
           items.append(item("ci-delivery-probe", "CI delivery probe", dt_del.hour, dt_del.minute, del_epoch))
-          new_json = json.dumps(items, separators=(",", ":"))
-          new_xml = (xml[:mobj.start(1)] + new_json + xml[mobj.end(1):]) if mobj else xml
+          new_json_xml = xesc(json.dumps(items, separators=(",", ":")))
+          if mobj:
+              new_xml = xml[:mobj.start(1)] + new_json_xml + xml[mobj.end(1):]
+          elif "</map>" in xml:
+              new_xml = xml.replace("</map>", '<string name="waqt_items_json">' + new_json_xml + '</string></map>')
+          else:
+              new_xml = "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>\n<map><string name=\"waqt_items_json\">" + new_json_xml + "</string></map>\n"
+          print("items injected:", len(items), "key existed:", bool(mobj))
           # Distinctive pre-alert (13 min instead of default 10) so the registration
           # check can require the 09:37 trigger AND its 09:24 pre-alert, tying both
           # alarms to the injected task rather than any other app alarm.
@@ -377,7 +408,7 @@ jobs:
           with open("/tmp/alarm_probe_env.txt", "w") as f:
               f.write(f"EXP_TRIGGER={exp_trigger}\nEXP_PRE={exp_pre}\nDELIVERY_AT={dt_del.hour:02d}:{dt_del.minute:02d}\n")
           print("injected", len(items), "items; expect future trigger", exp_trigger,
-                "delivery at", f"{dt_del.hour:02d}:{dt_del.minute:02d}")
+                "pre", exp_pre, "delivery at", f"{dt_del.hour:02d}:{dt_del.minute:02d}")
           PYINJ
           cat /tmp/alarm_probe_env.txt
 
@@ -435,6 +466,7 @@ jobs:
           [ "$DELIVERED" = "yes" ]
 
       - name: Local backup restore round-trip (synthetic data)
+        if: ${{ !cancelled() }}
         run: |
           set -e
           # Local (non-Drive) backup round-trip with synthetic data:
