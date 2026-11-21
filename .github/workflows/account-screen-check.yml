@@ -1,0 +1,260 @@
+name: WAQT Account Screen and Signed Build Check
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/google-drive-backup
+    paths:
+      - .github/workflows/account-screen-check.yml
+
+permissions:
+  contents: write
+
+jobs:
+  account-screens:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+      - name: Enable KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+          ls -l /dev/kvm
+      - name: Compile debug APK
+        run: gradle :app:assembleDebug --no-daemon --stacktrace
+      - name: Install emulator image
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "emulator" "system-images;android-31;google_apis;x86_64"
+          echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+          echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> "$GITHUB_PATH"
+      - name: Create and boot AVD
+        run: |
+          export ANDROID_SDK_HOME="$HOME"
+          export ANDROID_AVD_HOME="${ANDROID_AVD_HOME:-$HOME/.android/avd}"
+          mkdir -p "$ANDROID_AVD_HOME"
+          echo no | avdmanager create avd -n acct -k "system-images;android-31;google_apis;x86_64" --device "pixel_5" --force
+          CFG="$ANDROID_AVD_HOME/acct.avd/config.ini"
+          if [ ! -f "$CFG" ]; then
+            CFG=$(find "$HOME" /usr/local/lib/android -maxdepth 6 -path "*acct.avd/config.ini" 2>/dev/null | head -1)
+          fi
+          if [ -z "$CFG" ] || [ ! -f "$CFG" ]; then
+            echo "acct AVD config.ini not found"; exit 1
+          fi
+          export ANDROID_AVD_HOME="$(dirname "$(dirname "$CFG")")"
+          echo "hw.ramSize=3072" >> "$CFG"
+          echo "disk.dataPartition.size=4G" >> "$CFG"
+          nohup emulator -avd acct -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot-save -memory 3072 > /tmp/emulator.log 2>&1 &
+          adb wait-for-device
+          for i in $(seq 1 120); do
+            BOOT=$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')
+            if [ "$BOOT" = "1" ]; then echo "booted after $((i*5))s"; break; fi
+            sleep 5
+          done
+          if [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" != "1" ]; then
+            echo "EMULATOR BOOT TIMEOUT"; tail -50 /tmp/emulator.log || true; exit 1
+          fi
+      - name: Exercise account screens and back behavior
+        run: |
+          set -x
+          mkdir -p shots
+          adb install -r app/build/outputs/apk/debug/app-debug.apk
+          adb shell pm clear com.example.glassproductivity
+          adb logcat -c
+          adb shell am start -n com.example.glassproductivity/.MainActivity
+          sleep 12
+
+          tap_text() {
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            python3 - "$1" <<'PY' > /tmp/tap.txt
+          import re, sys
+          target = sys.argv[1]
+          xml = open('ui.xml', encoding='utf-8').read()
+          for m in re.finditer(r'text="([^"]*)"[^>]*bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', xml):
+              if target in m.group(1):
+                  x = (int(m.group(2)) + int(m.group(4))) // 2
+                  y = (int(m.group(3)) + int(m.group(5))) // 2
+                  print(x, y)
+                  break
+          PY
+          }
+          try_tap() {
+            tap_text "$1"
+            read X Y < /tmp/tap.txt || true
+            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
+            unset X Y; return 1
+          }
+          scroll_until() {
+            for i in $(seq 1 8); do
+              if try_tap "$1"; then return 0; fi
+              adb shell input swipe 540 1700 540 700
+              sleep 2
+            done
+            return 1
+          }
+
+          # Dismiss first-run tour if present
+          try_tap "تخطّي" || true
+          sleep 3
+          adb exec-out screencap -p > shots/01_home.png
+
+          # Record pre-test persisted state (debug build allows run-as)
+          adb shell run-as com.example.glassproductivity ls -R shared_prefs 2>/dev/null | sort > shots/prefs_before.txt || true
+          adb shell run-as com.example.glassproductivity cat shared_prefs/*.xml 2>/dev/null | md5sum > shots/prefs_before.md5 || true
+
+          # Open settings via gear button
+          try_tap "⚙" || try_tap "الإعدادات" || true
+          sleep 4
+          adb exec-out screencap -p > shots/02_settings_top.png
+
+          # Account accordion section
+          scroll_until "حساب جوجل والنسخ السحابي" || true
+          sleep 3
+          adb exec-out screencap -p > shots/03_account_section.png
+
+          # Tap sign-in: expect system Credential Manager / add-account UI, no account configured
+          try_tap "تسجيل الدخول بحساب جوجل" || true
+          sleep 8
+          adb exec-out screencap -p > shots/04_signin_prompt.png
+          adb shell uiautomator dump /sdcard/ui2.xml >/dev/null 2>&1
+          adb pull /sdcard/ui2.xml shots/ui_at_signin.xml >/dev/null 2>&1 || true
+          adb shell input keyevent 4
+          sleep 2
+
+          # Data & backup accordion section
+          scroll_until "بياناتك والنسخ الاحتياطي" || true
+          sleep 3
+          adb exec-out screencap -p > shots/05_data_backup_section.png
+
+          # Return home
+          adb shell input keyevent 4
+          sleep 2
+          adb exec-out screencap -p > shots/06_back_at_home.png
+
+          # Back-behavior test: single back must keep app foreground with toast
+          adb shell input keyevent 4
+          sleep 1
+          adb exec-out screencap -p > shots/07_single_back.png
+          FOCUS1=$(adb shell dumpsys window | grep -m1 mCurrentFocus || true)
+          PID1=$(adb shell pidof com.example.glassproductivity || true)
+          # Second back quickly: app should background (double-back-to-exit guard)
+          adb shell input keyevent 4
+          sleep 2
+          adb exec-out screencap -p > shots/08_double_back.png
+          FOCUS2=$(adb shell dumpsys window | grep -m1 mCurrentFocus || true)
+          PID2=$(adb shell pidof com.example.glassproductivity || true)
+
+          # Reopen and verify state preserved (home without tour overlay)
+          adb shell am start -n com.example.glassproductivity/.MainActivity
+          sleep 8
+          adb exec-out screencap -p > shots/09_reopened.png
+          adb shell uiautomator dump /sdcard/ui3.xml >/dev/null 2>&1
+          adb pull /sdcard/ui3.xml shots/ui_reopened.xml >/dev/null 2>&1 || true
+          FOCUS3=$(adb shell dumpsys window | grep -m1 mCurrentFocus || true)
+          PID3=$(adb shell pidof com.example.glassproductivity || true)
+          adb shell run-as com.example.glassproductivity ls -R shared_prefs 2>/dev/null | sort > shots/prefs_after.txt || true
+          adb shell run-as com.example.glassproductivity cat shared_prefs/*.xml 2>/dev/null | md5sum > shots/prefs_after.md5 || true
+
+          # Crash evidence from logcat
+          adb logcat -d > shots/logcat_full.txt || true
+          grep -iE 'FATAL EXCEPTION|AndroidRuntime|beginning of crash' shots/logcat_full.txt > shots/crash_hits.txt || true
+
+          {
+            echo "FOCUS_AFTER_SINGLE_BACK=$FOCUS1"
+            echo "PID_AFTER_SINGLE_BACK=${PID1:-gone}"
+            echo "FOCUS_AFTER_DOUBLE_BACK=$FOCUS2"
+            echo "PID_AFTER_DOUBLE_BACK=${PID2:-gone}"
+            echo "FOCUS_AFTER_REOPEN=$FOCUS3"
+            echo "PID_AFTER_REOPEN=${PID3:-gone}"
+            echo "PREFS_BEFORE_MD5=$(cat shots/prefs_before.md5 2>/dev/null)"
+            echo "PREFS_AFTER_MD5=$(cat shots/prefs_after.md5 2>/dev/null)"
+            echo "CRASH_HITS=$(wc -l < shots/crash_hits.txt)"
+          } > shots/results.txt
+          cat shots/results.txt
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: account-shots
+          path: shots/
+      - name: Push shots to evidence branch
+        if: always()
+        run: |
+          set -e
+          BR="account-evidence-r${{ github.run_id }}"
+          mkdir -p /tmp/ev
+          cp shots/* /tmp/ev/ 2>/dev/null || true
+          cd /tmp/ev
+          git init -b "$BR" .
+          git config user.email "ci@waqt.local"
+          git config user.name "waqt-account-ci"
+          git add .
+          git commit -m "Account screen evidence for run ${{ github.run_id }} (head ${{ github.sha }})" || true
+          PUSH_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git push "$PUSH_URL" "$BR:$BR"
+      - name: Emulator log on failure
+        if: failure()
+        run: tail -100 /tmp/emulator.log || true
+
+  signed-build-only:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: "8.7"
+      - name: Decode signing key to runner temp
+        env:
+          KEYSTORE_BASE64: ${{ secrets.WAQT_KEYSTORE_BASE64 }}
+        run: |
+          test -n "$KEYSTORE_BASE64" || (echo "Missing WAQT_KEYSTORE_BASE64" && exit 1)
+          echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/waqt-release.jks"
+          test -s "$RUNNER_TEMP/waqt-release.jks"
+      - name: Build signed release APK (no OTA, no store, no release)
+        env:
+          WAQT_KEYSTORE_PATH: ${{ runner.temp }}/waqt-release.jks
+          WAQT_KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
+          WAQT_KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
+          WAQT_KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
+        run: gradle :app:assembleRelease --no-daemon --stacktrace
+      - name: Verify package, signature, size
+        run: |
+          set -e
+          APK=app/build/outputs/apk/release/app-release.apk
+          ls -la "$APK"
+          BT=$(ls "$ANDROID_HOME"/build-tools/ | sort -V | tail -1)
+          "$ANDROID_HOME/build-tools/$BT/apksigner" verify --print-certs "$APK" | tee certs.txt
+          SHA1=$(grep -m1 -oiE 'certificate SHA-1 digest: [0-9a-f:]+' certs.txt | awk '{print $NF}' | tr 'a-f' 'A-F' | sed 's/..\B/&:/g;s/::*/:/g')
+          EXPECTED="E1:63:0B:27:C1:71:6D:6A:F2:0A:BE:E8:B0:9C:46:E6:49:D0:9F:E6"
+          echo "COMPUTED_SHA1=$SHA1"
+          echo "EXPECTED_SHA1=$EXPECTED"
+          if [ "$SHA1" != "$EXPECTED" ]; then echo "SIGNATURE MISMATCH"; exit 1; fi
+          echo "SIGNATURE MATCHES PUBLISHED APP"
+          "$ANDROID_HOME/build-tools/$BT/aapt" dump badging "$APK" | grep -E 'package:|application-label:' | tee package.txt
+          echo "APK_SIZE_BYTES=$(stat -c%s "$APK")" | tee size.txt
+      - name: Upload signed APK artifact (Actions only, never published)
+        uses: actions/upload-artifact@v4
+        with:
+          name: waqt-signed-release-no-ota
+          path: app/build/outputs/apk/release/app-release.apk
