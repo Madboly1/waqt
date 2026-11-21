@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Build
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.File
 import java.util.Calendar
 
 data class ReminderItem(
@@ -692,12 +693,36 @@ object ReminderRepository {
             val habitCatsArr = root.optJSONArray("habitCategories")
             val quotesArr = root.optJSONArray("customQuotes")
 
-            val editor = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit()
+            // A section that is present but not the expected type, or whose
+            // entries lack the fields its loader requires, makes the whole
+            // file malformed: reject it before writing anything, so a bad
+            // backup can never become partial data that a later save would
+            // persist. Sections that are absent keep existing data (merge).
+            if (root.has("items") && itemsArr == null) return false
+            if (root.has("notes") && notesArr == null) return false
+            if (root.has("habitCategories") && habitCatsArr == null) return false
+            if (root.has("customQuotes") && quotesArr == null) return false
+            if (itemsArr != null && !isValidItemsArray(itemsArr)) return false
+            if (notesArr != null && !isValidNotesArray(notesArr)) return false
+            if (habitCatsArr != null && !isValidHabitCategoriesArray(habitCatsArr)) return false
+            if (quotesArr != null && !isValidQuotesArray(quotesArr)) return false
+
+            // Recovery point first: without a durable snapshot of the values
+            // that are about to be replaced, the restore does not happen.
+            val snapshot = snapshotBeforeJsonRestore(context, root) ?: return false
+
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val editor = prefs.edit()
             if (itemsArr != null) editor.putString(KEY_ITEMS, itemsArr.toString())
             if (notesArr != null) editor.putString(KEY_NOTES, notesArr.toString())
             if (habitCatsArr != null) editor.putString(KEY_HABIT_CATEGORIES, habitCatsArr.toString())
             if (quotesArr != null) editor.putString(KEY_CUSTOM_QUOTES, quotesArr.toString())
-            editor.apply()
+            // One atomic commit for every section; if it fails, put the
+            // snapshotted values back so no partial imported state survives.
+            if (!editor.commit()) {
+                rollbackJsonRestore(prefs, snapshot)
+                return false
+            }
 
             val settingsObj = root.optJSONObject("settings")
             if (settingsObj != null) {
@@ -714,6 +739,104 @@ object ReminderRepository {
             true
         } catch (_: Exception) {
             false
+        }
+    }
+
+    // Validation mirrors exactly the fields each loader requires, so any
+    // backup this app ever exported stays importable.
+    private fun isValidItemsArray(arr: JSONArray): Boolean = try {
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            o.getString("id")
+            o.getString("title")
+            o.getInt("hour")
+            o.getInt("minute")
+        }
+        true
+    } catch (_: Exception) { false }
+
+    private fun isValidNotesArray(arr: JSONArray): Boolean = try {
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            o.getString("id")
+            o.getString("title")
+        }
+        true
+    } catch (_: Exception) { false }
+
+    private fun isValidHabitCategoriesArray(arr: JSONArray): Boolean = try {
+        for (i in 0 until arr.length()) {
+            val o = arr.getJSONObject(i)
+            o.getString("id")
+            o.getString("name")
+            o.getString("icon")
+        }
+        true
+    } catch (_: Exception) { false }
+
+    private fun isValidQuotesArray(arr: JSONArray): Boolean = try {
+        for (i in 0 until arr.length()) arr.getString(i)
+        true
+    } catch (_: Exception) { false }
+
+    /**
+     * Writes the current values of the keys a JSON restore is about to
+     * replace into filesDir/restore_snapshots (last 5 kept) and returns them
+     * for in-memory rollback. Returns null when the snapshot could not be
+     * durably written; the caller must then abort before touching any data.
+     */
+    private fun snapshotBeforeJsonRestore(context: Context, root: JSONObject): Map<String, String?>? {
+        return try {
+            val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+            val snap = JSONObject()
+            snap.put("snapshotAt", System.currentTimeMillis())
+            val oldValues = HashMap<String, String?>()
+            fun current(key: String) {
+                val old = if (prefs.contains(key)) prefs.getString(key, "") else null
+                oldValues[key] = old
+                if (old != null) snap.put(key, old)
+            }
+            if (root.has("items")) current(KEY_ITEMS)
+            if (root.has("notes")) current(KEY_NOTES)
+            if (root.has("habitCategories")) current(KEY_HABIT_CATEGORIES)
+            if (root.has("customQuotes")) current(KEY_CUSTOM_QUOTES)
+            val settingsObj = root.optJSONObject("settings")
+            if (settingsObj != null) {
+                val settingsPrefs = context.getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
+                val before = JSONObject()
+                val keys = listOf(KEY_DARK_MODE, KEY_ACCENT_COLOR, KEY_DEFAULT_FOCUS_MINS, KEY_DEFAULT_BREAK_MINS, KEY_DAILY_FOCUS_GOAL_MINS, KEY_NOTIF_TASKS, KEY_NOTIF_HABITS)
+                for (key in keys) {
+                    if (settingsObj.has(key) && settingsPrefs.contains(key)) before.put(key, settingsPrefs.all[key])
+                }
+                snap.put("settings", before)
+            }
+            val dir = File(context.filesDir, "restore_snapshots").apply { mkdirs() }
+            val out = File(dir, "waqt-pre-json-restore-${System.currentTimeMillis()}.json")
+            out.writeText(snap.toString(2))
+            if (!out.isFile || out.length() == 0L) return null
+            dir.listFiles()
+                ?.filter { it.name.startsWith("waqt-pre-json-restore-") }
+                ?.sortedByDescending { it.name }
+                ?.drop(5)
+                ?.forEach { it.delete() }
+            oldValues
+        } catch (_: Exception) {
+            null
+        }
+    }
+
+    /** Best-effort undo of a failed restore commit from the snapshot values. */
+    private fun rollbackJsonRestore(
+        prefs: android.content.SharedPreferences,
+        oldValues: Map<String, String?>
+    ) {
+        try {
+            val editor = prefs.edit()
+            for ((key, old) in oldValues) {
+                if (old == null) editor.remove(key) else editor.putString(key, old)
+            }
+            editor.commit()
+        } catch (_: Exception) {
         }
     }
 
