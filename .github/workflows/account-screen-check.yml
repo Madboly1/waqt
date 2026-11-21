@@ -149,6 +149,49 @@ jobs:
           fi
           echo "TOUR_DISMISSED=yes" > /tmp/tour_state.txt
 
+          # Floating-ball drag + tab-swipe interaction probe (runtime evidence for
+          # the tab-swipe steal fix: ball drags must not start tab swipes; real
+          # content-area swipes must still switch tabs).
+          adb shell uiautomator dump /sdcard/uib.xml >/dev/null 2>&1
+          adb pull /sdcard/uib.xml /tmp/uib.xml >/dev/null 2>&1 || true
+          BALL=$(python3 - <<'PYB'
+          import re
+          try:
+              xml = open('/tmp/uib.xml', encoding='utf-8').read()
+          except Exception:
+              xml = ''
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              if tm and tm.group(1) == '\u2726' and bm:
+                  x = (int(bm.group(1))+int(bm.group(3)))//2
+                  y = (int(bm.group(2))+int(bm.group(4)))//2
+                  print(f"{x} {y}")
+                  break
+          PYB
+          )
+          if [ -z "$BALL" ]; then
+            echo "BALL_FOUND=no" | tee shots/swipe_probe.txt
+          else
+            read BX BY <<< "$BALL"
+            echo "BALL_FOUND=yes at $BX,$BY" | tee shots/swipe_probe.txt
+            adb logcat -c
+            adb shell input swipe $BX $BY $((BX+260)) $((BY+120)) 700
+            sleep 2
+            adb exec-out screencap -p > shots/10_ball_dragged.png
+            adb logcat -d > shots/swipe_probe_ball_logcat.txt
+            if grep -q 'ACTIVITY_SWIPE_DOWN eligible=false' shots/swipe_probe_ball_logcat.txt; then echo "BALL_DRAG_EXCLUDED=yes" | tee -a shots/swipe_probe.txt; else echo "BALL_DRAG_EXCLUDED=no" | tee -a shots/swipe_probe.txt; fi
+            if grep -q 'SWIPE_CREATED' shots/swipe_probe_ball_logcat.txt; then echo "BALL_DRAG_TAB_SWITCH=yes_BUG" | tee -a shots/swipe_probe.txt; else echo "BALL_DRAG_TAB_SWITCH=no" | tee -a shots/swipe_probe.txt; fi
+            adb logcat -c
+            adb shell input swipe 800 1200 250 1200 350
+            sleep 2
+            adb exec-out screencap -p > shots/11_tab_swiped.png
+            adb logcat -d > shots/swipe_probe_tab_logcat.txt
+            if grep -q 'SWIPE_CREATED' shots/swipe_probe_tab_logcat.txt; then echo "TAB_SWIPE_WORKS=yes" | tee -a shots/swipe_probe.txt; else echo "TAB_SWIPE_WORKS=no" | tee -a shots/swipe_probe.txt; fi
+          fi
+          cat shots/swipe_probe.txt
+
           # Record pre-test persisted state (debug build allows run-as)
           adb shell "run-as com.example.glassproductivity sh -c 'ls -la shared_prefs'" > shots/prefs_before.txt 2>/dev/null || true
           adb shell "run-as com.example.glassproductivity sh -c 'cat shared_prefs/*.xml 2>/dev/null'" | md5sum > shots/prefs_before.md5 || true
