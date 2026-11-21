@@ -259,7 +259,7 @@ jobs:
         run: tail -100 /tmp/emulator.log || true
 
   signed-build-only:
-    if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.build_signed == 'true' }}
+    if: ${{ !contains(github.event.head_commit.message, '[no-signed]') && (github.event_name != 'workflow_dispatch' || github.event.inputs.build_signed == 'true') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
