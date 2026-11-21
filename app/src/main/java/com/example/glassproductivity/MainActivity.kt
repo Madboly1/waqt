@@ -108,7 +108,8 @@ class MainActivity : AppCompatActivity() {
     private var activitySwipeTracking = false
     private var activitySwipeDownX = 0f
     private var activitySwipeDownY = 0f
-    private val activitySwipeSlop by lazy { ViewConfiguration.get(this).scaledTouchSlop * 0.70f }
+    // Full system slop: 0.70 made tab steals trigger on small diagonal drags (incl. floating-ball drags).
+    private val activitySwipeSlop by lazy { ViewConfiguration.get(this).scaledTouchSlop * 1.0f }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
         touchTrace(ev, "ACTIVITY_DISPATCH")
@@ -127,7 +128,8 @@ class MainActivity : AppCompatActivity() {
                     val insideHost = localX >= 0f && localY >= 0f &&
                         localX < tabContentHost.width && localY < tabContentHost.height
                     if (insideHost) {
-                        activitySwipeEligible = !isPrimaryTabSwipeExcluded(tabContentHost, localX, localY)
+                        activitySwipeEligible = !isFloatingOverlayTouch(ev.rawX, ev.rawY) &&
+                            !isPrimaryTabSwipeExcluded(tabContentHost, localX, localY)
                         activitySwipeDownX = ev.rawX
                         activitySwipeDownY = ev.rawY
                         Log.d("WAQT_TOUCH_TRACE", "ACTIVITY_SWIPE_DOWN eligible=" + activitySwipeEligible +
@@ -143,7 +145,7 @@ class MainActivity : AppCompatActivity() {
                 if (activitySwipeEligible) {
                     val dx = ev.rawX - activitySwipeDownX
                     val dy = ev.rawY - activitySwipeDownY
-                    if (abs(dx) > activitySwipeSlop && abs(dx) > abs(dy) * 1.05f) {
+                    if (abs(dx) > activitySwipeSlop && abs(dx) > abs(dy) * 1.4f) {
                         val cancel = MotionEvent.obtain(ev).apply { action = MotionEvent.ACTION_CANCEL }
                         super.dispatchTouchEvent(cancel)
                         cancel.recycle()
@@ -178,6 +180,16 @@ class MainActivity : AppCompatActivity() {
         val handled = super.dispatchTouchEvent(ev)
         Log.d("WAQT_TOUCH_TRACE", "ACTIVITY_RESULT action=" + ev.actionMasked + " handled=" + handled)
         return handled
+    }
+
+    // Floating overlays (assistant ball) are root-level siblings above the tab
+    // content, so the host-rect test alone would claim their touches for tab swipes.
+    private fun isFloatingOverlayTouch(rawX: Float, rawY: Float): Boolean {
+        if (!::floatingAIChatBubble.isInitialized || !floatingAIChatBubble.isShown) return false
+        val loc = IntArray(2)
+        floatingAIChatBubble.getLocationOnScreen(loc)
+        return rawX >= loc[0] && rawY >= loc[1] &&
+            rawX < loc[0] + floatingAIChatBubble.width && rawY < loc[1] + floatingAIChatBubble.height
     }
 
     private fun describeTabSwipeCandidate(container: ViewGroup, x: Float, y: Float): String {
@@ -856,8 +868,8 @@ class MainActivity : AppCompatActivity() {
                         }
                         val dx = event.x - downX
                         val dy = event.y - downY
-                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 0.70f &&
-                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.05f) {
+                        if (!tracking && kotlin.math.abs(dx) > touchSlop * 1.0f &&
+                            kotlin.math.abs(dx) > kotlin.math.abs(dy) * 1.4f) {
                             Log.d("WAQT_TOUCH_TRACE", "HOST_INTERCEPT dx=" + dx + " dy=" + dy + " tab=" + currentTab)
                             tracking = true
                             beginInteractiveTabSwipe(dx)
