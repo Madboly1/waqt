@@ -852,9 +852,13 @@ object AlarmScheduler {
             set(Calendar.MILLISECOND, 0)
         }
 
-        // Habit day IDs are stored in Saturday-first order: Sat=1, Sun=2, ... Fri=7.
-        // Find the next enabled day instead of blindly scheduling tomorrow.
-        if (forceTomorrow || calendar.timeInMillis <= nowMillis) {
+        // Tasks carrying a future due date must ring on that date, not today/tomorrow
+        // (the scheduler previously ignored dueDateEpochDay for non-habits).
+        if (!item.isHabit && item.dueDateEpochDay > currentEpochDay()) {
+            calendar.add(Calendar.DAY_OF_YEAR, (item.dueDateEpochDay - currentEpochDay()).toInt())
+        } else if (forceTomorrow || calendar.timeInMillis <= nowMillis) {
+            // Habit day IDs are stored in Saturday-first order: Sat=1, Sun=2, ... Fri=7.
+            // Find the next enabled day instead of blindly scheduling tomorrow.
             calendar.add(Calendar.DAY_OF_YEAR, 1)
         }
         if (item.isHabit) {
