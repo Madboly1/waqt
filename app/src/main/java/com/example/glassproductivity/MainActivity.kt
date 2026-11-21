@@ -7440,13 +7440,25 @@ class MainActivity : AppCompatActivity() {
                     return@launch
                 }
                 val email = googleAccountManager.current(this@MainActivity)?.email
-                val zip = withContext(Dispatchers.IO) { WaqtCloudBackup.build(this@MainActivity, email) }
+                val built = withContext(Dispatchers.IO) { WaqtCloudBackup.buildWithReport(this@MainActivity, email) }
+                val zip = built.zipBytes
                 val stamp = java.text.SimpleDateFormat("yyyy-MM-dd-HHmmss", java.util.Locale.US).apply {
                     timeZone = java.util.TimeZone.getTimeZone("UTC")
                 }.format(java.util.Date())
                 val name = "waqt-backup-$stamp.zip"
                 driveBackupManager.uploadBackup(token, name, zip)
-                toastShort(if (isArabic) "اتحفظت نسخة جديدة في درايف: $name" else "New backup saved to Drive: $name")
+                val skipped = built.report.skippedExternalMedia
+                if (skipped > 0) {
+                    android.app.AlertDialog.Builder(this@MainActivity)
+                        .setTitle(if (isArabic) "اتحفظت النسخة، مع تنبيه" else "Backup saved, with a warning")
+                        .setMessage(if (isArabic)
+                            "اتحفظت النسخة $name في درايف، لكن $skipped ملف ميديا مرتبط بمعرض الصور ما اتضافش لأن الوصول ليه مش متاح. باقي بياناتك اتحفظت كاملة."
+                            else "Backup $name was saved to Drive, but $skipped gallery media item(s) could not be included because they are not accessible. Everything else was saved.")
+                        .setPositiveButton(if (isArabic) "تمام" else "OK", null)
+                        .show()
+                } else {
+                    toastShort(if (isArabic) "اتحفظت نسخة جديدة في درايف: $name" else "New backup saved to Drive: $name")
+                }
             } catch (e: DriveBackupException) {
                 toastShort(if (isArabic) "تعذر النسخ الاحتياطي، حاول تاني" else "Backup failed, try again")
             } catch (e: Exception) {
@@ -7515,7 +7527,7 @@ class MainActivity : AppCompatActivity() {
 
     private suspend fun performRestore(zip: ByteArray) {
         try {
-            withContext(Dispatchers.IO) {
+            val restoreReport = withContext(Dispatchers.IO) {
                 // Local safety snapshot first, pruned to the last 5.
                 val snapshotsDir = java.io.File(filesDir, "restore_snapshots").apply { mkdirs() }
                 val stamp = System.currentTimeMillis()
@@ -7528,7 +7540,18 @@ class MainActivity : AppCompatActivity() {
                     ?.forEach { it.delete() }
                 WaqtCloudBackup.restore(this@MainActivity, zip)
             }
-            toastShort(if (isArabic) "تمت الاستعادة بنجاح. بياناتك السابقة محفوظة محليًا كنسخة أمان." else "Restore complete. Your previous data was kept as a local safety snapshot.")
+            val missing = restoreReport.missingTotal
+            if (missing > 0) {
+                android.app.AlertDialog.Builder(this@MainActivity)
+                    .setTitle(if (isArabic) "تمت الاستعادة، مع عناصر ناقصة" else "Restore finished, with missing items")
+                    .setMessage(if (isArabic)
+                        "اتاستعادت بياناتك، لكن في $missing عنصر ميديا ناقص: إما ماكانش متاح وقت النسخة الأصلية أو تعذر استرجاعه دلوقتي. بياناتك السابقة محفوظة محليًا كنسخة أمان."
+                        else "Your data was restored, but $missing media item(s) are missing: they were either unavailable when the backup was made or could not be restored now. Your previous data was kept as a local safety snapshot.")
+                    .setPositiveButton(if (isArabic) "تمام" else "OK", null)
+                    .show()
+            } else {
+                toastShort(if (isArabic) "تمت الاستعادة بنجاح. بياناتك السابقة محفوظة محليًا كنسخة أمان." else "Restore complete. Your previous data was kept as a local safety snapshot.")
+            }
             renderCurrentTab()
         } catch (e: WaqtCloudBackup.RestoreException) {
             toastShort(e.message ?: "Invalid backup")
