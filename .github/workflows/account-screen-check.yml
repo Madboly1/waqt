@@ -110,7 +110,7 @@ jobs:
               if not bm:
                   continue
               val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
-              if target in val:
+              if target.lower() in val.lower():
                   x = (int(bm.group(1)) + int(bm.group(3))) // 2
                   y = (int(bm.group(2)) + int(bm.group(4))) // 2
                   score = 10 if (cm and cm.group(1) == 'true') else 0
@@ -493,7 +493,7 @@ jobs:
               if not bm:
                   continue
               val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
-              if target in val:
+              if target.lower() in val.lower():
                   x = (int(bm.group(1)) + int(bm.group(3))) // 2
                   y = (int(bm.group(2)) + int(bm.group(4))) // 2
                   score = 10 if (cm and cm.group(1) == 'true') else 0
@@ -617,7 +617,7 @@ jobs:
               if not bm:
                   continue
               val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
-              if target in val:
+              if target.lower() in val.lower():
                   x = (int(bm.group(1)) + int(bm.group(3))) // 2
                   y = (int(bm.group(2)) + int(bm.group(4))) // 2
                   score = 10 if (cm and cm.group(1) == 'true') else 0
