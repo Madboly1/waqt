@@ -878,3 +878,18 @@ jobs:
         with:
           name: waqt-signed-release-no-ota
           path: app/build/outputs/apk/release/app-release.apk
+      - name: Push signed APK to evidence branch
+        if: success()
+        run: |
+          set -e
+          BR="apk-evidence-r${{ github.run_id }}"
+          mkdir -p /tmp/apkev
+          cp app/build/outputs/apk/release/app-release.apk "/tmp/apkev/waqt-test-${GITHUB_SHA::7}-signed.apk"
+          cd /tmp/apkev
+          git init -b "$BR" .
+          git config user.email "ci@waqt.local"
+          git config user.name "waqt-account-ci"
+          git add .
+          git commit -m "Signed test APK for run ${{ github.run_id }} (head ${{ github.sha }})"
+          PUSH_URL="https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+          git push "$PUSH_URL" "$BR:$BR"
