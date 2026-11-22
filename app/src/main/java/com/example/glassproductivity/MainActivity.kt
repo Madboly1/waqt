@@ -579,6 +579,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installCrashReporter()
         super.onCreate(savedInstanceState)
+        if (StartupRecovery.enterIfRecorded(this)) return
         audioManager = getSystemService(Context.AUDIO_SERVICE) as? AudioManager
         loadSavedPreferences()
         applySystemBarTheme()
@@ -668,12 +669,14 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        if (StartupRecovery.isActive(this)) return
         val filter = IntentFilter(FloatingCardService.ACTION_DATA_UPDATED)
         ContextCompat.registerReceiver(this, dataUpdateReceiver, filter, ContextCompat.RECEIVER_NOT_EXPORTED)
     }
 
     override fun onResume() {
         super.onResume()
+        if (StartupRecovery.isActive(this)) return
         syncActiveFocusTimerFromStorage()
         renderCurrentTab()
         onboardingRefresh?.invoke()
