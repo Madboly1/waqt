@@ -580,7 +580,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installCrashReporter()
         super.onCreate(savedInstanceState)
-        if (StartupRecovery.enterIfRecorded(this)) return
+        // Diagnostic startup is explicit opt-in, never a trap for an old crash record.
+        if (intent?.getBooleanExtra("waqt_startup_diagnostic", false) == true &&
+            StartupRecovery.enterIfRecorded(this)) return
         audioManager = getSystemService(Context.AUDIO_SERVICE) as? AudioManager
         loadSavedPreferences()
         applySystemBarTheme()
