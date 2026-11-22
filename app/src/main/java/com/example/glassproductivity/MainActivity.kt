@@ -560,6 +560,7 @@ class MainActivity : AppCompatActivity() {
                 .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, -1)
                 .putInt("focus_selected_track_position", focusSelectedTrackPosition)
                 .apply()
+            android.util.Log.i("WAQT_AUDIO_TRACE", "PICKED name=$name count=${focusCustomAudioTracks.size} uri=$uri")
             Toast.makeText(this, if (isArabic) "🎵 تمت إضافة: $name" else "🎵 Added: $name", Toast.LENGTH_SHORT).show()
             if (isPickingAudioFromConsole) selectFocusAudioTrack(focusSelectedTrackPosition, true)
             isPickingAudioFromConsole = false
@@ -8688,6 +8689,7 @@ class MainActivity : AppCompatActivity() {
         try {
             stopCustomAudio()
             customAudioPlayer = MediaPlayer().apply {
+                android.util.Log.i("WAQT_AUDIO_TRACE", "PLAY_CUSTOM name=$customAudioName uri=$uri")
                 setDataSource(this@MainActivity, uri)
                 isLooping = true
                 setVolume(ambientVolume, ambientVolume)
