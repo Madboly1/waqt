@@ -1,0 +1,1431 @@
+--------- beginning of main
+11-22 08:07:02.451  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=423.0 y=2078.0 rawX=423.0 rawY=2078.0 tab=0 
+11-22 08:07:02.451  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=true local=423.0,1733.0 host=1080x1863
+11-22 08:07:02.452  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 08:07:02.452  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=423.0 y=2078.0 rawX=423.0 rawY=2078.0 tab=0 
+11-22 08:07:02.453  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 08:07:02.471   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(37)
+11-22 08:07:02.505   360   360 I android.hardware.vibrator-service.example: Vibrator on for timeoutMs: 35
+11-22 08:07:02.505   360  9264 I android.hardware.vibrator-service.example: Starting on on another thread
+11-22 08:07:02.505   360   360 I android.hardware.vibrator-service.example: Vibrator set amplitude: 0.11
+11-22 08:07:02.528  9226  9226 D CompatibilityChangeReporter: Compat change id reported: 171228096; UID 10145; state: ENABLED
+11-22 08:07:02.529  9226  9226 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=false grip=false children=1
+11-22 08:07:02.540   360  9264 I android.hardware.vibrator-service.example: Notifying on complete
+11-22 08:07:02.540   360   360 I android.hardware.vibrator-service.example: Vibrator off
+11-22 08:07:02.706  9226  9243 D EGL_emulation: app_time_stats: avg=3464.25ms min=613.73ms max=6314.77ms count=2
+11-22 08:07:02.803   326  9262 E android.hardware.audio@6.0-impl.ranchu: pcmWrite:203 pcm_write failed with  (-5)
+11-22 08:07:02.803   326  9262 E android.hardware.audio@6.0-impl.ranchu: device/generic/goldfish/audio/talsa.cpp:pcmWrite:204 failure: false
+11-22 08:07:03.855  8665  8723 I WorkerManager: dispose()
+11-22 08:07:03.855  8665  8723 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-22 08:07:05.498  9267  9267 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:05.500  9267  9267 I AndroidRuntime: Using default boot image
+11-22 08:07:05.500  9267  9267 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:05.501  9267  9267 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:05.539  9267  9267 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:05.539  9267  9267 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:05.543  9267  9267 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:05.543  9267  9267 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:05.551  9267  9267 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:05.555  9267  9281 V UiAutomation: Init UiAutomation@f1e268[id=82, flags=0]
+--------- beginning of system
+11-22 08:07:05.560   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:05.561  8665  8691 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:05.561  8665  8691 I A       : Nga state changed to DISABLED
+11-22 08:07:05.569  1447  7447 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:05.571  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:05.571  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:05.571  1447  2066 I A       : Disconnected
+11-22 08:07:06.581  9267  9267 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2450c; boundsInParent: Rect(0, 0 - 894, 115); boundsInScreen: Rect(93, 2243 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:06.581  9267  9267 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@26a96; boundsInParent: Rect(0, 0 - 894, 93); boundsInScreen: Rect(93, 2358 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.TextView; text: الهدف اليومي: 0 / 120 دقيقة  (0%); error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:06.581  9267  9267 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@26e57; boundsInParent: Rect(0, 0 - 894, 27); boundsInScreen: Rect(93, 2451 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:06.581  9267  9267 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2799a; boundsInParent: Rect(0, 0 - 982, 74); boundsInScreen: Rect(49, 2549 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.TextView; text: 🎧 مشغل الأصوات; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:06.581  9267  9267 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@27d5b; boundsInParent: Rect(0, 0 - 982, 643); boundsInScreen: Rect(49, 2623 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:06.581  9267  9267 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2a2e5; boundsInParent: Rect(0, 0 - 982, 470); boundsInScreen: Rect(49, 3321 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:06.588  9267  9267 W AccessibilityNodeInfoDumper: Fetch time: 19ms
+11-22 08:07:06.589   518   553 D CompatibilityChangeReporter: Compat change id reported: 158002302; UID 10145; state: ENABLED
+11-22 08:07:06.593   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:06.595  9267  9267 D AndroidRuntime: Shutting down VM
+11-22 08:07:06.595  8665  8691 I A       : NGA enabled in interactor.
+11-22 08:07:06.596  8665  8691 I A       : Nga state changed to ENABLED
+11-22 08:07:06.596  1447  7447 I A       : Initializing all components
+11-22 08:07:06.596  1447  7447 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:06.597  1447  2066 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2067 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.597  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2067 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:06.598  1447  2066 I A       : Setting session to type: NO_SESSION
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:06.598  1447  2066 I A       : onDisabled. Registered: false
+11-22 08:07:06.605  1447  2067 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:06.605  1447  2067 I A       : on opa visibility changed false
+11-22 08:07:06.605  1447  2067 I A       : on opa visibility changed false
+11-22 08:07:06.605   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:06.605   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:06.605   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:06.610  1447  2067 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:06.610  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:06.610  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:06.611  1447  2066 I A       : Disconnected
+11-22 08:07:06.612  1447  2066 I A       : Successfully initialized all components
+11-22 08:07:06.615   518  2252 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10101; state: DISABLED
+11-22 08:07:06.617  8665  8665 I A       : Creating pss binder().
+11-22 08:07:06.617  1447  2067 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:06.617  1447  2067 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:06.618  8665  8983 I A       : Calling beginBinderSession().
+11-22 08:07:06.618  8665  8983 I A       : beginBinderSession(): calling binder
+11-22 08:07:06.618  1447  2067 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(SourceFile:6)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(SourceFile:4)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(SourceFile:4)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(SourceFile:14)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.y.<init>(SourceFile:8)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.yy.a(SourceFile:48)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at dagger.a.e.a(SourceFile:1)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.yz.a(Unknown Source:2)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:44)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 08:07:06.631  8665  8699 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:920)
+11-22 08:07:06.633   518   546 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10102; state: DISABLED
+11-22 08:07:06.635  8665  8723 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 08:07:06.638  1447  2066 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:06.638   518  1796 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:06.638  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.638  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.639  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.639  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.639  8665  8993 I PBSessionCacheImpl: Deleted sessionId[38110868353460668] from persistence.
+11-22 08:07:06.639  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 42] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.640  8665  8686 W LocationOracle: No location history returned by ContextManager
+11-22 08:07:06.642  8862  8905 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-22 08:07:06.644  8665  8694 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 08:07:06.644  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 67] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.644  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:06.646  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:06.648  8665  8723 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 08:07:06.650  8862  8894 I Icing   : Using regular flags by method 2
+11-22 08:07:06.652  8862  8905 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-22 08:07:06.653  8862  8894 I Icing   : Usage reports ok 1, Failed Usage reports 0, indexed 0, rejected 0
+11-22 08:07:06.655  8862  8894 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 08:07:09.460   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f4000000 0x3f49a4000]
+11-22 08:07:09.481   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 08:07:09.482  9287  9288 I Gralloc4: mapper 4.x is not supported
+11-22 08:07:09.487  9287  9288 D HostConnection: createUnique: call
+11-22 08:07:09.487  9287  9288 D HostConnection: HostConnection::get() New Host Connection established 0x7f0bd6fef350, tid 9288
+11-22 08:07:09.488  9287  9288 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 08:07:09.488  9287  9288 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 08:07:09.498  9287  9288 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:09.747  9289  9289 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:09.749  9289  9289 I AndroidRuntime: Using default boot image
+11-22 08:07:09.749  9289  9289 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:09.751  9289  9289 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:09.790  9289  9289 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:09.790  9289  9289 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:09.794  9289  9289 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:09.794  9289  9289 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:09.802  9289  9289 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:09.807   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:09.814  9289  9303 V UiAutomation: Init UiAutomation@b7c4c0c[id=83, flags=0]
+11-22 08:07:09.816  8665  8691 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:09.816  8665  8691 I A       : Nga state changed to DISABLED
+11-22 08:07:09.817  1447  8084 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:09.819  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:09.819  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:09.819  1447  2066 I A       : Disconnected
+11-22 08:07:10.837  9289  9289 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2451d; boundsInParent: Rect(0, 0 - 894, 115); boundsInScreen: Rect(93, 2243 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:10.837  9289  9289 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@26aa7; boundsInParent: Rect(0, 0 - 894, 93); boundsInScreen: Rect(93, 2358 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.TextView; text: الهدف اليومي: 0 / 120 دقيقة  (0%); error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:10.838  9289  9289 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@26e68; boundsInParent: Rect(0, 0 - 894, 27); boundsInScreen: Rect(93, 2451 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:10.838  9289  9289 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@279ab; boundsInParent: Rect(0, 0 - 982, 74); boundsInScreen: Rect(49, 2549 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.TextView; text: 🎧 مشغل الأصوات; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:10.839  9289  9289 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@27d6c; boundsInParent: Rect(0, 0 - 982, 643); boundsInScreen: Rect(49, 2623 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:10.839  9289  9289 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@2a2f6; boundsInParent: Rect(0, 0 - 982, 470); boundsInScreen: Rect(49, 3321 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:10.841  9289  9289 W AccessibilityNodeInfoDumper: Fetch time: 17ms
+11-22 08:07:10.843   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:10.844  9289  9289 D AndroidRuntime: Shutting down VM
+11-22 08:07:10.846  8665  8691 I A       : NGA enabled in interactor.
+11-22 08:07:10.846  8665  8691 I A       : Nga state changed to ENABLED
+11-22 08:07:10.847  1447  8084 I A       : Initializing all components
+11-22 08:07:10.847  1447  8084 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:10.848  1447  2067 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 I A       : Setting session to type: NO_SESSION
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:10.849  1447  2067 I A       : onDisabled. Registered: false
+11-22 08:07:10.849   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:10.849   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:10.849   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:10.849  1447  2067 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:10.849  1447  2067 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:10.850  1447  2066 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:10.853  8665  8665 I A       : Creating pss binder().
+11-22 08:07:10.853  1447  2066 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:10.853  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:10.853  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:10.853  1447  2066 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:10.853  1447  2066 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:10.854  8665  8678 I A       : Calling beginBinderSession().
+11-22 08:07:10.854  8665  8678 I A       : beginBinderSession(): calling binder
+11-22 08:07:10.854  1447  2066 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:10.855  1447  2067 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:10.855  1447  2067 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:10.855  1447  2067 I A       : Disconnected
+11-22 08:07:10.858   518  2252 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:10.859  1447  2066 I A       : Successfully initialized all components
+11-22 08:07:10.879  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:10.881  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:10.882  8665  8703 I PBSessionCacheImpl: Deleted sessionId[38110868353460671] from persistence.
+11-22 08:07:10.882  1447  2066 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:11.693  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=1039.0 y=1439.0 rawX=1039.0 rawY=1439.0 tab=2 
+11-22 08:07:11.693  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=1039.0,1094.0 host=1080x1863
+11-22 08:07:11.693  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=1039.0 y=1094.0 rawX=1039.0 rawY=1439.0 tab=2 
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=38x81,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- LinearLayout(id=-1,size=82x264,click=true,long=false,vis=0,tx=998.0,ty=962.50354,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 08:07:11.694  9226  9226 D WAQT_RAIL_TRACE: RAIL_DOWN targetIsDock=true isOpen=false slop=22 thr=49
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISALLOW requested=true tab=2
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=2
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=1039.0 y=1439.0 rawX=1039.0 rawY=1439.0 tab=2 
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=1039.0 y=1094.0 rawX=1039.0 rawY=1439.0 tab=2 
+11-22 08:07:11.694  9226  9226 D WAQT_RAIL_TRACE: RAIL_UP moved=false dragging=false isOpen=false
+11-22 08:07:11.694  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=2
+11-22 08:07:11.695  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 08:07:11.711  9226  9226 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=true grip=true children=8
+11-22 08:07:11.819  9226  9243 D EGL_emulation: app_time_stats: avg=1010.71ms min=79.21ms max=8246.12ms count=9
+11-22 08:07:14.748  9312  9312 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:14.750  9312  9312 I AndroidRuntime: Using default boot image
+11-22 08:07:14.750  9312  9312 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:14.751  9312  9312 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:14.787  9312  9312 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:14.788  9312  9312 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:14.791  9312  9312 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:14.792  9312  9312 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:14.800  9312  9312 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:14.803  9312  9326 V UiAutomation: Init UiAutomation@8a95019[id=84, flags=0]
+11-22 08:07:14.805  8665  8694 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:14.805  8665  8694 I A       : Nga state changed to DISABLED
+11-22 08:07:14.808  1447  3796 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:14.810  1447  2067 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:14.811  1447  2067 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:14.811  1447  2067 I A       : Disconnected
+11-22 08:07:14.813   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:15.678   351   351 E android.hardware.power.stats@1.0-service-mock: Failed to getEnergyData
+11-22 08:07:15.825  9312  9312 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@3482a; boundsInParent: Rect(0, 0 - 894, 115); boundsInScreen: Rect(93, 2243 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:15.825  9312  9312 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@36db4; boundsInParent: Rect(0, 0 - 894, 93); boundsInScreen: Rect(93, 2358 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.TextView; text: الهدف اليومي: 0 / 120 دقيقة  (0%); error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:15.825  9312  9312 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@37175; boundsInParent: Rect(0, 0 - 894, 27); boundsInScreen: Rect(93, 2451 - 987, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:15.826  9312  9312 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@37cb8; boundsInParent: Rect(0, 0 - 982, 74); boundsInScreen: Rect(49, 2549 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.TextView; text: 🎧 مشغل الأصوات; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_NEXT_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_PREVIOUS_AT_MOVEMENT_GRANULARITY - null, AccessibilityAction: ACTION_SET_SELECTION - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:15.827  9312  9312 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@38079; boundsInParent: Rect(0, 0 - 982, 643); boundsInScreen: Rect(49, 2623 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:15.827  9312  9312 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@3a603; boundsInParent: Rect(0, 0 - 982, 470); boundsInScreen: Rect(49, 3321 - 1031, 2208); packageName: com.example.glassproductivity; className: android.widget.LinearLayout; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: null; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:15.831  9312  9312 W AccessibilityNodeInfoDumper: Fetch time: 16ms
+11-22 08:07:15.836  8665  8695 I A       : NGA enabled in interactor.
+11-22 08:07:15.836  8665  8695 I A       : Nga state changed to ENABLED
+11-22 08:07:15.837  9312  9312 D AndroidRuntime: Shutting down VM
+11-22 08:07:15.840  1447  3796 I A       : Initializing all components
+11-22 08:07:15.840  1447  3796 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:15.845  1447  2067 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:15.845  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.845  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.846  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:15.846  1447  2066 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:15.846  1447  2066 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:15.847  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.847  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.847  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.847  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 I A       : Setting session to type: NO_SESSION
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:15.848  1447  2067 I A       : onDisabled. Registered: false
+11-22 08:07:15.854  1447  2066 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:15.854  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:15.854   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:15.855   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:15.855   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:15.855   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:15.855  1447  2067 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:15.856  1447  2067 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:15.856  1447  2067 I A       : Disconnected
+11-22 08:07:15.856  1447  2066 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:15.866  8665  8665 I A       : Creating pss binder().
+11-22 08:07:15.867  1447  2066 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:15.867  1447  2066 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:15.868  8665  8678 I A       : Calling beginBinderSession().
+11-22 08:07:15.872  8665  8678 I A       : beginBinderSession(): calling binder
+11-22 08:07:15.872  1447  2066 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:15.875  1447  2067 I A       : Successfully initialized all components
+11-22 08:07:15.876   518   733 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:15.883  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:15.884  8665  8703 I PBSessionCacheImpl: Deleted sessionId[38110868353460674] from persistence.
+11-22 08:07:15.885  1447  2067 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:15.885  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:16.724   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f49a4000 0x3f5348000]
+11-22 08:07:16.732   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 08:07:16.733  9331  9332 I Gralloc4: mapper 4.x is not supported
+11-22 08:07:16.739  9331  9332 D HostConnection: createUnique: call
+11-22 08:07:16.739  9331  9332 D HostConnection: HostConnection::get() New Host Connection established 0x7ff45ba20850, tid 9332
+11-22 08:07:16.740  9331  9332 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 08:07:16.740  9331  9332 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 08:07:16.750  9331  9332 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:16.994  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=997.0 y=1309.0 rawX=997.0 rawY=1309.0 tab=2 
+11-22 08:07:16.994  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=997.0,964.0 host=1080x1863
+11-22 08:07:16.994  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=997.0 y=964.0 rawX=997.0 rawY=1309.0 tab=2 
+11-22 08:07:16.995  9226  9226 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=115x115,click=true,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=11.0) <- LinearLayout(id=-1,size=165x1112,click=false,long=false,vis=0,tx=915.0,ty=344.72894,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 08:07:16.996  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=2
+11-22 08:07:16.996  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 08:07:16.996  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=997.0 y=1309.0 rawX=997.0 rawY=1309.0 tab=2 
+11-22 08:07:16.996  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=997.0 y=964.0 rawX=997.0 rawY=1309.0 tab=2 
+11-22 08:07:16.996  9226  9226 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=2
+11-22 08:07:16.996  9226  9226 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 08:07:17.008   360   360 I android.hardware.vibrator-service.example: Vibrator on for timeoutMs: 35
+11-22 08:07:17.008   360   360 I android.hardware.vibrator-service.example: Vibrator set amplitude: 0.11
+11-22 08:07:17.010   360  9339 I android.hardware.vibrator-service.example: Starting on on another thread
+11-22 08:07:17.011   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(41)
+11-22 08:07:17.046   360  9339 I android.hardware.vibrator-service.example: Notifying on complete
+11-22 08:07:17.050   360   360 I android.hardware.vibrator-service.example: Vibrator off
+11-22 08:07:17.082  9226  9243 D EGL_emulation: app_time_stats: avg=2631.53ms min=94.73ms max=5168.34ms count=2
+11-22 08:07:17.084   518   546 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10145; state: DISABLED
+11-22 08:07:17.108   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f5348000 0x3f5ab8000]
+11-22 08:07:17.121   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f5ab8000 0x3f6228000]
+11-22 08:07:17.142   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f4000000 0x3f4770000]
+11-22 08:07:17.596   326  9340 E android.hardware.audio@6.0-impl.ranchu: pcmWrite:203 pcm_write failed with  (-5)
+11-22 08:07:17.596   326  9340 E android.hardware.audio@6.0-impl.ranchu: device/generic/goldfish/audio/talsa.cpp:pcmWrite:204 failure: false
+11-22 08:07:17.605  9226  9226 I Choreographer: Skipped 30 frames!  The application may be doing too much work on its main thread.
+11-22 08:07:17.767  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3420 
+11-22 08:07:17.767  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():2002 
+11-22 08:07:17.805  1338  1338 I DeviceUnlockedTag: DeviceUnlockedTag.notifyDeviceLockStatusChanged():31 Notify device unlocked.
+11-22 08:07:18.818  9226  9243 D EGL_emulation: app_time_stats: avg=183.29ms min=66.17ms max=469.83ms count=7
+11-22 08:07:20.041   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f4770000 0x3f5114000]
+11-22 08:07:20.050   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 08:07:20.050  9345  9346 I Gralloc4: mapper 4.x is not supported
+11-22 08:07:20.057  9345  9346 D HostConnection: createUnique: call
+11-22 08:07:20.062  9345  9346 D HostConnection: HostConnection::get() New Host Connection established 0x7c61b3017010, tid 9346
+11-22 08:07:20.062  9345  9346 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 08:07:20.062  9345  9346 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 08:07:20.072  9345  9346 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:20.263  9347  9347 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:20.264  9347  9347 I AndroidRuntime: Using default boot image
+11-22 08:07:20.264  9347  9347 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:20.266  9347  9347 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:20.304  9347  9347 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:20.304  9347  9347 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:20.308  9347  9347 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:20.309  9347  9347 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:20.316  9347  9347 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:20.320   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:20.321  8665  8695 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:20.321  8665  8695 I A       : Nga state changed to DISABLED
+11-22 08:07:20.323  1447  5662 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:20.324  9347  9361 V UiAutomation: Init UiAutomation@878ee8f[id=85, flags=0]
+11-22 08:07:20.329  1447  2067 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:20.329  1447  2067 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:20.329  1447  2067 I A       : Disconnected
+11-22 08:07:21.328  9347  9347 W AccessibilityNodeInfoDumper: Fetch time: 4ms
+11-22 08:07:21.330   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:21.332  9347  9347 D AndroidRuntime: Shutting down VM
+11-22 08:07:21.335  8665  8686 I A       : NGA enabled in interactor.
+11-22 08:07:21.335  8665  8686 I A       : Nga state changed to ENABLED
+11-22 08:07:21.336  1447  3796 I A       : Initializing all components
+11-22 08:07:21.336  1447  3796 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:21.336  1447  2066 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2067 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:21.336  1447  2067 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.336  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 I A       : Setting session to type: NO_SESSION
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:21.337  1447  2066 I A       : onDisabled. Registered: false
+11-22 08:07:21.340  1447  2067 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:21.340  1447  2067 I A       : on opa visibility changed false
+11-22 08:07:21.340  1447  2067 I A       : on opa visibility changed false
+11-22 08:07:21.345  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:21.345  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:21.345  1447  2066 I A       : Disconnected
+11-22 08:07:21.345  1447  2066 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:21.348  8665  8665 I A       : Creating pss binder().
+11-22 08:07:21.351   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:21.351   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:21.351   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:21.356  1447  2066 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:21.356  1447  2066 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:21.356  8665  8678 I A       : Calling beginBinderSession().
+11-22 08:07:21.356  8665  8678 I A       : beginBinderSession(): calling binder
+11-22 08:07:21.357  1447  2066 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:21.367  1447  2067 I A       : Successfully initialized all components
+11-22 08:07:21.372   518  1018 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:21.388  8665  8691 W LocationOracle: No location history returned by ContextManager
+11-22 08:07:21.395  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:21.395  8665  8703 I PBSessionCacheImpl: Deleted sessionId[38110868353460677] from persistence.
+11-22 08:07:21.397  8665  8686 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 08:07:21.399  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:21.401  1447  2066 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:21.708  8862  8862 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 08:07:22.215   518  2251 I ActivityTaskManager: START u0 {act=android.intent.action.OPEN_DOCUMENT typ=*/* cmp=com.google.android.documentsui/com.android.documentsui.picker.PickActivity (has extras)} from uid 10145
+11-22 08:07:22.220   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(30)
+11-22 08:07:22.323   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(11)
+11-22 08:07:22.440  9226  9243 D EGL_emulation: app_time_stats: avg=720.31ms min=70.04ms max=3165.64ms count=5
+11-22 08:07:22.442  9226  9243 D OpenGLRenderer: endAllActiveAnimators on 0x7344edef0c30 (RippleDrawable) with handle 0x7343fde7b630
+11-22 08:07:22.444   518   546 W InputManager-JNI: Input channel object 'f8230b7 com.example.glassproductivity/com.example.glassproductivity.MainActivity (client)' was disposed without first being removed with the input manager!
+11-22 08:07:22.448   518  2251 W ActivityTaskManager: Tried to set launchTime (0) < mLastActivityLaunchTime (649703)
+11-22 08:07:22.466  8315  8315 D PickActivity: Created new state object: State{action=3, acceptMimes=[audio/*], allowMultiple=false, localOnly=false, stack=DocumentStack{root=null, docStack=[], stackTouched=false}, dirConfigs={}, excludedAuthorities=[], openableOnly=false, restrictScopeStorage=true, sortModel=SortModel{dimensions={16908304=SortDimension{id=16908304, labelId=2131755247, dataType=0, sortCapability=0, defaultSortDirection=1, sortDirection=0, visibility=4}, 16908310=SortDimension{id=16908310, labelId=2131755241, dataType=0, sortCapability=3, defaultSortDirection=1, sortDirection=0, visibility=0}, 2131296377=SortDimension{id=2131296377, labelId=2131755234, dataType=1, sortCapability=3, defaultSortDirection=2, sortDirection=0, visibility=0}, 2131296425=SortDimension{id=2131296425, labelId=2131755238, dataType=0, sortCapability=3, defaultSortDirection=1, sortDirection=0, visibility=0}, 2131296571=SortDimension{id=2131296571, labelId=2131755244, dataType=1, sortCapability=3, defaultSortDirection=1, sortDirection=0, visibility=0}}, defaultDimensionId=0, sortedDimension=null}}
+11-22 08:07:22.466  8315  8315 D DrawerController: Calculated drawer width:280.0
+11-22 08:07:22.471  8315  8315 D PickerActionHandler: Load last accessed stack.
+11-22 08:07:22.472  8315  8315 D PickerActionHandler: Attempting to load last used stack for calling package.
+11-22 08:07:22.473  8315  8315 D ProvidersAccess: Matched roots: [Root{userId=0, authority=null, rootId=null, title=Recent, isUsb=false, isSd=false, isMtp=false} @ content:/root/null, Root{userId=0, authority=com.android.providers.media.documents, rootId=audio_root, title=Audio, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.media.documents/root/audio_root, Root{userId=0, authority=com.android.providers.downloads.documents, rootId=downloads, title=Downloads, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.downloads.documents/root/downloads, Root{userId=0, authority=com.android.externalstorage.documents, rootId=primary, title=sdk_gphone64_x86_64, isUsb=false, isSd=false, isMtp=false} @ content://com.android.externalstorage.documents/root/primary]
+11-22 08:07:22.473  8315  8315 D DocumentStack: Root changed to: Root{userId=0, authority=null, rootId=null, title=Recent, isUsb=false, isSd=false, isMtp=false} @ content:/root/null
+11-22 08:07:22.473  8315  8315 D DocumentStack: Adding doc to stack: DocumentInfo{docId=null, userId=0, name=null, mimeType=null, isContainer=false, isDirectory=false, isArchive=false, isInArchive=false, isPartial=false, isVirtual=false, isDeleteSupported=false, isCreateSupported=false, isMoveSupported=false, isRenameSupported=false, isMetadataSupported=false, isBlockedFromTree=false} @ content:/document/null
+11-22 08:07:22.474  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:22.474  8315  8315 D DirectoryFragment: Creating new fragment null directory
+11-22 08:07:22.478  8315  8315 W SelectionTracker: Setting gestureTooltypes is likely to result in unexpected behavior.
+11-22 08:07:22.479  8315  8315 D AbstractActionHandler: Creating new loader recents.
+11-22 08:07:22.480  8315  8631 W RefreshTask: Failed to refresh
+11-22 08:07:22.480  8315  8631 W RefreshTask: java.lang.NullPointerException: name
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at java.util.Objects.requireNonNull(Objects.java:245)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at android.content.ContentResolver.acquireUnstableContentProviderClient(ContentResolver.java:2629)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at com.android.documentsui.DocumentsApplication.acquireUnstableProviderOrThrow(DocumentsApplication.java:85)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at com.android.documentsui.RefreshTask.run(RefreshTask.java:108)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at com.android.documentsui.RefreshTask.run(RefreshTask.java:43)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at com.android.documentsui.base.CheckedTask.doInBackground(CheckedTask.java:65)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at android.os.AsyncTask$3.call(AsyncTask.java:394)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 08:07:22.480  8315  8631 W RefreshTask: 	at com.android.documentsui.ProviderExecutor.run(ProviderExecutor.java:104)
+11-22 08:07:22.481  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:22.484  8315  8315 V RefreshTask: Provider does not support refresh and did not refresh
+11-22 08:07:22.485  8315  9373 D ProvidersAccess: Matched roots: [Root{userId=0, authority=null, rootId=null, title=Recent, isUsb=false, isSd=false, isMtp=false} @ content:/root/null, Root{userId=0, authority=com.android.providers.media.documents, rootId=audio_root, title=Audio, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.media.documents/root/audio_root, Root{userId=0, authority=com.android.providers.downloads.documents, rootId=downloads, title=Downloads, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.downloads.documents/root/downloads, Root{userId=0, authority=com.android.externalstorage.documents, rootId=primary, title=sdk_gphone64_x86_64, isUsb=false, isSd=false, isMtp=false} @ content://com.android.externalstorage.documents/root/primary]
+11-22 08:07:22.494   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f4770000 0x3f5114000]
+11-22 08:07:22.508   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3fb2f8000 0x3fbc9c000]
+11-22 08:07:22.509   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f9023000 0x3f99c7000]
+11-22 08:07:22.567  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:22.570   326  9369 E android.hardware.audio@6.0-impl.ranchu: pcmWrite:203 pcm_write failed with  (-5)
+11-22 08:07:22.572   326  9369 E android.hardware.audio@6.0-impl.ranchu: device/generic/goldfish/audio/talsa.cpp:pcmWrite:204 failure: false
+11-22 08:07:22.573  8315  9377 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-22 08:07:22.627  8315  8332 D ProvidersAccess: Matched roots: [Root{userId=0, authority=null, rootId=null, title=Recent, isUsb=false, isSd=false, isMtp=false} @ content:/root/null, Root{userId=0, authority=com.android.providers.media.documents, rootId=audio_root, title=Audio, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.media.documents/root/audio_root, Root{userId=0, authority=com.android.providers.downloads.documents, rootId=downloads, title=Downloads, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.downloads.documents/root/downloads, Root{userId=0, authority=com.android.externalstorage.documents, rootId=primary, title=sdk_gphone64_x86_64, isUsb=false, isSd=false, isMtp=false} @ content://com.android.externalstorage.documents/root/primary]
+11-22 08:07:22.639  8315  8332 D MultiRootDocsLoader: Found 1 of 1 queries done
+11-22 08:07:22.645  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:22.675   518   549 I ActivityTaskManager: Displayed com.google.android.documentsui/com.android.documentsui.picker.PickActivity: +453ms
+11-22 08:07:22.738  8315  8332 D ProvidersAccess: Matched roots: [Root{userId=0, authority=null, rootId=null, title=Recent, isUsb=false, isSd=false, isMtp=false} @ content:/root/null, Root{userId=0, authority=com.android.providers.media.documents, rootId=audio_root, title=Audio, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.media.documents/root/audio_root, Root{userId=0, authority=com.android.providers.downloads.documents, rootId=downloads, title=Downloads, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.downloads.documents/root/downloads, Root{userId=0, authority=com.android.externalstorage.documents, rootId=primary, title=sdk_gphone64_x86_64, isUsb=false, isSd=false, isMtp=false} @ content://com.android.externalstorage.documents/root/primary]
+11-22 08:07:22.739  8315  8315 D AbstractActionHandler: Loader has finished for: content:/document/null
+11-22 08:07:22.739  8315  8315 I Model   : Updating model with new result set.
+11-22 08:07:22.740  8315  8315 D DirectoryFragment: Received model update. Loading=false
+11-22 08:07:22.740  8315  8315 D DefaultSelectionTracker: Ignoring onDataSetChange. No active selection.
+11-22 08:07:22.753   752   877 D EGL_emulation: app_time_stats: avg=22742.39ms min=22742.39ms max=22742.39ms count=1
+11-22 08:07:22.759   752   877 D EGL_emulation: app_time_stats: avg=4356.64ms min=6.78ms max=25985.67ms count=6
+11-22 08:07:22.873  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:22.906  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3420 
+11-22 08:07:22.906  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():2002 
+11-22 08:07:22.921  1338  1338 I DeviceUnlockedTag: DeviceUnlockedTag.notifyDeviceLockStatusChanged():31 Notify device unlocked.
+11-22 08:07:23.085   518   679 D CompatibilityChangeReporter: Compat change id reported: 171306433; UID 10145; state: ENABLED
+11-22 08:07:25.941   752   877 D EGL_emulation: app_time_stats: avg=796.78ms min=43.98ms max=2933.14ms count=4
+11-22 08:07:26.241  9383  9383 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:26.243  9383  9383 I AndroidRuntime: Using default boot image
+11-22 08:07:26.243  9383  9383 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:26.244  9383  9383 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:26.282  9383  9383 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:26.282  9383  9383 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:26.286  9383  9383 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:26.286  9383  9383 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:26.294  9383  9383 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:26.298   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:26.299  8665  8686 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:26.299  8665  8686 I A       : Nga state changed to DISABLED
+11-22 08:07:26.300  9383  9397 V UiAutomation: Init UiAutomation@8488d05[id=86, flags=0]
+11-22 08:07:26.300  1447  5662 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:26.301  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:26.301  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:26.301  1447  2066 I A       : Disconnected
+11-22 08:07:27.302  9383  9383 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@6dfee; boundsInParent: Rect(0, 0 - 1080, 0); boundsInScreen: Rect(0, 277 - 1080, 277); packageName: com.google.android.documentsui; className: androidx.recyclerview.widget.RecyclerView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: com.google.android.documentsui:id/horizontal_breadcrumb; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: true; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:27.303  9383  9383 W AccessibilityNodeInfoDumper: Fetch time: 3ms
+11-22 08:07:27.305   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:27.306  8665  8686 I A       : NGA enabled in interactor.
+11-22 08:07:27.307  8665  8686 I A       : Nga state changed to ENABLED
+11-22 08:07:27.308  9383  9383 D AndroidRuntime: Shutting down VM
+11-22 08:07:27.309  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:27.311  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:27.312  1447  5662 I A       : Initializing all components
+11-22 08:07:27.312  1447  5662 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:27.312  1447  2066 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 I A       : Setting session to type: NO_SESSION
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:27.312  1447  2066 I A       : onDisabled. Registered: false
+11-22 08:07:27.312  1447  2067 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:27.313  1447  2067 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:27.313   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:27.313   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:27.313   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:27.313  1447  2067 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:27.315  8665  8665 I A       : Creating pss binder().
+11-22 08:07:27.315  1447  2067 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:27.315  1447  2067 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:27.315  8665  8983 I A       : Calling beginBinderSession().
+11-22 08:07:27.315  8665  8983 I A       : beginBinderSession(): calling binder
+11-22 08:07:27.317  1447  2067 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:27.317  1447  2067 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:27.318  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:27.318  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:27.318  1447  2066 I A       : Disconnected
+11-22 08:07:27.319   518  1844 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:27.321  8665  8695 W LocationOracle: No location history returned by ContextManager
+11-22 08:07:27.321  1447  2067 I A       : Successfully initialized all components
+11-22 08:07:27.321  8665  8691 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 08:07:27.325  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:27.326  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:27.332  8665  8993 I PBSessionCacheImpl: Deleted sessionId[38110868353460680] from persistence.
+11-22 08:07:27.335  1447  2066 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:28.178   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(22)
+11-22 08:07:28.180  8315  8353 D EGL_emulation: app_time_stats: avg=690.79ms min=22.28ms max=4963.58ms count=8
+11-22 08:07:28.199  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3420 
+11-22 08:07:28.199  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():2002 
+11-22 08:07:28.199  1338  1338 I DeviceUnlockedTag: DeviceUnlockedTag.notifyDeviceLockStatusChanged():31 Notify device unlocked.
+11-22 08:07:28.682  8315  9408 I ProvidersCache: Provider returned no roots. Possibly naughty: com.google.android.apps.docs.storage
+11-22 08:07:28.730  8315  8332 D ProvidersAccess: Matched roots: [Root{userId=0, authority=null, rootId=null, title=Recent, isUsb=false, isSd=false, isMtp=false} @ content:/root/null, Root{userId=0, authority=com.android.providers.media.documents, rootId=audio_root, title=Audio, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.media.documents/root/audio_root, Root{userId=0, authority=com.android.providers.downloads.documents, rootId=downloads, title=Downloads, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.downloads.documents/root/downloads, Root{userId=0, authority=com.android.externalstorage.documents, rootId=primary, title=sdk_gphone64_x86_64, isUsb=false, isSd=false, isMtp=false} @ content://com.android.externalstorage.documents/root/primary]
+11-22 08:07:28.732  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:29.814  8315  8353 D EGL_emulation: app_time_stats: avg=64.33ms min=8.51ms max=891.67ms count=23
+11-22 08:07:30.212  9411  9411 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:30.214  9411  9411 I AndroidRuntime: Using default boot image
+11-22 08:07:30.214  9411  9411 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:30.215  9411  9411 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:30.255  9411  9411 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:30.255  9411  9411 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:30.259  9411  9411 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:30.260  9411  9411 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:30.268  9411  9411 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:30.280  9411  9425 V UiAutomation: Init UiAutomation@2d2f6a9[id=87, flags=0]
+11-22 08:07:30.282  8665  8694 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:30.282  8665  8694 I A       : Nga state changed to DISABLED
+11-22 08:07:30.284   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:30.284  1447  7447 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:30.285  1447  2067 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:30.285  1447  2067 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:30.285  1447  2067 I A       : Disconnected
+11-22 08:07:31.284  9411  9411 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@6dffa; boundsInParent: Rect(0, 0 - 1080, 0); boundsInScreen: Rect(0, 277 - 1080, 277); packageName: com.google.android.documentsui; className: androidx.recyclerview.widget.RecyclerView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: com.google.android.documentsui:id/horizontal_breadcrumb; checkable: false; checked: false; focusable: true; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_FOCUS - null, AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:31.290  9411  9411 W AccessibilityNodeInfoDumper: Fetch time: 9ms
+11-22 08:07:31.295  9411  9411 D AndroidRuntime: Shutting down VM
+11-22 08:07:31.296  8665  8694 I A       : NGA enabled in interactor.
+11-22 08:07:31.297  8665  8694 I A       : Nga state changed to ENABLED
+11-22 08:07:31.298  1447  7447 I A       : Initializing all components
+11-22 08:07:31.298  1447  7447 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:31.298  1447  2066 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.298  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 I A       : Setting session to type: NO_SESSION
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:31.299  1447  2066 I A       : onDisabled. Registered: false
+11-22 08:07:31.301  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:31.301   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:31.301  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:31.302   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:31.302   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:31.302   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:31.302  1447  2066 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:31.302  1447  2066 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:31.303  1447  2067 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:31.307  8665  8665 I A       : Creating pss binder().
+11-22 08:07:31.309  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:31.309  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:31.309  1447  2066 I A       : Disconnected
+11-22 08:07:31.309  1447  2066 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:31.311  1447  2067 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:31.321  1447  1447 V ClearcutMetricXmitter: Transmission is done.
+11-22 08:07:31.322  1447  2066 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:31.322  8665  8678 I A       : Calling beginBinderSession().
+11-22 08:07:31.323  8665  8678 I A       : beginBinderSession(): calling binder
+11-22 08:07:31.323  1447  2066 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:31.324  1447  2067 I A       : Successfully initialized all components
+11-22 08:07:31.326   518   546 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:31.331  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:31.332  8665  8993 I PBSessionCacheImpl: Deleted sessionId[38110868353460683] from persistence.
+11-22 08:07:31.332  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:31.333  1447  2067 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:32.168  8315  8353 D EGL_emulation: app_time_stats: avg=190.66ms min=9.61ms max=2019.76ms count=12
+11-22 08:07:32.228  8315  8315 W ActionModeController: Tried to finish a null action mode.
+11-22 08:07:32.228  8315  8315 D DocumentStack: Root changed to: Root{userId=0, authority=com.android.providers.downloads.documents, rootId=downloads, title=Downloads, isUsb=false, isSd=false, isMtp=false} @ content://com.android.providers.downloads.documents/root/downloads
+11-22 08:07:32.229   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(33)
+11-22 08:07:32.308  8315  8315 D DocumentStack: Adding doc to stack: DocumentInfo{docId=downloads, userId=0, name=Downloads, mimeType=vnd.android.document/directory, isContainer=true, isDirectory=true, isArchive=false, isInArchive=false, isPartial=false, isVirtual=false, isDeleteSupported=false, isCreateSupported=true, isMoveSupported=false, isRenameSupported=false, isMetadataSupported=false, isBlockedFromTree=false} @ content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.309  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:32.309  8315  8315 D DirectoryFragment: Showing directory: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.309  8315  8315 D DirectoryFragment: Creating new fragment for directory: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.312  8315  8315 E oid.documentsu: No package ID ff found for ID 0xffffffff.
+11-22 08:07:32.344  8315  8315 D DirectoryFragment: Received model update. Loading=false
+11-22 08:07:32.344  8315  8315 D DefaultSelectionTracker: Ignoring onDataSetChange. No active selection.
+11-22 08:07:32.346  8315  8315 W SelectionTracker: Setting gestureTooltypes is likely to result in unexpected behavior.
+11-22 08:07:32.346  8315  8315 D AbstractActionHandler: Creating new directory loader for: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.385  8315  8315 D AbstractActionHandler: Loader has finished for: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.386  8315  8315 I Model   : Updating model with new result set.
+11-22 08:07:32.389  8315  8315 D DirectoryFragment: Received model update. Loading=false
+11-22 08:07:32.389  8315  8315 D DefaultSelectionTracker: Ignoring onDataSetChange. No active selection.
+11-22 08:07:32.391  8315  8315 V RefreshTask: Provider does not support refresh and did not refresh
+11-22 08:07:32.391  8315  8315 D AbstractActionHandler: Creating new directory loader for: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.531  8315  8315 D AbstractActionHandler: Loader has finished for: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:32.531  8315  8315 I Model   : Updating model with new result set.
+11-22 08:07:32.531  8315  8315 D DirectoryFragment: Received model update. Loading=false
+11-22 08:07:32.531  8315  8315 D DefaultSelectionTracker: Ignoring onDataSetChange. No active selection.
+11-22 08:07:35.198   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f71d0000 0x3f7b74000]
+11-22 08:07:35.203   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 08:07:35.203  9436  9437 I Gralloc4: mapper 4.x is not supported
+11-22 08:07:35.208  9436  9437 D HostConnection: createUnique: call
+11-22 08:07:35.215  9436  9437 D HostConnection: HostConnection::get() New Host Connection established 0x74d62bf64850, tid 9437
+11-22 08:07:35.215  9436  9437 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 08:07:35.215  9436  9437 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 08:07:35.230  9436  9437 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:35.393  9438  9438 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 0 <<<<<<
+11-22 08:07:35.395  9438  9438 I AndroidRuntime: Using default boot image
+11-22 08:07:35.395  9438  9438 I AndroidRuntime: Leaving lock profiling enabled
+11-22 08:07:35.396  9438  9438 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 08:07:35.435  9438  9438 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 08:07:35.435  9438  9438 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 08:07:35.439  9438  9438 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:35.439  9438  9438 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 08:07:35.447  9438  9438 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 08:07:35.450   518   518 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 08:07:35.451  8665  8686 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 08:07:35.451  8665  8686 I A       : Nga state changed to DISABLED
+11-22 08:07:35.452  1447  7287 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 08:07:35.453  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:35.453  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:35.453  1447  2066 I A       : Disconnected
+11-22 08:07:35.454  9438  9452 V UiAutomation: Init UiAutomation@ffffab6[id=88, flags=0]
+11-22 08:07:36.457  9438  9438 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9b0c1; boundsInParent: Rect(0, 0 - 83, 83); boundsInScreen: Rect(99, 1209 - 182, 1292); packageName: com.google.android.documentsui; className: android.widget.ImageView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: com.google.android.documentsui:id/icon_check; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:36.461  9438  9438 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@9f453; boundsInParent: Rect(0, 0 - 83, 83); boundsInScreen: Rect(584, 1209 - 667, 1292); packageName: com.google.android.documentsui; className: android.widget.ImageView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: com.google.android.documentsui:id/icon_check; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: true; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:36.462  9438  9438 I AccessibilityNodeInfoDumper: Skipping invisible child: android.view.accessibility.AccessibilityNodeInfo@a37e5; boundsInParent: Rect(0, 0 - 83, 83); boundsInScreen: Rect(99, 1835 - 182, 1918); packageName: com.google.android.documentsui; className: android.widget.ImageView; text: null; error: null; maxTextLength: -1; stateDescription: null; contentDescription: null; tooltipText: null; viewIdResName: com.google.android.documentsui:id/icon_check; checkable: false; checked: false; focusable: false; focused: false; selected: false; clickable: false; longClickable: false; contextClickable: false; enabled: false; password: false; scrollable: false; importantForAccessibility: false; visible: false; actions: [AccessibilityAction: ACTION_SELECT - null, AccessibilityAction: ACTION_CLEAR_SELECTION - null, AccessibilityAction: ACTION_ACCESSIBILITY_FOCUS - null, AccessibilityAction: ACTION_SHOW_ON_SCREEN - null]
+11-22 08:07:36.463  9438  9438 W AccessibilityNodeInfoDumper: Fetch time: 10ms
+11-22 08:07:36.464   518   518 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 08:07:36.465  8665  8695 I A       : NGA enabled in interactor.
+11-22 08:07:36.465  8665  8695 I A       : Nga state changed to ENABLED
+11-22 08:07:36.465  1447  7287 I A       : Initializing all components
+11-22 08:07:36.466  1447  7287 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 08:07:36.466  1447  2067 I A       : onIsEnabledChanged, isEnabled: false
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 I A       : Setting session to type: NO_SESSION
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 08:07:36.466  1447  2067 I A       : onDisabled. Registered: false
+11-22 08:07:36.466  1447  2067 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 08:07:36.466  1447  2067 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 08:07:36.467  1447  2066 I NgaEntryPointEventSendr: setupConnection
+11-22 08:07:36.469  9438  9438 D AndroidRuntime: Shutting down VM
+11-22 08:07:36.472  1447  2066 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 08:07:36.473  8665  8665 I A       : Creating pss binder().
+11-22 08:07:36.473  1447  2066 I A       : Disconnecting from SysUi, flag disabled.
+11-22 08:07:36.473  1447  2066 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 08:07:36.473  1447  2066 I A       : Disconnected
+11-22 08:07:36.473  1447  2066 I A       : on opa visibility changed false
+11-22 08:07:36.473  1447  2066 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 08:07:36.480  1447  2067 I NgaEntryPointEventSendr: onServiceConnected
+11-22 08:07:36.480  8665  8983 I A       : Calling beginBinderSession().
+11-22 08:07:36.480  8665  8983 I A       : beginBinderSession(): calling binder
+11-22 08:07:36.480  1447  2067 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 08:07:36.484   518  1796 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 08:07:36.484  1447  2067 I A       : on opa visibility changed false
+11-22 08:07:36.484   752   752 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 08:07:36.484   752   752 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 08:07:36.484   752   752 V NgaMessageHandler:    visible: true
+11-22 08:07:36.488  8665  8695 W LocationOracle: No location history returned by ContextManager
+11-22 08:07:36.488  8665  8694 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 08:07:36.494  1447  2067 I A       : Successfully initialized all components
+11-22 08:07:36.497  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:36.497  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:36.498  8665  8723 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 08:07:36.499  8665  8993 I PBSessionCacheImpl: Deleted sessionId[38110868353460686] from persistence.
+11-22 08:07:36.501  8665  8723 W SearchServiceCore: Abort, client detached.
+11-22 08:07:36.502  1447  2067 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 08:07:37.330  8315  8315 D QuickViewIntentBuilder: Preparing intent for doc:raw:/storage/emulated/0/Download/waqt_probe_alpha.wav
+11-22 08:07:37.330   518  1844 I ActivityTaskManager: START u0 {act=android.intent.action.VIEW dat=content://com.android.providers.downloads.documents/document/raw:/storage/emulated/0/Download/waqt_probe_alpha.wav typ=audio/x-wav flg=0x20000003 cmp=com.google.android.apps.youtube.music/.audiopreview.AudioPreviewPlayerActivity} from uid 10060
+11-22 08:07:37.332   518  1844 D CompatibilityChangeReporter: Compat change id reported: 174042980; UID 10106; state: DISABLED
+11-22 08:07:37.332   518  1844 D CompatibilityChangeReporter: Compat change id reported: 184838306; UID 10106; state: DISABLED
+11-22 08:07:37.332   518  1844 D CompatibilityChangeReporter: Compat change id reported: 185004937; UID 10106; state: DISABLED
+11-22 08:07:37.332   518  1844 D CompatibilityChangeReporter: Compat change id reported: 181136395; UID 10106; state: DISABLED
+11-22 08:07:37.332   518  1844 D CompatibilityChangeReporter: Compat change id reported: 174042936; UID 10106; state: DISABLED
+11-22 08:07:37.333   518  1844 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10106; state: DISABLED
+11-22 08:07:37.333   518  1844 V SplashScreenExceptionList: SplashScreen checking exception for package com.google.android.apps.youtube.music (target sdk:30) -> false
+11-22 08:07:37.334   518   552 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10106; state: DISABLED
+11-22 08:07:37.334   518   561 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10106; state: ENABLED
+11-22 08:07:37.341   321   321 D Zygote  : Forked child process 9460
+11-22 08:07:37.346   518   561 I ActivityManager: Start proc 9460:com.google.android.apps.youtube.music/u0a106 for pre-top-activity {com.google.android.apps.youtube.music/com.google.android.apps.youtube.music.audiopreview.AudioPreviewPlayerActivity}
+11-22 08:07:37.356  9460  9460 W s.youtube.musi: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:37.364  7344  7351 I adbd    : jdwp connection from 9460
+11-22 08:07:37.378  9460  9460 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10106; state: DISABLED
+11-22 08:07:37.381  9460  9460 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/app/YouTubeMusicPrebuilt/lib/x86_64:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 08:07:37.385  9460  9460 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.youtube.music' set to: 'default'
+11-22 08:07:37.385  9460  9460 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 08:07:37.386  9460  9460 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 08:07:37.386  9460  9460 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 08:07:37.407  9460  9460 W s.youtube.musi: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-22 08:07:37.407  9460  9460 W s.youtube.musi: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 08:07:37.407  9460  9460 W s.youtube.musi: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 08:07:37.409  9460  9476 W s.youtube.musi: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk*482612108:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes2.dex*3971764547:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes3.dex*426843809:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes4.dex*3127326728]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]})
+11-22 08:07:37.420  9460  9487 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-22 08:07:37.420  5463  5486 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-22 08:07:37.420  9460  9487 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module found. Local version is 0 and remote version is 0.
+11-22 08:07:37.427   518  1796 D ConnectivityService: requestNetwork for uid/pid:10106/9460 activeRequest: null callbackRequest: 151 [NetworkRequest [ REQUEST id=152, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 08:07:37.428   518   688 D ConnectivityService: NetReassign [152 : null → 100]
+11-22 08:07:37.428   518   681 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=152, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.428   518   681 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=152, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.428   518   681 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=152, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.431  9460  9487 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 08:07:37.439  9460  9486 E AwarenessClientProvider: Account associated with identity was null
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: Exception while syncing fences
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: java.util.concurrent.ExecutionException: java.lang.IllegalStateException: Account associated with identity was null
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at acyh.s(PG:6)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at acyh.get(PG:4)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at adbz.a(PG:1)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at adaq.p(PG:2)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at gzf.run(PG:1)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at nwe.run(PG:1)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at nvp.run(PG:2)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at nvf.run(PG:2)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at java.lang.Thread.run(Thread.java:920)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: Caused by: java.lang.IllegalStateException: Account associated with identity was null
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at gyl.a(PG:3)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at acyj.f(PG:2)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	at acyl.run(PG:9)
+11-22 08:07:37.442  9460  9514 E AwarenessRouterSyncMgr: 	... 6 more
+11-22 08:07:37.448  9460  9504 W GoogleTagManager: Failed to extract the container from the resource file. Resource is a UTF-8 encoded string but doesn't contain a JSON container
+11-22 08:07:37.471  9460  9522 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10106; state: DISABLED
+11-22 08:07:37.482  1446  5866 W MediaProvider: isAppCloneUserPair for user 0: false
+11-22 08:07:37.486  1446  5860 I MediaProvider: Open with lower FS for /storage/emulated/0/Download/waqt_probe_alpha.wav. Uid: 10062
+11-22 08:07:37.486  8315  8315 D Documents: Content updated.
+11-22 08:07:37.486  8315  8315 D ContentLock: run when unlock, is locked : false
+11-22 08:07:37.487  8315  8315 D Documents: Content updated.
+11-22 08:07:37.487  8315  8315 D ContentLock: run when unlock, is locked : false
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: Failed to query
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: android.os.OperationCanceledException: The operation has been canceled.
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at android.os.CancellationSignal.throwIfCanceled(CancellationSignal.java:58)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at android.content.ContentProviderClient.query(ContentProviderClient.java:192)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at com.android.documentsui.DirectoryLoader.queryOnUsers(DirectoryLoader.java:227)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at com.android.documentsui.DirectoryLoader.loadInBackground(DirectoryLoader.java:173)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at com.android.documentsui.DirectoryLoader.loadInBackground(DirectoryLoader.java:56)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at androidx.loader.content.AsyncTaskLoader.onLoadInBackground(AsyncTaskLoader.java:289)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at androidx.loader.content.AsyncTaskLoader$LoadTask.doInBackground(AsyncTaskLoader.java:57)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at androidx.loader.content.ModernAsyncTask$1.call(ModernAsyncTask.java:96)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 08:07:37.489  8315  8406 W DirectoryLoader: 	at com.android.documentsui.ProviderExecutor.run(ProviderExecutor.java:104)
+11-22 08:07:37.490  1446  5866 W MediaProvider: Failed to fetch original file descriptor
+11-22 08:07:37.490  1446  5866 W MediaProvider: java.io.FileNotFoundException: Input file descriptor is already original
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at com.android.providers.media.MediaProvider.getOriginalMediaFormatFileDescriptor(MediaProvider.java:5718)
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at com.android.providers.media.MediaProvider.openTypedAssetFileCommon(MediaProvider.java:7134)
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at com.android.providers.media.MediaProvider.openTypedAssetFile(MediaProvider.java:7115)
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at android.content.ContentProvider$Transport.openTypedAssetFile(ContentProvider.java:548)
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:327)
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at android.os.Binder.execTransactInternal(Binder.java:1179)
+11-22 08:07:37.490  1446  5866 W MediaProvider: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-22 08:07:37.498   452   452 D NuPlayerDriver: NuPlayerDriver(0x751f1a52cb30) created, clientPid(9460)
+11-22 08:07:37.500   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.media.omx@1.0::IOmx/default in either framework or device VINTF manifest.
+11-22 08:07:37.500   452   452 D MediaPlayerService: OMX service is not available
+11-22 08:07:37.504  8315  8315 D AbstractActionHandler: Loader has finished for: content://com.android.providers.downloads.documents/document/downloads
+11-22 08:07:37.504  8315  8315 I Model   : Updating model with new result set.
+11-22 08:07:37.504  8315  8315 D DirectoryFragment: Received model update. Loading=false
+11-22 08:07:37.504  8315  8315 D DefaultSelectionTracker: Ignoring onDataSetChange. No active selection.
+11-22 08:07:37.504  9460  9512 I DynamiteModule: Considering local module com.google.android.gms.ads.dynamite:0 and remote module com.google.android.gms.ads.dynamite:224400003
+11-22 08:07:37.505   452  9540 D GenericSource: FileSource remote
+11-22 08:07:37.506  9460  9512 I DynamiteModule: Selected remote version of com.google.android.gms.ads.dynamite, version >= 224400003
+11-22 08:07:37.510   447  3805 D MediaBufferGroup: creating MemoryDealer
+11-22 08:07:37.512  9460  9534 D libEGL  : loaded /vendor/lib64/egl/libEGL_emulation.so
+11-22 08:07:37.513  1446  5866 I MediaProvider: Open with lower FS for /storage/emulated/0/Download/waqt_probe_alpha.wav. Uid: 10062
+11-22 08:07:37.514  9460  9534 D libEGL  : loaded /vendor/lib64/egl/libGLESv1_CM_emulation.so
+11-22 08:07:37.516  9460  9534 D libEGL  : loaded /vendor/lib64/egl/libGLESv2_emulation.so
+11-22 08:07:37.516  5463  7277 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService started execution. cause:9 exec_start_elapsed_seconds: 769 [CONTEXT service_id=218 ]
+11-22 08:07:37.527  1446  5866 W MediaProvider: Failed to fetch original file descriptor
+11-22 08:07:37.527  1446  5866 W MediaProvider: java.io.FileNotFoundException: Input file descriptor is already original
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at com.android.providers.media.MediaProvider.getOriginalMediaFormatFileDescriptor(MediaProvider.java:5718)
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at com.android.providers.media.MediaProvider.openTypedAssetFileCommon(MediaProvider.java:7134)
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at com.android.providers.media.MediaProvider.openTypedAssetFile(MediaProvider.java:7115)
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at android.content.ContentProvider$Transport.openTypedAssetFile(ContentProvider.java:548)
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at android.content.ContentProviderNative.onTransact(ContentProviderNative.java:327)
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at android.os.Binder.execTransactInternal(Binder.java:1179)
+11-22 08:07:37.527  1446  5866 W MediaProvider: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-22 08:07:37.529  5463  7889 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService finished executing. cause:9 result: 1 elapsed_millis: 27 uptime_millis: 27 exec_start_elapsed_seconds: 769 [CONTEXT service_id=218 ]
+11-22 08:07:37.537  8315  8353 D EGL_emulation: app_time_stats: avg=312.78ms min=18.77ms max=4734.49ms count=17
+11-22 08:07:37.539  9460  9512 W s.youtube.musi: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk*482612108:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes2.dex*3971764547:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes3.dex*426843809:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes4.dex*3127326728]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]})
+11-22 08:07:37.554   518   841 D ConnectivityService: requestNetwork for uid/pid:10106/9460 activeRequest: null callbackRequest: 153 [NetworkRequest [ REQUEST id=154, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 08:07:37.555   518   688 D ConnectivityService: NetReassign [154 : null → 100]
+11-22 08:07:37.558   518   681 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=154, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.558   518   681 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=154, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.558   518   681 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=154, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.561   518   688 D ConnectivityService: NetReassign [no changes]
+11-22 08:07:37.564  9460  9487 V NativeCrypto: Registering com/google/android/gms/org/conscrypt/NativeCrypto's 295 native methods...
+11-22 08:07:37.567  9460  9512 D DynamitePackage: Instantiated singleton DynamitePackage.
+11-22 08:07:37.567  9460  9512 D DynamitePackage: Instantiating com.google.android.gms.ads.adshield.ChimeraAdShieldCreatorImpl
+11-22 08:07:37.586  9460  9487 I ProviderInstaller: Installed default security provider GmsCore_OpenSSL
+11-22 08:07:37.599   518   841 D ConnectivityService: requestNetwork for uid/pid:10106/9460 activeRequest: null callbackRequest: 156 [NetworkRequest [ REQUEST id=157, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 08:07:37.600   518   688 D ConnectivityService: NetReassign [157 : null → 100]
+11-22 08:07:37.600   518   681 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=157, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.600   518   681 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=157, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.600   518   681 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=157, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10106 RequestorUid: 10106 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 08:07:37.604   518   578 E VerityUtils: Failed to measure fs-verity, errno 1: /product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk
+11-22 08:07:37.600   518   518 W PackageManagerB: type=1400 audit(0.0:112): avc: denied { ioctl } for path="/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk" dev="dm-2" ino=138 ioctlcmd=0x6686 scontext=u:r:system_server:s0 tcontext=u:object_r:system_file:s0 tclass=file permissive=0
+11-22 08:07:37.643   518   733 I MediaFocusControl: requestAudioFocus() from uid/pid 10106/9460 AA=USAGE_MEDIA/CONTENT_TYPE_MUSIC clientId=android.media.AudioManager@91956efcom.google.android.apps.youtube.music.audiopreview.AudioPreviewPlayerActivity@6cd3e23 callingPack=com.google.android.apps.youtube.music req=2 flags=0x0 sdk=30
+11-22 08:07:37.647   518   733 I AudioService.FadeOutManager: unfadeOutUid() uid:10106
+11-22 08:07:37.647  9460  9493 I FA      : App measurement disabled by setAnalyticsCollectionEnabled(false)
+11-22 08:07:37.650  9460  9493 I FA      : App measurement initialized, version: 75066
+11-22 08:07:37.650  9460  9493 I FA      : To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+11-22 08:07:37.651  9460  9493 I FA      : To enable faster debug mode event logging run:
+11-22 08:07:37.651  9460  9493 I FA      :   adb shell setprop debug.firebase.analytics.app com.google.android.apps.youtube.music
+11-22 08:07:37.653   452  9538 I GenericSource: start
+11-22 08:07:37.659   452  3799 E MetadataRetrieverClient: failed to extract an album art
+11-22 08:07:37.659  9460  9492 E MediaMetadataRetrieverJNI: getEmbeddedPicture: Call to getEmbeddedPicture failed.
+11-22 08:07:37.660  8862  8862 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 08:07:37.660  8862  8862 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 08:07:37.660   518   553 D CompatibilityChangeReporter: Compat change id reported: 158002302; UID 10106; state: ENABLED
+11-22 08:07:37.661   366   415 W ServiceManager: Permission failure: android.permission.ACCESS_SURFACE_FLINGER from uid=10106 pid=9460
+11-22 08:07:37.661   366   415 D PermissionCache: checking android.permission.ACCESS_SURFACE_FLINGER for uid=10106 => denied (107 us)
+11-22 08:07:37.661   366   415 W ServiceManager: Permission failure: android.permission.ROTATE_SURFACE_FLINGER from uid=10106 pid=9460
+11-22 08:07:37.661   366   415 D PermissionCache: checking android.permission.ROTATE_SURFACE_FLINGER for uid=10106 => denied (66 us)
+11-22 08:07:37.662  9460  9530 D HostConnection: createUnique: call
+11-22 08:07:37.663  9460  9530 D HostConnection: HostConnection::get() New Host Connection established 0x73446de2ff10, tid 9530
+11-22 08:07:37.665  9460  9530 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:37.666   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.configstore@1.0::ISurfaceFlingerConfigs/default in either framework or device VINTF manifest.
+11-22 08:07:37.667   452  9588 D CCodec  : allocate(c2.android.raw.decoder)
+11-22 08:07:37.667  9460  9530 W OpenGLRenderer: Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-22 08:07:37.668  9460  9530 D EGL_emulation: eglCreateContext: 0x73446de2e890: maj 3 min 0 rcv 3
+11-22 08:07:37.669  9460  9530 D EGL_emulation: eglMakeCurrent: 0x73446de2e890: ver 3 0 (tinfo 0x734688db9080) (first time)
+11-22 08:07:37.670   452  9588 I CCodec  : setting up 'default' as default (vendor) store
+11-22 08:07:37.670   466   802 V C2Store : in init
+11-22 08:07:37.670   466   802 V C2Store : loading dll
+11-22 08:07:37.714   452  9588 I CCodec  : Created component [c2.android.raw.decoder]
+11-22 08:07:37.714   452  9588 D CCodecConfig: read media type: audio/raw
+11-22 08:07:37.714   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.max-count.values
+11-22 08:07:37.714   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: output.subscribed-indices.values
+11-22 08:07:37.714   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: input.buffers.allocator-ids.values
+11-22 08:07:37.714   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.allocator-ids.values
+11-22 08:07:37.714   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.allocator-ids.values
+11-22 08:07:37.714   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: output.buffers.pool-ids.values
+11-22 08:07:37.715   452  9588 D ReflectedParamUpdater: extent() != 1 for single value type: algo.buffers.pool-ids.values
+11-22 08:07:37.716   452  9588 I CCodecConfig: query failed after returning 8 values (BAD_INDEX)
+11-22 08:07:37.717   452  9588 D CCodecConfig: c2 config diff is Dict {
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 coded.bitrate.value = 64000
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 input.buffers.max-size.value = 65536
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 input.delay.value = 0
+11-22 08:07:37.717   452  9588 D CCodecConfig:   string input.media-type.value = "audio/raw"
+11-22 08:07:37.717   452  9588 D CCodecConfig:   string output.media-type.value = "audio/raw"
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 raw.channel-count.value = 2
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 raw.pcm-encoding.value = 0
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 raw.sample-rate.value = 44100
+11-22 08:07:37.717   452  9588 D CCodecConfig: }
+11-22 08:07:37.717   366   631 E HWComposer: getSupportedContentTypes: getSupportedContentTypes failed for display 4619827259835644672: Unsupported (8)
+11-22 08:07:37.717   452  9588 D CCodec  : [c2.android.raw.decoder] buffers are bound to CCodec for this session
+11-22 08:07:37.717   452  9588 D CCodecConfig: no c2 equivalents for durationUs
+11-22 08:07:37.717   452  9588 D CCodecConfig: no c2 equivalents for bits-per-sample
+11-22 08:07:37.717   452  9588 D CCodecConfig: no c2 equivalents for channel-mask
+11-22 08:07:37.717   452  9588 D CCodecConfig: no c2 equivalents for flags
+11-22 08:07:37.717   452  9588 D CCodecConfig: config failed => CORRUPTED
+11-22 08:07:37.717   452  9588 D CCodecConfig: c2 config diff is   c2::u32 raw.channel-count.value = 1
+11-22 08:07:37.717   452  9588 D CCodecConfig:   c2::u32 raw.sample-rate.value = 8000
+11-22 08:07:37.717   452  9588 W Codec2Client: query -- param skipped: index = 1107298332.
+11-22 08:07:37.717   452  9588 D CCodec  : client requested max input size 32768, which is smaller than what component recommended (65536); overriding with component recommendation.
+11-22 08:07:37.717   452  9588 W CCodec  : This behavior is subject to change. It is recommended that app developers double check whether the requested max input size is in reasonable range.
+11-22 08:07:37.717   452  9588 D CCodec  : setup formats input: AMessage(what = 0x00000000) = {
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t bitrate = 64000
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t channel-count = 1
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t max-input-size = 65536
+11-22 08:07:37.717   452  9588 D CCodec  :   string mime = "audio/raw"
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t pcm-encoding = 2
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t sample-rate = 8000
+11-22 08:07:37.717   452  9588 D CCodec  : }
+11-22 08:07:37.717   452  9588 D CCodec  : setup formats output: AMessage(what = 0x00000000) = {
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t channel-count = 1
+11-22 08:07:37.717   452  9588 D CCodec  :   string mime = "audio/raw"
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t pcm-encoding = 2
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t sample-rate = 8000
+11-22 08:07:37.717   452  9588 D CCodec  :   int32_t channel-mask = 0
+11-22 08:07:37.717   452  9588 D CCodec  : }
+11-22 08:07:37.717   452  9588 I CCodecConfig: query failed after returning 8 values (BAD_INDEX)
+11-22 08:07:37.717   452  9588 I MediaCodec: MediaCodec will operate in async mode
+11-22 08:07:37.717   452  9587 D MediaCodec: keep callback message for reclaim
+11-22 08:07:37.718   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 08:07:37.720  9460  9530 I Gralloc4: mapper 4.x is not supported
+11-22 08:07:37.720   452  9588 W Codec2Client: query -- param skipped: index = 1342179345.
+11-22 08:07:37.720   452  9588 W Codec2Client: query -- param skipped: index = 2415921170.
+11-22 08:07:37.720   452  9588 D C2Store : Using DMABUF Heaps
+11-22 08:07:37.720   452  9588 D CCodecBufferChannel: [c2.android.raw.decoder#634] Created input block pool with allocatorID 16 => poolID 17 - OK (0)
+11-22 08:07:37.720  9460  9530 D HostConnection: createUnique: call
+11-22 08:07:37.720   518  1865 D BufferPoolAccessor2.0: bufferpool2 0x7344bde67b08 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/18 (fetch/transfer)
+11-22 08:07:37.721   518  1865 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde67b08 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 18, 72% unfetched
+11-22 08:07:37.721  9460  9530 D HostConnection: HostConnection::get() New Host Connection established 0x73446de2e7d0, tid 9530
+11-22 08:07:37.722  9460  9530 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 08:07:37.722   752  1076 D BufferPoolAccessor2.0: bufferpool2 0x7344bde3e7f8 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/36 (fetch/transfer)
+11-22 08:07:37.722  9460  9530 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 08:07:37.722   752  1076 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde3e7f8 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 36, 83% unfetched
+11-22 08:07:37.722   752  1076 D BufferPoolAccessor2.0: bufferpool2 0x7344bde3a298 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/38 (fetch/transfer)
+11-22 08:07:37.725   752  1076 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde3a298 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 38, 84% unfetched
+11-22 08:07:37.726   518   557 D BufferPoolAccessor2.0: bufferpool2 0x7344bde5b8c8 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/24 (fetch/transfer)
+11-22 08:07:37.726   752  1076 D BufferPoolAccessor2.0: bufferpool2 0x7344bde3c798 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/18 (fetch/transfer)
+11-22 08:07:37.727   752  1076 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde3c798 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 18, 67% unfetched
+11-22 08:07:37.727   518   557 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde5b8c8 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 24, 75% unfetched
+11-22 08:07:37.727   518   557 D BufferPoolAccessor2.0: bufferpool2 0x7344bde4d188 : 0(0 size) total buffers - 0(0 size) used buffers - 2/7 (recycle/alloc) - 5/34 (fetch/transfer)
+11-22 08:07:37.727   518   557 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde4d188 cached: 0/0M, 0/0% in use; allocs: 7, 29% recycled; transfers: 34, 85% unfetched
+11-22 08:07:37.728   518  1865 D BufferPoolAccessor2.0: bufferpool2 0x7344bde66ad8 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/24 (fetch/transfer)
+11-22 08:07:37.730   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.allocator@4.0::IAllocator/default in either framework or device VINTF manifest.
+11-22 08:07:37.730  9460  9530 W Gralloc4: allocator 4.x is not supported
+11-22 08:07:37.730   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f71d0000 0x3f74af000]
+11-22 08:07:37.730   518  1865 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde66ad8 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 24, 75% unfetched
+11-22 08:07:37.730   518  1865 D BufferPoolAccessor2.0: bufferpool2 0x7344bde5cd98 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/26 (fetch/transfer)
+11-22 08:07:37.731   518  1865 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde5cd98 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 26, 77% unfetched
+11-22 08:07:37.731   518   852 D BufferPoolAccessor2.0: bufferpool2 0x7344bde5b428 : 0(0 size) total buffers - 0(0 size) used buffers - 1/7 (recycle/alloc) - 6/34 (fetch/transfer)
+11-22 08:07:37.731   518   852 D BufferPoolAccessor2.0: Destruction - bufferpool2 0x7344bde5b428 cached: 0/0M, 0/0% in use; allocs: 7, 14% recycled; transfers: 34, 82% unfetched
+11-22 08:07:37.731   452  9588 I CCodecBufferChannel: [c2.android.raw.decoder#634] Created output block pool with allocatorID 16 => poolID 26 - OK
+11-22 08:07:37.731   452  9588 D CCodecBufferChannel: [c2.android.raw.decoder#634] Configured output block pool ids 26 => OK
+11-22 08:07:37.732   452  9588 I DMABUFHEAPS: Using DMA-BUF heap named: system
+11-22 08:07:37.732   466  9594 D SimpleC2Component: Using output block pool with poolID 26 => got 26 - 0
+11-22 08:07:37.733   452  9588 D CCodecBufferChannel: [c2.android.raw.decoder#634] buffers after EOS ignored (0 us)
+11-22 08:07:37.734   362  1347 D AudioFlinger: Client defaulted notificationFrames to 2035 for frameCount 4071
+11-22 08:07:37.735   362  1347 D AF::TrackHandle: OpPlayAudio: track:56 usage:1 not muted
+11-22 08:07:37.754   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(43)
+11-22 08:07:37.776  9460  9530 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:37.803   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f74af000 0x3f778e000]
+11-22 08:07:37.814   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f778e000 0x3f7a6d000]
+11-22 08:07:37.822   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(35)
+11-22 08:07:37.887  9460  9504 E GoogleTagManager: Invalid macro: _gtm.loadEventEnabled
+11-22 08:07:37.934   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(1)
+11-22 08:07:38.063   362   495 D AudioFlinger: mixer(0x7ece2c5fda70) throttle end: throttle time(40)
+11-22 08:07:38.132  9460  9599 E GoogleTagManager: Invalid macro: _gtm.loadEventEnabled
+11-22 08:07:38.237  9460  9460 I Choreographer: Skipped 33 frames!  The application may be doing too much work on its main thread.
+11-22 08:07:38.249   518   549 I ActivityTaskManager: Displayed com.google.android.apps.youtube.music/.audiopreview.AudioPreviewPlayerActivity: +906ms
+11-22 08:07:38.259  8862  9039 W SQLiteLog: (28) double-quoted string literal: "1795162058258"
+11-22 08:07:38.259  8862  9039 W SQLiteLog: (28) double-quoted string literal: "1"
+11-22 08:07:38.292  9460  9460 E YouTubeMusic: Trying to detachMediaView when it wasn't the most recent MediaView Setter
+11-22 08:07:38.308  5463  5463 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.herrevad.services.LightweightNetworkQualityAndroidService.START pkg=com.google.android.gms }
+11-22 08:07:38.308  5463  5463 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.herrevad.services.LightweightNetworkQualityAndroidService.START pkg=com.google.android.gms }
+11-22 08:07:38.308  5463  5463 I BndSvcConfigHelper: No bound-service is registered for action: com.google.android.gms.herrevad.services.LightweightNetworkQualityAndroidService.START
+11-22 08:07:38.308  5463  5463 I BoundBrokerSvc: Bound service not available for: Intent { act=com.google.android.gms.herrevad.services.LightweightNetworkQualityAndroidService.START pkg=com.google.android.gms }
+11-22 08:07:38.308  5463  5705 I GmsApiChimeraSvc: Using MissingApiServiceBroker for com.google.android.gms.herrevad.services.LightweightNetworkQualityAndroidService.START due to missing BoundService implementation
+11-22 08:07:38.319   752   877 D EGL_emulation: app_time_stats: avg=12378.01ms min=12378.01ms max=12378.01ms count=1
+11-22 08:07:38.348  9460  9490 E GoogleTagManager: Unsupported Value Escaping: 3
+11-22 08:07:38.356  8862  9609 I FA-SVC  : App measurement initialized, version: 225014
+11-22 08:07:38.361  9460  9490 E GoogleTagManager: Unsupported Value Escaping: 3
+11-22 08:07:38.374  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():3420 
+11-22 08:07:38.374  1338  1338 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():2002 
+11-22 08:07:38.375  1338  1338 I DeviceUnlockedTag: DeviceUnlockedTag.notifyDeviceLockStatusChanged():31 Notify device unlocked.
+11-22 08:07:38.383  9460  9490 E GoogleTagManager: Unsupported Value Escaping: 3
+11-22 08:07:38.407   752   877 D EGL_emulation: app_time_stats: avg=3908.61ms min=65.09ms max=15386.58ms count=4
+11-22 08:07:38.663   320  9616 D resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10106 0}
+11-22 08:07:38.663   320  9616 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 08:07:38.663   320  9617 D resolv  : doQuery: (1, 28)
+11-22 08:07:38.663   320  9617 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 08:07:38.663   320  9617 D resolv  : res_nsend
+11-22 08:07:38.663   320  9617 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:38.663   320  9617 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723b4d30790DISCARDED)
+11-22 08:07:38.663   320  9617 I resolv  : _cache_remove_p: entry 51 removed (count=53)
+11-22 08:07:38.663   320  9617 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:38.663   320  9617 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 15, min_samples = 8
+11-22 08:07:38.663   320  9617 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:38.663   320  9617 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:38.663   320  9617 D resolv  : send_dg: new DG socket
+11-22 08:07:38.664   320  9618 D resolv  : doQuery: (1, 1)
+11-22 08:07:38.664   320  9618 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 08:07:38.664   320  9618 D resolv  : res_nsend
+11-22 08:07:38.664   320  9618 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:38.664   320  9618 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723b4d2d2b0DISCARDED)
+11-22 08:07:38.664   320  9618 I resolv  : _cache_remove_p: entry 19 removed (count=52)
+11-22 08:07:38.664   320  9618 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:38.664   320  9617 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:38.664   320  9617 I resolv  : retrying_poll: 55 retrying_poll
+11-22 08:07:38.666   320  9618 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 15, min_samples = 8
+11-22 08:07:38.666   320  9618 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:38.666   320  9618 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:38.666   320  9618 D resolv  : send_dg: new DG socket
+11-22 08:07:38.666   320  9618 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:38.666   320  9618 I resolv  : retrying_poll: 56 retrying_poll
+11-22 08:07:38.669   320  9618 I resolv  : retrying_poll: 56 retrying_poll returning 1
+11-22 08:07:38.669   320  9618 I resolv  : res_nsend: used send_dg 106 terrno: 0
+11-22 08:07:38.669   320  9618 I resolv  : res_stats_set_sample: rcode = 0, sec = 3
+11-22 08:07:38.669   320  9618 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 6, count = 64
+11-22 08:07:38.669   320  9618 D resolv  : res_nsend: got answer:
+11-22 08:07:38.669   320  9618 I resolv  : answer_getTTL: TTL = 50
+11-22 08:07:38.669   320  9618 I resolv  : _cache_add_p: entry 70 added (count=53)
+11-22 08:07:38.669   320  9618 I resolv  : cache_dump_mru_locked: MRU LIST (53):  70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 17 18 43 42 52 41 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:38.669   320  9618 D resolv  : doQuery: rcode=0, ancount=4
+11-22 08:07:38.680   320  9617 I resolv  : retrying_poll: 55 retrying_poll returning 1
+11-22 08:07:38.680   320  9617 I resolv  : res_nsend: used send_dg 99 terrno: 0
+11-22 08:07:38.680   320  9617 I resolv  : res_stats_set_sample: rcode = 0, sec = 16
+11-22 08:07:38.680   320  9617 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 7, count = 64
+11-22 08:07:38.680   320  9617 D resolv  : res_nsend: got answer:
+11-22 08:07:38.680   320  9617 I resolv  : answer_getTTL: TTL = 60
+11-22 08:07:38.680   320  9617 I resolv  : _cache_add_p: entry 71 added (count=54)
+11-22 08:07:38.680   320  9617 I resolv  : cache_dump_mru_locked: MRU LIST (54):  71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 17 18 43 42 52 41 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:38.680   320  9617 D resolv  : doQuery: rcode=0, ancount=0
+11-22 08:07:38.680   320  9616 I ResolverController: No valid NAT64 prefix (100, <unspecified>/0)
+11-22 08:07:39.273   320  9620 D resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10106 0}
+11-22 08:07:39.273   320  9620 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 08:07:39.273   320  9622 D resolv  : doQuery: (1, 1)
+11-22 08:07:39.273   320  9622 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 08:07:39.273   320  9622 D resolv  : res_nsend
+11-22 08:07:39.273   320  9622 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:39.273   320  9622 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723a4d21930DISCARDED)
+11-22 08:07:39.273   320  9622 I resolv  : _cache_remove_p: entry 52 removed (count=53)
+11-22 08:07:39.273   320  9622 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:39.273   320  9621 D resolv  : doQuery: (1, 28)
+11-22 08:07:39.273   320  9621 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 08:07:39.273   320  9621 D resolv  : res_nsend
+11-22 08:07:39.273   320  9621 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:39.273   320  9621 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723b4d2e5d0DISCARDED)
+11-22 08:07:39.273   320  9621 I resolv  : _cache_remove_p: entry 41 removed (count=52)
+11-22 08:07:39.273   320  9621 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:39.273   320  9621 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 14, min_samples = 8
+11-22 08:07:39.273   320  9621 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:39.273   320  9621 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:39.273   320  9621 D resolv  : send_dg: new DG socket
+11-22 08:07:39.273   320  9621 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:39.273   320  9621 I resolv  : retrying_poll: 55 retrying_poll
+11-22 08:07:39.275   320  9622 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 14, min_samples = 8
+11-22 08:07:39.275   320  9622 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:39.275   320  9622 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:39.275   320  9622 D resolv  : send_dg: new DG socket
+11-22 08:07:39.275   320  9622 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:39.275   320  9622 I resolv  : retrying_poll: 56 retrying_poll
+11-22 08:07:39.278   320  9622 I resolv  : retrying_poll: 56 retrying_poll returning 1
+11-22 08:07:39.278   320  9622 I resolv  : res_nsend: used send_dg 68 terrno: 0
+11-22 08:07:39.278   320  9622 I resolv  : res_stats_set_sample: rcode = 0, sec = 3
+11-22 08:07:39.278   320  9622 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 8, count = 64
+11-22 08:07:39.278   320  9622 D resolv  : res_nsend: got answer:
+11-22 08:07:39.278   320  9622 I resolv  : answer_getTTL: TTL = 53
+11-22 08:07:39.278   320  9622 I resolv  : _cache_add_p: entry 72 added (count=53)
+11-22 08:07:39.278   320  9622 I resolv  : cache_dump_mru_locked: MRU LIST (53):  72 71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 17 18 43 42 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:39.278   320  9622 D resolv  : doQuery: rcode=0, ancount=2
+11-22 08:07:39.291   320  9621 I resolv  : retrying_poll: 55 retrying_poll returning 1
+11-22 08:07:39.291   320  9621 I resolv  : res_nsend: used send_dg 96 terrno: 0
+11-22 08:07:39.291   320  9621 I resolv  : res_stats_set_sample: rcode = 0, sec = 18
+11-22 08:07:39.291   320  9621 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 9, count = 64
+11-22 08:07:39.291   320  9621 D resolv  : res_nsend: got answer:
+11-22 08:07:39.291   320  9621 I resolv  : answer_getTTL: TTL = 60
+11-22 08:07:39.291   320  9621 I resolv  : _cache_add_p: entry 73 added (count=54)
+11-22 08:07:39.291   320  9621 I resolv  : cache_dump_mru_locked: MRU LIST (54):  73 72 71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 17 18 43 42 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:39.291   320  9621 D resolv  : doQuery: rcode=0, ancount=0
+11-22 08:07:39.291   320  9620 I ResolverController: No valid NAT64 prefix (100, <unspecified>/0)
+11-22 08:07:39.374  9460  9530 D EGL_emulation: app_time_stats: avg=112.13ms min=14.38ms max=218.23ms count=10
+11-22 08:07:39.840   320  9623 D resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10106 0}
+11-22 08:07:39.840   320  9623 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 08:07:39.841   320  9624 D resolv  : doQuery: (1, 28)
+11-22 08:07:39.841   320  9624 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 08:07:39.841   320  9624 D resolv  : res_nsend
+11-22 08:07:39.841   320  9624 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:39.841   320  9624 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723b4d2a370DISCARDED)
+11-22 08:07:39.841   320  9624 I resolv  : _cache_remove_p: entry 43 removed (count=53)
+11-22 08:07:39.841   320  9624 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:39.841   320  9624 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 13, min_samples = 8
+11-22 08:07:39.841   320  9624 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:39.841   320  9624 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:39.841   320  9625 D resolv  : doQuery: (1, 1)
+11-22 08:07:39.841   320  9624 D resolv  : send_dg: new DG socket
+11-22 08:07:39.841   320  9624 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:39.841   320  9624 I resolv  : retrying_poll: 55 retrying_poll
+11-22 08:07:39.842   320  9625 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 08:07:39.842   320  9625 D resolv  : res_nsend
+11-22 08:07:39.842   320  9625 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:39.842   320  9625 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723b4d30310DISCARDED)
+11-22 08:07:39.842   320  9625 I resolv  : _cache_remove_p: entry 42 removed (count=52)
+11-22 08:07:39.842   320  9625 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:39.844   320  9625 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 13, min_samples = 8
+11-22 08:07:39.844   320  9625 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:39.844   320  9625 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:39.844   320  9625 D resolv  : send_dg: new DG socket
+11-22 08:07:39.844   320  9625 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:39.844   320  9625 I resolv  : retrying_poll: 56 retrying_poll
+11-22 08:07:39.860   320  9624 I resolv  : retrying_poll: 55 retrying_poll returning 1
+11-22 08:07:39.860   320  9624 I resolv  : res_nsend: used send_dg 150 terrno: 0
+11-22 08:07:39.860   320  9624 I resolv  : res_stats_set_sample: rcode = 0, sec = 19
+11-22 08:07:39.860   320  9624 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 10, count = 64
+11-22 08:07:39.860   320  9624 D resolv  : res_nsend: got answer:
+11-22 08:07:39.860   320  9624 I resolv  : answer_getTTL: TTL = 300
+11-22 08:07:39.860   320  9624 I resolv  : _cache_add_p: entry 74 added (count=53)
+11-22 08:07:39.860   320  9624 I resolv  : cache_dump_mru_locked: MRU LIST (53):  74 73 72 71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 17 18 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:39.860   320  9624 D resolv  : doQuery: rcode=0, ancount=4
+11-22 08:07:39.861   320  9625 I resolv  : retrying_poll: 56 retrying_poll returning 1
+11-22 08:07:39.861   320  9625 I resolv  : res_nsend: used send_dg 102 terrno: 0
+11-22 08:07:39.861   320  9625 I resolv  : res_stats_set_sample: rcode = 0, sec = 17
+11-22 08:07:39.861   320  9625 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 11, count = 64
+11-22 08:07:39.861   320  9625 D resolv  : res_nsend: got answer:
+11-22 08:07:39.861   320  9625 I resolv  : answer_getTTL: TTL = 300
+11-22 08:07:39.861   320  9625 I resolv  : _cache_add_p: entry 75 added (count=54)
+11-22 08:07:39.861   320  9625 I resolv  : cache_dump_mru_locked: MRU LIST (54):  75 74 73 72 71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 17 18 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:39.861   320  9625 D resolv  : doQuery: rcode=0, ancount=4
+11-22 08:07:40.375  9460  9530 D EGL_emulation: app_time_stats: avg=200.09ms min=199.00ms max=202.01ms count=5
+11-22 08:07:40.451   320  9630 D resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10106 0}
+11-22 08:07:40.451   320  9630 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 08:07:40.451   320  9631 D resolv  : doQuery: (1, 28)
+11-22 08:07:40.451   320  9631 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 08:07:40.451   320  9631 D resolv  : res_nsend
+11-22 08:07:40.451   320  9631 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:40.451   320  9631 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723d4d2e7d0DISCARDED)
+11-22 08:07:40.452   320  9631 I resolv  : _cache_remove_p: entry 18 removed (count=53)
+11-22 08:07:40.452   320  9631 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:40.452   320  9631 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 14, min_samples = 8
+11-22 08:07:40.452   320  9631 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:40.452   320  9631 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:40.452   320  9631 D resolv  : send_dg: new DG socket
+11-22 08:07:40.452   320  9631 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:40.452   320  9631 I resolv  : retrying_poll: 55 retrying_poll
+11-22 08:07:40.453   320  9632 D resolv  : doQuery: (1, 1)
+11-22 08:07:40.453   320  9632 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 08:07:40.453   320  9632 D resolv  : res_nsend
+11-22 08:07:40.453   320  9632 I resolv  : resolv_cache_lookup: lookup
+11-22 08:07:40.453   320  9632 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x7723c4d1f450DISCARDED)
+11-22 08:07:40.453   320  9632 I resolv  : _cache_remove_p: entry 17 removed (count=52)
+11-22 08:07:40.453   320  9632 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 08:07:40.455   320  9632 I resolv  : res_stats_usable_server: NS stats: S 64 + E 0 + T 0 + I 0 = 64, rtt = 14, min_samples = 8
+11-22 08:07:40.455   320  9632 I resolv  : res_stats_usable_server: success rate 100
+11-22 08:07:40.455   320  9632 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 08:07:40.455   320  9632 D resolv  : send_dg: new DG socket
+11-22 08:07:40.455   320  9632 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 08:07:40.455   320  9632 I resolv  : retrying_poll: 56 retrying_poll
+11-22 08:07:40.458   320  9632 I resolv  : retrying_poll: 56 retrying_poll returning 1
+11-22 08:07:40.458   320  9632 I resolv  : res_nsend: used send_dg 169 terrno: 0
+11-22 08:07:40.458   320  9632 I resolv  : res_stats_set_sample: rcode = 0, sec = 3
+11-22 08:07:40.459   320  9632 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 12, count = 64
+11-22 08:07:40.459   320  9632 D resolv  : res_nsend: got answer:
+11-22 08:07:40.459   320  9632 I resolv  : answer_getTTL: TTL = 282
+11-22 08:07:40.459   320  9632 I resolv  : _cache_add_p: entry 76 added (count=53)
+11-22 08:07:40.459   320  9632 I resolv  : cache_dump_mru_locked: MRU LIST (53):  76 75 74 73 72 71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:40.459   320  9632 D resolv  : doQuery: rcode=0, ancount=8
+11-22 08:07:40.473   320  9631 I resolv  : retrying_poll: 55 retrying_poll returning 1
+11-22 08:07:40.473   320  9631 I resolv  : res_nsend: used send_dg 265 terrno: 0
+11-22 08:07:40.473   320  9631 I resolv  : res_stats_set_sample: rcode = 0, sec = 21
+11-22 08:07:40.473   320  9631 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 13, count = 64
+11-22 08:07:40.473   320  9631 D resolv  : res_nsend: got answer:
+11-22 08:07:40.473   320  9631 I resolv  : answer_getTTL: TTL = 300
+11-22 08:07:40.473   320  9631 I resolv  : _cache_add_p: entry 77 added (count=54)
+11-22 08:07:40.473   320  9631 I resolv  : cache_dump_mru_locked: MRU LIST (54):  77 76 75 74 73 72 71 70 69 64 68 67 66 65 62 61 37 38 57 56 55 4 54 53 9 10 49 48 36 35 45 44 25 26 47 46 22 21 40 39 16 15 34 33 30 29 28 27 12 11 14 13 2 1
+11-22 08:07:40.473   320  9631 D resolv  : doQuery: rcode=0, ancount=8
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: Could not register for notifications with InnerTube: 
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: tcg: sgv: Precondition check failed.
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at tbw.apply(Unknown Source:4)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at rnl.o(PG:5)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at rnl.b(PG:2)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at tby.d(PG:4)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at xas.c(PG:51)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at xas.j(PG:38)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at xas.d(PG:3)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at xap.run(Unknown Source:2)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at nvu.run(PG:1)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at nvp.run(PG:2)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at nvh.run(PG:3)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:920)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: Caused by: sgv: Precondition check failed.
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at tau.e(PG:5)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at rux.c(PG:18)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at rty.run(PG:17)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at rmq.run(PG:12)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	... 1 more
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: Caused by: byd
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	at rty.run(PG:12)
+11-22 08:07:41.040  9460  9626 W YouTubeMusic: 	... 4 more
+11-22 08:07:41.310   452  9584 D AudioTrack: stop(16): called with 32000 frames delivered
+11-22 08:07:41.574  9460  9530 D EGL_emulation: app_time_stats: avg=199.84ms min=197.82ms max=202.02ms count=6
+11-22 08:07:42.591  9460  9530 D EGL_emulation: app_time_stats: avg=203.35ms min=197.95ms max=216.75ms count=5
+11-22 08:07:42.721   452  9591 D BufferPoolAccessor2.0: bufferpool2 0x751f3a524728 : 5(327680 size) total buffers - 4(262144 size) used buffers - 0/5 (recycle/alloc) - 2/4 (fetch/transfer)
+11-22 08:07:42.721   452  9591 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+11-22 08:07:42.721   466   787 D BufferPoolAccessor2.0: bufferpool2 0x786f86534158 : 0(0 size) total buffers - 0(0 size) used buffers - 0/0 (recycle/alloc) - 0/0 (fetch/transfer)
+11-22 08:07:42.721   466   787 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 1
+11-22 08:07:42.721   518   822 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 0
+11-22 08:07:42.723   752  1075 D BufferPoolAccessor2.0: evictor expired: 1, evicted: 0
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: Could not register for notifications with InnerTube: 
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: tcg: sgv: Precondition check failed.
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at tbw.apply(Unknown Source:4)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at rnl.o(PG:5)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at rnl.b(PG:2)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at tby.d(PG:4)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at xas.c(PG:51)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at xas.j(PG:38)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at xas.d(PG:3)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at xap.run(Unknown Source:2)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at nvu.run(PG:1)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at nvp.run(PG:2)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at nvh.run(PG:3)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:920)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: Caused by: sgv: Precondition check failed.
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at tau.e(PG:5)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at rux.c(PG:18)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at rty.run(PG:17)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at rmq.run(PG:12)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	... 1 more
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: Caused by: byd
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	at rty.run(PG:12)
+11-22 08:07:42.913  9460  9626 W YouTubeMusic: 	... 4 more
+11-22 08:07:43.399   340   340 D goldfish-address-space: claimShared: Ask to claim region [0x3f5114000 0x3f5ab8000]
+11-22 08:07:43.407   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 08:07:43.408  9635  9636 I Gralloc4: mapper 4.x is not supported
+11-22 08:07:43.421  9635  9636 D HostConnection: createUnique: call
+11-22 08:07:43.422  9635  9636 D HostConnection: HostConnection::get() New Host Connection established 0x77ada7496390, tid 9636
+11-22 08:07:43.422  9635  9636 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 08:07:43.428  9635  9636 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 08:07:43.446  9635  9636 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 08:07:43.591  9460  9530 D EGL_emulation: app_time_stats: avg=200.10ms min=196.66ms max=201.59ms count=5
+11-22 08:07:43.721   518   822 D BufferPoolAccessor2.0: evictor expired: 5, evicted: 0
+11-22 08:07:43.723   752  1075 D BufferPoolAccessor2.0: evictor expired: 2, evicted: 0
+11-22 08:07:44.584  8862  9638 I Vision  : Supported ABIS: [x86_64, arm64-v8a]
+11-22 08:07:44.596  8862  9639 I ChimeraConfigurator: Starting update, reason: 4 urgentFeatures: vision.ocr:-1
+11-22 08:07:44.632   518   733 D WifiNl80211Manager: Scan result ready event
+11-22 08:07:44.632   518   733 D WifiNative: Scan result ready event
+11-22 08:07:44.633  8862  9639 I DynamiteModule: Considering local module com.google.android.gms.cronet_dynamite:0 and remote module com.google.android.gms.cronet_dynamite:1611
+11-22 08:07:44.633  8862  9639 I DynamiteModule: Selected remote version of com.google.android.gms.cronet_dynamite, version >= 1611
+11-22 08:07:44.635  8862  9639 W gle.android.gm: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk*710115887:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes2.dex*2846691920:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes3.dex*2761815357:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes4.dex*685778569:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes5.dex*533941434:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes6.dex*2075164405:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes7.dex*1278043695:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes8.dex*1915487278:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes9.dex*3363323367:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes10.dex*2549418032]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]#PCL[/system/framework/com.android.media.remotedisplay.jar*3472798122]#PCL[/system/framework/com.android.location.provider.jar*3633238673]#PCL[/system_ext/framework/androidx.window.sidecar.jar*3539530913]})
+11-22 08:07:44.660  8862  9639 I GmsDebugLogger: [73] 1801
+11-22 08:07:44.664  8862  9639 W ZappDownloader: No successful module downloads for requested features [vision.ocr].
+11-22 08:07:44.664  8862  9639 I GmsDebugLogger: [30] [VisionOcrDynamite.integ:231602402100000],[MlkitOcrCommon.optional:225014100800],[TfliteDynamiteDynamite.integ:264010405100800]
+11-22 08:07:44.671  8862  9639 W ChimeraConfigService: Retry attempt was throttled. [CONTEXT service_id=264 ]
+11-22 08:07:44.671  8862  9639 I GmsDebugLogger: [83] 1 [vision.ocr]
+11-22 08:07:44.672  8862  9638 W Vision  : Request for optional module download of ocr failed. Request again.
+11-22 08:07:44.673  8862  9638 I Vision  : Schedule retrying download ocr at 777130 with backoff 320 seconds
+11-22 08:07:44.791  9460  9530 D EGL_emulation: app_time_stats: avg=171.32ms min=50.66ms max=200.20ms count=7
+11-22 08:07:45.991  9460  9530 D EGL_emulation: app_time_stats: avg=199.98ms min=197.49ms max=202.47ms count=6
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: Could not register for notifications with InnerTube: 
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: tcg: sgv: Precondition check failed.
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at tbw.apply(Unknown Source:4)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at rnl.o(PG:5)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at rnl.b(PG:2)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at tby.d(PG:4)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at xas.c(PG:51)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at xas.j(PG:38)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at xas.d(PG:3)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at xap.run(Unknown Source:2)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at nvu.run(PG:1)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at nvp.run(PG:2)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at nvh.run(PG:3)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:920)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: Caused by: sgv: Precondition check failed.
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at tau.e(PG:5)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at rux.c(PG:18)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at rty.run(PG:17)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at rmq.run(PG:12)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	... 1 more
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: Caused by: byd
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	at rty.run(PG:12)
+11-22 08:07:46.328  9460  9626 W YouTubeMusic: 	... 4 more
+11-22 08:07:46.510  8665  8723 I WorkerManager: dispose()
+11-22 08:07:46.510  8665  8723 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-22 08:07:46.991  9460  9530 D EGL_emulation: app_time_stats: avg=199.98ms min=199.80ms max=200.19ms count=5
+11-22 08:07:47.487   518   518 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10122; state: DISABLED
+11-22 08:07:47.487   518   561 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10122; state: ENABLED
+11-22 08:07:47.491   321   321 D Zygote  : Forked child process 9646
+11-22 08:07:47.491   518   561 I ActivityManager: Start proc 9646:com.google.android.apps.photos/u0a122 for service {com.google.android.apps.photos/com.google.android.libraries.social.mediamonitor.MediaMonitorJobSchedulerService}
+11-22 08:07:47.494  9646  9646 W oid.apps.photo: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 08:07:47.495  7344  7351 I adbd    : jdwp connection from 9646
+11-22 08:07:47.499  9646  9646 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10122; state: ENABLED
+11-22 08:07:47.502  9646  9646 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/app/Photos/lib/x86_64:/product/app/Photos/Photos.apk!/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 08:07:47.504  9646  9646 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.photos' set to: 'default'
+11-22 08:07:47.504  9646  9646 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 08:07:47.504  9646  9646 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 08:07:47.504  9646  9646 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 08:07:47.510  9646  9646 W oid.apps.photo: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-22 08:07:47.510  9646  9646 W oid.apps.photo: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 08:07:47.510  9646  9646 W oid.apps.photo: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 08:07:47.576   518  1844 W UriGrantsManagerService: No permission grants found for com.google.android.apps.photos
+11-22 08:07:47.577   518  1844 W UriGrantsManagerService: No permission grants found for com.google.android.apps.photos
+11-22 08:07:47.578   518  1844 D CompatibilityChangeReporter: Compat change id reported: 149924527; UID 10122; state: ENABLED
+11-22 08:07:47.578   518  1844 D CompatibilityChangeReporter: Compat change id reported: 132649864; UID 10122; state: DISABLED
+11-22 08:07:47.579   518  1844 D CompatibilityChangeReporter: Compat change id reported: 182734110; UID 10122; state: ENABLED
+11-22 08:07:47.584   518  1844 W UriGrantsManagerService: No permission grants found for com.google.android.apps.photos
+11-22 08:07:47.584   518  1844 W UriGrantsManagerService: No permission grants found for com.google.android.apps.photos
+11-22 08:07:47.595   518  1844 W UriGrantsManagerService: No permission grants found for com.google.android.apps.photos
+11-22 08:07:47.595   518  1844 W UriGrantsManagerService: No permission grants found for com.google.android.apps.photos
+11-22 08:07:48.033   518  1796 W AppOps  : Noting op not finished: uid 10102 pkg com.google.android.gms code 113 startTime of in progress event=1795334165482
+11-22 08:07:48.191  9460  9530 D EGL_emulation: app_time_stats: avg=199.94ms min=195.87ms max=203.94ms count=6
+11-22 08:07:48.633  8862  8862 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 08:07:49.193  9460  9530 D EGL_emulation: app_time_stats: avg=200.52ms min=199.87ms max=202.55ms count=5
+--------- beginning of kernel
+11-22 08:07:49.764     0     0 I logd    : logdr: UID=0 GID=0 PID=9681 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
