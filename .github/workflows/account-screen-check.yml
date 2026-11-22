@@ -1236,3 +1236,98 @@ jobs:
         with:
           name: waqt-signed-release-no-ota
           path: app/build/outputs/apk/release/app-release.apk
+
+  signed-artifact-startup:
+    # Diagnosis only: exact artifact delivered to user, never a new release.
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: write
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        api: [31, 35]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: waqt-signed-release-no-ota
+          run-id: 44989788115
+          github-token: ${{ github.token }}
+          path: exact-apk
+      - name: Verify exact delivered bytes
+        run: |
+          echo '17ecc7747d5c15cf27a2f8f703be81be752905249912e027f6b0f1268f3235e3  exact-apk/app-release.apk' | sha256sum -c -
+      - name: Enable emulator acceleration
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - name: Boot test device
+        env:
+          API: ${{ matrix.api }}
+        run: |
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' "system-images;android-$API;google_apis;x86_64"
+          echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+          echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd -n startup -k "system-images;android-$API;google_apis;x86_64" --device pixel_5 --force
+          nohup "$ANDROID_HOME/emulator/emulator" -avd startup -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot-save -memory 3072 > /tmp/emulator.log 2>&1 &
+          "$ANDROID_HOME/platform-tools/adb" wait-for-device
+          for i in $(seq 1 100); do
+            if [ "$("$ANDROID_HOME/platform-tools/adb" shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then exit 0; fi
+            sleep 3
+          done
+          tail -70 /tmp/emulator.log
+          exit 1
+      - name: Exact release first launch and preserved-data relaunch
+        run: |
+          mkdir -p startup-evidence
+          adb shell input keyevent 82
+          adb install exact-apk/app-release.apk | tee startup-evidence/install.txt
+          adb logcat -c
+          adb shell am start -W -n com.example.glassproductivity/.MainActivity | tee startup-evidence/first-start.txt
+          sleep 12
+          adb exec-out screencap -p > startup-evidence/first.png
+          adb shell uiautomator dump /sdcard/ui.xml || true
+          adb pull /sdcard/ui.xml startup-evidence/first.xml || true
+          adb logcat -d > startup-evidence/first-logcat.txt
+          adb shell dumpsys activity activities > startup-evidence/first-activities.txt
+          adb shell pidof com.example.glassproductivity | tee startup-evidence/first-pid.txt || true
+          adb shell am force-stop com.example.glassproductivity
+          adb install -r exact-apk/app-release.apk | tee startup-evidence/reinstall.txt
+          adb logcat -c
+          adb shell am start -W -n com.example.glassproductivity/.MainActivity | tee startup-evidence/restart.txt
+          sleep 12
+          adb exec-out screencap -p > startup-evidence/restart.png
+          adb logcat -d > startup-evidence/restart-logcat.txt
+          adb shell dumpsys activity activities > startup-evidence/restart-activities.txt
+          adb shell pidof com.example.glassproductivity | tee startup-evidence/restart-pid.txt || true
+          grep -E -A30 'FATAL EXCEPTION|AndroidRuntime.*(Exception|Error)|Process: com.example.glassproductivity' startup-evidence/*logcat.txt > startup-evidence/crash.txt || true
+          if [ -s startup-evidence/crash.txt ]; then cat startup-evidence/crash.txt; exit 1; fi
+          test -s startup-evidence/first-pid.txt
+          test -s startup-evidence/restart-pid.txt
+          grep -q 'mResumedActivity.*com.example.glassproductivity' startup-evidence/restart-activities.txt
+      - name: Preserve diagnostic evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: exact-signed-startup-api${{ matrix.api }}
+          path: startup-evidence/
+      - name: Publish test evidence branch
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          API: ${{ matrix.api }}
+        run: |
+          mkdir -p /tmp/evidence
+          cp startup-evidence/* /tmp/evidence/ 2>/dev/null || true
+          cd /tmp/evidence
+          git init
+          git config user.name 'Waqt CI'
+          git config user.email 'waqt-ci@users.noreply.github.com'
+          git add .
+          git commit -m 'Exact signed artifact startup diagnostic evidence' || true
+          git branch -M "startup-evidence-r${{ github.run_id }}-api$API"
+          git push "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" HEAD --force
