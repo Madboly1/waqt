@@ -19,7 +19,7 @@ import java.util.zip.ZipOutputStream
  */
 object WaqtCloudBackup {
 
-    const val SCHEMA_VERSION = 5
+    const val SCHEMA_VERSION = 6
 
     private val PREFS_FILES = listOf(
         "waqt_productivity_prefs",
@@ -80,22 +80,19 @@ object WaqtCloudBackup {
         val out = ByteArrayOutputStream()
         ZipOutputStream(out).use { zip ->
             val prefsJson = JSONObject()
+            val preferenceTypes = JSONObject()
             for (name in PREFS_FILES) {
                 val prefs = context.getSharedPreferences(name, Context.MODE_PRIVATE)
                 val store = JSONObject()
+                val types = JSONObject()
                 for ((key, value) in prefs.all) {
                     if (isExcludedKey(key)) continue
-                    when (value) {
-                        is Boolean -> store.put(key, value)
-                        is Int -> store.put(key, value)
-                        is Long -> store.put(key, value)
-                        is Float -> store.put(key, value.toDouble())
-                        is String -> store.put(key, value)
-                        is Set<*> -> store.put(key, JSONArray(value.filterIsInstance<String>()))
-                        else -> {}
-                    }
+                    val type = BackupPreferenceTypes.typeOf(value) ?: continue
+                    store.put(key, BackupPreferenceTypes.jsonValue(value!!))
+                    types.put(key, type)
                 }
                 prefsJson.put(name, store)
+                preferenceTypes.put(name, types)
             }
 
             val chatJson = exportChatHistory(context)
@@ -109,6 +106,7 @@ object WaqtCloudBackup {
                 }.format(java.util.Date()))
                 if (!account.isNullOrBlank()) put("account", account)
                 put("preferences", prefsJson)
+                put("preferenceTypes", preferenceTypes)
                 put("chatHistory", chatJson)
                 put("media", mediaManifest)
             }.toString(2).toByteArray(Charsets.UTF_8))
@@ -299,6 +297,33 @@ object WaqtCloudBackup {
         val version = root.optInt("schemaVersion", 0)
         if (version > SCHEMA_VERSION) throw RestoreException("النسخة دي من إصدار أحدث من التطبيق")
 
+        // Validate the entire preference payload before any preference/media write.
+        // Legacy backups have no metadata; known app contracts recover their numbers.
+        val decodedPreferences = linkedMapOf<String, Map<String, Any>>()
+        val preferences = root.optJSONObject("preferences") ?: JSONObject()
+        val typeRoot = root.optJSONObject("preferenceTypes")
+        val prefNames = preferences.keys()
+        while (prefNames.hasNext()) {
+            val name = prefNames.next()
+            val store = preferences.optJSONObject(name)
+                ?: throw RestoreException("قسم إعدادات غير صالح")
+            val types = typeRoot?.optJSONObject(name)
+            val existing = context.getSharedPreferences(name, Context.MODE_PRIVATE).all
+            val decoded = linkedMapOf<String, Any>()
+            val keys = store.keys()
+            while (keys.hasNext()) {
+                val key = keys.next()
+                if (isExcludedKey(key)) continue
+                val declared = if (types?.has(key) == true) {
+                    types.get(key) as? String ?: throw RestoreException("نوع إعداد غير صالح")
+                } else null
+                decoded[key] = BackupPreferenceTypes.decode(
+                    name, key, store.get(key), declared, existing[key], version >= 6
+                )
+            }
+            decodedPreferences[name] = decoded
+        }
+
         val entries = readAllEntries(zipBytes)
 
         // 1. Media files first so references can point at restored paths.
@@ -354,32 +379,9 @@ object WaqtCloudBackup {
         }
 
         // 2. Preferences with reference rewriting.
-        val prefs = root.optJSONObject("preferences") ?: JSONObject()
-        val names = prefs.keys()
-        while (names.hasNext()) {
-            val name = names.next()
-            val store = prefs.optJSONObject(name) ?: continue
+        for ((name, store) in decodedPreferences) {
             val editor = context.getSharedPreferences(name, Context.MODE_PRIVATE).edit()
-            val keys = store.keys()
-            while (keys.hasNext()) {
-                val key = keys.next()
-                if (isExcludedKey(key)) continue
-                when (val value = store.get(key)) {
-                    is Boolean -> editor.putBoolean(key, value)
-                    is Int -> editor.putInt(key, value)
-                    is Long -> editor.putLong(key, value)
-                    is Double -> editor.putFloat(key, value.toFloat())
-                    is String -> {
-                        var rewritten: String = value
-                        for ((original, replacement) in replacements) {
-                            if (rewritten.contains(original)) rewritten = rewritten.replace(original, replacement)
-                        }
-                        editor.putString(key, rewritten)
-                    }
-                    is JSONArray -> editor.putString(key, value.toString())
-                    else -> {}
-                }
-            }
+            for ((key, value) in store) BackupPreferenceTypes.put(editor, key, value, replacements)
             editor.apply()
         }
 
