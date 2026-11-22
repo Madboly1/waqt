@@ -1098,7 +1098,12 @@ jobs:
           if [ -n "$HPXY" ]; then adb shell input tap $HPXY; fi
           sleep 3
           adb exec-out screencap -p > shots/51b_audio_console.png
-          if ! try_tap "إضافة صوت من الجهاز"; then
+          CONSOLE_OK=no
+          for i in 1 2 3 4 5; do
+            if try_tap "إضافة صوت من الجهاز"; then CONSOLE_OK=yes; break; fi
+            sleep 2
+          done
+          if [ "$CONSOLE_OK" != yes ]; then
             echo "AUDIO_CONSOLE=not_reached" > shots/audio_probe.txt
             adb shell uiautomator dump /sdcard/uia.xml >/dev/null 2>&1
             adb pull /sdcard/uia.xml shots/ui_audio_blocker.xml >/dev/null 2>&1 || true
