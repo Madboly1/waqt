@@ -1050,7 +1050,7 @@ jobs:
           for i in 1 2 3; do
             adb shell uiautomator dump /sdcard/uid.xml >/dev/null 2>&1
             adb pull /sdcard/uid.xml /tmp/uid.xml >/dev/null 2>&1 || true
-            if grep -q '&#127911;' /tmp/uid.xml; then break; fi
+            if grep -q '&#128202;' /tmp/uid.xml; then break; fi
             HXY=$(python3 - <<'PYHD'
           import re
           xml = open('/tmp/uid.xml', encoding='utf-8').read()
@@ -1076,7 +1076,26 @@ jobs:
             sleep 3
           done
           adb exec-out screencap -p > shots/51_audio_dock.png
-          try_tap "&#127911;" || true
+          HPXY=$(python3 - <<'PYHP'
+          import re
+          xml = open('/tmp/uid.xml', encoding='utf-8').read()
+          best = None
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              if not bm:
+                  continue
+              val = tm.group(1) if tm else ''
+              if '&#127911;' in val:
+                  x0, y0, x1, y1 = (int(bm.group(k)) for k in range(1, 5))
+                  if x1 > x0 and y1 > y0:
+                      best = ((x0 + x1) // 2, (y0 + y1) // 2)
+          if best:
+              print(best[0], best[1])
+          PYHP
+          )
+          if [ -n "$HPXY" ]; then adb shell input tap $HPXY; fi
           sleep 3
           adb exec-out screencap -p > shots/51b_audio_console.png
           if ! try_tap "إضافة صوت من الجهاز"; then
