@@ -1,0 +1,172 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.7/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+WARNING: We recommend using a newer Android Gradle plugin to use compileSdk = 35
+
+This Android Gradle plugin (8.5.2) was tested up to compileSdk = 34.
+
+You are strongly encouraged to update your project to use a newer
+Android Gradle plugin that has been tested with compileSdk = 35.
+
+If you are already using the latest version of the Android Gradle plugin,
+you may need to wait until a newer version with support for compileSdk = 35 is available.
+
+For more information refer to the compatibility table:
+https://d.android.com/r/tools/api-level-support
+
+To suppress this warning, add/update
+    android.suppressUnsupportedCompileSdk=35
+to this project's gradle.properties.
+> Task :app:checkKotlinGradlePluginConfigurationErrors
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:packageDebugResources
+> Task :app:mergeDebugResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:parseDebugLocalResources
+
+> Task :app:processDebugMainManifest
+package="com.example.glassproductivity" found in source AndroidManifest.xml: /home/runner/work/waqt/waqt/app/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.example.glassproductivity" from the source AndroidManifest.xml: /home/runner/work/waqt/waqt/app/src/main/AndroidManifest.xml.
+
+> Task :app:processDebugManifest
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebug
+> Task :app:processDebugManifestForPackage
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:buildKotlinToolingMetadata
+> Task :app:preReleaseBuild UP-TO-DATE
+> Task :app:checkReleaseAarMetadata
+> Task :app:generateReleaseResValues
+> Task :app:mapReleaseSourceSetPaths
+> Task :app:generateReleaseResources
+> Task :app:processDebugResources
+> Task :app:mergeReleaseResources
+> Task :app:packageDebugUnitTestForUnitTest
+> Task :app:generateDebugUnitTestConfig
+> Task :app:packageReleaseResources
+> Task :app:createReleaseCompatibleScreenManifests
+> Task :app:extractDeepLinksRelease
+> Task :app:parseReleaseLocalResources
+
+> Task :app:processReleaseMainManifest
+package="com.example.glassproductivity" found in source AndroidManifest.xml: /home/runner/work/waqt/waqt/app/src/main/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="com.example.glassproductivity" from the source AndroidManifest.xml: /home/runner/work/waqt/waqt/app/src/main/AndroidManifest.xml.
+
+> Task :app:processReleaseManifest
+> Task :app:processReleaseManifestForPackage
+> Task :app:javaPreCompileRelease
+> Task :app:extractProguardFiles
+> Task :app:mergeReleaseJniLibFolders
+> Task :app:mergeReleaseNativeLibs NO-SOURCE
+> Task :app:stripReleaseDebugSymbols NO-SOURCE
+> Task :app:extractReleaseNativeSymbolTables NO-SOURCE
+> Task :app:mergeReleaseNativeDebugMetadata NO-SOURCE
+> Task :app:desugarReleaseFileDependencies
+> Task :app:mergeReleaseStartupProfile
+> Task :app:checkReleaseDuplicateClasses
+> Task :app:mergeReleaseArtProfile
+> Task :app:processReleaseResources
+> Task :app:mergeReleaseShaders
+> Task :app:compileReleaseShaders NO-SOURCE
+> Task :app:generateReleaseAssets UP-TO-DATE
+> Task :app:mergeReleaseAssets
+> Task :app:compressReleaseAssets
+> Task :app:compileDebugKotlin
+> Task :app:extractReleaseVersionControlInfo
+> Task :app:mergeExtDexRelease
+> Task :app:collectReleaseDependencies
+> Task :app:sdkReleaseDependencyData
+> Task :app:optimizeReleaseResources
+> Task :app:validateSigningRelease
+> Task :app:writeReleaseAppMetadata
+> Task :app:writeReleaseSigningConfigVersions
+> Task :app:compileReleaseKotlin
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/AlarmReceiver.kt:100:13 Variable 'sessionId' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/AlarmReceiver.kt:183:26 'SCREEN_BRIGHT_WAKE_LOCK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/AlarmReceiver.kt:183:66 'ACQUIRE_CAUSES_WAKEUP: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/FloatingCardService.kt:316:34 Parameter 'view' is never used, could be renamed to _
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/FloatingCardService.kt:387:65 'SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/FloatingCardService.kt:489:69 'SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/GeminiClient.kt:192:22 Unnecessary safe call on a non-null receiver of type GeminiClient.MediaInput
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:539:48 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:599:16 'setter for statusBarColor: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:600:16 'setter for navigationBarColor: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:603:20 'setter for isStatusBarContrastEnforced: Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:4572:54 Parameter 'contentDesc' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:6135:57 Parameter 'isForeground' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:6142:13 Variable 'cardColor' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:6675:25 Variable 'startedAt' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:10206:21 Variable 'file' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/SoundEngine.kt:455:27 Parameter 't' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/SoundEngine.kt:463:22 Parameter 't' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:77:29 Variable 'appMediaCount' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:78:32 Variable 'externalIncluded' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:79:31 Variable 'externalSkipped' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:369:73 Name shadowed: root
+
+> Task :app:compileReleaseJavaWithJavac NO-SOURCE
+
+> Task :app:compileDebugKotlin
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/AlarmReceiver.kt:100:13 Variable 'sessionId' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/AlarmReceiver.kt:183:26 'SCREEN_BRIGHT_WAKE_LOCK: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/AlarmReceiver.kt:183:66 'ACQUIRE_CAUSES_WAKEUP: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/FloatingCardService.kt:316:34 Parameter 'view' is never used, could be renamed to _
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/FloatingCardService.kt:387:65 'SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/FloatingCardService.kt:489:69 'SOFT_INPUT_ADJUST_RESIZE: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/GeminiClient.kt:192:22 Unnecessary safe call on a non-null receiver of type GeminiClient.MediaInput
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:539:48 Elvis operator (?:) always returns the left operand of non-nullable type String
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:599:16 'setter for statusBarColor: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:600:16 'setter for navigationBarColor: Int' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:603:20 'setter for isStatusBarContrastEnforced: Boolean' is deprecated. Deprecated in Java
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:4572:54 Parameter 'contentDesc' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:6135:57 Parameter 'isForeground' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:6142:13 Variable 'cardColor' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:6675:25 Variable 'startedAt' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/MainActivity.kt:10206:21 Variable 'file' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/SoundEngine.kt:455:27 Parameter 't' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/SoundEngine.kt:463:22 Parameter 't' is never used
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:77:29 Variable 'appMediaCount' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:78:32 Variable 'externalIncluded' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:79:31 Variable 'externalSkipped' initializer is redundant
+w: file:///home/runner/work/waqt/waqt/app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt:369:73 Name shadowed: root
+
+> Task :app:generateReleaseLintVitalReportModel
+> Task :app:compileDebugJavaWithJavac NO-SOURCE
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:processDebugJavaRes
+
+> Task :app:compileDebugUnitTestKotlin
+w: file:///home/runner/work/waqt/waqt/app/src/test/java/com/example/glassproductivity/BackupWiringTest.kt:177:21 No cast needed
+w: file:///home/runner/work/waqt/waqt/app/src/test/java/com/example/glassproductivity/BackupWiringTest.kt:213:21 No cast needed
+
+> Task :app:dexBuilderRelease
+> Task :app:compileDebugUnitTestJavaWithJavac NO-SOURCE
+> Task :app:processDebugUnitTestJavaRes
+> Task :app:testDebugUnitTest
+> Task :app:mergeReleaseGlobalSynthetics
+> Task :app:processReleaseJavaRes
+> Task :app:lintVitalAnalyzeRelease
+> Task :app:mergeReleaseJavaResource
+> Task :app:mergeDexRelease
+> Task :app:compileReleaseArtProfile
+> Task :app:packageRelease
+> Task :app:createReleaseApkListingFileRedirect
+> Task :app:lintVitalReportRelease
+> Task :app:lintVitalRelease
+> Task :app:assembleRelease
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/__run_3-1795345462762.json
+
+BUILD SUCCESSFUL in 2m 8s
+72 actionable tasks: 72 executed
