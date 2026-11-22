@@ -536,6 +536,13 @@ class MainActivity : AppCompatActivity() {
                 contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
             } catch (_: Exception) { }
             val name = getFileNameFromUri(uri) ?: if (isArabic) "صوت من الجهاز" else "Device audio"
+            val lowerName = name.lowercase()
+            val mime = contentResolver.getType(uri) ?: ""
+            if (lowerName.endsWith(".m3u") || lowerName.endsWith(".m3u8") || lowerName.endsWith(".pls") || lowerName.endsWith(".wpl") || mime.contains("mpegurl") || mime.contains("playlist")) {
+                Toast.makeText(this, if (isArabic) "اختار ملف أغنية واحد مش قائمة تشغيل عشان يشتغل لوحده" else "Pick a single song file, not a playlist, so only it plays", Toast.LENGTH_LONG).show()
+                isPickingAudioFromConsole = false
+                return@registerForActivityResult
+            }
             val existing = focusCustomAudioTracks.indexOfFirst { it.second == uri.toString() }
             if (existing >= 0) {
                 focusSelectedTrackPosition = 9 + existing
@@ -1189,10 +1196,11 @@ class MainActivity : AppCompatActivity() {
         }
         val touchedView = target
         while (target !== container) {
-            // Preserve gestures owned by the carousel and controls that directly receive
-            // the touch. A clickable ancestor (for example, a whole content card) must not
-            // block tab navigation across the entire card surface.
+            // Preserve gestures owned by the carousel, the side-rail docks, and controls
+            // that directly receive the touch. A clickable ancestor (for example, a whole
+            // content card) must not block tab navigation across the entire card surface.
             if (carouselSwipeViews.containsKey(target) ||
+                railDockViews.containsKey(target) ||
                 target is android.widget.HorizontalScrollView ||
                 target is android.widget.SeekBar ||
                 target is android.widget.EditText ||
@@ -7307,6 +7315,7 @@ class MainActivity : AppCompatActivity() {
                 .putString("custom_audio_name", local.first)
                 .putInt(ReminderRepository.KEY_DEFAULT_SOUND_INDEX, -1).apply()
             if (autoplay) {
+                soundEngine.stopAmbient()
                 isAmbientPlaying = true
                 isAmbientPaused = false
                 playCustomAudio()
