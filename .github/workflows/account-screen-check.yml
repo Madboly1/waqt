@@ -1238,6 +1238,7 @@ jobs:
           path: app/build/outputs/apk/release/app-release.apk
 
   signed-artifact-startup:
+    if: ${{ !contains(github.event.head_commit.message, '[recovery-test]') }}
     # Diagnosis only: exact artifact delivered to user, never a new release.
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -1348,3 +1349,211 @@ jobs:
           git commit -m 'Exact signed artifact startup diagnostic evidence' || true
           git branch -M "startup-evidence-r${{ github.run_id }}-api$API"
           git push "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" HEAD --force
+
+  recovery-release-check:
+    if: ${{ contains(github.event.head_commit.message, '[recovery-test]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+    - uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.7'
+    - name: Apply diagnostic-only startup guards
+      run: |
+        python3 - <<'PY'
+        from pathlib import Path
+        p=Path('app/src/main/java/com/example/glassproductivity/MainActivity.kt')
+        s=p.read_text()
+        for old,new in [
+        ('        super.onCreate(savedInstanceState)\n        audioManager', '        super.onCreate(savedInstanceState)\n        if (StartupRecovery.enterIfRecorded(this)) return\n        audioManager'),
+        ('        super.onStart()\n        val filter', '        super.onStart()\n        if (StartupRecovery.isActive(this)) return\n        val filter'),
+        ('        super.onResume()\n        syncActiveFocusTimerFromStorage()', '        super.onResume()\n        if (StartupRecovery.isActive(this)) return\n        syncActiveFocusTimerFromStorage()')]:
+         assert s.count(old)==1, old
+         s=s.replace(old,new)
+        p.write_text(s)
+        p.with_name('StartupRecovery.kt').write_bytes(__import__('base64').b64decode('cGFja2FnZSBjb20uZXhhbXBsZS5nbGFzc3Byb2R1Y3Rpdml0eQoKaW1wb3J0IGFuZHJvaWQuYXBwLkFjdGl2aXR5CmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ2xpcERhdGEKaW1wb3J0IGFuZHJvaWQuY29udGVudC5DbGlwYm9hcmRNYW5hZ2VyCmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ29udGV4dAppbXBvcnQgYW5kcm9pZC5ncmFwaGljcy5Db2xvcgppbXBvcnQgYW5kcm9pZC52aWV3LlZpZXdHcm91cAppbXBvcnQgYW5kcm9pZC53aWRnZXQuQnV0dG9uCmltcG9ydCBhbmRyb2lkLndpZGdldC5MaW5lYXJMYXlvdXQKaW1wb3J0IGFuZHJvaWQud2lkZ2V0LlNjcm9sbFZpZXcKaW1wb3J0IGFuZHJvaWQud2lkZ2V0LlRleHRWaWV3CgovKiogRGlhZ25vc3RpYyBlbnRyeSBvbmx5LiBOZXZlciBjbGVhcnMgdGhlIHN0b3JlZCBjcmFzaCBvciBlZGl0cyBidXNpbmVzcyBkYXRhLiAqLwppbnRlcm5hbCBvYmplY3QgU3RhcnR1cFJlY292ZXJ5IHsKICAgIHByaXZhdGUgdmFsIGFjdGl2ZSA9IGphdmEudXRpbC5XZWFrSGFzaE1hcDxBY3Rpdml0eSwgQm9vbGVhbj4oKQoKICAgIGZ1biBpc0FjdGl2ZShhY3Rpdml0eTogQWN0aXZpdHkpOiBCb29sZWFuID0gYWN0aXZlW2FjdGl2aXR5XSA9PSB0cnVlCgogICAgZnVuIGVudGVySWZSZWNvcmRlZChhY3Rpdml0eTogQWN0aXZpdHkpOiBCb29sZWFuIHsKICAgICAgICB2YWwgcHJlZnMgPSBhY3Rpdml0eS5nZXRTaGFyZWRQcmVmZXJlbmNlcygid2FxdF9wcmVmcyIsIENvbnRleHQuTU9ERV9QUklWQVRFKQogICAgICAgIHZhbCBjcmFzaCA9IHRyeSB7IHByZWZzLmdldFN0cmluZygibGFzdF9jcmFzaCIsIG51bGwpIH0gY2F0Y2ggKF86IEV4Y2VwdGlvbikgeyBudWxsIH0KICAgICAgICBpZiAoY3Jhc2guaXNOdWxsT3JCbGFuaygpKSByZXR1cm4gZmFsc2UKICAgICAgICBhY3RpdmVbYWN0aXZpdHldID0gdHJ1ZQogICAgICAgIHZhbCBkZW5zaXR5ID0gYWN0aXZpdHkucmVzb3VyY2VzLmRpc3BsYXlNZXRyaWNzLmRlbnNpdHkKICAgICAgICBmdW4gZHAodmFsdWU6IEludCkgPSAodmFsdWUgKiBkZW5zaXR5ICsgMC41ZikudG9JbnQoKQogICAgICAgIHZhbCBib2R5ID0gTGluZWFyTGF5b3V0KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIG9yaWVudGF0aW9uID0gTGluZWFyTGF5b3V0LlZFUlRJQ0FMCiAgICAgICAgICAgIHNldFBhZGRpbmcoZHAoMjApLCBkcCgyNCksIGRwKDIwKSwgZHAoMjQpKQogICAgICAgICAgICBzZXRCYWNrZ3JvdW5kQ29sb3IoQ29sb3IucmdiKDI1MCwgMjQ3LCAyNDApKQogICAgICAgIH0KICAgICAgICBib2R5LmFkZFZpZXcoVGV4dFZpZXcoYWN0aXZpdHkpLmFwcGx5IHsKICAgICAgICAgICAgdGV4dCA9ICLZgdiq2K0g2KLZhdmGINmE2YTYqti02K7Ziti1IgogICAgICAgICAgICB0ZXh0U2l6ZSA9IDIzZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDM1LCAzMCwgMjUpKQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KFRleHRWaWV3KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSAi2KfZhNi02KfYtNipINiv2Yog2KjYqti52LHYtiDYs9io2Kgg2KfZhNil2LrZhNin2YIg2KfZhNmF2LPYrNmEINio2K/ZhCDZgdiq2K0g2KfZhNmI2KfYrNmH2Kkg2KfZhNi52KfYr9mK2KkuINmF2LQg2KjYqtmF2LPYrSDYp9mE2YXZh9in2YUg2KPZiCDYp9mE2KXYudiv2KfYr9in2KouINmF2Kcg2KrYrdiw2YHYtCDYp9mE2KrYt9io2YrZgiDZiNmE2Kcg2KrZhdiz2K0g2KjZitin2YbYp9iq2YcuIgogICAgICAgICAgICB0ZXh0U2l6ZSA9IDE2ZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDQ1LCA0MCwgMzUpKQogICAgICAgICAgICBzZXRQYWRkaW5nKDAsIGRwKDE2KSwgMCwgZHAoMTYpKQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KFRleHRWaWV3KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSBjcmFzaAogICAgICAgICAgICB0ZXh0U2l6ZSA9IDEyZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDQwLCAzNSwgMzApKQogICAgICAgICAgICBzZXRUZXh0SXNTZWxlY3RhYmxlKHRydWUpCiAgICAgICAgICAgIGNvbnRlbnREZXNjcmlwdGlvbiA9ICJXQVFUX1NUQVJUVVBfUkVDT1ZFUllfVFJBQ0UiCiAgICAgICAgfSkKICAgICAgICBib2R5LmFkZFZpZXcoQnV0dG9uKGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSAi2YbYs9iuINiq2YHYp9i12YrZhCDYp9mE2LnYt9mEIgogICAgICAgICAgICBzZXRPbkNsaWNrTGlzdGVuZXIgewogICAgICAgICAgICAgICAgKGFjdGl2aXR5LmdldFN5c3RlbVNlcnZpY2UoQ29udGV4dC5DTElQQk9BUkRfU0VSVklDRSkgYXMgQ2xpcGJvYXJkTWFuYWdlcikKICAgICAgICAgICAgICAgICAgICAuc2V0UHJpbWFyeUNsaXAoQ2xpcERhdGEubmV3UGxhaW5UZXh0KCJXYXF0IHN0YXJ0dXAgZGlhZ25vc3RpYyIsIGNyYXNoKSkKICAgICAgICAgICAgfQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KEJ1dHRvbihhY3Rpdml0eSkuYXBwbHkgewogICAgICAgICAgICB0ZXh0ID0gItil2LrZhNin2YIiCiAgICAgICAgICAgIHNldE9uQ2xpY2tMaXN0ZW5lciB7IGFjdGl2aXR5LmZpbmlzaCgpIH0KICAgICAgICB9KQogICAgICAgIGFjdGl2aXR5LnNldENvbnRlbnRWaWV3KFNjcm9sbFZpZXcoYWN0aXZpdHkpLmFwcGx5IHsKICAgICAgICAgICAgYWRkVmlldyhib2R5LCBWaWV3R3JvdXAuTGF5b3V0UGFyYW1zKFZpZXdHcm91cC5MYXlvdXRQYXJhbXMuTUFUQ0hfUEFSRU5ULCBWaWV3R3JvdXAuTGF5b3V0UGFyYW1zLldSQVBfQ09OVEVOVCkpCiAgICAgICAgfSkKICAgICAgICByZXR1cm4gdHJ1ZQogICAgfQp9Cg=='))
+        print('Three minimal lifecycle guards applied; helper added. No storage/schema/version changes.')
+
+        PY
+        git diff --stat
+    - name: Decode existing release signing key
+      env:
+        KEYSTORE_BASE64: ${{ secrets.WAQT_KEYSTORE_BASE64 }}
+      run: |
+        test -n "$KEYSTORE_BASE64"
+        echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/waqt-release.jks"
+    - name: Build exact diagnostic signed release
+      env:
+        WAQT_KEYSTORE_PATH: ${{ runner.temp }}/waqt-release.jks
+        WAQT_KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
+        WAQT_KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
+        WAQT_KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
+      run: gradle :app:assembleRelease --no-daemon --stacktrace
+    - name: Verify unchanged package version and signing
+      run: |
+        mkdir -p recovery-evidence
+        APK=app/build/outputs/apk/release/app-release.apk
+        BT=$(ls "$ANDROID_HOME"/build-tools/ | sort -V | tail -1)
+        "$ANDROID_HOME/build-tools/$BT/apksigner" verify --print-certs "$APK" | tee recovery-evidence/certificate.txt
+        grep -q '76b52b825b663a53294a8030a7ca52ef74a2cddabc197ff7f9606045e60c9689' recovery-evidence/certificate.txt
+        "$ANDROID_HOME/build-tools/$BT/aapt" dump badging "$APK" | grep -E '^(package:|sdkVersion:|targetSdkVersion:|application-label:)' | tee recovery-evidence/package.txt
+        grep -q "name='com.example.glassproductivity' versionCode='105' versionName='5.6.79'" recovery-evidence/package.txt
+        sha256sum "$APK" | tee recovery-evidence/apk-sha256.txt
+    - name: Enable emulator acceleration
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+    - name: Boot test device
+      env:
+        API: '36'
+      run: |
+        yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+        if [ ! -x "$ANDROID_HOME/platform-tools/adb" ] || [ ! -x "$ANDROID_HOME/emulator/emulator" ]; then
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator'
+        fi
+        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "system-images;android-$API;google_apis;x86_64"
+        echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+        echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
+        export ANDROID_SDK_HOME="$HOME"
+        export ANDROID_AVD_HOME="$HOME/.android/avd"
+        mkdir -p "$ANDROID_AVD_HOME"
+        echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd -n startup -k "system-images;android-$API;google_apis;x86_64" --device pixel_5 --force
+        CFG="$ANDROID_AVD_HOME/startup.avd/config.ini"
+        test -f "$CFG"
+        echo 'hw.ramSize=3072' >> "$CFG"
+        echo 'disk.dataPartition.size=4G' >> "$CFG"
+        nohup "$ANDROID_HOME/emulator/emulator" -avd startup -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot-save -memory 3072 > /tmp/emulator.log 2>&1 &
+        timeout 120 "$ANDROID_HOME/platform-tools/adb" wait-for-device || { cat /tmp/emulator.log; exit 1; }
+        for i in $(seq 1 100); do
+          if [ "$("$ANDROID_HOME/platform-tools/adb" shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then exit 0; fi
+          sleep 3
+        done
+        tail -70 /tmp/emulator.log
+        exit 1
+    - name: Exercise exact release with synthetic saved state
+      run: |
+        set -e
+        mkdir -p recovery-evidence
+        APK=app/build/outputs/apk/release/app-release.apk
+        adb install "$APK" | tee recovery-evidence/install.txt
+        adb shell input keyevent 82
+        adb logcat -c
+        adb shell am start -W -n com.example.glassproductivity/.MainActivity | tee recovery-evidence/clean-start.txt
+        sleep 10
+        adb exec-out screencap -p > recovery-evidence/clean.png
+        adb logcat -d > recovery-evidence/clean-logcat.txt
+        adb shell pidof com.example.glassproductivity > recovery-evidence/clean-pid.txt
+        if grep -q 'Process: com.example.glassproductivity' recovery-evidence/clean-logcat.txt; then exit 1; fi
+        adb shell am force-stop com.example.glassproductivity
+        adb root
+        adb wait-for-device
+        PKG=com.example.glassproductivity
+        DATA=/data/user/0/$PKG
+        OWNER=$(adb shell stat -c %u "$DATA" | tr -d '\r')
+        python3 - <<'PY'
+        from pathlib import Path
+        import xml.etree.ElementTree as ET
+        for with_crash in [True,False]:
+         r=ET.Element('map')
+         ET.SubElement(r,'string',name='pref_dark_mode').text='synthetic-wrong-type-preserve-me'
+         if with_crash:
+          ET.SubElement(r,'string',name='last_crash').text='java.lang.IllegalStateException: WAQT_SYNTHETIC_STARTUP_FAILURE'
+         Path('/tmp/recovery-with-crash.xml' if with_crash else '/tmp/recovery-no-crash.xml').write_bytes(ET.tostring(r,encoding='utf-8',xml_declaration=True))
+        r=ET.Element('map')
+        ET.SubElement(r,'string',name='waqt_items_json').text='[{"id":"keep-sentinel","title":"KEEP SYNTHETIC TASK","isHabit":false,"hour":9,"minute":30}]'
+        ET.SubElement(r,'string',name='waqt_notes_json').text='[{"id":"keep-note","title":"KEEP SYNTHETIC NOTE"}]'
+        Path('/tmp/recovery-business.xml').write_bytes(ET.tostring(r,encoding='utf-8',xml_declaration=True))
+        PY
+        adb shell mkdir -p "$DATA/shared_prefs"
+        adb push /tmp/recovery-with-crash.xml "$DATA/shared_prefs/waqt_prefs.xml"
+        adb push /tmp/recovery-business.xml "$DATA/shared_prefs/waqt_productivity_prefs.xml"
+        adb shell chown -R "$OWNER:$OWNER" "$DATA/shared_prefs"
+        adb shell restorecon -R "$DATA/shared_prefs"
+        adb shell sha256sum "$DATA/shared_prefs/waqt_productivity_prefs.xml" > recovery-evidence/business-before.txt
+        adb shell sha256sum "$DATA/shared_prefs/waqt_prefs.xml" > recovery-evidence/settings-before.txt
+        for pass in first repeat; do
+         adb logcat -c
+         adb shell am start -W -n "$PKG/.MainActivity" > "recovery-evidence/$pass-start.txt"
+         sleep 5
+         adb exec-out screencap -p > "recovery-evidence/$pass-recovery.png"
+         adb shell uiautomator dump /sdcard/ui.xml
+         adb pull /sdcard/ui.xml "recovery-evidence/$pass-recovery.xml"
+         grep -q 'WAQT_STARTUP_RECOVERY_TRACE' "recovery-evidence/$pass-recovery.xml"
+         grep -q 'WAQT_SYNTHETIC_STARTUP_FAILURE' "recovery-evidence/$pass-recovery.xml"
+         adb logcat -d > "recovery-evidence/$pass-logcat.txt"
+         if grep -q 'Process: com.example.glassproductivity' "recovery-evidence/$pass-logcat.txt"; then exit 1; fi
+         adb shell pidof "$PKG" > "recovery-evidence/$pass-pid.txt"
+         adb shell am force-stop "$PKG"
+        done
+        adb shell sha256sum "$DATA/shared_prefs/waqt_prefs.xml" > recovery-evidence/settings-after.txt
+        adb shell sha256sum "$DATA/shared_prefs/waqt_productivity_prefs.xml" > recovery-evidence/business-after.txt
+        diff -u recovery-evidence/settings-before.txt recovery-evidence/settings-after.txt
+        diff -u recovery-evidence/business-before.txt recovery-evidence/business-after.txt
+        # No saved trace: the old startup type failure is recorded by the existing reporter.
+        adb push /tmp/recovery-no-crash.xml "$DATA/shared_prefs/waqt_prefs.xml"
+        adb shell chown "$OWNER:$OWNER" "$DATA/shared_prefs/waqt_prefs.xml"
+        adb shell restorecon "$DATA/shared_prefs/waqt_prefs.xml"
+        adb logcat -c
+        adb shell am start -W -n "$PKG/.MainActivity" > recovery-evidence/expected-first-failure.txt || true
+        sleep 5
+        adb logcat -d > recovery-evidence/expected-type-error-logcat.txt
+        grep -q 'ClassCastException' recovery-evidence/expected-type-error-logcat.txt
+        adb shell am force-stop "$PKG"
+        adb shell am start -W -n "$PKG/.MainActivity" > recovery-evidence/recorded-restart.txt
+        sleep 5
+        adb exec-out screencap -p > recovery-evidence/recorded-recovery.png
+        adb shell uiautomator dump /sdcard/ui.xml
+        adb pull /sdcard/ui.xml recovery-evidence/recorded-recovery.xml
+        grep -q 'WAQT_STARTUP_RECOVERY_TRACE' recovery-evidence/recorded-recovery.xml
+        grep -q 'ClassCastException' recovery-evidence/recorded-recovery.xml
+        adb shell sha256sum "$DATA/shared_prefs/waqt_productivity_prefs.xml" > recovery-evidence/business-final.txt
+        diff -u recovery-evidence/business-before.txt recovery-evidence/business-final.txt
+        echo 'RECOVERY_EXISTING_TRACE=yes' > recovery-evidence/verdict.txt
+        echo 'RECOVERY_REPEATED_LAUNCH=yes' >> recovery-evidence/verdict.txt
+        echo 'RECOVERY_SETTINGS_UNCHANGED=yes' >> recovery-evidence/verdict.txt
+        echo 'RECOVERY_BUSINESS_DATA_UNCHANGED=yes' >> recovery-evidence/verdict.txt
+        echo 'RECOVERY_NEW_TRACE_ON_NEXT_LAUNCH=yes' >> recovery-evidence/verdict.txt
+        cat recovery-evidence/verdict.txt
+    - name: Preserve diagnostic APK for review only
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: waqt-recovery-diagnostic-not-approved-for-install
+        path: app/build/outputs/apk/release/app-release.apk
+    - name: Preserve recovery evidence
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: waqt-recovery-evidence
+        path: recovery-evidence/
+    - name: Persist tested source only after checks pass
+      run: |
+        git config user.name 'Waqt CI'
+        git config user.email 'waqt-ci@users.noreply.github.com'
+        git add app/src/main/java/com/example/glassproductivity/MainActivity.kt app/src/main/java/com/example/glassproductivity/StartupRecovery.kt
+        git commit -m 'Add data-preserving early startup diagnostic screen'
+        git push origin HEAD:feature/google-drive-backup
+    - name: Publish synthetic evidence branch
+      if: always()
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        mkdir -p /tmp/recovery-evidence
+        cp recovery-evidence/* /tmp/recovery-evidence/ 2>/dev/null || true
+        cp /tmp/emulator.log /tmp/recovery-evidence/emulator.log 2>/dev/null || true
+        cd /tmp/recovery-evidence
+        git init
+        git config user.name 'Waqt CI'
+        git config user.email 'waqt-ci@users.noreply.github.com'
+        git add .
+        git commit -m 'Synthetic startup recovery evidence' || true
+        git branch -M "recovery-evidence-r${{ github.run_id }}"
+        git push "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" HEAD --force
