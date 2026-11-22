@@ -1,0 +1,755 @@
+--------- beginning of main
+11-22 05:00:55.939  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=118.0 y=604.0 rawX=118.0 rawY=604.0 tab=0 
+11-22 05:00:55.939  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=118.0,259.0 host=1080x1863
+11-22 05:00:55.940  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 05:00:55.951  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=119.11429 y=604.5143 rawX=119.11429 rawY=604.5143 tab=0 
+11-22 05:00:55.951  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:55.965  2840  2848 I .apps.messagin: Background concurrent copying GC freed 76882(3478KB) AllocSpace objects, 25(2344KB) LOS objects, 49% free, 7921KB/15MB, paused 15us,19us total 126.755ms
+11-22 05:00:55.968  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=124.87142 y=607.17145 rawX=124.87142 rawY=607.17145 tab=0 
+11-22 05:00:55.968  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:55.984  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=131.74286 y=610.3429 rawX=131.74286 rawY=610.3429 tab=0 
+11-22 05:00:55.984  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:55.999  2341  2387 I DynamiteModule: Considering local module com.google.android.gms.googlecertificates:7 and remote module com.google.android.gms.googlecertificates:7
+11-22 05:00:55.999  2341  2387 I DynamiteModule: Selected local version of com.google.android.gms.googlecertificates
+11-22 05:00:56.001  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=138.05714 y=613.2572 rawX=138.05714 rawY=613.2572 tab=0 
+11-22 05:00:56.001  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:56.018  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=144.0 y=616.0 rawX=144.0 rawY=616.0 tab=0 
+11-22 05:00:56.018  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:56.034  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=149.57143 y=618.5714 rawX=149.57143 rawY=618.5714 tab=0 
+11-22 05:00:56.034  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:56.067   322  4014 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-22 05:00:56.067   322  4014 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 05:00:56.067   322  4014 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=10 ai_socktype=1 ai_protocol=6
+11-22 05:00:56.067   322  4014 D resolv  : explore_numeric_scope
+11-22 05:00:56.067   322  4014 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=2 ai_socktype=1 ai_protocol=6
+11-22 05:00:56.067   322  4014 D resolv  : explore_numeric_scope
+11-22 05:00:56.068   322  4014 I ResolverController: No valid NAT64 prefix (100, <unspecified>/0)
+11-22 05:00:56.124  2341  2387 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-22 05:00:56.124  2341  2387 W libc    : Access denied finding property "service.adb.tls.port"
+11-22 05:00:56.143   525  1216 D ConnectivityService: requestNetwork for uid/pid:1000/525 asUid: 10113 activeRequest: null callbackRequest: 81 [NetworkRequest [ REQUEST id=82, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10113 RequestorUid: 1000 RequestorPkg: android] ]] callback flags: 0 priority: 2147483647
+11-22 05:00:56.144  1169  1169 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdh.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 05:00:56.148   525   700 D ConnectivityService: NetReassign [82 : null → 100]
+11-22 05:00:56.150   525   691 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=82, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10113 RequestorUid: 1000 RequestorPkg: android] ]
+11-22 05:00:56.150   525   691 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=82, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10113 RequestorUid: 1000 RequestorPkg: android] ]
+11-22 05:00:56.150   525   691 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=82, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10113 RequestorUid: 1000 RequestorPkg: android] ]
+11-22 05:00:56.153  1169  1169 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdh.service.listener.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 05:00:56.161  2840  2883 I BugleNotifications: Silently refreshing notifications after Boot/Package replacement
+11-22 05:00:56.120  2341  2341 W Binder:2341_2: type=1400 audit(0.0:41): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=246 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:56.236  2840  2883 I BugleDatabasePerf: : took 74ms to executeInTransaction
+11-22 05:00:56.241  1169  2653 I PeopleChimeraService: onService. callbacks = asoo@dc4ce1e, request = com.google.android.gms.common.internal.GetServiceRequest@ccd16ff
+11-22 05:00:56.120  2341  2341 W Binder:2341_2: type=1400 audit(0.0:42): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=56 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:56.268  2316  2566 D EGL_emulation: app_time_stats: avg=3533.84ms min=151.16ms max=6916.53ms count=2
+11-22 05:00:56.269  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=157.37143 y=622.17145 rawX=157.37143 rawY=622.17145 tab=0 
+11-22 05:00:56.269  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:56.274  2840  2864 D MddListenableWorkerFactory: createWorker for class: com.google.android.apps.messaging.shared.datamodel.workqueue.WorkQueueWorkerShim
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: Phenotype bulk platform registration failed. [CONTEXT service_id=204 ]
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at bqxg.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):20)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):15)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:56.342  1051  2239 W ConfiguratorPhenotypeUt: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:56.382  1051  2775 W .gms.persisten: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.PersistentIntentOperationChimeraService-Executor] processing com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener for action com.google.android.gms.chimera.container.CONTAINER_UPDATED (2239) at void gug.run()(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3) waiters=0 in void gug.run() for 6.081s
+11-22 05:00:56.400  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=242.05714 y=661.25714 rawX=242.05714 rawY=661.25714 tab=0 
+11-22 05:00:56.400  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:56.421   762   762 I Choreographer: Skipped 35 frames!  The application may be doing too much work on its main thread.
+11-22 05:00:56.427  2840  2872 I BugleNotifications: Starting refreshIncomingMessageNotifications: silent - true, isSmartReplyUpdate - false, isFromNotification - false
+11-22 05:00:56.451   322  4017 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10100 0}
+11-22 05:00:56.452   322  4017 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 05:00:56.465   322  4019 D resolv  : doQuery: (1, 1)
+11-22 05:00:56.465   322  4019 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 05:00:56.465   322  4019 D resolv  : res_nsend
+11-22 05:00:56.466   322  4019 I resolv  : resolv_cache_lookup: lookup
+11-22 05:00:56.466   322  4019 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 05:00:56.466   322  4019 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 05:00:56.466   322  4018 D resolv  : doQuery: (1, 28)
+11-22 05:00:56.466   322  4018 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 05:00:56.466   322  4018 D resolv  : res_nsend
+11-22 05:00:56.466   322  4018 I resolv  : resolv_cache_lookup: lookup
+11-22 05:00:56.466   322  4018 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 05:00:56.466   322  4018 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 05:00:56.466   322  4018 I resolv  : res_stats_usable_server: NS stats: S 38 + E 0 + T 0 + I 0 = 38, rtt = 14, min_samples = 8
+11-22 05:00:56.466   322  4018 I resolv  : res_stats_usable_server: success rate 100
+11-22 05:00:56.466   322  4018 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 05:00:56.467   322  4018 D resolv  : send_dg: new DG socket
+11-22 05:00:56.467   322  4018 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 05:00:56.475   322  4019 I resolv  : res_stats_usable_server: NS stats: S 38 + E 0 + T 0 + I 0 = 38, rtt = 14, min_samples = 8
+11-22 05:00:56.476   322  4019 I resolv  : res_stats_usable_server: success rate 100
+11-22 05:00:56.476   322  4019 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 05:00:56.476   322  4019 D resolv  : send_dg: new DG socket
+11-22 05:00:56.476   322  4019 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 05:00:56.477   322  4018 I resolv  : retrying_poll: 58 retrying_poll
+11-22 05:00:56.477   322  4019 I resolv  : retrying_poll: 59 retrying_poll
+11-22 05:00:56.480   322  4018 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-22 05:00:56.480   322  4018 I resolv  : res_nsend: used send_dg 276 terrno: 0
+11-22 05:00:56.480   322  4018 I resolv  : res_stats_set_sample: rcode = 0, sec = 3
+11-22 05:00:56.480   322  4018 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 38, count = 38
+11-22 05:00:56.480   322  4018 D resolv  : res_nsend: got answer:
+11-22 05:00:56.480   322  4018 I resolv  : answer_getTTL: TTL = 300
+11-22 05:00:56.480   322  4018 I resolv  : _cache_add_p: entry 39 added (count=39)
+11-22 05:00:56.480   322  4018 I resolv  : cache_dump_mru_locked: MRU LIST (39):  39 38 37 11 12 33 34 30 29 9 10 36 35 32 31 4 7 5 8 27 28 18 17 26 25 24 23 22 21 20 19 16 15 14 13 6 3 2 1
+11-22 05:00:56.480   322  4018 D resolv  : doQuery: rcode=0, ancount=8
+11-22 05:00:56.503   322  4019 I resolv  : retrying_poll: 59 retrying_poll returning 1
+11-22 05:00:56.503   322  4019 I resolv  : res_nsend: used send_dg 180 terrno: 0
+11-22 05:00:56.503   322  4019 I resolv  : res_stats_set_sample: rcode = 0, sec = 26
+11-22 05:00:56.503   322  4019 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 39, count = 39
+11-22 05:00:56.503   322  4019 D resolv  : res_nsend: got answer:
+11-22 05:00:56.503   322  4019 I resolv  : answer_getTTL: TTL = 300
+11-22 05:00:56.503   322  4019 I resolv  : _cache_add_p: entry 40 added (count=40)
+11-22 05:00:56.503   322  4019 I resolv  : cache_dump_mru_locked: MRU LIST (40):  40 39 38 37 11 12 33 34 30 29 9 10 36 35 32 31 4 7 5 8 27 28 18 17 26 25 24 23 22 21 20 19 16 15 14 13 6 3 2 1
+11-22 05:00:56.503   322  4019 D resolv  : doQuery: rcode=0, ancount=8
+11-22 05:00:56.630  1169  3433 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-22 05:00:56.631  1169  3433 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-22 05:00:56.632  1169  3433 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+--------- beginning of kernel
+11-22 05:00:56.858     0     0 I logd    : start watching /data/system/packages.list ...
+11-22 05:00:56.862     0     0 I logd    : ReadPackageList, total packages: 153
+11-22 05:00:56.666   525  1726 W system_server: Long monitor contention with owner PackageManager (591) at void com.android.server.pm.permission.LegacyPermissionSettings.writePermissionTrees(android.util.TypedXmlSerializer)(LegacyPermissionSettings.java:150) waiters=1 in int com.android.server.pm.PackageManagerService.getPackageStartability(java.lang.String, int, int) for 273ms
+11-22 05:00:56.667   525   917 W system_server: Long monitor contention with owner PackageManager (591) at void com.android.server.pm.permission.LegacyPermissionSettings.writePermissionTrees(android.util.TypedXmlSerializer)(LegacyPermissionSettings.java:150) waiters=2 in com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 264ms
+11-22 05:00:56.692   762  2159 I OpenGLRenderer: Davey! duration=722ms; Flags=0, FrameTimelineVsyncId=2169, IntendedVsync=71378486166, Vsync=71961819476, InputEventId=0, HandleInputStart=71965808674, AnimationStart=71965809095, PerformTraversalsStart=71966014724, DrawStart=71966050812, FrameDeadline=71411819498, FrameInterval=71965770258, FrameStartTime=16666666, SyncQueued=71966120009, SyncStart=72077023329, IssueDrawCommandsStart=72077227928, SwapBuffers=72168814260, FrameCompleted=72211956010, DequeueBufferDuration=4032, QueueBufferDuration=1135740, GpuCompleted=72211956010, SwapBuffersCompleted=72180231671, DisplayPresentTime=0, 
+11-22 05:00:56.694   525   853 W system_server: Long monitor contention with owner Binder:525_A (917) at com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:5702) waiters=2 in com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 276ms
+11-22 05:00:56.695   525   556 W system_server: Long monitor contention with owner Binder:525_A (917) at com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:5702) waiters=3 in com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 256ms
+11-22 05:00:56.695   525  1697 W system_server: Long monitor contention with owner Binder:525_A (917) at com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:5702) waiters=6 in com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 213ms
+11-22 05:00:56.696   525  2203 W system_server: Long monitor contention with owner Binder:525_A (917) at com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer()(PackageManagerService.java:5702) waiters=7 in com.android.server.pm.PackageManagerService$Computer com.android.server.pm.PackageManagerService.snapshotComputer() for 203ms
+11-22 05:00:56.697   525  1613 W system_server: Long monitor contention with owner Binder:525_12 (1726) at android.content.ComponentName com.android.server.am.ActivityManagerService.startService(android.app.IApplicationThread, android.content.Intent, java.lang.String, boolean, java.lang.String, java.lang.String, int)(ActivityManagerService.java:11845) waiters=0 in void com.android.server.am.ContentProviderHelper.removeContentProvider(android.os.IBinder, boolean) for 243ms
+11-22 05:00:56.704  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=290.34283 y=683.54285 rawX=290.34283 rawY=683.54285 tab=0 
+11-22 05:00:56.704  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:00:56.706  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=378.0 y=724.0 rawX=378.0 rawY=724.0 tab=0 
+11-22 05:00:56.706  2316  2316 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 05:00:56.716  1169  1169 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdd.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 05:00:56.722  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.722  1169  1169 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+11-22 05:00:56.722  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.722  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.722  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.722  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.722  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.729  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.729  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.729  2840  2872 W SQLiteLog: (28) double-quoted string literal: ""
+11-22 05:00:56.734  1051  2775 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:00:56.735  1051  2775 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:00:56.735  1051  2775 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:00:56.735  1051  2775 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:00:56.738  1051  2775 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:00:56.738  1051  2775 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:00:56.738  1051  2775 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:00:56.738  1051  2775 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:00:56.738  1051  2775 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:00:56.738  1051  2775 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:00:56.739  2840  2872 I BugleNotifications: No unseen incoming message notifications
+11-22 05:00:56.739  2840  2872 I BugleNotifications: No incomingMessageNotification created, canceling existing incomingMessageNotifications
+11-22 05:00:56.745  1051  2775 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:00:56.745  1051  2775 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:00:56.745  1051  2775 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:00:56.745  1051  2775 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:00:56.747  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.android.sdksandbox name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.747  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.android.odad name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.747  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.747  1051  2775 W ConfiguratorPhenotypeUt: Package com.android.media.swcodec name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.748  1051  2775 W ConfiguratorPhenotypeUt: Package com.android.appsearch name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.748  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.android.adservices name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.748  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.748  1051  2775 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.748  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.android.as.oss name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.748  1051  2775 W ConfiguratorPhenotypeUt: Package com.google.oslo name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.754  1051  2775 W ConfiguratorPhenotypeUt: Package com.android.refreshratecontrol name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.755  1051  2775 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.755  1051  2775 W ConfiguratorPhenotypeUt: Package com.android.neuralnetworks name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.755  1051  2775 W ConfiguratorPhenotypeUt: Package 1 name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:00:56.802  2840  2864 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=1ef61af8-3f11-4216-baf1-18d2ae59c142, tags={ com.google.android.apps.messaging.shared.datamodel.workqueue.WorkQueueWorkerShim, refresh_incoming_message_notifications- } ]
+--------- beginning of system
+11-22 05:00:56.963   525   917 D CompatibilityChangeReporter: Compat change id reported: 171306433; UID 10113; state: ENABLED
+11-22 05:00:56.969  1169  3433 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-22 05:00:56.972  1169  3433 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-22 05:00:56.975  1169  3433 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:56.987   322  4022 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-22 05:00:56.987   322  4022 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 05:00:56.998   322  4024 D resolv  : doQuery: (1, 1)
+11-22 05:00:56.998   322  4024 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 05:00:56.998   322  4024 D resolv  : res_nsend
+11-22 05:00:56.998   322  4024 I resolv  : resolv_cache_lookup: lookup
+11-22 05:00:56.998   322  4024 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 05:00:56.998   322  4024 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 05:00:56.998   322  4023 D resolv  : doQuery: (1, 28)
+11-22 05:00:56.998   322  4023 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 05:00:56.998   322  4023 D resolv  : res_nsend
+11-22 05:00:56.998   322  4023 I resolv  : resolv_cache_lookup: lookup
+11-22 05:00:56.998   322  4023 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 05:00:56.998   322  4023 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 05:00:56.998   322  4023 I resolv  : res_stats_usable_server: NS stats: S 40 + E 0 + T 0 + I 0 = 40, rtt = 14, min_samples = 8
+11-22 05:00:56.998   322  4023 I resolv  : res_stats_usable_server: success rate 100
+11-22 05:00:56.998   322  4023 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 05:00:56.998   322  4023 D resolv  : send_dg: new DG socket
+11-22 05:00:56.998   322  4023 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 05:00:56.998   322  4023 I resolv  : retrying_poll: 58 retrying_poll
+11-22 05:00:57.000   322  4024 I resolv  : res_stats_usable_server: NS stats: S 40 + E 0 + T 0 + I 0 = 40, rtt = 14, min_samples = 8
+11-22 05:00:57.000   322  4024 I resolv  : res_stats_usable_server: success rate 100
+11-22 05:00:57.000   322  4024 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 05:00:57.000   322  4024 D resolv  : send_dg: new DG socket
+11-22 05:00:57.000   322  4024 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 05:00:57.000   322  4024 I resolv  : retrying_poll: 59 retrying_poll
+11-22 05:00:57.010   322  4023 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-22 05:00:57.010   322  4023 I resolv  : res_nsend: used send_dg 149 terrno: 0
+11-22 05:00:57.010   322  4023 I resolv  : res_stats_set_sample: rcode = 0, sec = 12
+11-22 05:00:57.010   322  4023 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 40, count = 40
+11-22 05:00:57.010   322  4023 D resolv  : res_nsend: got answer:
+11-22 05:00:57.010   322  4023 I resolv  : answer_getTTL: TTL = 300
+11-22 05:00:57.010   322  4023 I resolv  : _cache_add_p: entry 41 added (count=41)
+11-22 05:00:57.010   322  4023 I resolv  : cache_dump_mru_locked: MRU LIST (41):  41 40 39 38 37 11 12 33 34 30 29 9 10 36 35 32 31 4 7 5 8 27 28 18 17 26 25 24 23 22 21 20 19 16 15 14 13 6 3 2 1
+11-22 05:00:57.010   322  4023 D resolv  : doQuery: rcode=0, ancount=4
+11-22 05:00:57.013  2341  3064 W SystemServiceRegistry: No service published for: persistent_data_block
+11-22 05:00:57.027   322  4024 I resolv  : retrying_poll: 59 retrying_poll returning 1
+11-22 05:00:57.027   322  4024 I resolv  : res_nsend: used send_dg 133 terrno: 0
+11-22 05:00:57.027   322  4024 I resolv  : res_stats_set_sample: rcode = 0, sec = 27
+11-22 05:00:57.027   322  4024 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 41, count = 41
+11-22 05:00:57.027   322  4024 D resolv  : res_nsend: got answer:
+11-22 05:00:57.027   322  4024 I resolv  : answer_getTTL: TTL = 300
+11-22 05:00:57.027   322  4024 I resolv  : _cache_add_p: entry 42 added (count=42)
+11-22 05:00:57.027   322  4024 I resolv  : cache_dump_mru_locked: MRU LIST (42):  42 41 40 39 38 37 11 12 33 34 30 29 9 10 36 35 32 31 4 7 5 8 27 28 18 17 26 25 24 23 22 21 20 19 16 15 14 13 6 3 2 1
+11-22 05:00:57.027   322  4024 D resolv  : doQuery: rcode=0, ancount=6
+11-22 05:00:57.031   952   985 D MmsSmsDatabaseHelper: [MmsSmsDb] tableName: threads hasAutoIncrement: CREATE TABLE threads (_id INTEGER PRIMARY KEY AUTOINCREMENT,date INTEGER DEFAULT 0,message_count INTEGER DEFAULT 0,recipient_ids TEXT,snippet TEXT,snippet_cs INTEGER DEFAULT 0,read INTEGER DEFAULT 1,archived INTEGER DEFAULT 0,type INTEGER DEFAULT 0,error INTEGER DEFAULT 0,has_attachment INTEGER DEFAULT 0) result: true
+11-22 05:00:57.031   952   985 D MmsSmsDatabaseHelper: [MmsSmsDb] tableName: canonical_addresses hasAutoIncrement: CREATE TABLE canonical_addresses (_id INTEGER PRIMARY KEY AUTOINCREMENT,address TEXT) result: true
+11-22 05:00:57.031   952   985 D MmsSmsDatabaseHelper: [MmsSmsDb] tableName: part hasAutoIncrement: CREATE TABLE part (_id INTEGER PRIMARY KEY AUTOINCREMENT,mid INTEGER,seq INTEGER DEFAULT 0,ct TEXT,name TEXT,chset INTEGER,cd TEXT,fn TEXT,cid TEXT,cl TEXT,ctt_s INTEGER,ctt_t TEXT,_data TEXT,text TEXT) result: true
+11-22 05:00:57.031   952   985 D MmsSmsDatabaseHelper: [MmsSmsDb] tableName: pdu hasAutoIncrement: CREATE TABLE pdu (_id INTEGER PRIMARY KEY AUTOINCREMENT,thread_id INTEGER,date INTEGER,date_sent INTEGER DEFAULT 0,msg_box INTEGER,read INTEGER DEFAULT 0,m_id TEXT,sub TEXT,sub_cs INTEGER,ct_t TEXT,ct_l TEXT,exp INTEGER,m_cls TEXT,m_type INTEGER,v INTEGER,m_size INTEGER,pri INTEGER,rr INTEGER,rpt_a INTEGER,resp_st INTEGER,st INTEGER,tr_id TEXT,retr_st INTEGER,retr_txt TEXT,retr_txt_cs INTEGER,read_status INTEGER,ct_cls INTEGER,resp_txt TEXT,d_tm INTEGER,d_rpt INTEGER,locked INTEGER DEFAULT 0,sub_id INTEGER DEFAULT -1, seen INTEGER DEFAULT 0,creator TEXT,text_only INTEGER DEFAULT 0) result: true
+11-22 05:00:57.031   952   985 D MmsSmsDatabaseHelper: [getWritableDatabase] hasAutoIncrementThreads: true hasAutoIncrementAddresses: true hasAutoIncrementPart: true hasAutoIncrementPdu: true
+11-22 05:00:57.031   952   985 D MmsSmsDatabaseHelper: [getWritableDatabase] hasAutoIncrementThreads: true hasAutoIncrementAddresses: true hasAutoIncrementPart: true hasAutoIncrementPdu: true
+11-22 05:00:57.043  2341  3064 D EGL_emulation: eglCreateContext: 0x73f518b55450: maj 3 min 0 rcv 3
+11-22 05:00:57.079  1169  3433 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:57.092  1169  3433 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:57.123  2840  2883 I Bugle   : PartTableDetectionHeuristic: Previous content provider uri is empty. Wipeout inconclusive.
+11-22 05:00:57.197  1169  3433 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:57.225  1169  3433 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:57.236  2840  2883 I Bugle   : BootAndPackageReplacedReceiver: run post-reboot oobe tasks
+11-22 05:00:57.241  2341  3064 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-22 05:00:57.241  2341  3064 W libc    : Access denied finding property "service.adb.tls.port"
+11-22 05:00:57.268  2840  2883 I BugleRcsProvisioning: BugleSystemBindingManager: onBootComplete
+11-22 05:00:57.268  2840  2883 I BugleRcsProvisioning: BugleSystemBindingManager: onCsLibPhenotypeUpdated
+11-22 05:00:57.269  2840  2883 I BugleRcsEngine: [56] zuq.c: SystemBindingManager: force P/H Flag update scheduled and start updateBinding
+11-22 05:00:57.269  2840  2883 I BugleRcsProvisioning: RcsProvisioningTrigger: onBootComplete
+11-22 05:00:57.269  2840  2883 I BugleRcsProvisioning: RcsProvisioningTrigger: updateRcsAvailabilityAsync : hint = BOOT_COMPLETE
+11-22 05:00:57.236  2341  2341 W Binder:2341_6: type=1400 audit(0.0:43): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=246 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:57.280   525  2203 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 05:00:57.280   525  2203 D PackageManager: Clear ephemeral installer activity
+11-22 05:00:57.281  2840  2862 I BugleRcsEngine: [40] ajkh.run: SystemBindingManager: SystemBinding enabled: false
+11-22 05:00:57.281  2840  2862 I BugleRcsProvisioning: RcsProvisioningTrigger: updateRcsAvailability : hint = BOOT_COMPLETE
+11-22 05:00:57.281  2840  2862 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: BOOT_COMPLETE
+11-22 05:00:57.281  2840  2862 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: BOOT_COMPLETE
+11-22 05:00:57.282  2840  2862 I BugleRcsEngine: [40] ajki.b: System Binding updated
+11-22 05:00:57.285  2840  3501 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailability, hint: BOOT_COMPLETE
+11-22 05:00:57.285  2840  2872 W BugleRcsEngine: [48] ajnl.z: Unable to send diagnostic log
+11-22 05:00:57.297  2840  3501 W BugleRcsEngine: [68] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.297  2840  3501 I BugleRcsEngine: [68] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.297  2840  3501 W BugleRcsEngine: [68] alsz.e: Service with meta data key: SignupServiceVersions is not compatible. Service Version 4 is not supported. Supported versions: []
+11-22 05:00:57.297  2840  3501 W BugleRcsEngine: [68] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.297  2840  3501 I BugleRcsEngine: [68] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.297  2840  3501 W BugleRcsEngine: [68] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.297  2840  3501 I BugleRcsEngine: [68] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:00:57.297  2840  2840 I RcsClientLib: Connecting SignupService
+11-22 05:00:57.297  2840  2840 W RcsClientLib: No CS.apk RCS service found. Is RCS running in Bugle?
+11-22 05:00:57.298  2840  2840 W BugleRcsEngine: [2] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.298  2840  2840 I BugleRcsEngine: [2] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.298  2840  2840 W BugleRcsEngine: [2] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.298  2840  2840 I BugleRcsEngine: [2] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:00:57.298  2840  2840 I RcsClientLib: shouldUseCarrierServicesJibeService: false, CarrierServices rcs service found: false
+11-22 05:00:57.302  3511  3511 I BugleRcsEngine: [2] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-22 05:00:57.305  2840  2881 W InstanceID: Instance ID SDK is deprecated, com.google.android.apps.messaging should update to use Firebase Instance ID
+11-22 05:00:57.310  3511  4026 I BugleRcsEngine: [99] ajsa.a: Creating JibeServiceComponent
+11-22 05:00:57.236  2341  2341 W Binder:2341_6: type=1400 audit(0.0:44): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=56 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:57.325  3511  4026 I BugleRcsEngine: [99] alod.j: (Sim): Processing an intent
+11-22 05:00:57.325  3511  4026 I BugleRcsEngine: [99] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 05:00:57.325  3511  4026 I BugleRcsEngine: [99] ajre.b: Initializing Carrier Services Logging.
+11-22 05:00:57.325  3511  4026 D BugleRcsEngine: log_saver already enabled
+11-22 05:00:57.326  2840  2862 D MddListenableWorkerFactory: createWorker for class: com.google.android.apps.messaging.shared.datamodel.workqueue.WorkQueueWorkerShim
+11-22 05:00:57.328  3511  4026 I BugleRcsEngine: [99] RcsEngineProxyImpl.initializeRcsEngine: RcsEngineProxy: Initializing RCS Engine.
+11-22 05:00:57.331  2840  2862 D MddListenableWorkerFactory: createWorker for class: com.google.apps.tiktok.contrib.work.TikTokListenableWorker
+11-22 05:00:57.335  3511  4026 I BugleRcsEngine: [99] alod.j: (Sim): Processing an intent
+11-22 05:00:57.335  3511  4026 I BugleRcsEngine: [99] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 05:00:57.340   952  1263 D MmsSmsProvider: getSingleAddressId: insert new canonical_address for xxxxxx, _id=1
+11-22 05:00:57.340   952  1263 D MmsSmsProvider: getThreadId: create new thread_id for recipients xxxxxxxx
+11-22 05:00:57.341   952  1263 D MmsSmsProvider: insertThread: created new thread_id 1 for recipientIds xxxxxxx
+11-22 05:00:57.353  2840  2862 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.353  2840  2862 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.353  2840  2862 W BugleRcsEngine: [40] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.353  2840  2862 I BugleRcsEngine: [40] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:00:57.356   472   472 D mediaserver: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 05:00:57.357   472   472 D mediaserver: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 05:00:57.358  2840  2862 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=5010c688-0edb-4133-9fd2-ef62f5329105, tags={ com.google.apps.tiktok.contrib.work.TikTokListenableWorker, TikTokWorker#com.google.android.apps.messaging.shared.telephony.impl.copyoftelephony.TelephonyOrphanedAttachmentsCollectorTikTokWorkItem } ]
+11-22 05:00:57.359  2840  2863 I Bugle   : VerifiedSmsEnabledCheckerImpl: VSMS is disabled via Phenotype flag.
+11-22 05:00:57.379  3511  4026 I BugleRcsEngine: [99] ajre.b: Initializing Carrier Services Logging.
+11-22 05:00:57.379  3511  4026 D BugleRcsEngine: log_saver already enabled
+11-22 05:00:57.380  3511  4026 I BugleRcsEngine: [99] RcsEngineImpl.<init>: RcsEngine(DUAL_REG): Constructor running in com.google.android.apps.messaging
+11-22 05:00:57.382  3511  4030 I BugleRcsEngine: [103] aloh.c: SIM delay is not enabled
+11-22 05:00:57.384  3511  4030 I BugleRcsEngine: [103] alod.j: (Sim): Processing an intent
+11-22 05:00:57.384  3511  4030 I BugleRcsEngine: [103] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 05:00:57.385  3511  3736 I BugleRcsEngine: [68] EventHubProxy.subscribe: Adding event listener alah@57fb5ff for category 8 with key 92255743 for hub ENGINE
+11-22 05:00:57.389  3511  4026 I BugleRcsEngine: [99] akua.u: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = false, currentProvisioningStrategy = akxp
+11-22 05:00:57.389  2840  2864 I Bugle   : VerifiedSmsStartupTask: Checking if Verified SMS tasks should be enqueued. feature supported: false, feature enabled: false, eligible / has registered key: false, C11N: false
+11-22 05:00:57.390  2840  2864 I Bugle   : VerifiedSmsStartupTask: Not enqueuing VSMS periodic task, VSMS is disabled or not supported.
+11-22 05:00:57.390  2840  2874 I Bugle   : VerifiedSmsStartupTask: Not calling C11N to get phone numbers.
+11-22 05:00:57.391  3511  4026 I BugleRcsEngine: [99] aktt.e: (PEv2-SM-35070485): start PEv2 [null]
+11-22 05:00:57.391  3511  4026 I BugleRcsEngine: [99] alck.b: Created new RcsProvisioningProtoDataStorage for sim redacted-pii:sim_id[20-chars]
+11-22 05:00:57.391  3511  4026 I BugleRcsEngine: [99] albk.o: RCS Configuration storage in Bugle is disabled by p/h flag, using ProvisioningEngineStateCacheUtil.getProvisioningConfigurationForGivenSimIfExist()
+11-22 05:00:57.391  3511  4026 I BugleRcsEngine: [99] aktt.e: (PEv2-SM-35070485): start [null]
+11-22 05:00:57.391  3511  4026 I BugleRcsEngine: [99] aksn.a: Sending ProvisioningEvent to Bugle [Request Bugle information (15)], no extra data
+11-22 05:00:57.391  3511  4026 I BugleRcsEngine: [99] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[83-chars]
+11-22 05:00:57.391  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): Enter EnabledState [null]
+11-22 05:00:57.398  3511  3700 W BugleRcsEngine: [65] ajnl.z: Unable to send diagnostic log
+11-22 05:00:57.403  3511  4026 D BugleRcsEngine: log_saver already enabled
+11-22 05:00:57.404  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): Start a new provisioning session [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.404  3511  4029 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 05:00:57.409  3511  4029 I BugleRcsEngine: [102] albk.b: Bugle is default SMS app: true
+11-22 05:00:57.409  3511  4029 I BugleRcsEngine: [102] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 05:00:57.410  3511  4029 I BugleRcsEngine: [102] albk.a: Rcs is enabled from user settings: true
+11-22 05:00:57.410  3511  4029 W BugleRcsEngine: [102] alcv.a: No config URL. RCS will be disabled!
+11-22 05:00:57.410  3511  4029 I BugleRcsEngine: [102] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:00:57.410  3511  4029 W BugleRcsEngine: [102] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.410  3511  4029 I BugleRcsEngine: [102] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.410  3511  4029 W BugleRcsEngine: [102] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.410  3511  4029 I BugleRcsEngine: [102] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 05:00:57.411  3511  4029 I BugleRcsEngine: [102] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 05:00:57.413  2840  2866 W BugleDataModel: ExpireWapPushSiMessageHandler:no WAP Push SI messages.
+11-22 05:00:57.416  2840  2840 I RcsClientLib: com.google.android.rcs.client.signup.SignupService connected
+11-22 05:00:57.417  3511  3511 W BugleRcsEngine: [2] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.417  3511  3511 I BugleRcsEngine: [2] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.418  3511  3511 W BugleRcsEngine: [2] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.418  3511  3511 I BugleRcsEngine: [2] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:00:57.418  3511  3511 E BugleRcsEngine: [2] AutoStartReceiver.onReceive: JibeService cannot be started because Bugle is not exempt from doze mode.
+11-22 05:00:57.419  3511  3909 W BugleRcsEngine: [79] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED
+11-22 05:00:57.419  3511  3908 W BugleRcsEngine: [78] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED
+11-22 05:00:57.422  3511  3654 I BugleRcsEngine: [59] aloh.c: SIM delay is not enabled
+11-22 05:00:57.422  3511  3654 W BugleRcsEngine: [59] alod.a: (Sim): process intent: android.intent.action.SIM_STATE_CHANGED
+11-22 05:00:57.422  2840  2863 I WM-WorkerWrapper: Worker result SUCCESS for Work [ id=5b5828d5-9853-41ee-b94c-f1d55ccf5e32, tags={ com.google.android.apps.messaging.shared.datamodel.workqueue.WorkQueueWorkerShim, expire_wap_push_si_message- } ]
+11-22 05:00:57.428  3511  3736 I BugleRcsEngine: [68] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:00:57.428  3511  3736 W BugleRcsEngine: [68] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.428  3511  3736 I BugleRcsEngine: [68] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.429  3511  3736 W BugleRcsEngine: [68] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.431  3511  3736 W BugleRcsEngine: [68] ajnx.h: Unable to send RCS extension log
+11-22 05:00:57.431  3511  3736 W BugleRcsEngine: [68] akjn.run: ProvisioningEngineMetricsStorage, the wrapper class for proto data store, is null
+11-22 05:00:57.431  3511  3700 W BugleRcsEngine: [65] aldi.a: Unable to send provisioning event log
+11-22 05:00:57.439  3511  3971 I BugleRcsEngine: [86] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 05:00:57.444  3511  4029 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 05:00:57.444  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): transitionViaMessage, srcState=EnabledState, destState = DisabledState [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.444  3511  4029 I BugleRcsEngine: [102] aksn.a: Sending ProvisioningEvent to Bugle [Update provisioning status (11)], redacted-pii:[85-chars]
+11-22 05:00:57.444  3511  4029 I BugleRcsEngine: [102] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[243-chars]
+11-22 05:00:57.447  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): EnabledState: Transition to disabled [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.447  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): transitionTo: destState=DisabledState [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.447  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): onTransitionRequested EnabledState [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.447  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): Exit EnabledState [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.450  3511  3971 I BugleRcsEngine: [86] albk.b: Bugle is default SMS app: true
+11-22 05:00:57.450  3511  4030 I BugleRcsEngine: [103] alod.j: (Sim): Processing an intent
+11-22 05:00:57.450  3511  4030 I BugleRcsEngine: [103] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 05:00:57.450  3511  3736 W BugleRcsEngine: [68] ajnl.z: Unable to send diagnostic log
+11-22 05:00:57.450  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): Enter DisabledState [e917bbc0-5d66-4686-b7cd-9b2bdbfe2c6f]
+11-22 05:00:57.465  3511  3736 W BugleRcsEngine: [68] ajnl.z: Unable to send diagnostic log
+11-22 05:00:57.466  3511  4029 I BugleRcsEngine: [102] aldv.p: Provisioning state change [STATE_UNKNOWN -> CONFIGURATION UPDATED SUCCESSFULLY]
+11-22 05:00:57.466  3511  4031 I BugleRcsEngine: [104] ajje.handleMessage: RCS engine STOP RCS stack
+11-22 05:00:57.466  3511  4031 I BugleRcsEngine: [104] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:00:57.466  3511  4029 I BugleRcsEngine: [102] aksn.a: Sending ProvisioningEvent to Bugle [Update provisioning status (11)], redacted-pii:[85-chars]
+11-22 05:00:57.466  3511  4029 I BugleRcsEngine: [102] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[243-chars]
+11-22 05:00:57.466  3511  4031 W BugleRcsEngine: [104] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.466  3511  4031 I BugleRcsEngine: [104] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.466  3511  4031 W BugleRcsEngine: [104] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.468  3511  4029 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 05:00:57.469  3511  4029 I BugleRcsEngine: [102] albk.b: Bugle is default SMS app: true
+11-22 05:00:57.469  3511  4029 I BugleRcsEngine: [102] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 05:00:57.469  3511  4029 I BugleRcsEngine: [102] albk.a: Rcs is enabled from user settings: true
+11-22 05:00:57.470  3511  4029 W BugleRcsEngine: [102] alcv.a: No config URL. RCS will be disabled!
+11-22 05:00:57.470  3511  4029 I BugleRcsEngine: [102] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:00:57.470  3511  3971 I BugleRcsEngine: [86] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 05:00:57.470  3511  4029 W BugleRcsEngine: [102] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.470  3511  4029 I BugleRcsEngine: [102] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.470  3511  4029 W BugleRcsEngine: [102] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.470  3511  4029 I BugleRcsEngine: [102] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 05:00:57.470  3511  4029 I BugleRcsEngine: [102] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 05:00:57.470  3511  4029 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 05:00:57.482  3511  3971 I BugleRcsEngine: [86] albk.a: Rcs is enabled from user settings: true
+11-22 05:00:57.482  3511  3971 W BugleRcsEngine: [86] alcv.a: No config URL. RCS will be disabled!
+11-22 05:00:57.484  1051  1612 I LockboxIntentOp: Completed task: true [CONTEXT service_id=26 ]
+11-22 05:00:57.492  3511  3971 I BugleRcsEngine: [86] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:00:57.503  3511  3971 W BugleRcsEngine: [86] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.503  3511  3971 I BugleRcsEngine: [86] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.503  3511  3971 W BugleRcsEngine: [86] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.506  3511  3971 I BugleRcsEngine: [86] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 05:00:57.506  3511  3971 I BugleRcsEngine: [86] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 05:00:57.506  3511  3971 I BugleRcsEngine: [86] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 05:00:57.506  2840  3501 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityPostProcess, Get Updated RcsAvailability, RcsAvailability: DISABLED_VIA_GSERVICES, SimId: redacted-pii[20-chars]
+11-22 05:00:57.506  2840  2862 I RcsClientLib: Disconnecting ChatSessionService
+11-22 05:00:57.506  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.chatsession.IChatSession: Service not registered: awmr@cf76253
+11-22 05:00:57.506  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@cf76253
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at war.i(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.506  2840  2862 I RcsClientLib: Disconnecting EventService
+11-22 05:00:57.506  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.events.IEvent: Service not registered: awmr@a8a08e
+11-22 05:00:57.506  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@a8a08e
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at com.google.android.rcs.client.events.EventService.disconnect(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at war.i(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.506  2840  2862 I RcsClientLib: Disconnecting ContactsService
+11-22 05:00:57.506  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.contacts.IContactsManagement: Service not registered: awmr@f775cbc
+11-22 05:00:57.506  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@f775cbc
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at war.i(PG:3)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.506  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.506  2840  2862 I RcsClientLib: Disconnecting FileTransferService
+11-22 05:00:57.506  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.filetransfer.IFileTransfer: Service not registered: awmr@92379a
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@92379a
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 I RcsClientLib: Disconnecting LocationSharingService
+11-22 05:00:57.507  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.locationsharing.ILocationSharing: Service not registered: awmr@8bb88a8
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@8bb88a8
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:5)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 I RcsClientLib: Disconnecting ImsConnectionTrackerService
+11-22 05:00:57.507  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.ims.IImsConnectionTracker: Service not registered: awmr@34c3366
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@34c3366
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:6)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 I RcsClientLib: Disconnecting RcsProfileService
+11-22 05:00:57.507  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.profile.IRcsProfile: Service not registered: awmr@7948754
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@7948754
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:7)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 I RcsClientLib: Disconnecting BusinessInfoService
+11-22 05:00:57.507  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.businessinfo.IBusinessInfo: Service not registered: awmr@4581ff2
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@4581ff2
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:8)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 I RcsClientLib: Disconnecting RcsMessagingService
+11-22 05:00:57.507  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.rcs.client.messaging.IMessaging: Service not registered: awmr@a5cc4c0
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@a5cc4c0
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:9)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 I RcsClientLib: Disconnecting TransportControlService
+11-22 05:00:57.507  2840  2862 W RcsClientLib: Unexpected error when trying to unbind com.google.android.ims.rcsservice.transportcontrol.ITransportControl: Service not registered: awmr@3c4493e
+11-22 05:00:57.507  2840  2862 W RcsClientLib: java.lang.IllegalArgumentException: Service not registered: awmr@3c4493e
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.LoadedApk.forgetServiceDispatcher(LoadedApk.java:1880)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.app.ContextImpl.unbindService(ContextImpl.java:2021)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at android.content.ContextWrapper.unbindService(ContextWrapper.java:848)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.g(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at awmp.disconnect(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at war.i(PG:10)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at wau.a(PG:4)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at uve.a(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at alql.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosz.run(PG:1)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aosl.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at aorz.run(PG:2)
+11-22 05:00:57.507  2840  2862 W RcsClientLib: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.507  2840  2862 W BugleRcs: disconnecting from all Rcs Services
+11-22 05:00:57.511  2840  2862 I BugleRcsProvisioning: RcsProvisioningTrigger: onRcsAvailabilityUpdate : availability is updated to RCS is disabled for this carrier by Google, lastAvailability is null, simId hash = 524314662340542412, isPev3Enabled = false
+11-22 05:00:57.512  2840  2840 I RcsClientLib: Disconnecting SignupService
+11-22 05:00:57.512  3511  3511 I BugleRcsEngine: [2] RcsEngineProxyImpl.destroyRcsEngine: RcsEngineProxy: Destroy RCS Engine.
+11-22 05:00:57.517  3511  3511 E BugleRcsEngine: [2] alok.a: TelephonyChangeReceiver is not registered.
+11-22 05:00:57.517  3511  3511 I BugleRcsEngine: [2] EventHubProxy.unsubscribe: Removing event listener 92255743 for category 8 for hub ENGINE
+11-22 05:00:57.517  3511  3511 I BugleRcsEngine: [2] aktt.e: (PEv2-SM-35070485): quit [null]
+11-22 05:00:57.517  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): transitionTo: destState=akbb [null]
+11-22 05:00:57.517  3511  4029 I BugleRcsEngine: [102] aktt.e: (PEv2-SM-35070485): Exit DisabledState [null]
+11-22 05:00:57.518  3511  4029 W BugleRcsEngine: [102] aktt.c: (PEv2-SM-35070485): onQuitting [null]
+11-22 05:00:57.518  3511  4029 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 05:00:57.518  3511  3736 W BugleRcsEngine: [68] ajnl.z: Unable to send diagnostic log
+11-22 05:00:57.518  3511  3511 D ConnectivityManager: NetworkCallback was already unregistered
+11-22 05:00:57.518  3511  3511 I BugleRcsEngine: [2] ajsa.c: Destroying JibeServiceComponent
+11-22 05:00:57.519  3511  4029 I BugleRcsEngine: [102] albk.b: Bugle is default SMS app: true
+11-22 05:00:57.520  3511  4029 I BugleRcsEngine: [102] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 05:00:57.520  3511  4029 I BugleRcsEngine: [102] albk.a: Rcs is enabled from user settings: true
+11-22 05:00:57.520  3511  4029 W BugleRcsEngine: [102] alcv.a: No config URL. RCS will be disabled!
+11-22 05:00:57.520  3511  4029 I BugleRcsEngine: [102] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:00:57.520  3511  4029 W BugleRcsEngine: [102] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.520  3511  4029 I BugleRcsEngine: [102] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.520  3511  4029 W BugleRcsEngine: [102] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.521  3511  4029 I BugleRcsEngine: [102] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 05:00:57.521  3511  4029 I BugleRcsEngine: [102] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 05:00:57.521  3511  4029 I BugleRcsEngine: [102] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 05:00:57.529  2840  2863 W BugleRcsEngine: [41] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.537  2840  2863 W BugleRcsEngine: [41] alsz.g: Carrier Services Apk was not found.
+11-22 05:00:57.537  2840  2863 I BugleRcsEngine: [41] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:00:57.537  2840  2863 W BugleRcsEngine: [41] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:00:57.537  2840  2863 I BugleRcsEngine: [41] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:00:57.538  2840  2874 W BugleUsageStatistics: InstallReferrerFetcher: Bad response code: 2
+11-22 05:00:57.539  2840  2874 W Bugle   : Failed to check if revocation is enabled
+11-22 05:00:57.539  2840  2874 W Bugle   : awmw: Jibe SDK Service not available. Is the Jibe SDK service running? Did you call connect() and wait for the notification before calling an API function?
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at awmp.b(PG:2)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at com.google.android.rcs.client.profile.RcsProfileService.getRcsConfig(PG:1)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at utg.K(PG:1)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at utg.aG(PG:1)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at utg.aa(PG:1)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at kmn.call(PG:8)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at aypl.call(PG:2)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at bcfn.c(PG:1)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at bchf.run(PG:4)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at aosz.run(PG:1)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at aosl.run(PG:2)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at aorz.run(PG:2)
+11-22 05:00:57.539  2840  2874 W Bugle   : 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:00:57.555   322   357 I netd    : trafficSwapActiveStatsMap() <10.61ms>
+11-22 05:00:57.556   322   357 I netd    : tetherGetStats() -> {[]} <0.29ms>
+11-22 05:00:57.563   322   357 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.72ms>
+11-22 05:00:57.564   322   357 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.46ms>
+11-22 05:00:57.583   322   357 I netd    : trafficSwapActiveStatsMap() <16.80ms>
+11-22 05:00:57.584   322   357 I netd    : tetherGetStats() -> {[]} <0.22ms>
+11-22 05:00:57.585   322   357 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.33ms>
+11-22 05:00:57.586   322   357 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.28ms>
+11-22 05:00:57.673  2341  3064 W SystemServiceRegistry: No service published for: persistent_data_block
+11-22 05:00:57.691  2341  3064 D EGL_emulation: eglCreateContext: 0x73f518b54a90: maj 3 min 0 rcv 3
+11-22 05:00:57.859  2341  3064 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-22 05:00:57.859  2341  3064 W libc    : Access denied finding property "service.adb.tls.port"
+11-22 05:00:57.848  2341  2341 W Binder:2341_6: type=1400 audit(0.0:45): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=246 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:57.856  2341  2341 W Binder:2341_6: type=1400 audit(0.0:46): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=56 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:57.880  1051  1051 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.nearby.exposurenotification.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-22 05:00:57.942  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:57.945  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:57.970  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:57.987  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:57.999  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.005  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.010  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.011  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.013  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.023  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.045  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.066  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.076  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.080  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.081  1051  1078 I .gms.persisten: Background young concurrent copying GC freed 241278(16MB) AllocSpace objects, 4(144KB) LOS objects, 52% free, 14MB/29MB, paused 368us,119us total 119.299ms
+11-22 05:00:58.093  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.112  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.116  1051  2530 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.143  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.151  1051  2530 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.161  1051  2530 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.162  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.176  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.178  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.201  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.203  2341  2387 W SystemServiceRegistry: No service published for: persistent_data_block
+11-22 05:00:58.215  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.216  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.223  2341  2387 D EGL_emulation: eglCreateContext: 0x73f518b54fd0: maj 3 min 0 rcv 3
+11-22 05:00:58.241  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.247  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.256  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.285  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.296  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.298  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.307  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.316  1051  1051 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.devicesyncservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-22 05:00:58.319  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.340  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.340  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.341  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.358  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.367  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.368  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.406  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.407  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.417  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.433  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.435  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.455   322  4035 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-22 05:00:58.455   322  4035 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 05:00:58.455   322  4035 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=10 ai_socktype=1 ai_protocol=6
+11-22 05:00:58.455   322  4035 D resolv  : explore_numeric_scope
+11-22 05:00:58.455   322  4035 D resolv  : android_getaddrinfofornetcontext: explore_numeric: ai_family=2 ai_socktype=1 ai_protocol=6
+11-22 05:00:58.455   322  4035 D resolv  : explore_numeric_scope
+11-22 05:00:58.455   322  4035 I ResolverController: No valid NAT64 prefix (100, <unspecified>/0)
+11-22 05:00:58.462  2341  2387 W libc    : Access denied finding property "persist.adb.tls_server.enable"
+11-22 05:00:58.462  2341  2387 W libc    : Access denied finding property "service.adb.tls.port"
+11-22 05:00:58.479  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.481  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.456  2341  2341 W Binder:2341_2: type=1400 audit(0.0:47): avc: denied { read } for name="u:object_r:system_adbd_prop:s0" dev="tmpfs" ino=246 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:system_adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:58.487  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.489  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.489  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.456  2341  2341 W Binder:2341_2: type=1400 audit(0.0:48): avc: denied { read } for name="u:object_r:adbd_prop:s0" dev="tmpfs" ino=56 scontext=u:r:gmscore_app:s0:c512,c768 tcontext=u:object_r:adbd_prop:s0 tclass=file permissive=0 app=com.google.android.gms
+11-22 05:00:58.502  1169  3433 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.502  1169  3433 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.515  1169  1169 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.cryptauth.cryptauthservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 05:00:58.520  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.540  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.549  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.566  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.567  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.574  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.584  1169  3431 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 05:00:58.584  1169  3431 I Icing   : Indexing done com.google.android.gms-apps
+11-22 05:00:58.587  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.594  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.619  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.620  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.621  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.640  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.649  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.650  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.677  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.685  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.689  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.716  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.725  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.725  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.751  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.754  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.755  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.773  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.784  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.787  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.831   348   388 D goldfish-address-space: claimShared: Ask to claim region [0x3f2fb3000 0x3f3957000]
+11-22 05:00:58.833  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.834  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.835  1051  1233 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.842   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 05:00:58.843  4038  4039 I Gralloc4: mapper 4.x is not supported
+11-22 05:00:58.850  4038  4039 D HostConnection: createUnique: call
+11-22 05:00:58.851  4038  4039 D HostConnection: HostConnection::get() New Host Connection established 0x7f918fc0c6d0, tid 4039
+11-22 05:00:58.851  4038  4039 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 05:00:58.851  4038  4039 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3efffe000 size 0x2000
+11-22 05:00:58.868  4038  4039 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 05:00:58.886  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.913  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.914  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.925  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.934  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.938  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.954  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.965  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.969  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.980  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.987  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:58.991  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.024  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.045  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.052  1051  2520 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.097  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.111  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.112  1051  4034 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.148  1051  1232 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:00:59.468     0     0 I logd    : logdr: UID=2000 GID=2000 PID=4040 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
