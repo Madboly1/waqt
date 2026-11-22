@@ -1,0 +1,187 @@
+--------- beginning of main
+11-22 06:30:19.094  5655  5725 I GCoreUlr: DispatchingService ignoring Intent { act=android.net.wifi.WIFI_STATE_CHANGED flg=0x44000010 (has extras) } because ULR inactive
+11-22 06:30:19.100  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=82.0 y=1159.0 rawX=82.0 rawY=1159.0 tab=1 
+11-22 06:30:19.100  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=82.0,814.0 host=1080x1863
+11-22 06:30:19.100  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=82.0 y=814.0 rawX=82.0 rawY=1159.0 tab=1 
+11-22 06:30:19.101  2411  2411 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=115x82,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- LinearLayout(id=-1,size=165x544,click=false,long=false,vis=0,tx=0.0,ty=734.52136,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 06:30:19.101  2411  2411 D WAQT_RAIL_TRACE: RAIL_DOWN targetIsDock=false isOpen=true slop=22 thr=49
+11-22 06:30:19.101  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISALLOW requested=true tab=1
+11-22 06:30:19.101  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=1
+11-22 06:30:19.101  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 06:30:19.118  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=88.32 y=1159.0 rawX=88.32 rawY=1159.0 tab=1 
+11-22 06:30:19.118  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=88.32 y=814.0 rawX=88.32 rawY=1159.0 tab=1 
+11-22 06:30:19.118  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=6.3199997 dy=0.0
+11-22 06:30:19.119  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.119  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.171  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=124.13333 y=1159.0 rawX=124.13333 rawY=1159.0 tab=1 
+11-22 06:30:19.171  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=124.13333 y=814.0 rawX=124.13333 rawY=1159.0 tab=1 
+11-22 06:30:19.171  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=42.13333 dy=0.0
+11-22 06:30:19.171  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=42.13333 dragging=true isOpen=true
+11-22 06:30:19.171  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.171  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.197  5655  5850 I Nearby  : [MBleClient] Start ble scanning from NearbyDirect:BluetoothAdapterWrapper, context tag = nearby_messages [CONTEXT service_id=49 ]
+11-22 06:30:19.197  5655  5850 I Nearby  : [MBleClient] M hardware scan: 1 clients, scanMode= LOW_LATENCY, filters size = 5 [CONTEXT service_id=49 ]
+11-22 06:30:19.197  5655  5850 D BluetoothAdapter: isLeEnabled(): ON
+11-22 06:30:19.198   745  1139 I bluetooth: system/bt/stack/gatt/gatt_api.cc:1019 GATT_Register: Allocated name:GattClient uuid:6f165ab4-37b2-7bbf-e86f-87b5386108fa gatt_if:6 eatt_support:0
+11-22 06:30:19.201  5655  5669 D BluetoothLeScanner: onScannerRegistered() - status=0 scannerId=6 mScannerId=0
+11-22 06:30:19.213  2411  2505 D EGL_emulation: app_time_stats: avg=6218.57ms min=6218.57ms max=6218.57ms count=1
+11-22 06:30:19.215  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=161.0 y=1159.0 rawX=161.0 rawY=1159.0 tab=1 
+11-22 06:30:19.215  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=161.0 y=814.0 rawX=161.0 rawY=1159.0 tab=1 
+11-22 06:30:19.215  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=79.0 dy=0.0
+11-22 06:30:19.215  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=79.0 dragging=true isOpen=true
+11-22 06:30:19.215  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.215  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.242  5655  5725 I GCoreUlr: WorldUpdater received intent Intent { act=com.google.android.location.reporting.ACTION_UPDATE_WORLD cmp=com.google.android.gms/com.google.android.location.reporting.service.DispatchingService (has extras) } with receiverAction com.google.android.location.internal.server.ACTION_RESTARTED
+11-22 06:30:19.279  5655  5662 I .gms.persisten: Compiler allocated 4511KB to compile void yrm.f(android.content.Context)
+11-22 06:30:19.315  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=205.23999 y=1159.0 rawX=205.23999 rawY=1159.0 tab=1 
+11-22 06:30:19.315  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=205.23999 y=814.0 rawX=205.23999 rawY=1159.0 tab=1 
+11-22 06:30:19.315  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=123.23999 dy=0.0
+11-22 06:30:19.315  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=123.23999 dragging=true isOpen=true
+11-22 06:30:19.315  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.315  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.375  5679  5719 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 06:30:19.376  5679  5719 I Icing   : Indexing done com.google.android.gms-apps
+11-22 06:30:19.402  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=370.6133 y=1159.0 rawX=370.6133 rawY=1159.0 tab=1 
+11-22 06:30:19.403  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=370.6133 y=814.0 rawX=370.6133 rawY=1159.0 tab=1 
+11-22 06:30:19.403  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=288.6133 dy=0.0
+11-22 06:30:19.403  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=288.6133 dragging=true isOpen=true
+11-22 06:30:19.403  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.403  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.451  5655  5725 I GCoreUlr: WorldUpdater:com.google.android.location.internal.server.ACTION_RESTARTED: Ensuring that reporting is stopped because of reasons: (no Google accounts)
+11-22 06:30:19.451  5655  5881 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 640843]
+11-22 06:30:19.495  5655  5725 I GCoreUlr: Unbound from all signal providers.
+11-22 06:30:19.516  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=405.37335 y=1159.0 rawX=405.37335 rawY=1159.0 tab=1 
+11-22 06:30:19.517  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=405.37335 y=814.0 rawX=405.37335 rawY=1159.0 tab=1 
+11-22 06:30:19.517  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=323.37335 dy=0.0
+11-22 06:30:19.517  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=323.37335 dragging=true isOpen=true
+11-22 06:30:19.517  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.517  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.539  5655  5921 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.languageprofile.GcmTaskService finished executing. cause:7 result: 1 elapsed_millis: 362 uptime_millis: 362 exec_start_elapsed_seconds: 110 [CONTEXT service_id=218 ]
+11-22 06:30:19.585  5655  5881 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 641141]
+11-22 06:30:19.586  5655  5655 I GCoreUlr: Unbound from all signal providers.
+11-22 06:30:19.586  5655  5655 I GCoreUlr: Stopping handler for UlrDispSvcFast
+11-22 06:30:19.623  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=523.3467 y=1159.0 rawX=523.3467 rawY=1159.0 tab=1 
+11-22 06:30:19.623  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=523.3467 y=814.0 rawX=523.3467 rawY=1159.0 tab=1 
+11-22 06:30:19.623  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=441.34668 dy=0.0
+11-22 06:30:19.623  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=441.34668 dragging=true isOpen=true
+11-22 06:30:19.623  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.623  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.729  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=633.94666 y=1159.0 rawX=633.94666 rawY=1159.0 tab=1 
+11-22 06:30:19.729  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=633.94666 y=814.0 rawX=633.94666 rawY=1159.0 tab=1 
+11-22 06:30:19.729  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=551.94666 dy=0.0
+11-22 06:30:19.730  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=551.94666 dragging=true isOpen=true
+11-22 06:30:19.730  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.730  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.816  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=746.6534 y=1159.0 rawX=746.6534 rawY=1159.0 tab=1 
+11-22 06:30:19.816  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=746.6534 y=814.0 rawX=746.6534 rawY=1159.0 tab=1 
+11-22 06:30:19.816  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=664.6534 dy=0.0
+11-22 06:30:19.816  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=664.6534 dragging=true isOpen=true
+11-22 06:30:19.816  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.816  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.918  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=837.24 y=1159.0 rawX=837.24 rawY=1159.0 tab=1 
+11-22 06:30:19.919  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=837.24 y=814.0 rawX=837.24 rawY=1159.0 tab=1 
+11-22 06:30:19.919  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=755.24 dy=0.0
+11-22 06:30:19.919  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=755.24 dragging=true isOpen=true
+11-22 06:30:19.919  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:19.919  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: DiscoveryNearbyMessagesManager failed to background subscribe [CONTEXT service_id=265 ]
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at axtp.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):25)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at axtj.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at dkry.handleMessage(:com.google.android.gms@225014047@22.50.14 (190800-499278674):5)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at astc.lC(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at astc.dispatchMessage(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at android.os.Looper.loop(Looper.java:288)
+11-22 06:30:19.984  5655  5880 I NearbyDiscovery: 	at android.os.HandlerThread.run(HandlerThread.java:67)
+11-22 06:30:20.004  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=945.73334 y=1159.0 rawX=945.73334 rawY=1159.0 tab=1 
+11-22 06:30:20.004  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=945.73334 y=814.0 rawX=945.73334 rawY=1159.0 tab=1 
+11-22 06:30:20.008  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=863.73334 dy=0.0
+11-22 06:30:20.008  2411  2411 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=863.73334 dragging=true isOpen=true
+11-22 06:30:20.008  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:30:20.008  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:30:20.021  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=1030.0 y=1159.0 rawX=1030.0 rawY=1159.0 tab=1 
+11-22 06:30:20.021  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=1030.0 y=814.0 rawX=1030.0 rawY=1159.0 tab=1 
+11-22 06:30:20.021  2411  2411 D WAQT_RAIL_TRACE: RAIL_UP moved=true dragging=true isOpen=true
+11-22 06:30:20.021  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=1
+11-22 06:30:20.021  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 06:30:20.187  2411  2411 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=true grip=true children=4
+11-22 06:30:20.234  2411  2505 D EGL_emulation: app_time_stats: avg=100.38ms min=80.50ms max=121.73ms count=10
+11-22 06:30:20.243  5655  5812 W .gms.persisten: Long monitor contention with owner lowpool[2] (5727) at android.content.SharedPreferences android.app.ContextImpl.getSharedPreferences(java.lang.String, int)(ContextImpl.java:540) waiters=0 in android.content.SharedPreferences android.app.ContextImpl.getSharedPreferences(java.lang.String, int) for 150ms
+11-22 06:30:20.398   519   530 I system_server: Background young concurrent copying GC freed 242763(8135KB) AllocSpace objects, 22(744KB) LOS objects, 17% free, 34MB/42MB, paused 55us,152us total 833.233ms
+11-22 06:30:20.567  5655  5880 W NearbyDiscovery: Runnable[processBackgroundSubscribeQueue] was delayed for 00:02.055 [CONTEXT service_id=265 ]
+11-22 06:30:20.568  5655  5880 I NearbyDiscovery: Show notifications: 0 total, no changes since last shown, no-op. [CONTEXT service_id=265 ]
+11-22 06:30:20.568  5655  5921 I NearbyShared: FastPairSlice: enableBindServiceForDiscoveryItem called, isBind = false
+11-22 06:30:20.576  5679  5694 I FastPair: ServiceBindHelper.onSlicePinned, slice already pinned, uri = content://com.google.android.gms.nearby.fastpair/method_bind_service_for_discovery_item?is_bind=false
+11-22 06:30:20.776  5655  5737 E bqto    : Phenotype registration failed [CONTEXT service_id=51 ]
+11-22 06:30:20.776  5655  5737 E bqto    : java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 06:30:20.776  5655  5737 E bqto    : 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at bqto.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at asuo.call(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 06:30:20.776  5655  5737 E bqto    : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:30:20.928  5679  5679 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-22 06:30:21.187  5089  5186 D PhFileGroupPop: Added file groups smarts_expressive_content_scoped_v1
+11-22 06:30:21.208  5089  5186 D PhFileGroupPop: Added file groups smart_actions_sensitive_classifier_models
+11-22 06:30:21.234  5089  5186 D PhFileGroupPop: Added file groups scripted_reply
+11-22 06:30:21.260  5089  5186 D PhFileGroupPop: Added file groups multitask_experiment
+11-22 06:30:21.270  5089  5186 D PhFileGroupPop: Added file groups spam_verdict_enforcement_policy_config
+11-22 06:30:21.277  5089  5186 D PhFileGroupPop: Added file groups smart_suggestion_reranker_models
+11-22 06:30:21.286  5089  5186 D PhFileGroupPop: Added file groups calendar_appointment_grammar
+11-22 06:30:21.300  5089  5186 D PhFileGroupPop: Added file groups birthday_grammars
+11-22 06:30:21.301  5089  5186 E MDD     : FileGroupManager: Trying to add expired group webref-model-local-index.
+11-22 06:30:21.301  5089  5186 W MDD     : MDDManager class arhp
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: Failed to add file group
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: arhp
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at arnq.a(PG:86)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at bcdv.e(PG:2)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at bcdx.run(PG:9)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at bchu.run(PG:4)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at aosz.run(PG:1)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at aosl.run(PG:2)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at aory.run(PG:3)
+11-22 06:30:21.301  5089  5186 E PhFileGroupPop: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:30:21.302  5089  5186 D PhFileGroupPop: Added file groups smart_actions_grammars
+11-22 06:30:21.302  5089  5186 D PhFileGroupPop: Added file groups smart_actions_ml_models
+11-22 06:30:21.303  5089  5186 D PhFileGroupPop: Added file groups text_classifier
+11-22 06:30:21.304  5089  5186 D PhFileGroupPop: Added file groups smart_actions_emotive_models
+11-22 06:30:21.314  5089  5186 D PhFileGroupPop: Added file groups smarts_expressive_content_scoped_v1
+11-22 06:30:21.314  5089  5186 D PhFileGroupPop: Added file groups smart_actions_sensitive_classifier_models
+11-22 06:30:21.314  5089  5186 D PhFileGroupPop: Added file groups scripted_reply
+11-22 06:30:21.315  5089  5186 D PhFileGroupPop: Added file groups multitask_experiment
+11-22 06:30:21.315  5089  5186 D PhFileGroupPop: Added file groups spam_verdict_enforcement_policy_config
+11-22 06:30:21.315  5089  5186 D PhFileGroupPop: Added file groups smart_suggestion_reranker_models
+11-22 06:30:21.315  5089  5186 D PhFileGroupPop: Added file groups calendar_appointment_grammar
+11-22 06:30:21.315  5089  5186 D PhFileGroupPop: Added file groups birthday_grammars
+11-22 06:30:21.323  5089  5186 D ManifestConfigHelper: Added file groups en_us
+11-22 06:30:21.331   321  5953 D resolv  : GetAddrInfoHandler::run: {101 786533 101 983141 10100 0}
+11-22 06:30:21.332   321  5953 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:30:21.333   321  5955 D resolv  : doQuery: (1, 1)
+11-22 06:30:21.333   321  5955 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:30:21.333   321  5955 D resolv  : res_nsend
+11-22 06:30:21.333   321  5955 I resolv  : resolv_cache_lookup: lookup
+11-22 06:30:21.333   321  5955 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x72d4b7deb710
+11-22 06:30:21.333   321  5955 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:30:21.340   321  5954 D resolv  : doQuery: (1, 28)
+11-22 06:30:21.340   321  5954 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:30:21.340   321  5954 D resolv  : res_nsend
+11-22 06:30:21.340   321  5954 I resolv  : resolv_cache_lookup: lookup
+11-22 06:30:21.340   321  5954 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x72d4c7de87d0
+11-22 06:30:21.340   321  5954 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:30:21.507  5679  5800 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-22 06:30:21.512  5679  5679 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.languageprofile.service.START pkg=com.google.android.gms }
+11-22 06:30:21.522  5679  5719 W Icing   : No valid account for uploading user actions
+11-22 06:30:21.533  5679  5719 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 06:30:21.606  5655  5655 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }
+11-22 06:30:21.628  5655  5655 D BoundBrokerSvc: onRebind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }

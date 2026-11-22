@@ -1,0 +1,619 @@
+--------- beginning of main
+11-22 06:29:54.000  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/emoji/20210928151924/en_us.zip to f3e8ef9a2eea15b0459d82fa3609b4c7.zip.fetched (constraints: m:b:u:l)
+11-22 06:29:54.000  1368  1561 I SP      : Successfully got manifest for delight-manifest: manifests:delight-2021093005
+11-22 06:29:54.021   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.022   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.028  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=41.0 y=1079.0 rawX=41.0 rawY=1079.0 tab=1 
+11-22 06:29:54.028  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=41.0,734.0 host=1080x1863
+11-22 06:29:54.028  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=41.0 y=734.0 rawX=41.0 rawY=1079.0 tab=1 
+11-22 06:29:54.028  2411  2411 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=38x81,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- LinearLayout(id=-1,size=82x264,click=true,long=false,vis=0,tx=0.0,ty=602.95,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 06:29:54.028  2411  2411 D WAQT_RAIL_TRACE: RAIL_DOWN targetIsDock=true isOpen=false slop=22 thr=49
+11-22 06:29:54.029  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISALLOW requested=true tab=1
+11-22 06:29:54.029  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=1
+11-22 06:29:54.029  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 06:29:54.033  1368  1825 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->getAlpnSelectedProtocol()[B (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.034  1368  1825 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->getAlpnSelectedProtocol()[B (max-target-q, reflection, denied)
+11-22 06:29:54.040   325   325 I Zygote  : Process 3353 exited due to signal 9 (Killed)
+11-22 06:29:54.051  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=67.0 y=1079.0 rawX=67.0 rawY=1079.0 tab=1 
+11-22 06:29:54.052  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=67.0 y=734.0 rawX=67.0 rawY=1079.0 tab=1 
+11-22 06:29:54.052  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=26.0 dy=0.0
+11-22 06:29:54.052  2411  2411 D WAQT_RAIL_TRACE: RAIL_EVAL dx=26.0 dy=0.0 inward=false edge=0
+11-22 06:29:54.052  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:29:54.052  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:29:54.068  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=119.00001 y=1079.0 rawX=119.00001 rawY=1079.0 tab=1 
+11-22 06:29:54.068  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=119.00001 y=734.0 rawX=119.00001 rawY=1079.0 tab=1 
+11-22 06:29:54.068  2411  2411 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=78.00001 dy=0.0
+11-22 06:29:54.068  2411  2411 D WAQT_RAIL_TRACE: RAIL_EVAL dx=78.00001 dy=0.0 inward=true edge=0
+11-22 06:29:54.068  2411  2411 D WAQT_RAIL_TRACE: RAIL_OPEN_FIRED
+11-22 06:29:54.073  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.073  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.073  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-22 06:29:54.074  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.074  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.074  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-22 06:29:54.074  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.074  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-22 06:29:54.074  1368  1561 I SuperDelight: SuperDelightDownloadMetadataParser.parse():183 SuperDelightDownloadMetadataParser#parse(delight): Manifest parsed with 885 packs
+11-22 06:29:54.075  2411  2411 D WAQT_RAIL_TRACE: RAIL_UP moved=true dragging=false isOpen=false
+11-22 06:29:54.077  1368  1561 I SP      : Successfully got manifest for transformer_concept-manifest: manifests:transformer_concept-2020102810
+11-22 06:29:54.080  1368  1623 I SuperDelight: SuperDelightManager.lambda$syncDownloadableLanguageModels$6():600 SuperDelightManager#syncDownloadableLanguageModels(delight): [OnDevice] Syncing for version 2021093005
+11-22 06:29:54.080  1368  1561 I SP      : Syncing content_cache (2021061512) with slices: [9e22973d4ff86e79a43b587d114f5a4e, 73c10eff89726f4122ae1887121fdee6], metadata: true
+11-22 06:29:54.101  2411  2411 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=true grip=true children=4
+11-22 06:29:54.103  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:29:54.103  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:29:54.113  1368  1561 I SP      : Scheduling: download registered, 1 started, 0 paused, 0 scheduled, 2 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ * {m:b:u:l, bg}
+11-22 06:29:54.129  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=210.0 y=1079.0 rawX=210.0 rawY=1079.0 tab=1 
+11-22 06:29:54.129  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=210.0 y=734.0 rawX=210.0 rawY=1079.0 tab=1 
+11-22 06:29:54.129  2411  2411 D WAQT_TOUCH_TRACE: HOST_TOUCH action=2 x=210.0 y=734.0 rawX=210.0 rawY=1079.0 tab=1 
+11-22 06:29:54.129  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:29:54.129  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:29:54.157  1368  1561 I SP      : Scheduling: download registered, 1 started, 0 paused, 0 scheduled, 3 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ * {m:b:u:l, bg}
+11-22 06:29:54.192  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/emoji2expr.pb to 9e22973d4ff86e79a43b587d114f5a4e.fetched (constraints: m:b:u:l)
+11-22 06:29:54.193  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/contextual_ek.pb to 73c10eff89726f4122ae1887121fdee6.fetched (constraints: m:b:u:l)
+11-22 06:29:54.193  1368  1561 I SP      : Syncing transformer_concept (2020102810) with slices: [2020102810_en], metadata: false
+11-22 06:29:54.200  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=272.8333 y=1079.0 rawX=272.8333 rawY=1079.0 tab=1 
+11-22 06:29:54.200  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=272.8333 y=734.0 rawX=272.8333 rawY=1079.0 tab=1 
+11-22 06:29:54.200  2411  2411 D WAQT_TOUCH_TRACE: HOST_TOUCH action=2 x=272.8333 y=734.0 rawX=272.8333 rawY=1079.0 tab=1 
+11-22 06:29:54.200  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 06:29:54.200  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:29:54.202  1042  2438 W SystemServiceRegistry: No service published for: contexthub
+11-22 06:29:54.208  1042  2437 W ctxmgr  : [UpdateFenceRegistrationOperation] Gesture nano app is not available. [CONTEXT service_id=47 ]
+--------- beginning of system
+11-22 06:29:54.216   519  1010 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:29:54.216   519  1010 D PackageManager: Clear ephemeral installer activity
+11-22 06:29:54.218  2411  2505 D EGL_emulation: app_time_stats: avg=950.56ms min=112.36ms max=4891.93ms count=6
+11-22 06:29:54.223  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=301.0 y=1079.0 rawX=301.0 rawY=1079.0 tab=1 
+11-22 06:29:54.223  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=301.0 y=734.0 rawX=301.0 rawY=1079.0 tab=1 
+11-22 06:29:54.223  2411  2411 D WAQT_TOUCH_TRACE: HOST_TOUCH action=1 x=301.0 y=734.0 rawX=301.0 rawY=1079.0 tab=1 
+11-22 06:29:54.223  2411  2411 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=1
+11-22 06:29:54.223  2411  2411 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 06:29:54.233   519  2316 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:29:54.233   519  2316 D PackageManager: Clear ephemeral installer activity
+11-22 06:29:54.237   519  2316 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:29:54.237   519  2316 D PackageManager: Clear ephemeral installer activity
+11-22 06:29:54.297  1394  1654 W etd     : Cannot reschedule growth notification, not scheduled.
+11-22 06:29:54.307  1368  1561 I SP      : Scheduling: download registered, 1 started, 0 paused, 0 scheduled, 4 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, transformer_concept:2020102810_en @ * {m:b:u:l, bg}
+11-22 06:29:54.308  1368  1561 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():82 DownloadSlicing#getSlices() : Locale = [en_US]
+11-22 06:29:54.315  1368  1561 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():229 DownloadSlicing#getSlices(): result {slices=[delight:main_en_us_2021062100_1, delight:main_en_840_2021081100_1], last batch=true, sync metadata=false}
+11-22 06:29:54.315  1368  1561 I SP      : Syncing delight (2021093005) with slices: [main_en_us_2021062100_1, main_en_840_2021081100_1], metadata: false
+11-22 06:29:54.326  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/en.zip to 2020102810_en.zip.fetched (constraints: m:b:u:l)
+11-22 06:29:54.383  1368  1561 I SP      : Pausing download content_cache:9e22973d4ff86e79a43b587d114f5a4e, reason: PREEMPTED
+11-22 06:29:54.384  1368  1561 I SP      : Pausing download content_cache:73c10eff89726f4122ae1887121fdee6, reason: PREEMPTED
+11-22 06:29:54.384  1368  1561 I SP      : Pausing download emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, reason: PREEMPTED
+11-22 06:29:54.385  1368  1561 I SP      : Pausing download transformer_concept:2020102810_en, reason: PREEMPTED
+11-22 06:29:54.394  1368  1561 I SP      : Scheduling: download registered, 1 started, 4 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, transformer_concept:2020102810_en @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ * {m:b:u:l, bg}
+11-22 06:29:54.395  1368  1561 I SP      : Successfully got manifest for gboard-small-speech-packs-manifest: manifests:gboard-small-speech-packs-1327534105
+11-22 06:29:54.400  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/dictionarypack/prod/en-840_d3_2021081100_5b547qpqwyjy_jwsmain.dict to main_en_840_2021081100_1.fst-decompress.fetched (constraints: m:b:u:l)
+11-22 06:29:54.400  1368  1594 I SpeechPackManager: SpeechPackManager$2.onSuccess():350 refreshManifest() : Refreshed URL = https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json
+11-22 06:29:54.400  1368  1561 I SP      : Download for emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 was canceled
+11-22 06:29:54.401  1368  1561 I SP      : Download stopped: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, failed (retriable) paused, size: 0
+11-22 06:29:54.408  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.408  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.409  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-22 06:29:54.409  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.409  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.409  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-22 06:29:54.409  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.409  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-22 06:29:54.411  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, transformer_concept:2020102810_en @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 06:29:54.412  1368  1561 I SP      : Download for content_cache:9e22973d4ff86e79a43b587d114f5a4e was canceled
+11-22 06:29:54.412  1368  1561 I SP      : Download stopped: content_cache:9e22973d4ff86e79a43b587d114f5a4e, failed (retriable) paused, size: 0
+11-22 06:29:54.414  3642  4179 W AssistantConfig: appIntegrationDataInBase64 is null
+11-22 06:29:54.415  3642  4179 E AssistantConnector: Couldn't read whether gRPC is supported from public value
+11-22 06:29:54.415  3642  4179 E AssistantConnector: java.lang.IllegalStateException: Failed to query to AGSA.
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at amdj.call(PG:16)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at aypl.call(PG:2)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at bcic.c(PG:1)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at bchf.run(PG:4)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at bcid.run(PG:1)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:29:54.415  3642  4179 E AssistantConnector: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:29:54.415  3642  4179 I AssistantConnector: Fallback to Maestro connector
+11-22 06:29:54.418  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, transformer_concept:2020102810_en @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 06:29:54.419  1368  1561 I SP      : Download for content_cache:73c10eff89726f4122ae1887121fdee6 was canceled
+11-22 06:29:54.419  1368  1561 I SP      : Download stopped: content_cache:73c10eff89726f4122ae1887121fdee6, failed (retriable) paused, size: 0
+11-22 06:29:54.422  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 {m:b:u:l, bg}, transformer_concept:2020102810_en @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 06:29:54.422  1368  1561 I SP      : Download for transformer_concept:2020102810_en was canceled
+11-22 06:29:54.422  1368  1561 I SP      : Download stopped: transformer_concept:2020102810_en, failed (retriable) paused, size: 0
+11-22 06:29:54.425  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 {m:b:u:l, bg}, transformer_concept:2020102810_en {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 06:29:54.473  1042  3786 I bqwt    : Removed 0 invalid users [CONTEXT service_id=51 ]
+11-22 06:29:54.494   759   759 D TileServices: Couldn't find tile for ComponentInfo{com.google.android.apps.wellbeing/com.google.android.apps.wellbeing.focusmode.quicksettings.FocusModeTileService}
+11-22 06:29:54.508  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->getAlpnSelectedProtocol()[B (max-target-q,core-platform-api, reflection, denied)
+11-22 06:29:54.508  1368  4174 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->getAlpnSelectedProtocol()[B (max-target-q, reflection, denied)
+11-22 06:29:54.557  1394  1660 W gmg     : Unsupported: feature flag disabled.
+11-22 06:29:54.578   519   548 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10108; state: DISABLED
+11-22 06:29:54.578   519   562 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10108; state: ENABLED
+11-22 06:29:54.583   325   325 D Zygote  : Forked child process 4182
+11-22 06:29:54.583   519   562 I ActivityManager: Start proc 4182:com.google.android.apps.youtube.music/u0a108 for broadcast {com.google.android.apps.youtube.music/com.google.android.libraries.youtube.mdx.background.MdxBackgroundScanBootReceiver}
+11-22 06:29:54.612  4182  4182 W s.youtube.musi: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 06:29:54.630  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.636  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.637   420   442 I adbd    : jdwp connection from 4182
+11-22 06:29:54.658  4182  4182 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10108; state: DISABLED
+11-22 06:29:54.664  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.681   519   618 I RoleService: Granting default roles...
+11-22 06:29:54.682  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.682  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.684   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.contacts
+11-22 06:29:54.684   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.689  4182  4182 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/app/YouTubeMusicPrebuilt/lib/x86_64:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 06:29:54.693   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.696  4182  4182 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.youtube.music' set to: 'default'
+11-22 06:29:54.696  4182  4182 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 06:29:54.698  4182  4182 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 06:29:54.698  4182  4182 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 06:29:54.699   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.746  4182  4182 W s.youtube.musi: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-22 06:29:54.746  4182  4182 W s.youtube.musi: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 06:29:54.746  4182  4182 W s.youtube.musi: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 06:29:54.813  4182  4200 W s.youtube.musi: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk*482612108:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes2.dex*3971764547:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes3.dex*426843809:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes4.dex*3127326728]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]})
+11-22 06:29:54.830   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.851  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.862  4182  4207 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-22 06:29:54.866  1153  3289 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 06:29:54.868  1042  1056 I .gms.persisten: Background young concurrent copying GC freed 20457(992KB) AllocSpace objects, 10(1112KB) LOS objects, 0% free, 34MB/34MB, paused 733us,27us total 102.397ms
+11-22 06:29:54.874  1042  1063 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-22 06:29:54.890   519  2316 D ConnectivityService: requestNetwork for uid/pid:10108/4182 activeRequest: null callbackRequest: 96 [NetworkRequest [ REQUEST id=97, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 06:29:54.890   519   697 D ConnectivityService: NetReassign [97 : null → 101]
+11-22 06:29:54.890  1153  3289 I Icing   : Indexing done com.google.android.gms-apps
+11-22 06:29:54.892   519   688 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=97, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:54.892   519   688 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=97, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:54.892   519   688 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=97, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:54.906  4182  4207 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module found. Local version is 0 and remote version is 0.
+11-22 06:29:54.908  1153  3289 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 06:29:54.909  1153  3289 I Icing   : Indexing done com.google.android.gms-apps
+11-22 06:29:54.912   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.917   761   899 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 06:29:54.925  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.925  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.944  4182  4239 E GEL_DELAYED_EVENT_DEBUG: Failed delayed event dispatch, no dispatchers.
+11-22 06:29:54.949  4182  4244 E AwarenessClientProvider: Account associated with identity was null
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: Exception while syncing fences
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: java.util.concurrent.ExecutionException: java.lang.IllegalStateException: Account associated with identity was null
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at acyh.s(PG:6)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at acyh.get(PG:4)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at adbz.a(PG:1)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at adaq.p(PG:2)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at gzf.run(PG:1)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at nwe.run(PG:1)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at nvp.run(PG:2)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at nvf.run(PG:2)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: Caused by: java.lang.IllegalStateException: Account associated with identity was null
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at gyl.a(PG:3)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at acyj.f(PG:2)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	at acyl.run(PG:9)
+11-22 06:29:54.950  4182  4244 E AwarenessRouterSyncMgr: 	... 6 more
+11-22 06:29:54.971  1153  3289 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-22 06:29:54.974  1153  3289 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-22 06:29:54.980  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.983  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.983  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:54.998  4182  4252 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10108; state: DISABLED
+11-22 06:29:55.000  4182  4206 W GoogleTagManager: Failed to extract the container from the resource file. Resource is a UTF-8 encoded string but doesn't contain a JSON container
+11-22 06:29:55.030  4182  4207 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/priv-app/PrebuiltGmsCore/lib/x86_64:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 06:29:55.040  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.053   761   785 I PermissionControllerServiceImpl: Updating user sensitive for user 0
+11-22 06:29:55.054   519   548 D ConnectivityService: requestNetwork for uid/pid:10108/4182 activeRequest: null callbackRequest: 98 [NetworkRequest [ REQUEST id=99, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 06:29:55.055   519   697 D ConnectivityService: NetReassign [99 : null → 101]
+11-22 06:29:55.057   519   688 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=99, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.057   519   688 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=99, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.057   519   688 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=99, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.061   519   697 D ConnectivityService: NetReassign [no changes]
+11-22 06:29:55.068  4182  4182 W YT.MDX.tyl: CastAppId for type 0 not found. Defaulting to mainCastAppId.
+11-22 06:29:55.069  4182  4182 W YT.MDX.tyl: CastAppId for type 0 not found. Defaulting to mainCastAppId.
+11-22 06:29:55.101  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.108   519   548 D ConnectivityService: requestNetwork for uid/pid:10108/4182 activeRequest: null callbackRequest: 101 [NetworkRequest [ REQUEST id=102, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 06:29:55.109   519   697 D ConnectivityService: NetReassign [102 : null → 101]
+11-22 06:29:55.110   519   688 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=102, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.110   519   688 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=102, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.110   519   688 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=102, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.111  4182  4240 I DynamiteModule: Considering local module com.google.android.gms.ads.dynamite:0 and remote module com.google.android.gms.ads.dynamite:224400003
+11-22 06:29:55.111  4182  4240 I DynamiteModule: Selected remote version of com.google.android.gms.ads.dynamite, version >= 224400003
+11-22 06:29:55.112  4182  4214 W YouTubeMusic: Unknown task tag mdx_background_scanner; aborting...
+11-22 06:29:55.115   519  2008 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10119; state: DISABLED
+11-22 06:29:55.115   519  2008 D CompatibilityChangeReporter: Compat change id reported: 177438394; UID 10119; state: DISABLED
+11-22 06:29:55.115   519  2008 D CompatibilityChangeReporter: Compat change id reported: 135772972; UID 10119; state: DISABLED
+11-22 06:29:55.115   519  2008 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10119; state: ENABLED
+11-22 06:29:55.116   519   562 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10119; state: ENABLED
+11-22 06:29:55.120   325   325 D Zygote  : Forked child process 4273
+11-22 06:29:55.120  1042  1056 I .gms.persisten: Background concurrent copying GC freed 457132(17MB) AllocSpace objects, 8(3796KB) LOS objects, 49% free, 15MB/30MB, paused 20us,19us total 244.702ms
+11-22 06:29:55.121   519   562 I ActivityManager: Start proc 4273:com.google.android.calendar/u0a119 for broadcast {com.google.android.calendar/com.google.android.apps.calendar.sync.SyncOnUnlockReceiver}
+11-22 06:29:55.124  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.125   519  2316 I ActivityManager: Killing 3444:com.android.camera2/u0a117 (adj 975): empty #17
+11-22 06:29:55.133  4273  4273 W ndroid.calenda: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 06:29:55.136   420   442 I adbd    : jdwp connection from 4273
+11-22 06:29:55.139   325   325 I Zygote  : Process 3444 exited due to signal 9 (Killed)
+11-22 06:29:55.147   519  2059 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10119; state: DISABLED
+11-22 06:29:55.153  4273  4273 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10119; state: DISABLED
+11-22 06:29:55.156  4182  4207 V NativeCrypto: Registering com/google/android/gms/org/conscrypt/NativeCrypto's 295 native methods...
+11-22 06:29:55.162  4182  4240 W s.youtube.musi: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk*482612108:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes2.dex*3971764547:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes3.dex*426843809:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!classes4.dex*3127326728]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]})
+11-22 06:29:55.166  4273  4273 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/app/CalendarGooglePrebuilt/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 06:29:55.169   519   563 I libprocessgroup: Successfully killed process cgroup uid 10117 pid 3444 in 43ms
+11-22 06:29:55.170  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.171  4273  4273 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.calendar' set to: 'default'
+11-22 06:29:55.171  4273  4273 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 06:29:55.171  4273  4273 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 06:29:55.171  4273  4273 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 06:29:55.202  4182  4240 D DynamitePackage: Instantiated singleton DynamitePackage.
+11-22 06:29:55.202  4182  4240 D DynamitePackage: Instantiating com.google.android.gms.ads.adshield.ChimeraAdShieldCreatorImpl
+11-22 06:29:55.214  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.221  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.260   519   550 D CompanionDeviceManagerService: onPackageModified(packageName = com.google.android.apps.wellbeing)
+11-22 06:29:55.261   761   785 I PermissionControllerServiceImpl: Updating user sensitive for uid 10098
+11-22 06:29:55.261  4182  4207 I ProviderInstaller: Installed default security provider GmsCore_OpenSSL
+11-22 06:29:55.262   519   623 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS | 
+11-22 06:29:55.264   745   745 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-22 06:29:55.264   745   745 D MediaPlayerList: Name of package changed: com.google.android.apps.wellbeing
+11-22 06:29:55.318   519   519 I Telecom : DefaultDialerCache: Refreshing default dialer for user 0: now com.android.dialer: DDC.oR@AKw
+11-22 06:29:55.323   934   934 D CarrierSvcBindHelper: No carrier app for: 0
+11-22 06:29:55.323   934   934 D ImsResolver: maybeAddedImsService, packageName: com.google.android.apps.wellbeing
+11-22 06:29:55.330  1042  2747 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package:com.google.android.apps.wellbeing flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-22 06:29:55.340  1042  2747 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-22 06:29:55.343  1153  1153 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.constellation.service.START pkg=com.google.android.gms }
+11-22 06:29:55.367  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.385  4273  4299 W ndroid.calenda: Accessing hidden field Ljava/util/Collections$SynchronizedCollection;->mutex:Ljava/lang/Object; (max-target-o, reflection, denied)
+11-22 06:29:55.385  4273  4299 W ndroid.calenda: Accessing hidden method Ljava/util/Collections$SynchronizedSet;-><init>(Ljava/util/Set;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 06:29:55.386  4273  4299 W ndroid.calenda: Accessing hidden method Ljava/util/Collections$SynchronizedCollection;-><init>(Ljava/util/Collection;Ljava/lang/Object;)V (max-target-o, reflection, denied)
+11-22 06:29:55.406  1153  4088 W SQLiteLog: (28) double-quoted string literal: "1795156195406"
+11-22 06:29:55.406  1153  4088 W SQLiteLog: (28) double-quoted string literal: "1"
+11-22 06:29:55.421   519  2316 D ConnectivityService: requestNetwork for uid/pid:10108/4182 activeRequest: null callbackRequest: 103 [NetworkRequest [ REQUEST id=104, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]] callback flags: 0 priority: 2147483647
+11-22 06:29:55.423   519   697 D ConnectivityService: NetReassign [104 : null → 101]
+11-22 06:29:55.424   519   688 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=104, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.424  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.424   519   688 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=104, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.424   519   688 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=104, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10108 RequestorUid: 10108 RequestorPkg: com.google.android.apps.youtube.music] ]
+11-22 06:29:55.431   519   579 E VerityUtils: Failed to measure fs-verity, errno 1: /product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk
+11-22 06:29:55.452  1042  1228 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.455  1368  1561 I SP      : <==== Finishing job {m:b:u:l, bg}, 1582 ms. elapsed since start
+11-22 06:29:55.455  1368  1561 I SP      : Download stopped: delight:main_en_840_2021081100_1, succeeded, size: 8680208
+11-22 06:29:55.458  1368  1561 I SP      : Scheduling job with delay of 0s for {m:b:u:l, bg}, 4 candidates
+11-22 06:29:55.465  1368  1368 I SP      : <<<<< Stopping job {m:b:u:l, bg}, 1593 ms. elapsed since start
+11-22 06:29:55.424   519   519 W PackageManagerB: type=1400 audit(0.0:55): avc: denied { ioctl } for path="/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk" dev="dm-2" ino=138 ioctlcmd=0x6686 scontext=u:r:system_server:s0 tcontext=u:object_r:system_file:s0 tclass=file permissive=0
+11-22 06:29:55.496  4182  4182 E YouTubeMusic: Trying to detachMediaView when it wasn't the most recent MediaView Setter
+11-22 06:29:55.520  4182  4206 E GoogleTagManager: Invalid macro: _gtm.loadEventEnabled
+11-22 06:29:55.528  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.531  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 4 scheduled, 4 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 * {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e * {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 * {m:b:u:l, bg}, transformer_concept:2020102810_en * {m:b:u:l, bg}
+11-22 06:29:55.532  1368  1368 I SpBackgroundTask: SuperpacksBackgroundJobService.onStartJob():23 onStartJob: android.app.job.JobParameters@142909e
+11-22 06:29:55.532  1368  1368 I SP      : ====> Starting job {m:b:u:l, bg}
+11-22 06:29:55.551   519   548 D CompatibilityChangeReporter: Compat change id reported: 143231523; UID 10119; state: DISABLED
+11-22 06:29:55.554  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.585  1042  2130 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.608  4182  4319 E GoogleTagManager: Invalid macro: _gtm.loadEventEnabled
+11-22 06:29:55.612  4273  4331 I c.zhd   : Obtained writable database SQLiteDatabase/266422026 instance with path /data/user/0/com.google.android.calendar/databases/cal_v2a
+11-22 06:29:55.614  4273  4330 I c.zfk   : The schema version is 17, the database version is 17, and there are 0 migrations
+11-22 06:29:55.642  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.645  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.647   321   920 I netd    : trafficSwapActiveStatsMap() <15.18ms>
+11-22 06:29:55.648  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.648   321   920 I netd    : tetherGetStats() -> {[]} <0.30ms>
+11-22 06:29:55.656   321   920 I netd    : bandwidthSetGlobalAlert(2097152) <0.13ms>
+11-22 06:29:55.660  1368  1561 I SP      : Scheduling: job start ({m:b:u:l, bg}), 4 started, 0 paused, 0 scheduled, 4 pending: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ * {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ * {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ * {m:b:u:l, bg}, transformer_concept:2020102810_en @ * {m:b:u:l, bg}
+11-22 06:29:55.660  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/emoji/20210928151924/en_us.zip to f3e8ef9a2eea15b0459d82fa3609b4c7.zip.fetched (constraints: m:b:u:l)
+11-22 06:29:55.660  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/emoji2expr.pb to 9e22973d4ff86e79a43b587d114f5a4e.fetched (constraints: m:b:u:l)
+11-22 06:29:55.660  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/contextual_ek.pb to 73c10eff89726f4122ae1887121fdee6.fetched (constraints: m:b:u:l)
+11-22 06:29:55.660  1368  1561 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/en.zip to 2020102810_en.zip.fetched (constraints: m:b:u:l)
+11-22 06:29:55.665   321   920 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.49ms>
+11-22 06:29:55.666   321   920 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.41ms>
+11-22 06:29:55.680  4273  4273 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10119; state: DISABLED
+11-22 06:29:55.683  1368  1561 I SP      : Download stopped: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, succeeded, size: 81060
+11-22 06:29:55.699   321   920 I netd    : trafficSwapActiveStatsMap() <15.33ms>
+11-22 06:29:55.700   321   920 I netd    : tetherGetStats() -> {[]} <0.40ms>
+11-22 06:29:55.709   321   920 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.70ms>
+11-22 06:29:55.709   321   920 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.32ms>
+11-22 06:29:55.715  1042  2612 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.727   519   736 D CompatibilityChangeReporter: Compat change id reported: 171306433; UID 10119; state: DISABLED
+11-22 06:29:55.745  4273  4273 W GrowthKit: Failed to get GrowthKitJobScheduler in GrowthKitBootCompletedBroadcastReceiver So GrowthKit failed to schedule jobs after package replaced / boot completed.
+11-22 06:29:55.745  4273  4273 W GrowthKit: java.lang.NullPointerException: Unable to get GrowthKit Component from host app: com.google.android.calendar
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at cal.rll.a(PG:6)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at com.google.android.libraries.internal.growth.growthkit.inject.GrowthKitBootCompletedBroadcastReceiver.onReceive(PG:1)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.app.ActivityThread.handleReceiver(ActivityThread.java:4308)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.app.ActivityThread.access$1600(ActivityThread.java:247)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2064)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.os.Handler.dispatchMessage(Handler.java:106)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.os.Looper.loopOnce(Looper.java:201)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.os.Looper.loop(Looper.java:288)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at android.app.ActivityThread.main(ActivityThread.java:7839)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at java.lang.reflect.Method.invoke(Native Method)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+11-22 06:29:55.745  4273  4273 W GrowthKit: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
+11-22 06:29:55.755  1042  2612 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.756  1042  2612 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.759  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 3 pending: content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, transformer_concept:2020102810_en @ {m:b:u:l, bg}
+11-22 06:29:55.766  1368  1561 I SP      : Download stopped: content_cache:9e22973d4ff86e79a43b587d114f5a4e, succeeded, size: 3663
+11-22 06:29:55.767  1368  1795 I SuperDelight: SuperDelightUnpacker$UnpackCancellableTask.execute():102 UnpackCancellableTask#execute(): fst-decompress /data/user/0/com.google.android.inputmethod.latin/files/superpacks/delight/main_en_840_2021081100_1.staged
+11-22 06:29:55.782  1042  2317 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:29:55.784  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 2 pending: content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, transformer_concept:2020102810_en @ {m:b:u:l, bg}
+11-22 06:29:55.801  1042  1042 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }
+11-22 06:29:55.827  1368  1561 I SP      : Download stopped: content_cache:73c10eff89726f4122ae1887121fdee6, succeeded, size: 808
+11-22 06:29:55.828  4182  4222 I FA      : App measurement disabled by setAnalyticsCollectionEnabled(false)
+11-22 06:29:55.853  4182  4222 I FA      : App measurement initialized, version: 75066
+11-22 06:29:55.853  4182  4222 I FA      : To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+11-22 06:29:55.853  4182  4222 I FA      : To enable faster debug mode event logging run:
+11-22 06:29:55.853  4182  4222 I FA      :   adb shell setprop debug.firebase.analytics.app com.google.android.apps.youtube.music
+11-22 06:29:55.868  1042  2130 W VerdictProvider: response is invalid [4] [CONTEXT service_id=257 ]
+11-22 06:29:55.925  4182  4243 E GoogleTagManager: Unsupported Value Escaping: 3
+11-22 06:29:55.926  4182  4243 E GoogleTagManager: Unsupported Value Escaping: 3
+11-22 06:29:55.933  4182  4243 E GoogleTagManager: Unsupported Value Escaping: 3
+11-22 06:29:55.959  1153  1153 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 06:29:55.959  1153  1153 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 06:29:55.988  1368  1561 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 1 pending: transformer_concept:2020102810_en @ {m:b:u:l, bg}
+11-22 06:29:56.013  1368  1561 I SP      : Sync for emoji succeeded in 2186 ms: {added: [f3e8ef9a2eea15b0459d82fa3609b4c7], metadata: false
+11-22 06:29:56.024   321  4370 D resolv  : GetAddrInfoHandler::run: {101 101 101 983141 10108 0}
+11-22 06:29:56.025   321  4370 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:29:56.027   321  4372 D resolv  : doQuery: (1, 1)
+11-22 06:29:56.027   321  4372 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:29:56.027   321  4372 D resolv  : res_nsend
+11-22 06:29:56.027   321  4372 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.027   321  4372 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x72d4b7de9cf0
+11-22 06:29:56.027   321  4372 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:29:56.027   321  4371 D resolv  : doQuery: (1, 28)
+11-22 06:29:56.027   321  4371 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:29:56.027   321  4371 D resolv  : res_nsend
+11-22 06:29:56.027   321  4371 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.027   321  4371 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x72d4c7de4e10
+11-22 06:29:56.028   321  4371 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:29:56.049  1368  1561 I SP      : GC for 'emoji' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-22 06:29:56.050  1368  1561 I SP      : Sync for content_cache succeeded in 1970 ms: {added: [73c10eff89726f4122ae1887121fdee6, 9e22973d4ff86e79a43b587d114f5a4e], removed: [3514c1e9a5c7d614d5646bd12032bfa6], metadata: true
+11-22 06:29:56.078  1368  1561 I SP      : <==== Finishing job {m:b:u:l, bg}, 546 ms. elapsed since start
+11-22 06:29:56.079  1368  1561 I SP      : Download stopped: transformer_concept:2020102810_en, succeeded, size: 1405688
+11-22 06:29:56.095   321  4373 D resolv  : GetAddrInfoHandler::run: {101 101 101 983141 10108 0}
+11-22 06:29:56.095   321  4373 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:29:56.099   321  4375 D resolv  : doQuery: (1, 1)
+11-22 06:29:56.099   321  4374 D resolv  : doQuery: (1, 28)
+11-22 06:29:56.099   321  4375 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:29:56.099   321  4374 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:29:56.099   321  4375 D resolv  : res_nsend
+11-22 06:29:56.099   321  4375 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.099   321  4374 D resolv  : res_nsend
+11-22 06:29:56.099   321  4375 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 06:29:56.099   321  4374 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.099   321  4375 I resolv  : resolv_populate_res_for_net: netid=101
+11-22 06:29:56.099   321  4374 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 06:29:56.099   321  4374 I resolv  : resolv_populate_res_for_net: netid=101
+11-22 06:29:56.099   321  4374 I resolv  : res_stats_usable_server: NS stats: S 36 + E 0 + T 0 + I 0 = 36, rtt = 14, min_samples = 8
+11-22 06:29:56.099   321  4374 I resolv  : res_stats_usable_server: success rate 100
+11-22 06:29:56.099   321  4374 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 06:29:56.099   321  4374 D resolv  : send_dg: new DG socket
+11-22 06:29:56.099   321  4374 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 06:29:56.099   321  4374 I resolv  : retrying_poll: 58 retrying_poll
+11-22 06:29:56.102   321  4375 I resolv  : res_stats_usable_server: NS stats: S 36 + E 0 + T 0 + I 0 = 36, rtt = 14, min_samples = 8
+11-22 06:29:56.102   321  4375 I resolv  : res_stats_usable_server: success rate 100
+11-22 06:29:56.102   321  4375 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 06:29:56.102   321  4375 D resolv  : send_dg: new DG socket
+11-22 06:29:56.102   321  4375 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 06:29:56.102   321  4375 I resolv  : retrying_poll: 59 retrying_poll
+11-22 06:29:56.116   321  4374 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-22 06:29:56.117   321  4374 I resolv  : res_nsend: used send_dg 96 terrno: 0
+11-22 06:29:56.117   321  4374 I resolv  : res_stats_set_sample: rcode = 0, sec = 18
+11-22 06:29:56.117   321  4374 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 36, count = 36
+11-22 06:29:56.117   321  4374 D resolv  : res_nsend: got answer:
+11-22 06:29:56.117   321  4374 I resolv  : answer_getTTL: TTL = 60
+11-22 06:29:56.117   321  4374 I resolv  : _cache_add_p: entry 37 added (count=37)
+11-22 06:29:56.117   321  4374 I resolv  : cache_dump_mru_locked: MRU LIST (37):  37 11 12 36 35 21 22 24 23 34 33 32 31 30 29 7 8 28 27 17 18 26 25 20 19 10 9 3 4 1 2 16 15 13 14 6 5
+11-22 06:29:56.117   321  4374 D resolv  : doQuery: rcode=0, ancount=0
+11-22 06:29:56.121   321  4375 I resolv  : retrying_poll: 59 retrying_poll returning 1
+11-22 06:29:56.121   321  4375 I resolv  : res_nsend: used send_dg 68 terrno: 0
+11-22 06:29:56.121   321  4375 I resolv  : res_stats_set_sample: rcode = 0, sec = 19
+11-22 06:29:56.122   321  4375 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 37, count = 37
+11-22 06:29:56.122   321  4375 D resolv  : res_nsend: got answer:
+11-22 06:29:56.122   321  4375 I resolv  : answer_getTTL: TTL = 300
+11-22 06:29:56.122   321  4375 I resolv  : _cache_add_p: entry 38 added (count=38)
+11-22 06:29:56.122   321  4375 I resolv  : cache_dump_mru_locked: MRU LIST (38):  38 37 11 12 36 35 21 22 24 23 34 33 32 31 30 29 7 8 28 27 17 18 26 25 20 19 10 9 3 4 1 2 16 15 13 14 6 5
+11-22 06:29:56.122   321  4375 D resolv  : doQuery: rcode=0, ancount=2
+11-22 06:29:56.122   321  4373 I ResolverController: No valid NAT64 prefix (101, <unspecified>/0)
+11-22 06:29:56.141  4273  4335 W ndroid.calenda: Long monitor contention with owner BACKGROUND_0 (4314) at java.lang.String cal.sqs.b()(PG:25) waiters=0 in java.lang.String cal.sqs.b() for 464ms
+11-22 06:29:56.163  1042  1042 W SystemServiceRegistry: No service published for: persistent_data_block
+11-22 06:29:56.177  1042  2612 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(6, com.google.android.libraries.notifications#com.google.android.calendar) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-22 06:29:56.203  4273  4273 D CompatibilityChangeReporter: Compat change id reported: 119147584; UID 10119; state: ENABLED
+11-22 06:29:56.232  1042  3786 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1795328996232) [CONTEXT service_id=51 ]
+11-22 06:29:56.233   519  2059 D ConnectivityService: requestNetwork for uid/pid:1000/519 asUid: 10119 activeRequest: null callbackRequest: 105 [NetworkRequest [ REQUEST id=106, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 1000 RequestorPkg: android] ]] callback flags: 0 priority: 2147483647
+11-22 06:29:56.234  1368  1368 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 06:29:56.234  1368  1368 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():168 maybeFetchAndUpdate: forceRefresh=true
+11-22 06:29:56.235  1368  1368 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 06:29:56.236   519   697 D ConnectivityService: NetReassign [106 : null → 101]
+11-22 06:29:56.236   321  4380 D resolv  : GetAddrInfoHandler::run: {101 101 101 983141 10108 0}
+11-22 06:29:56.236   321  4380 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:29:56.237   519   688 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=106, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 1000 RequestorPkg: android] ]
+11-22 06:29:56.237   519   688 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=106, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 1000 RequestorPkg: android] ]
+11-22 06:29:56.237   519   688 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=106, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10119 RequestorUid: 1000 RequestorPkg: android] ]
+11-22 06:29:56.239   321  4381 D resolv  : doQuery: (1, 28)
+11-22 06:29:56.239   321  4381 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:29:56.239   321  4381 D resolv  : res_nsend
+11-22 06:29:56.239   321  4381 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.239   321  4381 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 06:29:56.240   321  4381 I resolv  : resolv_populate_res_for_net: netid=101
+11-22 06:29:56.240   321  4381 I resolv  : res_stats_usable_server: NS stats: S 38 + E 0 + T 0 + I 0 = 38, rtt = 14, min_samples = 8
+11-22 06:29:56.240   321  4381 I resolv  : res_stats_usable_server: success rate 100
+11-22 06:29:56.240   321  4381 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 06:29:56.240   321  4381 D resolv  : send_dg: new DG socket
+11-22 06:29:56.240   321  4381 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 06:29:56.240   321  4381 I resolv  : retrying_poll: 58 retrying_poll
+11-22 06:29:56.241   519   519 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10119; state: DISABLED
+11-22 06:29:56.245  1042  3786 I bqwi    : Scheduling a periodic sync task every 86400 seconds, with flex of 1800 seconds [CONTEXT service_id=51 ]
+11-22 06:29:56.247   321  4382 D resolv  : doQuery: (1, 1)
+11-22 06:29:56.247   321  4382 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:29:56.247   321  4382 D resolv  : res_nsend
+11-22 06:29:56.247   321  4382 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.247   321  4382 I resolv  : resolv_cache_lookup: NOT IN CACHE
+11-22 06:29:56.247   321  4382 I resolv  : resolv_populate_res_for_net: netid=101
+11-22 06:29:56.247   321  4381 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-22 06:29:56.247   321  4381 I resolv  : res_nsend: used send_dg 150 terrno: 0
+11-22 06:29:56.247   321  4381 I resolv  : res_stats_set_sample: rcode = 0, sec = 7
+11-22 06:29:56.247   321  4381 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 38, count = 38
+11-22 06:29:56.247   321  4381 D resolv  : res_nsend: got answer:
+11-22 06:29:56.247   321  4381 I resolv  : answer_getTTL: TTL = 300
+11-22 06:29:56.247   321  4381 I resolv  : _cache_add_p: entry 39 added (count=39)
+11-22 06:29:56.247   321  4381 I resolv  : cache_dump_mru_locked: MRU LIST (39):  39 38 37 11 12 36 35 21 22 24 23 34 33 32 31 30 29 7 8 28 27 17 18 26 25 20 19 10 9 3 4 1 2 16 15 13 14 6 5
+11-22 06:29:56.247   321  4381 D resolv  : doQuery: rcode=0, ancount=4
+11-22 06:29:56.249   321  4382 I resolv  : res_stats_usable_server: NS stats: S 39 + E 0 + T 0 + I 0 = 39, rtt = 14, min_samples = 8
+11-22 06:29:56.249   321  4382 I resolv  : res_stats_usable_server: success rate 100
+11-22 06:29:56.249   321  4382 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 06:29:56.249   321  4382 D resolv  : send_dg: new DG socket
+11-22 06:29:56.249   321  4382 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 06:29:56.249   321  4382 I resolv  : retrying_poll: 58 retrying_poll
+11-22 06:29:56.251  1042  3786 I bqwi    : Scheduling adaptive one off task with window [14400, 604800] in seconds [CONTEXT service_id=51 ]
+11-22 06:29:56.256  1368  1561 I SP      : GC for 'content_cache' (10) with ttl of 0 ms took 0 ms (0/0/0)
+11-22 06:29:56.264  1368  1594 I EmojiSuperpacksManager: EmojiSuperpacksManager.processPackSet():514 processPackSet() : isBundled = false
+11-22 06:29:56.264  1368  1570 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():58 0 emoji shortcut maps loaded.
+11-22 06:29:56.264  1368  1570 I EmojiShortcutsLoader: EmojiShortcutsLoader.call():67 Finished loading emoji shortcuts
+11-22 06:29:56.267  1042  1042 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-22 06:29:56.271   321  4382 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-22 06:29:56.271   321  4382 I resolv  : res_nsend: used send_dg 102 terrno: 0
+11-22 06:29:56.271   321  4382 I resolv  : res_stats_set_sample: rcode = 0, sec = 22
+11-22 06:29:56.271   321  4382 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 39, count = 39
+11-22 06:29:56.271   321  4382 D resolv  : res_nsend: got answer:
+11-22 06:29:56.271   321  4382 I resolv  : answer_getTTL: TTL = 300
+11-22 06:29:56.271   321  4382 I resolv  : _cache_add_p: entry 40 added (count=40)
+11-22 06:29:56.271   321  4382 I resolv  : cache_dump_mru_locked: MRU LIST (40):  40 39 38 37 11 12 36 35 21 22 24 23 34 33 32 31 30 29 7 8 28 27 17 18 26 25 20 19 10 9 3 4 1 2 16 15 13 14 6 5
+11-22 06:29:56.271   321  4382 D resolv  : doQuery: rcode=0, ancount=4
+11-22 06:29:56.282   519  2013 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10144; state: DISABLED
+11-22 06:29:56.285  1042  1042 D CompatibilityChangeReporter: Compat change id reported: 119147584; UID 10102; state: ENABLED
+11-22 06:29:56.286   519  2013 D CompatibilityChangeReporter: Compat change id reported: 177438394; UID 10144; state: DISABLED
+11-22 06:29:56.286   519  2013 D CompatibilityChangeReporter: Compat change id reported: 135772972; UID 10144; state: DISABLED
+11-22 06:29:56.286   519  2013 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10144; state: ENABLED
+11-22 06:29:56.290   519   562 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10144; state: ENABLED
+11-22 06:29:56.294   325   325 D Zygote  : Forked child process 4389
+11-22 06:29:56.295   519   562 I ActivityManager: Start proc 4389:com.google.android.cellbroadcastreceiver/u0a144 for broadcast {com.google.android.cellbroadcastreceiver/com.android.cellbroadcastreceiver.CellBroadcastReceiver}
+11-22 06:29:56.296  1368  1540 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdatesInternal():364 Latency of updating configurations from phenotype (experiment v4): 0
+11-22 06:29:56.296  1368  1540 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdates():263 Latency of updating configurations from phenotype (ExperimentV4): 17
+11-22 06:29:56.305  4389  4389 W oadcastreceive: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 06:29:56.306  1368  1540 I PhenotypeModule: PhenotypeModule.lambda$fetchAndUpdate$1():220 fetchAndUpdate() : Success, hasFlags=true, flagCount=763, lastFetchStatus=November 22, 6:29 AM {reason=2, isFullFetch=false, success=true, isEmpty=false, isDelta=true, fetchedFlagsCount=1, deletedFlagsCount=0, updatedFlagsCount=1, totalTime=63}
+11-22 06:29:56.312   420   442 I adbd    : jdwp connection from 4389
+11-22 06:29:56.323  4389  4389 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10144; state: ENABLED
+11-22 06:29:56.335  4389  4389 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.cellbroadcastreceiver' set to: 'default'
+11-22 06:29:56.335  4389  4389 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 06:29:56.336  4389  4389 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 06:29:56.336  4389  4389 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 06:29:56.338  4389  4389 D CellBroadcastReceiver: onReceive Intent { act=android.intent.action.BOOT_COMPLETED flg=0x89000010 cmp=com.google.android.cellbroadcastreceiver/com.android.cellbroadcastreceiver.CellBroadcastReceiver (has extras) }
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: Could not register for notifications with InnerTube: 
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: tcg: sgv: Precondition check failed.
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at tbw.apply(Unknown Source:4)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at rnl.o(PG:5)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at rnl.b(PG:2)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at tby.d(PG:4)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at xas.c(PG:51)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at xaq.run(PG:2)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at nwe.run(PG:1)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at nvp.run(PG:2)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at nvh.run(PG:3)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: Caused by: sgv: Precondition check failed.
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at tau.e(PG:5)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at rux.c(PG:18)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at rty.run(PG:17)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at rmq.run(PG:12)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	... 1 more
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: Caused by: byd
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	at rty.run(PG:12)
+11-22 06:29:56.350  4182  4364 W YouTubeMusic: 	... 4 more
+11-22 06:29:56.367   341   385 D goldfish-address-space: claimShared: Ask to claim region [0x3f7038000 0x3f79dc000]
+11-22 06:29:56.377   172   172 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 06:29:56.377  1153  3282 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 06:29:56.377  4386  4405 I Gralloc4: mapper 4.x is not supported
+11-22 06:29:56.378  1153  3282 I Icing   : Indexing done com.google.android.gms-apps
+11-22 06:29:56.380   519   681 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10094; state: DISABLED
+11-22 06:29:56.383  4386  4405 D HostConnection: createUnique: call
+11-22 06:29:56.383   519   681 D CompatibilityChangeReporter: Compat change id reported: 177438394; UID 10094; state: DISABLED
+11-22 06:29:56.383   519   681 D CompatibilityChangeReporter: Compat change id reported: 135772972; UID 10094; state: DISABLED
+11-22 06:29:56.383   519   681 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10094; state: DISABLED
+11-22 06:29:56.384  4389  4404 D CellBroadcastContentProvider: database changed: notifying observers...
+11-22 06:29:56.384  4386  4405 D HostConnection: HostConnection::get() New Host Connection established 0x704bdf578550, tid 4405
+11-22 06:29:56.385  4386  4405 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 06:29:56.385  4386  4405 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 06:29:56.396  4386  4405 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 06:29:56.400   519   562 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10094; state: DISABLED
+11-22 06:29:56.406   325   325 D Zygote  : Forked child process 4406
+11-22 06:29:56.417  4406  4406 W d.configupdate: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 06:29:56.426   519   681 I ActivityManager: Killing 3468:com.android.contacts/u0a91 (adj 975): empty #17
+11-22 06:29:56.432  1042  2437 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator finished executing. cause:5 result: 1 elapsed_millis: 4005 uptime_millis: 4005 exec_start_elapsed_seconds: 83 [CONTEXT service_id=218 ]
+11-22 06:29:56.433   519   562 W ActivityManager: Slow operation: 57ms so far, now at startProcess: returned from zygote!
+11-22 06:29:56.434   519   562 W ActivityManager: Slow operation: 58ms so far, now at startProcess: done updating battery stats
+11-22 06:29:56.434   519   562 W ActivityManager: Slow operation: 58ms so far, now at startProcess: building log message
+11-22 06:29:56.434   519   562 I ActivityManager: Start proc 4406:com.google.android.configupdater/u0a94 for broadcast {com.google.android.configupdater/com.google.android.configupdater.MainReceiver}
+11-22 06:29:56.434   519   562 W ActivityManager: Slow operation: 58ms so far, now at startProcess: starting to update pids map
+11-22 06:29:56.434   519   562 W ActivityManager: Slow operation: 58ms so far, now at startProcess: done updating pids map
+11-22 06:29:56.455   325   325 I Zygote  : Process 3468 exited due to signal 9 (Killed)
+11-22 06:29:56.471   420   442 I adbd    : jdwp connection from 4406
+11-22 06:29:56.479   519   563 I libprocessgroup: Successfully killed process cgroup uid 10091 pid 3468 in 47ms
+11-22 06:29:56.495   519   547 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10094; state: DISABLED
+11-22 06:29:56.507  4406  4406 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10094; state: DISABLED
+11-22 06:29:56.508   321   920 I netd    : setProcSysNet(4, 2, wlan0, retrans_time_ms, 750) <0.10ms>
+11-22 06:29:56.509   321   920 I netd    : setProcSysNet(4, 2, wlan0, ucast_solicit, 10) <0.04ms>
+11-22 06:29:56.509   321   920 I netd    : setProcSysNet(6, 2, wlan0, retrans_time_ms, 750) <0.08ms>
+11-22 06:29:56.518   321   920 I netd    : setProcSysNet(6, 2, wlan0, ucast_solicit, 10) <0.04ms>
+11-22 06:29:56.525  2345  3984 D HostConnection: createUnique: call
+11-22 06:29:56.526  4406  4406 D ApplicationLoaders: Returning zygote-cached class loader: /system/framework/android.test.base.jar
+11-22 06:29:56.528  2345  3984 D HostConnection: HostConnection::get() New Host Connection established 0x710674fd7f10, tid 3984
+11-22 06:29:56.530  4406  4406 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/priv-app/ConfigUpdater/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 06:29:56.534  2345  3984 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 06:29:56.541  2345  3984 D EGL_emulation: eglCreateContext: 0x710674fd5e10: maj 3 min 0 rcv 3
+11-22 06:29:56.542  2345  3984 D EGL_emulation: eglMakeCurrent: 0x710674fd5e10: ver 3 0 (tinfo 0x71088b74d180) (first time)
+11-22 06:29:56.561  4406  4406 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.configupdater' set to: 'default'
+11-22 06:29:56.561  4406  4406 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 06:29:56.566  4406  4406 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 06:29:56.566  4406  4406 D NetworkSecurityConfig: No Network Security Config specified, using platform default
+11-22 06:29:56.607   321  4421 D resolv  : GetAddrInfoHandler::run: {101 101 101 983141 10108 0}
+11-22 06:29:56.607   321  4421 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:29:56.608   321  4422 D resolv  : doQuery: (1, 28)
+11-22 06:29:56.608   321  4422 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:29:56.608   321  4422 D resolv  : res_nsend
+11-22 06:29:56.608   321  4422 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.608   321  4422 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x72d4c7de5350
+11-22 06:29:56.608   321  4422 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:29:56.610  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.616  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.617   321  4423 D resolv  : doQuery: (1, 1)
+11-22 06:29:56.617   321  4423 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:29:56.617   321  4423 D resolv  : res_nsend
+11-22 06:29:56.617   321  4423 I resolv  : resolv_cache_lookup: lookup
+11-22 06:29:56.617   321  4423 I resolv  : resolv_cache_lookup: NOT IN CACHE (STALE ENTRY 0x72d4a7de12b0DISCARDED)
+11-22 06:29:56.617   321  4423 I resolv  : _cache_remove_p: entry 3 removed (count=39)
+11-22 06:29:56.617   321  4423 I resolv  : resolv_populate_res_for_net: netid=101
+11-22 06:29:56.617  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.619   321  4423 I resolv  : res_stats_usable_server: NS stats: S 40 + E 0 + T 0 + I 0 = 40, rtt = 14, min_samples = 8
+11-22 06:29:56.619   321  4423 I resolv  : res_stats_usable_server: success rate 100
+11-22 06:29:56.619   321  4423 D resolv  : res_nsend: Querying server (# 1) address = 10.0.2.3:53
+11-22 06:29:56.619   321  4423 D resolv  : send_dg: new DG socket
+11-22 06:29:56.619   321  4423 I resolv  : get_timeout: using timeout of 5000 msec
+11-22 06:29:56.619   321  4423 I resolv  : retrying_poll: 58 retrying_poll
+11-22 06:29:56.620  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.626   321  4423 I resolv  : retrying_poll: 58 retrying_poll returning 1
+11-22 06:29:56.626   321  4423 I resolv  : res_nsend: used send_dg 160 terrno: 0
+11-22 06:29:56.626   321  4423 I resolv  : res_stats_set_sample: rcode = 0, sec = 7
+11-22 06:29:56.626   321  4423 I resolv  : res_cache_add_stats_sample_locked: adding sample to stats, next = 40, count = 40
+11-22 06:29:56.626   321  4423 D resolv  : res_nsend: got answer:
+11-22 06:29:56.626   321  4423 I resolv  : answer_getTTL: TTL = 44
+11-22 06:29:56.626   321  4423 I resolv  : _cache_add_p: entry 41 added (count=40)
+11-22 06:29:56.626   321  4423 I resolv  : cache_dump_mru_locked: MRU LIST (40):  41 4 40 39 38 37 11 12 36 35 21 22 24 23 34 33 32 31 30 29 7 8 28 27 17 18 26 25 20 19 10 9 1 2 16 15 13 14 6 5
+11-22 06:29:56.626   321  4423 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:29:56.628  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.634  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.636  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.637  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.642  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.644  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.650  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.665  4406  4406 E ConfigUpdater: ignoring update request
+11-22 06:29:56.669  4406  4406 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10094; state: DISABLED
+11-22 06:29:56.684   519  2316 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10123; state: DISABLED
+11-22 06:29:56.684   519  2316 D CompatibilityChangeReporter: Compat change id reported: 177438394; UID 10123; state: DISABLED
+11-22 06:29:56.684   519  2316 D CompatibilityChangeReporter: Compat change id reported: 135772972; UID 10123; state: DISABLED
+11-22 06:29:56.684   519  2316 D CompatibilityChangeReporter: Compat change id reported: 135754954; UID 10123; state: DISABLED
+11-22 06:29:56.684   519   562 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10123; state: DISABLED
+11-22 06:29:56.689   325   325 D Zygote  : Forked child process 4450
+11-22 06:29:56.689   519  2316 I ActivityManager: Killing 3491:com.android.dynsystem/1000 (adj 985): empty #17
+11-22 06:29:56.690   519   562 I ActivityManager: Start proc 4450:com.google.android.deskclock/u0a123 for broadcast {com.google.android.deskclock/com.android.deskclock.AlarmInitReceiver}
+11-22 06:29:56.693  4450  4450 W droid.deskcloc: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 06:29:56.704   420   442 I adbd    : jdwp connection from 4450
+--------- beginning of kernel
+11-22 06:29:56.916     0     0 I logd    : logdr: UID=2000 GID=2000 PID=4448 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
+11-22 06:29:56.729  2345  3984 W SystemServiceRegistry: No service published for: persistent_data_block
+11-22 06:29:56.732   519  2316 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10123; state: DISABLED
