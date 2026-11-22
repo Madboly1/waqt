@@ -991,7 +991,7 @@ jobs:
           tap_text() {
             adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
             adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
-            python3 - "$1" <<'PY'
+            python3 - "$1" <<'PY' > /tmp/tap.txt
           import re, sys
           target = sys.argv[1]
           xml = open('ui.xml', encoding='utf-8').read()
@@ -1032,14 +1032,55 @@ jobs:
           adb shell am start -n com.example.glassproductivity/.MainActivity
           sleep 8
           adb logcat -c
-          try_tap "⚙" || adb shell input tap 98 247 || true
-          sleep 4
-          scroll_until "التركيز والاستراحة" || true
-          sleep 2
-          adb exec-out screencap -p > shots/50_focus_settings.png
-          if ! scroll_until "اختيار صوت أو موسيقى من الجهاز"; then
+          for i in 1 2 3; do
+            try_tap "التركيز" || adb shell input tap 423 2078 || true
+            sleep 3
+            adb shell uiautomator dump /sdcard/uif.xml >/dev/null 2>&1
+            adb pull /sdcard/uif.xml /tmp/uif.xml >/dev/null 2>&1 || true
+            if grep -q 'بومودورو' /tmp/uif.xml; then break; fi
+          done
+          if ! grep -q 'بومودورو' /tmp/uif.xml; then
             echo "AUDIO_CONSOLE=not_reached" > shots/audio_probe.txt
-            echo "AUDIO_SETTINGS_PICK_BUTTON=no" >> shots/audio_probe.txt
+            echo "AUDIO_FOCUS_TAB=no" >> shots/audio_probe.txt
+            cat shots/audio_probe.txt
+            exit 1
+          fi
+          sleep 2
+          adb exec-out screencap -p > shots/50_focus_tab.png
+          for i in 1 2 3; do
+            adb shell uiautomator dump /sdcard/uid.xml >/dev/null 2>&1
+            adb pull /sdcard/uid.xml /tmp/uid.xml >/dev/null 2>&1 || true
+            if grep -q '&#127911;' /tmp/uid.xml; then break; fi
+            HXY=$(python3 - <<'PYHD'
+          import re
+          xml = open('/tmp/uid.xml', encoding='utf-8').read()
+          best = None
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              if not bm:
+                  continue
+              val = tm.group(1) if tm else ''
+              if val in ('▸', '◂', '▾', '▴'):
+                  x0, y0, x1, y1 = (int(bm.group(k)) for k in range(1, 5))
+                  cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
+                  edge = min(cx, 1080 - cx)
+                  if best is None or edge < best[0]:
+                      best = (edge, cx, cy)
+          if best:
+              print(best[1], best[2])
+          PYHD
+            )
+            if [ -n "$HXY" ]; then adb shell input tap $HXY; fi
+            sleep 3
+          done
+          adb exec-out screencap -p > shots/51_audio_dock.png
+          try_tap "&#127911;" || true
+          sleep 3
+          adb exec-out screencap -p > shots/51b_audio_console.png
+          if ! try_tap "إضافة صوت من الجهاز"; then
+            echo "AUDIO_CONSOLE=not_reached" > shots/audio_probe.txt
             adb shell uiautomator dump /sdcard/uia.xml >/dev/null 2>&1
             adb pull /sdcard/uia.xml shots/ui_audio_blocker.xml >/dev/null 2>&1 || true
             cat shots/audio_probe.txt
@@ -1054,7 +1095,6 @@ jobs:
           try_tap "waqt_probe_alpha.wav" || true
           sleep 6
           adb exec-out screencap -p > shots/53_after_pick.png
-          scroll_until "معاينة / إيقاف الصوت المختار" || true
           sleep 6
           adb logcat -d > shots/audio_probe_logcat.txt || true
           adb shell dumpsys media.player > shots/audio_dumpsys.txt 2>/dev/null || true
