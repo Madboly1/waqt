@@ -1,0 +1,329 @@
+--------- beginning of system
+11-22 11:25:22.708  1012  1086 V WindowManagerShell:  animated by com.android.wm.shell.transition.RemoteTransitionHandler@8056cc3
+--------- beginning of main
+11-22 11:25:22.714  1265  1265 D SsBaseTemplateCard: No text view can be set up
+11-22 11:25:22.714  1265  1265 D SsBaseTemplateCard: Passed-in item info is null
+11-22 11:25:22.714  1265  1265 D SsBaseTemplateCard: Passed-in item info is null
+11-22 11:25:22.714  1265  1265 D SsBaseTemplateCard: Passed-in item info is null
+11-22 11:25:22.714  1265  1265 I SsBaseTemplateCard: Secondary card pane is null
+11-22 11:25:22.720   581   777 I ImeTracker: com.google.android.apps.nexuslauncher:c9faae63: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-22 11:25:22.721  1265  1265 D InsetsController: hide(ime(), fromIme=false)
+11-22 11:25:22.721  1265  1265 I ImeTracker: com.google.android.apps.nexuslauncher:c9faae63: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-22 11:25:22.726  1012  1086 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#36) android.os.BinderProxy@de8dc5b@0
+11-22 11:25:22.731  1494  1494 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043 
+11-22 11:25:22.752  1494  1494 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+11-22 11:25:22.755   581   654 V WindowManager: Finish Transition (#36): created at 11-22 11:25:22.586 collect-started=0.055ms request-sent=0.088ms started=12.771ms ready=23.491ms sent=88.376ms commit=26.556ms finished=141.635ms
+11-22 11:25:22.755   581  1863 E IPCThreadState: Binder transaction failure. id: 397661, BR_*: 29189, error: -22 (Invalid argument)
+11-22 11:25:22.755   581  1863 W ActivityManager: pid 581 system sent binder code 7 with flags 1 to frozen apps and got error -32
+11-22 11:25:22.755   581  1863 W WindowManager: Exception thrown during dispatchAppVisibility Window{151d87a u0 com.example.glassproductivity/com.example.glassproductivity.MainActivity EXITING}
+11-22 11:25:22.755   581  1863 W WindowManager: android.os.DeadObjectException
+11-22 11:25:22.755   581  1863 W WindowManager: 	at android.os.BinderProxy.transactNative(Native Method)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at android.os.BinderProxy.transact(BinderProxy.java:592)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at android.view.IWindow$Stub$Proxy.dispatchAppVisibility(IWindow.java:557)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.WindowState.sendAppVisibilityToClients(WindowState.java:3151)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.WindowContainer.sendAppVisibilityToClients(WindowContainer.java:1311)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.WindowToken.setClientVisible(WindowToken.java:389)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.ActivityRecord.setClientVisible(ActivityRecord.java:6650)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.ActivityRecord.commitVisibility(ActivityRecord.java:5561)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.Transition.finishTransition(Transition.java:1391)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.TransitionController.finishTransition(TransitionController.java:1029)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.finishTransition(WindowOrganizerController.java:496)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at android.window.IWindowOrganizerController$Stub.onTransact(IWindowOrganizerController.java:261)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at com.android.server.wm.WindowOrganizerController.onTransact(WindowOrganizerController.java:223)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at android.os.Binder.execTransactInternal(Binder.java:1421)
+11-22 11:25:22.755   581  1863 W WindowManager: 	at android.os.Binder.execTransact(Binder.java:1365)
+11-22 11:25:22.756   581  1863 W Process : Unable to open /proc/6934/status
+11-22 11:25:22.757   581  1863 I ImeTracker: system_server:ccfde04e: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+11-22 11:25:22.761  1012  1086 V WindowManagerShell: Track 0 became idle
+11-22 11:25:22.761  1012  1086 V WindowManagerShell: All active transition animations finished
+11-22 11:25:22.761  1012  1086 W Looper  : Slow dispatch took 35ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=com.android.wm.shell.transition.RemoteTransitionHandler$1$$ExternalSyntheticLambda0@745a80e m=0
+11-22 11:25:22.762  1494  1494 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.google.android.apps.nexuslauncher, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: EmojiCompatManager.getEmojiCompatIfLoaded():343 EmojiCompat.init() was never called.
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: java.lang.IllegalStateException: EmojiCompat is not initialized. Please call EmojiCompat.init() first
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at asx.p(PG:6)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at axb.b(PG:13)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at jnr.b(PG:2)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at jnr.c(PG:4)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at jnr.f(PG:3)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at jnx.c(PG:3)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at kif.cz(PG:47)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at lhl.run(PG:1025)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at jaf.execute(PG:12)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at nco.v(PG:13)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at lhn.m(PG:96)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at lhn.k(PG:25)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at kgn.onStartInput(PG:250)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService.doStartInput(InputMethodService.java:3521)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.startInput(InputMethodService.java:879)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.dispatchStartInput(InputMethodService.java:908)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.IInputMethodWrapper.executeMessage(IInputMethodWrapper.java:201)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.os.Looper.loopOnce(Looper.java:248)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.os.Looper.loop(Looper.java:338)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at java.lang.reflect.Method.invoke(Native Method)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+11-22 11:25:22.762  1494  1494 I EmojiCompatManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+11-22 11:25:22.767   581  1881 I ImeTracker: system_server:111daf56: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+11-22 11:25:22.798   581   658 I ImeTracker: system_server:ccfde04e: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-22 11:25:22.798   581   658 I ImeTracker: system_server:111daf56: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-22 11:25:22.799  1012  1086 W Looper  : Slow delivery took 34ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=null m=1
+11-22 11:25:22.799  1012  1086 W Looper  : Slow dispatch took 39ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=null m=1
+11-22 11:25:22.799  1012  1086 W Looper  : Drained
+11-22 11:25:22.802  1494  1494 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+11-22 11:25:22.802  1494  1494 W NotificationCenter: NotificationCenter$NotificationQueue.notifyPendingNotificationsOnExecutor():877 Heavy notify work detected on UI thread: [kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->ilu, kig->fro, kig->ilu, kig->ilu, kig->gkl, kig->jnx, kig->lux, kig->ilu, kig->khc, kig->ijm, kig->ilu, kig->fef, kig->ilu, kig->ilu, kig->fcb, kig->imt, kig->khg] takes 40ms
+11-22 11:25:22.803   581  1881 W PackageConfigPersister: App-specific configuration not found for packageName: com.google.android.apps.nexuslauncher and userId: 0
+11-22 11:25:22.875  2622  2622 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.app.Activity$$ExternalSyntheticLambda0@769155f
+11-22 11:25:22.875   581  1828 D CoreBackPreview: Window{7954db4 u0 com.google.android.packageinstaller/com.android.packageinstaller.DeleteStagedFileOnResult}: Setting back callback null
+11-22 11:25:22.901   521   521 E BpTransactionCompletedListener: Failed to transact (-32)
+11-22 11:25:22.903  2622  2622 D ViewRootImpl: Skipping stats log for color mode
+11-22 11:25:22.909   581   972 D BackgroundInstallControlService: Package event received: 0
+11-22 11:25:22.940  1012  1086 W Looper  : Slow delivery took 79ms wmshell.main app=com.android.systemui main=false group=FOREGROUND h=android.os.Handler c=android.window.TaskOrganizer$1$$ExternalSyntheticLambda4@ab1022f m=0
+11-22 11:25:22.941  1265  1265 D RecentsView: onTaskRemoved: 15, not handling task stack changes
+11-22 11:25:22.941  1265  1265 D RecentsView: onTaskRemoved: 15, not handling task stack changes
+11-22 11:25:23.093   581  1863 I ActivityManager: Force stopping com.example.glassproductivity appid=10216 user=0: from pid 7020
+11-22 11:25:23.095   581  1863 I AppsFilter: interaction: PackageSetting{57da2cb com.android.microdroid.empty_payload/10212} -> PackageSetting{db3aa54 com.example.glassproductivity/10216} BLOCKED
+11-22 11:25:23.100   581   956 I AppWidgetServiceImpl: Received broadcast: android.intent.action.PACKAGE_RESTARTED on user 0
+11-22 11:25:23.100   581   956 I AppWidgetServiceImpl: Updating package stopped masked state for uid 10216 package com.example.glassproductivity isStopped true
+11-22 11:25:23.101  1186  1186 D CarrierSvcBindHelper: onHandleForceStop: [com.example.glassproductivity]
+11-22 11:25:23.101  1186  1186 D CarrierSvcBindHelper: No carrier app for: 0
+11-22 11:25:23.171   581   922 D WifiClientModeImpl[33162:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2437 RxLinkSpeed=2
+11-22 11:25:23.171   581   922 D WifiDataStall: tx tput in kbps: 37000
+11-22 11:25:23.171   581   922 D WifiDataStall: rx tput in kbps: 37000
+11-22 11:25:23.171   581   922 V WifiConfigManager: Updating scan detail cache freq=2437 BSSID=02:15:b2:00:00:01 RSSI=-50 for "AndroidWifi"NONE
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:23.171   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:23.173   581   922 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 453280269 SSID: "AndroidWifi", BSSID: 02:15:b2:00:00:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 54Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 54Mbps, Frequency: 2437MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+11-22 11:25:23.173   581   922 D WifiScoreCard: txRate: 2 txSpeed: 1
+11-22 11:25:23.173   581   922 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 1456012208 RSSI -50 txSpeed -1
+11-22 11:25:23.173   581   922 D WifiClientModeImpl[33162:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 02:15:b2:00:00:01 rssi=-50 f=2437 sc=60 link=1 tx=1.8, 0.0, 0.0 rx=1.7 bcn=0 [on:0 tx:0 rx:0 period:3004] from screen [on:0 period:50393445] score=60
+11-22 11:25:23.350   581  1863 W ActivityTaskManager: callingPackage for (uid=0, pid=7020) has no WPC
+11-22 11:25:23.351   581  1863 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10216, packageName = null, attributionTag = null, token = android.os.Binder@80a4deb, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-22 11:25:23.351   581  1863 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_OVERRIDE
+11-22 11:25:23.351   581  1863 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_USER_ASPECT_RATIO_FULLSCREEN_OVERRIDE
+11-22 11:25:23.351   581  1863 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_RESIZEABLE_ACTIVITY_OVERRIDES
+11-22 11:25:23.351   581  1863 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_MIN_ASPECT_RATIO_OVERRIDE
+11-22 11:25:23.352  1012  1086 W Looper  : Drained
+11-22 11:25:23.354   521   767 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+11-22 11:25:23.354   581  1863 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ALLOW_ORIENTATION_OVERRIDE
+11-22 11:25:23.354   581  1863 V SplashScreenExceptionList: SplashScreen checking exception for package com.example.glassproductivity (target sdk:34) -> false
+11-22 11:25:23.356   581  1863 I ActivityTaskManager: START u0 {flg=0x10008000 xflg=0x4 cmp=com.example.glassproductivity/.MainActivity} with LAUNCH_MULTIPLE from uid 0 (BAL_ALLOW_ALLOWLISTED_UID) result code=0
+11-22 11:25:23.357  1012  1086 V WindowManagerShell: Transition requested (#37): android.os.BinderProxy@d6c3541 TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=16 effectiveUid=10216 displayId=0 isRunning=true baseIntent=Intent { flg=0x10008000 cmp=com.example.glassproductivity/.MainActivity } baseActivity=ComponentInfo{com.example.glassproductivity/com.example.glassproductivity.MainActivity} topActivity=ComponentInfo{com.example.glassproductivity/com.example.glassproductivity.MainActivity} origActivity=null realActivity=ComponentInfo{com.example.glassproductivity/com.example.glassproductivity.MainActivity} numActivities=1 lastActiveTime=320093 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{android.window.IWindowContainerToken$Stub$Proxy@92aae6} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 136 - 0, 0) topActivityInfo=ActivityInfo{2690827 com.example.glassproductivity.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(275, 695 - 805, 1775) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 136 - 1080, 2334) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 37 }
+11-22 11:25:23.357  1012  1086 D ShellSplitScreen: logExit: no-op, mLoggerSessionId is null
+11-22 11:25:23.357  1012  1143 W HWUI    : Image decoding logging dropped!
+11-22 11:25:23.359   609   685 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:23.360   581   658 V GrammaticalInflectionUtils: AttributionSource: AttributionSource { uid = 10216, packageName = null, attributionTag = null, token = android.os.Binder@80a4deb, deviceId = 0, next = null } does not have READ_SYSTEM_GRAMMATICAL_GENDER permission.
+11-22 11:25:23.361  1265  1265 W SplitSelectStateCtor: Missing session instanceIds
+11-22 11:25:23.361  1265  1265 D StatsLog: LAUNCHER_SPLIT_SELECTION_EXIT_INTERRUPTED
+11-22 11:25:23.362   521   521 I BpBinder: onLastStrongRef automatically unlinking death recipients: 
+11-22 11:25:23.363  1012  1086 D WindowManagerShell: setLauncherKeepClearAreaHeight: visible=false, height=552
+11-22 11:25:23.376   581  1881 I AppsFilter: interaction: PackageSetting{57da2cb com.android.microdroid.empty_payload/10212} -> PackageSetting{dc768ac com.example.glassproductivity/10216} BLOCKED
+11-22 11:25:23.386   581   972 D BackgroundInstallControlService: Package event received: 0
+11-22 11:25:23.388   448   448 D Zygote  : Forked child process 7023
+11-22 11:25:23.392   581   690 I ActivityManager: Start proc 7023:com.example.glassproductivity/u0a216 for next-top-activity {com.example.glassproductivity/com.example.glassproductivity.MainActivity}
+11-22 11:25:23.392   581   690 I ActivityManager: ProcessObserver broadcast disabled
+11-22 11:25:23.393   581   956 I AppWidgetServiceImpl: Received broadcast: android.intent.action.PACKAGE_UNSTOPPED on user 0
+11-22 11:25:23.393   581   956 I AppWidgetServiceImpl: Updating package stopped masked state for uid 10216 package com.example.glassproductivity isStopped false
+11-22 11:25:23.395  7023  7023 I assproductivity: Using CollectorTypeCMC GC.
+11-22 11:25:23.396  7023  7023 W assproductivity: Unexpected CPU variant for x86: x86_64.
+11-22 11:25:23.396  7023  7023 W assproductivity: Known variants: atom, sandybridge, silvermont, goldmont, goldmont-plus, goldmont-without-sha-xsaves, tremont, kabylake, alderlake, default
+11-22 11:25:23.402  7023  7023 E assproductivity: Not starting debugger since process cannot load the jdwp agent.
+11-22 11:25:23.404  7023  7023 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-22 11:25:23.416  1012  1143 D SplashScreenView: Build android.window.SplashScreenView{f519996 V.E...... ......ID 0,0-0,0}
+11-22 11:25:23.416  1012  1143 D SplashScreenView: Icon: view: android.widget.ImageView{28e4917 V.ED..... ......I. 0,0-0,0 #1020542 android:id/splashscreen_icon_view} drawable: com.android.wm.shell.startingsurface.SplashscreenIconDrawableFactory$ImmobileIconDrawable@fa45104 size: 440
+11-22 11:25:23.416  1012  1143 D SplashScreenView: Branding: view: android.view.View{6bde6ed G.ED..... ......I. 0,0-0,0 #1020541 android:id/splashscreen_branding_view} drawable: null size w: 0 h: 0
+11-22 11:25:23.416   581   744 D CoreBackPreview: Window{47d9ab9 u0 Splash Screen com.example.glassproductivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@fd0a362, mPriority=0, mIsAnimationCallback=false, mOverrideBehavior=0}
+11-22 11:25:23.420   581   972 D BackgroundInstallControlService: Package event received: 0
+11-22 11:25:23.429  7023  7023 D CompatChangeReporter: Compat change id reported: 242716250; UID 10216; state: ENABLED
+11-22 11:25:23.491  7023  7023 D nativeloader: Configuring clns-9 for other apk /data/app/~~w6IAI6d--KFrz3DK9U28Gg==/com.example.glassproductivity-kiqghiEqpvuEP8_E_vmzxw==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~w6IAI6d--KFrz3DK9U28Gg==/com.example.glassproductivity-kiqghiEqpvuEP8_E_vmzxw==/lib/x86_64, permitted_path=/data:/mnt/expand:/data/user/0/com.example.glassproductivity
+11-22 11:25:23.494  7023  7023 I assproductivity: AssetManager2(0x7f204259d0b8) locale list changing from [] to [en-US]
+11-22 11:25:23.502  7023  7023 V GraphicsEnvironment: Currently set values for:
+11-22 11:25:23.502  7023  7023 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-22 11:25:23.503  7023  7023 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-22 11:25:23.503  7023  7023 V GraphicsEnvironment: com.example.glassproductivity is not listed in per-application setting
+11-22 11:25:23.503  7023  7023 V GraphicsEnvironment: ANGLE allowlist from config: com.dreamgames.royalmatch com.dts.freefiremax com.dxx.firenow com.gramgames.mergedragons com.ludo.king com.mojang.minecraftpe com.my.defense com.nintendo.zaka com.os.airforce com.playrix.fishdomdd.gplay io.teslatech.callbreak jp.konami.prospia net.peakgames.toonblast
+11-22 11:25:23.503  7023  7023 V GraphicsEnvironment: com.example.glassproductivity is not listed in ANGLE allowlist or settings, returning default
+11-22 11:25:23.503  7023  7023 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 11:25:23.512  1012  1158 V WindowManagerShell: onTransitionReady(transaction=2495376002367)
+11-22 11:25:23.514   581   758 D ActivityManager: freezing 3253 com.google.android.dialer
+11-22 11:25:23.514   581   758 D ActivityManager: freezing 1719 android.process.acore
+11-22 11:25:23.517  1012  1086 V WindowManagerShell: onTransitionReady (#37) android.os.BinderProxy@d6c3541: {id=37 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+11-22 11:25:23.517  1012  1086 V WindowManagerShell:         {m=OPEN f=NONE leash=Surface(name=Task=16)/@0xc32122b sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},
+11-22 11:25:23.517  1012  1086 V WindowManagerShell:         {m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xb1d0688 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},
+11-22 11:25:23.517  1012  1086 V WindowManagerShell:         {m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{d714daf showWhenLocked=false})/@0x8896821 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0}
+11-22 11:25:23.517  1012  1086 V WindowManagerShell:     ]}
+11-22 11:25:23.518   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-22 11:25:23.522  1012  1086 V WindowManagerShell: Playing animation for (#37) android.os.BinderProxy@d6c3541@0
+11-22 11:25:23.523  1012  1086 V ShellRecents: RecentsTransitionHandler.startAnimation: no controller found
+11-22 11:25:23.523  1012  1086 V WindowManagerShell: Transition doesn't have explicit remote, search filters for match for {id=37 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=NONE leash=Surface(name=Task=16)/@0xc32122b sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},{m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xb1d0688 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},{m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{d714daf showWhenLocked=false})/@0x8896821 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0}]}
+11-22 11:25:23.523  1012  1086 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=undefined independent=true modes=[CLOSE,TO_BACK] flags=IN_TASK_WITH_EMBEDDED_ACTIVITY mustBeTask=false order=ANY topActivity=null launchCookie=null taskFragmentToken=android.os.BinderProxy@c234bd4 windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@61a117d, appThread = android.app.IApplicationThread$Stub$Proxy@e1bb872, debugName = overlayBackTransition }}
+11-22 11:25:23.523  1012  1086 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x0 checks=[{atype=dream independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{atype=home independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@e2c74c3, appThread = android.app.IApplicationThread$Stub$Proxy@6535140, debugName = LauncherToDream }}
+11-22 11:25:23.523  1012  1086 V WindowManagerShell:  Checking filter Pair{{types=[] flags=0x0] notFlags=0x100 checks=[{atype=home independent=true modes=[OPEN,TO_FRONT] flags=NONE mustBeTask=false order=TOP topActivity=ComponentInfo{com.google.android.apps.nexuslauncher/com.google.android.apps.nexuslauncher.NexusLauncherActivity} launchCookie=null windowingMode=undefined},{atype=standard independent=true modes=[CLOSE,TO_BACK] flags=NONE mustBeTask=false order=ANY topActivity=null launchCookie=null windowingMode=undefined},{NOT atype=undefined independent=true modes=[] flags=NONE mustBeTask=true order=ANY topActivity=null launchCookie=null customAnim=true windowingMode=undefined}]} RemoteTransition { remoteTransition = android.window.IRemoteTransition$Stub$Proxy@bbb4879, appThread = android.app.IApplicationThread$Stub$Proxy@568e9be, debugName = QuickstepLaunchHome }}
+11-22 11:25:23.523  1012  1086 V WindowManagerShell:  Delegate animation for (#37) to null
+11-22 11:25:23.523  1012  1086 V WindowManagerShell: start default transition animation, info = {id=37 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[{m=OPEN f=NONE leash=Surface(name=Task=16)/@0xc32122b sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},{m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0xb1d0688 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},{m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{d714daf showWhenLocked=false})/@0x8896821 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0}]}
+11-22 11:25:23.523  1012  1086 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@3bda607 animAttr=0x13 type=OPEN isEntrance=false
+11-22 11:25:23.523  1012  1086 V WindowManagerShell: loadAnimation: anim=android.view.animation.AnimationSet@c00334 animAttr=0x12 type=OPEN isEntrance=true
+11-22 11:25:23.529  1012  1086 V WindowManagerShell:  animated by com.android.wm.shell.transition.DefaultTransitionHandler@90688d6
+11-22 11:25:23.530   581   654 V WindowManager: Sent Transition (#37) createdAt=11-22 11:25:23.351 via request=TransitionRequestInfo { type = OPEN, triggerTask = TaskInfo{userId=0 taskId=16 effectiveUid=10216 displayId=0 isRunning=true baseIntent=Intent { flg=0x10008000 cmp=com.example.glassproductivity/.MainActivity } baseActivity=ComponentInfo{com.example.glassproductivity/com.example.glassproductivity.MainActivity} topActivity=ComponentInfo{com.example.glassproductivity/com.example.glassproductivity.MainActivity} origActivity=null realActivity=ComponentInfo{com.example.glassproductivity/com.example.glassproductivity.MainActivity} numActivities=1 lastActiveTime=320093 supportsMultiWindow=true resizeMode=1 isResizeable=true minWidth=-1 minHeight=-1 defaultMinSize=220 token=WCT{RemoteToken{4ba5f47 Task{8fbfbd #16 type=standard A=10216:com.example.glassproductivity}}} topActivityType=1 pictureInPictureParams=null shouldDockBigOverlays=false launchIntoPipHostTaskId=-1 lastParentTaskIdBeforePip=-1 displayCutoutSafeInsets=Rect(0, 136 - 0, 0) topActivityInfo=ActivityInfo{44c6374 com.example.glassproductivity.MainActivity} launchCookies=[] positionInParent=Point(0, 0) parentTaskId=-1 isFocused=false isVisible=false isVisibleRequested=false isTopActivityNoDisplay=false isSleeping=false locusId=null displayAreaFeatureId=1 isTopActivityTransparent=false isActivityStackTransparent=false lastNonFullscreenBounds=Rect(275, 695 - 805, 1775) capturedLink=null capturedLinkTimestamp=0 requestedVisibleTypes=-9 topActivityRequestOpenInBrowserEducationTimestamp=0 appCompatTaskInfo=AppCompatTaskInfo { topActivityInSizeCompat=false eligibleForLetterboxEducation= false isLetterboxEducationEnabled= true isLetterboxDoubleTapEnabled= false eligibleForUserAspectRatioButton= false topActivityBoundsLetterboxed= false isFromLetterboxDoubleTap= false topActivityLetterboxVerticalPosition= -1 topActivityLetterboxHorizontalPosition= -1 topActivityLetterboxWidth=-1 topActivityLetterboxHeight=-1 topActivityAppBounds=Rect(0, 136 - 1080, 2334) isUserFullscreenOverrideEnabled=false isSystemFullscreenOverrideEnabled=false hasMinAspectRatioOverride=false topActivityLetterboxBounds=null cameraCompatTaskInfo=CameraCompatTaskInfo { freeformCameraCompatMode=inactive}} topActivityMainWindowFrame=null}, pipChange = null, remoteTransition = null, displayChange = null, flags = 0, debugId = 37 }
+11-22 11:25:23.530   581   654 V WindowManager:     startWCT=WindowContainerTransaction { changes= {} hops= [] errorCallbackToken=null taskFragmentOrganizer=null }
+11-22 11:25:23.530   581   654 V WindowManager:     info={id=37 t=OPEN f=0x0 trk=0 r=[0@Point(0, 0)] c=[
+11-22 11:25:23.530   581   654 V WindowManager:         {WCT{RemoteToken{4ba5f47 Task{8fbfbd #16 type=standard A=10216:com.example.glassproductivity}}} m=OPEN f=NONE leash=Surface(name=Task=16)/@0xc0359e5 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},
+11-22 11:25:23.530   581   654 V WindowManager:         {WCT{RemoteToken{3ac2a02 Task{7318467 #1 type=home}}} m=TO_BACK f=SHOW_WALLPAPER leash=Surface(name=Task=1)/@0x97fe47 sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0 taskParent=-1},
+11-22 11:25:23.530   581   654 V WindowManager:         {m=TO_BACK f=IS_WALLPAPER leash=Surface(name=WallpaperWindowToken{d714daf showWhenLocked=false})/@0x9c0124c sb=Rect(0, 0 - 1080, 2400) eb=Rect(0, 0 - 1080, 2400) epz=Point(1080, 2400) d=0}
+11-22 11:25:23.530   581   654 V WindowManager:     ]}
+11-22 11:25:23.532   581   744 W OptProp : Cannot read opt property android.window.PROPERTY_COMPAT_ENABLE_FAKE_FOCUS
+11-22 11:25:23.535   581   972 D BackgroundInstallControlService: Package event received: 0
+11-22 11:25:23.536   581   972 D BackgroundInstallControlService: Package event received: 0
+11-22 11:25:23.536   581  1111 I BroadcastQueue: BOOT_COMPLETED_BROADCAST_COMPLETION_LATENCY_REPORTED action:android.intent.action.BOOT_COMPLETED dispatchLatency:4 completeLatency:112 dispatchRealLatency:4 completeRealLatency:112 receiversSize:1 userId:0 userType:android.os.usertype.full.SYSTEM
+11-22 11:25:23.538   581   688 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:23.544   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-22 11:25:23.544   581   928 D InetDiagMessage: Destroyed live tcp sockets for uids={10135} in 27ms
+11-22 11:25:23.563  1012  1086 V WindowManagerShell: Transition animation finished (aborted=false), notifying core (#37) android.os.BinderProxy@d6c3541@0
+11-22 11:25:23.564  7023  7023 I assproductivity: AssetManager2(0x7f2042597938) locale list changing from [] to [en-US]
+11-22 11:25:23.565  7023  7037 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-22 11:25:23.584   581   654 V WindowManager: Finish Transition (#37): created at 11-22 11:25:23.351 collect-started=0.024ms request-sent=4.524ms started=7.544ms ready=143.496ms sent=158.523ms commit=20.124ms finished=232.346ms
+11-22 11:25:23.596  1012  1086 V WindowManagerShell: Track 0 became idle
+11-22 11:25:23.596  1012  1086 V WindowManagerShell: All active transition animations finished
+11-22 11:25:23.597  1012  1086 W Looper  : Slow dispatch took 33ms wmshell.main app=com.android.systemui main=false group=TOP_APP h=android.os.Handler c=com.android.wm.shell.transition.DefaultSurfaceAnimator$$ExternalSyntheticLambda0@93b4eff m=0
+11-22 11:25:23.597  1012  1086 W Looper  : Slow delivery took 34ms wmshell.main app=com.android.systemui main=false group=TOP_APP h=android.os.Handler c=com.android.wm.shell.pip.phone.PipController$$ExternalSyntheticLambda3@2bacde8 m=0
+11-22 11:25:23.611  1265  1265 D VRI[NexusLauncherActivity]: visibilityChanged oldVisibility=true newVisibility=false
+11-22 11:25:23.613  1265  1265 D NexusLauncherModelDelegate: notifySmartspaceEvent: SmartspaceTargetEvent{mSmartspaceTarget=null, mSmartspaceActionId='null', mEventType=7}
+11-22 11:25:23.613  7023  7023 D AppCompatDelegate: Checking for metadata for AppLocalesMetadataHolderService : Service not found
+11-22 11:25:23.619  7023  7023 I assproductivity: AssetManager2(0x7f204259e9b8) locale list changing from [] to [en-US]
+11-22 11:25:23.643   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-22 11:25:23.647   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-22 11:25:23.647   581   928 D InetDiagMessage: Destroyed live tcp sockets for uids={10097} in 4ms
+11-22 11:25:23.648  7023  7023 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-22 11:25:23.665  1012  1086 W Looper  : Drained
+11-22 11:25:23.685  7023  7037 I EGL_emulation: Opening libGLESv1_CM_emulation.so
+11-22 11:25:23.685  7023  7037 I EGL_emulation: Opening libGLESv2_emulation.so
+11-22 11:25:23.735  7023  7037 W HWUI    : Failed to initialize 101010-2 format, error = EGL_SUCCESS
+11-22 11:25:23.757  7023  7023 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-22 11:25:23.782  7023  7023 W HWUI    : Image decoding logging dropped!
+11-22 11:25:23.790  7023  7023 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=false grip=false children=1
+11-22 11:25:23.793  7023  7023 W WindowOnBackDispatcher: OnBackInvokedCallback is not enabled for the application.
+11-22 11:25:23.793  7023  7023 W WindowOnBackDispatcher: Set 'android:enableOnBackInvokedCallback="true"' in the application manifest.
+11-22 11:25:23.798  7023  7023 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=false grip=false children=1
+11-22 11:25:23.803  7023  7023 W HWUI    : Unknown dataspace 0
+--------- beginning of kernel
+11-22 11:25:24.027     0     0 I servicemanager: Caller(pid=7023,uid=10216,sid=u:r:untrusted_app:s0:c216,c256,c512,c768) Found android.hardware.graphics.allocator.IAllocator/default in device VINTF manifest.
+11-22 11:25:24.032     0     0 I servicemanager: Caller(pid=7023,uid=10216,sid=u:r:untrusted_app:s0:c216,c256,c512,c768) Found android.hardware.graphics.allocator.IAllocator/default in device VINTF manifest.
+11-22 11:25:23.812   581   744 D CoreBackPreview: Window{4cb2b0d u0 com.example.glassproductivity/com.example.glassproductivity.MainActivity}: Setting back callback OnBackInvokedCallbackInfo{mCallback=android.window.IOnBackInvokedCallback$Stub$Proxy@b5090d3, mPriority=0, mIsAnimationCallback=false, mOverrideBehavior=0}
+11-22 11:25:24.041     0     0 I servicemanager: Caller(pid=7023,uid=10216,sid=u:r:untrusted_app:s0:c216,c256,c512,c768) Found mapper/ranchu in device VINTF manifest.
+11-22 11:25:24.433   581   654 I ActivityTaskManager: Displayed com.example.glassproductivity/.MainActivity for user 0: +1s81ms
+11-22 11:25:24.437  1325  2270 I FontLog : Received query Noto Color Emoji Compat, URI content://com.google.android.gms.fonts [CONTEXT service_id=132 ]
+11-22 11:25:24.437  1325  2270 I FontLog : Query [emojicompat-emoji-font] resolved to {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} [CONTEXT service_id=132 ]
+11-22 11:25:24.438  1325  2270 I FontLog : Fetch {Noto Color Emoji Compat, wdth 100.0, wght 400, ital 0.0, bestEffort false}, isVf false} end status Status{statusCode=SUCCESS, resolution=null} [CONTEXT service_id=132 ]
+11-22 11:25:24.440  1325  2200 I FontLog : Pulling font file for id = 24, cache size = 6 [CONTEXT service_id=132 ]
+11-22 11:25:24.441  1325  2200 I FontLog : Pulling font file for id = 24, cache size = 6 [CONTEXT service_id=132 ]
+11-22 11:25:24.455  1012  1142 W WindowOnBackDispatcher: sendCancelIfRunning: isInProgress=false callback=android.view.ViewRootImpl$$ExternalSyntheticLambda13@385b922
+11-22 11:25:24.455   445   474 I netd    : tetherGetStats() -> {[]} <0.31ms>
+11-22 11:25:24.457   581  1863 D CoreBackPreview: Window{47d9ab9 u0 Splash Screen com.example.glassproductivity EXITING}: Setting back callback null
+11-22 11:25:24.459   581   658 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:24.459   581   658 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:24.470   581   777 I ImeTracker: com.example.glassproductivity:5c0a92bd: onRequestHide at ORIGIN_SERVER reason HIDE_UNSPECIFIED_WINDOW fromUser false
+11-22 11:25:24.471  7023  7023 D InsetsController: hide(ime(), fromIme=false)
+11-22 11:25:24.472  7023  7023 I ImeTracker: com.example.glassproductivity:5c0a92bd: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-22 11:25:24.486   609   685 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:24.532  1265  1265 D BaseDepthController: setSurface:
+11-22 11:25:24.532  1265  1265 D BaseDepthController: 	mWaitingOnSurfaceValidity: false
+11-22 11:25:24.532  1265  1265 D BaseDepthController: 	mBaseSurface: null
+11-22 11:25:24.532  1265  1265 D BaseDepthController: mSurface is null and mCurrentBlur is: 0
+11-22 11:25:24.533  1265  1265 D StateManager: goToState - fromState: Normal, toState: Normal, partial trace:
+11-22 11:25:24.533  1265  1265 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 43e00d9cd0eb17b3d9dd30fc1741b1c71445c4c0f7c8c9b81300265c86c5b873:4)
+11-22 11:25:24.533  1265  1265 D StateManager: 	at com.android.launcher3.statemanager.StateManager.moveToRestState(go/retraceme 43e00d9cd0eb17b3d9dd30fc1741b1c71445c4c0f7c8c9b81300265c86c5b873:1)
+11-22 11:25:24.533  1265  1265 D StateManager: 	at com.android.launcher3.statemanager.StatefulActivity.onStop(go/retraceme 43e00d9cd0eb17b3d9dd30fc1741b1c71445c4c0f7c8c9b81300265c86c5b873:34)
+11-22 11:25:24.533  1265  1265 D StatsLog: LAUNCHER_ONSTOP
+11-22 11:25:24.533  1494  1494 I GoogleInputMethodService: GoogleInputMethodService.onFinishInput():2043 
+11-22 11:25:24.539  1494  1494 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 0, locked = false
+11-22 11:25:24.539  1494  1494 I GoogleInputMethodService: GoogleInputMethodService.onStartInput():1293 onStartInput(EditorInfo{EditorInfo{packageName=com.example.glassproductivity, inputType=0, inputTypeString=NULL, enableLearning=false, autoCorrection=false, autoComplete=false, imeOptions=0, privateImeOptions=null, actionName=UNSPECIFIED, actionLabel=null, initialSelStart=-1, initialSelEnd=-1, initialCapsMode=0, label=null, fieldId=0, fieldName=null, extras=null, hintText=null, hintLocales=[]}}, false)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: EmojiCompatManager.getEmojiCompatIfLoaded():343 EmojiCompat.init() was never called.
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: java.lang.IllegalStateException: EmojiCompat is not initialized. Please call EmojiCompat.init() first
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at asx.p(PG:6)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at axb.b(PG:13)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at jnr.b(PG:2)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at jnr.c(PG:4)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at jnr.f(PG:3)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at jnx.c(PG:3)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at kif.cz(PG:47)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at lhl.run(PG:1025)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at jaf.execute(PG:12)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at nco.v(PG:13)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at lhn.m(PG:96)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at lhn.k(PG:25)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at kgn.onStartInput(PG:250)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService.doStartInput(InputMethodService.java:3521)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.startInput(InputMethodService.java:879)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.InputMethodService$InputMethodImpl.dispatchStartInput(InputMethodService.java:908)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.inputmethodservice.IInputMethodWrapper.executeMessage(IInputMethodWrapper.java:201)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at com.android.internal.os.HandlerCaller$MyHandler.handleMessage(HandlerCaller.java:44)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.os.Handler.dispatchMessage(Handler.java:110)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.os.Looper.loopOnce(Looper.java:248)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.os.Looper.loop(Looper.java:338)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at android.app.ActivityThread.main(ActivityThread.java:9067)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at java.lang.reflect.Method.invoke(Native Method)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:593)
+11-22 11:25:24.539  1494  1494 I EmojiCompatManager: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:932)
+11-22 11:25:24.540  1494  1494 I Module  : DeviceLockedStatusModuleProvider$Module.updateDeviceLockedStatus():100 repeatCheckTimes = 1, locked = false
+11-22 11:25:24.540   581   744 W PackageConfigPersister: App-specific configuration not found for packageName: com.example.glassproductivity and userId: 0
+11-22 11:25:24.540   581   989 I AppWidgetServiceImpl: setAppWidgetHidden() 0
+11-22 11:25:24.552  1265  1265 D StatsLog: LAUNCHER_GOOGLE_SEARCH_RESTORE_LIST_SIZE_AFTER_ACTIVITY_RESTART
+11-22 11:25:24.559   581  1693 I ImeTracker: system_server:180debbf: onRequestHide at ORIGIN_SERVER reason IME_REQUESTED_CHANGED_LISTENER fromUser false
+11-22 11:25:24.571   581   658 I ImeTracker: system_server:180debbf: onCancelled at PHASE_SERVER_SHOULD_HIDE
+11-22 11:25:24.579   581   972 D BackgroundInstallControlService: Package event received: 0
+11-22 11:25:24.912   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-22 11:25:24.912   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-22 11:25:24.912   581   928 D InetDiagMessage: Destroyed live tcp sockets for uids={10194} in 0ms
+11-22 11:25:24.912   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET, states=14
+11-22 11:25:24.913   581   928 D InetDiagMessage: Destroyed 0 sockets, proto=IPPROTO_TCP, family=AF_INET6, states=14
+11-22 11:25:24.913   581   928 D InetDiagMessage: Destroyed live tcp sockets for uids={20194} in 1ms
+11-22 11:25:24.963   581   688 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:24.993   581   688 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:25.994   581   688 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:26.175   581   922 D WifiClientModeImpl[33162:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=1 freq=2437 RxLinkSpeed=2
+11-22 11:25:26.176   581   922 D WifiDataStall: tx tput in kbps: 37000
+11-22 11:25:26.176   581   922 D WifiDataStall: rx tput in kbps: 37000
+11-22 11:25:26.176   581   922 V WifiConfigManager: Updating scan detail cache freq=2437 BSSID=02:15:b2:00:00:01 RSSI=-50 for "AndroidWifi"NONE
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:26.176   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:26.176   581   922 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 453280269 SSID: "AndroidWifi", BSSID: 02:15:b2:00:00:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 1Mbps, Tx Link speed: 1Mbps, Max Supported Tx Link speed: 54Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 54Mbps, Frequency: 2437MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+11-22 11:25:26.176   581   922 D WifiScoreCard: txRate: 1 txSpeed: 1
+11-22 11:25:26.176   581   922 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 1456012208 RSSI -50 txSpeed -1
+11-22 11:25:26.176   581   922 D WifiClientModeImpl[33162:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 02:15:b2:00:00:01 rssi=-50 f=2437 sc=60 link=1 tx=0.6, 0.0, 0.0 rx=0.6 bcn=0 [on:0 tx:0 rx:0 period:3003] from screen [on:0 period:50396448] score=60
+11-22 11:25:26.760   581  2749 E TaskPersister: File error accessing recents directory (directory doesn't exist?).
+11-22 11:25:27.747   581   989 D OomAdjuster: Not killing cached processes
+11-22 11:25:27.748   581   688 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:27.783   581   688 W IPCThreadState: Sending oneway calls to frozen process.
+11-22 11:25:27.842  1485  1485 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.feedback.internal.IFeedbackService dat=chimera-action:/... xflg=0x4 cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 11:25:27.856   445   474 I netd    : tetherGetStats() -> {[]} <0.84ms>
+11-22 11:25:28.762  7023  7048 D ProfileInstaller: Installing profile for com.example.glassproductivity
+11-22 11:25:29.178   581   922 D WifiClientModeImpl[33162:wlan0]: updateLinkLayerStatsRssiSpeedFrequencyCapabilities rssi=-50 TxLinkspeed=6 freq=2437 RxLinkSpeed=2
+11-22 11:25:29.179   581   922 D WifiDataStall: tx tput in kbps: 37000
+11-22 11:25:29.179   581   922 D WifiDataStall: rx tput in kbps: 37000
+11-22 11:25:29.179   581   922 V WifiConfigManager: Updating scan detail cache freq=2437 BSSID=02:15:b2:00:00:01 RSSI=-50 for "AndroidWifi"NONE
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  utilization (LLS) 80 isBluetoothConnected: false final utilization: 80
+11-22 11:25:29.179   581   922 D WifiThroughputPredictor:  BW: 0 RSSI: -50 Nss: 1 Mode: 1 symDur: 4000 snrDb 30 bitPerTone: 4500 rate: 54 throughput: 37
+11-22 11:25:29.179   581   922 D WifiScoreCard: BSSID update SIGNAL_POLL ID: 453280269 SSID: "AndroidWifi", BSSID: 02:15:b2:00:00:01, MAC: 02:15:b2:00:00:00, IP: /10.0.2.16, Security type: 0, Supplicant state: COMPLETED, Wi-Fi standard: legacy, RSSI: -50, Link speed: 6Mbps, Tx Link speed: 6Mbps, Max Supported Tx Link speed: 54Mbps, Rx Link speed: 2Mbps, Max Supported Rx Link speed: 54Mbps, Frequency: 2437MHz, Net ID: 0, Metered hint: false, score: 60, isUsable: true, CarrierMerged: false, SubscriptionId: -1, IsPrimary: 1, Trusted: true, Restricted: false, Ephemeral: false, OEM paid: false, OEM private: false, OSU AP: false, FQDN: <none>, Provider friendly name: <none>, Requesting package name: <none>"AndroidWifi"openMLO Information: , Is TID-To-Link negotiation supported by the AP: false, AP MLD Address: <none>, AP MLO Link Id: <none>, AP MLO Affiliated links: <none>, Vendor Data: <none>
+11-22 11:25:29.179   581   922 D WifiScoreCard: txRate: 1 txSpeed: 6
+11-22 11:25:29.179   581   922 D WifiScoreCard: network update SIGNAL_POLL "AndroidWifi" ID: 1456012208 RSSI -50 txSpeed -1
+11-22 11:25:29.180   581   922 D WifiClientModeImpl[33162:wlan0]:  ClientModeImpl$L2ConnectedState screen=on 1 0 "AndroidWifi" 02:15:b2:00:00:01 rssi=-50 f=2437 sc=60 link=6 tx=0.8, 0.0, 0.0 rx=1.0 bcn=0 [on:0 tx:0 rx:0 period:3003] from screen [on:0 period:50399451] score=60
+11-22 11:25:29.295   581   688 W IPCThreadState: Sending oneway calls to frozen process.
