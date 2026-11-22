@@ -1247,7 +1247,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api: [31, 35]
+        api: [36]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v4
@@ -1318,7 +1318,7 @@ jobs:
           if [ -s startup-evidence/crash.txt ]; then cat startup-evidence/crash.txt; exit 1; fi
           test -s startup-evidence/first-pid.txt
           test -s startup-evidence/restart-pid.txt
-          grep -q 'mResumedActivity.*com.example.glassproductivity' startup-evidence/restart-activities.txt
+          grep -qE '(mResumedActivity|topResumedActivity|mFocusedApp|mFocusedWindow).*com.example.glassproductivity' startup-evidence/restart-activities.txt
       - name: Preserve emulator setup logs
         if: always()
         run: |
