@@ -999,9 +999,11 @@ jobs:
               tag = m.group(0)
               tm = re.search(r'text="([^"]*)"', tag)
               dm = re.search(r'content-desc="([^"]*)"', tag)
-              bm = re.search(r'bounds="[(\d+),(\d+)][(\d+),(\d+)]"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
               cm = re.search(r'clickable="(true|false)"', tag)
               if not bm:
+                  continue
+              if int(bm.group(3)) <= int(bm.group(1)) or int(bm.group(4)) <= int(bm.group(2)):
                   continue
               val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
               if target.lower() in val.lower():
@@ -1033,7 +1035,7 @@ jobs:
           sleep 8
           adb logcat -c
           for i in 1 2 3; do
-            try_tap "التركيز" || adb shell input tap 423 2078 || true
+            adb shell input tap 423 2078
             sleep 3
             adb shell uiautomator dump /sdcard/uif.xml >/dev/null 2>&1
             adb pull /sdcard/uif.xml /tmp/uif.xml >/dev/null 2>&1 || true
