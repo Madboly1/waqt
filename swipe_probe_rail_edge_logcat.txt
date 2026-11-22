@@ -1,0 +1,516 @@
+--------- beginning of main
+11-22 04:45:57.149  5749  5855 I ModuleSetMgr: Computing pending module set with APKs: [[AdsFdrDynamite.integ:224400003100000], [Cronetdynamite:225014190800], [Dynamiteloader:225014190000], [Dynamitemodulesa:225014190000], [Dynamitemodulesc:225014190000], [Googlecertificates:225014190000], [Mapsdynamite:225014190000], [Measurementdynamite:225014190000]]
+11-22 04:45:57.200  5687  6179 I PTCommittedOperation: Receive new configuration for com.google.android.client_error_logging
+11-22 04:45:57.209  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=82.0 y=1183.0 rawX=82.0 rawY=1183.0 tab=1 
+11-22 04:45:57.210  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=82.0,838.0 host=1080x1863
+11-22 04:45:57.210  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=82.0 y=838.0 rawX=82.0 rawY=1183.0 tab=1 
+11-22 04:45:57.210  2206  2206 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=115x82,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- LinearLayout(id=-1,size=165x544,click=false,long=false,vis=0,tx=0.0,ty=758.52136,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 04:45:57.210  2206  2206 D WAQT_RAIL_TRACE: RAIL_DOWN targetIsDock=false isOpen=true slop=22 thr=49
+11-22 04:45:57.210  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISALLOW requested=true tab=1
+11-22 04:45:57.210  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=1
+11-22 04:45:57.210  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 04:45:57.212  5687  6152 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:57.220  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Calm/Calm.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:57.227  5687  6152 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 04:45:57.227  5687  6152 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:57.227  5687  6152 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 04:45:57.228  5687  6152 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:57.228  5687  6152 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 04:45:57.228  5687  6152 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 04:45:57.228  5687  6152 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 04:45:57.228  5687  6152 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:57.228  5687  6152 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package rkpd name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package com.google.android.devicelockcontroller name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package com.google.android.healthfitness name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package android.companion name not found! Using module version.
+11-22 04:45:57.229  5687  6152 I ExperimentPackageManage: Package com.google.android.ondevicepersonalization name not found! Using module version.
+11-22 04:45:57.232  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=85.16 y=1183.0 rawX=85.16 rawY=1183.0 tab=1 
+11-22 04:45:57.233  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=85.16 y=838.0 rawX=85.16 rawY=1183.0 tab=1 
+11-22 04:45:57.233  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=3.1600037 dy=0.0
+11-22 04:45:57.233  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.233  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.236  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: Received Provisioning Event: [Bugle information (100)]
+11-22 04:45:57.236  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: JibeService is not running
+11-22 04:45:57.236  5233  6138 W BugleRcsEngine: [90] ProvisioningEventReceiver.d: Event is not a valid user action. Discarding it.
+11-22 04:45:57.253  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=107.28 y=1183.0 rawX=107.28 rawY=1183.0 tab=1 
+11-22 04:45:57.253  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=107.28 y=838.0 rawX=107.28 rawY=1183.0 tab=1 
+11-22 04:45:57.253  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=25.279999 dy=0.0
+11-22 04:45:57.253  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=25.279999 dragging=true isOpen=true
+11-22 04:45:57.254  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.254  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.268  5173  5173 I BugleRcsProvisioning: RcsProvisioningEventReceiver: Received ProvisioningEvent: Request Bugle information
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.healthfitness name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.aicore name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.audioproxy name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.healthfitness name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.apps.safetycore name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.crashrecovery name not found! Using module version.
+11-22 04:45:57.271  5687  6152 I ExperimentPackageManage: Package com.google.android.profiling name not found! Using module version.
+11-22 04:45:57.272  5687  6152 I ExperimentPackageManage: Package com.google.android.bt name not found! Using module version.
+11-22 04:45:57.272  5687  6152 I ExperimentPackageManage: Package com.google.android.nfcservices name not found! Using module version.
+11-22 04:45:57.280  5173  5173 W BugleRcsEngine: [2] alsz.g: Carrier Services Apk was not found.
+11-22 04:45:57.280  5173  5173 I BugleRcsEngine: [2] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 04:45:57.280  5173  5173 W BugleRcsEngine: [2] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 04:45:57.280  5173  5173 I BugleRcsEngine: [2] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 04:45:57.291  4864  4878 D SettingsSliceProvider: onSlicePinned: content://com.android.settings.slices/action/gesture_double_tap_power
+11-22 04:45:57.291  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:57.297  5173  6123 I FA      : App measurement initialized, version: 75066
+11-22 04:45:57.297  5173  6123 I FA      : To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+11-22 04:45:57.297  5173  6123 I FA      : To enable faster debug mode event logging run:
+11-22 04:45:57.297  5173  6123 I FA      :   adb shell setprop debug.firebase.analytics.app com.google.android.apps.messaging
+11-22 04:45:57.302  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/gesture_double_tap_power) in: 11
+11-22 04:45:57.309  5687  6152 I ExperimentPackageManage: Package com.google.android.webapp name not found! Using module version.
+11-22 04:45:57.309  5687  6152 I ExperimentPackageManage: Package com.google.android.telephonycore name not found! Using module version.
+11-22 04:45:57.309  5687  6152 I ExperimentPackageManage: Package com.google.android.uprobestats name not found! Using module version.
+11-22 04:45:57.309  5687  6152 I ExperimentPackageManage: Package com.google.android.uwb name not found! Using module version.
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.growth [CONTEXT service_id=204 ]
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.android.gms.growth
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 04:45:57.310  5687  6152 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 04:45:57.314  5687  6176 I PTCommittedOperation: Receive new configuration for com.google.android.gms.romanesco
+11-22 04:45:57.316  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Music_box/Music Box.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:57.317  5173  5173 I BugleRcsProvisioning: RcsProvisioningEventReceiver: Received ProvisioningEvent: Update provisioning status
+11-22 04:45:57.320  5173  5173 I BugleRcsProvisioning: RcsProvisioningEventReceiver: Received ProvisioningEvent: Update provisioning status
+11-22 04:45:57.322  2206  2322 D EGL_emulation: app_time_stats: avg=6116.49ms min=6116.49ms max=6116.49ms count=1
+11-22 04:45:57.322  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=130.45334 y=1183.0 rawX=130.45334 rawY=1183.0 tab=1 
+11-22 04:45:57.322  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=130.45334 y=838.0 rawX=130.45334 rawY=1183.0 tab=1 
+11-22 04:45:57.322  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=48.45334 dy=0.0
+11-22 04:45:57.322  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=48.45334 dragging=true isOpen=true
+11-22 04:45:57.323  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.323  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.330  5749  6147 I GalProviderController: setting component enabled=2 for com.google.android.syncadapters.contacts.ProxyGalProvider
+11-22 04:45:57.330  5749  6147 I GalProviderController: Setting component enabled succeeds.
+11-22 04:45:57.335  5749  6147 I PeopleGalProvider: Gal directories started.
+11-22 04:45:57.335  5749  6147 I PeopleGalProvider: Method 1 completed.
+11-22 04:45:57.335  5749  6147 I PeopleGalProvider: Method 1 finished successfully.
+11-22 04:45:57.337   744   744 D BluetoothPbapService:  onChange on contact uri 
+11-22 04:45:57.339  5749  6147 I GalProviderController: setting component enabled=1 for com.google.android.gms.people.service.galprovider.PeopleGalProvider
+11-22 04:45:57.339  5749  6147 I GalProviderController: Setting component enabled succeeds.
+11-22 04:45:57.341  5749  6147 I PeopleGalProvider: Gal directories started.
+11-22 04:45:57.341  5749  6147 I PeopleGalProvider: Method 1 completed.
+11-22 04:45:57.341  5749  6147 I PeopleGalProvider: Method 1 finished successfully.
+11-22 04:45:57.342  5749  6142 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.342  5749  6142 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.343  5749  6142 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.343  5749  6142 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.344  5749  6142 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.346  5749  5804 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.348  5749  6146 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.349  5749  6146 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:57.349  5749  6146 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:57.350  5749  6146 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:57.355  4864  4876 D SliceBuilder: Creating slice for: com.android.settings.gestures.DoubleTapPowerPreferenceController
+11-22 04:45:57.357  5749  5749 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 04:45:57.357  5749  5749 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 04:45:57.372  5749  5855 I ModuleSetMgr: Pending container module APKs: []
+11-22 04:45:57.415  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=204.18668 y=1183.0 rawX=204.18668 rawY=1183.0 tab=1 
+11-22 04:45:57.416  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=204.18668 y=838.0 rawX=204.18668 rawY=1183.0 tab=1 
+11-22 04:45:57.416  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=122.186676 dy=0.0
+11-22 04:45:57.416  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=122.186676 dragging=true isOpen=true
+11-22 04:45:57.416  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.416  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+--------- beginning of system
+11-22 04:45:57.427   522   549 W ContentProviderHelper: Slow operation: 55ms so far, now at getContentProviderImpl: after checkContentProviderPermission
+11-22 04:45:57.430  5749  5855 I ModuleSetMgr: Pending non-container module APKs: []
+11-22 04:45:57.434   522   549 W ContentProviderHelper: Slow operation: 62ms so far, now at getContentProviderImpl: incProviderCountLocked
+11-22 04:45:57.434   522   549 W ContentProviderHelper: Slow operation: 62ms so far, now at getContentProviderImpl: before updateLruProcess
+11-22 04:45:57.434   522   549 W ContentProviderHelper: Slow operation: 62ms so far, now at getContentProviderImpl: after updateLruProcess
+11-22 04:45:57.434   522   549 W ContentProviderHelper: Slow operation: 62ms so far, now at getContentProviderImpl: before updateOomAdj
+11-22 04:45:57.434   522   549 W ContentProviderHelper: Slow operation: 62ms so far, now at getContentProviderImpl: after updateOomAdj
+11-22 04:45:57.434   522   549 W ContentProviderHelper: Slow operation: 62ms so far, now at getContentProviderImpl: done!
+11-22 04:45:57.455  1484  1707 W MediaProvider: isAppCloneUserPair for user 0: false
+11-22 04:45:57.488  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Music_box/Music Box.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:57.494   744  6205 D BluetoothPbapUtils: primaryVersionCounter = 0, secondaryVersionCounter=0
+11-22 04:45:57.503  5687  5853 I PTCommittedOperation: Receive new configuration for com.google.android.gms.platformconfigurator
+11-22 04:45:57.505  5687  5694 I .gms.persisten: Background concurrent copying GC freed 345505(14MB) AllocSpace objects, 13(372KB) LOS objects, 49% free, 14MB/28MB, paused 372us,31us total 569.718ms
+11-22 04:45:57.511  5173  5232 D PhFileGroupPop: Added file groups smart_actions_emotive_models
+11-22 04:45:57.519  5749  6214 I FA-SVC  : App measurement initialized, version: 225014
+11-22 04:45:57.522  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=301.09332 y=1183.0 rawX=301.09332 rawY=1183.0 tab=1 
+11-22 04:45:57.522  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=301.09332 y=838.0 rawX=301.09332 rawY=1183.0 tab=1 
+11-22 04:45:57.522  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=219.09332 dy=0.0
+11-22 04:45:57.522  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=219.09332 dragging=true isOpen=true
+11-22 04:45:57.522  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.522  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.529  5687  5853 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:57.536  5173  5232 D PhFileGroupPop: Added file groups smart_actions_emotive_models
+11-22 04:45:57.546  5687  5853 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 04:45:57.546  5687  5853 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:57.546  5687  5853 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 04:45:57.547  5687  5853 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:57.569  5687  5853 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package rkpd name not found! Using module version.
+11-22 04:45:57.570  5687  5853 I ExperimentPackageManage: Package com.google.android.devicelockcontroller name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.healthfitness name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package android.companion name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.ondevicepersonalization name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.healthfitness name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.aicore name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.apps.agentunderstander name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.audioproxy name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.healthfitness name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.apps.pixel.psi name not found! Using module version.
+11-22 04:45:57.571  5687  5853 I ExperimentPackageManage: Package com.google.android.apps.safetycore name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.crashrecovery name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.profiling name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.bt name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.nfcservices name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.webapp name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.telephonycore name not found! Using module version.
+11-22 04:45:57.573  5687  5853 I ExperimentPackageManage: Package com.google.android.uprobestats name not found! Using module version.
+11-22 04:45:57.574  5687  5853 I ExperimentPackageManage: Package com.google.android.uwb name not found! Using module version.
+11-22 04:45:57.575  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.sdksandbox name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.575  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.audioproxy name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.575  5687  5853 W ConfiguratorPhenotypeUt: Package com.android.media.swcodec name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.575  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.crashrecovery name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.575  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.devicelockcontroller name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.576  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.nfcservices name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.576  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.apps.safetycore name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.576  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.adservices name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.577  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.as.oss name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.577  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.oslo name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.577  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.uprobestats name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.577  5687  5853 W ConfiguratorPhenotypeUt: Package com.android.refreshratecontrol name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.578  5687  5853 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.578  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.healthfitness name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.578  5687  5853 W ConfiguratorPhenotypeUt: Package 1 name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.578  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.ondevicepersonalization name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.578  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.odad name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.578  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.bt name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.579  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.579  5687  5853 W ConfiguratorPhenotypeUt: Package rkpd name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.579  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.aicore name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.579  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.healthfitness name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.580  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.apps.agentunderstander name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.580  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.profiling name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.580  5687  5853 W ConfiguratorPhenotypeUt: Package android.companion name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.580  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.580  5687  5853 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.581  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.webapp name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.581  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.uwb name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.581  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.apps.pixel.psi name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.581  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.healthfitness name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.582  5687  5853 W ConfiguratorPhenotypeUt: Package com.android.neuralnetworks name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.582  5687  5853 W ConfiguratorPhenotypeUt: Package com.google.android.telephonycore name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:57.609  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=414.85333 y=1183.0 rawX=414.85333 rawY=1183.0 tab=1 
+11-22 04:45:57.609  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=414.85333 y=838.0 rawX=414.85333 rawY=1183.0 tab=1 
+11-22 04:45:57.609  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=332.85333 dy=0.0
+11-22 04:45:57.610  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=332.85333 dragging=true isOpen=true
+11-22 04:45:57.610  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.610  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.629  4864  4876 D SliceBuilder: Creating slice for: com.android.settings.gestures.DoubleTapPowerPreferenceController
+11-22 04:45:57.654  5173  5203 D asog    : Starting download: https://www.gstatic.com/compose/manifest_configs/manifest_20230622.pb
+11-22 04:45:57.654  5173  5203 V asog    : Is http uri, downloading (uri: https://www.gstatic.com/compose/manifest_configs/manifest_20230622.pb)
+11-22 04:45:57.706  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Nudge/Nudge.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:57.706  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:57.706  4864  5265 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+11-22 04:45:57.707  4864  5265 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 1
+11-22 04:45:57.714  5173  5173 I BugleRcsProvisioning: RcsProvisioningEventReceiver: Received ProvisioningEvent: Request Bugle information
+11-22 04:45:57.715  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=504.3867 y=1183.0 rawX=504.3867 rawY=1183.0 tab=1 
+11-22 04:45:57.715  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=504.3867 y=838.0 rawX=504.3867 rawY=1183.0 tab=1 
+11-22 04:45:57.715  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=422.3867 dy=0.0
+11-22 04:45:57.715  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=422.3867 dragging=true isOpen=true
+11-22 04:45:57.715  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.715  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.737  5173  5173 W BugleRcsEngine: [2] alsz.g: Carrier Services Apk was not found.
+11-22 04:45:57.738  5173  5173 I BugleRcsEngine: [2] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 04:45:57.738  5173  5173 W BugleRcsEngine: [2] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 04:45:57.738  5173  5173 I BugleRcsEngine: [2] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 04:45:57.747  5749  6197 V Backup  : [CustomDownloadSchedulingIO] Received Action: com.google.android.gms.phenotype.com.google.android.gms.backup.COMMITTED
+11-22 04:45:57.747  5749  6197 V Backup  : [CustomDownloadSchedulingIO] listenToSetupWizardFinishedBroadcast or customBackupDownloadEnableSuwTriggerWithGmsUpdateCheck flag on
+11-22 04:45:57.747  5749  6198 V Backup  : [G1ModuleInitIntentOperation] Flags updated
+11-22 04:45:57.768  5749  6196 V Backup  : [ShowPhotosNotifIO] Flag not enabled; returning.
+11-22 04:45:57.783  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-22 04:45:57.786  5749  5803 W gle.android.gm: Long monitor contention with owner [com.google.android.gms.chimera.container.intentoperation.GmsIntentOperationChimeraService-Executor] processing com.google.android.gms.ads.config.PhenotypeFlagChangedIntentOperation for action com.google.android.gms.phenotype.com.google.android.gms.COMMITTED (5802) at void gug.run()(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3) waiters=0 in void gug.run() for 441ms
+11-22 04:45:57.790  5749  6198 V Backup  : [G1ModuleInitIntentOperation] Running restore operation is disabled by flag
+11-22 04:45:57.790  5749  6198 W ChimeraUtils: Module com.google.android.gms.backup_g1 has empty metadata display_name_string_id
+11-22 04:45:57.792  5749  6198 W ChimeraUtils: Module com.google.android.gms.backup_g1 has empty metadata display_name_string_id
+11-22 04:45:57.795  5749  6198 W ChimeraUtils: Module com.google.android.gms.backup_g1 has empty metadata display_name_string_id
+11-22 04:45:57.797  5749  5802 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.798  5749  5802 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.798  5749  5802 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.798  5749  5802 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.800  5749  5802 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.801  5749  6196 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.801  5749  6196 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.802  5749  6196 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:57.802  5749  6197 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:57.803  5749  6196 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:57.809  5749  6196 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.809  5749  6196 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.810  5749  6196 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.810  5749  6196 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.810  5749  6194 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.811  5749  6201 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.812  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=614.9867 y=1183.0 rawX=614.9867 rawY=1183.0 tab=1 
+11-22 04:45:57.812  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=614.9867 y=838.0 rawX=614.9867 rawY=1183.0 tab=1 
+11-22 04:45:57.812  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=532.9867 dy=0.0
+11-22 04:45:57.812  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=532.9867 dragging=true isOpen=true
+11-22 04:45:57.813  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.813  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.814  5749  6201 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.815  5749  6195 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:57.815  5749  6195 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:57.816  5749  6195 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:57.837  5173  5173 I BugleRcsProvisioning: RcsProvisioningEventReceiver: Received ProvisioningEvent: Update provisioning status
+11-22 04:45:57.840  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-22 04:45:57.840  4864  4876 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/media_volume
+11-22 04:45:57.844  5749  6194 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.845  5749  6204 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.847  5749  6204 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.853  5173  5173 I BugleRcsProvisioning: RcsProvisioningEventReceiver: Received ProvisioningEvent: Update provisioning status
+11-22 04:45:57.858  5749  6204 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.858  5749  6202 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.865  1484  1671 W MediaProvider: isAppCloneUserPair for user 0: false
+11-22 04:45:57.867  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-22 04:45:57.867  5749  6199 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.869  5749  5802 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.870  5749  5802 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:57.874  5749  6202 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:57.874  5749  6202 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:57.875  5749  6196 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.876  5749  6202 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.876  5749  6202 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.877  5749  6202 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.879  5749  6196 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.879  5749  6196 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:57.880  5749  6196 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:57.880  5749  6196 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:57.881  5749  5803 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.882  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: Received Provisioning Event: [Bugle information (100)]
+11-22 04:45:57.882  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: JibeService is not running
+11-22 04:45:57.882  5233  6138 W BugleRcsEngine: [90] ProvisioningEventReceiver.d: Event is not a valid user action. Discarding it.
+11-22 04:45:57.887  5749  6201 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.888  5749  6201 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.893  5749  6203 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.893  5749  6200 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.893  5749  6146 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.894  5749  6146 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.903  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:57.904  5749  6200 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.904  5749  6199 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:57.904  4864  5230 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+11-22 04:45:57.905  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 2
+11-22 04:45:57.908  5749  6200 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:57.909  5749  6200 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:57.914  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=719.26666 y=1183.0 rawX=719.26666 rawY=1183.0 tab=1 
+11-22 04:45:57.914  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=719.26666 y=838.0 rawX=719.26666 rawY=1183.0 tab=1 
+11-22 04:45:57.914  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=637.26666 dy=0.0
+11-22 04:45:57.914  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=637.26666 dragging=true isOpen=true
+11-22 04:45:57.914  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:57.914  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:57.922  5749  6148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.922  5749  6148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.923  5749  6148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:57.923  5749  6148 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:57.923  5749  6148 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:57.924  5749  5804 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:57.934  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Nudge/Nudge.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:57.935  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Piggyback/Piggyback.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:57.956  5687  5742 W .gms.persisten: Long monitor contention with owner netscheduler-queue-handler (5740) at void btea.d(astv, android.net.Uri, int)(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9) waiters=0 in void btea.c(btbl) for 759ms
+11-22 04:45:58.004  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=831.9733 y=1183.0 rawX=831.9733 rawY=1183.0 tab=1 
+11-22 04:45:58.004  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=831.9733 y=838.0 rawX=831.9733 rawY=1183.0 tab=1 
+11-22 04:45:58.004  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=749.9733 dy=0.0
+11-22 04:45:58.004  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=749.9733 dragging=true isOpen=true
+11-22 04:45:58.004  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:58.004  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:58.011  5749  6148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.017  5749  6195 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:58.024  5749  6148 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:58.024  5749  6148 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:58.113  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=925.72 y=1183.0 rawX=925.72 rawY=1183.0 tab=1 
+11-22 04:45:58.113  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=925.72 y=838.0 rawX=925.72 rawY=1183.0 tab=1 
+11-22 04:45:58.113  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=843.72 dy=0.0
+11-22 04:45:58.113  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=843.72 dragging=true isOpen=true
+11-22 04:45:58.113  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:58.113  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:58.154  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.154  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.notification.AlarmVolumePreferenceController
+11-22 04:45:58.173  4864  5265 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-22 04:45:58.180  4864  5265 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/alarm_volume) in: 26
+11-22 04:45:58.198  5687  6153 I PhenotypeIntentOp: Feature flags are not turned on, skipping operations. [CONTEXT service_id=258 ]
+11-22 04:45:58.205  5749  6201 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.205  5749  6201 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.206  5749  5804 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.207  5749  5804 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:58.214  5749  6200 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:58.215  4864  4876 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-22 04:45:58.219  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=1030.0 y=1183.0 rawX=1030.0 rawY=1183.0 tab=1 
+11-22 04:45:58.219  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=1030.0 y=838.0 rawX=1030.0 rawY=1183.0 tab=1 
+11-22 04:45:58.219  2206  2206 D WAQT_RAIL_TRACE: RAIL_UP moved=true dragging=true isOpen=true
+11-22 04:45:58.219  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=1
+11-22 04:45:58.219  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 04:45:58.228  5749  5804 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:58.234  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: Received Provisioning Event: [Bugle information (100)]
+11-22 04:45:58.234  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: JibeService is not running
+11-22 04:45:58.234  5233  6138 W BugleRcsEngine: [90] ProvisioningEventReceiver.d: Event is not a valid user action. Discarding it.
+11-22 04:45:58.236  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.notification.AlarmVolumePreferenceController
+11-22 04:45:58.244  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: Received Provisioning Event: [Bugle information (100)]
+11-22 04:45:58.244  5233  6138 I BugleRcsEngine: [90] ProvisioningEventReceiver.d: JibeService is not running
+11-22 04:45:58.244  5233  6138 W BugleRcsEngine: [90] ProvisioningEventReceiver.d: Event is not a valid user action. Discarding it.
+11-22 04:45:58.246  1484  1736 W MediaProvider: isAppCloneUserPair for user 0: false
+11-22 04:45:58.248  5749  6200 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.253  5749  6200 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:58.263  5749  5804 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:58.270  5749  5804 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:58.279  2206  2206 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=true grip=true children=4
+11-22 04:45:58.282   522  1051 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 04:45:58.282   522  1051 D PackageManager: Clear ephemeral installer activity
+11-22 04:45:58.282   522  1051 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 04:45:58.283   522  1051 D PackageManager: Clear ephemeral installer activity
+11-22 04:45:58.283   522  1051 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 04:45:58.289   522  1051 D PackageManager: Clear ephemeral installer activity
+11-22 04:45:58.292   522   549 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 04:45:58.292   522   549 D PackageManager: Clear ephemeral installer activity
+11-22 04:45:58.293   522  1051 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 04:45:58.294   522  1051 D PackageManager: Clear ephemeral installer activity
+11-22 04:45:58.328  5749  6198 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.331  5749  6198 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.333  5749  6198 I SyncIntentOperation: Handling the intent: Intent { act=com.google.android.gms.phenotype.COMMITTED flg=0x10 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.GmsIntentOperationService (has extras) }. [CONTEXT service_id=80 ]
+11-22 04:45:58.334  5749  6147 V Backup  : [PhenotypeConfigIO] Phenotype broadcast received for different package
+11-22 04:45:58.336  5749  6148 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.337  5749  6198 I MdiSyncModule: flag handling is skipping irrelevant intent.
+11-22 04:45:58.339  5749  6198 W ModuleInitIntentOp: Dropping unexpected action com.google.android.gms.phenotype.COMMITTED
+11-22 04:45:58.344  5749  6148 I GmsSyncPolicyEngine: Periodic sync 1 disabled by policy, cancelled.
+11-22 04:45:58.345  5749  6198 I LocationHistory: [IntentOperation] Handling action com.google.android.gms.phenotype.COMMITTED [CONTEXT service_id=314 ]
+11-22 04:45:58.346  5749  6148 I GmsSyncPolicyEngine: Periodic sync 2 disabled by policy, cancelled.
+11-22 04:45:58.398  1484  1707 W MediaProvider: isAppCloneUserPair for user 0: false
+11-22 04:45:58.408  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.409  4864  5230 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-22 04:45:58.414  4864  5085 D SliceBuilder: Creating slice for: com.android.settings.notification.RingVolumePreferenceController
+11-22 04:45:58.414  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/ring_volume) in: 6
+11-22 04:45:58.423  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Piggyback/Piggyback.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.435  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Shrink_ray/Shrink Ray.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.438  4864  5085 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-22 04:45:58.444  4864  4876 D SliceBuilder: Creating slice for: com.android.settings.notification.RingVolumePreferenceController
+11-22 04:45:58.454  5687  5724 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator started execution. cause:9 exec_start_elapsed_seconds: 101 [CONTEXT service_id=218 ]
+11-22 04:45:58.461  2206  2322 D EGL_emulation: app_time_stats: avg=102.53ms min=82.65ms max=149.21ms count=11
+11-22 04:45:58.466  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.469  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.notification.CallVolumePreferenceController
+11-22 04:45:58.472  4864  5265 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+11-22 04:45:58.477  4864  5265 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 11
+11-22 04:45:58.482  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Shrink_ray/Shrink Ray.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.483  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Snap/Snappy.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.488  4864  5085 D SliceBuilder: Creating slice for: com.android.settings.notification.CallVolumePreferenceController
+11-22 04:45:58.489  4864  4876 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/call_volume
+11-22 04:45:58.496  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.499  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-22 04:45:58.499  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 4
+11-22 04:45:58.510  4864  4876 D SliceBuilder: Creating slice for: com.android.settings.accessibility.MagnificationGesturesPreferenceController
+11-22 04:45:58.512  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.513  4864  5265 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen) in: 1
+11-22 04:45:58.523  4864  5085 D SliceBuilder: Creating slice for: com.android.settings.accessibility.MagnificationGesturesPreferenceController
+11-22 04:45:58.528  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.534  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 6
+11-22 04:45:58.537  4864  4878 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-22 04:45:58.541  4864  4876 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-22 04:45:58.543  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.544  4864  5265 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 1
+11-22 04:45:58.545  4864  4876 D SliceBuilder: Creating slice for: com.android.settings.fuelgauge.SmartBatteryPreferenceController
+11-22 04:45:58.550  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Snap/Snappy.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.551  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.552  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Sweet/Sweet.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.555  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 4
+11-22 04:45:58.555  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.556  4864  5265 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 1
+11-22 04:45:58.561  4864  5230 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.562  4864  5265 D SlicesIndexer: Slices already indexed - returning.
+11-22 04:45:58.577  4864  5230 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 16
+11-22 04:45:58.577  4864  5265 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/airplane_mode) in: 16
+11-22 04:45:58.578  4864  6134 D SliceBuilder: Creating slice for: com.android.settings.network.AirplaneModePreferenceController
+11-22 04:45:58.589  4797  4797 W AppSearchIndexUpdateUtils: No result for indexing
+11-22 04:45:58.601  4864  6134 D SliceBuilder: Creating slice for: com.android.settings.network.AirplaneModePreferenceController
+11-22 04:45:58.637  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Sweet/Sweet.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.638  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Tennis/Tennis.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.666  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Tennis/Tennis.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.666  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Treasure/Treasure.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.684  5687  5743 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService started execution. cause:5 exec_start_elapsed_seconds: 102 [CONTEXT service_id=218 ]
+11-22 04:45:58.721  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Treasure/Treasure.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.722  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Welcome/Welcome.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.747  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Welcome/Welcome.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.748  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Whistle/Whistle.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.758  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Whistle/Whistle.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.762  1484  3302 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Tones/Tones.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.779  5687  5861 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.icing.proxy.IcingInternalCorporaUpdateService finished executing. cause:5 result: 1 elapsed_millis: 108 uptime_millis: 108 exec_start_elapsed_seconds: 102 [CONTEXT service_id=218 ]
+11-22 04:45:58.786  1484  3302 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///storage/emulated/0/Android/media/com.google.android.gm/Notifications/Tones/Tones.ogg flg=0x1000010 cmp=com.google.android.providers.media.module/com.android.providers.media.MediaService }
+11-22 04:45:58.883  5687  5724 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService started execution. cause:9 exec_start_elapsed_seconds: 102 [CONTEXT service_id=218 ]
+11-22 04:45:58.888  5687  5740 I NetworkScheduler: ignoring stale queue check message
+11-22 04:45:58.892  5687  5724 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.ipa.base.IpaGcmTaskService finished executing. cause:9 result: 1 elapsed_millis: 14 uptime_millis: 14 exec_start_elapsed_seconds: 102 [CONTEXT service_id=218 ]
+11-22 04:45:59.322   522   552 D CompanionDeviceManagerService: onPackageModified(packageName = com.google.android.gms)
+11-22 04:45:59.323   522   619 I RoleService: Granting default roles...
+11-22 04:45:59.325   522   625 I InputReader: Reconfiguring input devices, changes=KEYBOARD_LAYOUTS | 
+11-22 04:45:59.329   744   744 V MediaPlayerList: mPackageChangedBroadcastReceiver: action: android.intent.action.PACKAGE_CHANGED
+11-22 04:45:59.329   744   744 D MediaPlayerList: Name of package changed: com.google.android.gms
+11-22 04:45:59.332   522   522 I Telecom : DefaultDialerCache: Refreshing default dialer for user 0: now com.android.dialer: DDC.oR@ALY
+11-22 04:45:59.334   770   916 I PermissionControllerServiceImpl: Updating user sensitive for uid 10102
+11-22 04:45:59.336  5749  6186 I PeopleGalProvider: Gal directories started.
+11-22 04:45:59.342  5749  6186 I PeopleGalProvider: Method 1 completed.
+11-22 04:45:59.342  5749  6186 I PeopleGalProvider: Method 1 finished successfully.
+11-22 04:45:59.357   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.contacts
+11-22 04:45:59.362   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 04:45:59.370   947   947 D CarrierSvcBindHelper: No carrier app for: 0
+11-22 04:45:59.370   947   947 D ImsResolver: maybeAddedImsService, packageName: com.google.android.gms
+11-22 04:45:59.395   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 04:45:59.396   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 04:45:59.425  5687  5865 I Fitness : OnPackageChangedOperation got intent: Intent { act=android.intent.action.PACKAGE_CHANGED dat=package:com.google.android.gms flg=0x45000010 pkg=com.google.android.gms cmp=com.google.android.gms/.chimera.PersistentIntentOperationService (has extras) } [CONTEXT service_id=17 ]
+11-22 04:45:59.428  5687  6153 I Fitness : FitCleanupIntentOperation received Intent android.intent.action.PACKAGE_CHANGED [CONTEXT service_id=17 ]
+11-22 04:45:59.440  5687  5712 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 04:45:59.447  5749  5787 I Icing   : updateResources: need to parse aotg{com.google.android.gms}
+11-22 04:45:59.487   522   532 I system_server: Background young concurrent copying GC freed 626224(12MB) AllocSpace objects, 9(1100KB) LOS objects, 30% free, 28MB/40MB, paused 70us,220us total 139.266ms
+11-22 04:45:59.498   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 04:45:59.545   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 04:45:59.547   770   880 W Role    : Cannot get ApplicationInfo for default holder: com.google.android.as
+11-22 04:45:59.730  5173  5232 D PhFileGroupPop: Added file groups smarts_expressive_content_scoped_v1
+11-22 04:45:59.747  5173  5232 D PhFileGroupPop: Added file groups smarts_expressive_content_scoped_v1
+11-22 04:45:59.761  5173  5232 D PhFileGroupPop: Added file groups smart_actions_sensitive_classifier_models
+11-22 04:45:59.778  5173  5232 D PhFileGroupPop: Added file groups scripted_reply
+11-22 04:45:59.802  5173  5232 D PhFileGroupPop: Added file groups multitask_experiment
+11-22 04:45:59.807  5173  5232 D PhFileGroupPop: Added file groups spam_verdict_enforcement_policy_config
+11-22 04:45:59.812  5173  5232 D PhFileGroupPop: Added file groups smart_suggestion_reranker_models
+11-22 04:45:59.824  5173  5232 D PhFileGroupPop: Added file groups calendar_appointment_grammar
+11-22 04:45:59.841  5173  5232 D PhFileGroupPop: Added file groups birthday_grammars
+11-22 04:45:59.842  5173  5232 D PhFileGroupPop: Added file groups smart_actions_sensitive_classifier_models
+11-22 04:45:59.842  5173  5232 D PhFileGroupPop: Added file groups scripted_reply
+11-22 04:45:59.842  5173  5232 D PhFileGroupPop: Added file groups multitask_experiment
+11-22 04:45:59.843  5173  5232 D PhFileGroupPop: Added file groups spam_verdict_enforcement_policy_config
+11-22 04:45:59.843  5173  5232 D PhFileGroupPop: Added file groups smart_suggestion_reranker_models
+11-22 04:45:59.843  5173  5232 D PhFileGroupPop: Added file groups calendar_appointment_grammar
+11-22 04:45:59.843  5173  5232 D PhFileGroupPop: Added file groups birthday_grammars
+11-22 04:45:59.848  5173  5232 D ManifestConfigHelper: Added file groups en_us
+11-22 04:45:59.851   323  6240 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10100 0}
+11-22 04:45:59.851   323  6240 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 04:45:59.851   323  6241 D resolv  : doQuery: (1, 28)
+11-22 04:45:59.851   323  6241 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 04:45:59.851   323  6241 D resolv  : res_nsend
+11-22 04:45:59.851   323  6241 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:59.851   323  6241 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b021c57ed0
+11-22 04:45:59.851   323  6241 D resolv  : doQuery: rcode=0, ancount=8
+11-22 04:45:59.852   323  6242 D resolv  : doQuery: (1, 1)
+11-22 04:45:59.852   323  6242 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 04:45:59.853   323  6242 D resolv  : res_nsend
+11-22 04:45:59.853   323  6242 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:59.853   323  6242 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b011c55770
+11-22 04:45:59.853   323  6242 D resolv  : doQuery: rcode=0, ancount=8
+11-22 04:46:00.024   745   809 D EGL_emulation: app_time_stats: avg=15173.29ms min=15173.29ms max=15173.29ms count=1
+--------- beginning of kernel
+11-22 04:46:00.426     0     0 I logd    : logdr: UID=2000 GID=2000 PID=6243 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns

@@ -1,0 +1,449 @@
+--------- beginning of main
+11-22 04:45:50.017  5687  5861 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 623588]
+11-22 04:45:50.021  5687  5861 I AlarmManager: setExactAndAllowWhileIdle [name: GCM_HB_ALARM type: 2 triggerAtMillis: 623592]
+11-22 04:45:50.031  5687  5742 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService started execution. cause:5 exec_start_elapsed_seconds: 93 [CONTEXT service_id=218 ]
+11-22 04:45:50.043  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=82.0 y=901.0 rawX=82.0 rawY=901.0 tab=1 
+11-22 04:45:50.043  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=82.0,556.0 host=1080x1863
+11-22 04:45:50.044  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=82.0 y=556.0 rawX=82.0 rawY=901.0 tab=1 
+11-22 04:45:50.044  2206  2206 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=115x82,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- LinearLayout(id=-1,size=165x544,click=false,long=false,vis=0,tx=0.0,ty=476.94998,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 04:45:50.044  2206  2206 D WAQT_RAIL_TRACE: RAIL_DOWN targetIsDock=false isOpen=true slop=22 thr=49
+11-22 04:45:50.044  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISALLOW requested=true tab=1
+11-22 04:45:50.044  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=1
+11-22 04:45:50.044  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 04:45:50.051  5687  5861 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.udc.service.UdcContextInitService finished executing. cause:5 result: 1 elapsed_millis: 31 uptime_millis: 31 exec_start_elapsed_seconds: 93 [CONTEXT service_id=218 ]
+11-22 04:45:50.063  5687  5742 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.languageprofile.GcmTaskService started execution. cause:5 exec_start_elapsed_seconds: 93 [CONTEXT service_id=218 ]
+11-22 04:45:50.065  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=902.28564 rawX=82.0 rawY=902.28564 tab=1 
+11-22 04:45:50.065  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=557.28564 rawX=82.0 rawY=902.28564 tab=1 
+11-22 04:45:50.065  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=1.2856445
+11-22 04:45:50.065  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.065  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.072  5687  5687 D BoundBrokerSvc: onBind: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+11-22 04:45:50.072  5687  5687 D BoundBrokerSvc: Loading bound service for intent: Intent { act=com.google.android.gms.libs.gmscorelogger.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentDirectBootAwareApiService }
+11-22 04:45:50.086  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=913.0 rawX=82.0 rawY=913.0 tab=1 
+11-22 04:45:50.086  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=568.0 rawX=82.0 rawY=913.0 tab=1 
+11-22 04:45:50.086  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=12.0
+11-22 04:45:50.086  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.086  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.109  5687  5861 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.languageprofile.GcmTaskService finished executing. cause:5 result: 1 elapsed_millis: 50 uptime_millis: 50 exec_start_elapsed_seconds: 93 [CONTEXT service_id=218 ]
+11-22 04:45:50.143  5687  5742 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gcm.gmsproc.GcmInGmsTaskService started execution. cause:5 exec_start_elapsed_seconds: 93 [CONTEXT service_id=218 ]
+11-22 04:45:50.143  5749  5855 I GCM-GMS : Registering GMS for direct boot.
+11-22 04:45:50.151  2206  2322 D EGL_emulation: app_time_stats: avg=2939.45ms min=103.78ms max=8553.99ms count=3
+11-22 04:45:50.151  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=923.7143 rawX=82.0 rawY=923.7143 tab=1 
+11-22 04:45:50.151  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=578.7143 rawX=82.0 rawY=923.7143 tab=1 
+11-22 04:45:50.152  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=22.714294
+11-22 04:45:50.152  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.152  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.152  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.288  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=952.4286 rawX=82.0 rawY=952.4286 tab=1 
+11-22 04:45:50.289  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=607.4286 rawX=82.0 rawY=952.4286 tab=1 
+11-22 04:45:50.289  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=51.42859
+11-22 04:45:50.289  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.289  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.289  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.319  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=1008.1429 rawX=82.0 rawY=1008.1429 tab=1 
+11-22 04:45:50.320  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=663.1429 rawX=82.0 rawY=1008.1429 tab=1 
+11-22 04:45:50.320  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=107.14288
+11-22 04:45:50.320  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.320  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.320  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.413  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=1022.7143 rawX=82.0 rawY=1022.7143 tab=1 
+11-22 04:45:50.413  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=677.7143 rawX=82.0 rawY=1022.7143 tab=1 
+11-22 04:45:50.413  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=121.714294
+11-22 04:45:50.413  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.413  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.413  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.461   323  5916 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-22 04:45:50.461   323  5916 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 04:45:50.465   323  5918 D resolv  : doQuery: (1, 1)
+11-22 04:45:50.465   323  5918 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 04:45:50.465   323  5918 D resolv  : res_nsend
+11-22 04:45:50.465   323  5918 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:50.465   323  5918 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74aff1c4e930
+11-22 04:45:50.465   323  5918 D resolv  : doQuery: rcode=0, ancount=2
+11-22 04:45:50.465   323  5917 D resolv  : doQuery: (1, 28)
+11-22 04:45:50.465   323  5917 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 04:45:50.465   323  5917 D resolv  : res_nsend
+11-22 04:45:50.465   323  5917 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:50.465   323  5917 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b001c4e1d0
+11-22 04:45:50.465   323  5917 D resolv  : doQuery: rcode=0, ancount=2
+11-22 04:45:50.489  5687  5742 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-22 04:45:50.490  5687  5742 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 04:45:50.490  5687  5742 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 04:45:50.513  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=1061.2858 rawX=82.0 rawY=1061.2858 tab=1 
+11-22 04:45:50.513  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=716.28577 rawX=82.0 rawY=1061.2858 tab=1 
+11-22 04:45:50.513  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=160.28577
+11-22 04:45:50.513  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.513  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.514  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.613  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=1105.8572 rawX=82.0 rawY=1105.8572 tab=1 
+11-22 04:45:50.613  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=760.8572 rawX=82.0 rawY=1105.8572 tab=1 
+11-22 04:45:50.613  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=204.85718
+11-22 04:45:50.614  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.614  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.614  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.700  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=1146.5714 rawX=82.0 rawY=1146.5714 tab=1 
+11-22 04:45:50.700  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=801.5714 rawX=82.0 rawY=1146.5714 tab=1 
+11-22 04:45:50.700  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=245.57141
+11-22 04:45:50.700  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.700  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.700  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.763  5687  5694 I .gms.persisten: Background young concurrent copying GC freed 586785(34MB) AllocSpace objects, 70(1792KB) LOS objects, 70% free, 10MB/34MB, paused 93us,19us total 126.921ms
+11-22 04:45:50.791  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=82.0 y=1182.5714 rawX=82.0 rawY=1182.5714 tab=1 
+11-22 04:45:50.791  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=82.0 y=837.5714 rawX=82.0 rawY=1182.5714 tab=1 
+11-22 04:45:50.791  2206  2206 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=0.0 dy=281.5714
+11-22 04:45:50.791  2206  2206 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=0.0 dragging=true isOpen=true
+11-22 04:45:50.792  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 04:45:50.792  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 04:45:50.842  4877  5199 W YouTube : Could not register for notifications with InnerTube: 
+11-22 04:45:50.842  4877  5199 W YouTube : zxc: ylz: Precondition check failed.
+11-22 04:45:50.842  4877  5199 W YouTube : 	at ytm.apply(PG:57)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at xrp.t(PG:5)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at xrp.d(PG:2)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at zwu.d(PG:4)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at afdl.c(PG:51)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at afdk.run(PG:2)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at rvv.run(PG:5)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at rvh.run(PG:2)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at hmu.run(PG:4)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at java.lang.Thread.run(Thread.java:920)
+11-22 04:45:50.842  4877  5199 W YouTube : Caused by: ylz: Precondition check failed.
+11-22 04:45:50.842  4877  5199 W YouTube : 	at zvt.d(PG:5)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at xzj.c(PG:18)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at xyk.run(PG:17)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 04:45:50.842  4877  5199 W YouTube : 	at xqz.run(PG:12)
+11-22 04:45:50.842  4877  5199 W YouTube : 	... 1 more
+11-22 04:45:50.842  4877  5199 W YouTube : Caused by: bsk
+11-22 04:45:50.842  4877  5199 W YouTube : 	at xyk.run(PG:12)
+11-22 04:45:50.842  4877  5199 W YouTube : 	... 4 more
+11-22 04:45:50.879  5749  5787 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 04:45:50.879  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=82.0 y=1201.0 rawX=82.0 rawY=1201.0 tab=1 
+11-22 04:45:50.879  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=82.0 y=856.0 rawX=82.0 rawY=1201.0 tab=1 
+11-22 04:45:50.908  2206  2206 D WAQT_RAIL_TRACE: RAIL_UP moved=true dragging=true isOpen=true
+11-22 04:45:50.909  2206  2206 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=1
+11-22 04:45:50.909  2206  2206 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 04:45:50.938  2206  2206 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=true grip=true children=4
+11-22 04:45:50.952  5687  5742 W Conscrypt: Could not set socket write timeout: java.net.SocketException: Socket closed
+11-22 04:45:50.953  5687  5742 W Conscrypt: 	at com.google.android.gms.org.conscrypt.Platform.setSocketWriteTimeout(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 04:45:50.953  5687  5742 W Conscrypt: 	at com.google.android.gms.org.conscrypt.ConscryptFileDescriptorSocket.setSoWriteTimeout(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 04:45:50.982  5749  5749 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.measurement.START pkg=com.google.android.gms }
+11-22 04:45:51.003  2510  2525 W id.gms.unstabl: Couldn't lock the profile file /data/user/0/com.google.android.gms/app_dg_cache/BCD37DA6707F74E3F78AB9C0F65BC34E65B1F2E1/oat/the.apk.cur.prof: Failed to open file '/data/user/0/com.google.android.gms/app_dg_cache/BCD37DA6707F74E3F78AB9C0F65BC34E65B1F2E1/oat/the.apk.cur.prof': No such file or directory
+11-22 04:45:51.003  2510  2525 W id.gms.unstabl: Could not forcefully load profile /data/user/0/com.google.android.gms/app_dg_cache/BCD37DA6707F74E3F78AB9C0F65BC34E65B1F2E1/oat/the.apk.cur.prof
+11-22 04:45:51.024  5749  5756 I gle.android.gm: Background young concurrent copying GC freed 202101(10198KB) AllocSpace objects, 186(6892KB) LOS objects, 78% free, 6677KB/30MB, paused 41us,17us total 117.984ms
+--------- beginning of system
+11-22 04:45:51.082   522   555 D ColorDisplayService: GlobalSaturationTintController Animation cancelled: false to matrix: 
+11-22 04:45:51.082   522   555 D ColorDisplayService:        1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 min matrix coefficients: 
+11-22 04:45:51.082   522   555 D ColorDisplayService:        1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 max matrix coefficients: 
+11-22 04:45:51.082   522   555 D ColorDisplayService:        1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000 0.000000 0.000000 0.000000 0.000000 1.000000
+11-22 04:45:51.111  5749  5787 I Icing   : Indexing done com.google.android.gms-apps
+11-22 04:45:51.205  2206  2322 D EGL_emulation: app_time_stats: avg=94.35ms min=76.54ms max=120.07ms count=11
+11-22 04:45:51.225  5687  5868 I NearbyDiscovery: Show notifications: 0 total, no changes since last shown, no-op. [CONTEXT service_id=265 ]
+11-22 04:45:51.228  5687  5861 I NearbyShared: FastPairSlice: enableBindServiceForDiscoveryItem called, isBind = false
+11-22 04:45:51.231  5749  5790 I FastPair: ServiceBindHelper.onSlicePinned, slice already pinned, uri = content://com.google.android.gms.nearby.fastpair/method_bind_service_for_discovery_item?is_bind=false
+11-22 04:45:51.258  5749  5855 I GCM-GMS : Got GMS direct boot token.
+11-22 04:45:51.261  5687  5724 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.gcm.gmsproc.GcmInGmsTaskService finished executing. cause:5 result: 1 elapsed_millis: 1126 uptime_millis: 1126 exec_start_elapsed_seconds: 93 [CONTEXT service_id=218 ]
+11-22 04:45:51.335   522   522 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10101; state: DISABLED
+11-22 04:45:51.337  1712  1712 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPLOAD_ASSISTANT_DEVICE_SETTINGS.
+11-22 04:45:51.340  1712  4655 W LocationOracle: getBestLocation(): no location is available
+11-22 04:45:51.341  1712  2406 I NetworkRecognitionRnr: Using pair HTTP connection
+11-22 04:45:51.342  1712  4653 I A       : [Upload] Connected
+11-22 04:45:51.344  1712  4653 I NetworkRecognitionRnr: Using pair HTTP connection
+11-22 04:45:51.346  1712  1712 E A       : onError
+11-22 04:45:51.346  1712  1712 E A       : com.google.android.apps.gsa.shared.speech.a.n: errorCode: 65561, engine: 2
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.staticplugins.di.a.e.a(SourceFile:3)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.s3.n.gF(SourceFile:1)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.ce.g.a.f.f(SourceFile:2)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(SourceFile:21)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.jG(SourceFile:6)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.s3.o.d(SourceFile:15)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.s3.p.run(SourceFile:1)
+11-22 04:45:51.346  1712  1712 E A       : 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-22 04:45:51.346  1712  1712 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.e.run(SourceFile:2)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ay.run(SourceFile:1)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.ay.run(SourceFile:1)
+11-22 04:45:51.346  1712  1712 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 04:45:51.346  1712  1712 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 04:45:51.346  1712  1712 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.h.run(SourceFile:4)
+11-22 04:45:51.346  1712  1712 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.p: errorCode: 65586, engine: 2
+11-22 04:45:51.346  1712  1712 E A       : 	... 15 more
+11-22 04:45:51.346  1712  1712 E A       : Caused by: com.google.android.apps.gsa.shared.speech.a.l: errorCode: 401, engine: 2
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.assistant.shared.m.h.a(SourceFile:5)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.s3.producers.j.gX(SourceFile:2)
+11-22 04:45:51.346  1712  1712 E A       : 	at com.google.android.apps.gsa.speech.k.a.g.d(SourceFile:15)
+11-22 04:45:51.346  1712  1712 E A       : 	... 12 more
+11-22 04:45:51.346  1712  4656 I A       : [Upload] Connected
+11-22 04:45:51.347  1712  1712 W A       : Failed to sync device settings.
+11-22 04:45:51.347  1712  1712 I A       : Retrying to sync device settings.
+11-22 04:45:51.347  1712  1909 W CronetNetworkRqstWrppr: Upload request without a content type.
+11-22 04:45:51.350  1712  1981 W CronetNetworkRqstWrppr: Upload request without a content type.
+11-22 04:45:51.469  5687  5727 E bqto    : Phenotype registration failed [CONTEXT service_id=51 ]
+11-22 04:45:51.469  5687  5727 E bqto    : java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 04:45:51.469  5687  5727 E bqto    : 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at bqto.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at asuo.call(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 04:45:51.469  5687  5727 E bqto    : 	at java.lang.Thread.run(Thread.java:920)
+--------- beginning of kernel
+11-22 04:45:51.849     0     0 I logd    : start watching /data/system/packages.list ...
+11-22 04:45:51.851     0     0 I logd    : ReadPackageList, total packages: 153
+11-22 04:45:51.741  5091  5166 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10113; state: ENABLED
+11-22 04:45:52.168   190   818 I keystore2: keystore2::watchdog: Watchdog thread idle -> terminating. Have a great day.
+11-22 04:45:52.216  5749  5802 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.games [CONTEXT service_id=231 ]
+11-22 04:45:52.218  5749  5802 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.maps#com.google.android.gms [CONTEXT service_id=231 ]
+11-22 04:45:52.218  5749  5802 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.cast [CONTEXT service_id=231 ]
+11-22 04:45:52.219  5749  5802 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.mobile_data_plan [CONTEXT service_id=231 ]
+11-22 04:45:52.220  5749  5802 E PhenotypeRegOp: Attempting to overwrite config package for com.google.android.gms.udc [CONTEXT service_id=231 ]
+11-22 04:45:52.230  1499  1499 V ClearcutMetricXmitter: Transmission is done.
+11-22 04:45:52.235  5233  5233 V ClearcutMetricXmitter: Transmission is done.
+11-22 04:45:52.236  5233  5233 V ClearcutMetricXmitter: Transmission is done.
+11-22 04:45:52.292  5687  5693 I .gms.persisten: Compiler allocated 4511KB to compile void yrm.f(android.content.Context)
+11-22 04:45:52.308  5306  5306 V ClearcutMetricXmitter: Transmission is done.
+11-22 04:45:52.328  5687  5727 I bqwt    : Removed 0 invalid users [CONTEXT service_id=51 ]
+11-22 04:45:52.382  5687  5727 I DynamiteModule: Considering local module com.google.android.gms.cronet_dynamite:0 and remote module com.google.android.gms.cronet_dynamite:1611
+11-22 04:45:52.382  5687  5727 I DynamiteModule: Selected remote version of com.google.android.gms.cronet_dynamite, version >= 1611
+11-22 04:45:52.387  5687  5727 W .gms.persisten: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk*710115887:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes2.dex*2846691920:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes3.dex*2761815357:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes4.dex*685778569:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes5.dex*533941434:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes6.dex*2075164405:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes7.dex*1278043695:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes8.dex*1915487278:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes9.dex*3363323367:/product/priv-app/PrebuiltGmsCore/PrebuiltGmsCore.apk!classes10.dex*2549418032]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]#PCL[/system/framework/com.android.media.remotedisplay.jar*3472798122]#PCL[/system/framework/com.android.location.provider.jar*3633238673]#PCL[/system_ext/framework/androidx.window.sidecar.jar*3539530913]})
+11-22 04:45:52.404  5687  5693 I .gms.persisten: Compiler allocated 6116KB to compile void bqwt.D(java.util.Set, java.util.List, dely, java.lang.String, boolean, dqfs, bqws, java.util.LinkedHashMap, czlq, boolean, dtvl)
+11-22 04:45:52.424   522   803 D ConnectivityService: requestNetwork for uid/pid:10102/5687 activeRequest: null callbackRequest: 127 [NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]] callback flags: 0 priority: 2147483647
+11-22 04:45:52.424   522   696 D ConnectivityService: NetReassign [128 : null → 100]
+11-22 04:45:52.425   522   687 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]
+11-22 04:45:52.425   522   687 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]
+11-22 04:45:52.425   522   687 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=128, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.gms] ]
+11-22 04:45:52.426   522   696 D ConnectivityService: NetReassign [no changes]
+11-22 04:45:52.429  5687  5727 I cr_CronetLibraryLoader: Cronet version: 108.0.5359.61, arch: x86_64
+11-22 04:45:52.442   323  5936 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10102 0}
+11-22 04:45:52.442   323  5936 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 04:45:52.443   323  5938 D resolv  : doQuery: (1, 1)
+11-22 04:45:52.443   323  5938 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 04:45:52.443   323  5938 D resolv  : res_nsend
+11-22 04:45:52.443   323  5938 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:52.443   323  5938 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b011c55b90
+11-22 04:45:52.443   323  5938 D resolv  : doQuery: rcode=0, ancount=8
+11-22 04:45:52.444   323  5937 D resolv  : doQuery: (1, 28)
+11-22 04:45:52.444   323  5937 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 04:45:52.444   323  5937 D resolv  : res_nsend
+11-22 04:45:52.445   323  5937 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:52.445   323  5937 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b021c55d90
+11-22 04:45:52.445   323  5937 D resolv  : doQuery: rcode=0, ancount=8
+11-22 04:45:52.994  5940  5940 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-22 04:45:52.996  5940  5940 I AndroidRuntime: Using default boot image
+11-22 04:45:52.996  5940  5940 I AndroidRuntime: Leaving lock profiling enabled
+11-22 04:45:53.003  5940  5940 W libc    : Access denied finding property "odsign.verification.success"
+11-22 04:45:53.004  5940  5940 W app_process: ART APEX data files are untrusted.
+11-22 04:45:53.004  5940  5940 I app_process: Core platform API reporting enabled, enforcing=false
+11-22 04:45:52.992  5940  5940 W app_process: type=1400 audit(0.0:62): avc: denied { read } for name="u:object_r:odsign_prop:s0" dev="tmpfs" ino=206 scontext=u:r:shell:s0 tcontext=u:object_r:odsign_prop:s0 tclass=file permissive=0
+11-22 04:45:53.049  5940  5940 D app_process: Time zone APEX ICU file found: /apex/com.android.tzdata/etc/icu/icu_tzdata.dat
+11-22 04:45:53.049  5940  5940 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt68l.dat
+11-22 04:45:53.053  5940  5940 W app_process: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 04:45:53.054  5940  5940 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[] | PCL[/system/framework/android.test.runner.jar*1585996318])
+11-22 04:45:53.063  5940  5940 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-22 04:45:53.066   522   522 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-22 04:45:53.068  1712  1981 I A       : NGA disabled since it's running Panthera and at least one a11y feature is on.
+11-22 04:45:53.068  1712  1981 I A       : Nga state changed to DISABLED
+11-22 04:45:53.069  1499  4151 I A       : [Memory] eligibility: StashEligibility{4}
+11-22 04:45:53.072  1499  2259 I A       : Disconnecting from SysUi, flag disabled.
+11-22 04:45:53.072  1499  2259 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 04:45:53.072  1499  2259 I A       : Disconnected
+11-22 04:45:53.073  5940  5954 V UiAutomation: Init UiAutomation@a8de097[id=10, flags=0]
+11-22 04:45:53.209  5749  5749 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-22 04:45:53.424   522   696 D ConnectivityService: reportNetworkConnectivity(100, false) by 10101
+11-22 04:45:53.424   522   696 D ConnectivityService: reportNetworkConnectivity(100, false) by 10101
+11-22 04:45:53.425   885  1823 D NetworkMonitor/100: Forcing reevaluation for UID 10101. Dns signal count: 0
+11-22 04:45:53.432   323  5959 D resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-22 04:45:53.432   323  5959 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 04:45:53.432   323  5959 D resolv  : res_nsend
+11-22 04:45:53.432   323  5959 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.433   323  5959 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b021c57b50
+11-22 04:45:53.435   323  5961 D resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-22 04:45:53.435   323  5961 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 04:45:53.435   323  5961 D resolv  : res_nsend
+11-22 04:45:53.435   323  5961 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.435   323  5961 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b001c4f3d0
+11-22 04:45:53.436   323  5960 D resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-22 04:45:53.437   323  5960 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 04:45:53.437   323  5960 D resolv  : res_nsend
+11-22 04:45:53.437   323  5960 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.437   323  5960 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74aff1c4deb0
+11-22 04:45:53.439   323  5962 D resolv  : ResNSendHandler::run: 0 / {100 983140 100 983140 1073 1}
+11-22 04:45:53.440   323  5962 I resolv  : resolv_populate_res_for_net: netid=100
+11-22 04:45:53.440   323  5962 D resolv  : res_nsend
+11-22 04:45:53.440   323  5962 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.440   323  5962 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74aff1c4c710
+11-22 04:45:53.448   885  5957 D NetworkMonitor/100: PROBE_DNS www.google.com 17ms OK 142.251.156.119,142.251.155.119,142.251.151.119,142.251.150.119,142.251.154.119,142.251.153.119,142.251.157.119,142.251.152.119,2001:4860:482c:7700::,2001:4860:4829:7700::,2001:4860:4826:7700::,2001:4860:482d:7700::,2001:4860:4827:7700::,2001:4860:4828:7700::,2001:4860:482a:7700::,2001:4860:482b:7700::
+11-22 04:45:53.450   885  5958 D NetworkMonitor/100: PROBE_DNS connectivitycheck.gstatic.com 18ms OK 142.251.150.120,2001:4860:4826:7800::
+11-22 04:45:53.451   323  5964 D resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-22 04:45:53.451   323  5964 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 04:45:53.451   323  5963 D resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 1073 1}
+11-22 04:45:53.451   323  5963 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 04:45:53.454   323  5966 D resolv  : doQuery: (1, 1)
+11-22 04:45:53.454   323  5965 D resolv  : doQuery: (1, 28)
+11-22 04:45:53.454   323  5966 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 04:45:53.454   323  5965 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 04:45:53.454   323  5966 D resolv  : res_nsend
+11-22 04:45:53.454   323  5966 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.454   323  5965 D resolv  : res_nsend
+11-22 04:45:53.454   323  5966 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b001c4f3d0
+11-22 04:45:53.454   323  5966 D resolv  : doQuery: rcode=0, ancount=8
+11-22 04:45:53.455   323  5965 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.455   323  5965 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74b021c57b50
+11-22 04:45:53.455   323  5967 D resolv  : doQuery: (1, 28)
+11-22 04:45:53.455   323  5965 D resolv  : doQuery: rcode=0, ancount=8
+11-22 04:45:53.455   323  5967 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 04:45:53.455   323  5967 D resolv  : res_nsend
+11-22 04:45:53.455   323  5967 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.455   323  5967 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74aff1c4deb0
+11-22 04:45:53.455   323  5967 D resolv  : doQuery: rcode=0, ancount=1
+11-22 04:45:53.457   323  5968 D resolv  : doQuery: (1, 1)
+11-22 04:45:53.457   323  5968 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 04:45:53.457   323  5968 D resolv  : res_nsend
+11-22 04:45:53.457   323  5968 I resolv  : resolv_cache_lookup: lookup
+11-22 04:45:53.457   323  5968 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x74aff1c4c710
+11-22 04:45:53.457   323  5968 D resolv  : doQuery: rcode=0, ancount=1
+11-22 04:45:53.470   885  5958 D NetworkMonitor/100: PROBE_HTTP http://connectivitycheck.gstatic.com/generate_204 time=20ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sun, 22 Nov 2026 04:45:54 GMT], X-Android-Received-Millis=[1795322753470], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1795322753465]}
+11-22 04:45:53.491   885  5957 D NetworkMonitor/100: PROBE_HTTPS https://www.google.com/generate_204 time=42ms ret=204 request={Connection=[close], User-Agent=[Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.32 Safari/537.36]} headers={null=[HTTP/1.1 204 No Content], Alt-Svc=[h3=":443"; ma=2592000,h3-29=":443"; ma=2592000], Connection=[close], Content-Length=[0], Cross-Origin-Resource-Policy=[cross-origin], Date=[Sun, 22 Nov 2026 04:45:54 GMT], X-Android-Received-Millis=[1795322753491], X-Android-Response-Source=[NETWORK 204], X-Android-Selected-Protocol=[http/1.1], X-Android-Sent-Millis=[1795322753484]}
+11-22 04:45:53.492   885  5956 D NetworkMonitor/100: isCaptivePortal: isSuccessful()=true isPortal()=false RedirectUrl=null isPartialConnectivity()=false Time=64ms
+11-22 04:45:53.493   522   696 D ConnectivityService: [100 WIFI] validation passed
+11-22 04:45:53.647  5749  5749 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.languageprofile.service.START pkg=com.google.android.gms }
+11-22 04:45:53.652  5749  5749 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.asterism.service.START pkg=com.google.android.gms }
+11-22 04:45:53.656  5687  5687 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.pseudonymous.service.START pkg=com.google.android.gms }
+11-22 04:45:53.659  5687  5687 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.usagereporting.service.START pkg=com.google.android.gms }
+11-22 04:45:53.674   522   804 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10102; state: DISABLED
+11-22 04:45:53.696  5749  5849 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-22 04:45:53.698  5749  5855 W Icing   : No valid account for uploading user actions
+11-22 04:45:53.700  5749  5855 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 04:45:53.739  5687  5693 I .gms.persisten: Compiler allocated 4803KB to compile void bqwt.C(java.util.Set, long, demj, demk, java.util.List, java.util.LinkedHashMap, dqfs, bqws, boolean)
+11-22 04:45:53.772  5687  5693 I .gms.persisten: Compiler allocated 5902KB to compile void bqwt.C(java.util.Set, long, demj, demk, java.util.List, java.util.LinkedHashMap, dqfs, bqws, boolean)
+11-22 04:45:53.943  4161  4187 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.apps.wellbeing.device
+11-22 04:45:53.976  4161  4186 W ProcessReaper: Scheduling killing of process to refresh configuration
+11-22 04:45:53.977  4827  4827 D PhenotypeContext: Application doesn't implement PhenotypeApplication interface, falling back to globally set context. See go/phenotype-flag#process-stable-init for more info.
+11-22 04:45:53.978  4827  5608 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.setupwizard
+11-22 04:45:53.994  5687  5829 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:53.994  5687  5829 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 04:45:53.994  5687  5829 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:53.995  5687  5829 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 04:45:53.997  5687  5829 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:53.997  5687  5829 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 04:45:54.004  5687  5829 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 04:45:54.007  5687  5829 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 04:45:54.007  5687  5829 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 04:45:54.007  5687  5829 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:54.009  5687  5829 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 04:45:54.009  5687  5829 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 04:45:54.009  5687  5829 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 04:45:54.010  5687  5829 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 04:45:54.012  5687  5834 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:54.012  5687  5834 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 04:45:54.012  5687  5834 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 04:45:54.013  5687  5834 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 04:45:54.013  5687  5834 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:54.013  5687  5834 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 04:45:54.013  5687  5834 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 04:45:54.015  5687  5834 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 04:45:54.015  5687  5834 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 04:45:54.015  5687  5834 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 04:45:54.015  5687  5834 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 04:45:54.015  5687  5834 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 04:45:54.015  5687  5834 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 04:45:54.016  5687  5834 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 04:45:54.016  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.android.sdksandbox name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.017  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.android.odad name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.019  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.020  5687  5834 W ConfiguratorPhenotypeUt: Package com.android.media.swcodec name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.021  5687  5834 W ConfiguratorPhenotypeUt: Package com.android.appsearch name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.036  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.android.adservices name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.038  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.039  5687  5834 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.039  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.android.as.oss name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.040  5687  5834 W ConfiguratorPhenotypeUt: Package com.google.oslo name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.041  5687  5834 W ConfiguratorPhenotypeUt: Package com.android.refreshratecontrol name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.042  5687  5834 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.042  5687  5834 W ConfiguratorPhenotypeUt: Package com.android.neuralnetworks name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.042  5687  5834 W ConfiguratorPhenotypeUt: Package 1 name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 04:45:54.135  5940  5940 W AccessibilityNodeInfoDumper: Fetch time: 58ms
+11-22 04:45:54.139  5940  5940 D AndroidRuntime: Shutting down VM
+11-22 04:45:54.143  1712  1981 I A       : NGA enabled in interactor.
+11-22 04:45:54.143  1712  1981 I A       : Nga state changed to ENABLED
+11-22 04:45:54.146  1499  4151 I A       : Initializing all components
+11-22 04:45:54.147  1499  4151 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 04:45:54.147  1499  2259 I A       : on opa visibility changed false
+11-22 04:45:54.148  1499  2259 I A       : on opa visibility changed false
+11-22 04:45:54.148  1499  2321 I A       : onIsEnabledChanged, isEnabled: false
+11-22 04:45:54.149   522   522 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-22 04:45:54.157  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.157  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.158  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.158  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.158  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.158  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 I A       : Setting session to type: NO_SESSION
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.159  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.160  1499  2321 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 04:45:54.160  1499  2259 I A       : State changed: IDLE => IDLE by NGA_STATE_CHANGED and N/A with Optional.empty
+11-22 04:45:54.160  1499  2259 I A       : Recognizer choice: (recognizer_type: 1, recognizer_mode: 1, choice_reason: 4)
+11-22 04:45:54.163  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.163  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.163  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.163  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.163  1499  2321 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 04:45:54.163  1499  2321 I A       : onDisabled. Registered: false
+11-22 04:45:54.168  1499  2321 I A       : Disconnecting from SysUi, flag disabled.
+11-22 04:45:54.168  1499  2321 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 04:45:54.168  1499  2321 I A       : Disconnected
+11-22 04:45:54.168  1499  2321 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 04:45:54.177   745   745 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 04:45:54.177   745   745 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 04:45:54.177   745   745 V NgaMessageHandler:    visible: true
+11-22 04:45:54.186  1499  2259 I NgaEntryPointEventSendr: setupConnection
+11-22 04:45:54.192  1499  2259 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 04:45:54.193  1712  1712 I A       : Creating pss binder().
+11-22 04:45:54.199  1499  2259 I NgaEntryPointEventSendr: onServiceConnected
+11-22 04:45:54.199  1712  2141 I A       : Calling beginBinderSession().
+11-22 04:45:54.199  1712  2141 I A       : beginBinderSession(): calling binder
+11-22 04:45:54.200  1499  2321 I A       : Successfully initialized all components
+11-22 04:45:54.204  1499  2259 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 04:45:54.208   522   601 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 04:45:54.211  1712  1981 W LocationOracle: No location history returned by ContextManager
+11-22 04:45:54.215  1712  1908 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 04:45:54.217  1712  2121 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 04:45:54.217  1712  4656 I PBSessionCacheImpl: Deleted sessionId[7531250949708184] from persistence.
+11-22 04:45:54.219  1712  2121 W SearchServiceCore: Abort, client detached.
+11-22 04:45:54.221  1499  2259 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 04:45:54.321  1356  1356 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 04:45:54.322  1356  1356 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():168 maybeFetchAndUpdate: forceRefresh=true
+11-22 04:45:54.322  1356  1356 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 04:45:54.327  5687  5727 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1795322754327) [CONTEXT service_id=51 ]
+11-22 04:45:54.389  4797  5084 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10090; state: ENABLED
+11-22 04:45:54.389  4827  5588 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10093; state: ENABLED
+11-22 04:45:54.545   522  1630 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10100; state: DISABLED
+11-22 04:45:54.547  5173  5198 I BuglePhenotype: onReceive for bugle package [CONTEXT package_name="com.google.android.apps.messaging#com.google.android.apps.messaging" ]
+11-22 04:45:54.548  5173  5232 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging
+11-22 04:45:54.605  5687  5838 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 04:45:54.606  5687  5838 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 04:45:54.674  5749  5749 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.findmydevice.spot.service.locationreport.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsApiService }
+11-22 04:45:55.164     0     0 I logd    : logdr: UID=2000 GID=2000 PID=5977 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
