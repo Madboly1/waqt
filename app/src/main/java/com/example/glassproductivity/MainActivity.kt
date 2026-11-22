@@ -3338,6 +3338,7 @@ class MainActivity : AppCompatActivity() {
     private fun showLastCrashIfAny(): Boolean {
         val prefs = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
         val crash = prefs.getString("last_crash", null) ?: return false
+        if (StartupRecovery.canContinueAfterHandledFocusCrash(this, crash)) return false
         prefs.edit().remove("last_crash").apply()
         val tv = TextView(this).apply {
             text = crash.lines().take(14).joinToString("\n")
@@ -8319,7 +8320,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun railEdge(): Int = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).getInt("rail_edge", 0)
-    private fun railOffset(): Float = getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE).getFloat("rail_offset", 0.45f)
+    private fun railOffset(): Float = SavedNumericPreferences.float(getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE), "rail_offset", 0.45f)
 
     private fun createRailDrawable(edge: Int = railEdge()): GradientDrawable =
         GradientDrawable(

@@ -17,10 +17,19 @@ internal object StartupRecovery {
 
     fun isActive(activity: Activity): Boolean = active[activity] == true
 
+    /** Keep the trace, but do not trap a repaired, readable timer behind diagnostics. */
+    fun canContinueAfterHandledFocusCrash(context: Context, crash: String): Boolean {
+        if (!crash.contains("java.lang.ClassCastException") ||
+            !crash.contains("java.lang.Integer cannot be cast to java.lang.Long") ||
+            !crash.contains("ReminderRepository.getActiveFocusState")) return false
+        return runCatching { ReminderRepository.getActiveFocusState(context) }.isSuccess
+    }
+
     fun enterIfRecorded(activity: Activity): Boolean {
         val prefs = activity.getSharedPreferences("waqt_prefs", Context.MODE_PRIVATE)
         val crash = try { prefs.getString("last_crash", null) } catch (_: Exception) { null }
         if (crash.isNullOrBlank()) return false
+        if (canContinueAfterHandledFocusCrash(activity, crash)) return false
         active[activity] = true
         val density = activity.resources.displayMetrics.density
         fun dp(value: Int) = (value * density + 0.5f).toInt()

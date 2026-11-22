@@ -520,7 +520,7 @@ object ReminderRepository {
     fun getTodayFocusMinutes(context: Context): Int {
         val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val todayEpoch = currentEpochDay()
-        val savedDay = prefs.getLong(KEY_FOCUS_EPOCH_DAY, -1L)
+        val savedDay = SavedNumericPreferences.long(prefs, KEY_FOCUS_EPOCH_DAY, -1L)
         if (savedDay != todayEpoch) {
             prefs.edit()
                 .putLong(KEY_FOCUS_EPOCH_DAY, todayEpoch)
@@ -575,9 +575,9 @@ object ReminderRepository {
     fun getActiveFocusState(context: Context): JSONObject {
         val p = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         return JSONObject().apply {
-            put("startMs", p.getLong(KEY_ACTIVE_FOCUS_START_MS, 0L))
-            put("totalMs", p.getLong(KEY_ACTIVE_FOCUS_TOTAL_MS, 25 * 60 * 1000L))
-            put("remainingPauseMs", p.getLong(KEY_ACTIVE_FOCUS_REMAINING_PAUSE_MS, 25 * 60 * 1000L))
+            put("startMs", SavedNumericPreferences.long(p, KEY_ACTIVE_FOCUS_START_MS, 0L))
+            put("totalMs", SavedNumericPreferences.long(p, KEY_ACTIVE_FOCUS_TOTAL_MS, 25 * 60 * 1000L))
+            put("remainingPauseMs", SavedNumericPreferences.long(p, KEY_ACTIVE_FOCUS_REMAINING_PAUSE_MS, 25 * 60 * 1000L))
             put("isRunning", p.getBoolean(KEY_ACTIVE_FOCUS_RUNNING, false))
             put("taskId", p.getString(KEY_ACTIVE_FOCUS_TASK_ID, "") ?: "")
             put("isBreak", p.getBoolean(KEY_ACTIVE_FOCUS_IS_BREAK, false))
