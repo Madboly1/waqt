@@ -3,6 +3,7 @@ package com.example.glassproductivity
 import android.Manifest
 import android.app.Activity
 import android.app.AlarmManager
+import java.io.File
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.Dialog
@@ -710,6 +711,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        updateCancelled = true
+        updateProgressDialog?.dismiss()
         if (isRecordingJournalAudio) {
             try { stopJournalAudioRecording() } catch (_: Exception) {
                 try { journalAudioRecorder?.release() } catch (_: Exception) {}
@@ -7612,7 +7615,115 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun settingsPageTitle(section: String): String = when (section) {
+        "backup" -> if (isArabic) "الحساب والنسخ الاحتياطي" else "Account & backup"
+        "focus" -> if (isArabic) "التركيز والأصوات" else "Focus & audio"
+        "notifications" -> if (isArabic) "التنبيهات والصلاحيات" else "Alarms & permissions"
+        "appearance" -> if (isArabic) "المظهر واللغة" else "Appearance & language"
+        "ai" -> if (isArabic) "المساعد الذكي" else "AI assistant"
+        else -> if (isArabic) "المساعدة وعن وقت" else "Help & about WAQT"
+    }
+
     private fun showAccordionSettingsDialog() {
+        val d = Dialog(this)
+        d.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        val scroll = ScrollView(this).apply { isFillViewport = true; clipToPadding = false }
+        val body = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(18), dp(20), dp(18), dp(22))
+            background = createPillDrawable(bgPrimaryColor(), dp(24), "#557F684F")
+            layoutDirection = if (isArabic) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
+        }
+        val heading = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
+        heading.addView(TextView(this).apply {
+            text = if (isArabic) "إعدادات وَقْت" else "WAQT Settings"
+            textSize = 25f; setTextColor(textPrimaryColor()); setTypeface(typeface, Typeface.BOLD)
+            layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
+        })
+        heading.addView(TextView(this).apply {
+            text = "✕"; contentDescription = if (isArabic) "إغلاق الإعدادات" else "Close settings"
+            textSize = 21f; setTextColor(textMutedColor()); gravity = Gravity.CENTER
+            layoutParams = LinearLayout.LayoutParams(dp(44), dp(44)); setOnClickListener { d.dismiss() }
+        })
+        body.addView(heading)
+        body.addView(TextView(this).apply {
+            text = if (isArabic) "كل حاجة في مكانها، من غير زحمة" else "Everything in its place."
+            textSize = 13f; setTextColor(textMutedColor()); setPadding(0, dp(2), 0, dp(18))
+        })
+        val updateCard = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL; setPadding(dp(15), dp(15), dp(15), dp(12))
+            background = createPillDrawable(bgElevatedColor(), dp(20), "#AAEBA45E")
+            layoutParams = LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(16) }
+            contentDescription = "WAQT_SETTINGS_UPDATE_CARD"
+        }
+        updateCard.addView(TextView(this).apply {
+            text = if (isArabic) "تحديث التطبيق" else "App update"
+            textSize = 18f; setTypeface(typeface, Typeface.BOLD); setTextColor(textPrimaryColor())
+        })
+        updateCard.addView(TextView(this).apply {
+            val version = packageManager.getPackageInfo(packageName, 0).versionName ?: ""
+            text = (if (isArabic) "الإصدار المثبّت " else "Installed version ") + version
+            textSize = 13f; setTextColor(textMutedColor()); setPadding(0, dp(4), 0, dp(10))
+        })
+        updateCard.addView(createSettingsActionButton(if (isArabic) "البحث عن تحديث" else "Check for updates", "↻") {
+            checkForOnlineUpdates(true)
+        })
+        updateCard.addView(TextView(this).apply {
+            text = if (isArabic) "تحميل ومتابعة التحديث من داخل وقت" else "Download and follow the update inside WAQT."
+            textSize = 12f; setTextColor(textMutedColor())
+        })
+        body.addView(updateCard)
+        val rows = listOf(
+            Triple("backup", if (isArabic) "جوجل درايف، ملف على الجهاز، استعادة" else "Google Drive, device file, restore", "☁"),
+            Triple("focus", if (isArabic) "مدد الجلسات، الاستراحة، أغنيتك" else "Session lengths, breaks, your song", "◉"),
+            Triple("notifications", if (isArabic) "نغمة التنبيه، الإشعارات، البطارية" else "Ringtone, notifications, battery", "🔔"),
+            Triple("appearance", if (isArabic) "الوضع الداكن والفاتح، عربي والإنجليزية" else "Dark/light mode and language", "◎"),
+            Triple("ai", if (isArabic) "المفاتيح، الموديل، مزوّدو الخدمة" else "Keys, model, providers", "✦"),
+            Triple("help", if (isArabic) "شرح التطبيق، الإصدار، معلومات التطبيق" else "App tour, version, about", "?")
+        )
+        rows.forEach { (key, subtitle, icon) ->
+            val row = LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
+                background = createPillDrawable(bgCardColor(), dp(17), "#557F684F")
+                setPadding(dp(13), dp(14), dp(13), dp(14))
+                layoutParams = LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(10) }
+                contentDescription = "WAQT_SETTINGS_PAGE_$key"
+                setOnClickListener { d.dismiss(); showSettingsSectionDialog(key) }
+            }
+            row.addView(TextView(this).apply {
+                text = icon; textSize = 22f; setTextColor(accentOrangeColor()); gravity = Gravity.CENTER
+                layoutParams = LinearLayout.LayoutParams(dp(40), dp(48))
+            })
+            val labels = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; layoutParams = LinearLayout.LayoutParams(0, -2, 1f) }
+            labels.addView(TextView(this).apply { text = settingsPageTitle(key); textSize = 16f; setTextColor(textPrimaryColor()); setTypeface(typeface, Typeface.BOLD) })
+            labels.addView(TextView(this).apply { text = subtitle; textSize = 11.5f; setTextColor(textMutedColor()); setPadding(0, dp(5), 0, 0) })
+            row.addView(labels)
+            row.addView(TextView(this).apply { text = if (isArabic) "‹" else "›"; textSize = 26f; setTextColor(textMutedColor()); gravity = Gravity.CENTER; layoutParams = LinearLayout.LayoutParams(dp(26), -2) })
+            body.addView(row)
+        }
+        body.addView(createSettingsActionButton(if (isArabic) "تواصل معنا على تليجرام  \u2066@cadr_tech\u2069" else "Contact us on Telegram  @cadr_tech", "➤") {
+            try { startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/cadr_tech"))) }
+            catch (_: Exception) { Toast.makeText(this, if (isArabic) "تعذر فتح تليجرام. الرابط: t.me/cadr_tech" else "Could not open Telegram: t.me/cadr_tech", Toast.LENGTH_LONG).show() }
+        })
+        scroll.addView(body)
+        d.setContentView(scroll); d.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(Color.TRANSPARENT))
+        d.show(); styleGlassDialog(d)
+        d.window?.setLayout((resources.displayMetrics.widthPixels * .94).toInt(), (resources.displayMetrics.heightPixels * .9).toInt())
+    }
+
+    private fun createSettingsSectionContent(title: String, buildContent: (LinearLayout) -> Unit): View {
+        val box = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(12), dp(12), dp(12), dp(8))
+            background = createPillDrawable(bgCardColor(), dp(16), "#447F684F")
+            layoutParams = LinearLayout.LayoutParams(-1, -2).apply { bottomMargin = dp(12) }
+        }
+        box.addView(TextView(this).apply { text = title; textSize = 16f; setTextColor(accentOrangeColor()); setTypeface(typeface, Typeface.BOLD); setPadding(0, 0, 0, dp(12)) })
+        buildContent(box)
+        return box
+    }
+
+    private fun showSettingsSectionDialog(section: String) {
         val d = Dialog(this)
         d.requestWindowFeature(Window.FEATURE_NO_TITLE)
 
@@ -7628,25 +7739,35 @@ class MainActivity : AppCompatActivity() {
         val body = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(18), dp(18), dp(18), dp(22))
+            layoutDirection = if (isArabic) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
         }
 
         val header = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER_VERTICAL
+            gravity = Gravity.TOP
+            layoutDirection = if (isArabic) View.LAYOUT_DIRECTION_RTL else View.LAYOUT_DIRECTION_LTR
             setPadding(0, 0, 0, dp(8))
         }
         val titleColumn = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
+            setPaddingRelative(0, 0, dp(14), 0)
             layoutParams = LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, 1f)
         }
         titleColumn.addView(TextView(this).apply {
-            text = if (isArabic) "إعدادات وَقْت" else "WAQT Settings"
+            text = settingsPageTitle(section)
+            maxLines = 2
+            textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+            textDirection = if (isArabic) View.TEXT_DIRECTION_RTL else View.TEXT_DIRECTION_LTR
+            layoutParams = LinearLayout.LayoutParams(-1, -2)
             setTextColor(textPrimaryColor())
             textSize = 23f
             setTypeface(typeface, Typeface.BOLD)
         })
         titleColumn.addView(TextView(this).apply {
-            text = if (isArabic) "خلّي تجربتك مناسبة ليك." else "Make your experience yours."
+            text = if (isArabic) "إعداداتك محفوظة، غيّر اللي يناسبك." else "Your settings are saved. Change what suits you."
+            textAlignment = View.TEXT_ALIGNMENT_VIEW_START
+            textDirection = if (isArabic) View.TEXT_DIRECTION_RTL else View.TEXT_DIRECTION_LTR
+            layoutParams = LinearLayout.LayoutParams(-1, -2)
             setTextColor(textMutedColor())
             textSize = 13f
             setPadding(0, dp(3), 0, 0)
@@ -7654,12 +7775,13 @@ class MainActivity : AppCompatActivity() {
         header.addView(titleColumn)
         header.addView(TextView(this).apply {
             text = "✕"
+            contentDescription = if (isArabic) "الرجوع إلى الإعدادات" else "Back to settings"
             textSize = 19f
             gravity = Gravity.CENTER
             setTextColor(textMutedColor())
             background = createPillDrawable(bgElevatedColor(), dp(14), null)
             layoutParams = LinearLayout.LayoutParams(dp(38), dp(38))
-            setOnClickListener { d.dismiss() }
+            setOnClickListener { d.dismiss(); showAccordionSettingsDialog() }
         })
         body.addView(header)
 
@@ -7731,9 +7853,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
         appearanceCard.addView(appearanceActions)
-        body.addView(appearanceCard)
+        if (section == "appearance") body.addView(appearanceCard)
 
-        body.addView(createAccordionSection(if (isArabic) "✨ إعدادات المساعد الذكي" else "✨ AI Assistant") { container ->
+        if (section == "ai") body.addView(createSettingsSectionContent(if (isArabic) "✨ إعدادات المساعد الذكي" else "✨ AI Assistant") { container ->
             container.addView(TextView(this@MainActivity).apply {
                 text = if (isArabic) "إعدادات المساعد مستقلة عن باقي التطبيق. اربط Gemini وGroq وOpenRouter، وWAQT هينتقل تلقائيًا بين المزودين عند تعطل الخدمة أو انتهاء الحد." else "Connect Gemini, Groq, and OpenRouter here. WAQT automatically switches providers when a service is unavailable or rate-limited."
                 textSize = 12f; setTextColor(textMutedColor()); setPadding(dp(8), dp(4), dp(8), dp(10))
@@ -7747,7 +7869,7 @@ class MainActivity : AppCompatActivity() {
             })
         })
 
-        body.addView(createAccordionSection(if (isArabic) "🍅 التركيز والاستراحة" else "🍅 Focus & Breaks") { container ->
+        if (section == "focus") body.addView(createSettingsSectionContent(if (isArabic) "🍅 التركيز والاستراحة" else "🍅 Focus & Breaks") { container ->
             fun addDurationRow(label: String, value: Int, onChoose: () -> Unit) {
                 val row = LinearLayout(this@MainActivity).apply {
                     orientation = LinearLayout.HORIZONTAL
@@ -7766,6 +7888,7 @@ class MainActivity : AppCompatActivity() {
                 })
                 row.addView(TextView(this@MainActivity).apply {
                     text = "$value ${if (isArabic) "دقيقة" else "min"}  ›"
+                    setPaddingRelative(dp(12), 0, 0, 0)
                     textSize = 14f
                     setTypeface(typeface, Typeface.BOLD)
                     setTextColor(accentOrangeColor())
@@ -7839,7 +7962,7 @@ class MainActivity : AppCompatActivity() {
             })
         })
 
-        body.addView(createAccordionSection(if (isArabic) "🔔 التنبيهات والصوت" else "🔔 Alarms & Audio") { container ->
+        if (section == "notifications") body.addView(createSettingsSectionContent(if (isArabic) "🔔 التنبيهات والصوت" else "🔔 Alarms & Audio") { container ->
             val ringtoneButton = createSettingsActionButton(
                 if (isArabic) "اختيار نغمة المنبه" else "Choose alarm ringtone",
                 "♫"
@@ -7855,7 +7978,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         if (GoogleAccountManager.configured) {
-            body.addView(createAccordionSection(if (isArabic) "🔐 حساب جوجل والنسخ السحابي" else "🔐 Google Account & Cloud Backup") { container ->
+            if (section == "backup") body.addView(createSettingsSectionContent(if (isArabic) "🔐 حساب جوجل والنسخ السحابي" else "🔐 Google Account & Cloud Backup") { container ->
                 val linked = googleAccountManager.current(this@MainActivity)
                 if (linked == null) {
                     container.addView(createSettingsActionButton(if (isArabic) "تسجيل الدخول بحساب جوجل" else "Sign in with Google", "🔐") {
@@ -7907,7 +8030,7 @@ class MainActivity : AppCompatActivity() {
             })
         }
 
-        body.addView(createAccordionSection(if (isArabic) "💾 بياناتك والنسخ الاحتياطي" else "💾 Your Data & Backup") { container ->
+        if (section == "backup") body.addView(createSettingsSectionContent(if (isArabic) "💾 بياناتك والنسخ الاحتياطي" else "💾 Your Data & Backup") { container ->
             container.addView(createSettingsActionButton(
                 if (isArabic) "حفظ نسخة في ملف / جوجل درايف" else "Save backup to file / Google Drive",
                 "☁"
@@ -7941,7 +8064,7 @@ class MainActivity : AppCompatActivity() {
             })
         })
 
-        body.addView(createAccordionSection(if (isArabic) "🛡️ صلاحيات التطبيق" else "🛡️ App Permissions") { container ->
+        if (section == "notifications") body.addView(createSettingsSectionContent(if (isArabic) "🛡️ صلاحيات التطبيق" else "🛡️ App Permissions") { container ->
             container.addView(createSettingsActionButton(
                 if (isArabic) "🔔 أذونات التنبيهات والخلفية" else "🔔 Reminder permissions",
                 "🔔"
@@ -7968,7 +8091,7 @@ class MainActivity : AppCompatActivity() {
             })
         })
 
-        body.addView(createAccordionSection(if (isArabic) "ℹ️ عن وَقْت والتحديث السحابي" else "ℹ️ About WAQT & Cloud Update") { container ->
+        if (section == "help") body.addView(createSettingsSectionContent(if (isArabic) "ℹ️ عن وَقْت والتحديث السحابي" else "ℹ️ About WAQT & Cloud Update") { container ->
             container.addView(TextView(this@MainActivity).apply {
                 text = if (isArabic)
                     "وَقْت — مساحة هادئة لمهامك وعاداتك وتركيزك.\nالتحديث الأونلاين من GitHub Cloud Sync، والفحص التلقائي حسب المفتاح أدناه."
@@ -8022,6 +8145,7 @@ class MainActivity : AppCompatActivity() {
             })
         })
 
+        d.setOnCancelListener { showAccordionSettingsDialog() }
         scroll.addView(body)
         d.setContentView(scroll)
         d.window?.setBackgroundDrawableResource(android.R.color.transparent)
@@ -10015,96 +10139,142 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Volatile private var updateCancelled = false
+    private var updateBusy = false
+    private var updateClientOverride: WaqtUpdateClient? = null
+    private var updateProgressDialog: AlertDialog? = null
+    private fun updateClient(): WaqtUpdateClient = updateClientOverride ?: WaqtUpdateClient(this)
+    private val updateSourcePermissionLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (Build.VERSION.SDK_INT < 26 || packageManager.canRequestPackageInstalls()) launchPendingUpdateInstaller()
+        else Toast.makeText(this, if (isArabic) "لم يتم السماح بالتثبيت. التطبيق وبياناتك لم يتغيروا." else "Install permission was not granted. Your app and data are unchanged.", Toast.LENGTH_LONG).show()
+    }
+
     private fun checkForOnlineUpdates(manual: Boolean) {
-        val updateUrl = "https://raw.githubusercontent.com/Madboly1/waqt-updates/main/update.json"
-        thread(name = "waqt-ota-check") {
-            var responseCode = -1
+        if (updateBusy) return
+        updateBusy = true
+        if (manual) Toast.makeText(this, if (isArabic) "جارٍ البحث عن تحديث…" else "Checking for updates…", Toast.LENGTH_SHORT).show()
+        thread(name = "waqt-update-check") {
             try {
-                val conn = (URL(updateUrl).openConnection() as HttpURLConnection).apply {
-                    requestMethod = "GET"
-                    connectTimeout = 10000
-                    readTimeout = 10000
-                    setRequestProperty("Cache-Control", "no-cache")
-                    setRequestProperty("Pragma", "no-cache")
-                }
-                responseCode = conn.responseCode
-                if (responseCode !in 200..299) throw IllegalStateException("HTTP $responseCode")
-                val jsonText = conn.inputStream.bufferedReader(Charsets.UTF_8).use { it.readText() }
-                conn.disconnect()
-                val root = org.json.JSONObject(jsonText)
-                val remoteCode = root.optInt("versionCode", 0)
-                val remoteName = root.optString("versionName", "")
-                val remoteMsg = root.optString("updateMessage", "")
-                val apkUrl = root.optString("apkDownloadUrl", "")
-                val currentCode = if (Build.VERSION.SDK_INT >= 28) {
-                    packageManager.getPackageInfo(packageName, 0).longVersionCode.toInt()
-                } else {
-                    @Suppress("DEPRECATION")
-                    packageManager.getPackageInfo(packageName, 0).versionCode
-                }
-                val isNewer = remoteCode > currentCode && apkUrl.startsWith("https://")
+                val result = updateClient().check()
                 runOnUiThread {
-                    if (isNewer) {
-                        val title = if (isArabic) "تحديث جديد متاح 🚀" else "New update available 🚀"
-                        val details = buildString {
-                            append(if (isArabic) "الإصدار الحالي: " else "Current version: ")
-                            append(packageManager.getPackageInfo(packageName, 0).versionName)
-                            append("\n")
-                            append(if (isArabic) "الإصدار الجديد: " else "New version: ")
-                            append(remoteName)
-                            if (remoteMsg.isNotBlank()) append("\n\n").append(remoteMsg)
-                        }
-                        AlertDialog.Builder(this@MainActivity)
-                            .setTitle(title)
-                            .setMessage(details)
+                    updateBusy = false
+                    if (isFinishing || isDestroyed) return@runOnUiThread
+                    if (result == null) {
+                        if (manual) Toast.makeText(this, if (isArabic) "وقت محدّث بالفعل، مفيش تحديث جديد." else "WAQT is up to date.", Toast.LENGTH_LONG).show()
+                    } else {
+                        val choice = AlertDialog.Builder(this)
+                            .setTitle(if (isArabic) "تحديث جديد متاح" else "New update available")
+                            .setMessage((if (isArabic) "الإصدار " else "Version ") + result.versionName + "\n\n" + result.message)
                             .setNegativeButton(if (isArabic) "لاحقًا" else "Later", null)
-                            .setPositiveButton(if (isArabic) "تحميل التحديث" else "Download update") { _, _ ->
-                                try {
-                                    val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as android.app.DownloadManager
-                                    val safeVersion = remoteName.replace(Regex("[^A-Za-z0-9._-]"), "_")
-                                    val request = android.app.DownloadManager.Request(Uri.parse(apkUrl))
-                                        .setTitle(if (isArabic) "تحميل تحديث وَقْت $remoteName" else "Downloading WAQT $remoteName")
-                                        .setDescription(if (isArabic) "سيظهر إشعار عند اكتمال التحميل. اضغط عليه لتثبيت التحديث." else "A notification will appear when the download is complete. Tap it to install.")
-                                        .setMimeType("application/vnd.android.package-archive")
-                                        .setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                                        .setAllowedOverMetered(true)
-                                        .setAllowedOverRoaming(false)
-                                        .setDestinationInExternalPublicDir(
-                                            android.os.Environment.DIRECTORY_DOWNLOADS,
-                                            "WAQT-update-$safeVersion.apk"
-                                        )
-                                    downloadManager.enqueue(request)
-                                    Toast.makeText(
-                                        this@MainActivity,
-                                        if (isArabic) "بدأ تحميل التحديث… هتلاقي إشعار عند اكتماله." else "Update download started. You'll be notified when it finishes.",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                } catch (downloadError: Exception) {
-                                    Toast.makeText(
-                                        this@MainActivity,
-                                        (if (isArabic) "تعذر بدء التحميل: " else "Could not start download: ") + (downloadError.message ?: "Unknown error"),
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
-                            }
-                            .show()
-                    } else if (manual) {
-                        val msg = if (remoteCode <= currentCode) {
-                            if (isArabic) "أنت تستخدم أحدث إصدار بالفعل ✓" else "You are up to date ✓"
-                        } else {
-                            if (isArabic) "رابط التحديث غير جاهز حاليًا" else "Update download is not ready yet"
-                        }
-                        Toast.makeText(this@MainActivity, msg, Toast.LENGTH_LONG).show()
+                            .setPositiveButton(if (isArabic) "تحديث الآن" else "Update now") { _, _ -> downloadWaqtUpdate(result) }
+                            .create()
+                        choice.show(); styleGlassDialog(choice)
                     }
                 }
-            } catch (e: Exception) {
-                if (manual) runOnUiThread {
-                    val reason = e.message ?: "Network error"
-                    Toast.makeText(this@MainActivity,
-                        (if (isArabic) "تعذر فحص التحديثات: " else "Update check failed: ") + reason,
-                        Toast.LENGTH_LONG).show()
+            } catch (_: Exception) {
+                runOnUiThread {
+                    updateBusy = false
+                    if (manual && !isFinishing && !isDestroyed) Toast.makeText(this, if (isArabic) "تعذر التحقق من التحديثات مؤقتًا. جرّب لاحقًا." else "Could not check for updates. Try again later.", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+    }
+
+    private fun downloadWaqtUpdate(manifest: WaqtUpdateManifest) {
+        if (updateBusy) return
+        updateBusy = true
+        updateCancelled = false
+        val box = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(22), dp(12), dp(22), dp(12)) }
+        val status = TextView(this).apply {
+            text = if (isArabic) "جارٍ تنزيل التحديث…" else "Downloading update…"
+            textSize = 15f; setTextColor(textPrimaryColor())
+        }
+        val bar = ProgressBar(this, null, android.R.attr.progressBarStyleHorizontal).apply { max = 100; isIndeterminate = true; contentDescription = "WAQT_UPDATE_PROGRESS" }
+        box.addView(status); box.addView(bar, LinearLayout.LayoutParams(-1, dp(28)))
+        box.addView(TextView(this).apply {
+            text = if (isArabic) "بعد التحقق من الملف، هتفتح شاشة تثبيت أندرويد. إنت اللي هتوافق على التثبيت، من غير حذف التطبيق أو مسح بياناته." else "After verification, Android's installer opens. You choose whether to install. Do not uninstall or clear app data."
+            textSize = 13f; setTextColor(textMutedColor()); setPadding(0, dp(12), 0, 0)
+        })
+        val dialog = AlertDialog.Builder(this)
+            .setTitle(if (isArabic) "جارٍ تنزيل التحديث" else "Downloading update")
+            .setView(box)
+            .setNegativeButton(if (isArabic) "إلغاء" else "Cancel") { _, _ -> updateCancelled = true }
+            .create()
+        dialog.setCancelable(false); dialog.show(); styleGlassDialog(dialog); updateProgressDialog = dialog
+        thread(name = "waqt-update-download") {
+            try {
+                val file = updateClient().download(manifest, cancelled = { updateCancelled }) { received, total ->
+                    runOnUiThread {
+                        if (!isFinishing && !isDestroyed) {
+                            bar.isIndeterminate = total <= 0
+                            if (total > 0) {
+                                bar.progress = ((received * 100) / total).toInt().coerceIn(0, 100)
+                                status.text = (if (isArabic) "تم التحميل " else "Downloaded ") + bar.progress + "%"
+                            }
+                        }
+                    }
+                }
+                if (updateCancelled) return@thread
+                val saved = org.json.JSONObject().apply {
+                    put("app", "WAQT"); put("versionCode", manifest.versionCode); put("versionName", manifest.versionName)
+                    put("apkDownloadUrl", manifest.apkUrl); put("sha256", manifest.sha256)
+                    put("packageName", packageName)
+                    if (manifest.certificateSha256 != null) put("certificateSha256", manifest.certificateSha256)
+                }
+                val pending = File(cacheDir, "waqt_updates/pending.json")
+                pending.parentFile?.mkdirs(); pending.writeText(saved.toString())
+                runOnUiThread {
+                    if (!isFinishing && !isDestroyed && !updateCancelled) {
+                        dialog.dismiss(); requestUpdateInstaller()
+                    }
+                }
+            } catch (error: Exception) {
+                runOnUiThread {
+                    if (!isFinishing && !isDestroyed && !updateCancelled) {
+                        dialog.dismiss()
+                        Toast.makeText(this, if (isArabic) "تعذر تحميل أو التحقق من التحديث. التطبيق لم يتغير." else "Could not download or verify the update. Your app is unchanged.", Toast.LENGTH_LONG).show()
+                    }
+                }
+            } finally {
+                runOnUiThread { updateBusy = false; if (!isFinishing && !isDestroyed) dialog.dismiss(); updateProgressDialog = null }
+            }
+        }
+    }
+
+    private fun requestUpdateInstaller() {
+        if (Build.VERSION.SDK_INT >= 26 && !packageManager.canRequestPackageInstalls()) {
+            val explain = AlertDialog.Builder(this)
+                .setTitle(if (isArabic) "السماح بتحديث وقت" else "Allow WAQT updates")
+                .setMessage(if (isArabic) "أندرويد محتاج تسمح لوقت يفتح التثبيت. فعّل السماح وارجع، وهنفتح شاشة تثبيت التحديث مباشرة. مش محتاج تدور على ملف في الإشعارات." else "Android needs permission to install updates from WAQT. Allow it and return to open the installer directly, without looking for a downloaded file.")
+                .setNegativeButton(if (isArabic) "لاحقًا" else "Later", null)
+                .setPositiveButton(if (isArabic) "فتح الإعدادات" else "Open settings") { _, _ ->
+                    try { updateSourcePermissionLauncher.launch(Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, Uri.parse("package:$packageName"))) }
+                    catch (_: Exception) { Toast.makeText(this, if (isArabic) "تعذر فتح صلاحية التثبيت." else "Could not open install permission.", Toast.LENGTH_LONG).show() }
+                }.create()
+            explain.show(); styleGlassDialog(explain)
+        } else launchPendingUpdateInstaller()
+    }
+
+    private fun launchPendingUpdateInstaller() {
+        try {
+            val dir = File(cacheDir, "waqt_updates").canonicalFile
+            val pending = File(dir, "pending.json")
+            if (!pending.isFile) return
+            val manifest = WaqtUpdateManifest.parse(pending.readText(), packageName).requireDownloadable()
+            require(manifest.versionCode > updateClient().installedCode())
+            val apk = File(dir, "waqt-${manifest.versionCode}.apk").canonicalFile
+            require(apk.parentFile == dir && apk.isFile)
+            val digest = java.security.MessageDigest.getInstance("SHA-256")
+            apk.inputStream().use { input -> val bytes = ByteArray(32 * 1024); while (true) { val count = input.read(bytes); if (count < 0) break; digest.update(bytes, 0, count) } }
+            require(digest.digest().joinToString("") { "%02x".format(it) } == manifest.sha256)
+            updateClient().verifyPackage(apk, manifest)
+            val uri = androidx.core.content.FileProvider.getUriForFile(this, "$packageName.fileprovider", apk)
+            val intent = Intent(Intent.ACTION_VIEW).setDataAndType(uri, "application/vnd.android.package-archive").addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+            intent.clipData = android.content.ClipData.newRawUri("WAQT update", uri)
+            startActivity(intent)
+            pending.delete()
+        } catch (_: Exception) {
+            Toast.makeText(this, if (isArabic) "تعذر فتح تثبيت التحديث. التطبيق وبياناتك لم يتغيروا." else "Could not open the update installer. Your app and data are unchanged.", Toast.LENGTH_LONG).show()
         }
     }
 
