@@ -1,4 +1,4 @@
-# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps (v6)
+# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps + focus audio isolation (v7)
 name: WAQT Account Screen and Signed Build Check
 # Last triggered to verify the side-rail host-interceptor drag fix + focus audio fixes.
 
@@ -975,6 +975,90 @@ jobs:
           adb shell input keyevent 4 || true
           cat shots/backup_probe.txt
 
+      - name: Focus local-audio isolation probe (gated)
+        run: |
+          mkdir -p shots
+          python3 - <<'PYWAV'
+          import wave, math, struct
+          for name, freq, secs in (("waqt_probe_alpha.wav", 440, 4), ("waqt_probe_beta.wav", 880, 7)):
+              w = wave.open("/tmp/" + name, "w")
+              w.setnchannels(1); w.setsampwidth(2); w.setframerate(8000)
+              frames = b"".join(struct.pack("<h", int(9000 * math.sin(2 * math.pi * freq * i / 8000))) for i in range(8000 * secs))
+              w.writeframes(frames); w.close()
+          PYWAV
+          adb push /tmp/waqt_probe_alpha.wav /sdcard/Download/waqt_probe_alpha.wav
+          adb push /tmp/waqt_probe_beta.wav /sdcard/Download/waqt_probe_beta.wav
+          tap_text() {
+            adb shell uiautomator dump /sdcard/ui.xml >/dev/null 2>&1
+            adb pull /sdcard/ui.xml ui.xml >/dev/null 2>&1
+            python3 - "$1" <<'PY'
+          import re, sys
+          target = sys.argv[1]
+          xml = open('ui.xml', encoding='utf-8').read()
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              dm = re.search(r'content-desc="([^"]*)"', tag)
+              bm = re.search(r'bounds="[(\d+),(\d+)][(\d+),(\d+)]"', tag)
+              cm = re.search(r'clickable="(true|false)"', tag)
+              if not bm:
+                  continue
+              val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
+              if target.lower() in val.lower():
+                  x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                  y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                  score = 10 if (cm and cm.group(1) == 'true') else 0
+                  if val.strip() == target:
+                      score += 1
+                  print(score, x, y)
+          PY
+          }
+          try_tap() {
+            tap_text "$1"
+            read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
+            if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
+            unset X Y; return 1
+          }
+          adb shell am force-stop com.example.glassproductivity
+          sleep 2
+          adb shell am start -n com.example.glassproductivity/.MainActivity
+          sleep 8
+          adb logcat -c
+          try_tap "التركيز" || true
+          sleep 3
+          adb exec-out screencap -p > shots/50_focus_tab.png
+          try_tap "▸" || true
+          sleep 2
+          try_tap "&#127911;" || true
+          sleep 3
+          adb exec-out screencap -p > shots/51_audio_console.png
+          if ! try_tap "إضافة صوت من الجهاز"; then
+            echo "AUDIO_CONSOLE=not_reached" > shots/audio_probe.txt
+            cat shots/audio_probe.txt
+            exit 1
+          fi
+          sleep 4
+          try_tap "Show roots" || true
+          sleep 2
+          try_tap "Downloads" || true
+          sleep 3
+          adb exec-out screencap -p > shots/52_picker.png
+          try_tap "waqt_probe_alpha.wav" || true
+          sleep 6
+          adb exec-out screencap -p > shots/53_after_pick.png
+          adb logcat -d > shots/audio_probe_logcat.txt || true
+          adb shell dumpsys media.player > shots/audio_dumpsys.txt 2>/dev/null || true
+          PICK_LINE=$(grep 'WAQT_AUDIO_TRACE.*PICKED' shots/audio_probe_logcat.txt | tail -1 || true)
+          COUNT=$(echo "$PICK_LINE" | grep -o 'count=[0-9]*' | cut -d= -f2 || true)
+          echo "AUDIO_PICKED_COUNT=${COUNT:-0}" > shots/audio_probe.txt
+          if echo "$PICK_LINE" | grep -q 'name=waqt_probe_alpha.wav'; then echo "AUDIO_PICKED_ALPHA=yes" >> shots/audio_probe.txt; else echo "AUDIO_PICKED_ALPHA=no" >> shots/audio_probe.txt; fi
+          if grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/audio_probe_logcat.txt | grep -q 'name=waqt_probe_alpha.wav'; then echo "AUDIO_PLAY_CUSTOM=waqt_probe_alpha.wav" >> shots/audio_probe.txt; else echo "AUDIO_PLAY_CUSTOM=none" >> shots/audio_probe.txt; fi
+          if grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/audio_probe_logcat.txt | grep -q 'waqt_probe_beta'; then echo "AUDIO_OTHER_FILE_PLAYED=yes" >> shots/audio_probe.txt; else echo "AUDIO_OTHER_FILE_PLAYED=no" >> shots/audio_probe.txt; fi
+          DISTINCT=$(grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/audio_probe_logcat.txt | grep -o 'name=[^ ]*' | sort -u | wc -l)
+          echo "AUDIO_PLAY_DISTINCT=$DISTINCT" >> shots/audio_probe.txt
+          if grep -q '^AUDIO_PICKED_COUNT=1$' shots/audio_probe.txt && grep -q '^AUDIO_PICKED_ALPHA=yes$' shots/audio_probe.txt && grep -q '^AUDIO_PLAY_CUSTOM=waqt_probe_alpha.wav$' shots/audio_probe.txt && [ "$DISTINCT" = "1" ] && grep -q '^AUDIO_OTHER_FILE_PLAYED=no$' shots/audio_probe.txt; then echo "AUDIO_ISOLATION=pass" >> shots/audio_probe.txt; else echo "AUDIO_ISOLATION=fail" >> shots/audio_probe.txt; fi
+          cat shots/audio_probe.txt
+          grep -q '^AUDIO_ISOLATION=pass$' shots/audio_probe.txt
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
