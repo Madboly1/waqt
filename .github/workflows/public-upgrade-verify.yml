@@ -1,0 +1,138 @@
+name: Waqt 5.6.80 public upgrade safety gate
+'on':
+  push:
+    branches:
+    - feature/google-drive-backup
+    paths:
+    - .github/workflows/public-upgrade-verify.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  public-upgrade-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+    - uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.7'
+    - name: Check accepted application lineage and version-only app change
+      run: |
+        set -euo pipefail
+        git fetch --depth=1 origin af9c90263663d594805b97770bfd037cf3550f53
+        git diff --exit-code af9c90263663d594805b97770bfd037cf3550f53 -- app/src
+        python3 - <<'PY'
+        import pathlib,subprocess
+        old=subprocess.check_output(['git','show','af9c90263663d594805b97770bfd037cf3550f53:app/build.gradle.kts']).decode()
+        expected=old.replace('versionCode = 105','versionCode = 106').replace('versionName = "5.6.79"','versionName = "5.6.80"')
+        assert pathlib.Path('app/build.gradle.kts').read_text()==expected
+        print('ACCEPTED_APP_SOURCE_IDENTICAL_EXCEPT_105_TO_106_VERSION=yes')
+        PY
+    - uses: actions/download-artifact@v4
+      with:
+        github-token: ${{ github.token }}
+        run-id: 45015447376
+        name: waqt-settings-updater-candidate-not-yet-install-approved
+        path: accepted-private105
+    - name: Decode existing release signing key
+      env:
+        KEYSTORE_BASE64: ${{ secrets.WAQT_KEYSTORE_BASE64 }}
+      run: |
+        set -euo pipefail
+        test -n "$KEYSTORE_BASE64"
+        echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/waqt-release.jks"
+    - name: Run complete regressions and build signed 5.6.80
+      env:
+        WAQT_KEYSTORE_PATH: ${{ runner.temp }}/waqt-release.jks
+        WAQT_KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
+        WAQT_KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
+        WAQT_KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
+      run: |
+        set -euo pipefail
+        mkdir -p release-proof
+        gradle :app:testDebugUnitTest :app:assembleRelease --no-daemon --stacktrace 2>&1 | tee release-proof/build.log
+        python3 - <<'PY'
+        from pathlib import Path
+        import xml.etree.ElementTree as X,json
+        rows=[{k:r.get(k) for k in ['name','tests','failures','errors','skipped']} for r in [X.parse(p).getroot() for p in Path('app/build/test-results/testDebugUnitTest').glob('TEST-*.xml')]]
+        assert rows and sum(int(r['tests']) for r in rows)>=66,rows
+        assert all(int(r['failures'])==int(r['errors'])==int(r['skipped'])==0 for r in rows),rows
+        updater=[r for r in rows if r['name'].endswith('WaqtUpdateSafetyTest')]
+        assert updater and int(updater[0]['tests'])>=27,updater
+        Path('release-proof/unit-verdict.json').write_text(json.dumps(rows,indent=2))
+        print('ALL_UNIT_REGRESSIONS_PASS='+str(sum(int(r['tests']) for r in rows)))
+        PY
+    - name: Validate original public APK and new package certificate versions
+      run: |
+        set -euo pipefail
+        curl -fL --retry 2 https://github.com/Madboly1/waqt/releases/download/v5.6.79/app-release.apk -o public105.apk
+        echo '9e13b583646c650dbc2493f99943c2fd05af4ee0600bb04532e9e253eaca0cc8  public105.apk' | sha256sum -c -
+        BT=$(ls "$ANDROID_HOME"/build-tools/ | sort -V | tail -1)
+        for APK in public105.apk app/build/outputs/apk/release/app-release.apk; do
+          "$ANDROID_HOME/build-tools/$BT/apksigner" verify --print-certs "$APK" | tee -a release-proof/certificates.txt
+          "$ANDROID_HOME/build-tools/$BT/apksigner" verify --print-certs "$APK" | grep -q '76b52b825b663a53294a8030a7ca52ef74a2cddabc197ff7f9606045e60c9689'
+        done
+        "$ANDROID_HOME/build-tools/$BT/aapt" dump badging app/build/outputs/apk/release/app-release.apk | grep -E '^(package:|sdkVersion:|targetSdkVersion:)' | tee release-proof/package.txt
+        grep -q "name='com.example.glassproductivity' versionCode='106' versionName='5.6.80'" release-proof/package.txt
+        sha256sum app/build/outputs/apk/release/app-release.apk | tee release-proof/apk-sha256.txt
+    - name: Enable emulator acceleration
+      run: |
+        echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+        sudo udevadm control --reload-rules
+        sudo udevadm trigger --name-match=kvm
+    - name: Boot disposable API31 test device
+      run: |
+        set -euo pipefail
+        yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /tmp/sdk-licenses.log || true
+        "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' 'system-images;android-31;google_apis;x86_64'
+        echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
+        echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
+        export ANDROID_AVD_HOME="$HOME/.android/avd"
+        mkdir -p "$ANDROID_AVD_HOME"
+        echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd -n publicupgrade -k 'system-images;android-31;google_apis;x86_64' --device pixel_5 --force
+        echo 'hw.ramSize=3072' >> "$ANDROID_AVD_HOME/publicupgrade.avd/config.ini"
+        echo 'disk.dataPartition.size=4G' >> "$ANDROID_AVD_HOME/publicupgrade.avd/config.ini"
+        nohup "$ANDROID_HOME/emulator/emulator" -avd publicupgrade -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot-save -memory 3072 > /tmp/emulator.log 2>&1 &
+        timeout 120 "$ANDROID_HOME/platform-tools/adb" wait-for-device
+        for i in $(seq 1 100); do
+          if [ "$("$ANDROID_HOME/platform-tools/adb" shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then exit 0; fi
+          sleep 3
+        done
+        tail -70 /tmp/emulator.log
+        exit 1
+    - name: Verify real public105 and accepted105 populated upgrades to exact106
+      run: |
+        set -euo pipefail
+        python3 - <<'PY'
+        import base64,pathlib
+        pathlib.Path('/tmp/waqt_public_upgrade.py').write_bytes(base64.b64decode('aW1wb3J0IGhhc2hsaWIsIGpzb24sIG9zLCByZSwgc3VicHJvY2VzcywgdGltZSwgeG1sLmV0cmVlLkVsZW1lbnRUcmVlIGFzIFgKZnJvbSBwYXRobGliIGltcG9ydCBQYXRoCgpQS0cgPSAnY29tLmV4YW1wbGUuZ2xhc3Nwcm9kdWN0aXZpdHknCkRBVEEgPSAnL2RhdGEvdXNlci8wLycgKyBQS0cKT1VUID0gUGF0aCgncmVsZWFzZS1wcm9vZicpCk9VVC5ta2RpcihleGlzdF9vaz1UcnVlKQpDQU5ESURBVEUgPSBQYXRoKCdhcHAvYnVpbGQvb3V0cHV0cy9hcGsvcmVsZWFzZS9hcHAtcmVsZWFzZS5hcGsnKQpDQU5ESURBVEVfU0hBID0gaGFzaGxpYi5zaGEyNTYoQ0FORElEQVRFLnJlYWRfYnl0ZXMoKSkuaGV4ZGlnZXN0KCkKCmRlZiBhZGIoKmFyZ3MsIGNoZWNrPVRydWUsIHRpbWVvdXQ9NTApOgogICAgciA9IHN1YnByb2Nlc3MucnVuKFsnYWRiJywgKmFyZ3NdLCBjYXB0dXJlX291dHB1dD1UcnVlLCB0aW1lb3V0PXRpbWVvdXQpCiAgICBpZiBjaGVjayBhbmQgci5yZXR1cm5jb2RlOgogICAgICAgIHJhaXNlIFJ1bnRpbWVFcnJvcigoYXJncywgci5zdGRvdXQuZGVjb2RlKGVycm9ycz0ncmVwbGFjZScpLCByLnN0ZGVyci5kZWNvZGUoZXJyb3JzPSdyZXBsYWNlJykpKQogICAgcmV0dXJuIHIuc3Rkb3V0CgpkZWYgcm9vdF94bWwoKToKICAgIGFkYignc2hlbGwnLCAndWlhdXRvbWF0b3InLCAnZHVtcCcsICcvc2RjYXJkL3JlbGVhc2UtdWkueG1sJykKICAgIHJldHVybiBhZGIoJ2V4ZWMtb3V0JywgJ2NhdCcsICcvc2RjYXJkL3JlbGVhc2UtdWkueG1sJykKCmRlZiBzY3JlZW5zaG90KHBhdGgpOgogICAgcGF0aC53cml0ZV9ieXRlcyhhZGIoJ2V4ZWMtb3V0JywgJ3NjcmVlbmNhcCcsICctcCcpKQoKZGVmIGxhdW5jaChsYWJlbCwgc3RhZ2UpOgogICAgYWRiKCdzaGVsbCcsICdhbScsICdmb3JjZS1zdG9wJywgUEtHKQogICAgYWRiKCdsb2djYXQnLCAnLWMnKQogICAgcmVzdWx0ID0gYWRiKCdzaGVsbCcsICdhbScsICdzdGFydCcsICctUycsICctVycsICctZicsICcweDEwMDA4MDAwJywgJy1uJywgUEtHICsgJy8uTWFpbkFjdGl2aXR5JykKICAgIHRpbWUuc2xlZXAoNikKICAgIGFzc2VydCBhZGIoJ3NoZWxsJywgJ3BpZG9mJywgUEtHKS5zdHJpcCgpLCAnbWlzc2luZyBhcHAgcHJvY2VzcycKICAgIGxvZyA9IGFkYignbG9nY2F0JywgJy1kJykKICAgIChPVVQgLyBmJ3tsYWJlbH0te3N0YWdlfS1sYXVuY2gudHh0Jykud3JpdGVfYnl0ZXMocmVzdWx0KQogICAgKE9VVCAvIGYne2xhYmVsfS17c3RhZ2V9LWxvZ2NhdC50eHQnKS53cml0ZV9ieXRlcyhsb2cpCiAgICBhc3NlcnQgYidQcm9jZXNzOiBjb20uZXhhbXBsZS5nbGFzc3Byb2R1Y3Rpdml0eScgbm90IGluIGxvZywgJ2FwcGxpY2F0aW9uIGNyYXNoJwogICAgeG1sID0gcm9vdF94bWwoKQogICAgKE9VVCAvIGYne2xhYmVsfS17c3RhZ2V9LnhtbCcpLndyaXRlX2J5dGVzKHhtbCkKICAgIHNjcmVlbnNob3QoT1VUIC8gZid7bGFiZWx9LXtzdGFnZX0ucG5nJykKICAgIHJldHVybiB4bWwKCmRlZiByZWFkX3ByZWYobmFtZSk6CiAgICByYXcgPSBhZGIoJ2V4ZWMtb3V0JywgJ2NhdCcsIERBVEEgKyAnL3NoYXJlZF9wcmVmcy8nICsgbmFtZSArICcueG1sJywgY2hlY2s9RmFsc2UpCiAgICB0cnk6CiAgICAgICAgcmV0dXJuIFguZnJvbXN0cmluZyhyYXcpCiAgICBleGNlcHQgWC5QYXJzZUVycm9yOgogICAgICAgIHJldHVybiBYLkVsZW1lbnQoJ21hcCcpCgpkZWYgcHV0X2VudHJ5KHJvb3QsIHRhZywgbmFtZSwgdmFsdWUpOgogICAgZm9yIGNoaWxkIGluIGxpc3Qocm9vdCk6CiAgICAgICAgaWYgY2hpbGQuZ2V0KCduYW1lJykgPT0gbmFtZToKICAgICAgICAgICAgcm9vdC5yZW1vdmUoY2hpbGQpCiAgICBjaGlsZCA9IFguU3ViRWxlbWVudChyb290LCB0YWcsIG5hbWU9bmFtZSkKICAgIGlmIHRhZyA9PSAnc3RyaW5nJzoKICAgICAgICBjaGlsZC50ZXh0ID0gdmFsdWUKICAgIGVsc2U6CiAgICAgICAgY2hpbGQuc2V0KCd2YWx1ZScsIHZhbHVlKQoKZGVmIHdyaXRlX3ByZWYobGFiZWwsIG5hbWUsIHJvb3QpOgogICAgcCA9IE9VVCAvIGYne2xhYmVsfS1zZWVkLXtuYW1lfS54bWwnCiAgICBwLndyaXRlX2J5dGVzKFgudG9zdHJpbmcocm9vdCwgZW5jb2Rpbmc9J3V0Zi04JywgeG1sX2RlY2xhcmF0aW9uPVRydWUpKQogICAgYWRiKCdwdXNoJywgc3RyKHApLCBEQVRBICsgJy9zaGFyZWRfcHJlZnMvJyArIG5hbWUgKyAnLnhtbCcpCgpkZWYgc2VlZChsYWJlbCk6CiAgICBhZGIoJ3NoZWxsJywgJ2FtJywgJ2ZvcmNlLXN0b3AnLCBQS0cpCiAgICBvd25lciA9IGFkYignc2hlbGwnLCAnc3RhdCcsICctYycsICcldScsIERBVEEpLmRlY29kZSgpLnN0cmlwKCkKICAgIHNldHRpbmdzID0gcmVhZF9wcmVmKCd3YXF0X3ByZWZzJykKICAgIHB1dF9lbnRyeShzZXR0aW5ncywgJ2Jvb2xlYW4nLCAnb25ib2FyZGluZ19kb25lJywgJ3RydWUnKQogICAgcHV0X2VudHJ5KHNldHRpbmdzLCAnYm9vbGVhbicsICdvdGFfYXV0b19jaGVjaycsICdmYWxzZScpCiAgICBwdXRfZW50cnkoc2V0dGluZ3MsICdzdHJpbmcnLCAnc3ludGhldGljX3JlbGVhc2Vfc2V0dGluZycsICdLRUVQIEVYSVNUSU5HIFNFVFRJTkcnKQogICAgd3JpdGVfcHJlZihsYWJlbCwgJ3dhcXRfcHJlZnMnLCBzZXR0aW5ncykKICAgIHByb2R1Y3Rpdml0eSA9IHJlYWRfcHJlZignd2FxdF9wcm9kdWN0aXZpdHlfcHJlZnMnKQogICAgdGFzayA9IHsnaWQnOiAncHVibGljLXVwZ3JhZGUtdGFzaycsICd0aXRsZSc6ICdQVUJMSUMgVVBHUkFERSBUQVNLJywgJ2hvdXInOiA5LCAnbWludXRlJzogMzAsICdpc0hhYml0JzogRmFsc2UsICdoYXNSZW1pbmRlcic6IEZhbHNlfQogICAgbm90ZSA9IHsnaWQnOiAncHVibGljLXVwZ3JhZGUtbm90ZScsICd0aXRsZSc6ICdQVUJMSUMgVVBHUkFERSBOT1RFJywgJ2JvZHknOiAnU3ludGhldGljIG9sZC12ZXJzaW9uIG5vdGUgcmV0YWluZWQgYWNyb3NzIHVwZ3JhZGUnfQogICAgcHV0X2VudHJ5KHByb2R1Y3Rpdml0eSwgJ3N0cmluZycsICd3YXF0X2l0ZW1zX2pzb24nLCBqc29uLmR1bXBzKFt0YXNrXSkpCiAgICBwdXRfZW50cnkocHJvZHVjdGl2aXR5LCAnc3RyaW5nJywgJ3dhcXRfbm90ZXNfanNvbicsIGpzb24uZHVtcHMoW25vdGVdKSkKICAgIHdyaXRlX3ByZWYobGFiZWwsICd3YXF0X3Byb2R1Y3Rpdml0eV9wcmVmcycsIHByb2R1Y3Rpdml0eSkKICAgIGFkYignc2hlbGwnLCAnbWtkaXInLCAnLXAnLCBEQVRBICsgJy9maWxlcy9qb3VybmFsX2F1ZGlvJykKICAgIG1lZGlhID0gT1VUIC8gZid7bGFiZWx9LXN5bnRoZXRpYy1tZWRpYS5iaW4nCiAgICBtZWRpYS53cml0ZV9ieXRlcyhiJ1BVQkxJQyBSRUxFQVNFIFVQR1JBREUgU1lOVEhFVElDIE1FRElBIFBSRVNFUlZBVElPTlxuJyAqIDIwKQogICAgYWRiKCdwdXNoJywgc3RyKG1lZGlhKSwgREFUQSArICcvZmlsZXMvam91cm5hbF9hdWRpby9yZWxlYXNlLXByZXNlcnZhdGlvbi5iaW4nKQogICAgYWRiKCdzaGVsbCcsICdjaG93bicsICctUicsIG93bmVyICsgJzonICsgb3duZXIsIERBVEEgKyAnL3NoYXJlZF9wcmVmcycsIERBVEEgKyAnL2ZpbGVzJykKICAgIGFkYignc2hlbGwnLCAncmVzdG9yZWNvbicsICctUicsIERBVEEgKyAnL3NoYXJlZF9wcmVmcycsIERBVEEgKyAnL2ZpbGVzJykKCmRlZiBzbmFwc2hvdChsYWJlbCwgc3RhZ2UpOgogICAgYWRiKCdzaGVsbCcsICdhbScsICdmb3JjZS1zdG9wJywgUEtHKQogICAgcmVzdWx0ID0ge30KICAgIGZvciBuYW1lIGluIFsnd2FxdF9wcmVmcycsICd3YXF0X3Byb2R1Y3Rpdml0eV9wcmVmcyddOgogICAgICAgIHJvb3QgPSByZWFkX3ByZWYobmFtZSkKICAgICAgICByZXN1bHRbbmFtZV0gPSB7bi5nZXQoJ25hbWUnKTogW24udGFnLCBuLmdldCgndmFsdWUnKSwgbi50ZXh0XSBmb3IgbiBpbiByb290fQogICAgICAgIChPVVQgLyBmJ3tsYWJlbH0te3N0YWdlfS17bmFtZX0ueG1sJykud3JpdGVfYnl0ZXMoWC50b3N0cmluZyhyb290LCBlbmNvZGluZz0ndXRmLTgnLCB4bWxfZGVjbGFyYXRpb249VHJ1ZSkpCiAgICBwYXRocyA9IGFkYignc2hlbGwnLCAnZmluZCcsIERBVEEgKyAnL2ZpbGVzJywgJy10eXBlJywgJ2YnKS5kZWNvZGUoKS5zcGxpdGxpbmVzKCkKICAgIHJlc3VsdFsnZmlsZXMnXSA9IHt9CiAgICBmb3IgcCBpbiBzb3J0ZWQocGF0aHMpOgogICAgICAgIGlmIHAuZW5kc3dpdGgoJy9wcm9maWxlSW5zdGFsbGVkJyk6CiAgICAgICAgICAgIGNvbnRpbnVlCiAgICAgICAgcmVzdWx0WydmaWxlcyddW3BdID0gaGFzaGxpYi5zaGEyNTYoYWRiKCdleGVjLW91dCcsICdjYXQnLCBwKSkuaGV4ZGlnZXN0KCkKICAgIChPVVQgLyBmJ3tsYWJlbH0te3N0YWdlfS1zbmFwc2hvdC5qc29uJykud3JpdGVfdGV4dChqc29uLmR1bXBzKHJlc3VsdCwgaW5kZW50PTIpKQogICAgcmV0dXJuIHJlc3VsdAoKcmVzdWx0cyA9IFtdCmFkYigncm9vdCcpCmFkYignd2FpdC1mb3ItZGV2aWNlJykKYWRiKCdzaGVsbCcsICdpbnB1dCcsICdrZXlldmVudCcsICc4MicpCmFkYignc2hlbGwnLCAnd20nLCAnc2l6ZScsICcxMDgweDI0MDAnKQpmb3Iga2V5IGluIFsnd2luZG93X2FuaW1hdGlvbl9zY2FsZScsICd0cmFuc2l0aW9uX2FuaW1hdGlvbl9zY2FsZScsICdhbmltYXRvcl9kdXJhdGlvbl9zY2FsZSddOgogICAgYWRiKCdzaGVsbCcsICdzZXR0aW5ncycsICdwdXQnLCAnZ2xvYmFsJywga2V5LCAnMCcpCgpiYXNlbGluZXMgPSBbKCdwdWJsaWMxMDUnLCBQYXRoKCdwdWJsaWMxMDUuYXBrJyksICc5ZTEzYjU4MzY0NmM2NTBkYmMyNDkzZjk5OTQzYzJmZDA1YWY0ZWUwNjAwYmIwNDUzMmU5ZTI1M2VhY2EwY2M4JyksCiAgICAgICAgICAgICAoJ2FjY2VwdGVkMTA1JywgbmV4dChQYXRoKCdhY2NlcHRlZC1wcml2YXRlMTA1Jykucmdsb2IoJ2FwcC1yZWxlYXNlLmFwaycpKSwgJzNkODY1NmZhODhmMmY0Y2UyMjdmN2U5MjUyZWI5YTExMWYzY2RkOTExNGQ2MDA4ZmQwOTY2YzIzZDAzODczOWYnKV0KZm9yIGxhYmVsLCBiYXNlbGluZSwgZXhwZWN0ZWQgaW4gYmFzZWxpbmVzOgogICAgYXNzZXJ0IGhhc2hsaWIuc2hhMjU2KGJhc2VsaW5lLnJlYWRfYnl0ZXMoKSkuaGV4ZGlnZXN0KCkgPT0gZXhwZWN0ZWQsIChsYWJlbCwgJ2Jhc2VsaW5lIGRpZ2VzdCcpCiAgICAjIFRoaXMgaXMgYSBmcmVzaCBkaXNwb3NhYmxlIENJIGVtdWxhdG9yLCBuZXZlciB0aGUgdXNlcidzIHBob25lLgogICAgYWRiKCd1bmluc3RhbGwnLCBQS0csIGNoZWNrPUZhbHNlKQogICAgYWRiKCdpbnN0YWxsJywgc3RyKGJhc2VsaW5lKSkKICAgIGxhdW5jaChsYWJlbCwgJ2NsZWFuLWJhc2VsaW5lJykKICAgIHNlZWQobGFiZWwpCiAgICB4bWwgPSBsYXVuY2gobGFiZWwsICdwb3B1bGF0ZWQtYmFzZWxpbmUnKQogICAgYXNzZXJ0IGInUFVCTElDIFVQR1JBREUgVEFTSycgaW4geG1sLCAobGFiZWwsICdzZWVkZWQgdGFzayBub3Qgc2hvd24gYnkgcmVhbCBvbGQgYXBwJykKICAgIGJlZm9yZSA9IHNuYXBzaG90KGxhYmVsLCAnYmVmb3JlJykKICAgIChPVVQgLyBmJ3tsYWJlbH0tdXBncmFkZS1pbnN0YWxsLnR4dCcpLndyaXRlX2J5dGVzKGFkYignaW5zdGFsbCcsICctcicsIHN0cihDQU5ESURBVEUpKSkKICAgIGZvciBzdGFnZSBpbiBbJ2ZpcnN0LWNvbGQtbGF1bmNoJywgJ3NlY29uZC1jb2xkLWxhdW5jaCddOgogICAgICAgIHhtbCA9IGxhdW5jaChsYWJlbCwgc3RhZ2UpCiAgICAgICAgYXNzZXJ0IGInUFVCTElDIFVQR1JBREUgVEFTSycgaW4geG1sLCAobGFiZWwsIHN0YWdlLCAndGFzayBtaXNzaW5nIGFmdGVyIHVwZ3JhZGUnKQogICAgcGFja2FnZSA9IGFkYignc2hlbGwnLCAnZHVtcHN5cycsICdwYWNrYWdlJywgUEtHKS5kZWNvZGUoKQogICAgYXNzZXJ0ICd2ZXJzaW9uQ29kZT0xMDYgJyBpbiBwYWNrYWdlIGFuZCAndmVyc2lvbk5hbWU9NS42LjgwJyBpbiBwYWNrYWdlCiAgICBpbnN0YWxsZWQgPSBhZGIoJ3NoZWxsJywgJ3BtJywgJ3BhdGgnLCBQS0cpLmRlY29kZSgpLnNwbGl0bGluZXMoKVswXS5yZW1vdmVwcmVmaXgoJ3BhY2thZ2U6Jykuc3RyaXAoKQogICAgYXNzZXJ0IGhhc2hsaWIuc2hhMjU2KGFkYignZXhlYy1vdXQnLCAnY2F0JywgaW5zdGFsbGVkKSkuaGV4ZGlnZXN0KCkgPT0gQ0FORElEQVRFX1NIQQogICAgeG1sID0gWC5mcm9tc3RyaW5nKHJvb3RfeG1sKCkpCiAgICBnZWFyID0gbmV4dChuIGZvciBuIGluIHhtbC5pdGVyKCdub2RlJykgaWYgbi5nZXQoJ3RleHQnKSA9PSAn4pqZ77iPJykKICAgIHgxLCB5MSwgeDIsIHkyID0gbWFwKGludCwgcmUuZmluZGFsbChyJ1xkKycsIGdlYXIuZ2V0KCdib3VuZHMnKSkpCiAgICBhZGIoJ3NoZWxsJywgJ2lucHV0JywgJ3RhcCcsIHN0cigoeDEgKyB4MikgLy8gMiksIHN0cigoeTEgKyB5MikgLy8gMikpCiAgICB0aW1lLnNsZWVwKDIpCiAgICBzZXR0aW5nc194bWwgPSByb290X3htbCgpCiAgICAoT1VUIC8gZid7bGFiZWx9LXNldHRpbmdzMTA2LnhtbCcpLndyaXRlX2J5dGVzKHNldHRpbmdzX3htbCkKICAgIHNjcmVlbnNob3QoT1VUIC8gZid7bGFiZWx9LXNldHRpbmdzMTA2LnBuZycpCiAgICBhc3NlcnQgYic1LjYuODAnIGluIHNldHRpbmdzX3htbCBhbmQgYidXQVFUX1NFVFRJTkdTX1VQREFURV9DQVJEJyBpbiBzZXR0aW5nc194bWwKICAgIGFmdGVyID0gc25hcHNob3QobGFiZWwsICdhZnRlcicpCiAgICBhZGRlZCA9IHt9CiAgICBmb3IgbmFtZSBpbiBbJ3dhcXRfcHJlZnMnLCAnd2FxdF9wcm9kdWN0aXZpdHlfcHJlZnMnXToKICAgICAgICBmb3Iga2V5LCB2YWx1ZSBpbiBiZWZvcmVbbmFtZV0uaXRlbXMoKToKICAgICAgICAgICAgYXNzZXJ0IGFmdGVyW25hbWVdLmdldChrZXkpID09IHZhbHVlLCAobGFiZWwsIG5hbWUsIGtleSwgdmFsdWUsIGFmdGVyW25hbWVdLmdldChrZXkpKQogICAgICAgIGFkZGVkW25hbWVdID0gc29ydGVkKHNldChhZnRlcltuYW1lXSkgLSBzZXQoYmVmb3JlW25hbWVdKSkKICAgIGFzc2VydCBiZWZvcmVbJ2ZpbGVzJ10gPT0gYWZ0ZXJbJ2ZpbGVzJ10sIChsYWJlbCwgJ2J1c2luZXNzL21lZGlhIGZpbGUgaGFzaGVzIGNoYW5nZWQnKQogICAgYXNzZXJ0ICdQVUJMSUMgVVBHUkFERSBUQVNLJyBpbiBhZnRlclsnd2FxdF9wcm9kdWN0aXZpdHlfcHJlZnMnXVsnd2FxdF9pdGVtc19qc29uJ11bMl0KICAgIGFzc2VydCAnUFVCTElDIFVQR1JBREUgTk9URScgaW4gYWZ0ZXJbJ3dhcXRfcHJvZHVjdGl2aXR5X3ByZWZzJ11bJ3dhcXRfbm90ZXNfanNvbiddWzJdCiAgICByZXN1bHRzLmFwcGVuZCh7J2Jhc2VsaW5lJzogbGFiZWwsICdiYXNlbGluZV9zaGEyNTYnOiBleHBlY3RlZCwgJ3VwZ3JhZGUnOiBUcnVlLCAndHdvX2NvbGRfbGF1bmNoZXMnOiBUcnVlLAogICAgICAgICAgICAgICAgICAgICdpbnN0YWxsZWRfYXBrX2V4YWN0JzogVHJ1ZSwgJ2V4aXN0aW5nX3ByZWZlcmVuY2VzX3ByZXNlcnZlZCc6IFRydWUsICdidXNpbmVzc19tZWRpYV9oYXNoZXNfcHJlc2VydmVkJzogVHJ1ZSwKICAgICAgICAgICAgICAgICAgICAnc2V0dGluZ3NfdmVyc2lvbl92aXNpYmxlJzogVHJ1ZSwgJ25ld19pbml0aWFsaXphdGlvbl9rZXlzJzogYWRkZWR9KQoKcHJvb2YgPSB7J3ZlcnNpb25fbmFtZSc6ICc1LjYuODAnLCAndmVyc2lvbl9jb2RlJzogMTA2LCAncGFja2FnZSc6IFBLRywgJ2Fwa19zaGEyNTYnOiBDQU5ESURBVEVfU0hBLAogICAgICAgICAnYXBrX2J5dGVzJzogQ0FORElEQVRFLnN0YXQoKS5zdF9zaXplLCAnc291cmNlX2NvbW1pdCc6IG9zLmVudmlyb25bJ0dJVEhVQl9TSEEnXSwKICAgICAgICAgJ2FjY2VwdGVkX3NvdXJjZV9jb21taXQnOiAnYWY5YzkwMjYzNjYzZDU5NDgwNWI5Nzc3MGJmZDAzN2NmMzU1MGY1MycsICdydW5faWQnOiBvcy5lbnZpcm9uWydHSVRIVUJfUlVOX0lEJ10sCiAgICAgICAgICdiYXNlbGluZV9yZXN1bHRzJzogcmVzdWx0cywgJ3J1bnRpbWVfcGFzc2VkJzogVHJ1ZX0KKE9VVCAvICdyZWxlYXNlLXByb29mLmpzb24nKS53cml0ZV90ZXh0KGpzb24uZHVtcHMocHJvb2YsIGluZGVudD0yKSkKcHJpbnQoJ1BVQkxJQ19SRUxFQVNFX1JVTlRJTUVfVkVSRElDVD0nICsganNvbi5kdW1wcyhwcm9vZiwgc2VwYXJhdG9ycz0oJywnLCAnOicpKSkK'))
+        PY
+        python3 /tmp/waqt_public_upgrade.py
+    - name: Capture failure diagnostics
+      if: always()
+      run: |
+        adb logcat -d > release-proof/final-logcat.txt || true
+        adb exec-out screencap -p > release-proof/final-screen.png || true
+        cp /tmp/emulator.log release-proof/emulator.log || true
+    - name: Keep exact signed candidate and synthetic evidence private
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: waqt-5.6.80-public-release-verified-candidate
+        path: 'app/build/outputs/apk/release/app-release.apk
+
+          release-proof/
+
+          app/build/test-results/testDebugUnitTest/
+
+          '
+        retention-days: 14
+    - name: Remove temporary signing key
+      if: always()
+      run: |
+        rm -f "$RUNNER_TEMP/waqt-release.jks"
