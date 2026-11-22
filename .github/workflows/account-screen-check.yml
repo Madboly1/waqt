@@ -1,4 +1,4 @@
-# Trigger probe run: rail-open gesture fix (e596dfe3) + settings evidence
+# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps
 name: WAQT Account Screen and Signed Build Check
 # Last triggered to verify the side-rail host-interceptor drag fix + focus audio fixes.
 
@@ -311,40 +311,42 @@ jobs:
               sleep 2
               safe=$(echo "$title" | md5sum | cut -c1-6)
               adb exec-out screencap -p > shots/4x_settings_$safe.png
+              adb shell uiautomator dump /sdcard/uix_$safe.xml >/dev/null 2>&1
+              adb pull /sdcard/uix_$safe.xml shots/dump_$safe.xml >/dev/null 2>&1 || true
               echo "SETTINGS_EXPANDED=$title" >> shots/settings_probe.txt
             else
               echo "SETTINGS_SECTION_MISSING=$title" >> shots/settings_probe.txt
             fi
           done
-          # Scroll to the very bottom so trailing sections render, then dump everything.
-          adb shell input swipe 540 1700 540 500; sleep 1
-          adb shell input swipe 540 1700 540 500; sleep 1
-          adb shell uiautomator dump /sdcard/uif.xml >/dev/null 2>&1
-          adb pull /sdcard/uif.xml /tmp/uisettings.xml >/dev/null 2>&1 || true
           python3 - <<'PYS' >> shots/settings_probe.txt
-          import re
-          try:
-              xml = open('/tmp/uisettings.xml', encoding='utf-8').read()
-          except Exception:
-              xml = ''
-          texts = re.findall(r'text="([^"]*)"', xml)
-          def idx(sub):
+          import re, glob
+          def texts_of(path):
+              try:
+                  xml = open(path, encoding='utf-8').read()
+              except Exception:
+                  return []
+              return re.findall(r'text="([^"]*)"', xml)
+          dumps = sorted(glob.glob('shots/dump_*.xml'))
+          def idx(texts, sub):
               for i, t in enumerate(texts):
                   if sub in t:
                       return i
               return -1
-          focus = idx("التركيز والاستراحة"); alarms = idx("التنبيهات والصوت")
-          audio = idx("اختيار صوت أو موسيقى من الجهاز")
-          data = idx("بياناتك والنسخ الاحتياطي"); perms = idx("صلاحيات التطبيق")
-          permsbtn = idx("أذونات التنبيهات والخلفية")
-          about = idx("عن وَقْت والتحديث السحابي"); tour = idx("شرح التطبيق"); contact = idx("تواصل معنا")
-          def yn(c): return "yes" if c else "no"
-          print("SETTINGS_AUDIO_IN_FOCUS=" + yn(focus >= 0 and audio > focus and (alarms < 0 or audio < alarms)))
-          print("SETTINGS_PERMS_PLACED=" + yn(perms >= 0 and permsbtn > perms and (about < 0 or permsbtn < about)))
-          print("SETTINGS_TOUR_IN_ABOUT=" + yn(about >= 0 and tour > about))
-          print("SETTINGS_CONTACT_IN_ABOUT=" + yn(about >= 0 and contact > about))
-          print("SETTINGS_DATA_LEAN=" + yn(data >= 0 and (tour < 0 or tour > perms) and (contact < 0 or contact > perms)))
-          print("SETTINGS_DUMP_NODES=" + str(len(texts)))
+          def yn(c): return 'yes' if c else 'no'
+          checks = {k: False for k in ['AUDIO_IN_FOCUS','PERMS_PLACED','TOUR_IN_ABOUT','CONTACT_IN_ABOUT']}
+          for d in dumps:
+              texts = texts_of(d)
+              focus = idx(texts, 'التركيز والاستراحة'); alarms = idx(texts, 'التنبيهات والصوت')
+              audio = idx(texts, 'اختيار صوت أو موسيقى من الجهاز')
+              perms = idx(texts, 'صلاحيات التطبيق'); permsbtn = idx(texts, 'أذونات التنبيهات والخلفية')
+              about = idx(texts, 'عن وَقْت والتحديث السحابي'); tour = idx(texts, 'شرح التطبيق'); contact = idx(texts, 'تواصل معنا')
+              if focus >= 0 and audio > focus and (alarms < 0 or audio < alarms): checks['AUDIO_IN_FOCUS'] = True
+              if perms >= 0 and permsbtn > perms and (about < 0 or permsbtn < about): checks['PERMS_PLACED'] = True
+              if about >= 0 and tour > about: checks['TOUR_IN_ABOUT'] = True
+              if about >= 0 and contact > about: checks['CONTACT_IN_ABOUT'] = True
+          for k, v in checks.items():
+              print('SETTINGS_' + k + '=' + yn(v))
+          print('SETTINGS_DUMPS=' + str(len(dumps)))
           PYS
           cat shots/settings_probe.txt 2>/dev/null || true
                     # Acceptance assertions: the job must FAIL when the swipe-fix checks
