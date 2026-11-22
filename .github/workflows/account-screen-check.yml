@@ -202,12 +202,120 @@ jobs:
           fi
           cat shots/swipe_probe.txt
 
+          # Side-rail probes (runtime evidence for the rail/tab-swipe fix):
+          #  1) a horizontal drag starting on the closed rail must stay with the
+          #     rail (no tab switch/intercept) and open it;
+          #  2) rail icons must still respond to taps (click regression);
+          #  3) the open rail's grip must actually reposition the rail along its
+          #     edge;
+          #  4) dragging the grip to the opposite edge must re-dock the rail there.
+          find_node() {
+            adb shell uiautomator dump /sdcard/uif.xml >/dev/null 2>&1
+            adb pull /sdcard/uif.xml /tmp/uif.xml >/dev/null 2>&1 || true
+            python3 - "$1" "$2" <<'PYF'
+          import re, sys
+          target = sys.argv[1]
+          maxcx = int(sys.argv[2]) if sys.argv[2] else 10**9
+          try:
+              xml = open('/tmp/uif.xml', encoding='utf-8').read()
+          except Exception:
+              xml = ''
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              if tm and bm and tm.group(1) == target:
+                  x1, y1, x2, y2 = (int(bm.group(i)) for i in range(1, 5))
+                  cx, cy = (x1 + x2) // 2, (y1 + y2) // 2
+                  if cx <= maxcx:
+                      print(f"{cx} {cy}")
+                      break
+          PYF
+          }
+          RAIL=$(find_node $'\u25b8' 120)
+          [ -z "$RAIL" ] && RAIL=$(find_node $'\u25c2' 120)
+          if [ -z "$RAIL" ]; then
+            echo "RAIL_FOUND=no" | tee -a shots/swipe_probe.txt
+          else
+            read RX RY <<< "$RAIL"
+            echo "RAIL_FOUND=yes at $RX,$RY" | tee -a shots/swipe_probe.txt
+            adb logcat -c
+            adb shell input swipe $RX $RY $((RX+260)) $RY 700
+            sleep 2
+            adb exec-out screencap -p > shots/30_rail_dragged.png
+            adb logcat -d > shots/swipe_probe_rail_logcat.txt
+            if grep -q 'SWIPE_CREATED' shots/swipe_probe_rail_logcat.txt; then echo "RAIL_DRAG_TAB_SWITCH=yes_BUG" | tee -a shots/swipe_probe.txt; else echo "RAIL_DRAG_TAB_SWITCH=no" | tee -a shots/swipe_probe.txt; fi
+            if grep -q 'ACTIVITY_SWIPE_INTERCEPT' shots/swipe_probe_rail_logcat.txt; then echo "RAIL_DRAG_INTERCEPTED=yes_BUG" | tee -a shots/swipe_probe.txt; else echo "RAIL_DRAG_INTERCEPTED=no" | tee -a shots/swipe_probe.txt; fi
+
+            GRIP=$(find_node $'\u2261' 400)
+            if [ -z "$GRIP" ]; then echo "RAIL_OPENED=no" | tee -a shots/swipe_probe.txt; else echo "RAIL_OPENED=yes at $GRIP" | tee -a shots/swipe_probe.txt; fi
+
+            ICON=$(find_node $'\U0001F4CA' 400)
+            if [ -z "$ICON" ]; then
+              echo "RAIL_CLICK_WORKS=no_icon" | tee -a shots/swipe_probe.txt
+            else
+              read IX IY <<< "$ICON"
+              adb shell input tap $IX $IY
+              sleep 2
+              adb shell uiautomator dump /sdcard/uid.xml >/dev/null 2>&1
+              adb pull /sdcard/uid.xml /tmp/uid.xml >/dev/null 2>&1 || true
+              if grep -q 'أسبوع' /tmp/uid.xml && grep -q 'مخصص' /tmp/uid.xml; then echo "RAIL_CLICK_WORKS=yes" | tee -a shots/swipe_probe.txt; else echo "RAIL_CLICK_WORKS=no" | tee -a shots/swipe_probe.txt; fi
+              adb shell input keyevent 4
+              sleep 2
+            fi
+
+            GRIP_BEFORE=$(find_node $'\u2261' 400)
+            if [ -n "$GRIP_BEFORE" ]; then
+              read GX1 GY1 <<< "$GRIP_BEFORE"
+              adb logcat -c
+              adb shell input swipe $GX1 $GY1 $GX1 $((GY1+300)) 700
+              sleep 2
+              GRIP_AFTER=$(find_node $'\u2261' 400)
+              adb logcat -d > shots/swipe_probe_rail_vertical_logcat.txt
+              read GX2 GY2 <<< "${GRIP_AFTER:-$GX1 $GY1}"
+              DYV=$((GY2 - GY1))
+              echo "RAIL_VERTICAL_DELTA=$DYV" | tee -a shots/swipe_probe.txt
+              if [ "$DYV" -ge 100 ]; then echo "RAIL_REPOSITIONED_VERTICAL=yes" | tee -a shots/swipe_probe.txt; else echo "RAIL_REPOSITIONED_VERTICAL=no" | tee -a shots/swipe_probe.txt; fi
+              if grep -q 'SWIPE_CREATED' shots/swipe_probe_rail_vertical_logcat.txt; then echo "RAIL_VERTICAL_TAB_SWITCH=yes_BUG" | tee -a shots/swipe_probe.txt; else echo "RAIL_VERTICAL_TAB_SWITCH=no" | tee -a shots/swipe_probe.txt; fi
+            else
+              echo "RAIL_REPOSITIONED_VERTICAL=no_grip" | tee -a shots/swipe_probe.txt
+              echo "RAIL_VERTICAL_TAB_SWITCH=no_grip" | tee -a shots/swipe_probe.txt
+            fi
+
+            GRIP2=$(find_node $'\u2261' 10000)
+            if [ -n "$GRIP2" ]; then
+              read HX HY <<< "$GRIP2"
+              adb logcat -c
+              adb shell input swipe $HX $HY 1030 $HY 900
+              sleep 2
+              adb logcat -d > shots/swipe_probe_rail_edge_logcat.txt
+              EDGE_PREF=$(adb shell "run-as com.example.glassproductivity sh -c 'cat shared_prefs/waqt_prefs.xml 2>/dev/null'" | grep -o 'name="rail_edge" value="[0-9]*"' | grep -o '[0-9]*$' || true)
+              echo "RAIL_EDGE_PREF=${EDGE_PREF:-unknown}" | tee -a shots/swipe_probe.txt
+              if [ "$EDGE_PREF" = "1" ]; then echo "RAIL_MOVED_TO_RIGHT_EDGE=yes" | tee -a shots/swipe_probe.txt; else echo "RAIL_MOVED_TO_RIGHT_EDGE=no" | tee -a shots/swipe_probe.txt; fi
+              if grep -q 'SWIPE_CREATED' shots/swipe_probe_rail_edge_logcat.txt; then echo "RAIL_EDGE_TAB_SWITCH=yes_BUG" | tee -a shots/swipe_probe.txt; else echo "RAIL_EDGE_TAB_SWITCH=no" | tee -a shots/swipe_probe.txt; fi
+              adb exec-out screencap -p > shots/31_rail_right_edge.png
+            else
+              echo "RAIL_MOVED_TO_RIGHT_EDGE=no_grip" | tee -a shots/swipe_probe.txt
+              echo "RAIL_EDGE_TAB_SWITCH=no_grip" | tee -a shots/swipe_probe.txt
+            fi
+          fi
+          cat shots/swipe_probe.txt
+
           # Acceptance assertions: the job must FAIL when the swipe-fix checks
           # could not be verified - evidence alone is not a pass.
           grep -q '^BALL_FOUND=yes' shots/swipe_probe.txt
           grep -q '^BALL_DRAG_EXCLUDED=yes$' shots/swipe_probe.txt
           grep -q '^BALL_DRAG_TAB_SWITCH=no$' shots/swipe_probe.txt
           grep -q '^TAB_SWIPE_WORKS=yes$' shots/swipe_probe.txt
+          grep -q '^RAIL_FOUND=yes' shots/swipe_probe.txt
+          grep -q '^RAIL_DRAG_TAB_SWITCH=no$' shots/swipe_probe.txt
+          grep -q '^RAIL_DRAG_INTERCEPTED=no$' shots/swipe_probe.txt
+          grep -q '^RAIL_OPENED=yes' shots/swipe_probe.txt
+          grep -q '^RAIL_CLICK_WORKS=yes$' shots/swipe_probe.txt
+          grep -q '^RAIL_REPOSITIONED_VERTICAL=yes$' shots/swipe_probe.txt
+          grep -q '^RAIL_VERTICAL_TAB_SWITCH=no$' shots/swipe_probe.txt
+          grep -q '^RAIL_MOVED_TO_RIGHT_EDGE=yes$' shots/swipe_probe.txt
+          grep -q '^RAIL_EDGE_TAB_SWITCH=no$' shots/swipe_probe.txt
 
           # Reminder-scheduling runtime signal (evidence only): capture pending
           # alarms for the app after boot so the scheduled trigger times can be
