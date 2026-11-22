@@ -1,0 +1,811 @@
+--------- beginning of main
+11-22 06:52:00.118  1123  2745 I Icing   : Indexing done com.google.android.gms-apps
+11-22 06:52:00.123  1123  2745 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-22 06:52:00.124  1123  2745 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-22 06:52:00.124  1123  2745 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 06:52:00.125  1123  2745 I Icing   : Indexing done com.google.android.gms-apps
+11-22 06:52:00.161  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=250.0 y=1780.0 rawX=250.0 rawY=1780.0 tab=0 
+11-22 06:52:00.161  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=true local=250.0,1435.0 host=1080x1863
+11-22 06:52:00.162  2545  2545 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=250.0 y=1435.0 rawX=250.0 rawY=1780.0 tab=0 
+11-22 06:52:00.162  2545  2545 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=false candidatePath=LinearLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 06:52:00.162  2545  2545 D WAQT_TOUCH_TRACE: HOST_TOUCH action=0 x=250.0 y=1435.0 rawX=250.0 rawY=1780.0 tab=0 
+11-22 06:52:00.162  2545  2545 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=0
+11-22 06:52:00.162  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 06:52:00.168  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:00.169  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:00.177  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=255.78572 y=1780.0 rawX=255.78572 rawY=1780.0 tab=0 
+11-22 06:52:00.178  2545  2545 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=255.78572 y=1435.0 rawX=255.78572 rawY=1780.0 tab=0 
+11-22 06:52:00.178  2545  2545 D WAQT_TOUCH_TRACE: HOST_TOUCH action=2 x=255.78572 y=1435.0 rawX=255.78572 rawY=1780.0 tab=0 
+11-22 06:52:00.178  2545  2545 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=0
+11-22 06:52:00.178  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 06:52:00.181  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.181  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.181  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.181  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.181  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.186  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.186  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.186  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.186  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.186  1693  2056 W A       : Account id is not cached
+11-22 06:52:00.187  1693  1944 W A       : Account id is not cached
+11-22 06:52:00.187  1693  1944 W A       : Account id is not cached
+11-22 06:52:00.190  1693  1944 W A       : Account id is not cached
+11-22 06:52:00.192  1693  1944 I A       : Refusing EXCLUSIVE task 24, it is already pending. Try again in 327 seconds.
+11-22 06:52:00.193  1693  1944 I BlobLobber: Canceling downloads: []
+11-22 06:52:00.194  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=288.0449 y=1780.0 rawX=288.0449 rawY=1780.0 tab=0 
+11-22 06:52:00.194  2545  2545 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=3 x=288.0449 y=1780.0 rawX=288.0449 rawY=1780.0 tab=0 
+11-22 06:52:00.194  2545  2545 D WAQT_TOUCH_TRACE: HOST_TOUCH action=3 x=288.0449 y=1780.0 rawX=288.0449 rawY=1780.0 tab=0 
+11-22 06:52:00.194  2545  2545 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=3 handled=true tab=0
+11-22 06:52:00.194  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_BEGIN tab=0 dx=38.04489 pending=null
+11-22 06:52:00.204  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:00.204  1693  1944 I ModelDownloadListener: Schdedule model download
+11-22 06:52:00.205  1693  1872 I FedAssExpListener: Fed-ass not supported for signed out users.
+--------- beginning of system
+11-22 06:52:00.209   517   728 W OverlayManager: service 'idmap' died
+11-22 06:52:00.210  1693  1872 I FedAssExpListener: Successfully processed experiments changed.
+--------- beginning of kernel
+11-22 06:52:00.414     0     0 I init    : Sending signal 9 to service 'idmap2d' (pid 3487) process group...
+11-22 06:52:00.222  1693  1693 I BgTaskExecutorImpl: Starting EXCLUSIVE background task BLOBLOBBER_SYNC.
+11-22 06:52:00.422     0     0 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 3487 in 5ms
+11-22 06:52:00.424     0     0 I init    : Control message: Processed ctl.stop for 'idmap2d' from pid: 517 (system_server)
+11-22 06:52:00.427     0     0 I init    : Service 'idmap2d' (pid 3487) received signal 9
+11-22 06:52:00.223  1693  1944 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-22 06:52:00.223  1693  1693 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPDATE_HOTWORD_MODELS.
+11-22 06:52:00.226  1693  1974 I ModelDownloadController: requestHotwordModelUpdate modelType-2 modelLocale-en-US
+11-22 06:52:00.226  1693  1974 I A       : New OK_HEY model config map hash: reinitializing config map.
+11-22 06:52:00.227  1693  1974 I ModelDownloadController: #maybeDownloadHotwordModelWithMDD with locale: en-US, modelType: 2.
+11-22 06:52:00.231   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.231   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.231   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.231   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.233  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:00.238  1693  2056 I MicroDetectionWorker: Removing hotword detection due to no account being used.
+11-22 06:52:00.238  1693  2056 I A       : isOpaHotwordEnabled: false
+11-22 06:52:00.238  1693  2056 I A       : Disabling the hotword detector.
+11-22 06:52:00.245  1693  1693 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-22 06:52:00.247  1693  2713 I A       : hasHotwordEverywhere-true
+11-22 06:52:00.248  1693  2056 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 06:52:00.249  1693  2056 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 06:52:00.256  1693  1974 E BistoWorker: Couldn't get logged in Google account.
+11-22 06:52:00.257  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.258  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.258  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.258  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.258  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.261  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:00.269  1693  1924 I BistoWorker: Performing LockscreenPersonalResponseSetting migration.
+11-22 06:52:00.292  1693  1872 I A       : NGA enabled in interactor.
+11-22 06:52:00.292  1693  1872 I A       : Nga state changed to ENABLED
+11-22 06:52:00.295  1693  1872 I A       : NGA enabled in interactor.
+11-22 06:52:00.297  1123  2751 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-22 06:52:00.300  1123  3398 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-22 06:52:00.318   399   399 I android.hardware.vibrator-service.example: Vibrator on for timeoutMs: 35
+11-22 06:52:00.319   399   399 I android.hardware.vibrator-service.example: Vibrator set amplitude: 0.11
+11-22 06:52:00.320   399  4103 I android.hardware.vibrator-service.example: Starting on on another thread
+11-22 06:52:00.321  2545  2545 D CompatibilityChangeReporter: Compat change id reported: 171228096; UID 10145; state: ENABLED
+11-22 06:52:00.325  1693  2056 I BistoSessionController: onStart no extra context
+11-22 06:52:00.332  2545  2545 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=false grip=false children=1
+11-22 06:52:00.334  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_CREATED id=210476221 from=0 to=1
+11-22 06:52:00.334  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=210476221 from=0 to=1 dx=38.04489
+11-22 06:52:00.334  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_INTERCEPT dx=38.04489 dy=0.0
+11-22 06:52:00.336  1693  2056 I BistoSessionController: handleGenericClientEvent ID = 455
+11-22 06:52:00.337  1123  1123 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.cryptauth.cryptauthservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 06:52:00.344  1693  2056 E BistoWorker: Couldn't get logged in Google account.
+11-22 06:52:00.355   399  4103 I android.hardware.vibrator-service.example: Notifying on complete
+11-22 06:52:00.356  1123  2745 W Icing   : No valid account for uploading user actions
+11-22 06:52:00.356   399   399 I android.hardware.vibrator-service.example: Vibrator off
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: Phenotype bulk platform registration failed. [CONTEXT service_id=204 ]
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at bqxg.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):20)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):15)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.362  1042  2709 W ConfiguratorPhenotypeUt: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.365  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.366  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.366  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.367  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.367  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.368  1693  1923 W MDD     : MDDManager Failed to init shared file metadata.
+11-22 06:52:00.375  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=477.5714 y=1780.0 rawX=477.5714 rawY=1780.0 tab=1 
+11-22 06:52:00.375  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=210476221 from=0 to=1 dx=227.57141
+11-22 06:52:00.395  1693  1924 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okg' from location: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 06:52:00.395   517   728 W ActivityManager: Unable to start service Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.libraries.mdi.download.d.a.a (has extras) } U=0: not found
+11-22 06:52:00.398  1693  1872 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 06:52:00.400  1693  1862 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 06:52:00.402   517   517 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+11-22 06:52:00.410  1042  1042 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.nearby.exposurenotification.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-22 06:52:00.432   750   750 D InterruptionStateProvider: No bubble up: not allowed to bubble: 0|com.google.android.googlequicksearchbox|-307962363|null|10101
+11-22 06:52:00.438   750   750 D InterruptionStateProvider: No heads up: unimportant notification: 0|com.google.android.googlequicksearchbox|-307962363|null|10101
+11-22 06:52:00.439   750   817 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 06:52:00.458  1123  2751 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-22 06:52:00.459  1693  1714 I earchbox:searc: Background young concurrent copying GC freed 32506(1722KB) AllocSpace objects, 14(660KB) LOS objects, 32% free, 11MB/17MB, paused 42us,12us total 171.186ms
+11-22 06:52:00.463  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=538.0 y=1780.0 rawX=538.0 rawY=1780.0 tab=1 
+11-22 06:52:00.463  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=210476221 from=0 to=1 dx=288.0
+11-22 06:52:00.463  1693  2713 I A       : hotwordModelLocation is null true, locale is en-US, re-mapped Chinese locale 
+11-22 06:52:00.465  1464  1880 E GsaVoiceInteractionSrv: modelLocation is null: true isAlwaysOnEnabled is false: true isFromAnyScreenEnabled is false: true
+11-22 06:52:00.467  1464  1880 E HwDetectorWithState: a: 3
+11-22 06:52:00.467  1464  1880 I GsaVoiceInteractionSrv: #checkDspStatus
+11-22 06:52:00.467  1464  1880 I BistoHotwordHelper: setting speaker id present: false
+11-22 06:52:00.478  1464  1880 I BistoHotwordHelper: setting hotword model of size: 0 bytes
+11-22 06:52:00.483  1693  1923 I DynamiteModule: Considering local module com.google.android.gms.cronet_dynamite:0 and remote module com.google.android.gms.cronet_dynamite:1611
+11-22 06:52:00.483  1693  1923 I DynamiteModule: Selected remote version of com.google.android.gms.cronet_dynamite, version >= 1611
+11-22 06:52:00.483  1693  1923 V DynamiteModule: Dynamite loader version >= 2, using loadModule2NoCrashUtils
+11-22 06:52:00.485  1693  1923 W earchbox:searc: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/priv-app/Velvet/Velvet.apk*2792366340:/product/priv-app/Velvet/Velvet.apk!classes2.dex*888232921:/product/priv-app/Velvet/Velvet.apk!classes3.dex*3433715809:/product/priv-app/Velvet/Velvet.apk!classes4.dex*4105148533:/product/priv-app/Velvet/Velvet.apk!classes5.dex*1130777259:/product/priv-app/Velvet/Velvet.apk!classes6.dex*465529957:/product/priv-app/Velvet/Velvet.apk!classes7.dex*1738199263:/product/priv-app/Velvet/Velvet.apk!classes8.dex*2075634446:/product/priv-app/Velvet/Velvet.apk!classes9.dex*4197861567:/product/priv-app/Velvet/Velvet.apk!classes10.dex*2691985635]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]})
+11-22 06:52:00.495  1693  1923 I cr_CronetLibraryLoader: Cronet version: 108.0.5359.61, arch: x86_64
+11-22 06:52:00.498  1464  1880 I BistoHotwordHelper: setting modeltype: Ok Google
+11-22 06:52:00.498  1464  1880 I BistoHotwordHelper: setHotwordVoiceLocale: prev: en-US, new: en-US
+11-22 06:52:00.500  1693  1974 D t       : Starting download: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 06:52:00.500  1693  1974 V t       : Is http uri, downloading (uri: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data)
+11-22 06:52:00.503   517   728 D ConnectivityService: requestNetwork for uid/pid:10101/1693 activeRequest: null callbackRequest: 86 [NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]] callback flags: 0 priority: 2147483647
+11-22 06:52:00.507   517   690 D ConnectivityService: NetReassign [87 : null → 101]
+11-22 06:52:00.508   517   683 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 06:52:00.508   517   683 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 06:52:00.508   517   683 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.gms.lockbox failed
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at bqro.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at bqro.i(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at bqro.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at com.google.android.gms.lockbox.LockboxIntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.511  1042  2808 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.521   517   690 D ConnectivityService: NetReassign [no changes]
+11-22 06:52:00.545  1642  4113 D DownloadManager: [1] Starting
+11-22 06:52:00.547  2545  2604 D EGL_emulation: app_time_stats: avg=2659.06ms min=2659.06ms max=2659.06ms count=1
+11-22 06:52:00.559  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=651.1428 y=1780.0 rawX=651.1428 rawY=1780.0 tab=1 
+11-22 06:52:00.559  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_UPDATE id=210476221 from=0 to=1 dx=401.14282
+11-22 06:52:00.576   322  4117 D resolv  : GetAddrInfoHandler::run: {101 262245 101 983141 10101 0}
+11-22 06:52:00.577   322  4117 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:52:00.580  1464  2226 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10101; state: DISABLED
+11-22 06:52:00.589   322  4119 D resolv  : doQuery: (1, 1)
+11-22 06:52:00.589   322  4119 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:52:00.589   322  4119 D resolv  : res_nsend
+11-22 06:52:00.589   322  4119 I resolv  : resolv_cache_lookup: lookup
+11-22 06:52:00.589   322  4119 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ad4c00917f0
+11-22 06:52:00.589   322  4119 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:52:00.589   322  4118 D resolv  : doQuery: (1, 28)
+11-22 06:52:00.589   322  4118 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:52:00.589   322  4118 D resolv  : res_nsend
+11-22 06:52:00.589   322  4118 I resolv  : resolv_cache_lookup: lookup
+11-22 06:52:00.589   322  4118 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ad4d008db50
+11-22 06:52:00.589   322  4118 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:52:00.592  1042  1074 I .gms.persisten: Background young concurrent copying GC freed 113414(6253KB) AllocSpace objects, 2(56KB) LOS objects, 16% free, 28MB/34MB, paused 21us,14us total 368.550ms
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.westworld failed
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at bqro.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at bqro.i(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at bqro.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at cfdn.F(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at com.google.android.gms.westworld.InitOperation.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at xqf.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.625  1123  2608 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.627  1693  2056 W SessionLifecycleManager: Client : AttachedClient[7447688073587049, ClientConfig[mFlags=[40000088001] mSuggestFlags=[0] mClientId=HOTWORD_SERVICE mSessionType=search publicSearchServiceCallerUid=-1]] has no associated SessionController
+11-22 06:52:00.627  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.627  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.627  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.627  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:00.627  3079  3185 W GnpSdk  : [PhenotypeManagerImpl] Phenotype registration timed out [com.google.android.libraries.notifications.platform#com.google.android.apps.docs].
+11-22 06:52:00.630  1123  2745 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 06:52:00.638  1123  2608 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+11-22 06:52:00.652  1464  2226 I A       : Initializing all components
+11-22 06:52:00.662  1464  2226 I A       : [Memory] NGA configuration not yet available
+11-22 06:52:00.662  1464  2030 I A       : onIsEnabledChanged, isEnabled: false
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.662  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 I A       : Setting session to type: NO_SESSION
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.663  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.682  1123  2608 E WorkSourceUtil: Could not find package: com.google.android.gms.westworld
+11-22 06:52:00.663  1464  2030 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 06:52:00.683  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.683  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.683  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.683  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.683  1464  2030 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 06:52:00.683  1464  2030 I A       : onDisabled. Registered: false
+11-22 06:52:00.688  3079  3202 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-22 06:52:00.695  1042  2484 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-22 06:52:00.697  2545  2545 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=700.0 y=1780.0 rawX=700.0 rawY=1780.0 tab=1 
+11-22 06:52:00.698  2545  2545 D WAQT_TOUCH_TRACE: SWIPE_FINISH id=210476221 cancelled=false latestDx=401.14282
+11-22 06:52:00.720   517   728 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.720   517   728 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.722   517   728 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.722   517   728 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.722  3079  3202 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module found. Local version is 0 and remote version is 0.
+11-22 06:52:00.725   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.725   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.759  1464  2030 I A       : on opa visibility changed false
+11-22 06:52:00.759  1464  2030 I A       : on opa visibility changed false
+11-22 06:52:00.767   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.772   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.786  1464  2030 I NgaEntryPointEventSendr: setupConnection
+11-22 06:52:00.788  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:00.789  1123  2745 W Icing   : No valid account for uploading user actions
+11-22 06:52:00.793  1693  1693 I A       : Creating pss binder().
+11-22 06:52:00.796  1464  2030 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.796  1464  2030 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.v.get(SourceFile:1)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.shared.w.a.o.b(SourceFile:1)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.shared.w.e.a.d.apply(Unknown Source:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at j$.util.Optional.map(Optional.java:265)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.shared.w.e.a.g.a(SourceFile:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.staticplugins.opa.ap.c.b.q.apply(Unknown Source:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at j$.util.Optional.map(Optional.java:265)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.staticplugins.opa.ap.c.b.r.b(SourceFile:10)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.staticplugins.opa.ap.c.b.d.run(SourceFile:17)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.libraries.gsa.k.a.k.run(SourceFile:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bt.b(SourceFile:1)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.apps.gsa.shared.util.c.a.bw.run(SourceFile:1)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.796  1464  2030 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.796  1464  2030 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.796  1464  2030 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.811  1042  1874 I LockboxIntentOp: Completed task: true [CONTEXT service_id=26 ]
+11-22 06:52:00.823   517   728 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.823   517   728 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.823   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.823   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.825  1123  2608 I NewModuleComplete: Received com.google.android.chimera.IntentOperation.NEW_MODULE(com.google.android.gms.chimera.GmsIntentOperationService,2,true)
+11-22 06:52:00.826   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.826   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.826   517   728 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.826   517   728 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.834   517   728 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.834   517   728 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.836  1123  2608 I NewModuleHelper: Received com.google.android.chimera.container.NEW_MODULE_FINALIZE(2/0): com.google.android.gms.chimera.GmsIntentOperationService,2,true
+11-22 06:52:00.836  1123  2608 I NewModuleHelper: Completed all new module init intents for all processes.
+11-22 06:52:00.849   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.849   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.853   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.853   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.853   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.853   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.853   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.853   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.861   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.861   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.862   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.862   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.862   517  1877 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 06:52:00.862   517  1877 D PackageManager: Clear ephemeral installer activity
+11-22 06:52:00.883  1464  2030 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 06:52:00.883  1464  2030 I NgaEntryPointEventSendr: onServiceConnected
+11-22 06:52:00.884  1693  2713 I A       : Calling beginBinderSession().
+11-22 06:52:00.885  1693  2713 I A       : beginBinderSession(): calling binder
+11-22 06:52:00.909  1464  2030 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 06:52:00.954  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.954  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.y.k.K(SourceFile:1)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.a(SourceFile:1)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.N(SourceFile:1)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.R(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.gp(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.954  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.954  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.954  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.990  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.990  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.j.K(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.a(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.N(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.R(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.gp(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.990  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.990  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.education.a.v.K(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.a(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.N(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.R(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.gp(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.990  1464  2038 I A       : [Memory] NGA configuration not yet available
+11-22 06:52:00.990  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.990  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.education.pie.c.a.K(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.a(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.N(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.R(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.gp(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.990  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.991  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.991  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.j.K(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.keyboard.b.cg.n(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.keyboard.b.cg.g(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.dictation.b.c.k.a(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.dictation.b.c.k.gp(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.991  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.991  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.keyboard.b.cg.n(SourceFile:4)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.keyboard.b.cg.g(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.dictation.b.c.k.a(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.dictation.b.c.k.gp(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.991  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:00.991  1464  2038 I A       : Disconnecting from SysUi, flag disabled.
+11-22 06:52:00.995  1464  2038 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 06:52:00.995  1464  2038 I A       : Disconnected
+11-22 06:52:00.996  1464  2038 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:00.996  1464  2038 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.j.K(SourceFile:1)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.a(SourceFile:1)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.N(SourceFile:1)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.R(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.gp(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.b.a(Unknown Source:4)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:00.996  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:00.996  1464  2038 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:00.996  1464  2038 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:01.008  1123  2745 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 06:52:01.043   750   750 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 06:52:01.043   750   750 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 06:52:01.043   750   750 V NgaMessageHandler:    visible: true
+11-22 06:52:01.044  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.051  1693  1959 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:268)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7725)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:561)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:115)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.speech.e.b.a.b(SourceFile:2)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.languagepack.ao.<init>(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.l(SourceFile:124)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at dagger.a.e.a(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.c(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.a(SourceFile:7)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aez.X(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:72)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:01.051  1693  1959 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:01.057  1693  1959 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at libcore.io.BlockGuardOs.fstat(BlockGuardOs.java:193)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at libcore.io.ForwardingOs.fstat(ForwardingOs.java:264)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:564)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:115)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.speech.e.b.a.b(SourceFile:2)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.languagepack.ao.<init>(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.l(SourceFile:124)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at dagger.a.e.a(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.c(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.a(SourceFile:7)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aez.X(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:72)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:01.057  1693  1959 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:01.065  1693  1944 I ModelDownloadController: Hotword model update tasks finished.
+11-22 06:52:01.065   517  1877 W ActivityManager: Unable to start service Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.libraries.mdi.download.d.a.a (has extras) } U=0: not found
+11-22 06:52:01.066   517   517 D CompatibilityChangeReporter: Compat change id reported: 175319604; UID 1000; state: ENABLED
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(SourceFile:6)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(SourceFile:4)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(SourceFile:4)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(SourceFile:14)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.y.<init>(SourceFile:8)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.yy.a(SourceFile:48)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at dagger.a.e.a(SourceFile:1)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.yz.a(Unknown Source:2)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:44)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:01.080  1693  1958 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:01.083  1693  1959 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at libcore.io.BlockGuardOs.read(BlockGuardOs.java:323)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at libcore.io.ForwardingOs.read(ForwardingOs.java:617)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at libcore.io.IoBridge.read(IoBridge.java:606)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.io.FileInputStream.read(FileInputStream.java:323)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:291)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:355)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:181)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.io.BufferedReader.fill(BufferedReader.java:172)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.io.BufferedReader.readLine(BufferedReader.java:335)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.io.BufferedReader.readLine(BufferedReader.java:400)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.speech.e.b.a.b(SourceFile:3)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.languagepack.ao.<init>(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.l(SourceFile:124)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at dagger.a.e.a(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.c(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.a(SourceFile:7)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aez.X(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:72)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:01.083  1693  1959 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:01.101  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.101   517   728 D ConnectivityService: requestNetwork for uid/pid:10101/1693 activeRequest: null callbackRequest: 89 [NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]] callback flags: 0 priority: 2147483647
+11-22 06:52:01.102  1123  2751 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-22 06:52:01.102   517   690 D ConnectivityService: NetReassign [90 : null → 101]
+11-22 06:52:01.106   517   683 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 06:52:01.108   517   683 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 06:52:01.108   517   683 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10101 RequestorUid: 10101 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 06:52:01.131   517   690 D ConnectivityService: NetReassign [no changes]
+11-22 06:52:01.157  1123  1123 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+11-22 06:52:01.159  1123  2745 W Icing   : No valid account for uploading user actions
+11-22 06:52:01.216   750   801 D EGL_emulation: app_time_stats: avg=588.11ms min=337.64ms max=838.58ms count=2
+11-22 06:52:01.279  1464  2030 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 06:52:01.279  1464  2030 E A       : com.google.common.f.s: MEDIUM
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.u.j.K(SourceFile:1)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.a(SourceFile:1)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.u.f.N(SourceFile:1)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.u.o.R(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.aj.b.j.B(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.engine.ar.a.a(Unknown Source:4)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.shared.t.g.a(SourceFile:1)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.apps.gsa.nga.shared.t.i.a(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.libraries.gsa.k.a.l.call(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 06:52:01.279  1464  2030 E A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 06:52:01.279  1464  2030 E A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 06:52:01.279  1464  2030 E A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:01.280  1123  2745 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 06:52:01.292  1123  2745 W Icing   : No valid account for uploading user actions
+11-22 06:52:01.315  1464  2038 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 06:52:01.315  1464  2030 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 06:52:01.321  1464  2038 I A       : StashOnboardingStateImpl.initialize
+11-22 06:52:01.321  1464  2038 I A       : Disconnecting from SysUi, flag disabled.
+11-22 06:52:01.321  1464  2038 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 06:52:01.321  1464  2038 I A       : Disconnected
+11-22 06:52:01.354   517  1877 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 06:52:01.355   750   750 D InterruptionStateProvider: No bubble up: not allowed to bubble: 0|com.google.android.googlequicksearchbox|-307962363|null|10101
+11-22 06:52:01.355   750   750 D InterruptionStateProvider: No heads up: unimportant notification: 0|com.google.android.googlequicksearchbox|-307962363|null|10101
+11-22 06:52:01.360   517  1877 W ProcessStats: Tracking association SourceState{86b00a com.google.android.googlequicksearchbox:interactor/10101 BTopFgs #3503} whose proc state 2 is better than process ProcessState{4b8307b com.google.android.gms.persistent/10102 pkg=com.google.android.gms} proc state 3 (5795 skipped)
+11-22 06:52:01.369  1693  1924 I cr_CronetLibraryLoader: Cronet version: 93.0.4542.0, arch: x86_64
+11-22 06:52:01.371  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.371  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.374  1464  1464 V ClearcutMetricXmitter: Transmission is done.
+11-22 06:52:01.377   750   817 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 06:52:01.380  1693  2056 I PBSessionCacheImpl: Deleted sessionId[7447688073587061] from persistence.
+11-22 06:52:01.383  1464  2038 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 06:52:01.388   750   817 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 06:52:01.393  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.394  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.398  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 42] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.400  1693  1872 W LocationOracle: No location history returned by ContextManager
+11-22 06:52:01.412  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 67] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.414  1693  2056 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 06:52:01.415  1042  2525 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.416  1123  2745 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 06:52:01.429  1464  2030 I A       : Successfully initialized all components
+11-22 06:52:01.439  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.439  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.439  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.439  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.439  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.448  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.448  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.448  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.448  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.449  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.449  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.449  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.450  1693  2056 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 06:52:01.450  1693  2056 I MicroDetectionWorker: Initializing MicroDataManager InitializeType-2, isForced-true, isActivePhoneEnrollment-false isActiveGoogleHomeEnrollment-false
+11-22 06:52:01.462  1693  1924 I MicroDataManager: Location for model with model type: 2 and locale: en-US, is : https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 06:52:01.467  1693  1958 I MicroDataManager: MicroDataManager InitializationTask. googleHotwordData is null: true, hotwordModel is null: false , sourceLocationOfCurrentHotwordModel https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 06:52:01.469  1693  2056 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 06:52:01.481  1642  2890 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10062; state: ENABLED
+11-22 06:52:01.495  1042  2525 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.499  1042  2525 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.511  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.511  1693  2056 W SearchServiceCore: Abort, client detached.
+11-22 06:52:01.512  1642  4130 D DownloadManager: [2] Starting
+11-22 06:52:01.516   517   690 D ConnectivityService: handleLingerComplete for [100 CELLULAR]
+11-22 06:52:01.519   322   322 I netd    : networkSetPermissionForNetwork(100, 1) <2.55ms>
+11-22 06:52:01.527  1642  4130 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 06:52:01.528  1642  4130 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 06:52:01.531   322  4131 D resolv  : GetAddrInfoHandler::run: {101 983141 101 983141 10062 0}
+11-22 06:52:01.531   322  4131 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 06:52:01.531   322  4132 D resolv  : doQuery: (1, 28)
+11-22 06:52:01.531   322  4132 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 06:52:01.531   322  4132 D resolv  : res_nsend
+11-22 06:52:01.531   322  4132 I resolv  : resolv_cache_lookup: lookup
+11-22 06:52:01.531   322  4132 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ad4d008db50
+11-22 06:52:01.531   322  4132 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:52:01.538   322  4133 D resolv  : doQuery: (1, 1)
+11-22 06:52:01.538   322  4133 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 06:52:01.538   322  4133 D resolv  : res_nsend
+11-22 06:52:01.538   322  4133 I resolv  : resolv_cache_lookup: lookup
+11-22 06:52:01.538   322  4133 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7ad4c00917f0
+11-22 06:52:01.538   322  4133 D resolv  : doQuery: rcode=0, ancount=8
+11-22 06:52:01.550  1693  1872 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 06:52:01.554  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.561  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.561  1642  4113 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 06:52:01.561  1642  4113 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 06:52:01.563  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.638  1042  2525 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.643  1123  1123 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-22 06:52:01.660  1042  2525 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.666  1042  2525 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.725  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.728  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.729  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.739  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.749  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.752  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.776  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.797  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.803  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.867  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.870  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.873  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.917  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.925  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.933  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.951  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.954  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.956  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.970  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.976  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:01.979  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.007  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.libraries.consentverifier#com.google.android.calendar failed
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: 	at cal.qys.b(PG:10)
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: 	at cal.qtk.e(PG:6)
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: 	at cal.qtk.d(PG:2)
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: 	at cal.rgb.run(PG:1)
+11-22 06:52:02.032  3512  4088 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 06:52:02.041  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.042  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.094  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.103  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.104  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.147  1642  4113 D DownloadManager: [1] Finished with status SUCCESS
+11-22 06:52:02.159  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.172  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.178  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.211  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.215  2768  2815 W GnpSdk  : [PhenotypeManagerImpl] Phenotype registration timed out [com.google.android.libraries.internal.growth.growthkit#com.google.android.apps.messaging].
+11-22 06:52:02.234   750   817 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.apps.messaging
+11-22 06:52:02.234  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.236  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.258   750   801 D EGL_emulation: app_time_stats: avg=106.92ms min=2.44ms max=658.95ms count=9
+11-22 06:52:02.306  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.310  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.324  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.402  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.408  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.413  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.464  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.485  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.487  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.515  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.537  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.541  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.568  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.578  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.579  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.580  1042  1042 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.tapandpay.service.BIND dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-22 06:52:02.608  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.613  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.615  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.641  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.650  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.652  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.687  1642  4130 D DownloadManager: [2] Finished with status SUCCESS
+11-22 06:52:02.687  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.690  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.691  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.704  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.709  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.709  1042  1243 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.716  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.729  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.731  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.767  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.777  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.780  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.784   343   343 D goldfish-address-space: claimShared: Ask to claim region [0x3f4e7f000 0x3f5823000]
+11-22 06:52:02.792   173   173 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 06:52:02.792  4140  4141 I Gralloc4: mapper 4.x is not supported
+11-22 06:52:02.802  4140  4141 D HostConnection: createUnique: call
+11-22 06:52:02.803  4140  4141 D HostConnection: HostConnection::get() New Host Connection established 0x75d52810e6d0, tid 4141
+11-22 06:52:02.803  4140  4141 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 06:52:02.804  4140  4141 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 06:52:02.812  4140  4141 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 06:52:02.818  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.821  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.821  1042  4040 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.834  1042  1240 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 06:52:02.861   322   322 I netd    : trafficSwapActiveStatsMap() <12.96ms>
+11-22 06:52:02.862   322   322 I netd    : tetherGetStats() -> {[]} <0.36ms>
+11-22 06:52:02.866   322   322 I netd    : bandwidthSetGlobalAlert(2097152) <0.08ms>
+11-22 06:52:02.867   322   322 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.31ms>
+11-22 06:52:02.867   322   322 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.25ms>
+11-22 06:52:02.886   322   322 I netd    : trafficSwapActiveStatsMap() <14.88ms>
+11-22 06:52:02.887   322   322 I netd    : tetherGetStats() -> {[]} <0.17ms>
+11-22 06:52:02.888   322   322 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.25ms>
+11-22 06:52:02.889   322   322 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.30ms>
+11-22 06:52:03.294     0     0 I logd    : logdr: UID=2000 GID=2000 PID=4143 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
