@@ -1,4 +1,4 @@
-# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps (v4)
+# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps (v5)
 name: WAQT Account Screen and Signed Build Check
 # Last triggered to verify the side-rail host-interceptor drag fix + focus audio fixes.
 
@@ -363,6 +363,7 @@ jobs:
           print('SETTINGS_DUMPS=' + str(len(dumps)))
           PYS
           cat shots/settings_probe.txt 2>/dev/null || true
+          if adb shell uiautomator dump /sdcard/uichk.xml >/dev/null 2>&1 && adb pull /sdcard/uichk.xml /tmp/uichk.xml >/dev/null 2>&1 && grep -q 'إعدادات وَقْت' /tmp/uichk.xml; then adb shell input keyevent 4; sleep 2; fi
                     # Acceptance assertions: the job must FAIL when the swipe-fix checks
           # could not be verified - evidence alone is not a pass.
           grep -q '^BALL_FOUND=yes' shots/swipe_probe.txt
