@@ -1,4 +1,4 @@
-# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps + focus audio isolation (v9)
+# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps + focus audio isolation (v14 title-only SAF selection)
 name: WAQT Account Screen and Signed Build Check
 # Last triggered to verify the side-rail host-interceptor drag fix + focus audio fixes.
 
@@ -1118,7 +1118,34 @@ jobs:
           try_tap "Downloads" || true
           sleep 3
           adb exec-out screencap -p > shots/52_picker.png
-          try_tap "waqt_probe_alpha.wav" || true
+          adb shell uiautomator dump /sdcard/uip.xml >/dev/null 2>&1
+          adb pull /sdcard/uip.xml shots/ui_audio_picker.xml >/dev/null 2>&1
+          DOCXY=$(python3 - <<'PYDOC'
+          import xml.etree.ElementTree as ET, re
+          root = ET.parse('shots/ui_audio_picker.xml').getroot()
+          candidates = []
+          for n in root.iter('node'):
+              text = n.get('text', '')
+              rid = n.get('resource-id', '')
+              if text != 'waqt_probe_alpha.wav':
+                  continue
+              b = re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]', n.get('bounds', ''))
+              if not b:
+                  continue
+              x0, y0, x1, y1 = map(int, b.groups())
+              if x1 > x0 and y1 > y0:
+                  score = 10 if rid.endswith('/title') else 0
+                  candidates.append((score, (x0+x1)//2, (y0+y1)//2))
+          if candidates:
+              _, x, y = max(candidates)
+              print(x, y)
+          PYDOC
+          )
+          if [ -z "$DOCXY" ]; then
+            echo "AUDIO_PICKER_TITLE=not_found" > shots/audio_probe.txt
+            exit 1
+          fi
+          adb shell input tap $DOCXY
           sleep 6
           adb exec-out screencap -p > shots/53_after_pick.png
           sleep 6
