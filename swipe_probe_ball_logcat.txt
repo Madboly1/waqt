@@ -1,0 +1,1136 @@
+--------- beginning of main
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.gms.phenotype failed
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at bqro.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at bqro.i(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at bqro.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at bqto.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.d(:com.google.android.gms@225014047@22.50.14 (190800-499278674):66)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at com.google.android.gms.phenotype.sync.HeterodyneSyncTaskChimeraService.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at asuo.call(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 02:53:21.961  1044  2707 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:21.964  1044  2811 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:21.968  1044  2811 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:21.977  1044  1247 E bque    : Phenotype API error. Event # dtvv@3f095fd0, EventCode: 5 [CONTEXT service_id=51 ]
+11-22 02:53:21.977  1044  1247 E bque    : bqtg: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-22 02:53:21.977  1044  1247 E bque    : 	at bquj.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-22 02:53:21.977  1044  1247 E bque    : 	at bquh.g(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 02:53:21.977  1044  1247 E bque    : 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 02:53:21.977  1044  1247 E bque    : 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:21.977  1044  1247 E bque    : 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-22 02:53:21.977  1044  1247 E bque    : 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-22 02:53:21.977  1044  1247 E bque    : 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:21.977  1044  1247 E bque    : 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:21.977  1044  1247 E bque    : 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-22 02:53:21.977  1044  1247 E bque    : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:21.977  1044  1247 E bque    : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:21.977  1044  1247 E bque    : 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 02:53:21.977  1044  1247 E bque    : 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: operation=CommitToConfigurationOperationCall, opStatusCode=29500 [CONTEXT service_id=51 ]
+11-22 02:53:21.977  1044  1247 W AsyncOperation: OperationException[Status{statusCode=Empty (package not registered?) or malformed snapshot token for null: , resolution=null}]
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at bque.e(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at bque.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at ason.er(:com.google.android.gms@225014047@22.50.14 (190800-499278674):1)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at asou.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):12)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at aalr.c(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at aalr.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):8)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at aaqv.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 02:53:21.977  1044  1247 W AsyncOperation: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: Failed to commit to config
+11-22 02:53:21.978  1810  2093 E MendelPackageState: com.google.android.libraries.phenotype.client.a.e: 29500: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.libraries.phenotype.client.a.g.apply(SourceFile:1)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.a.d(SourceFile:2)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.c.run(SourceFile:11)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.az.execute(SourceFile:1)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.d.i(SourceFile:1)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.d.m(SourceFile:12)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.d.p(SourceFile:3)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.libraries.s.b.a(SourceFile:5)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.k.n.run(SourceFile:1)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.common.w.a.az.execute(SourceFile:1)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.k.o.a(SourceFile:3)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.k.ad.b(SourceFile:5)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.k.aj.u(SourceFile:4)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.common.api.internal.dg.b(SourceFile:4)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.phenotype.r.a(SourceFile:1)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.phenotype.a.a.dispatchTransaction(SourceFile:31)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.a.b.onTransact(SourceFile:2)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at android.os.Binder.execTransactInternal(Binder.java:1184)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at android.os.Binder.execTransact(Binder.java:1143)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: Caused by: com.google.android.gms.common.api.n: 29500: Empty (package not registered?) or malformed snapshot token for null: 
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	at com.google.android.gms.common.api.internal.dg.b(SourceFile:3)
+11-22 02:53:21.978  1810  2093 E MendelPackageState: 	... 5 more
+11-22 02:53:21.982  1044  2696 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator finished executing. cause:5 result: 1 elapsed_millis: 9678 uptime_millis: 9678 exec_start_elapsed_seconds: 62 [CONTEXT service_id=218 ]
+11-22 02:53:21.984  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=118.0 y=604.0 rawX=118.0 rawY=604.0 tab=0 
+11-22 02:53:21.984  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=118.0,259.0 host=1080x1863
+11-22 02:53:21.984  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 02:53:21.996  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=119.11429 y=604.5143 rawX=119.11429 rawY=604.5143 tab=0 
+11-22 02:53:21.996  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.013  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=124.87142 y=607.17145 rawX=124.87142 rawY=607.17145 tab=0 
+11-22 02:53:22.013  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.028  1044  1044 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-22 02:53:22.029  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=133.22858 y=611.0286 rawX=133.22858 rawY=611.0286 tab=0 
+11-22 02:53:22.029  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.032  1044  1249 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.035  1177  1184 I gle.android.gm: Background young concurrent copying GC freed 125158(6877KB) AllocSpace objects, 84(3724KB) LOS objects, 34% free, 15MB/23MB, paused 25us,33us total 189.774ms
+11-22 02:53:22.036  1044  1249 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.038  1044  1249 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.046  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=137.5 y=613.0 rawX=137.5 rawY=613.0 tab=0 
+11-22 02:53:22.046  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.060  1177  1177 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.mdd.service.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 02:53:22.062  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=144.37143 y=616.1714 rawX=144.37143 rawY=616.1714 tab=0 
+11-22 02:53:22.063  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.079  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=150.31429 y=618.9143 rawX=150.31429 rawY=618.9143 tab=0 
+11-22 02:53:22.079  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.087  1044  1257 I bqwi    : Scheduling Phenotype for a PhenotypeSyncImmediately(13, com.google.android.googlequicksearchbox) one off with window [1, 2] in seconds [CONTEXT service_id=51 ]
+11-22 02:53:22.121  1044  3985 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.129  1044  3985 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.135  1177  3061 I Icing   : updateResources: need to parse aotg{com.google.android.googlequicksearchbox}
+11-22 02:53:22.140  1044  3985 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_birthdaydoodle_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_call_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_canvas_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_chkpkg_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_crashtest_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_dining_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_doodle_notifications_jar__name to integer.
+11-22 02:53:22.158  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_imageviewer_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_ipa_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_jslocation_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_localintent_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_messaging_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_activity_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_nativesrp_presenter_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_nowcontent_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_recents_activity_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_save_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_searchresults_activity_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_test_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag AndroidGsaVelourJars__velour_weather_jar__name to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag bindle_flags__bloblobber_blob to integer.
+11-22 02:53:22.159  1810  2142 W A       : Can't format flag bindle_flags__velour_jar to integer.
+11-22 02:53:22.161  2479  2507 D EGL_emulation: app_time_stats: avg=3304.20ms min=140.01ms max=6468.38ms count=2
+11-22 02:53:22.162  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=157.0 y=622.0 rawX=157.0 rawY=622.0 tab=0 
+11-22 02:53:22.162  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.183  1044  1064 I .gms.persisten: Background young concurrent copying GC freed 85163(4367KB) AllocSpace objects, 0(0B) LOS objects, 13% free, 20MB/23MB, paused 57us,25us total 101.970ms
+11-22 02:53:22.205  1177  1177 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.checkin.START pkg=com.google.android.gms }
+11-22 02:53:22.225  1044  1249 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.242  1044  1249 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.243  1044  1249 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.277  1365  1365 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():391 triggerSync() : isBundled = false
+11-22 02:53:22.278  1365  1365 I EmojiSuperpacksManager: EmojiSuperpacksManager.triggerSync():391 triggerSync() : isBundled = false
+11-22 02:53:22.278  1365  1635 I SP      : Registering emoji.20190807, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20210928151924/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 20190807, current: -1
+11-22 02:53:22.279  1365  1635 I SP      : Registering emoji.20210928, url: https://www.gstatic.com/android/keyboard/modelpack/emoji/20210928151924/superpacks_manifest.zip, constraints: m:*:*:*, flags: fg, requested: 20210928, current: -1
+11-22 02:53:22.279  1365  1365 I ClipboardDataExtension: ClipboardDataExtension.updateScreenshotsContentObserver():301 Disable the feature of handling screenshots in the clipboard.
+11-22 02:53:22.291  3218  3299 I GnpSdk  : [PhenotypeManagerImpl] Phenotype registration SUCCESS
+11-22 02:53:22.298  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=190.05714 y=637.25714 rawX=190.05714 rawY=637.25714 tab=0 
+11-22 02:53:22.298  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.308  1365  1451 I JobSchedulerImpl: JobSchedulerImpl.schedule():90 Schedule task: ExpressionDataPrunePeriodicTask. Success.
+11-22 02:53:22.413  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=237.22858 y=659.02856 rawX=237.22858 rawY=659.02856 tab=0 
+11-22 02:53:22.413  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.477  1365  1666 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():514 Destroy existing keyboard group manager in fci
+11-22 02:53:22.477  1365  1666 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():123 Create keyboard group manager listenable future in fci
+11-22 02:53:22.489  1365  1365 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():352 initializeDelightSuperpacks()
+11-22 02:53:22.489  1365  1365 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1080 getDelightMetadataUriAndVersion(): Phenotype : 2021093005 : https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json
+11-22 02:53:22.489  1365  1365 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-22 02:53:22.498  1365  1633 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdatesInternal():364 Latency of updating configurations from phenotype (experiment v4): 255
+11-22 02:53:22.498  1365  1633 I PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdates():263 Latency of updating configurations from phenotype (ExperimentV4): 255
+11-22 02:53:22.513  1365  1633 I PhenotypeModule: PhenotypeModule.lambda$fetchAndUpdate$1():220 fetchAndUpdate() : Success, hasFlags=true, flagCount=763, lastFetchStatus=November 22, 2:53 AM {reason=2, isFullFetch=true, success=true, isEmpty=false, isDelta=false, fetchedFlagsCount=763, deletedFlagsCount=299, updatedFlagsCount=171, totalTime=2680}
+11-22 02:53:22.531  1365  1365 I UrgentSignalsProcessor: UrgentSignalsProcessor.flagUpdated():97 Received flagsUpdated for urgent signal
+11-22 02:53:22.535  1177  1177 D CompatibilityChangeReporter: Compat change id reported: 119147584; UID 10101; state: ENABLED
+--------- beginning of system
+11-22 02:53:22.536   522  1050 W OverlayManager: service 'idmap' died
+--------- beginning of kernel
+11-22 02:53:22.736     0     0 I init    : Sending signal 9 to service 'idmap2d' (pid 3275) process group...
+11-22 02:53:22.540  1365  1635 I SuperpacksManager: SuperpacksManager$3$1.onFailure():617 emoji.registerManifest() cancelled
+11-22 02:53:22.540  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/emoji/20210928151924/superpacks_manifest.zip to emoji-20210928.zip.fetched (constraints: m:b:u:l)
+11-22 02:53:22.744     0     0 I libprocessgroup: Successfully killed process cgroup uid 1000 pid 3275 in 5ms
+11-22 02:53:22.747     0     0 I init    : Control message: Processed ctl.stop for 'idmap2d' from pid: 522 (system_server)
+11-22 02:53:22.750     0     0 I init    : Service 'idmap2d' (pid 3275) received signal 9
+11-22 02:53:22.552  1365  1365 I UrgentSignalsProcessor: UrgentSignalsProcessor.processSignals():117 Received signal: id: 576379183
+11-22 02:53:22.552  1365  1365 I UrgentSignalsProcessor: UrgentSignalsProcessor.processSignals():126 Signal target module: 1
+11-22 02:53:22.552  1365  1365 I UrgentSignalsProcessor: UrgentSignalsProcessor.processSignals():126 Signal target module: 1
+11-22 02:53:22.552  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=282.17145 y=679.7714 rawX=282.17145 rawY=679.7714 tab=0 
+11-22 02:53:22.552  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.553  1365  1681 I SuperDelight: SuperDelightManager.initializeDelightSuperpacks():352 initializeDelightSuperpacks()
+11-22 02:53:22.553  1365  1681 I SuperDelight: SuperDelightManager.getDelightMetadataUriAndVersion():1080 getDelightMetadataUriAndVersion(): Phenotype : 2021093005 : https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json
+11-22 02:53:22.553  1365  1681 I SuperDelight: SuperDelightAppsSuperpacksManager.initializeDelightAppsSuperpacks():92 initializeDelightAppsSuperpacks()
+11-22 02:53:22.554  1365  1365 I EmojiExtensionHelper: EmojiExtensionHelper.flagsUpdated():153 Received flag change: enable_emoji_tall_view{type=Boolean, finalValue=true, defaultValue=false, flagValue=true, overrideValue=null}.
+11-22 02:53:22.554  1365  1365 I AbstractOpenableExtension: AbstractOpenableExtension.maybeDestroyExistingKeyboardGroupManager():514 Destroy existing keyboard group manager in fau
+11-22 02:53:22.554  1365  1365 I AbstractOpenableExtension: AbstractOpenableExtension.createKeyboardGroupManagerListenableFuture():123 Create keyboard group manager listenable future in fau
+11-22 02:53:22.554  1365  1365 I SpeechPackManager: SpeechPackManager.refreshManifest():343 refreshManifest()
+11-22 02:53:22.554  1365  1365 I SpeechPackManager: SpeechPackManager.registerManifest():441 registerManifest() : https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json
+11-22 02:53:22.554  1365  1365 I DictionarySuperpacksManager: DictionarySuperpacksManager$1.onEnabledInputMethodEntriesChanged():60 onEnabledInputMethodEntriesChanged
+11-22 02:53:22.554  1365  1365 I AbstractOpenableExtension: AbstractOpenableExtension$3.onSuccess():527 KeyboardGroupManager destroyed in fau.
+11-22 02:53:22.558  1365  1460 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():89 parseKeyboardGroupDef() 2132148495 -> 0_resource_name_obfuscated : WaitTime = 0 ms : RunTime = 4 ms
+11-22 02:53:22.559  1365  1460 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():89 parseKeyboardGroupDef() 2132148496 -> 0_resource_name_obfuscated : WaitTime = 4 ms : RunTime = 0 ms
+11-22 02:53:22.559  1365  1635 W SP      : Manifest for delight is not available, version: 2021093005
+11-22 02:53:22.559  1365  1635 I SP      : Registering content_cache.2021061512, url: https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2021061512, current: 2020101916
+11-22 02:53:22.560  1365  1635 I SP      : Registering transformer_concept.2020102810, url: https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/superpacks_manifest.json, constraints: *:*:*:*, flags: *, requested: 2020102810, current: -1
+11-22 02:53:22.560  1365  1635 I SP      : Registering content_cache.2021061512, url: https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/superpacks_manifest.json, constraints: W:*:*:*, flags: bg, requested: 2021061512, current: 2020101916
+11-22 02:53:22.560  1365  1681 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$4():504 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2021062400, required 2021093005
+11-22 02:53:22.560  1365  1681 I SuperDelight: SuperDelightManager.lambda$registerAndUpgradeSuperpacks$4():504 SuperDelightManager#registerAndUpgradeSuperpacks(delight): current 2021062400, required 2021093005
+11-22 02:53:22.565  1177  3061 I Icing   : updateResources: need to parse aotg{com.google.android.gm}
+11-22 02:53:22.588  1365  1465 I KeyboardGroupDefParser: KeyboardGroupDefParser.parseKeyboardGroupDef():89 parseKeyboardGroupDef() 2132148499 -> 0_resource_name_obfuscated : WaitTime = 1 ms : RunTime = 109 ms
+11-22 02:53:22.633  1177  1177 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.cryptauth.cryptauthservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsBoundBrokerService }
+11-22 02:53:22.665  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.665  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.666  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.666  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.666  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.669  1044  2811 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.671  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.671  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.672  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.672  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.672  1810  2081 W A       : Account id is not cached
+11-22 02:53:22.674  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=333.4286 y=703.4286 rawX=333.4286 rawY=703.4286 tab=0 
+11-22 02:53:22.675  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 02:53:22.763  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/superpacks_manifest.json to transformer_concept-2020102810.fetched (constraints: m:b:u:l)
+11-22 02:53:22.763  1365  1635 I SuperpacksManager: SuperpacksManager$3$1.onFailure():617 content_cache.registerManifest() cancelled
+11-22 02:53:22.763  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/superpacks_manifest.json to content_cache-2021061512.fetched (constraints: W:b:u:l)
+11-22 02:53:22.764  1365  1635 I SP      : Registering delight.2021093005, url: https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json, constraints: m:*:*:*, flags: *, requested: 2021093005, current: 2021062400
+11-22 02:53:22.764  1365  1635 I SP      : Registering delight.2021093005, url: https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json, constraints: m:*:*:*, flags: *, requested: 2021093005, current: 2021062400
+11-22 02:53:22.794  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=378.0 y=724.0 rawX=378.0 rawY=724.0 tab=0 
+11-22 02:53:22.794  2479  2479 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 02:53:22.823  1044  2811 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.824  1044  2811 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:22.851  1044  1044 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.nearby.exposurenotification.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentApiService }
+11-22 02:53:22.854  1365  1629 I SpeechPackManager: SpeechPackManager.lambda$registerManifest$4():451 registerManifest() : Fetching hash 1327534105
+11-22 02:53:22.890  1365  1681 I AbstractSyncResultCallback: AbstractSyncResultCallback.onFailure():36 onFailure(): delight.sync cancelled; expected if new request supersedes pending one.
+11-22 02:53:22.896  1810  2023 W A       : Account id is not cached
+11-22 02:53:22.896  1810  2023 W A       : Account id is not cached
+11-22 02:53:22.899  1365  1635 I SuperpacksManager: SuperpacksManager$3$1.onFailure():617 delight.registerManifest() cancelled
+11-22 02:53:22.899  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/dictionarypack/Yellowjacket-normal/metadata.json to delight-2021093005.fetched (constraints: m:b:u:l)
+11-22 02:53:22.900  1365  1635 I SP      : Registering gboard-small-speech-packs.1327534105, url: https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json, constraints: m:b:*:*, flags: *, requested: 1327534105, current: 758538843
+11-22 02:53:22.906  1365  1681 I SuperDelight: SuperDelightManager$4.onSuccess():669 delight sync success, adding to data file manager
+11-22 02:53:22.907  1365  1681 I DataFileManager: DataFileManager.addDataWithoutNotify():167 adding data en-US delight
+11-22 02:53:23.063  1810  2023 W A       : Account id is not cached
+11-22 02:53:23.070  1044  3985 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:23.074  1044  3985 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:23.077  1044  3985 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:23.092  1810  2023 I A       : Refusing EXCLUSIVE task 24, it is already pending. Try again in 331 seconds.
+11-22 02:53:23.097  1177  3061 I Icing   : updateResources: need to parse aotg{com.google.android.gms}
+11-22 02:53:23.104  1810  2023 I BlobLobber: Canceling downloads: []
+11-22 02:53:23.112  1365  1635 I SP      : Requesting download of URL https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json to gboard-small-speech-packs-1327534105.fetched (constraints: m:b:u:l)
+11-22 02:53:23.113  1810  1810 I BgTaskExecutorImpl: Starting EXCLUSIVE background task BLOBLOBBER_SYNC.
+11-22 02:53:23.118  1810  2011 I FedAssExpListener: Fed-ass not supported for signed out users.
+11-22 02:53:23.120  1810  2028 I FedAssExpListener: Successfully processed experiments changed.
+11-22 02:53:23.121  1810  2023 I ModelDownloadListener: Schdedule model download
+11-22 02:53:23.129  1810  1810 I BgTaskExecutorImpl: Starting EXCLUSIVE background task UPDATE_HOTWORD_MODELS.
+11-22 02:53:23.131   522   627 I ActivityManager: Killing 1304:com.android.cellbroadcastreceiver/u0a67 (adj 985): empty #17
+11-22 02:53:23.139   522   579 I libprocessgroup: Successfully killed process cgroup uid 10067 pid 1304 in 4ms
+11-22 02:53:23.145  1810  2158 I ModelDownloadController: requestHotwordModelUpdate modelType-2 modelLocale-en-US
+11-22 02:53:23.145  1810  2158 I A       : New OK_HEY model config map hash: reinitializing config map.
+11-22 02:53:23.150  1810  2158 I ModelDownloadController: #maybeDownloadHotwordModelWithMDD with locale: en-US, modelType: 2.
+11-22 02:53:23.167  1365  1635 I SP      : Successfully got manifest for transformer_concept-manifest: manifests:transformer_concept-2020102810
+11-22 02:53:23.178  1044  2226 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 02:53:23.186  1365  1635 I SP      : Successfully got manifest for emoji-manifest: manifests:emoji-20210928
+11-22 02:53:23.202  1365  1390 I putmethod.lati: ThreadFlipBegin blocked for 9.255ms
+11-22 02:53:23.403     0     0 I binder  : undelivered transaction 253151, process died.
+11-22 02:53:23.206   326   326 I Zygote  : Process 1304 exited due to signal 9 (Killed)
+11-22 02:53:23.210  1044  1044 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.auth.proximity.devicesyncservice.START dat=chimera-action: cmp=com.google.android.gms/.chimera.PersistentBoundBrokerService }
+11-22 02:53:23.214  1365  1635 I SP      : Successfully got manifest for content_cache-manifest: manifests:content_cache-2021061512
+11-22 02:53:23.234  1365  1392 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2021062100_1[2]
+11-22 02:53:23.234  1365  1392 W SP      : File ref is being finalized but wasn't closed, file: main_en_us_2021062100_1[2]
+11-22 02:53:23.236  1365  1635 I SP      : Syncing transformer_concept (2020102810) with slices: [2020102810_en], metadata: false
+11-22 02:53:23.264  1177  3061 I Icing   : updateResources: need to parse aotg{com.google.android.gms}
+11-22 02:53:23.269  1365  1635 I SP      : Scheduling job with delay of 0s for {m:b:u:l, bg}, 1 candidates
+11-22 02:53:23.271  1789  3991 D DownloadManager: [1] Starting
+11-22 02:53:23.274  1365  1365 I SpBackgroundTask: SuperpacksBackgroundJobService.onStartJob():23 onStartJob: android.app.job.JobParameters@9871075
+11-22 02:53:23.275  1365  1365 I SP      : ====> Starting job {m:b:u:l, bg}
+11-22 02:53:23.280  1810  2141 W MDD     : MDDManager Failed to init shared file metadata.
+11-22 02:53:23.282  1789  3991 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 02:53:23.283  1789  3991 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 02:53:23.290   322  3994 D resolv  : GetAddrInfoHandler::run: {100 983140 100 983140 10061 0}
+11-22 02:53:23.290   322  3994 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 02:53:23.292   322  3996 D resolv  : doQuery: (1, 1)
+11-22 02:53:23.292   322  3996 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 02:53:23.292   322  3996 D resolv  : res_nsend
+11-22 02:53:23.292   322  3996 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:23.292   322  3996 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db31a5fa850
+11-22 02:53:23.292   322  3996 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:23.297   322  3995 D resolv  : doQuery: (1, 28)
+11-22 02:53:23.297   322  3995 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 02:53:23.298   322  3995 D resolv  : res_nsend
+11-22 02:53:23.298  1365  1635 I SP      : Scheduling: download registered, 0 started, 0 paused, 1 scheduled, 1 pending: transformer_concept:2020102810_en * {m:b:u:l, bg}
+11-22 02:53:23.299  1365  1635 I EmojiSlicingStrategy: EmojiSlicingStrategy.matchEnabledLocalesWithPackLocales():136 matchEnabledLocalesWithPackLocales() : User enabled 1 locales; returning 1 slices
+11-22 02:53:23.299  1365  1635 I SP      : Syncing emoji (20210928) with slices: [{f3e8ef9a2eea15b0459d82fa3609b4c7, m:*:*:*}], metadata: false
+11-22 02:53:23.301   322  3995 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:23.301   322  3995 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db32a5f8550
+11-22 02:53:23.301   322  3995 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:23.304  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:23.304  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:23.304  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:23.307  1810  2023 I OpaEligibilityChecker: send OpaEligibilityChange broadcast to CommonBroadcastReceiver
+11-22 02:53:23.310  1810  2028 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okg' from location: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 02:53:23.310   522  1597 W ActivityManager: Unable to start service Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.libraries.mdi.download.d.a.a (has extras) } U=0: not found
+11-22 02:53:23.312  1810  2081 I MicroDetectionWorker: Removing hotword detection due to no account being used.
+11-22 02:53:23.312  1810  2081 I A       : isOpaHotwordEnabled: false
+11-22 02:53:23.312  1810  2081 I A       : Disabling the hotword detector.
+11-22 02:53:23.314  1810  2081 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 02:53:23.315   522  1920 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 02:53:23.315   522  1920 D PackageManager: Clear ephemeral installer activity
+11-22 02:53:23.316   522  1027 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 02:53:23.316   522  1027 D PackageManager: Clear ephemeral installer activity
+11-22 02:53:23.320  1789  3999 D DownloadManager: [2] Starting
+11-22 02:53:23.326  1810  2011 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 02:53:23.328  1810  2040 E HotwordModelPopulator: Failed to add hotword file group for 'hotword_model_en-US_okhey' from location: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 02:53:23.330  1810  1810 W A       : Queue length for executor EventBus is now 11. Perhaps some tasks are too long, or the pool is too small.
+11-22 02:53:23.331  1365  1635 I SP      : Scheduling: job start ({m:b:u:l, bg}), 1 started, 0 paused, 0 scheduled, 1 pending: transformer_concept:2020102810_en @ * {m:b:u:l, bg}
+11-22 02:53:23.331  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/transformer_concept/2020102810/en.zip to 2020102810_en.zip.fetched (constraints: m:b:u:l)
+11-22 02:53:23.334  1810  2081 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 02:53:23.334   522   522 W NotificationHistory: Attempted to add notif for locked/gone/disabled user 0
+11-22 02:53:23.335  1789  2598 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10061; state: ENABLED
+11-22 02:53:23.336  1789  3999 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 02:53:23.337  1789  3999 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 02:53:23.350   322  4002 D resolv  : GetAddrInfoHandler::run: {100 100 100 983140 10114 0}
+11-22 02:53:23.350   322  4002 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 02:53:23.353  1810  2011 I A       : NGA enabled in interactor.
+11-22 02:53:23.353  1810  2011 I A       : Nga state changed to ENABLED
+11-22 02:53:23.353  1810  2011 I A       : NGA enabled in interactor.
+11-22 02:53:23.359   322  4004 D resolv  : doQuery: (1, 1)
+11-22 02:53:23.359   322  4004 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 02:53:23.359   322  4004 D resolv  : res_nsend
+11-22 02:53:23.359   322  4004 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:23.359   322  4004 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db31a5fa850
+11-22 02:53:23.359   322  4004 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:23.361   322  4003 D resolv  : doQuery: (1, 28)
+11-22 02:53:23.361   322  4003 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 02:53:23.361   322  4003 D resolv  : res_nsend
+11-22 02:53:23.361   322  4003 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:23.361   322  4003 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db32a5f8550
+11-22 02:53:23.361   322  4003 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:23.370  1365  1635 I SP      : Scheduling: download registered, 1 started, 0 paused, 0 scheduled, 2 pending: transformer_concept:2020102810_en @ {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ * {m:b:u:l, bg}
+11-22 02:53:23.371  1365  1635 I SP      : Syncing content_cache (2021061512) with slices: [9e22973d4ff86e79a43b587d114f5a4e, 73c10eff89726f4122ae1887121fdee6], metadata: true
+11-22 02:53:23.371  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/emoji/20210928151924/en_us.zip to f3e8ef9a2eea15b0459d82fa3609b4c7.zip.fetched (constraints: m:b:u:l)
+11-22 02:53:23.379  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:23.380  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:23.380  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-22 02:53:23.380  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:23.381  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:23.381  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-22 02:53:23.381  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:23.381  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-22 02:53:23.402   774   774 D InterruptionStateProvider: No bubble up: not allowed to bubble: 0|com.google.android.googlequicksearchbox|-307962363|null|10102
+11-22 02:53:23.403   774   774 D InterruptionStateProvider: No heads up: unimportant notification: 0|com.google.android.googlequicksearchbox|-307962363|null|10102
+11-22 02:53:23.403   774   849 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 02:53:23.405  1177  3316 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=33
+11-22 02:53:23.410  1177  3045 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=agsa_icing_connection serviceId=32
+11-22 02:53:23.418  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->getAlpnSelectedProtocol()[B (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:23.419  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->getAlpnSelectedProtocol()[B (max-target-q, reflection, denied)
+11-22 02:53:23.440  1536  2019 E A       : Calling getConfiguration before configuration manager is initialized.
+11-22 02:53:23.440  1536  2019 E A       : com.google.common.f.s: MEDIUM
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.nga.engine.h.a.aj.b(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.nga.engine.ag.a.a.a.a(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.nga.engine.ag.bb.<init>(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.auk.cO(SourceFile:1)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.H(SourceFile:87)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 02:53:23.440  1536  2019 E A       : 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:23.440  1536  2019 E A       : 	at dagger.a.d.a(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.auk.aC(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.auk.cr(SourceFile:1)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.E(SourceFile:109)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 02:53:23.440  1536  2019 E A       : 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:23.440  1536  2019 E A       : 	at dagger.a.d.a(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.auk.aX(SourceFile:1)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.E(SourceFile:108)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 02:53:23.440  1536  2019 E A       : 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:23.440  1536  2019 E A       : 	at dagger.a.d.a(SourceFile:2)
+11-22 02:53:23.440  1536  2019 E A       : 	at com.google.android.apps.gsa.binaries.velvet.app.auk.ea(SourceFile:1)
+11-22 02:53:23.468  1044  1064 I .gms.persisten: Background young concurrent copying GC freed 47318(3009KB) AllocSpace objects, 0(0B) LOS objects, 11% free, 20MB/23MB, paused 22us,14us total 188.537ms
+11-22 02:53:23.475  1810  3009 I A       : hasHotwordEverywhere-true
+11-22 02:53:23.479  1536  2019 I A       : on opa visibility changed false
+11-22 02:53:23.484  1536  1547 D CompatibilityChangeReporter: Compat change id reported: 160794467; UID 10102; state: DISABLED
+11-22 02:53:23.497  1365  1635 I SP      : Scheduling: download registered, 1 started, 0 paused, 0 scheduled, 3 pending: transformer_concept:2020102810_en @ {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ * {m:b:u:l, bg}
+11-22 02:53:23.507  1536  1547 I A       : Initializing all components
+11-22 02:53:23.515  1536  2019 I A       : onIsEnabledChanged, isEnabled: true
+11-22 02:53:23.515  1536  2019 I A       : onEnabled. Registered: false
+11-22 02:53:23.515  1536  1547 I A       : [Memory] NGA configuration not yet available
+11-22 02:53:23.519  1536  2077 I A       : on opa visibility changed false
+11-22 02:53:23.522  1536  2019 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at android.app.SharedPreferencesImpl.getBoolean(SharedPreferencesImpl.java:344)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.shared.util.u.g.m(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.shared.util.u.g.l(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.h.a.dx.B(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.h.a.dx.n(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.engine.ui.e.o.a(SourceFile:4)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.y.ab.b(SourceFile:6)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.y.b.d(SourceFile:3)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.y.am.d(SourceFile:3)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.y.m.c(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.engine.ui.e.l.f(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.engine.ui.e.v.a(SourceFile:4)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.y.r.run(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.libraries.gsa.k.a.k.run(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.shared.y.am.d(SourceFile:4)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.nga.engine.ui.e.x.run(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.libraries.gsa.k.a.k.run(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.shared.util.c.a.bt.b(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.apps.gsa.shared.util.c.a.bw.run(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.common.w.a.dg.run(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:23.522  1536  2019 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:23.592  1536  2077 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at android.app.SharedPreferencesImpl.awaitLoadedLocked(SharedPreferencesImpl.java:275)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at android.app.SharedPreferencesImpl.getString(SharedPreferencesImpl.java:301)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.apps.gsa.shared.util.u.g.g(SourceFile:2)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.apps.gsa.shared.util.u.g.h(SourceFile:1)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.apps.gsa.nga.engine.h.a.aj.l(SourceFile:2)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.apps.gsa.nga.engine.h.a.ad.a(SourceFile:1)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.libraries.gsa.k.a.i.apply(SourceFile:2)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.common.w.a.f.d(SourceFile:2)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.common.w.a.h.run(SourceFile:9)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:23.592  1536  2077 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:23.617  1365  1635 I SP      : Scheduling: download registered, 1 started, 0 paused, 0 scheduled, 4 pending: transformer_concept:2020102810_en @ {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ * {m:b:u:l, bg}
+11-22 02:53:23.655  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/emoji2expr.pb to 9e22973d4ff86e79a43b587d114f5a4e.fetched (constraints: m:b:u:l)
+11-22 02:53:23.655  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/modelpack/contentcache/202106151201/contextual_ek.pb to 73c10eff89726f4122ae1887121fdee6.fetched (constraints: m:b:u:l)
+11-22 02:53:23.655  1365  1635 I SP      : Successfully got manifest for delight-manifest: manifests:delight-2021093005
+11-22 02:53:23.661  1536  2019 I A       : setSysUiConfiguration, isAvailable: true
+11-22 02:53:23.664  1536  2019 I A       : setInteractorAssistLayerUiConfiguration, isAvailable: false
+11-22 02:53:23.670  1536  2019 I A       : setSearchAssistLayerUiConfiguration, isAvailable: false
+11-22 02:53:23.671  1536  2019 I A       : setScreenState
+11-22 02:53:23.671  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.676  1536  2019 I A       : setEdgeLights: EdgeLights{state=GONE, goneLogoState=NONE, listening=false, triggerType=UNKNOWN}
+11-22 02:53:23.676  1536  2019 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 02:53:23.676  1536  2019 I A       : setCard: Card{isVisible=false, color=UNKNOWN, animateTransition=true, forcesScrim=true}
+11-22 02:53:23.679  1536  2019 I A       : setLoggingState
+11-22 02:53:23.680  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.680  1536  2019 I A       : setShelfConfig
+11-22 02:53:23.680  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.680  1536  2019 I A       : setRightIconConfig
+11-22 02:53:23.680  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.680  1536  2019 I A       : setLeftIconConfig
+11-22 02:53:23.680  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.680  1536  2019 I A       : setHideLeftIconState
+11-22 02:53:23.681  1536  2019 I A       : setHideKeyboardIcon
+11-22 02:53:23.681  1536  2019 I A       : SystemUi idle, unbinding service...
+11-22 02:53:23.685  1536  2019 I A       : setAVS
+11-22 02:53:23.685  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.696  1177  3061 I Icing   : doRemovePackageData com.android.nfc
+11-22 02:53:23.717  1536  2077 I A       : [Memory] eligibility: StashEligibility{6}
+11-22 02:53:23.718  1536  2077 I A       : StashOnboardingStateImpl.initialize
+11-22 02:53:23.718  1536  2077 I A       : Disconnecting from SysUi, flag disabled.
+11-22 02:53:23.718  1536  2077 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 02:53:23.718  1536  2077 I A       : Disconnected
+11-22 02:53:23.720  1536  2077 I A       : Disconnecting from SysUi, flag disabled.
+11-22 02:53:23.721  1536  2077 I A       : Disconnecting from SysUi, VM not enabled.
+11-22 02:53:23.723  1536  2077 I A       : Disconnected
+11-22 02:53:23.731  1536  2019 I A       : setWarmActionsUi
+11-22 02:53:23.731  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.732  1536  2019 I A       : Setting session to type: NO_SESSION
+11-22 02:53:23.733  1536  2077 I A       : stopListening(NGA_PAUSED_UNKNOWN_REASON, NGA_CREATE), idleOverride=NOT_LISTENING
+11-22 02:53:23.749  1177  3061 I Icing   : updateResources: need to parse aotg{com.google.android.gms}
+11-22 02:53:23.785  1536  2077 I A       : Successfully initialized all components
+11-22 02:53:23.802  1810  2141 I DynamiteModule: Considering local module com.google.android.gms.cronet_dynamite:0 and remote module com.google.android.gms.cronet_dynamite:1611
+11-22 02:53:23.802  1810  2141 I DynamiteModule: Selected remote version of com.google.android.gms.cronet_dynamite, version >= 1611
+11-22 02:53:23.802  1810  2141 V DynamiteModule: Dynamite loader version >= 2, using loadModule2NoCrashUtils
+11-22 02:53:23.803  1536  2019 I A       : eventData = # com.google.android.apps.gsa.search.shared.service.b.um@67c48eda
+11-22 02:53:23.803  1536  2019 I A       : [255935327] {
+11-22 02:53:23.803  1536  2019 I A       : }
+11-22 02:53:23.804  1536  2019 I A       : onUiStateChanged: IDLE
+11-22 02:53:23.804  1536  2019 I A       : onInputPlateTextChanged, kind: NONE
+11-22 02:53:23.806  1810  1836 I earchbox:searc: Background young concurrent copying GC freed 23535(1284KB) AllocSpace objects, 24(1272KB) LOS objects, 45% free, 10MB/19MB, paused 16.548ms,190us total 317.807ms
+11-22 02:53:23.812  1536  2019 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:23.814  1536  2019 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 02:53:23.814  1536  2019 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 02:53:23.814  1536  2019 W A       : Disposing empty manager. Did you forgot to subscribe observables?
+11-22 02:53:23.815   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    is_available: true
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    touch_inside: PendingIntent{b65d7f0: android.os.BinderProxy@5c84169}
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    keyboard_showing_changed: PendingIntent{a6807ee: android.os.BinderProxy@ca148f}
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    action: config
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    assistant_locale: en-US
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    configuration: PendingIntent{de8831c: android.os.BinderProxy@79a8b25}
+11-22 02:53:23.815   774   774 V NgaMessageHandler:    touch_outside: PendingIntent{6d0b4fa: android.os.BinderProxy@15d6aab}
+11-22 02:53:23.819   774   831 D EGL_emulation: app_time_stats: avg=5210.75ms min=109.80ms max=15053.47ms count=3
+11-22 02:53:23.820  1810  2141 W earchbox:searc: ClassLoaderContext type mismatch. expected=PCL, found=DLC (PCL[] | DLC[];PCL[/product/priv-app/Velvet/Velvet.apk*2792366340:/product/priv-app/Velvet/Velvet.apk!classes2.dex*888232921:/product/priv-app/Velvet/Velvet.apk!classes3.dex*3433715809:/product/priv-app/Velvet/Velvet.apk!classes4.dex*4105148533:/product/priv-app/Velvet/Velvet.apk!classes5.dex*1130777259:/product/priv-app/Velvet/Velvet.apk!classes6.dex*465529957:/product/priv-app/Velvet/Velvet.apk!classes7.dex*1738199263:/product/priv-app/Velvet/Velvet.apk!classes8.dex*2075634446:/product/priv-app/Velvet/Velvet.apk!classes9.dex*4197861567:/product/priv-app/Velvet/Velvet.apk!classes10.dex*2691985635]{PCL[/system/framework/org.apache.http.legacy.jar*2058259660]})
+11-22 02:53:23.827  1536  2019 I A       : setSecondaryDisplayState
+11-22 02:53:23.827  1536  2019 I A       : Dropping message not meant for SystemUI.
+11-22 02:53:23.828  1536  2019 E A       : Sending config bundle on null callback
+11-22 02:53:23.828  1536  2019 W A       : flag enable_viss_in_remote_process enabled, but it's prerequisite is not
+11-22 02:53:23.828  1536  2019 W A       : flag enable_tactile_ui enabled, but it's prerequisite is not
+11-22 02:53:23.828  1536  2019 I A       : onIsEnabledChanged, isEnabled: false
+11-22 02:53:23.842  1536  2077 I NgaEntryPointEventSendr: setupConnection
+11-22 02:53:23.843  1536  2019 I A       : Setting session to type: NO_SESSION
+11-22 02:53:23.849  1536  1536 I A       : Receiving sys ui event of type com.google.android.apps.googlequicksearchbox.nga.ON_KEYBOARD_SHOWING_CHANGED.
+11-22 02:53:23.850  1536  2019 I A       : setCard: Card{isVisible=false, color=UNKNOWN, animateTransition=false, forcesScrim=true}
+11-22 02:53:23.852  1536  2077 I NgaEntryPointEventSendr: State changed: Disconnected => Connecting
+11-22 02:53:23.853  1810  1810 I A       : Creating pss binder().
+11-22 02:53:23.854  1536  1536 I A       : eventData = # com.google.android.apps.gsa.search.shared.service.b.um@67c48eda
+11-22 02:53:23.854  1536  1536 I A       : [255935327] {
+11-22 02:53:23.854  1536  1536 I A       : }
+11-22 02:53:23.854  1536  1536 I A       : eventData = # com.google.android.apps.gsa.search.shared.service.b.um@67c48eda
+11-22 02:53:23.854  1536  1536 I A       : [255935327] {
+11-22 02:53:23.854  1536  1536 I A       : }
+11-22 02:53:23.855  1536  2019 I A       : setNavBarVisible: GestureNavBarVisible{navbarVisible=true}
+11-22 02:53:23.866  1536  2077 I NgaEntryPointEventSendr: onServiceConnected
+11-22 02:53:23.867  1810  3859 I A       : Calling beginBinderSession().
+11-22 02:53:23.868  1536  2019 I A       : setSysUiConfiguration, isAvailable: false
+11-22 02:53:23.868  1810  2141 I cr_CronetLibraryLoader: Cronet version: 108.0.5359.61, arch: x86_64
+11-22 02:53:23.873   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.873   774   774 V NgaMessageHandler:    gone_logo_state: NONE
+11-22 02:53:23.873   774   774 V NgaMessageHandler:    action: edge_lights
+11-22 02:53:23.873   774   774 V NgaMessageHandler:    listening: false
+11-22 02:53:23.873   774   774 V NgaMessageHandler:    triggerType: UNKNOWN
+11-22 02:53:23.873   774   774 V NgaMessageHandler:    state: GONE
+11-22 02:53:23.874  1536  1536 I A       : Receiving sys ui event of type com.google.android.apps.googlequicksearchbox.nga.ON_CONFIGURATION.
+11-22 02:53:23.880   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    visible: true
+11-22 02:53:23.880   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    card_forces_scrim: true
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    action: card
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    sysui_color: 0
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    is_visible: false
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    animate_transition: true
+11-22 02:53:23.880   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.880   774   774 V NgaMessageHandler:    action: hide_zerostate
+11-22 02:53:23.885  1536  2019 I A       : onDisabled. Registered: true
+11-22 02:53:23.885   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.885   774   774 V NgaMessageHandler:    action: hide_keyboard
+11-22 02:53:23.885  1810  3859 I A       : beginBinderSession(): calling binder
+11-22 02:53:23.885  1536  2077 I NgaEntryPointEventSendr: State changed: Connecting => Ready
+11-22 02:53:23.886   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.886   774   774 V NgaMessageHandler:    action: clear
+11-22 02:53:23.886   774   774 V NgaMessageHandler:    is_active: false
+11-22 02:53:23.886   774   774 V NgaMessageHandler:    show_animation: false
+11-22 02:53:23.891   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.891   774   774 V NgaMessageHandler:    action: gesture_nav_bar_visible
+11-22 02:53:23.891   774   774 V NgaMessageHandler:    visible: true
+11-22 02:53:23.896  1810  3009 I A       : hotwordModelLocation is null true, locale is en-US, re-mapped Chinese locale 
+11-22 02:53:23.897   522  1584 D ConnectivityService: requestNetwork for uid/pid:10102/1810 activeRequest: null callbackRequest: 86 [NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]] callback flags: 0 priority: 2147483647
+11-22 02:53:23.898   522   709 D ConnectivityService: NetReassign [87 : null → 100]
+11-22 02:53:23.898   522   702 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 02:53:23.898   522   702 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 02:53:23.898   522   702 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=87, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 02:53:23.900  1810  2041 D t       : Starting download: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 02:53:23.900  1810  2041 V t       : Is http uri, downloading (uri: https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data)
+11-22 02:53:23.903   774   774 V NgaMessageHandler: Contents of NGA Bundle:
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    is_available: false
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    touch_inside: PendingIntent{c60eb4c: android.os.BinderProxy@5c84169}
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    keyboard_showing_changed: PendingIntent{5bd8795: android.os.BinderProxy@ca148f}
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    action: config
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    assistant_locale: en-US
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    configuration: PendingIntent{34050aa: android.os.BinderProxy@79a8b25}
+11-22 02:53:23.903   774   774 V NgaMessageHandler:    touch_outside: PendingIntent{872549b: android.os.BinderProxy@15d6aab}
+11-22 02:53:23.911   409  1108 D PermissionCache: checking android.permission.READ_FRAME_BUFFER for uid=10134 => granted (951 us)
+11-22 02:53:23.918   522   709 D ConnectivityService: NetReassign [no changes]
+11-22 02:53:23.934  1536  2046 E GsaVoiceInteractionSrv: modelLocation is null: true isAlwaysOnEnabled is false: true isFromAnyScreenEnabled is false: true
+11-22 02:53:23.934  1536  2046 E HwDetectorWithState: a: 3
+11-22 02:53:23.934  1536  2046 I GsaVoiceInteractionSrv: #checkDspStatus
+11-22 02:53:23.934  1536  2046 I BistoHotwordHelper: setting speaker id present: false
+11-22 02:53:23.940  1536  2019 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:23.940  1536  2019 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:23.945   341   393 D goldfish-address-space: claimShared: Ask to claim region [0x3f7a71000 0x3f7c42000]
+11-22 02:53:23.962  1365  1635 I SuperDelight: SuperDelightDownloadMetadataParser.parse():183 SuperDelightDownloadMetadataParser#parse(delight): Manifest parsed with 885 packs
+11-22 02:53:24.034  1536  2019 W A       : Could not fetch newFutureValue delayedUiState 
+11-22 02:53:24.034  1536  2019 W A       : java.util.concurrent.CancellationException
+11-22 02:53:24.034  1536  2019 W A       : 	at java.util.concurrent.FutureTask.report(FutureTask.java:122)
+11-22 02:53:24.034  1536  2019 W A       : 	at java.util.concurrent.FutureTask.get(FutureTask.java:193)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.common.w.a.dv.a(SourceFile:1)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.common.w.a.cb.q(SourceFile:2)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.common.w.a.bv.run(SourceFile:4)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.android.apps.gsa.shared.util.c.a.bt.b(SourceFile:1)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.android.apps.gsa.shared.util.c.a.bw.run(SourceFile:1)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.common.w.a.dh.run(SourceFile:4)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:24.034  1536  2019 W A       : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.034  1536  2019 W A       : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:24.034  1536  2019 W A       : 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:24.034  1536  2019 W A       : 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.037  1536  2019 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.037  1536  2019 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.041   341   393 D goldfish-address-space: claimShared: Ask to claim region [0x3f4000000 0x3f490c000]
+11-22 02:53:24.049  1177  1177 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-22 02:53:24.049  1536  1536 V ClearcutMetricXmitter: Transmission is done.
+11-22 02:53:24.074  1536  2046 I BistoHotwordHelper: setting hotword model of size: 0 bytes
+11-22 02:53:24.074  1536  2046 I BistoHotwordHelper: setting modeltype: Ok Google
+11-22 02:53:24.074  1536  2046 I BistoHotwordHelper: setHotwordVoiceLocale: prev: en-US, new: en-US
+11-22 02:53:24.092  1536  2077 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.092  1536  2077 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.libraries.notifications.platform#com.google.android.apps.docs failed
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at mzz.b(PG:8)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at mry.e(PG:6)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at mry.d(PG:2)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at qev.a(PG:16)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at oqq.run(PG:3)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.094  2904  2999 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.115  1810  2054 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at libcore.io.BlockGuardOs.open(BlockGuardOs.java:268)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at libcore.io.ForwardingOs.open(ForwardingOs.java:567)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at android.app.ActivityThread$AndroidOs.open(ActivityThread.java:7725)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:561)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:115)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.speech.e.b.a.b(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.languagepack.ao.<init>(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.l(SourceFile:124)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.c(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.a(SourceFile:7)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aez.X(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:72)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.115  1810  2054 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at libcore.io.BlockGuardOs.fstat(BlockGuardOs.java:193)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at libcore.io.ForwardingOs.fstat(ForwardingOs.java:264)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at libcore.io.IoBridge.open(IoBridge.java:564)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:160)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.io.FileInputStream.<init>(FileInputStream.java:115)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.speech.e.b.a.b(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.languagepack.ao.<init>(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.l(SourceFile:124)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.c(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.a(SourceFile:7)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aez.X(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:72)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:24.115  1810  2054 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.115   341   393 D goldfish-address-space: claimShared: Ask to claim region [0x3f490c000 0x3f5218000]
+11-22 02:53:24.118  1365  1635 I SP      : Successfully got manifest for gboard-small-speech-packs-manifest: manifests:gboard-small-speech-packs-1327534105
+11-22 02:53:24.118  1365  1681 I SuperDelight: SuperDelightManager.lambda$syncDownloadableLanguageModels$6():600 SuperDelightManager#syncDownloadableLanguageModels(delight): [OnDevice] Syncing for version 2021093005
+11-22 02:53:24.120   341   393 D goldfish-address-space: claimShared: Ask to claim region [0x3f5218000 0x3f5b24000]
+11-22 02:53:24.125   322  4019 D resolv  : GetAddrInfoHandler::run: {100 262244 100 983140 10102 0}
+11-22 02:53:24.125   322  4019 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 02:53:24.126   322  4020 D resolv  : doQuery: (1, 28)
+11-22 02:53:24.126   322  4020 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 02:53:24.126   322  4020 D resolv  : res_nsend
+11-22 02:53:24.126   322  4020 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:24.126   322  4020 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db32a5f8550
+11-22 02:53:24.126   322  4020 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:24.130   322  4021 D resolv  : doQuery: (1, 1)
+11-22 02:53:24.130   322  4021 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 02:53:24.130   322  4021 D resolv  : res_nsend
+11-22 02:53:24.130   322  4021 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:24.130   322  4021 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db31a5fa850
+11-22 02:53:24.130   322  4021 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:24.132  1810  2054 D StrictMode: StrictMode policy violation: android.os.strictmode.DiskReadViolation
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at android.os.StrictMode$AndroidBlockGuardPolicy.onReadFromDisk(StrictMode.java:1659)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at libcore.io.BlockGuardOs.read(BlockGuardOs.java:323)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at libcore.io.ForwardingOs.read(ForwardingOs.java:617)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at libcore.io.IoBridge.read(IoBridge.java:606)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.io.FileInputStream.read(FileInputStream.java:323)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at sun.nio.cs.StreamDecoder.readBytes(StreamDecoder.java:291)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at sun.nio.cs.StreamDecoder.implRead(StreamDecoder.java:355)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at sun.nio.cs.StreamDecoder.read(StreamDecoder.java:181)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.io.InputStreamReader.read(InputStreamReader.java:184)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.io.BufferedReader.fill(BufferedReader.java:172)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.io.BufferedReader.readLine(BufferedReader.java:335)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.io.BufferedReader.readLine(BufferedReader.java:400)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.speech.e.b.a.b(SourceFile:3)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.languagepack.ao.<init>(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.l(SourceFile:124)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aqr.a(SourceFile:6)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.c(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.qe.a(SourceFile:7)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.aez.X(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:72)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:24.132  1810  2054 D StrictMode: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.145  1536  2077 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.145  1536  2077 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.184  1365  1677 I SpeechPackManager: SpeechPackManager$2.onSuccess():350 refreshManifest() : Refreshed URL = https://dl.google.com/android/voice/gboard/terse/superpacks-manifest-20210519.json
+11-22 02:53:24.184  1365  1635 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():82 DownloadSlicing#getSlices() : Locale = [en_US]
+11-22 02:53:24.188  1789  3999 D DownloadManager: [2] Finished with status SUCCESS
+11-22 02:53:24.201  1536  2077 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.201  1536  2077 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: Invalid input from icing corpus JSON flag.
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: android.util.MalformedJsonException: Use JsonReader.setLenient(true) to accept malformed JSON at line 123 column 2
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at android.util.JsonReader.syntaxError(JsonReader.java:1162)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at android.util.JsonReader.checkLenient(JsonReader.java:840)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at android.util.JsonReader.nextInArray(JsonReader.java:615)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at android.util.JsonReader.peek(JsonReader.java:345)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at android.util.JsonReader.hasNext(JsonReader.java:321)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.c(SourceFile:6)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.searchbox.c.b.b.k.<init>(SourceFile:4)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.features.n.a.c.<init>(SourceFile:4)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.b.a(SourceFile:14)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.staticplugins.searchboxroot.y.<init>(SourceFile:8)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.yy.a(SourceFile:48)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at dagger.a.e.a(SourceFile:1)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.yz.a(Unknown Source:2)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.f(SourceFile:44)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.binaries.velvet.app.zm.a(SourceFile:106)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.apps.gsa.search.core.service.g.a.c.a(SourceFile:2)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.libraries.gsa.k.a.g.a(SourceFile:2)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.common.w.a.dr.a(SourceFile:1)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.common.w.a.co.run(SourceFile:4)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.common.w.a.dt.run(SourceFile:1)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.libraries.g.ab.run(SourceFile:1)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.libraries.g.n.run(SourceFile:2)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at com.google.android.libraries.g.d.run(SourceFile:2)
+11-22 02:53:24.201  1810  2083 W CorpusConfigHelper: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.251  1365  1635 I SuperDelight: SuperDelightDownloadSlicingStrategy.getSlices():229 DownloadSlicing#getSlices(): result {slices=[delight:main_en_us_2021062100_1, delight:main_en_840_2021081100_1], last batch=true, sync metadata=false}
+11-22 02:53:24.251  1365  1635 I SP      : Syncing delight (2021093005) with slices: [main_en_us_2021062100_1, main_en_840_2021081100_1], metadata: false
+11-22 02:53:24.254  1536  2077 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.254  1536  2077 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.267   522  1584 D ConnectivityService: requestNetwork for uid/pid:10102/1810 activeRequest: null callbackRequest: 89 [NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]] callback flags: 0 priority: 2147483647
+11-22 02:53:24.271   522   709 D ConnectivityService: NetReassign [90 : null → 100]
+11-22 02:53:24.291   522   702 D WifiNetworkFactory: got request NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 02:53:24.291   522   702 D UntrustedWifiNetworkFactory: got request NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 02:53:24.291   522   702 D OemPaidWifiNetworkFactory: got request NetworkRequest [ REQUEST id=90, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VCN_MANAGED Uid: 10102 RequestorUid: 10102 RequestorPkg: com.google.android.googlequicksearchbox] ]
+11-22 02:53:24.291   522   709 D ConnectivityService: NetReassign [no changes]
+11-22 02:53:24.306  1536  2019 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.306  1536  2019 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: Retrieving snapshot for com.google.android.libraries.internal.growth.growthkit#com.google.android.apps.messaging failed
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at aixj.f(PG:8)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at airq.g(PG:2)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at airq.i(PG:2)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at airq.d(PG:1)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at aspr.a(PG:20)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at aqnr.run(PG:2)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at aypj.run(PG:2)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at bcic.c(PG:1)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at bchf.run(PG:4)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at bcid.run(PG:1)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at aosl.run(PG:2)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at aorz.run(PG:2)
+11-22 02:53:24.337  3218  3299 E PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.345  1177  3045 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.googlequicksearchbox componentName=null serviceId=36
+11-22 02:53:24.349  3369  3943 W PhenotypeFlagCommitter: Committing snapshot for com.google.android.libraries.consentverifier#com.google.android.calendar failed, retrying
+11-22 02:53:24.349  3369  3943 W PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 02:53:24.349  3369  3943 W PhenotypeFlagCommitter: 	at cal.qys.b(PG:10)
+11-22 02:53:24.349  3369  3943 W PhenotypeFlagCommitter: 	at cal.qtk.d(PG:10)
+11-22 02:53:24.349  3369  3943 W PhenotypeFlagCommitter: 	at cal.rgb.run(PG:1)
+11-22 02:53:24.349  3369  3943 W PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.357  1536  2019 I A       : setClearText: ClearText{showAnimation=false, isActive=false}
+11-22 02:53:24.357  1536  2019 W A       : setUiHints failed. NGA inactive. key: clear
+11-22 02:53:24.402  1810  2023 I cr_CronetLibraryLoader: Cronet version: 93.0.4542.0, arch: x86_64
+11-22 02:53:24.403  2904  2966 W DynamiteModule: Local module descriptor class for com.google.android.gms.providerinstaller.dynamite not found.
+11-22 02:53:24.412  1044  1068 W ProviderHelper: Unknown dynamite feature providerinstaller.dynamite
+11-22 02:53:24.420  2904  2966 W ProviderInstaller: Failed to load providerinstaller module: No acceptable module found. Local version is 0 and remote version is 0.
+11-22 02:53:24.423  1810  2081 W SessionLifecycleManager: Client : AttachedClient[7962259501071016, ClientConfig[mFlags=[40000088001] mSuggestFlags=[0] mClientId=HOTWORD_SERVICE mSessionType=search publicSearchServiceCallerUid=-1]] has no associated SessionController
+11-22 02:53:24.424  1536  2019 I NgaEntryPointEventSendr: State changed: Ready => Disconnected (onOpaDisconnected)
+11-22 02:53:24.429  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.430  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.430  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.430  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 241] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.434  1810  2184 I PBSessionCacheImpl: Deleted sessionId[7962259501071026] from persistence.
+11-22 02:53:24.434   522  1597 W ActivityManager: Unable to start service Intent { cmp=com.google.android.apps.tachyon/.clientapi.ClientApiService } U=0: not found
+11-22 02:53:24.438  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.441  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.441  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 42] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.444  1177  3061 W Icing   : No valid account for uploading user actions
+11-22 02:53:24.454  1365  1635 I SP      : Pausing download content_cache:9e22973d4ff86e79a43b587d114f5a4e, reason: PREEMPTED
+11-22 02:53:24.454  1365  1635 I SP      : Pausing download content_cache:73c10eff89726f4122ae1887121fdee6, reason: PREEMPTED
+11-22 02:53:24.454  1365  1635 I SP      : Pausing download emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, reason: PREEMPTED
+11-22 02:53:24.462  1365  1635 I SP      : Pausing download transformer_concept:2020102810_en, reason: PREEMPTED
+11-22 02:53:24.470  1810  2040 W LocationOracle: No location history returned by ContextManager
+11-22 02:53:24.490   774   774 I Choreographer: Skipped 30 frames!  The application may be doing too much work on its main thread.
+11-22 02:53:24.521  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 67] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: Committing snapshot for com.google.android.westworld failed, retrying
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: java.util.concurrent.TimeoutException: Timed out waiting for Task
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at bzks.m(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at bqro.i(:com.google.android.gms@225014047@22.50.14 (190800-499278674):5)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at bqro.f(:com.google.android.gms@225014047@22.50.14 (190800-499278674):0)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at cfdn.F(:com.google.android.gms@225014047@22.50.14 (190800-499278674):9)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at com.google.android.gms.westworld.InitOperation.b(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at xqf.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:24.536  1177  2990 W PhenotypeFlagCommitter: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:24.565   774   774 D NgaUiController: Got lightness update (0.2721989) after 654 ms
+11-22 02:53:24.565   774   774 V NgaUiController: switching to dark
+11-22 02:53:24.565   409  1108 I BpBinder: onLastStrongRef automatically unlinking death recipients: <uncached descriptor>
+11-22 02:53:24.568  1365  1635 I SP      : Scheduling: download registered, 1 started, 4 paused, 0 scheduled, 5 pending: transformer_concept:2020102810_en @ {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ * {m:b:u:l, bg}
+11-22 02:53:24.577  1365  1635 I SP      : Requesting download of URL https://www.gstatic.com/android/keyboard/dictionarypack/prod/en-840_d3_2021081100_5b547qpqwyjy_jwsmain.dict to main_en_840_2021081100_1.fst-decompress.fetched (constraints: m:b:u:l)
+11-22 02:53:24.577  1365  1635 I SP      : Download for transformer_concept:2020102810_en was canceled
+11-22 02:53:24.577  1365  1635 I SP      : Download stopped: transformer_concept:2020102810_en, failed (retriable) paused, size: 1180054
+11-22 02:53:24.584  1810  2081 W A       : UiCallbackStub-onGenericEvent[ServiceEvent = 60] task was not run. Callback from Service received after client was disposed.
+11-22 02:53:24.601   522  2110 W InputManager-JNI: Input channel object 'bbb34a3 Assist (client)' was disposed without first being removed with the input manager!
+11-22 02:53:24.611   774   774 V NgaUiController: not switching; already dark
+11-22 02:53:24.612  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setUseSessionTickets(Z)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setUseSessionTickets(Z)V (max-target-q, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/ConscryptEngineSocket;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setHostname(Ljava/lang/String;)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setHostname(Ljava/lang/String;)V (max-target-q, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->setAlpnProtocols([B)V (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:24.613  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->setAlpnProtocols([B)V (max-target-q, reflection, denied)
+11-22 02:53:24.615   774   774 V NgaUiController: not switching; already dark
+11-22 02:53:24.651  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/OpenSSLSocketImpl;->getAlpnSelectedProtocol()[B (max-target-q,core-platform-api, reflection, denied)
+11-22 02:53:24.651  1365  4000 W putmethod.lati: Accessing hidden method Lcom/android/org/conscrypt/AbstractConscryptSocket;->getAlpnSelectedProtocol()[B (max-target-q, reflection, denied)
+11-22 02:53:24.670   322   836 I netd    : trafficSwapActiveStatsMap() <18.14ms>
+11-22 02:53:24.671   322   836 I netd    : tetherGetStats() -> {[]} <0.32ms>
+11-22 02:53:24.713   322   836 I netd    : bandwidthSetGlobalAlert(2097152) <0.18ms>
+11-22 02:53:24.719  1365  1635 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: transformer_concept:2020102810_en {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 @ {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 02:53:24.721  1365  1635 I SP      : Download for emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 was canceled
+11-22 02:53:24.722  1365  1635 I SP      : Download stopped: emoji:f3e8ef9a2eea15b0459d82fa3609b4c7, failed (retriable) paused, size: 0
+11-22 02:53:24.723   322   836 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.70ms>
+11-22 02:53:24.724   322   836 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.64ms>
+11-22 02:53:24.742   774   774 D InterruptionStateProvider: No bubble up: not allowed to bubble: 0|com.google.android.googlequicksearchbox|-307962363|null|10102
+11-22 02:53:24.748  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.748  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.748  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.748  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.752   774   774 D InterruptionStateProvider: No heads up: unimportant notification: 0|com.google.android.googlequicksearchbox|-307962363|null|10102
+11-22 02:53:24.757   322   836 I netd    : trafficSwapActiveStatsMap() <19.16ms>
+11-22 02:53:24.758   322   836 I netd    : tetherGetStats() -> {[]} <0.42ms>
+11-22 02:53:24.764   322   836 I netd    : bandwidthRemoveInterfaceQuota(eth0) <0.46ms>
+11-22 02:53:24.765   322   836 I netd    : bandwidthSetInterfaceQuota(eth0, 9223372036854775807) <0.52ms>
+11-22 02:53:24.775  1177  2318 I Icing   : IndexChimeraService.getServiceInterface callingPackage=com.google.android.gms componentName=null serviceId=30
+11-22 02:53:24.783  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.783  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.783  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.786  1365  1635 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: transformer_concept:2020102810_en {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e @ {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 02:53:24.786  1365  1635 I SP      : Download for content_cache:9e22973d4ff86e79a43b587d114f5a4e was canceled
+11-22 02:53:24.787  1365  1635 I SP      : Download stopped: content_cache:9e22973d4ff86e79a43b587d114f5a4e, failed (retriable) paused, size: 0
+11-22 02:53:24.789  1810  2081 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 02:53:24.798   774   849 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 02:53:24.804   522  1597 W ActivityManager: Unable to start service Intent { cmp=com.google.android.googlequicksearchbox/com.google.android.libraries.mdi.download.d.a.a (has extras) } U=0: not found
+11-22 02:53:24.811   522   522 D CompatibilityChangeReporter: Compat change id reported: 175319604; UID 1000; state: ENABLED
+11-22 02:53:24.836  1365  1635 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: transformer_concept:2020102810_en {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 @ {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 02:53:24.836  1365  1635 I SP      : Download for content_cache:73c10eff89726f4122ae1887121fdee6 was canceled
+11-22 02:53:24.836  1365  1635 I SP      : Download stopped: content_cache:73c10eff89726f4122ae1887121fdee6, failed (retriable) paused, size: 0
+11-22 02:53:24.847   774   831 D EGL_emulation: app_time_stats: avg=342.76ms min=140.14ms max=638.31ms count=3
+11-22 02:53:24.886  1810  2081 I MicroDetectionWorker: Initializing MicroDataManager InitializeType-2, isForced-true, isActivePhoneEnrollment-false isActiveGoogleHomeEnrollment-false
+11-22 02:53:24.890  1810  2028 I ModelDownloadController: Hotword model update tasks finished.
+11-22 02:53:24.891  1810  2028 I MicroDataManager: Location for model with model type: 2 and locale: en-US, is : https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 02:53:24.893  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.893  1810  2081 W SearchServiceCore: Abort, client detached.
+11-22 02:53:24.898   774   774 D InterruptionStateProvider: No bubble up: not allowed to bubble: 0|com.google.android.googlequicksearchbox|-307962363|null|10102
+11-22 02:53:24.899   774   774 D InterruptionStateProvider: No heads up: unimportant notification: 0|com.google.android.googlequicksearchbox|-307962363|null|10102
+11-22 02:53:24.908  1810  2083 I MicroDataManager: MicroDataManager InitializationTask. googleHotwordData is null: true, hotwordModel is null: false , sourceLocationOfCurrentHotwordModel https://www.gstatic.com/android-search/hotword/x_google/0b06a49fe5a853c080ada268feeb6882/hotword.data
+11-22 02:53:24.912  1810  2081 I MicroDetectionState: Should stop hotword detection immediately - true
+11-22 02:53:24.923   774   849 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 02:53:24.936  1177  3061 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 02:53:25.006   774   849 D PeopleSpaceWidgetMgr: Sbn doesn't contain valid PeopleTileKey: null/0/com.google.android.googlequicksearchbox
+11-22 02:53:25.007   341   393 D goldfish-address-space: claimShared: Ask to claim region [0x3f4000000 0x3f49a4000]
+11-22 02:53:25.006  1177  3061 W Icing   : No valid account for uploading user actions
+11-22 02:53:25.020   173   173 I hwservicemanager: getTransport: Cannot find entry android.hardware.graphics.mapper@4.0::IMapper/default in either framework or device VINTF manifest.
+11-22 02:53:25.020  4033  4034 I Gralloc4: mapper 4.x is not supported
+11-22 02:53:25.030  4033  4034 D HostConnection: createUnique: call
+11-22 02:53:25.038  4033  4034 D HostConnection: HostConnection::get() New Host Connection established 0x7dc9f10fc5d0, tid 4034
+11-22 02:53:25.046  4033  4034 D goldfish-address-space: allocate: Ask for block of size 0x100
+11-22 02:53:25.047  4033  4034 D goldfish-address-space: allocate: ioctl allocate returned offset 0x3f3ffe000 size 0x2000
+11-22 02:53:25.061  4033  4034 D HostConnection: HostComposition ext ANDROID_EMU_CHECKSUM_HELPER_v1 ANDROID_EMU_native_sync_v2 ANDROID_EMU_dma_v1 ANDROID_EMU_direct_mem ANDROID_EMU_host_composition_v1 ANDROID_EMU_host_composition_v2 ANDROID_EMU_vulkan ANDROID_EMU_deferred_vulkan_commands ANDROID_EMU_vulkan_null_optional_strings ANDROID_EMU_vulkan_create_resources_with_requirements ANDROID_EMU_YUV_Cache ANDROID_EMU_vulkan_ignored_handles ANDROID_EMU_has_shared_slots_host_memory_allocator ANDROID_EMU_vulkan_free_memory_sync ANDROID_EMU_vulkan_shader_float16_int8 ANDROID_EMU_vulkan_async_queue_submit ANDROID_EMU_vulkan_queue_submit_with_commands ANDROID_EMU_sync_buffer_data ANDROID_EMU_vulkan_async_qsri ANDROID_EMU_read_color_buffer_dma ANDROID_EMU_hwc_color_transform ANDROID_EMU_hwc_display_power_mode GL_OES_EGL_image_external_essl3 GL_OES_vertex_array_object GL_KHR_texture_compression_astc_ldr ANDROID_EMU_host_side_tracing ANDROID_EMU_gles_max_version_3_0 
+11-22 02:53:25.074  1365  1635 I SP      : Scheduling: download stopped, 0 started, 0 paused, 0 scheduled, 5 pending: transformer_concept:2020102810_en {m:b:u:l, bg}, emoji:f3e8ef9a2eea15b0459d82fa3609b4c7 {m:b:u:l, bg}, content_cache:9e22973d4ff86e79a43b587d114f5a4e {m:b:u:l, bg}, content_cache:73c10eff89726f4122ae1887121fdee6 {m:b:u:l, bg}, delight:main_en_840_2021081100_1 @ {m:b:u:l, bg}
+11-22 02:53:25.135  1810  2011 W LocationOracle: No location returned by GMS core getLastLocation()
+11-22 02:53:25.136  1177  3061 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 02:53:25.139  1177  3061 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 02:53:25.159  1177  3061 I Icing   : Indexing done com.google.android.gms-apps
+11-22 02:53:25.169  1177  3061 W Icing   : No valid account for uploading user actions
+11-22 02:53:25.182  1177  3061 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 02:53:25.187  1177  3061 W Icing   : No valid account for uploading user actions
+11-22 02:53:25.191  1044  1064 I .gms.persisten: Background concurrent copying GC freed 274990(11MB) AllocSpace objects, 5(960KB) LOS objects, 49% free, 11MB/22MB, paused 51.146ms,29us total 782.418ms
+11-22 02:53:25.201  1177  3061 I Icing   : Usage reports ok 0, Failed Usage reports 0, indexed 0, rejected 0
+11-22 02:53:25.299  1177  3061 I Icing   : Indexing com.google.android.gms-apps from com.google.android.gms
+11-22 02:53:25.332  1177  3061 I Icing   : Indexing com.google.android.gms-internal.3p:MobileApplication from com.google.android.gms
+11-22 02:53:25.357  1789  3991 D DownloadManager: [1] Finished with status SUCCESS
+11-22 02:53:25.414  3218  3293 I Bugle   : BugleStartup: Initializing with enabled individual init failures...
+11-22 02:53:25.415  3218  3293 I Bugle   : BugleStartup: Registering SIM change receiver...
+11-22 02:53:25.415  3218  3293 I Bugle   : BugleStartup: Updating app config...
+11-22 02:53:25.422  3218  3293 I Bugle   : BugleStartup: Done with SIM change receiver & app config.
+11-22 02:53:25.422  3218  3293 I Bugle   : BugleStartup: Handling shared prefs upgrade & Load MMS Configuration...
+11-22 02:53:25.437  3218  3293 I BugleRcsEngine: [40] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-22 02:53:25.437  3218  3293 I Bugle   : Upgrading shared prefs from -1 to 2
+11-22 02:53:25.440  3218  4038 I BugleRcsEngine: [80] aloh.c: do not delay first event
+11-22 02:53:25.442  3218  4036 W AssistantConfig: appIntegrationDataInBase64 is null
+11-22 02:53:25.443  3218  4036 E AssistantConnector: Couldn't read whether gRPC is supported from public value
+11-22 02:53:25.443  3218  4036 E AssistantConnector: java.lang.IllegalStateException: Failed to query to AGSA.
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at amdj.call(PG:16)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at aypl.call(PG:2)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at bcic.c(PG:1)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at bchf.run(PG:4)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at bcid.run(PG:1)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:25.443  3218  4036 E AssistantConnector: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:25.443  3218  4036 I AssistantConnector: Fallback to Maestro connector
+11-22 02:53:25.453  1177  1177 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.ocr.service.internal.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsInternalApiService }
+11-22 02:53:25.464  3218  4038 I BugleRcsEngine: [80] alod.j: (Sim): Processing an intent
+11-22 02:53:25.469  3218  3293 I Bugle   : BugleStartup: Initializing RCS availability...
+11-22 02:53:25.469  3218  4038 I BugleRcsEngine: [80] alod.w: (Sim): SIM state LOADED
+11-22 02:53:25.471  3218  4040 W BugleRcsEngine: [82] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED
+11-22 02:53:25.471  3218  4041 W BugleRcsEngine: [83] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED
+11-22 02:53:25.474  1177  3061 I Icing   : Indexing done com.google.android.gms-apps
+11-22 02:53:25.475  1177  3061 I Icing   : Indexing done com.google.android.gms-internal.3p:MobileApplication
+11-22 02:53:25.476  3218  4039 I BugleRcsEngine: [81] aloh.c: SIM delay is not enabled
+11-22 02:53:25.476  3218  4039 W BugleRcsEngine: [81] alod.a: (Sim): process intent: android.intent.action.SIM_STATE_CHANGED
+11-22 02:53:25.476  3218  3293 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-22 02:53:25.476  3218  3293 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-22 02:53:25.476  3218  3293 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityAsync, hint: NO_HINT
+11-22 02:53:25.476  3218  3293 I Bugle   : BugleStartup: Done with RCS availability.
+11-22 02:53:25.476  3218  3293 I Bugle   : BugleStartup: Initializing RBM downloads...
+11-22 02:53:25.476  3218  3293 I Bugle   : BugleDownloadManager: Marking BugleDownloadManager as initialized.
+11-22 02:53:25.476  3218  3293 I Bugle   : BugleStartup: Done initializing RBM downloads.
+11-22 02:53:25.476  3218  3293 I Bugle   : BugleStartup: Done initializing with enabled individual init failures.
+11-22 02:53:25.477  3218  3365 W Bugle   : BuglePhoneNumberUtils: canonicalizeMccMnc: invalid mccmnc. mcc: null, mnc: null
+11-22 02:53:25.485  3218  3317 W BugleRcsEngine: [44] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.485  3218  3317 I BugleRcsEngine: [44] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.485  3218  3317 W BugleRcsEngine: [44] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.485  3218  3317 I BugleRcsEngine: [44] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 02:53:25.486  3218  3293 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityAsync, trivialAvailability: null
+11-22 02:53:25.495  3218  3293 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.495  3218  3293 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.495  3218  3293 W BugleRcsEngine: [40] alsz.e: Service with meta data key: SignupServiceVersions is not compatible. Service Version 4 is not supported. Supported versions: []
+11-22 02:53:25.500  3218  3293 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.500  3218  3293 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.500  3218  3293 W BugleRcsEngine: [40] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.500  3218  3293 I BugleRcsEngine: [40] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 02:53:25.500  3218  3293 I BugleRcs: RcsAvailabilityUpdaterRemote: getRcsAvailabilityFromSignupServiceAsync
+11-22 02:53:25.502  3218  3343 I RcsClientLib: Connecting SignupService
+11-22 02:53:25.505  3218  3343 W RcsClientLib: No CS.apk RCS service found. Is RCS running in Bugle?
+11-22 02:53:25.507  3218  3293 I BugleJobs: Icing index repair service is not scheduled. [CONTEXT class_name="IcingMonitoringUtils" ]
+11-22 02:53:25.509  1044  1044 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.contextmanager.service.ContextManagerService.START pkg=com.google.android.gms }
+11-22 02:53:25.514  3218  3343 W BugleRcsEngine: [49] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.514  3218  3343 I BugleRcsEngine: [49] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.514  3218  3343 W BugleRcsEngine: [49] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.514  3218  3343 I BugleRcsEngine: [49] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 02:53:25.514  3218  3343 I RcsClientLib: shouldUseCarrierServicesJibeService: false, CarrierServices rcs service found: false
+11-22 02:53:25.529  3218  3293 I BugleJobs: Starts to observe table change.
+11-22 02:53:25.533  3856  3856 I BugleRcsEngine: [2] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-22 02:53:25.536  3856  4043 I BugleRcsEngine: [72] ajsa.a: Creating JibeServiceComponent
+11-22 02:53:25.539  3218  4038 I BugleRcsEngine: [80] alod.w: (Sim): SIM changed: true. current id: redacted-pii:sim_id[20-chars]; stored id: redacted-pii:sim_id[0-chars]; isFiDevice: false; subId: 1; slotIndex: 0
+11-22 02:53:25.555  3856  4043 I BugleRcsEngine: [72] alod.j: (Sim): Processing an intent
+11-22 02:53:25.555  3856  4043 I BugleRcsEngine: [72] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 02:53:25.555  3856  4043 I BugleRcsEngine: [72] ajre.b: Initializing Carrier Services Logging.
+11-22 02:53:25.555  3856  4043 D BugleRcsEngine: log_saver already enabled
+11-22 02:53:25.565  3856  4043 I BugleRcsEngine: [72] RcsEngineProxyImpl.initializeRcsEngine: RcsEngineProxy: Initializing RCS Engine.
+11-22 02:53:25.578  3856  4043 I BugleRcsEngine: [72] alod.j: (Sim): Processing an intent
+11-22 02:53:25.578  3856  4043 I BugleRcsEngine: [72] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 02:53:25.579  3218  3293 V AssistantIntegClient: #getAssistantConfig()
+11-22 02:53:25.600  3218  4038 I BugleRcsEngine: [80] alod.w: (Sim): Skipping writing subId because this is main bugle process.
+11-22 02:53:25.615  3218  4038 I BugleRcsEngine: [80] alod.w: (Sim): Updated SIM info: currentSimId: redacted-pii:sim_id[20-chars]; imsi: redacted-pii:imsi[15-chars]; rawMsisdn: redacted-pii:phone_number[12-chars]; formattedMsisdn: redacted-pii:phone_number[0-chars]; mccmnc: redacted-pii:sim_operator[6-chars] isFiDevice: false; subId: 1; slotIndex: 0
+11-22 02:53:25.615  3218  4038 I BugleRcsEngine: [80] alod.w: (Sim): First update of the SIM info.
+11-22 02:53:25.633  3856  4043 I BugleRcsEngine: [72] ajre.b: Initializing Carrier Services Logging.
+11-22 02:53:25.633  3856  4043 D BugleRcsEngine: log_saver already enabled
+11-22 02:53:25.634  3856  4043 I BugleRcsEngine: [72] RcsEngineImpl.<init>: RcsEngine(DUAL_REG): Constructor running in com.google.android.apps.messaging
+11-22 02:53:25.635  3856  4048 I BugleRcsEngine: [76] aloh.c: SIM delay is not enabled
+11-22 02:53:25.636  3856  3934 I BugleRcsEngine: [65] EventHubProxy.subscribe: Adding event listener alah@d8d0f4e for category 8 with key 227348302 for hub ENGINE
+11-22 02:53:25.636  3856  4043 I BugleRcsEngine: [72] akua.u: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = false, currentProvisioningStrategy = akxp
+11-22 02:53:25.645  3218  4038 I BugleRcsEngine: [80] alod.K: (Sim): Broadcasting Intent { act=com.google.android.ims.SIM_LOADED (has extras) }
+11-22 02:53:25.646  3218  4039 W .apps.messagin: Long monitor contention with owner SimStateTrackerHandler (4038) at void alod.w(android.content.Context, java.lang.String, int)(PG:209) waiters=0 in void alod.a(android.content.Context, android.content.Intent) for 170ms
+11-22 02:53:25.647  3856  4043 I BugleRcsEngine: [72] aktt.e: (PEv2-SM-120509018): start PEv2 [null]
+11-22 02:53:25.647  3856  4043 I BugleRcsEngine: [72] alck.b: Created new RcsProvisioningProtoDataStorage for sim redacted-pii:sim_id[20-chars]
+11-22 02:53:25.647  3856  4043 I BugleRcsEngine: [72] albk.o: RCS Configuration storage in Bugle is disabled by p/h flag, using ProvisioningEngineStateCacheUtil.getProvisioningConfigurationForGivenSimIfExist()
+11-22 02:53:25.647  3856  4043 I BugleRcsEngine: [72] aktt.e: (PEv2-SM-120509018): start [null]
+11-22 02:53:25.647  3856  4043 I BugleRcsEngine: [72] aksn.a: Sending ProvisioningEvent to Bugle [Request Bugle information (15)], no extra data
+11-22 02:53:25.647  3856  4043 I BugleRcsEngine: [72] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[83-chars]
+11-22 02:53:25.647  3856  4048 I BugleRcsEngine: [76] alod.j: (Sim): Processing an intent
+11-22 02:53:25.647  3856  4048 I BugleRcsEngine: [76] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 02:53:25.653  3218  3218 I Bugle   : SimChangeReceiver: action: com.google.android.ims.SIM_LOADED
+11-22 02:53:25.654  3218  3293 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-22 02:53:25.654  3218  3293 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-22 02:53:25.656  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): Enter EnabledState [null]
+11-22 02:53:25.660  3856  3937 W BugleRcsEngine: [67] ajnl.z: Unable to send diagnostic log
+11-22 02:53:25.669  3218  4047 W AssistantConfig: appIntegrationDataInBase64 is null
+11-22 02:53:25.670  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): Start a new provisioning session [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.670  3856  4046 I BugleRcsEngine: [75] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 02:53:25.671  3218  4038 I BugleRcsEngine: [80] alod.j: (Sim): Processing an intent
+11-22 02:53:25.671  3218  4038 I BugleRcsEngine: [80] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 02:53:25.671  3218  3302 W Bugle   : AssistantIntegrationStartupTask: Error getting assistant availability.
+11-22 02:53:25.671  3218  3302 W Bugle   : java.lang.IllegalStateException: Failed to query to AGSA.
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at amdj.call(PG:16)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at aypl.call(PG:2)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at bcic.c(PG:1)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at bchf.run(PG:4)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at bcid.run(PG:1)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:25.671  3218  3302 W Bugle   : 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:25.675  3218  3302 D CompatibilityChangeReporter: Compat change id reported: 147600208; UID 10100; state: ENABLED
+11-22 02:53:25.680  3856  4043 D BugleRcsEngine: log_saver already enabled
+11-22 02:53:25.687  3856  4046 I BugleRcsEngine: [75] albk.b: Bugle is default SMS app: true
+11-22 02:53:25.689  3856  4046 I BugleRcsEngine: [75] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 02:53:25.690  3856  4046 I BugleRcsEngine: [75] albk.a: Rcs is enabled from user settings: true
+11-22 02:53:25.690  3856  4046 W BugleRcsEngine: [75] alcv.a: No config URL. RCS will be disabled!
+11-22 02:53:25.690  3856  4046 I BugleRcsEngine: [75] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 02:53:25.691  3856  4046 W BugleRcsEngine: [75] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.691  3856  4046 W BugleRcsEngine: [75] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): transitionViaMessage, srcState=EnabledState, destState = DisabledState [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] aksn.a: Sending ProvisioningEvent to Bugle [Update provisioning status (11)], redacted-pii:[85-chars]
+11-22 02:53:25.691  3856  4046 I BugleRcsEngine: [75] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[243-chars]
+11-22 02:53:25.698  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): EnabledState: Transition to disabled [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.698  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): transitionTo: destState=DisabledState [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.698  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): onTransitionRequested EnabledState [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.698  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): Exit EnabledState [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.698  3856  3934 W BugleRcsEngine: [65] ajnl.z: Unable to send diagnostic log
+11-22 02:53:25.698  3856  4046 I BugleRcsEngine: [75] aktt.e: (PEv2-SM-120509018): Enter DisabledState [94143530-09d6-4730-8e0a-69730bc71173]
+11-22 02:53:25.712  3218  3327 I Forking : Starting analysis.
+11-22 02:53:25.713  3856  3934 W BugleRcsEngine: [65] ajnl.z: Unable to send diagnostic log
+11-22 02:53:25.713  3856  4046 I BugleRcsEngine: [75] aldv.p: Provisioning state change [STATE_UNKNOWN -> CONFIGURATION UPDATED SUCCESSFULLY]
+11-22 02:53:25.713  3856  4046 I BugleRcsEngine: [75] aksn.a: Sending ProvisioningEvent to Bugle [Update provisioning status (11)], redacted-pii:[85-chars]
+11-22 02:53:25.713  3856  4046 I BugleRcsEngine: [75] alsm.b: EngineBroadcaster: Broadcasting provisioning intent com.google.android.ims.provisioning.engine.provisioningEventAction to Bugle with extras redacted-pii:[243-chars]
+11-22 02:53:25.714  3856  4049 I BugleRcsEngine: [77] ajje.handleMessage: RCS engine STOP RCS stack
+11-22 02:53:25.714  3856  4049 I BugleRcsEngine: [77] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 02:53:25.718  3218  3293 I BugleNetwork: FirebaseRegistrationStartupTask: Enabling Firebase component
+11-22 02:53:25.720   522   749 D PackageManager: Instant App installer not found with android.intent.action.INSTALL_INSTANT_APP_PACKAGE
+11-22 02:53:25.720   522   749 D PackageManager: Clear ephemeral installer activity
+11-22 02:53:25.720  3856  4049 W BugleRcsEngine: [77] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.720  3856  4049 I BugleRcsEngine: [77] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.720  3856  4049 W BugleRcsEngine: [77] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.732  3856  4046 I BugleRcsEngine: [75] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 02:53:25.733  3856  4046 I BugleRcsEngine: [75] albk.b: Bugle is default SMS app: true
+11-22 02:53:25.733  3856  4046 I BugleRcsEngine: [75] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 02:53:25.734  3856  4046 I BugleRcsEngine: [75] albk.a: Rcs is enabled from user settings: true
+11-22 02:53:25.734  3856  4046 W BugleRcsEngine: [75] alcv.a: No config URL. RCS will be disabled!
+11-22 02:53:25.734  3856  4046 I BugleRcsEngine: [75] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 02:53:25.734  3856  4046 W BugleRcsEngine: [75] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.734  3856  4046 I BugleRcsEngine: [75] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.734  3856  4046 W BugleRcsEngine: [75] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.744  3856  4046 I BugleRcsEngine: [75] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 02:53:25.744  3856  4046 I BugleRcsEngine: [75] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 02:53:25.744  3856  4046 I BugleRcsEngine: [75] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 02:53:25.748  3218  3327 I Misthreading: Starting analysis.
+11-22 02:53:25.753  3856  3939 I BugleRcsEngine: [69] aloh.c: SIM delay is not enabled
+11-22 02:53:25.754  3856  3939 W BugleRcsEngine: [69] alod.a: (Sim): process intent: android.intent.action.SIM_STATE_CHANGED
+11-22 02:53:25.759  3856  3937 I BugleRcsEngine: [67] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 02:53:25.761  3856  3937 W BugleRcsEngine: [67] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.761  3856  3937 I BugleRcsEngine: [67] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.761  3856  3937 W BugleRcsEngine: [67] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.761  3856  4051 W BugleRcsEngine: [79] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED
+11-22 02:53:25.763  3856  3937 W BugleRcsEngine: [67] ajnx.h: Unable to send RCS extension log
+11-22 02:53:25.763  3856  3937 W BugleRcsEngine: [67] akjn.run: ProvisioningEngineMetricsStorage, the wrapper class for proto data store, is null
+11-22 02:53:25.763  3856  3934 W BugleRcsEngine: [65] aldi.a: Unable to send provisioning event log
+11-22 02:53:25.764  3856  4050 W BugleRcsEngine: [78] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED
+11-22 02:53:25.774  3218  3218 I RcsClientLib: com.google.android.rcs.client.signup.SignupService connected
+11-22 02:53:25.774  3856  3944 I BugleRcsEngine: [70] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 02:53:25.786  3218  3293 I FirebaseApp: Device unlocked: initializing all Firebase APIs for app [DEFAULT]
+11-22 02:53:25.789  3856  4048 I BugleRcsEngine: [76] alod.j: (Sim): Processing an intent
+11-22 02:53:25.789  3856  4048 I BugleRcsEngine: [76] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 02:53:25.795  3856  3944 I BugleRcsEngine: [70] albk.b: Bugle is default SMS app: true
+11-22 02:53:25.812  3856  3944 I BugleRcsEngine: [70] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 02:53:25.823  3856  3944 I BugleRcsEngine: [70] albk.a: Rcs is enabled from user settings: true
+11-22 02:53:25.823  3856  3944 W BugleRcsEngine: [70] alcv.a: No config URL. RCS will be disabled!
+11-22 02:53:25.823  3856  3944 I BugleRcsEngine: [70] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 02:53:25.834  3856  3944 W BugleRcsEngine: [70] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.834  3856  3944 I BugleRcsEngine: [70] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.834  3856  3944 W BugleRcsEngine: [70] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:25.843  3856  3944 I BugleRcsEngine: [70] albk.s: Configuration Terms and Conditions consent storage in Bugle is disabled by p/h flag
+11-22 02:53:25.843  3856  3944 I BugleRcsEngine: [70] akxz.a: Config state is not ACCEPTED, provisioning still in progress
+11-22 02:53:25.843  3856  3944 I BugleRcsEngine: [70] akxz.a: RcsAvailabilityManager: Rcs Availability still DISABLED_VIA_GSERVICES (RCS is disabled for this carrier by Google)
+11-22 02:53:25.843  3856  3944 I BugleRcsEngine: [70] akxz.a: RcsAvailabilityManager: Calculating Rcs Availability
+11-22 02:53:25.853  3856  3944 I BugleRcsEngine: [70] albk.b: Bugle is default SMS app: true
+11-22 02:53:25.869  3856  3944 I BugleRcsEngine: [70] akxz.a: Bugle has minimum required RCS permissions: true
+11-22 02:53:25.869  3218  3317 W BugleAction: Failed to get msisdn from Bugle
+11-22 02:53:25.869  3218  3317 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: NO_HINT
+11-22 02:53:25.869  3218  3317 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: NO_HINT
+11-22 02:53:25.869  3218  3317 W BugleAction: Failed to get msisdn from RcsProfileService
+11-22 02:53:25.869  3218  3317 W BugleAction: awmw: Jibe SDK Service not available. Is the Jibe SDK service running? Did you call connect() and wait for the notification before calling an API function?
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at awmp.b(PG:2)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.g(PG:1)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.getMsisdn(PG:1)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at utg.F(PG:12)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at tmz.b(PG:1)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at pzo.d(PG:4)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at pzk.run(PG:5)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at aypj.run(PG:2)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at bcic.c(PG:1)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at bchf.run(PG:4)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at bcid.run(PG:1)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at aosz.run(PG:1)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at aosl.run(PG:2)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at aorz.run(PG:2)
+11-22 02:53:25.869  3218  3317 W BugleAction: 	at java.lang.Thread.run(Thread.java:920)
+11-22 02:53:25.870  3218  3317 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-22 02:53:25.870  3218  3317 I Bugle   : TelephonyManagerFactory: Returning per-subscription TelephonyManager (>= N) subscription{id:-1}
+11-22 02:53:25.879   322  4071 D resolv  : GetAddrInfoHandler::run: {100 786532 100 983140 10100 0}
+11-22 02:53:25.879   322  4071 D resolv  : resolv_getaddrinfo: explore_fqdn(): ai_family=0 ai_socktype=1 ai_protocol=6
+11-22 02:53:25.879   322  4072 D resolv  : doQuery: (1, 28)
+11-22 02:53:25.879   322  4072 D resolv  : res_nmkquery: (QUERY, IN, AAAA)
+11-22 02:53:25.879   322  4072 D resolv  : res_nsend
+11-22 02:53:25.879   322  4072 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:25.879   322  4072 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db32a5f96d0
+11-22 02:53:25.879   322  4072 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:25.883  3218  3317 I BugleBackup: Registering preference change listener for "buglesub_-1".
+11-22 02:53:25.883  3218  3317 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-22 02:53:25.884   322  4073 D resolv  : doQuery: (1, 1)
+11-22 02:53:25.884   322  4073 D resolv  : res_nmkquery: (QUERY, IN, A)
+11-22 02:53:25.884   322  4073 D resolv  : res_nsend
+11-22 02:53:25.884   322  4073 I resolv  : resolv_cache_lookup: lookup
+11-22 02:53:25.884   322  4073 I resolv  : resolv_cache_lookup: FOUND IN CACHE entry=0x7db31a5fbb90
+11-22 02:53:25.884   322  4073 D resolv  : doQuery: rcode=0, ancount=8
+11-22 02:53:25.889  3856  3944 I BugleRcsEngine: [70] albk.a: Rcs is enabled from user settings: true
+11-22 02:53:25.889  3856  3944 W BugleRcsEngine: [70] alcv.a: No config URL. RCS will be disabled!
+11-22 02:53:25.889  3856  3944 I BugleRcsEngine: [70] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 02:53:25.892  3856  3944 W BugleRcsEngine: [70] alsz.g: Carrier Services Apk was not found.
+11-22 02:53:25.893  3856  3944 I BugleRcsEngine: [70] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 02:53:25.893  3856  3944 W BugleRcsEngine: [70] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 02:53:26.083     0     0 I logd    : logdr: UID=2000 GID=2000 PID=4066 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
