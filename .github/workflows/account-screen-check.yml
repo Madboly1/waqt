@@ -1,4 +1,4 @@
-# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps + focus audio isolation (v7)
+# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps + focus audio isolation (v8)
 name: WAQT Account Screen and Signed Build Check
 # Last triggered to verify the side-rail host-interceptor drag fix + focus audio fixes.
 
@@ -1024,11 +1024,47 @@ jobs:
           adb shell am start -n com.example.glassproductivity/.MainActivity
           sleep 8
           adb logcat -c
-          try_tap "التركيز" || true
-          sleep 3
+          for i in 1 2 3; do
+            try_tap "التركيز" || adb shell input tap 423 2078 || true
+            sleep 3
+            adb shell uiautomator dump /sdcard/uif.xml >/dev/null 2>&1
+            adb pull /sdcard/uif.xml /tmp/uif.xml >/dev/null 2>&1 || true
+            if grep -q 'بومودورو' /tmp/uif.xml; then break; fi
+          done
+          if ! grep -q 'بومودورو' /tmp/uif.xml; then
+            echo "AUDIO_CONSOLE=not_reached" > shots/audio_probe.txt
+            echo "AUDIO_FOCUS_TAB=no" >> shots/audio_probe.txt
+            cat shots/audio_probe.txt
+            exit 1
+          fi
           adb exec-out screencap -p > shots/50_focus_tab.png
-          try_tap "▸" || true
-          sleep 2
+          for i in 1 2; do
+            adb shell uiautomator dump /sdcard/uid.xml >/dev/null 2>&1
+            adb pull /sdcard/uid.xml /tmp/uid.xml >/dev/null 2>&1 || true
+            if grep -q '&#127911;' /tmp/uid.xml; then break; fi
+            HXY=$(python3 - <<'PYHD'
+          import re
+          xml = open('/tmp/uid.xml', encoding='utf-8').read()
+          best = None
+          for m in re.finditer(r'<node\b[^>]*>', xml):
+              tag = m.group(0)
+              tm = re.search(r'text="([^"]*)"', tag)
+              bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+              if not bm:
+                  continue
+              val = tm.group(1) if tm else ''
+              if '▸' in val:
+                  x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                  y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                  if best is None or x < best[0]:
+                      best = (x, y)
+          if best:
+              print(best[0], best[1])
+          PYHD
+            )
+            if [ -n "$HXY" ]; then adb shell input tap $HXY; fi
+            sleep 2
+          done
           try_tap "&#127911;" || true
           sleep 3
           adb exec-out screencap -p > shots/51_audio_console.png
