@@ -1240,7 +1240,7 @@ jobs:
   signed-artifact-startup:
     # Diagnosis only: exact artifact delivered to user, never a new release.
     runs-on: ubuntu-latest
-    timeout-minutes: 18
+    timeout-minutes: 25
     permissions:
       contents: write
       actions: read
@@ -1269,12 +1269,22 @@ jobs:
           API: ${{ matrix.api }}
         run: |
           yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator' "system-images;android-$API;google_apis;x86_64"
+          if [ ! -x "$ANDROID_HOME/platform-tools/adb" ] || [ ! -x "$ANDROID_HOME/emulator/emulator" ]; then
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'platform-tools' 'emulator'
+          fi
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "system-images;android-$API;google_apis;x86_64"
           echo "$ANDROID_HOME/platform-tools" >> "$GITHUB_PATH"
           echo "$ANDROID_HOME/emulator" >> "$GITHUB_PATH"
+          export ANDROID_SDK_HOME="$HOME"
+          export ANDROID_AVD_HOME="$HOME/.android/avd"
+          mkdir -p "$ANDROID_AVD_HOME"
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd -n startup -k "system-images;android-$API;google_apis;x86_64" --device pixel_5 --force
+          CFG="$ANDROID_AVD_HOME/startup.avd/config.ini"
+          test -f "$CFG"
+          echo 'hw.ramSize=3072' >> "$CFG"
+          echo 'disk.dataPartition.size=4G' >> "$CFG"
           nohup "$ANDROID_HOME/emulator/emulator" -avd startup -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot-save -memory 3072 > /tmp/emulator.log 2>&1 &
-          "$ANDROID_HOME/platform-tools/adb" wait-for-device
+          timeout 120 "$ANDROID_HOME/platform-tools/adb" wait-for-device || { cat /tmp/emulator.log; exit 1; }
           for i in $(seq 1 100); do
             if [ "$("$ANDROID_HOME/platform-tools/adb" shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then exit 0; fi
             sleep 3
@@ -1309,6 +1319,13 @@ jobs:
           test -s startup-evidence/first-pid.txt
           test -s startup-evidence/restart-pid.txt
           grep -q 'mResumedActivity.*com.example.glassproductivity' startup-evidence/restart-activities.txt
+      - name: Preserve emulator setup logs
+        if: always()
+        run: |
+          mkdir -p startup-evidence
+          cp /tmp/emulator.log startup-evidence/emulator.log 2>/dev/null || true
+          df -h > startup-evidence/disk.txt
+          "$ANDROID_HOME/platform-tools/adb" devices -l > startup-evidence/devices.txt || true
       - name: Preserve diagnostic evidence
         if: always()
         uses: actions/upload-artifact@v4
