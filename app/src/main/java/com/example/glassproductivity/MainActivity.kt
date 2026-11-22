@@ -1058,6 +1058,7 @@ class MainActivity : AppCompatActivity() {
     private fun applyPressAnimations(view: View) {
         if (view.isClickable &&
             !carouselSwipeViews.containsKey(view) &&
+                !railDockViews.containsKey(view) &&
             !pressAnimationAttached.containsKey(view)
         ) {
             pressAnimationAttached[view] = true
