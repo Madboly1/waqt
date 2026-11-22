@@ -1375,10 +1375,12 @@ jobs:
         ('        super.onCreate(savedInstanceState)\n        audioManager', '        super.onCreate(savedInstanceState)\n        if (StartupRecovery.enterIfRecorded(this)) return\n        audioManager'),
         ('        super.onStart()\n        val filter', '        super.onStart()\n        if (StartupRecovery.isActive(this)) return\n        val filter'),
         ('        super.onResume()\n        syncActiveFocusTimerFromStorage()', '        super.onResume()\n        if (StartupRecovery.isActive(this)) return\n        syncActiveFocusTimerFromStorage()')]:
-         assert s.count(old)==1, old
-         s=s.replace(old,new)
+         if s.count(old)==1:
+          s=s.replace(old,new)
+         else:
+          assert s.count(new)==1, old
         p.write_text(s)
-        p.with_name('StartupRecovery.kt').write_bytes(__import__('base64').b64decode('cGFja2FnZSBjb20uZXhhbXBsZS5nbGFzc3Byb2R1Y3Rpdml0eQoKaW1wb3J0IGFuZHJvaWQuYXBwLkFjdGl2aXR5CmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ2xpcERhdGEKaW1wb3J0IGFuZHJvaWQuY29udGVudC5DbGlwYm9hcmRNYW5hZ2VyCmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ29udGV4dAppbXBvcnQgYW5kcm9pZC5ncmFwaGljcy5Db2xvcgppbXBvcnQgYW5kcm9pZC52aWV3LlZpZXdHcm91cAppbXBvcnQgYW5kcm9pZC53aWRnZXQuQnV0dG9uCmltcG9ydCBhbmRyb2lkLndpZGdldC5MaW5lYXJMYXlvdXQKaW1wb3J0IGFuZHJvaWQud2lkZ2V0LlNjcm9sbFZpZXcKaW1wb3J0IGFuZHJvaWQud2lkZ2V0LlRleHRWaWV3CgovKiogRGlhZ25vc3RpYyBlbnRyeSBvbmx5LiBOZXZlciBjbGVhcnMgdGhlIHN0b3JlZCBjcmFzaCBvciBlZGl0cyBidXNpbmVzcyBkYXRhLiAqLwppbnRlcm5hbCBvYmplY3QgU3RhcnR1cFJlY292ZXJ5IHsKICAgIHByaXZhdGUgdmFsIGFjdGl2ZSA9IGphdmEudXRpbC5XZWFrSGFzaE1hcDxBY3Rpdml0eSwgQm9vbGVhbj4oKQoKICAgIGZ1biBpc0FjdGl2ZShhY3Rpdml0eTogQWN0aXZpdHkpOiBCb29sZWFuID0gYWN0aXZlW2FjdGl2aXR5XSA9PSB0cnVlCgogICAgZnVuIGVudGVySWZSZWNvcmRlZChhY3Rpdml0eTogQWN0aXZpdHkpOiBCb29sZWFuIHsKICAgICAgICB2YWwgcHJlZnMgPSBhY3Rpdml0eS5nZXRTaGFyZWRQcmVmZXJlbmNlcygid2FxdF9wcmVmcyIsIENvbnRleHQuTU9ERV9QUklWQVRFKQogICAgICAgIHZhbCBjcmFzaCA9IHRyeSB7IHByZWZzLmdldFN0cmluZygibGFzdF9jcmFzaCIsIG51bGwpIH0gY2F0Y2ggKF86IEV4Y2VwdGlvbikgeyBudWxsIH0KICAgICAgICBpZiAoY3Jhc2guaXNOdWxsT3JCbGFuaygpKSByZXR1cm4gZmFsc2UKICAgICAgICBhY3RpdmVbYWN0aXZpdHldID0gdHJ1ZQogICAgICAgIHZhbCBkZW5zaXR5ID0gYWN0aXZpdHkucmVzb3VyY2VzLmRpc3BsYXlNZXRyaWNzLmRlbnNpdHkKICAgICAgICBmdW4gZHAodmFsdWU6IEludCkgPSAodmFsdWUgKiBkZW5zaXR5ICsgMC41ZikudG9JbnQoKQogICAgICAgIHZhbCBib2R5ID0gTGluZWFyTGF5b3V0KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIG9yaWVudGF0aW9uID0gTGluZWFyTGF5b3V0LlZFUlRJQ0FMCiAgICAgICAgICAgIHNldFBhZGRpbmcoZHAoMjApLCBkcCgyNCksIGRwKDIwKSwgZHAoMjQpKQogICAgICAgICAgICBzZXRCYWNrZ3JvdW5kQ29sb3IoQ29sb3IucmdiKDI1MCwgMjQ3LCAyNDApKQogICAgICAgIH0KICAgICAgICBib2R5LmFkZFZpZXcoVGV4dFZpZXcoYWN0aXZpdHkpLmFwcGx5IHsKICAgICAgICAgICAgdGV4dCA9ICLZgdiq2K0g2KLZhdmGINmE2YTYqti02K7Ziti1IgogICAgICAgICAgICB0ZXh0U2l6ZSA9IDIzZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDM1LCAzMCwgMjUpKQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KFRleHRWaWV3KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSAi2KfZhNi02KfYtNipINiv2Yog2KjYqti52LHYtiDYs9io2Kgg2KfZhNil2LrZhNin2YIg2KfZhNmF2LPYrNmEINio2K/ZhCDZgdiq2K0g2KfZhNmI2KfYrNmH2Kkg2KfZhNi52KfYr9mK2KkuINmF2LQg2KjYqtmF2LPYrSDYp9mE2YXZh9in2YUg2KPZiCDYp9mE2KXYudiv2KfYr9in2KouINmF2Kcg2KrYrdiw2YHYtCDYp9mE2KrYt9io2YrZgiDZiNmE2Kcg2KrZhdiz2K0g2KjZitin2YbYp9iq2YcuIgogICAgICAgICAgICB0ZXh0U2l6ZSA9IDE2ZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDQ1LCA0MCwgMzUpKQogICAgICAgICAgICBzZXRQYWRkaW5nKDAsIGRwKDE2KSwgMCwgZHAoMTYpKQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KFRleHRWaWV3KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSBjcmFzaAogICAgICAgICAgICB0ZXh0U2l6ZSA9IDEyZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDQwLCAzNSwgMzApKQogICAgICAgICAgICBzZXRUZXh0SXNTZWxlY3RhYmxlKHRydWUpCiAgICAgICAgICAgIGNvbnRlbnREZXNjcmlwdGlvbiA9ICJXQVFUX1NUQVJUVVBfUkVDT1ZFUllfVFJBQ0UiCiAgICAgICAgfSkKICAgICAgICBib2R5LmFkZFZpZXcoQnV0dG9uKGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSAi2YbYs9iuINiq2YHYp9i12YrZhCDYp9mE2LnYt9mEIgogICAgICAgICAgICBzZXRPbkNsaWNrTGlzdGVuZXIgewogICAgICAgICAgICAgICAgKGFjdGl2aXR5LmdldFN5c3RlbVNlcnZpY2UoQ29udGV4dC5DTElQQk9BUkRfU0VSVklDRSkgYXMgQ2xpcGJvYXJkTWFuYWdlcikKICAgICAgICAgICAgICAgICAgICAuc2V0UHJpbWFyeUNsaXAoQ2xpcERhdGEubmV3UGxhaW5UZXh0KCJXYXF0IHN0YXJ0dXAgZGlhZ25vc3RpYyIsIGNyYXNoKSkKICAgICAgICAgICAgfQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KEJ1dHRvbihhY3Rpdml0eSkuYXBwbHkgewogICAgICAgICAgICB0ZXh0ID0gItil2LrZhNin2YIiCiAgICAgICAgICAgIHNldE9uQ2xpY2tMaXN0ZW5lciB7IGFjdGl2aXR5LmZpbmlzaCgpIH0KICAgICAgICB9KQogICAgICAgIGFjdGl2aXR5LnNldENvbnRlbnRWaWV3KFNjcm9sbFZpZXcoYWN0aXZpdHkpLmFwcGx5IHsKICAgICAgICAgICAgYWRkVmlldyhib2R5LCBWaWV3R3JvdXAuTGF5b3V0UGFyYW1zKFZpZXdHcm91cC5MYXlvdXRQYXJhbXMuTUFUQ0hfUEFSRU5ULCBWaWV3R3JvdXAuTGF5b3V0UGFyYW1zLldSQVBfQ09OVEVOVCkpCiAgICAgICAgfSkKICAgICAgICByZXR1cm4gdHJ1ZQogICAgfQp9Cg=='))
+        p.with_name('StartupRecovery.kt').write_bytes(__import__('base64').b64decode('cGFja2FnZSBjb20uZXhhbXBsZS5nbGFzc3Byb2R1Y3Rpdml0eQoKaW1wb3J0IGFuZHJvaWQuYXBwLkFjdGl2aXR5CmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ2xpcERhdGEKaW1wb3J0IGFuZHJvaWQuY29udGVudC5DbGlwYm9hcmRNYW5hZ2VyCmltcG9ydCBhbmRyb2lkLmNvbnRlbnQuQ29udGV4dAppbXBvcnQgYW5kcm9pZC5ncmFwaGljcy5Db2xvcgppbXBvcnQgYW5kcm9pZC52aWV3LlZpZXdHcm91cAppbXBvcnQgYW5kcm9pZC53aWRnZXQuQnV0dG9uCmltcG9ydCBhbmRyb2lkLndpZGdldC5MaW5lYXJMYXlvdXQKaW1wb3J0IGFuZHJvaWQud2lkZ2V0LlNjcm9sbFZpZXcKaW1wb3J0IGFuZHJvaWQud2lkZ2V0LlRleHRWaWV3CgovKiogRGlhZ25vc3RpYyBlbnRyeSBvbmx5LiBOZXZlciBjbGVhcnMgdGhlIHN0b3JlZCBjcmFzaCBvciBlZGl0cyBidXNpbmVzcyBkYXRhLiAqLwppbnRlcm5hbCBvYmplY3QgU3RhcnR1cFJlY292ZXJ5IHsKICAgIHByaXZhdGUgdmFsIGFjdGl2ZSA9IGphdmEudXRpbC5XZWFrSGFzaE1hcDxBY3Rpdml0eSwgQm9vbGVhbj4oKQoKICAgIGZ1biBpc0FjdGl2ZShhY3Rpdml0eTogQWN0aXZpdHkpOiBCb29sZWFuID0gYWN0aXZlW2FjdGl2aXR5XSA9PSB0cnVlCgogICAgZnVuIGVudGVySWZSZWNvcmRlZChhY3Rpdml0eTogQWN0aXZpdHkpOiBCb29sZWFuIHsKICAgICAgICB2YWwgcHJlZnMgPSBhY3Rpdml0eS5nZXRTaGFyZWRQcmVmZXJlbmNlcygid2FxdF9wcmVmcyIsIENvbnRleHQuTU9ERV9QUklWQVRFKQogICAgICAgIHZhbCBjcmFzaCA9IHRyeSB7IHByZWZzLmdldFN0cmluZygibGFzdF9jcmFzaCIsIG51bGwpIH0gY2F0Y2ggKF86IEV4Y2VwdGlvbikgeyBudWxsIH0KICAgICAgICBpZiAoY3Jhc2guaXNOdWxsT3JCbGFuaygpKSByZXR1cm4gZmFsc2UKICAgICAgICBhY3RpdmVbYWN0aXZpdHldID0gdHJ1ZQogICAgICAgIHZhbCBkZW5zaXR5ID0gYWN0aXZpdHkucmVzb3VyY2VzLmRpc3BsYXlNZXRyaWNzLmRlbnNpdHkKICAgICAgICBmdW4gZHAodmFsdWU6IEludCkgPSAodmFsdWUgKiBkZW5zaXR5ICsgMC41ZikudG9JbnQoKQogICAgICAgIHZhbCBib2R5ID0gTGluZWFyTGF5b3V0KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIG9yaWVudGF0aW9uID0gTGluZWFyTGF5b3V0LlZFUlRJQ0FMCiAgICAgICAgICAgIGlzRm9jdXNhYmxlSW5Ub3VjaE1vZGUgPSB0cnVlCiAgICAgICAgICAgIHNldFBhZGRpbmcoZHAoMjApLCBkcCgyNCksIGRwKDIwKSwgZHAoMjApKQogICAgICAgICAgICBzZXRCYWNrZ3JvdW5kQ29sb3IoQ29sb3IucmdiKDI1MCwgMjQ3LCAyNDApKQogICAgICAgIH0KICAgICAgICBib2R5LmFkZFZpZXcoVGV4dFZpZXcoYWN0aXZpdHkpLmFwcGx5IHsKICAgICAgICAgICAgdGV4dCA9ICLZgdiq2K0g2KLZhdmGINmE2YTYqti02K7Ziti1IgogICAgICAgICAgICB0ZXh0U2l6ZSA9IDIzZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDM1LCAzMCwgMjUpKQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KFRleHRWaWV3KGFjdGl2aXR5KS5hcHBseSB7CiAgICAgICAgICAgIHRleHQgPSAi2KfZhNi02KfYtNipINiv2Yog2KjYqti52LHYtiDYs9io2Kgg2KfZhNil2LrZhNin2YIg2KfZhNmF2LPYrNmEINio2K/ZhCDZgdiq2K0g2KfZhNmI2KfYrNmH2Kkg2KfZhNi52KfYr9mK2KkuINmF2LQg2KjYqtmF2LPYrSDYp9mE2YXZh9in2YUg2KPZiCDYp9mE2KXYudiv2KfYr9in2KouINmF2Kcg2KrYrdiw2YHYtCDYp9mE2KrYt9io2YrZgiDZiNmE2Kcg2KrZhdiz2K0g2KjZitin2YbYp9iq2YcuIgogICAgICAgICAgICB0ZXh0U2l6ZSA9IDE2ZgogICAgICAgICAgICBzZXRUZXh0Q29sb3IoQ29sb3IucmdiKDQ1LCA0MCwgMzUpKQogICAgICAgICAgICBzZXRQYWRkaW5nKDAsIGRwKDE2KSwgMCwgZHAoMTIpKQogICAgICAgIH0pCiAgICAgICAgYm9keS5hZGRWaWV3KEJ1dHRvbihhY3Rpdml0eSkuYXBwbHkgewogICAgICAgICAgICB0ZXh0ID0gItmG2LPYriDYqtmB2KfYtdmK2YQg2KfZhNi52LfZhCIKICAgICAgICAgICAgc2V0T25DbGlja0xpc3RlbmVyIHsKICAgICAgICAgICAgICAgIChhY3Rpdml0eS5nZXRTeXN0ZW1TZXJ2aWNlKENvbnRleHQuQ0xJUEJPQVJEX1NFUlZJQ0UpIGFzIENsaXBib2FyZE1hbmFnZXIpCiAgICAgICAgICAgICAgICAgICAgLnNldFByaW1hcnlDbGlwKENsaXBEYXRhLm5ld1BsYWluVGV4dCgiV2FxdCBzdGFydHVwIGRpYWdub3N0aWMiLCBjcmFzaCkpCiAgICAgICAgICAgIH0KICAgICAgICB9KQogICAgICAgIGJvZHkuYWRkVmlldyhCdXR0b24oYWN0aXZpdHkpLmFwcGx5IHsKICAgICAgICAgICAgdGV4dCA9ICLYpdi62YTYp9mCIgogICAgICAgICAgICBzZXRPbkNsaWNrTGlzdGVuZXIgeyBhY3Rpdml0eS5maW5pc2goKSB9CiAgICAgICAgfSkKICAgICAgICB2YWwgdHJhY2UgPSBUZXh0VmlldyhhY3Rpdml0eSkuYXBwbHkgewogICAgICAgICAgICB0ZXh0ID0gY3Jhc2gKICAgICAgICAgICAgdGV4dFNpemUgPSAxMmYKICAgICAgICAgICAgc2V0VGV4dENvbG9yKENvbG9yLnJnYig0MCwgMzUsIDMwKSkKICAgICAgICAgICAgc2V0VGV4dElzU2VsZWN0YWJsZSh0cnVlKQogICAgICAgICAgICBjb250ZW50RGVzY3JpcHRpb24gPSAiV0FRVF9TVEFSVFVQX1JFQ09WRVJZX1RSQUNFIgogICAgICAgICAgICBzZXRQYWRkaW5nKDAsIGRwKDEyKSwgMCwgZHAoMTIpKQogICAgICAgIH0KICAgICAgICBib2R5LmFkZFZpZXcoU2Nyb2xsVmlldyhhY3Rpdml0eSkuYXBwbHkgewogICAgICAgICAgICBhZGRWaWV3KHRyYWNlLCBWaWV3R3JvdXAuTGF5b3V0UGFyYW1zKFZpZXdHcm91cC5MYXlvdXRQYXJhbXMuTUFUQ0hfUEFSRU5ULCBWaWV3R3JvdXAuTGF5b3V0UGFyYW1zLldSQVBfQ09OVEVOVCkpCiAgICAgICAgfSwgTGluZWFyTGF5b3V0LkxheW91dFBhcmFtcyhWaWV3R3JvdXAuTGF5b3V0UGFyYW1zLk1BVENIX1BBUkVOVCwgMCwgMWYpKQogICAgICAgIGFjdGl2aXR5LnNldENvbnRlbnRWaWV3KGJvZHkpCiAgICAgICAgYm9keS5yZXF1ZXN0Rm9jdXMoKQogICAgICAgIHJldHVybiB0cnVlCiAgICB9Cn0K'))
         print('Three minimal lifecycle guards applied; helper added. No storage/schema/version changes.')
 
         PY
@@ -1514,6 +1516,18 @@ jobs:
         adb pull /sdcard/ui.xml recovery-evidence/recorded-recovery.xml
         grep -q 'WAQT_STARTUP_RECOVERY_TRACE' recovery-evidence/recorded-recovery.xml
         grep -q 'ClassCastException' recovery-evidence/recorded-recovery.xml
+        adb shell wm size > recovery-evidence/screen-size.txt
+        python3 - <<'PYCONTROLS'
+        import xml.etree.ElementTree as ET,re,pathlib
+        h=int(re.search(r'\d+x(\d+)',pathlib.Path('recovery-evidence/screen-size.txt').read_text()).group(1))
+        r=ET.parse('recovery-evidence/recorded-recovery.xml').getroot()
+        for label in ['نسخ تفاصيل العطل','إغلاق']:
+         nodes=[n for n in r.iter('node') if n.get('text')==label]
+         assert len(nodes)==1,label
+         b=list(map(int,re.findall(r'\d+',nodes[0].get('bounds',''))))
+         assert len(b)==4 and 0<=b[1]<b[3]<=h,(label,b,h)
+         print('CONTROL_VISIBLE',label,b)
+        PYCONTROLS
         adb shell sha256sum "$DATA/shared_prefs/waqt_productivity_prefs.xml" > recovery-evidence/business-final.txt
         diff -u recovery-evidence/business-before.txt recovery-evidence/business-final.txt
         echo 'RECOVERY_EXISTING_TRACE=yes' > recovery-evidence/verdict.txt
@@ -1556,4 +1570,50 @@ jobs:
         git add .
         git commit -m 'Synthetic startup recovery evidence' || true
         git branch -M "recovery-evidence-r${{ github.run_id }}"
+        git push "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" HEAD --force
+
+  backup-type-proof:
+    if: ${{ contains(github.event.head_commit.message, '[recovery-test]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with:
+        distribution: temurin
+        java-version: '17'
+    - uses: gradle/actions/setup-gradle@v4
+      with:
+        gradle-version: '8.7'
+    - name: Create disposable backup type characterization
+      run: |
+        python3 - <<'PY'
+        import base64,pathlib
+        p=pathlib.Path('app/src/test/java/com/example/glassproductivity/BackupNumericTypeProofTest.kt')
+        p.write_bytes(base64.b64decode('cGFja2FnZSBjb20uZXhhbXBsZS5nbGFzc3Byb2R1Y3Rpdml0eQoKaW1wb3J0IGFuZHJvaWQuY29udGVudC5Db250ZXh0CmltcG9ydCBvcmcuanVuaXQuQXNzZXJ0LioKaW1wb3J0IG9yZy5qdW5pdC5UZXN0CmltcG9ydCBvcmcuanVuaXQucnVubmVyLlJ1bldpdGgKaW1wb3J0IG9yZy5yb2JvbGVjdHJpYy5Sb2JvbGVjdHJpY1Rlc3RSdW5uZXIKaW1wb3J0IG9yZy5yb2JvbGVjdHJpYy5SdW50aW1lRW52aXJvbm1lbnQKaW1wb3J0IG9yZy5yb2JvbGVjdHJpYy5hbm5vdGF0aW9uLkNvbmZpZwoKLyoqIENoYXJhY3Rlcml6ZXMgdGhlIG9yaWdpbmFsIHJlc3RvcmUgZGVmZWN0IHdpdGggZGlzcG9zYWJsZSBwcmVmZXJlbmNlcyBvbmx5LiAqLwpAUnVuV2l0aChSb2JvbGVjdHJpY1Rlc3RSdW5uZXI6OmNsYXNzKQpAQ29uZmlnKHNkayA9IFszNF0pCmNsYXNzIEJhY2t1cE51bWVyaWNUeXBlUHJvb2ZUZXN0IHsKICAgIHByaXZhdGUgdmFsIGNvbnRleHQgZ2V0KCkgPSBSdW50aW1lRW52aXJvbm1lbnQuZ2V0QXBwbGljYXRpb24oKQoKICAgIEBUZXN0CiAgICBmdW4gc21hbGxMb25nUmVzdG9yZUNoYW5nZXNUaGVTdG9yZWRUeXBlQW5kQnJlYWtzVHlwZWRTdGFydHVwUmVhZCgpIHsKICAgICAgICB2YWwgcCA9IGNvbnRleHQuZ2V0U2hhcmVkUHJlZmVyZW5jZXMoIndhcXRfcHJvZHVjdGl2aXR5X3ByZWZzIiwgQ29udGV4dC5NT0RFX1BSSVZBVEUpCiAgICAgICAgcC5lZGl0KCkuY2xlYXIoKS5wdXRMb25nKCJhY3RpdmVfZm9jdXNfdG90YWxfbXMiLCAxNTAwMDAwTCkuY29tbWl0KCkKICAgICAgICB2YWwgemlwID0gV2FxdENsb3VkQmFja3VwLmJ1aWxkKGNvbnRleHQsIG51bGwpCiAgICAgICAgcC5lZGl0KCkuY2xlYXIoKS5jb21taXQoKQogICAgICAgIFdhcXRDbG91ZEJhY2t1cC5yZXN0b3JlKGNvbnRleHQsIHppcCkKICAgICAgICB2YWwgcmVzdG9yZWQgPSBwLmFsbFsiYWN0aXZlX2ZvY3VzX3RvdGFsX21zIl0KICAgICAgICBwcmludGxuKCJUWVBFX1BST09GX0xPTkdfT1JJR0lOQUw9TG9uZyByZXN0b3JlZD0ke3Jlc3RvcmVkPy5qYXZhQ2xhc3M/LnNpbXBsZU5hbWV9IHZhbHVlPSRyZXN0b3JlZCIpCiAgICAgICAgYXNzZXJ0VHJ1ZSgiT3JpZ2luYWwgcmVzdG9yZSBuYXJyb3dzIHRoaXMgTG9uZyB0byBJbnRlZ2VyIiwgcmVzdG9yZWQgaXMgSW50KQogICAgICAgIGFzc2VydEVxdWFscygxNTAwMDAwLCByZXN0b3JlZCkKICAgICAgICB2YXIgdGhyZXcgPSBmYWxzZQogICAgICAgIHRyeSB7IHAuZ2V0TG9uZygiYWN0aXZlX2ZvY3VzX3RvdGFsX21zIiwgMEwpIH0gY2F0Y2ggKF86IENsYXNzQ2FzdEV4Y2VwdGlvbikgeyB0aHJldyA9IHRydWUgfQogICAgICAgIGFzc2VydFRydWUoIlR5cGVkIHN0YXJ0dXAgZ2V0TG9uZyBtdXN0IGV4cG9zZSB0aGUgb3JpZ2luYWwgcmVzdG9yZSBidWciLCB0aHJldykKICAgIH0KCiAgICBAVGVzdAogICAgZnVuIGludGVncmFsRmxvYXRSZXN0b3JlQ2hhbmdlc1RoZVN0b3JlZFR5cGVBbmRCcmVha3NSYWlsUmVhZCgpIHsKICAgICAgICB2YWwgcCA9IGNvbnRleHQuZ2V0U2hhcmVkUHJlZmVyZW5jZXMoIndhcXRfcHJlZnMiLCBDb250ZXh0Lk1PREVfUFJJVkFURSkKICAgICAgICBwLmVkaXQoKS5jbGVhcigpLnB1dEZsb2F0KCJyYWlsX29mZnNldCIsIDEuMGYpLmNvbW1pdCgpCiAgICAgICAgdmFsIHppcCA9IFdhcXRDbG91ZEJhY2t1cC5idWlsZChjb250ZXh0LCBudWxsKQogICAgICAgIHAuZWRpdCgpLmNsZWFyKCkuY29tbWl0KCkKICAgICAgICBXYXF0Q2xvdWRCYWNrdXAucmVzdG9yZShjb250ZXh0LCB6aXApCiAgICAgICAgdmFsIHJlc3RvcmVkID0gcC5hbGxbInJhaWxfb2Zmc2V0Il0KICAgICAgICBwcmludGxuKCJUWVBFX1BST09GX0ZMT0FUX09SSUdJTkFMPUZsb2F0IHJlc3RvcmVkPSR7cmVzdG9yZWQ/LmphdmFDbGFzcz8uc2ltcGxlTmFtZX0gdmFsdWU9JHJlc3RvcmVkIikKICAgICAgICBhc3NlcnRUcnVlKCJPcmlnaW5hbCByZXN0b3JlIG5hcnJvd3MgYW4gaW50ZWdyYWwgRmxvYXQgdG8gSW50ZWdlciIsIHJlc3RvcmVkIGlzIEludCkKICAgICAgICB2YXIgdGhyZXcgPSBmYWxzZQogICAgICAgIHRyeSB7IHAuZ2V0RmxvYXQoInJhaWxfb2Zmc2V0IiwgLjQ1ZikgfSBjYXRjaCAoXzogQ2xhc3NDYXN0RXhjZXB0aW9uKSB7IHRocmV3ID0gdHJ1ZSB9CiAgICAgICAgYXNzZXJ0VHJ1ZSgiVHlwZWQgc3RhcnR1cCByYWlsIGdldEZsb2F0IG11c3QgZXhwb3NlIHRoZSBvcmlnaW5hbCByZXN0b3JlIGJ1ZyIsIHRocmV3KQogICAgfQp9Cg=='))
+        PY
+    - name: Verify existing numeric restore failure mechanism
+      run: gradle :app:testDebugUnitTest --tests com.example.glassproductivity.BackupNumericTypeProofTest --no-daemon --stacktrace
+    - name: Preserve disposable proof reports
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: backup-numeric-type-proof
+        path: app/build/test-results/testDebugUnitTest/
+    - name: Publish disposable proof branch
+      if: always()
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        mkdir -p /tmp/type-proof
+        cp app/build/test-results/testDebugUnitTest/*.xml /tmp/type-proof/ 2>/dev/null || true
+        cd /tmp/type-proof
+        git init
+        git config user.name 'Waqt CI'
+        git config user.email 'waqt-ci@users.noreply.github.com'
+        git add .
+        git commit -m 'Disposable numeric restore type proof' || true
+        git branch -M "backup-type-evidence-r${{ github.run_id }}"
         git push "https://x-access-token:$GH_TOKEN@github.com/${{ github.repository }}.git" HEAD --force
