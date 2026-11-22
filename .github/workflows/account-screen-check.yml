@@ -240,7 +240,7 @@ jobs:
             read RX RY <<< "$RAIL"
             echo "RAIL_FOUND=yes at $RX,$RY" | tee -a shots/swipe_probe.txt
             adb logcat -c
-            adb shell input swipe $RX $RY $((RX+260)) $RY 700
+            adb shell input swipe $RX $RY $((RX+260)) $RY 120
             sleep 2
             adb exec-out screencap -p > shots/30_rail_dragged.png
             adb logcat -d > shots/swipe_probe_rail_logcat.txt
@@ -300,8 +300,53 @@ jobs:
             fi
           fi
           cat shots/swipe_probe.txt
-
-          # Acceptance assertions: the job must FAIL when the swipe-fix checks
+          # ---- Settings organization evidence (non-gated): reopen settings, expand each
+          # section, screenshot it, then verify moved-item placement from one full dump.
+          try_tap "⚙" || adb shell input tap 111 252 || true
+          sleep 4
+          adb exec-out screencap -p > shots/40_settings_top.png
+          for title in "إعدادات المساعد الذكي" "التركيز والاستراحة" "التنبيهات والصوت" "بياناتك والنسخ الاحتياطي" "صلاحيات التطبيق" "عن وَقْت والتحديث السحابي"; do
+            if scroll_until "$title"; then
+              sleep 2
+              safe=$(echo "$title" | md5sum | cut -c1-6)
+              adb exec-out screencap -p > shots/4x_settings_$safe.png
+              echo "SETTINGS_EXPANDED=$title" >> shots/settings_probe.txt
+            else
+              echo "SETTINGS_SECTION_MISSING=$title" >> shots/settings_probe.txt
+            fi
+          done
+          # Scroll to the very bottom so trailing sections render, then dump everything.
+          adb shell input swipe 540 1700 540 500; sleep 1
+          adb shell input swipe 540 1700 540 500; sleep 1
+          adb shell uiautomator dump /sdcard/uif.xml >/dev/null 2>&1
+          adb pull /sdcard/uif.xml /tmp/uisettings.xml >/dev/null 2>&1 || true
+          python3 - <<'PYS' >> shots/settings_probe.txt
+          import re
+          try:
+              xml = open('/tmp/uisettings.xml', encoding='utf-8').read()
+          except Exception:
+              xml = ''
+          texts = re.findall(r'text="([^"]*)"', xml)
+          def idx(sub):
+              for i, t in enumerate(texts):
+                  if sub in t:
+                      return i
+              return -1
+          focus = idx("التركيز والاستراحة"); alarms = idx("التنبيهات والصوت")
+          audio = idx("اختيار صوت أو موسيقى من الجهاز")
+          data = idx("بياناتك والنسخ الاحتياطي"); perms = idx("صلاحيات التطبيق")
+          permsbtn = idx("أذونات التنبيهات والخلفية")
+          about = idx("عن وَقْت والتحديث السحابي"); tour = idx("شرح التطبيق"); contact = idx("تواصل معنا")
+          def yn(c): return "yes" if c else "no"
+          print("SETTINGS_AUDIO_IN_FOCUS=" + yn(focus >= 0 and audio > focus and (alarms < 0 or audio < alarms)))
+          print("SETTINGS_PERMS_PLACED=" + yn(perms >= 0 and permsbtn > perms and (about < 0 or permsbtn < about)))
+          print("SETTINGS_TOUR_IN_ABOUT=" + yn(about >= 0 and tour > about))
+          print("SETTINGS_CONTACT_IN_ABOUT=" + yn(about >= 0 and contact > about))
+          print("SETTINGS_DATA_LEAN=" + yn(data >= 0 and (tour < 0 or tour > perms) and (contact < 0 or contact > perms)))
+          print("SETTINGS_DUMP_NODES=" + str(len(texts)))
+          PYS
+          cat shots/settings_probe.txt 2>/dev/null || true
+                    # Acceptance assertions: the job must FAIL when the swipe-fix checks
           # could not be verified - evidence alone is not a pass.
           grep -q '^BALL_FOUND=yes' shots/swipe_probe.txt
           grep -q '^BALL_DRAG_EXCLUDED=yes$' shots/swipe_probe.txt
