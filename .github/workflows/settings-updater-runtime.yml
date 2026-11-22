@@ -13,19 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-    - name: Await final bidi-only candidate build
-      run: |
-        set -euo pipefail
-        for attempt in $(seq 1 8); do
-         curl -fsSL 'https://api.github.com/repos/Madboly1/waqt/actions/runs/45015447376' -o /tmp/current-build.json
-         STATUS=$(python3 -c 'import json;print(json.load(open("/tmp/current-build.json"))["status"])')
-         if [ "$STATUS" = completed ]; then
-          python3 -c 'import json;x=json.load(open("/tmp/current-build.json"));assert x["conclusion"]=="success",x["conclusion"]'
-          exit 0
-         fi
-         sleep 60
-        done
-        exit 1
     - uses: actions/checkout@v4
       with:
         ref: e46dedf819910b804d8c8fa6f3fed38c937ee2a8
@@ -65,9 +52,10 @@ jobs:
         WAQT_KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
         WAQT_KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
         WAQT_KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
+        GH_TOKEN: ${{ github.token }}
       run: |
         set -euo pipefail
-        curl -fsSL 'https://api.github.com/repos/Madboly1/waqt/actions/runs/45014376643/jobs' -o /tmp/fixture-provenance.json
+        gh api repos/Madboly1/waqt/actions/runs/45014376643/jobs > /tmp/fixture-provenance.json
         mkdir -p settings-runtime-evidence
         python3 - <<'PYFILES'
         from pathlib import Path
