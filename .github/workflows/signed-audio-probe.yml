@@ -281,6 +281,386 @@ jobs:
         print('SIGNED_AUDIO_SAVED_SELECTION=ONLY_ALPHA')
         open('shots/saved-selection-verdict.txt','w').write('SIGNED_AUDIO_SAVED_SELECTION=ONLY_ALPHA\n')
         PYPREF
+    - name: Add beta after relaunch while preserving alpha in library
+      run: |
+        mkdir -p shots/populated-beta
+        tap_text() {
+          adb shell uiautomator dump /sdcard/ui.xml >> shots/populated-beta/probe-commands.log 2>&1
+          adb pull /sdcard/ui.xml ui.xml >> shots/populated-beta/probe-commands.log 2>&1
+          python3 - "$1" <<'PY' > /tmp/tap.txt
+        import re, sys
+        target = sys.argv[1]
+        xml = open('ui.xml', encoding='utf-8').read()
+        for m in re.finditer(r'<node\b[^>]*>', xml):
+            tag = m.group(0)
+            tm = re.search(r'text="([^"]*)"', tag)
+            dm = re.search(r'content-desc="([^"]*)"', tag)
+            bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+            cm = re.search(r'clickable="(true|false)"', tag)
+            if not bm:
+                continue
+            if int(bm.group(3)) <= int(bm.group(1)) or int(bm.group(4)) <= int(bm.group(2)):
+                continue
+            val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
+            if target.lower() in val.lower():
+                x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                score = 10 if (cm and cm.group(1) == 'true') else 0
+                if val.strip() == target:
+                    score += 1
+                print(score, x, y)
+        PY
+        }
+        try_tap() {
+          tap_text "$1"
+          read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
+          if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
+          unset X Y; return 1
+        }
+        scroll_until() {
+          for i in $(seq 1 8); do
+            if try_tap "$1"; then return 0; fi
+            adb shell input swipe 540 1700 540 700
+            sleep 2
+          done
+          return 1
+        }
+        adb shell am force-stop com.example.glassproductivity
+        sleep 2
+        adb shell am start -n com.example.glassproductivity/.MainActivity
+        sleep 8
+        adb logcat -c
+        for i in 1 2 3; do
+          if ! try_tap "التركيز"; then adb shell input tap 423 2078; fi
+          sleep 3
+          adb shell uiautomator dump /sdcard/uif.xml >> shots/populated-beta/probe-commands.log 2>&1
+          adb pull /sdcard/uif.xml /tmp/uif.xml >> shots/populated-beta/probe-commands.log 2>&1 || true
+          if grep -q 'بومودورو' /tmp/uif.xml; then break; fi
+        done
+        if ! grep -q 'بومودورو' /tmp/uif.xml; then
+          echo "AUDIO_CONSOLE=not_reached" > shots/populated-beta/audio_probe.txt
+          echo "AUDIO_FOCUS_TAB=no" >> shots/populated-beta/audio_probe.txt
+          cat shots/populated-beta/audio_probe.txt
+          exit 1
+        fi
+        sleep 2
+        adb exec-out screencap -p > shots/populated-beta/50_focus_tab.png
+        for i in 1 2 3; do
+          adb shell uiautomator dump /sdcard/uid.xml >> shots/populated-beta/probe-commands.log 2>&1
+          adb pull /sdcard/uid.xml /tmp/uid.xml >> shots/populated-beta/probe-commands.log 2>&1 || true
+          if grep -q '&#128202;' /tmp/uid.xml; then break; fi
+          HXY=$(python3 - <<'PYHD'
+        import re
+        xml = open('/tmp/uid.xml', encoding='utf-8').read()
+        best = None
+        for m in re.finditer(r'<node\b[^>]*>', xml):
+            tag = m.group(0)
+            tm = re.search(r'text="([^"]*)"', tag)
+            bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+            if not bm:
+                continue
+            val = tm.group(1) if tm else ''
+            if val in ('▸', '◂', '▾', '▴'):
+                x0, y0, x1, y1 = (int(bm.group(k)) for k in range(1, 5))
+                cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
+                edge = min(cx, 1080 - cx)
+                if best is None or edge < best[0]:
+                    best = (edge, cx, cy)
+        if best:
+            print(best[1], best[2])
+        PYHD
+          )
+          if [ -n "$HXY" ]; then adb shell input tap $HXY; fi
+          sleep 3
+        done
+        adb exec-out screencap -p > shots/populated-beta/51_audio_dock.png
+        HPXY=$(python3 - <<'PYHP'
+        import re
+        xml = open('/tmp/uid.xml', encoding='utf-8').read()
+        best = None
+        for m in re.finditer(r'<node\b[^>]*>', xml):
+            tag = m.group(0)
+            tm = re.search(r'text="([^"]*)"', tag)
+            bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+            if not bm:
+                continue
+            val = tm.group(1) if tm else ''
+            if '&#127911;' in val:
+                x0, y0, x1, y1 = (int(bm.group(k)) for k in range(1, 5))
+                if x1 > x0 and y1 > y0:
+                    best = ((x0 + x1) // 2, (y0 + y1) // 2)
+        if best:
+            print(best[0], best[1])
+        PYHP
+        )
+        if [ -n "$HPXY" ]; then adb shell input tap $HPXY; fi
+        sleep 3
+        adb exec-out screencap -p > shots/populated-beta/51b_audio_console.png
+        CONSOLE_OK=no
+        for i in 1 2 3 4 5; do
+          if try_tap "إضافة صوت من الجهاز"; then CONSOLE_OK=yes; break; fi
+          sleep 2
+        done
+        if [ "$CONSOLE_OK" != yes ]; then
+          echo "AUDIO_CONSOLE=not_reached" > shots/populated-beta/audio_probe.txt
+          adb shell uiautomator dump /sdcard/uia.xml >> shots/populated-beta/probe-commands.log 2>&1
+          adb pull /sdcard/uia.xml shots/populated-beta/ui_audio_blocker.xml >> shots/populated-beta/probe-commands.log 2>&1 || true
+          cat shots/populated-beta/audio_probe.txt
+          exit 1
+        fi
+        sleep 4
+        try_tap "Show roots" || true
+        sleep 2
+        try_tap "Downloads" || true
+        sleep 3
+        adb exec-out screencap -p > shots/populated-beta/52_picker.png
+        adb shell uiautomator dump /sdcard/uip.xml >> shots/populated-beta/probe-commands.log 2>&1
+        adb pull /sdcard/uip.xml shots/populated-beta/ui_audio_picker.xml >> shots/populated-beta/probe-commands.log 2>&1
+        DOCXY=$(python3 - <<'PYDOC'
+        import xml.etree.ElementTree as ET, re
+        root = ET.parse('shots/populated-beta/ui_audio_picker.xml').getroot()
+        candidates = []
+        for n in root.iter('node'):
+            text = n.get('text', '')
+            rid = n.get('resource-id', '')
+            if text != 'waqt_probe_beta.wav':
+                continue
+            b = re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]', n.get('bounds', ''))
+            if not b:
+                continue
+            x0, y0, x1, y1 = map(int, b.groups())
+            if x1 > x0 and y1 > y0:
+                score = 10 if rid.endswith('/title') else 0
+                candidates.append((score, (x0+x1)//2, (y0+y1)//2))
+        if candidates:
+            _, x, y = max(candidates)
+            print(x, y)
+        PYDOC
+        )
+        if [ -z "$DOCXY" ]; then
+          echo "AUDIO_PICKER_TITLE=not_found" > shots/populated-beta/audio_probe.txt
+          exit 1
+        fi
+        adb shell input tap $DOCXY
+        sleep 6
+        adb exec-out screencap -p > shots/populated-beta/53_after_pick.png
+        sleep 6
+        adb logcat -d > shots/populated-beta/audio_probe_logcat.txt || true
+        adb shell dumpsys media.player > shots/populated-beta/audio_dumpsys.txt 2>>shots/populated-beta/probe-commands.log || true
+        PICK_LINE=$(grep 'WAQT_AUDIO_TRACE.*PICKED' shots/populated-beta/audio_probe_logcat.txt | tail -1 || true)
+        COUNT=$(echo "$PICK_LINE" | grep -o 'count=[0-9]*' | cut -d= -f2 || true)
+        echo "AUDIO_PICKED_COUNT=${COUNT:-0}" > shots/populated-beta/audio_probe.txt
+        if echo "$PICK_LINE" | grep -q 'name=waqt_probe_beta.wav'; then echo "AUDIO_PICKED_ALPHA=yes" >> shots/populated-beta/audio_probe.txt; else echo "AUDIO_PICKED_ALPHA=no" >> shots/populated-beta/audio_probe.txt; fi
+        if grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/populated-beta/audio_probe_logcat.txt | grep -q 'name=waqt_probe_beta.wav'; then echo "AUDIO_PLAY_CUSTOM=waqt_probe_beta.wav" >> shots/populated-beta/audio_probe.txt; else echo "AUDIO_PLAY_CUSTOM=none" >> shots/populated-beta/audio_probe.txt; fi
+        if grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/populated-beta/audio_probe_logcat.txt | grep -q 'waqt_probe_alpha'; then echo "AUDIO_OTHER_FILE_PLAYED=yes" >> shots/populated-beta/audio_probe.txt; else echo "AUDIO_OTHER_FILE_PLAYED=no" >> shots/populated-beta/audio_probe.txt; fi
+        DISTINCT=$(grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/populated-beta/audio_probe_logcat.txt | grep -o 'name=[^ ]*' | sort -u | wc -l)
+        echo "AUDIO_PLAY_DISTINCT=$DISTINCT" >> shots/populated-beta/audio_probe.txt
+        if grep -q '^AUDIO_PICKED_COUNT=2$' shots/populated-beta/audio_probe.txt && grep -q '^AUDIO_PICKED_ALPHA=yes$' shots/populated-beta/audio_probe.txt && grep -q '^AUDIO_PLAY_CUSTOM=waqt_probe_beta.wav$' shots/populated-beta/audio_probe.txt && [ "$DISTINCT" = "1" ] && grep -q '^AUDIO_OTHER_FILE_PLAYED=no$' shots/populated-beta/audio_probe.txt; then echo "AUDIO_UI_LOG_ISOLATION=pass" >> shots/populated-beta/audio_probe.txt; else echo "AUDIO_UI_LOG_ISOLATION=fail" >> shots/populated-beta/audio_probe.txt; fi
+        cat shots/populated-beta/audio_probe.txt
+        grep -q '^AUDIO_UI_LOG_ISOLATION=pass$' shots/populated-beta/audio_probe.txt
+
+        adb shell dumpsys media.player > shots/populated-beta/media-player.txt
+        adb exec-out cat /data/user/0/com.example.glassproductivity/shared_prefs/waqt_prefs.xml > shots/populated-beta/saved.xml
+        python3 - <<'PYLIB'
+        import json,xml.etree.ElementTree as E
+        r=E.parse('shots/populated-beta/saved.xml').getroot()
+        p={n.get('name'):n.text for n in r}
+        a=json.loads(p['focus_custom_audio_tracks'])
+        assert len(a)==2,a
+        assert {x['name'] for x in a}=={'waqt_probe_alpha.wav','waqt_probe_beta.wav'},a
+        assert p['custom_audio_name']=='waqt_probe_beta.wav',p
+        print('POPULATED_SELECTION=beta;LIBRARY_UNCHANGED_COUNT=2')
+        PYLIB
+    - name: Reselect existing alpha after relaunch without adding duplicate or playing beta
+      run: |
+        mkdir -p shots/reselected-alpha
+        tap_text() {
+          adb shell uiautomator dump /sdcard/ui.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+          adb pull /sdcard/ui.xml ui.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+          python3 - "$1" <<'PY' > /tmp/tap.txt
+        import re, sys
+        target = sys.argv[1]
+        xml = open('ui.xml', encoding='utf-8').read()
+        for m in re.finditer(r'<node\b[^>]*>', xml):
+            tag = m.group(0)
+            tm = re.search(r'text="([^"]*)"', tag)
+            dm = re.search(r'content-desc="([^"]*)"', tag)
+            bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+            cm = re.search(r'clickable="(true|false)"', tag)
+            if not bm:
+                continue
+            if int(bm.group(3)) <= int(bm.group(1)) or int(bm.group(4)) <= int(bm.group(2)):
+                continue
+            val = (tm.group(1) if tm else '') + ' ' + (dm.group(1) if dm else '')
+            if target.lower() in val.lower():
+                x = (int(bm.group(1)) + int(bm.group(3))) // 2
+                y = (int(bm.group(2)) + int(bm.group(4))) // 2
+                score = 10 if (cm and cm.group(1) == 'true') else 0
+                if val.strip() == target:
+                    score += 1
+                print(score, x, y)
+        PY
+        }
+        try_tap() {
+          tap_text "$1"
+          read _SCORE X Y < <(sort -rn /tmp/tap.txt | head -1) || true
+          if [ -n "${X:-}" ]; then adb shell input tap $X $Y; unset X Y; return 0; fi
+          unset X Y; return 1
+        }
+        scroll_until() {
+          for i in $(seq 1 8); do
+            if try_tap "$1"; then return 0; fi
+            adb shell input swipe 540 1700 540 700
+            sleep 2
+          done
+          return 1
+        }
+        adb shell am force-stop com.example.glassproductivity
+        sleep 2
+        adb shell am start -n com.example.glassproductivity/.MainActivity
+        sleep 8
+        adb logcat -c
+        for i in 1 2 3; do
+          if ! try_tap "التركيز"; then adb shell input tap 423 2078; fi
+          sleep 3
+          adb shell uiautomator dump /sdcard/uif.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+          adb pull /sdcard/uif.xml /tmp/uif.xml >> shots/reselected-alpha/probe-commands.log 2>&1 || true
+          if grep -q 'بومودورو' /tmp/uif.xml; then break; fi
+        done
+        if ! grep -q 'بومودورو' /tmp/uif.xml; then
+          echo "AUDIO_CONSOLE=not_reached" > shots/reselected-alpha/audio_probe.txt
+          echo "AUDIO_FOCUS_TAB=no" >> shots/reselected-alpha/audio_probe.txt
+          cat shots/reselected-alpha/audio_probe.txt
+          exit 1
+        fi
+        sleep 2
+        adb exec-out screencap -p > shots/reselected-alpha/50_focus_tab.png
+        for i in 1 2 3; do
+          adb shell uiautomator dump /sdcard/uid.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+          adb pull /sdcard/uid.xml /tmp/uid.xml >> shots/reselected-alpha/probe-commands.log 2>&1 || true
+          if grep -q '&#128202;' /tmp/uid.xml; then break; fi
+          HXY=$(python3 - <<'PYHD'
+        import re
+        xml = open('/tmp/uid.xml', encoding='utf-8').read()
+        best = None
+        for m in re.finditer(r'<node\b[^>]*>', xml):
+            tag = m.group(0)
+            tm = re.search(r'text="([^"]*)"', tag)
+            bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+            if not bm:
+                continue
+            val = tm.group(1) if tm else ''
+            if val in ('▸', '◂', '▾', '▴'):
+                x0, y0, x1, y1 = (int(bm.group(k)) for k in range(1, 5))
+                cx, cy = (x0 + x1) // 2, (y0 + y1) // 2
+                edge = min(cx, 1080 - cx)
+                if best is None or edge < best[0]:
+                    best = (edge, cx, cy)
+        if best:
+            print(best[1], best[2])
+        PYHD
+          )
+          if [ -n "$HXY" ]; then adb shell input tap $HXY; fi
+          sleep 3
+        done
+        adb exec-out screencap -p > shots/reselected-alpha/51_audio_dock.png
+        HPXY=$(python3 - <<'PYHP'
+        import re
+        xml = open('/tmp/uid.xml', encoding='utf-8').read()
+        best = None
+        for m in re.finditer(r'<node\b[^>]*>', xml):
+            tag = m.group(0)
+            tm = re.search(r'text="([^"]*)"', tag)
+            bm = re.search(r'bounds="\[(\d+),(\d+)\]\[(\d+),(\d+)\]"', tag)
+            if not bm:
+                continue
+            val = tm.group(1) if tm else ''
+            if '&#127911;' in val:
+                x0, y0, x1, y1 = (int(bm.group(k)) for k in range(1, 5))
+                if x1 > x0 and y1 > y0:
+                    best = ((x0 + x1) // 2, (y0 + y1) // 2)
+        if best:
+            print(best[0], best[1])
+        PYHP
+        )
+        if [ -n "$HPXY" ]; then adb shell input tap $HPXY; fi
+        sleep 3
+        adb exec-out screencap -p > shots/reselected-alpha/51b_audio_console.png
+        CONSOLE_OK=no
+        for i in 1 2 3 4 5; do
+          if try_tap "إضافة صوت من الجهاز"; then CONSOLE_OK=yes; break; fi
+          sleep 2
+        done
+        if [ "$CONSOLE_OK" != yes ]; then
+          echo "AUDIO_CONSOLE=not_reached" > shots/reselected-alpha/audio_probe.txt
+          adb shell uiautomator dump /sdcard/uia.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+          adb pull /sdcard/uia.xml shots/reselected-alpha/ui_audio_blocker.xml >> shots/reselected-alpha/probe-commands.log 2>&1 || true
+          cat shots/reselected-alpha/audio_probe.txt
+          exit 1
+        fi
+        sleep 4
+        try_tap "Show roots" || true
+        sleep 2
+        try_tap "Downloads" || true
+        sleep 3
+        adb exec-out screencap -p > shots/reselected-alpha/52_picker.png
+        adb shell uiautomator dump /sdcard/uip.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+        adb pull /sdcard/uip.xml shots/reselected-alpha/ui_audio_picker.xml >> shots/reselected-alpha/probe-commands.log 2>&1
+        DOCXY=$(python3 - <<'PYDOC'
+        import xml.etree.ElementTree as ET, re
+        root = ET.parse('shots/reselected-alpha/ui_audio_picker.xml').getroot()
+        candidates = []
+        for n in root.iter('node'):
+            text = n.get('text', '')
+            rid = n.get('resource-id', '')
+            if text != 'waqt_probe_alpha.wav':
+                continue
+            b = re.fullmatch(r'\[(\d+),(\d+)\]\[(\d+),(\d+)\]', n.get('bounds', ''))
+            if not b:
+                continue
+            x0, y0, x1, y1 = map(int, b.groups())
+            if x1 > x0 and y1 > y0:
+                score = 10 if rid.endswith('/title') else 0
+                candidates.append((score, (x0+x1)//2, (y0+y1)//2))
+        if candidates:
+            _, x, y = max(candidates)
+            print(x, y)
+        PYDOC
+        )
+        if [ -z "$DOCXY" ]; then
+          echo "AUDIO_PICKER_TITLE=not_found" > shots/reselected-alpha/audio_probe.txt
+          exit 1
+        fi
+        adb shell input tap $DOCXY
+        sleep 6
+        adb exec-out screencap -p > shots/reselected-alpha/53_after_pick.png
+        sleep 6
+        adb logcat -d > shots/reselected-alpha/audio_probe_logcat.txt || true
+        adb shell dumpsys media.player > shots/reselected-alpha/audio_dumpsys.txt 2>>shots/reselected-alpha/probe-commands.log || true
+        PICK_LINE=$(grep 'WAQT_AUDIO_TRACE.*PICKED' shots/reselected-alpha/audio_probe_logcat.txt | tail -1 || true)
+        COUNT=$(echo "$PICK_LINE" | grep -o 'count=[0-9]*' | cut -d= -f2 || true)
+        echo "AUDIO_PICKED_COUNT=${COUNT:-0}" > shots/reselected-alpha/audio_probe.txt
+        if echo "$PICK_LINE" | grep -q 'name=waqt_probe_alpha.wav'; then echo "AUDIO_PICKED_ALPHA=yes" >> shots/reselected-alpha/audio_probe.txt; else echo "AUDIO_PICKED_ALPHA=no" >> shots/reselected-alpha/audio_probe.txt; fi
+        if grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/reselected-alpha/audio_probe_logcat.txt | grep -q 'name=waqt_probe_alpha.wav'; then echo "AUDIO_PLAY_CUSTOM=waqt_probe_alpha.wav" >> shots/reselected-alpha/audio_probe.txt; else echo "AUDIO_PLAY_CUSTOM=none" >> shots/reselected-alpha/audio_probe.txt; fi
+        if grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/reselected-alpha/audio_probe_logcat.txt | grep -q 'waqt_probe_beta'; then echo "AUDIO_OTHER_FILE_PLAYED=yes" >> shots/reselected-alpha/audio_probe.txt; else echo "AUDIO_OTHER_FILE_PLAYED=no" >> shots/reselected-alpha/audio_probe.txt; fi
+        DISTINCT=$(grep 'WAQT_AUDIO_TRACE.*PLAY_CUSTOM' shots/reselected-alpha/audio_probe_logcat.txt | grep -o 'name=[^ ]*' | sort -u | wc -l)
+        echo "AUDIO_PLAY_DISTINCT=$DISTINCT" >> shots/reselected-alpha/audio_probe.txt
+        if grep -q '^AUDIO_PICKED_COUNT=2$' shots/reselected-alpha/audio_probe.txt && grep -q '^AUDIO_PICKED_ALPHA=yes$' shots/reselected-alpha/audio_probe.txt && grep -q '^AUDIO_PLAY_CUSTOM=waqt_probe_alpha.wav$' shots/reselected-alpha/audio_probe.txt && [ "$DISTINCT" = "1" ] && grep -q '^AUDIO_OTHER_FILE_PLAYED=no$' shots/reselected-alpha/audio_probe.txt; then echo "AUDIO_UI_LOG_ISOLATION=pass" >> shots/reselected-alpha/audio_probe.txt; else echo "AUDIO_UI_LOG_ISOLATION=fail" >> shots/reselected-alpha/audio_probe.txt; fi
+        cat shots/reselected-alpha/audio_probe.txt
+        grep -q '^AUDIO_UI_LOG_ISOLATION=pass$' shots/reselected-alpha/audio_probe.txt
+
+        adb shell dumpsys media.player > shots/reselected-alpha/media-player.txt
+        adb exec-out cat /data/user/0/com.example.glassproductivity/shared_prefs/waqt_prefs.xml > shots/reselected-alpha/saved.xml
+        python3 - <<'PYLIB'
+        import json,xml.etree.ElementTree as E
+        r=E.parse('shots/reselected-alpha/saved.xml').getroot()
+        p={n.get('name'):n.text for n in r}
+        a=json.loads(p['focus_custom_audio_tracks'])
+        assert len(a)==2,a
+        assert {x['name'] for x in a}=={'waqt_probe_alpha.wav','waqt_probe_beta.wav'},a
+        assert p['custom_audio_name']=='waqt_probe_alpha.wav',p
+        print('POPULATED_SELECTION=alpha;LIBRARY_UNCHANGED_COUNT=2')
+        PYLIB
     - name: Preserve exact signed audio evidence
       if: always()
       uses: actions/upload-artifact@v4
@@ -293,7 +673,7 @@ jobs:
         GH_TOKEN: ${{ github.token }}
       run: |
         mkdir -p /tmp/audio-evidence
-        cp shots/* /tmp/audio-evidence/ 2>/dev/null || true
+        cp -R shots/. /tmp/audio-evidence/
         cp /tmp/emulator.log /tmp/audio-evidence/emulator.log 2>/dev/null || true
         cd /tmp/audio-evidence
         git init
