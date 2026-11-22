@@ -8485,6 +8485,7 @@ class MainActivity : AppCompatActivity() {
         dock.alpha = 0f
         railDockViews[dock] = true
         attachRailDrag(grip ?: dock, dock, isOpen, setOpen)
+        android.util.Log.d("WAQT_RAIL_TRACE", "RAIL_ATTACHED isOpen=" + isOpen + " grip=" + (grip != null) + " children=" + dock.childCount)
         dock.post { positionRail(dock) }
     }
 
