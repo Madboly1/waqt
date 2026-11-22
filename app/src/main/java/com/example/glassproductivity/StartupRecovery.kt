@@ -26,7 +26,8 @@ internal object StartupRecovery {
         fun dp(value: Int) = (value * density + 0.5f).toInt()
         val body = LinearLayout(activity).apply {
             orientation = LinearLayout.VERTICAL
-            setPadding(dp(20), dp(24), dp(20), dp(24))
+            isFocusableInTouchMode = true
+            setPadding(dp(20), dp(24), dp(20), dp(20))
             setBackgroundColor(Color.rgb(250, 247, 240))
         }
         body.addView(TextView(activity).apply {
@@ -38,14 +39,7 @@ internal object StartupRecovery {
             text = "الشاشة دي بتعرض سبب الإغلاق المسجل بدل فتح الواجهة العادية. مش بتمسح المهام أو الإعدادات. ما تحذفش التطبيق ولا تمسح بياناته."
             textSize = 16f
             setTextColor(Color.rgb(45, 40, 35))
-            setPadding(0, dp(16), 0, dp(16))
-        })
-        body.addView(TextView(activity).apply {
-            text = crash
-            textSize = 12f
-            setTextColor(Color.rgb(40, 35, 30))
-            setTextIsSelectable(true)
-            contentDescription = "WAQT_STARTUP_RECOVERY_TRACE"
+            setPadding(0, dp(16), 0, dp(12))
         })
         body.addView(Button(activity).apply {
             text = "نسخ تفاصيل العطل"
@@ -58,9 +52,19 @@ internal object StartupRecovery {
             text = "إغلاق"
             setOnClickListener { activity.finish() }
         })
-        activity.setContentView(ScrollView(activity).apply {
-            addView(body, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
-        })
+        val trace = TextView(activity).apply {
+            text = crash
+            textSize = 12f
+            setTextColor(Color.rgb(40, 35, 30))
+            setTextIsSelectable(true)
+            contentDescription = "WAQT_STARTUP_RECOVERY_TRACE"
+            setPadding(0, dp(12), 0, dp(12))
+        }
+        body.addView(ScrollView(activity).apply {
+            addView(trace, ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        }, LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 0, 1f))
+        activity.setContentView(body)
+        body.requestFocus()
         return true
     }
 }
