@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.glassproductivity.BackupSafetyTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2026-11-22T10:36:42" hostname="runnervm0hi8g" time="0.964">
+  <properties/>
+  <testcase name="restore writes a recovery snapshot of replaced data first" classname="com.example.glassproductivity.BackupSafetyTest" time="0.145"/>
+  <testcase name="truncated backup is rejected and current items are untouched" classname="com.example.glassproductivity.BackupSafetyTest" time="0.146"/>
+  <testcase name="snapshot failure aborts restore before any write" classname="com.example.glassproductivity.BackupSafetyTest" time="0.089"/>
+  <testcase name="absent sections keep existing data" classname="com.example.glassproductivity.BackupSafetyTest" time="0.081"/>
+  <testcase name="zip media restore still writes inside the app files directory" classname="com.example.glassproductivity.BackupSafetyTest" time="0.075"/>
+  <testcase name="zip media restore refuses paths outside app directories" classname="com.example.glassproductivity.BackupSafetyTest" time="0.083"/>
+  <testcase name="malformed section rejects whole file with no partial writes" classname="com.example.glassproductivity.BackupSafetyTest" time="0.072"/>
+  <testcase name="valid roundtrip restores exact items" classname="com.example.glassproductivity.BackupSafetyTest" time="0.097"/>
+  <testcase name="wrong typed section is treated as malformed not absent" classname="com.example.glassproductivity.BackupSafetyTest" time="0.075"/>
+  <testcase name="settings section still restores" classname="com.example.glassproductivity.BackupSafetyTest" time="0.095"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.glassproductivity.BackupPreferenceTypesTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2026-11-22T10:36:39" hostname="runnervm0hi8g" time="3.117">
+  <properties/>
+  <testcase name="missingMetadataOverflowAndFractionalLongRejectWithoutWrites" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="0.193"/>
+  <testcase name="malformedMetadataRejectsBeforeAnyPreferenceOrFileWrite" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="0.111"/>
+  <testcase name="legacySchemasRecoverAllKnownLongAndFloatContractsOnFreshStores" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="0.136"/>
+  <testcase name="legacyUnknownNumericUsesExistingTypeWithoutChangingUnrelatedData" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="0.061"/>
+  <testcase name="legacyStringSetsRemainStringSets" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="0.088"/>
+  <testcase name="exactTypesSurviveFreshRestoreAndRepeatedRoundTrip" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="2.388"/>
+  <testcase name="newMetadataOverridesAnOldWrongNumericType" classname="com.example.glassproductivity.BackupPreferenceTypesTest" time="0.138"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
