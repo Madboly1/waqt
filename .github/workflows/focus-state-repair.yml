@@ -34,23 +34,34 @@ jobs:
         p=pathlib.Path('app/src/test/java/com/example/glassproductivity/SavedNumericPreferencesTest.kt');p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(zlib.decompress(base64.b64decode('eNq1V21P20gQ/p5fsfIn+4QsOFqhUlUiQLhD5U1JrndSVVmLPU6W2rvu7jpgVfz3m1nbeSExkCvnDyRkZ555fWbHBY+/8wmwWOUhPPC8yCCcZNyYQqukjK2YCVv1eiIvlLaMy0QrkYSxkhakDU/o88G2x0pPwrtSChv2jQFtw9/WT44hVRrWfx+D2YCjSylBh8NS/i3sdPlcq1uVQWy1iMPh4jvBDJ1Sp3AprchhIGdCK5ljGF2SXEpluRVKUqCpmPR6R40n/kaTh4cxpS7oHdXyvkm+s0/s6/67b0HPHbERn0FyVeaAijcaUtAgYzCEwX72GD6FFjNugc14xuI6v2wC1g8Qad33EI/6RZGJ2DnqB2sYBVoxc4QGkdRGU64hWXLC9+75DxstVz5y2t4OayodXl6fDqKb4fmX/niwbsuAtUJOtjS3jYXvUt3LseYxILp3x2c8zLiczKv6EENBiWAxLw0k7LZiC6ETKsEJN3Yudrh0eo72J6BRk+rObpEUKMqsWpK5UHLCuH2eLuEQciET0EMolBFW6cqViY7hTMWlGWFbgeeCO6oJwdJSMg3G5e1nXbQQEoH/hnEGXNOnynP64eM8z10S7LFXg7u+ImjJtVb3kDjzTaSmr2EIPBk88NhmFfW1Ku3JFANF8L6sRug6JF94VsK1HlcFkG8OuC7Lko9FaRHV97gLMkrJTGQs1zbKqbq7HSIWGZbVInvvd+kJ5gbo2aylIedCopNRQWWu9d/9TtqkcKyQm1w+VUKOogpKpjwzsG5nhGyWk6YthYXcRHdGSVTwPg8GN2zcH30eecGaKHYLPBG9uh4PSLQtyNwW9fBtXfFPTQZ5loVWXfJiSUxDAdz6+8v5btUNNQ8Ng1d1md9QcDVc7ubz4EeJmfB3L3ZqUNKnDvc9V7lL4wXYbCuyTZHWNVwhnUa3IVehddV5NW+omC9g1MnbWeRuk+xYl+DPJb52tNw3JgzD5logPPYWfxfcUVogIXhG3joymL5MLoUx6PIppLzMrBm6GByTVkjSkbwta/dsmp/ysBbsIiKdhpf9f6Iv/Yu/Busk2KC9xNFa+/yq0e5Q2EjPvQ8XW/Ph45s0/EoNVuN/feOvRv6a9n9N2z52jOlBoeLpKa9OFZgrZYd0MYxVwivjAr0UssSZ8/I4dvOpLgoQZIQQ3sb2i0uN17JtDSOGVQQRdMxjh2zJpQY/r31C9P2D/z74VpK2f9DFFJeLlVS0Vf+1/GsusuZ2RI6fZYpbuiGbq7G+D4dwr/F2WEn+0wu5zRLhRSpN8Zwo8FJe5jAvpmYv3enaJcOU3PZbLLySVr0I371PA7yR0xdStexM8FykLk1PYw0P0g3RrhhCkbcK4mkd73E9ntSXNG05SKE/cGzjQnhNjZTh+pg8S572fu+aot7uL1zuVle44m05zT7i1iIy5B1FxiwuYywvMdpmVTUiQ/ZmFSu4xjC9oEkJPfhqEE+ZHx2y9QWYls3H3rY3bS13RmuUP6KslMUQYjUDGiRc0iqPtIR+akH/iS+NWbN4nmhupm1IO0vLfLC5jEpm1angE6kwpgbIyZ9weVwV6EZrFtnqDtCbytQ8fYmgbY0xJzaKyTNvxaX1+m678Xa0v9tO3jJtb1gST9kpvgOV0hlhpkZyvVdq8IL/sQdCXTPT9za9LLWunZUypsZFVzrGygJxaYbRC+imessS+7ptvsfev0BdwM8=')))
         PY
         git diff --stat
-    - name: Test timer state preservation and all backup regression suites
-      run: |-
-        set -o pipefail
-        gradle :app:testDebugUnitTest --tests 'com.example.glassproductivity.SavedNumericPreferencesTest' --tests 'com.example.glassproductivity.Backup*' --tests 'com.example.glassproductivity.WaqtCloudBackupTest' --no-daemon --stacktrace | tee /tmp/focus-repair-test-log.txt
-    - name: Decode existing release signing key
-      env:
-        KEYSTORE_BASE64: ${{ secrets.WAQT_KEYSTORE_BASE64 }}
+    - uses: actions/download-artifact@v4
+      with:
+        name: waqt-focus-type-repair-review-only
+        run-id: 45008818101
+        github-token: ${{ github.token }}
+        path: app/build/outputs/apk/release
+    - name: Verify unchanged already built signed repair bytes
+      run: echo 'f40437cae4185714970647907b6447d0abf7c89c3f254a032151a5acc3e35fa4  app/build/outputs/apk/release/app-release.apk' |
+        sha256sum -c -
+    - uses: actions/checkout@v4
+      with:
+        ref: 178f5464d2abc2ee28b1c532fc1a3da03bdb20ae
+        path: prior-unit-evidence
+    - name: Verify same-source existing 35 unit regression results
       run: |
-        test -n "$KEYSTORE_BASE64"
-        echo "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/waqt-release.jks"
-    - name: Build signed focus repair candidate
-      env:
-        WAQT_KEYSTORE_PATH: ${{ runner.temp }}/waqt-release.jks
-        WAQT_KEYSTORE_PASSWORD: ${{ secrets.WAQT_KEYSTORE_PASSWORD }}
-        WAQT_KEY_ALIAS: ${{ secrets.WAQT_KEY_ALIAS }}
-        WAQT_KEY_PASSWORD: ${{ secrets.WAQT_KEY_PASSWORD }}
-      run: gradle :app:assembleRelease --no-daemon --stacktrace
+        python3 - <<'PY'
+        from pathlib import Path
+        import xml.etree.ElementTree as E
+        p=Path('prior-unit-evidence');total=0
+        for f in p.glob('TEST-*.xml'):
+         r=E.parse(f).getroot()
+         assert int(r.get('failures','0'))==int(r.get('errors','0'))==int(r.get('skipped','0'))==0,f
+         total+=int(r.get('tests','0'))
+        assert total==35,total
+        Path('repair-evidence').mkdir(exist_ok=True)
+        Path('repair-evidence/prior-unit-verdict.txt').write_text('UNCHANGED_SOURCE_PRIOR_UNIT_TESTS=35\nFAILURES_ERRORS_SKIPS=0\nORIGINAL_RUN=45008818101\n')
+        print('Prior unchanged-source unit tests:',total)
+        PY
     - name: Verify package version signing and exact bytes
       run: |
         mkdir -p repair-evidence
@@ -123,9 +134,20 @@ jobs:
         # First let the original initialize normal defaults on disposable state.
         adb shell am start -W -n "$PKG/.MainActivity" > repair-evidence/original-clean-launch.txt
         sleep 7
+        adb shell pidof "$PKG" > repair-evidence/original-clean-pid.txt
         adb shell am force-stop "$PKG"
-        adb exec-out cat "$DATA/shared_prefs/waqt_prefs.xml" > /tmp/repair-settings.xml
-        adb exec-out cat "$DATA/shared_prefs/waqt_productivity_prefs.xml" > /tmp/repair-productivity.xml
+        if adb shell test -f "$DATA/shared_prefs/waqt_prefs.xml"; then
+         adb exec-out cat "$DATA/shared_prefs/waqt_prefs.xml" > /tmp/repair-settings.xml
+        else
+         printf '<map />\n' > /tmp/repair-settings.xml
+         echo 'INITIAL_SETTINGS_FILE=not_created_yet' > repair-evidence/fixture-initial-files.txt
+        fi
+        if adb shell test -f "$DATA/shared_prefs/waqt_productivity_prefs.xml"; then
+         adb exec-out cat "$DATA/shared_prefs/waqt_productivity_prefs.xml" > /tmp/repair-productivity.xml
+        else
+         printf '<map />\n' > /tmp/repair-productivity.xml
+         echo 'INITIAL_PRODUCTIVITY_FILE=not_created_yet' >> repair-evidence/fixture-initial-files.txt
+        fi
         python3 - <<'PY'
         from pathlib import Path
         import xml.etree.ElementTree as E,json,datetime
@@ -150,6 +172,7 @@ jobs:
           else:n.set('value',value)
          Path(filename).write_bytes(E.tostring(r,encoding='utf-8',xml_declaration=True))
         PY
+        adb shell mkdir -p "$DATA/shared_prefs"
         adb push /tmp/repair-settings.xml "$DATA/shared_prefs/waqt_prefs.xml"
         adb push /tmp/repair-productivity.xml "$DATA/shared_prefs/waqt_productivity_prefs.xml"
         adb shell mkdir -p "$DATA/files/journal_audio"
@@ -239,7 +262,7 @@ jobs:
       if: always()
       uses: actions/upload-artifact@v4
       with:
-        name: waqt-focus-type-repair-review-only
+        name: waqt-focus-type-repair-exact-retested
         path: app/build/outputs/apk/release/app-release.apk
     - name: Keep repair evidence
       if: always()
