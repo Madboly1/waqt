@@ -1,0 +1,638 @@
+--------- beginning of main
+11-22 05:22:42.875  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=0 x=82.0 y=1180.0 rawX=82.0 rawY=1180.0 tab=1 
+11-22 05:22:42.875  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_SWIPE_DOWN eligible=false local=82.0,835.0 host=1080x1863
+11-22 05:22:42.875  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=0 x=82.0 y=835.0 rawX=82.0 rawY=1180.0 tab=1 
+11-22 05:22:42.876  1827  1827 D WAQT_TOUCH_TRACE: HOST_DOWN excluded=true candidatePath=TextView(id=-1,size=115x82,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0) <- LinearLayout(id=-1,size=165x544,click=false,long=false,vis=0,tx=0.0,ty=756.37854,scroll=0,0,elev=44.0) <- FrameLayout(id=-1,size=1080x1863,click=false,long=false,vis=0,tx=0.0,ty=0.0,scroll=0,0,elev=0.0)
+11-22 05:22:42.876  1827  1827 D WAQT_RAIL_TRACE: RAIL_DOWN targetIsDock=false isOpen=true slop=22 thr=49
+11-22 05:22:42.876  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISALLOW requested=true tab=1
+11-22 05:22:42.876  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=0 handled=true tab=1
+11-22 05:22:42.876  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=0 handled=true
+11-22 05:22:42.886  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=86.740005 y=1180.0 rawX=86.740005 rawY=1180.0 tab=1 
+11-22 05:22:42.887  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=86.740005 y=835.0 rawX=86.740005 rawY=1180.0 tab=1 
+11-22 05:22:42.887  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=4.7400055 dy=0.0
+11-22 05:22:42.887  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:42.887  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:42.903  4898  4909 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10090; state: ENABLED
+11-22 05:22:42.904  4928  5266 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10094; state: ENABLED
+11-22 05:22:42.907  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=99.38 y=1180.0 rawX=99.38 rawY=1180.0 tab=1 
+11-22 05:22:42.907  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=99.38 y=835.0 rawX=99.38 rawY=1180.0 tab=1 
+11-22 05:22:42.907  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=17.379997 dy=0.0
+11-22 05:22:42.907  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:42.907  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:42.956  1827  1907 D EGL_emulation: app_time_stats: avg=6099.46ms min=6099.46ms max=6099.46ms count=1
+11-22 05:22:42.956  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=116.759995 y=1180.0 rawX=116.759995 rawY=1180.0 tab=1 
+11-22 05:22:42.956  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=116.759995 y=835.0 rawX=116.759995 rawY=1180.0 tab=1 
+11-22 05:22:42.956  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=34.759995 dy=0.0
+11-22 05:22:42.956  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=34.759995 dragging=true isOpen=true
+11-22 05:22:42.957  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:42.957  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.031  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=169.42667 y=1180.0 rawX=169.42667 rawY=1180.0 tab=1 
+11-22 05:22:43.034  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=169.42667 y=835.0 rawX=169.42667 rawY=1180.0 tab=1 
+11-22 05:22:43.034  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=87.42667 dy=0.0
+11-22 05:22:43.035  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=87.42667 dragging=true isOpen=true
+11-22 05:22:43.035  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.035  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.150  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=251.58667 y=1180.0 rawX=251.58667 rawY=1180.0 tab=1 
+11-22 05:22:43.150  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=251.58667 y=835.0 rawX=251.58667 rawY=1180.0 tab=1 
+11-22 05:22:43.151  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=169.58667 dy=0.0
+11-22 05:22:43.151  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=169.58667 dragging=true isOpen=true
+11-22 05:22:43.151  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.152  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.256  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=373.77335 y=1180.0 rawX=373.77335 rawY=1180.0 tab=1 
+11-22 05:22:43.258  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=373.77335 y=835.0 rawX=373.77335 rawY=1180.0 tab=1 
+11-22 05:22:43.261  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=291.77335 dy=0.0
+11-22 05:22:43.261  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=291.77335 dragging=true isOpen=true
+11-22 05:22:43.262  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.262  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.265  5757  5757 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.clearcut.bootcount.service.START pkg=com.google.android.gms }
+11-22 05:22:43.336  5759  5759 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.people.service.START pkg=com.google.android.gms }
+11-22 05:22:43.364  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=492.80002 y=1180.0 rawX=492.80002 rawY=1180.0 tab=1 
+11-22 05:22:43.365  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=492.80002 y=835.0 rawX=492.80002 rawY=1180.0 tab=1 
+11-22 05:22:43.365  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=410.80002 dy=0.0
+11-22 05:22:43.365  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=410.80002 dragging=true isOpen=true
+11-22 05:22:43.365  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.365  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.453  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=599.18665 y=1180.0 rawX=599.18665 rawY=1180.0 tab=1 
+11-22 05:22:43.453  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=599.18665 y=835.0 rawX=599.18665 rawY=1180.0 tab=1 
+11-22 05:22:43.453  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=517.18665 dy=0.0
+11-22 05:22:43.453  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=517.18665 dragging=true isOpen=true
+11-22 05:22:43.453  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.453  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.540  5757  5776 I .gms.persisten: Compiler allocated 4801KB to compile void bqwt.C(java.util.Set, long, demj, demk, java.util.List, java.util.LinkedHashMap, dqfs, bqws, boolean)
+11-22 05:22:43.567  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=702.4133 y=1180.0 rawX=702.4133 rawY=1180.0 tab=1 
+11-22 05:22:43.568  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=702.4133 y=835.0 rawX=702.4133 rawY=1180.0 tab=1 
+11-22 05:22:43.568  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=620.4133 dy=0.0
+11-22 05:22:43.569  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=620.4133 dragging=true isOpen=true
+11-22 05:22:43.569  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.570  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.664  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=815.12 y=1180.0 rawX=815.12 rawY=1180.0 tab=1 
+11-22 05:22:43.665  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=815.12 y=835.0 rawX=815.12 rawY=1180.0 tab=1 
+11-22 05:22:43.665  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=733.12 dy=0.0
+11-22 05:22:43.668  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=733.12 dragging=true isOpen=true
+11-22 05:22:43.668  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.668  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.731  5757  5776 I .gms.persisten: Compiler allocated 5908KB to compile void bqwt.C(java.util.Set, long, demj, demk, java.util.List, java.util.LinkedHashMap, dqfs, bqws, boolean)
+11-22 05:22:43.777  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=2 x=923.61334 y=1180.0 rawX=923.61334 rawY=1180.0 tab=1 
+11-22 05:22:43.777  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=2 x=923.61334 y=835.0 rawX=923.61334 rawY=1180.0 tab=1 
+11-22 05:22:43.777  1827  1827 D WAQT_TOUCH_TRACE: HOST_MOVE_BLOCKED excluded=true dx=841.61334 dy=0.0
+11-22 05:22:43.777  1827  1827 D WAQT_RAIL_TRACE: RAIL_SKIP_EVAL dx=841.61334 dragging=true isOpen=true
+11-22 05:22:43.777  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=2 handled=true tab=1
+11-22 05:22:43.777  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=2 handled=true
+11-22 05:22:43.870  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_DISPATCH action=1 x=1030.0 y=1180.0 rawX=1030.0 rawY=1180.0 tab=1 
+11-22 05:22:43.870  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_IN action=1 x=1030.0 y=835.0 rawX=1030.0 rawY=1180.0 tab=1 
+11-22 05:22:43.870  1827  1827 D WAQT_RAIL_TRACE: RAIL_UP moved=true dragging=true isOpen=true
+11-22 05:22:43.870  1827  1827 D WAQT_TOUCH_TRACE: HOST_DISPATCH_OUT action=1 handled=true tab=1
+11-22 05:22:43.870  1827  1827 D WAQT_TOUCH_TRACE: ACTIVITY_RESULT action=1 handled=true
+11-22 05:22:43.897  4968  4984 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-22 05:22:43.907  4968  4986 D SettingsSliceProvider: onSlicePinned: content://com.android.settings.slices/action/media_volume
+11-22 05:22:43.911  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.912  4968  5060 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+11-22 05:22:43.912  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 1
+11-22 05:22:43.935  4968  4984 D SliceBuilder: Creating slice for: com.android.settings.fuelgauge.SmartBatteryPreferenceController
+11-22 05:22:43.936  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.941  4968  4986 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/media_volume
+11-22 05:22:43.946  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.947  4968  4984 D SliceBuilder: Creating slice for: com.android.settings.accessibility.MagnificationGesturesPreferenceController
+11-22 05:22:43.950  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen) in: 4
+11-22 05:22:43.950  4968  5278 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 14
+11-22 05:22:43.968  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.970  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 2
+11-22 05:22:43.970  4968  5075 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-22 05:22:43.975  4968  4986 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-22 05:22:43.977  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.977  4968  5086 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-22 05:22:43.978  4968  5278 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 1
+11-22 05:22:43.979  1827  1907 D EGL_emulation: app_time_stats: avg=101.08ms min=70.56ms max=119.05ms count=10
+11-22 05:22:43.981  5282  6026 W AssistantConfig: appIntegrationDataInBase64 is null
+11-22 05:22:43.982  5282  6026 E AssistantConnector: Couldn't read whether gRPC is supported from public value
+11-22 05:22:43.982  5282  6026 E AssistantConnector: java.lang.IllegalStateException: Failed to query to AGSA.
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at amdj.call(PG:16)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at aypl.call(PG:2)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at bcic.c(PG:1)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at bchf.run(PG:4)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at bcid.run(PG:1)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:43.982  5282  6026 E AssistantConnector: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:43.982  5282  6026 I AssistantConnector: Fallback to Maestro connector
+11-22 05:22:43.990  1827  1827 D WAQT_RAIL_TRACE: RAIL_ATTACHED isOpen=true grip=true children=4
+11-22 05:22:43.992  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.992  4968  5060 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/media_volume
+11-22 05:22:43.993  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/media_volume) in: 1
+11-22 05:22:43.993  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.993  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/smart_battery) in: 0
+11-22 05:22:43.996  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.fuelgauge.SmartBatteryPreferenceController
+11-22 05:22:43.998  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:43.999  4968  5552 D SliceBuilder: Creating slice for: com.android.settings.accessibility.MagnificationGesturesPreferenceController
+11-22 05:22:43.999  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/screen_magnification_gestures_preference_screen) in: 1
+11-22 05:22:44.001  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.001  4968  4986 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.hardwareinfo.DeviceModelPreferenceController
+11-22 05:22:44.008  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.008  4968  5278 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/hardware_info_device_model) in: 7
+11-22 05:22:44.009  4968  4984 D SliceBuilder: Creating slice for: com.android.settings.deviceinfo.firmwareversion.FirmwareVersionDetailPreferenceController
+11-22 05:22:44.010  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/os_firmware_version) in: 2
+11-22 05:22:44.011  4968  6028 D SliceBuilder: Creating slice for: com.android.settings.notification.MediaVolumePreferenceController
+11-22 05:22:44.013  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.014  4968  5278 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+11-22 05:22:44.014  4968  5278 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 1
+11-22 05:22:44.014  4968  6028 D SliceBuilder: Creating slice for: com.android.settings.notification.CallVolumePreferenceController
+11-22 05:22:44.018  4968  6028 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/call_volume
+11-22 05:22:44.023  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.notification.CallVolumePreferenceController
+11-22 05:22:44.026  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.027  4968  5060 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/call_volume
+11-22 05:22:44.027  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/call_volume) in: 1
+11-22 05:22:44.027  4968  6028 D SliceBuilder: Creating slice for: com.android.settings.notification.CallVolumePreferenceController
+11-22 05:22:44.032  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.032  4968  5278 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-22 05:22:44.032  4968  5278 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/ring_volume) in: 1
+11-22 05:22:44.035  4968  5086 D SliceBuilder: Creating slice for: com.android.settings.notification.RingVolumePreferenceController
+11-22 05:22:44.039  4968  5086 D SliceBuilder: Creating slice for: com.android.settings.notification.RingVolumePreferenceController
+11-22 05:22:44.041  4968  6027 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-22 05:22:44.042  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.043  4968  5060 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/ring_volume
+11-22 05:22:44.043  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/ring_volume) in: 1
+11-22 05:22:44.043  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.notification.RingVolumePreferenceController
+11-22 05:22:44.047  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.050  4968  5278 D VolumeSliceHelper: Registering uri for broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-22 05:22:44.059  4968  5278 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/alarm_volume) in: 12
+11-22 05:22:44.060  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.notification.AlarmVolumePreferenceController
+11-22 05:22:44.064  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.notification.AlarmVolumePreferenceController
+11-22 05:22:44.065  4968  5086 D VolumeSliceHelper: Unregistering uri broadcast relay: content://com.android.settings.slices/action/alarm_volume
+11-22 05:22:44.065  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.notification.AlarmVolumePreferenceController
+11-22 05:22:44.069  4968  5086 D SliceBuilder: Creating slice for: com.android.settings.gestures.DoubleTapPowerPreferenceController
+11-22 05:22:44.069  4968  5060 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.071  4968  5060 D SettingsSliceProvider: Built slice (content://com.android.settings.slices/action/gesture_double_tap_power) in: 2
+11-22 05:22:44.072  4968  6027 D SliceBuilder: Creating slice for: com.android.settings.gestures.DoubleTapPowerPreferenceController
+11-22 05:22:44.073  4968  5278 D SlicesIndexer: Slices already indexed - returning.
+11-22 05:22:44.074  4968  5278 D SettingsSliceProvider: Built slice (content://android.settings.slices/action/airplane_mode) in: 1
+11-22 05:22:44.075  4968  5086 D SliceBuilder: Creating slice for: com.android.settings.network.AirplaneModePreferenceController
+11-22 05:22:44.077  4898  4898 W AppSearchIndexUpdateUtils: No result for indexing
+11-22 05:22:44.078  4968  6028 D SliceBuilder: Creating slice for: com.android.settings.network.AirplaneModePreferenceController
+11-22 05:22:44.149  5759  5759 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.asterism.service.START pkg=com.google.android.gms }
+11-22 05:22:44.150  5759  5759 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.languageprofile.service.START pkg=com.google.android.gms }
+11-22 05:22:44.275  5757  5757 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.pseudonymous.service.START pkg=com.google.android.gms }
+11-22 05:22:44.326  5367  5391 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.apps.wellbeing.device
+11-22 05:22:44.362  5367  5685 W ProcessReaper: Scheduling killing of process to refresh configuration
+11-22 05:22:44.372  5367  5391 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.wellbeing
+11-22 05:22:44.374  5367  5367 W ConfigurationUpdatedRec: Received update for unknown package com.google.android.libraries.performance.primes#com.google.android.apps.wellbeing; known packages [com.google.android.apps.wellbeing.device]
+11-22 05:22:44.375  4928  4928 D PhenotypeContext: Application doesn't implement PhenotypeApplication interface, falling back to globally set context. See go/phenotype-flag#process-stable-init for more info.
+11-22 05:22:44.376  4928  5482 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.libraries.performance.primes#com.google.android.setupwizard
+11-22 05:22:44.377  4928  4928 D PhenotypeContext: Application doesn't implement PhenotypeApplication interface, falling back to globally set context. See go/phenotype-flag#process-stable-init for more info.
+11-22 05:22:44.377  4928  5482 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.setupwizard
+11-22 05:22:44.404  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:44.404  5757  5895 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:44.404  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:44.424  5757  5895 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:44.426  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:44.426  5757  5895 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:44.426  5757  5895 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:44.427  5757  5895 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:44.427  5757  5895 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:44.428  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:44.428  5757  5895 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:44.428  5757  5895 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:44.429  5757  5895 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:44.429  5757  5895 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:44.433  5757  5905 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:44.434  5757  5905 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:44.434  5757  5905 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:44.434  5757  5905 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:44.434  5757  5905 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:44.435  5757  5905 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:44.435  5757  5905 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:44.435  5757  5905 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:44.436  5757  5905 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:44.436  5757  5905 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:44.436  5757  5905 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:44.436  5757  5905 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:44.436  5757  5905 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:44.437  5757  5905 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:44.439  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.android.sdksandbox name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.440  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.android.odad name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.440  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.441  5757  5905 W ConfiguratorPhenotypeUt: Package com.android.media.swcodec name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.441  5757  5905 W ConfiguratorPhenotypeUt: Package com.android.appsearch name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.442  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.android.adservices name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.443  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.android.as name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.443  5757  5905 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.444  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.android.as.oss name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.444  5757  5905 W ConfiguratorPhenotypeUt: Package com.google.oslo name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.446  5757  5905 W ConfiguratorPhenotypeUt: Package com.android.refreshratecontrol name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.447  5757  5905 W ConfiguratorPhenotypeUt: Package com.android.media name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.449  5757  5905 W ConfiguratorPhenotypeUt: Package com.android.neuralnetworks name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.449  5757  5905 W ConfiguratorPhenotypeUt: Package 1 name not found! Using module version. [CONTEXT service_id=204 ]
+11-22 05:22:44.721  1353  1353 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 05:22:44.721  1353  1353 I PhenotypeModule: PhenotypeModule.maybeFetchAndUpdate():168 maybeFetchAndUpdate: forceRefresh=true
+11-22 05:22:44.721  1353  1353 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 05:22:44.721  1353  1353 I PhenotypeModule: PhenotypeModule.receiveBroadcast():387 onReceive() urgent = false
+11-22 05:22:44.733  5757  5810 I PackageUpdateTaskChimer: Scheduling Phenotype config package catchup updates to be 86400 seconds from now (1795324964733) [CONTEXT service_id=51 ]
+11-22 05:22:44.838  3016  3110 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.libraries.performance.primes#com.google.android.apps.messaging
+11-22 05:22:44.840  3016  3016 W ConfigurationUpdatedRec: Received update for unknown package com.google.android.libraries.performance.primes#com.google.android.apps.messaging; known packages [com.google.android.apps.messaging#com.google.android.apps.messaging]
+11-22 05:22:44.842  3016  4210 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.gms.icing.mdd#com.google.android.apps.messaging
+11-22 05:22:44.843  3016  3016 W ConfigurationUpdatedRec: Received update for unknown package com.google.android.gms.icing.mdd#com.google.android.apps.messaging; known packages [com.google.android.apps.messaging#com.google.android.apps.messaging]
+11-22 05:22:44.844  3016  3052 I BuglePhenotype: onReceive for bugle package [CONTEXT package_name="com.google.android.apps.messaging#com.google.android.apps.messaging" ]
+11-22 05:22:44.846  3016  3110 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.apps.messaging#com.google.android.apps.messaging
+11-22 05:22:45.049  5759  5759 D BoundBrokerSvc: onUnbind: Intent { act=com.google.android.gms.findmydevice.spot.service.locationreport.START dat=chimera-action: cmp=com.google.android.gms/.chimera.GmsApiService }
+11-22 05:22:45.317  5757  5816 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:22:45.318  5757  5816 W ChimeraUtils: Module com.google.android.gms.nearby_en has empty metadata display_name_string_id
+11-22 05:22:45.555  5759  5786 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10102; state: ENABLED
+11-22 05:22:45.570  5757  5810 I bqwi    : Scheduling a periodic sync task every 86400 seconds, with flex of 1800 seconds [CONTEXT service_id=51 ]
+11-22 05:22:45.574  5757  5810 I bqwi    : Scheduling adaptive one off task with window [14400, 604800] in seconds [CONTEXT service_id=51 ]
+11-22 05:22:45.649  1353  1553 E PhenotypeModule: PhenotypeModule.handlePhenotypeConfigurationUpdates():252 Get empty configurations.
+11-22 05:22:45.651  1353  1553 I PhenotypeModule: PhenotypeModule.lambda$fetchAndUpdate$1():220 fetchAndUpdate() : Success, hasFlags=true, flagCount=763, lastFetchStatus=November 22, 5:22 AM {reason=2, isFullFetch=false, success=true, isEmpty=true, isDelta=false, fetchedFlagsCount=0, deletedFlagsCount=0, updatedFlagsCount=0, totalTime=928}
+11-22 05:22:45.659  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.660  5757  5895 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.660  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.661  5757  5895 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.661  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.661  5757  5757 D CompatibilityChangeReporter: Compat change id reported: 119147584; UID 10102; state: ENABLED
+11-22 05:22:45.661  5757  5895 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.663  5757  5895 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.663  5757  5895 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.663  5757  5895 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.663  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.663  5757  5895 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.663  5757  5895 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.664  5757  5895 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.664  5757  5895 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.675  3016  3044 I BugleRcsProvisioning: BugleSystemBindingManager: onBuglePhenotypeFlagChanged
+11-22 05:22:45.675  3016  3044 I BugleRcsProvisioning: BugleSystemBindingManager: onCsLibPhenotypeUpdated
+11-22 05:22:45.675  3016  3044 I BugleRcsEngine: [43] zuq.c: SystemBindingManager: force P/H Flag update scheduled and start updateBinding
+11-22 05:22:45.675  3016  3044 W BugleRcsEngine: [43] akyy.h: RcsProvisioningManager: ProvisioningEngineAdapter not found for SIM redacted-pii:sim_id[20-chars]
+11-22 05:22:45.676  3016  3042 I BugleRcsEngine: [42] ajkh.run: SystemBindingManager: SystemBinding enabled: false
+11-22 05:22:45.677  3016  3042 I BugleRcsEngine: [42] ajki.b: System Binding updated
+11-22 05:22:45.677  3016  3110 W BugleRcsEngine: [62] alsz.g: Carrier Services Apk was not found.
+11-22 05:22:45.677  3016  3050 W BugleRcsEngine: [48] ajnl.z: Unable to send diagnostic log
+11-22 05:22:45.677  3016  3110 I BugleRcsEngine: [62] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:22:45.677  3016  3110 W BugleRcsEngine: [62] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:22:45.677  3016  3110 I BugleRcsEngine: [62] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:22:45.678  3016  3110 W BugleAction: Null config in BugleSharedPrefs
+11-22 05:22:45.678  3016  3110 W BugleAction: Failed to get msisdn from Bugle
+11-22 05:22:45.678  3016  3110 W BugleAction: Failed to get msisdn from RcsProfileService
+11-22 05:22:45.678  3016  3110 W BugleAction: awmw: Jibe SDK Service not available. Is the Jibe SDK service running? Did you call connect() and wait for the notification before calling an API function?
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at awmp.b(PG:2)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.g(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at com.google.android.rcs.client.profile.RcsProfileService.getMsisdn(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at utg.F(PG:12)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at tmz.b(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at tmx.call(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at ayqv.a(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at aypm.a(PG:2)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at bcib.c(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at bchf.run(PG:4)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at bcid.run(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at aosz.run(PG:1)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at aosl.run(PG:2)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at aory.run(PG:3)
+11-22 05:22:45.678  3016  3110 W BugleAction: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.678  3016  3110 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-22 05:22:45.678  3016  3110 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-22 05:22:45.678  3016  3110 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-22 05:22:45.678  3016  3110 W Bugle   : SubscriptionUtilsAsOfLMR1: getSelfRawNumber: subInfo is null for subscription{id:-1}
+11-22 05:22:45.678  3016  3110 W BugleAction: No default number, returning empty msisdn
+11-22 05:22:45.682  5757  5883 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.phenotype.service.sync.PhenotypeConfigurator finished executing. cause:5 result: 1 elapsed_millis: 5424 uptime_millis: 5424 exec_start_elapsed_seconds: 99 [CONTEXT service_id=218 ]
+11-22 05:22:45.684  3016  3044 W BugleRcsEngine: [43] alsz.g: Carrier Services Apk was not found.
+11-22 05:22:45.684  3016  3044 I BugleRcsEngine: [43] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:22:45.684  3016  3044 W BugleRcsEngine: [43] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:22:45.684  3016  3044 I BugleRcsEngine: [43] alsz.c: Not using CS JibeService because it is not compatible with AM.
+--------- beginning of system
+11-22 05:22:45.684   521  2332 I RescueParty: Starting to observe: [com.google.android.providers.media.module, android, com.google.android.permissioncontroller, com.google.android.setupwizard, com.google.android.networkstack, com.google.android.gms, com.google.android.gsf, com.android.settings, com.google.android.settings.intelligence, com.android.phone, com.android.systemui, com.android.bluetooth, com.android.providers.contacts], updated namespace: privacy
+11-22 05:22:45.684  3016  3110 W BugleAction: No default number, returning empty msisdn
+11-22 05:22:45.684  3016  3110 W Bugle   : SubscriptionMetadataUtils get: invalid subId = -2
+11-22 05:22:45.686  5757  5781 D CompatibilityChangeReporter: Compat change id reported: 150939131; UID 10102; state: ENABLED
+11-22 05:22:45.691  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.691  5757  5895 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.691  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.691  5757  5895 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.691  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.691  5757  5895 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.692  5757  5895 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.693  3016  3110 W BugleNetwork: RcsMsisdnAccessor: Failed to access Rcs msisdn. subId: -2
+11-22 05:22:45.694   521  2351 I RescueParty: Starting to observe: [android, com.android.systemui], updated namespace: window_manager
+11-22 05:22:45.694  3016  3042 I BugleTransport: Cannot refresh chat transport. No msisdn available
+11-22 05:22:45.704  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.704  5757  5895 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.704  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.704  5757  5895 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.705  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.705  5757  5895 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.705  5757  5895 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.705  5757  5895 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.705  5757  5895 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.705  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.706  5757  5895 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.706  5757  5895 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.706  5757  5895 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.706  5757  5895 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.kids#com.google.android.gms [CONTEXT service_id=204 ]
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.android.gms.kids#com.google.android.gms
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.706  5757  5895 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.708   521   564 I PackageWatchdog: Syncing state, reason: observing new packages
+11-22 05:22:45.708   521   564 D PackageWatchdog: rescue-party-observer added the following packages to monitor [com.google.android.providers.media.module, android, com.google.android.permissioncontroller, com.google.android.setupwizard, com.google.android.networkstack, com.google.android.gms, com.google.android.gsf, com.android.settings, com.google.android.settings.intelligence, com.android.phone, com.android.systemui, com.android.bluetooth, com.android.providers.contacts]
+11-22 05:22:45.708   521   564 I PackageWatchdog: Syncing state, reason: updated observers
+11-22 05:22:45.708   521   564 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+11-22 05:22:45.708   521   564 I PackageWatchdog: Syncing state, reason: observing new packages
+11-22 05:22:45.708   521   564 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+11-22 05:22:45.708   521   564 D PackageWatchdog: rescue-party-observer added the following packages to monitor [android, com.android.systemui]
+11-22 05:22:45.708   521   564 I PackageWatchdog: Syncing state, reason: updated observers
+11-22 05:22:45.708   521   564 I PackageWatchdog: Not pruning observers, elapsed time: 0ms
+11-22 05:22:45.708   521   564 I PackageWatchdog: Saving observer state to file
+11-22 05:22:45.708  5757  6035 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.708  5757  6035 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.709  5757  6035 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.709  5757  6035 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.709  5757  6035 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.709  5757  6035 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.709   521   521 I PackageWatchdog: Syncing health check requests for packages: {com.google.android.setupwizard, com.google.android.settings.intelligence}
+11-22 05:22:45.709   521   521 I ExplicitHealthCheckController: Service not ready to get health check supported packages. Binding...
+11-22 05:22:45.709  5757  6035 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.710  5757  6035 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.710  5757  6035 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.710  5757  6035 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.710  5757  6035 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.710  5757  6035 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.711   521   521 I ExplicitHealthCheckController: Explicit health check service is bound
+11-22 05:22:45.712   521   521 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-22 05:22:45.712   521   521 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-22 05:22:45.712   521   521 I PackageWatchdog: Syncing health check requests for packages: {com.google.android.setupwizard, com.google.android.settings.intelligence}
+11-22 05:22:45.712   521   521 D ExplicitHealthCheckController: Getting health check supported packages
+11-22 05:22:45.712   521  2351 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.712   521  2351 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.712   521  2351 I PackageWatchdog: Updated health check state for package com.google.android.setupwizard: INACTIVE -> PASSED
+11-22 05:22:45.712   521  2351 I PackageWatchdog: Updated health check state for package com.google.android.settings.intelligence: INACTIVE -> PASSED
+11-22 05:22:45.713   521  2351 I PackageWatchdog: Syncing state, reason: updated health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.713   521  2351 D ExplicitHealthCheckController: Getting health check requested packages
+11-22 05:22:45.713   521   564 I PackageWatchdog: Saving observer state to file
+11-22 05:22:45.713   521   521 I PackageWatchdog: Syncing health check requests for packages: {}
+11-22 05:22:45.713   521   521 D ExplicitHealthCheckController: Getting health check supported packages
+11-22 05:22:45.713   521   860 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.713   521  2351 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-22 05:22:45.713   521  2351 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-22 05:22:45.714   521   860 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.714   521  2351 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-22 05:22:45.714   521   860 I ExplicitHealthCheckController: Service not ready to get health check requested packages. Binding...
+11-22 05:22:45.715   521   860 I ExplicitHealthCheckController: Explicit health check service is bound
+11-22 05:22:45.715  5757  6035 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.716  5757  6035 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.icing.mdd#com.google.android.gms [CONTEXT service_id=204 ]
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.android.gms.icing.mdd#com.google.android.gms
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.716  5757  6035 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.718   521   521 I ExplicitHealthCheckController: Explicit health check service is connected ComponentInfo{com.google.android.ext.services/android.ext.services.watchdog.ExplicitHealthCheckServiceImpl}
+11-22 05:22:45.718   521   521 I ExplicitHealthCheckController: Service initialized, syncing requests
+11-22 05:22:45.718   521   521 I PackageWatchdog: Syncing health check requests for packages: {}
+11-22 05:22:45.718   521   521 D ExplicitHealthCheckController: Getting health check supported packages
+11-22 05:22:45.719   521   551 I ExplicitHealthCheckController: Explicit health check supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.719   521   551 D PackageWatchdog: Received supported packages [PackageConfig{com.google.android.networkstack, 86400000}]
+11-22 05:22:45.719   521   551 D ExplicitHealthCheckController: Getting health check requested packages
+11-22 05:22:45.719   521   551 I ExplicitHealthCheckController: Explicit health check requested packages []
+11-22 05:22:45.719   521   551 I ExplicitHealthCheckController: No more health check requests, unbinding...
+11-22 05:22:45.720   521   551 I ExplicitHealthCheckController: Explicit health check service is unbound
+11-22 05:22:45.727  3016  3057 W TimedProcessReaper: Scheduling killing of process to refresh configuration
+11-22 05:22:45.741  5757  5809 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService started execution. cause:5 exec_start_elapsed_seconds: 105 [CONTEXT service_id=218 ]
+11-22 05:22:45.746  3016  3057 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.libraries.notifications.platform#com.google.android.apps.messaging
+11-22 05:22:45.748  3016  3016 W ConfigurationUpdatedRec: Received update for unknown package com.google.android.libraries.notifications.platform#com.google.android.apps.messaging; known packages [com.google.android.apps.messaging#com.google.android.apps.messaging]
+11-22 05:22:45.749  3016  3051 I BuglePhenotype: onReceive for cslib package [CONTEXT package_name="com.google.android.ims.library" ]
+11-22 05:22:45.752  3016  3057 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.ims.library
+11-22 05:22:45.753  3016  3016 W ConfigurationUpdatedRec: Received update for unknown package com.google.android.ims.library; known packages [com.google.android.apps.messaging#com.google.android.apps.messaging]
+11-22 05:22:45.800  3016  3040 I BuglePhenotype: Notify about updates in current package [CONTEXT current_package_name="com.google.android.ims.library" ]
+11-22 05:22:45.801  3016  3040 I BugleRcsProvisioning: RcsProvisioningTrigger: onCsLibPhenotypeUpdated, enableProvisioningTaskInBugle = false
+11-22 05:22:45.801  3016  3040 I BugleRcsProvisioning: RcsProvisioningTrigger: updateRcsAvailability : hint = CSLIB_PHENOTYPE_UPDATE
+11-22 05:22:45.801  3016  3040 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: updateAvailabilityAsync, hint: CSLIB_PHENOTYPE_UPDATE
+11-22 05:22:45.801  3016  3040 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: swapAvailabilityUpdater, provisioningTaskInBugle: false, activeRcsAvailabilityUpdater: uuy
+11-22 05:22:45.801  3016  3040 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability, hint: CSLIB_PHENOTYPE_UPDATE
+11-22 05:22:45.801  3016  3040 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityAsync, hint: CSLIB_PHENOTYPE_UPDATE
+11-22 05:22:45.801  3016  3040 I Bugle   : RcsAvailabilityUtilForProvisioningEngineV2: onCsLibPhenotypeUpdated
+11-22 05:22:45.801  3016  3040 I BugleRcsProvisioning: BugleSystemBindingManager: onCsLibPhenotypeUpdated
+11-22 05:22:45.801  3016  3040 I BugleRcsEngine: [40] zuq.c: SystemBindingManager: force P/H Flag update scheduled and start updateBinding
+11-22 05:22:45.803  3016  3041 I BugleRcsEngine: [41] ajkh.run: SystemBindingManager: SystemBinding enabled: false
+11-22 05:22:45.803  3016  3041 I BugleRcsEngine: [41] ajki.b: System Binding updated
+11-22 05:22:45.803  3016  3110 W BugleRcsEngine: [62] ajnl.z: Unable to send diagnostic log
+11-22 05:22:45.804  3016  3040 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityAsync, trivialAvailability: null
+11-22 05:22:45.805  3016  3040 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-22 05:22:45.805  3016  3040 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:22:45.805  3016  3040 W BugleRcsEngine: [40] alsz.e: Service with meta data key: SignupServiceVersions is not compatible. Service Version 4 is not supported. Supported versions: []
+11-22 05:22:45.805  3016  3040 W BugleRcsEngine: [40] alsz.g: Carrier Services Apk was not found.
+11-22 05:22:45.805  3016  3040 I BugleRcsEngine: [40] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:22:45.805  3016  3040 W BugleRcsEngine: [40] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:22:45.805  3016  3040 I BugleRcsEngine: [40] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:22:45.805  3016  3040 I BugleRcs: RcsAvailabilityUpdaterRemote: getRcsAvailabilityFromSignupServiceAsync
+11-22 05:22:45.805  3016  3050 I RcsClientLib: Connecting SignupService
+11-22 05:22:45.805  3016  3050 W RcsClientLib: No CS.apk RCS service found. Is RCS running in Bugle?
+11-22 05:22:45.805  3016  3050 W BugleRcsEngine: [48] alsz.g: Carrier Services Apk was not found.
+11-22 05:22:45.806  3016  3050 I BugleRcsEngine: [48] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:22:45.806  3016  3050 W BugleRcsEngine: [48] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:22:45.806  3016  3050 I BugleRcsEngine: [48] alsz.c: Not using CS JibeService because it is not compatible with AM.
+11-22 05:22:45.806  3016  3050 I RcsClientLib: shouldUseCarrierServicesJibeService: false, CarrierServices rcs service found: false
+11-22 05:22:45.809  5282  5282 I BugleRcsEngine: [2] akbw.l: Reinitialize CSLib Flags: com.google.android.ims.library
+11-22 05:22:45.812  5282  6040 I BugleRcsEngine: [73] alod.j: (Sim): Processing an intent
+11-22 05:22:45.812  5282  6040 I BugleRcsEngine: [73] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 05:22:45.812  5282  6040 I BugleRcsEngine: [73] ajre.b: Initializing Carrier Services Logging.
+11-22 05:22:45.812  5282  6040 D BugleRcsEngine: log_saver already enabled
+11-22 05:22:45.812  5282  6040 I BugleRcsEngine: [73] RcsEngineProxyImpl.initializeRcsEngine: RcsEngineProxy: Initializing RCS Engine.
+11-22 05:22:45.813  5282  6040 I BugleRcsEngine: [73] alod.j: (Sim): Processing an intent
+11-22 05:22:45.813  5282  6040 I BugleRcsEngine: [73] alod.w: (Sim): Ignoring duplicate SIM state: LOADED
+11-22 05:22:45.818  5282  6041 I BugleRcsEngine: [74] aloh.c: SIM state event delay enabled: attempts 0, maxAttempts 3, delaySeconds 90 MSIM delayseconds 90, effective delay seconds 90
+11-22 05:22:45.818  5282  6041 I BugleRcsEngine: [74] aloh.c: posted simEventProcessTask to handler with delay 90
+11-22 05:22:45.819  5757  5883 I NetworkScheduler.Stats: Task com.google.android.gms/com.google.android.gms.clearcut.uploader.QosUploaderService finished executing. cause:5 result: 1 elapsed_millis: 90 uptime_millis: 90 exec_start_elapsed_seconds: 105 [CONTEXT service_id=218 ]
+11-22 05:22:45.819  5282  6040 I BugleRcsEngine: [73] ajre.b: Initializing Carrier Services Logging.
+11-22 05:22:45.819  5282  6040 D BugleRcsEngine: log_saver already enabled
+11-22 05:22:45.820  5282  6040 I BugleRcsEngine: [73] RcsEngineImpl.<init>: RcsEngine(DUAL_REG): Constructor running in com.google.android.apps.messaging
+11-22 05:22:45.820  5282  6040 I BugleRcsEngine: [73] EventHubProxy.subscribe: Adding event listener alah@3a14a2e for category 8 with key 60901934 for hub ENGINE
+11-22 05:22:45.822  5282  6040 I BugleRcsEngine: [73] akua.u: ProvisioningEngineManager: onCsLibPhenotypeUpdated, provisioningTaskInBugleEnabled = true, currentProvisioningStrategy = akyf
+11-22 05:22:45.826  5282  6040 D BugleRcsEngine: log_saver already enabled
+11-22 05:22:45.827  5282  6040 W BugleRcsEngine: [73] JibeService.b: Ignoring start action: com.google.android.ims.SIM_LOADED
+11-22 05:22:45.841  1683  1683 I BgTaskExecutorImpl: Starting EXCLUSIVE background task FETCH_CONFIGS_FROM_PHENOTYPE.
+11-22 05:22:45.842  5757  5809 W CCTFlatFileLogStore: Excessive logging: 64 events, 129014 bytes from log source PHENOTYPE last 6s
+11-22 05:22:45.843  1683  1683 I Notifications: [ChimeBroadcastReceiver] Intent received for action [com.google.android.gms.phenotype.UPDATE] package [com.google.android.googlequicksearchbox].
+11-22 05:22:45.843  1683  1683 I Notifications: [ChimeBroadcastReceiver] Phenotype initialized.
+11-22 05:22:45.844  1683  1683 I Notifications: [ChimeBroadcastReceiver] Validation failed for action [com.google.android.gms.phenotype.UPDATE].
+11-22 05:22:45.845  5408  5445 I PhenotypeBackgroundRecv: Successfully stored update snapshot for assistant_auto_tng_libraries_device#com.google.android.googlequicksearchbox
+11-22 05:22:45.863  5757  5903 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.866  5757  5891 I NearbySharing: FastInitiation warming period has ended [CONTEXT service_id=194 ]
+11-22 05:22:45.866  5757  5903 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.866  5757  5903 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.866  5757  5903 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.867  5757  5903 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.868  3016  3016 I RcsClientLib: com.google.android.rcs.client.signup.SignupService connected
+11-22 05:22:45.869  3016  3050 I BugleRcs: RcsAvailabilityUpdaterRemote: updateRcsAvailabilityPostProcess, Get Updated RcsAvailability, RcsAvailability: DISABLED_STUB_PROVISIONING_ENGINE, SimId: redacted-pii[20-chars]
+11-22 05:22:45.870  3016  3041 I BugleRcsProvisioning: RcsProvisioningTrigger: onRcsAvailabilityUpdate : availability is updated to Availability request was done on a stub implementation of the provisioning engine., lastAvailability is null, simId hash = -2262134216958901383, isPev3Enabled = false
+11-22 05:22:45.870  3016  3050 I RcsClientLib: Disconnecting SignupService
+11-22 05:22:45.871  3016  3041 I BugleRcs: RcsAvailabilityUpdaterRemote: postUpdateRcsAvailability : success updating RCS availability async
+11-22 05:22:45.871  5282  6043 I BugleRcsEngine: [76] alsz.d: Checking if using CarrierServices.apk is possible. Enabled: true, isAtLeastM: true, runningInsideBugle: true
+11-22 05:22:45.871  5282  6043 W BugleRcsEngine: [76] alsz.g: Carrier Services Apk was not found.
+11-22 05:22:45.871  5282  6043 I BugleRcsEngine: [76] alsz.e: Cannot get service version because CS.apk was not found, not pre-loaded or disabled.
+11-22 05:22:45.872  5282  6043 W BugleRcsEngine: [76] alsz.e: Service with meta data key: JibeServiceApiVersions is not compatible. Service Version 1 is not supported. Supported versions: []
+11-22 05:22:45.872  5282  5282 I BugleRcsEngine: [2] RcsEngineProxyImpl.destroyRcsEngine: RcsEngineProxy: Destroy RCS Engine.
+11-22 05:22:45.878   521   521 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10108; state: DISABLED
+11-22 05:22:45.878   521   521 D CompatibilityChangeReporter: Compat change id reported: 135634846; UID 10117; state: DISABLED
+11-22 05:22:45.878   521   566 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10108; state: ENABLED
+11-22 05:22:45.882   325   325 D Zygote  : Forked child process 6044
+11-22 05:22:45.883   521   566 I ActivityManager: Start proc 6044:com.google.android.apps.youtube.music/u0a108 for service {com.google.android.apps.youtube.music/androidx.work.impl.background.systemjob.SystemJobService}
+11-22 05:22:45.883   521   566 D CompatibilityChangeReporter: Compat change id reported: 143937733; UID 10117; state: ENABLED
+11-22 05:22:45.883  5757  5903 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.885  5282  5282 I BugleRcsEngine: [2] EventHubProxy.unsubscribe: Removing event listener 60901934 for category 8 for hub ENGINE
+11-22 05:22:45.886  5282  6043 I BugleRcsEngine: [76] albk.n: No RCS Configuration was found in Bugle for simID: redacted-pii:sim_id[20-chars]
+11-22 05:22:45.886  5282  5282 D ConnectivityManager: NetworkCallback was already unregistered
+11-22 05:22:45.886  5282  5282 I BugleRcsEngine: [2] ajsa.c: Destroying JibeServiceComponent
+11-22 05:22:45.886  5282  6043 W BugleRcsEngine: [76] ajnx.h: Unable to send RCS extension log
+11-22 05:22:45.887  6044  6044 W s.youtube.musi: Unexpected CPU variant for X86 using defaults: x86_64
+11-22 05:22:45.890   325   325 D Zygote  : Forked child process 6056
+11-22 05:22:45.890   420   439 I adbd    : jdwp connection from 6044
+11-22 05:22:45.891  5282  6043 W BugleRcsEngine: [76] akjn.run: ProvisioningEngineMetricsStorage, the wrapper class for proto data store, is null
+11-22 05:22:45.891  5282  6043 W BugleRcsEngine: [76] aldi.a: Unable to send provisioning event log
+11-22 05:22:45.891  5757  5903 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.892   521  1589 D CompatibilityChangeReporter: Compat change id reported: 168419799; UID 10108; state: DISABLED
+11-22 05:22:45.893  5757  5903 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.893  5757  5903 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.893  5757  5903 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.893  5757  5903 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.894  5282  5693 I BugleRcsEngine: [62] aloh.c: SIM state event delay enabled: attempts 1, maxAttempts 3, delaySeconds 90 MSIM delayseconds 90, effective delay seconds 90
+11-22 05:22:45.894  5282  5693 I BugleRcsEngine: [62] aloh.c: posted simEventProcessTask to handler with delay 90
+11-22 05:22:45.894  5282  5693 I BugleRcsEngine: [62] alod.d: (Sim): delay SIM event: android.intent.action.SIM_STATE_CHANGED, LOADED
+11-22 05:22:45.896  6044  6044 D CompatibilityChangeReporter: Compat change id reported: 171979766; UID 10108; state: DISABLED
+11-22 05:22:45.896   521   566 I ActivityManager: Start proc 6056:com.google.android.gm/u0a117 for service {com.google.android.gm/com.google.android.gm.job.RegisterNotificationSoundsJob$RegisterNotificationSoundsJobService}
+11-22 05:22:45.898  5757  5903 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.898  1683  1683 I Notifications: [ChimeBroadcastReceiver] Intent received for action [com.google.android.gms.phenotype.UPDATE] package [com.google.android.googlequicksearchbox].
+11-22 05:22:45.898  1683  1683 I Notifications: [ChimeBroadcastReceiver] Phenotype initialized.
+11-22 05:22:45.898  1683  1683 I Notifications: [ChimeBroadcastReceiver] Validation failed for action [com.google.android.gms.phenotype.UPDATE].
+11-22 05:22:45.904  5408  5444 I PhenotypeBackgroundRecv: Successfully stored update snapshot for com.google.android.libraries.search.user#com.google.android.googlequicksearchbox
+11-22 05:22:45.906  5757  5903 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.906  5757  5903 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms [CONTEXT service_id=204 ]
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.android.gms
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.907  5757  5903 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.908  5282  5693 W BugleRcsEngine: [62] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_DATA_SUBSCRIPTION_CHANGED
+11-22 05:22:45.911  6044  6044 D nativeloader: classloader namespace configured for unbundled product apk. library_path=/product/app/YouTubeMusicPrebuilt/lib/x86_64:/product/app/YouTubeMusicPrebuilt/YouTubeMusicPrebuilt.apk!/lib/x86_64:/product/lib64:/system/product/lib64
+11-22 05:22:45.912  5757  6037 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.912  5757  6037 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.912  5757  6037 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.912  5757  6037 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.913  5757  6037 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.913  5282  5693 W BugleRcsEngine: [62] alod.d: (Sim): Unexpected action: android.intent.action.ACTION_DEFAULT_VOICE_SUBSCRIPTION_CHANGED
+11-22 05:22:45.913  5757  6037 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.914  5757  6037 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.914  5757  6037 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.915  5757  6037 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.915  5757  6037 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.915  5757  6037 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.915  5757  6037 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.915  5757  6037 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.915  5757  6037 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.lighter.android#com.google.android.gms [CONTEXT service_id=204 ]
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.lighter.android#com.google.android.gms
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.916  5757  6037 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.917  5757  5905 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.918  5757  5905 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.918  5757  5905 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.918  5757  5905 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.918  5757  5905 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.918  5757  5905 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.918  5757  5905 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.919  6044  6044 V GraphicsEnvironment: ANGLE Developer option for 'com.google.android.apps.youtube.music' set to: 'default'
+11-22 05:22:45.919  6044  6044 V GraphicsEnvironment: Neither updatable production driver nor prerelease driver is supported.
+11-22 05:22:45.919  5757  5905 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.919  5757  5905 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.919  6044  6044 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 05:22:45.919  5757  5905 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.919  5757  5905 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.919  5757  5905 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.920  6044  6044 D NetworkSecurityConfig: Using Network Security Config from resource network_security_config debugBuild: false
+11-22 05:22:45.920  5757  5905 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.920  5757  5905 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.people [CONTEXT service_id=204 ]
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.android.gms.people
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.920  5757  5905 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.922  5757  6035 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.924  5757  6035 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.924  5757  6035 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.925  5757  6035 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.926  5757  6035 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
+11-22 05:22:45.926  5757  6035 I ExperimentPackageManage: Package 1 name not found! Using module version.
+11-22 05:22:45.926  5757  6035 I ExperimentPackageManage: Package com.google.android.sdksandbox name not found! Using module version.
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: Update for unknown DeviceConfig package com.google.android.gms.phenotype [CONTEXT service_id=204 ]
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: bqxl: No package exists for config package: com.google.android.gms.phenotype
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.a(:com.google.android.gms@225014047@22.50.14 (190800-499278674):7)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at com.google.android.gms.platformconfigurator.PhenotypeConfigurationUpdateListener.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):6)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at com.google.android.chimera.IntentOperation.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at xuu.onHandleIntent(:com.google.android.gms@225014047@22.50.14 (190800-499278674):4)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at gug.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):3)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at guf.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):11)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at cxit.run(:com.google.android.gms@225014047@22.50.14 (190800-499278674):2)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1167)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:641)
+11-22 05:22:45.926  5757  6035 W PhenotypeConfigurationU: 	at java.lang.Thread.run(Thread.java:920)
+11-22 05:22:45.929  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.929  5757  5895 I ExperimentPackageManage: Package com.android.refreshratecontrol name not found! Using module version.
+11-22 05:22:45.929  5757  5895 I ExperimentPackageManage: Package com.google.android.as name not found! Using module version.
+11-22 05:22:45.930  5757  5895 I ExperimentPackageManage: Package com.google.oslo name not found! Using module version.
+11-22 05:22:45.930  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.931  5757  5895 I ExperimentPackageManage: Package com.android.media.swcodec name not found! Using module version.
+11-22 05:22:45.931  5757  5895 I ExperimentPackageManage: Package com.android.appsearch name not found! Using module version.
+--------- beginning of kernel
+11-22 05:22:46.099     0     0 I logd    : logdr: UID=2000 GID=2000 PID=6058 n tail=0 logMask=99 pid=0 start=0ns deadline=0ns
+11-22 05:22:45.931  5757  5895 I ExperimentPackageManage: Package com.android.neuralnetworks name not found! Using module version.
+11-22 05:22:45.931  5757  5895 I ExperimentPackageManage: Package com.google.android.odad name not found! Using module version.
+11-22 05:22:45.932  5757  5895 I ExperimentPackageManage: Package com.android.media name not found! Using module version.
+11-22 05:22:45.932  5757  5895 I ExperimentPackageManage: Package com.google.android.adservices name not found! Using module version.
+11-22 05:22:45.932  5757  5895 I ExperimentPackageManage: Package com.google.android.as.oss name not found! Using module version.
