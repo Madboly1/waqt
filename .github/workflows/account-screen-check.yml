@@ -1,4 +1,4 @@
-# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps (v2)
+# Trigger probe run: rail instrumentation (WAQT_RAIL_TRACE) + per-section settings dumps (v3)
 name: WAQT Account Screen and Signed Build Check
 # Last triggered to verify the side-rail host-interceptor drag fix + focus audio fixes.
 
@@ -250,6 +250,13 @@ jobs:
 
             GRIP=$(find_node $'\u2261' 400)
             if [ -z "$GRIP" ]; then echo "RAIL_OPENED=no" | tee -a shots/swipe_probe.txt; else echo "RAIL_OPENED=yes at $GRIP" | tee -a shots/swipe_probe.txt; fi
+            if [ -z "$GRIP" ]; then
+              adb shell input tap $RX $RY
+              sleep 2
+              adb exec-out screencap -p > shots/31_rail_tapped.png
+              GRIP2=$(find_node $'\u2261' 400)
+              if [ -n "$GRIP2" ]; then echo "RAIL_TAP_OPEN=yes" | tee -a shots/swipe_probe.txt; GRIP=$GRIP2; else echo "RAIL_TAP_OPEN=no" | tee -a shots/swipe_probe.txt; fi
+            fi
 
             ICON=$(find_node $'\U0001F4CA' 400)
             if [ -z "$ICON" ]; then
@@ -318,6 +325,11 @@ jobs:
               echo "SETTINGS_SECTION_MISSING=$title" >> shots/settings_probe.txt
             fi
           done
+          adb shell input swipe 540 1500 540 500 400
+          sleep 2
+          adb exec-out screencap -p > shots/49_settings_about_scrolled.png
+          adb shell uiautomator dump /sdcard/uix_zzabout2.xml >/dev/null 2>&1
+          adb pull /sdcard/uix_zzabout2.xml shots/dump_zzabout2.xml >/dev/null 2>&1 || true
           python3 - <<'PYS' >> shots/settings_probe.txt
           import re, glob
           def texts_of(path):
