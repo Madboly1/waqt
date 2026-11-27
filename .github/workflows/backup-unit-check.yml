@@ -3,7 +3,7 @@ name: WAQT Backup Unit Check
 on:
   push:
     branches:
-      - feature/google-drive-backup
+      - fix/waqt-review-hardening
     paths:
       - app/src/test/**
       - app/src/main/java/com/example/glassproductivity/WaqtCloudBackup.kt
