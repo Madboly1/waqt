@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- AI provider keys live in waqt_prefs and must never leave the device. -->
+    <exclude domain="sharedpref" path="waqt_prefs.xml" />
+</full-backup-content>
