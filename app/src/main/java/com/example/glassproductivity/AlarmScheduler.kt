@@ -105,6 +105,29 @@ object ReminderRepository {
     private const val KEY_ACTIVE_FOCUS_TASK_ID = "active_focus_task_id"
     private const val KEY_ACTIVE_FOCUS_IS_BREAK = "active_focus_is_break"
 
+    /**
+     * When stored JSON cannot be read (fully or in part), keep a copy of the raw
+     * text once so a later save cannot silently erase the only recoverable data.
+     */
+    internal fun preserveUnreadableJson(prefs: android.content.SharedPreferences, key: String, raw: String) {
+        val backupKey = key + "_unreadable_backup"
+        if (!prefs.contains(backupKey)) prefs.edit().putString(backupKey, raw).apply()
+    }
+
+    /** Real calendar days between two stored day numbers (year*366+dayOfYear), safe across year ends. */
+    fun epochDaysBetween(from: Long, to: Long): Long = realEpochDay(to) - realEpochDay(from)
+
+    private fun realEpochDay(e: Long): Long {
+        var y = e / 366
+        var doy = e - y * 366
+        if (doy <= 0L) { y -= 1; doy += 366 }
+        return try {
+            java.time.LocalDate.ofYearDay(y.toInt(), doy.toInt().coerceIn(1, 366)).toEpochDay()
+        } catch (_: Exception) {
+            java.time.LocalDate.ofYearDay(y.toInt(), 365).toEpochDay()
+        }
+    }
+
     fun currentEpochDay(): Long {
         val cal = Calendar.getInstance()
         val year = cal.get(Calendar.YEAR)
@@ -121,10 +144,12 @@ object ReminderRepository {
         val rawJson = prefs.getString(KEY_ITEMS, null) ?: return seedDefaultItems(context)
         val list = mutableListOf<ReminderItem>()
         val todayEpoch = currentEpochDay()
+        var skipped = 0
 
         try {
             val array = JSONArray(rawJson)
             for (i in 0 until array.length()) {
+              try {
                 val obj = array.getJSONObject(i)
                 val lastCompleted = obj.optLong("lastCompletedEpochDay", -1L)
                 val isHabit = obj.optBoolean("isHabit", false)
@@ -134,7 +159,7 @@ object ReminderRepository {
                 var streak = obj.optInt("streakCount", 0)
                 val longest = obj.optInt("longestStreak", streak)
 
-                if (isHabit && !isPaused && lastCompleted != -1L && (todayEpoch - lastCompleted) > 1L) {
+                if (isHabit && !isPaused && lastCompleted != -1L && epochDaysBetween(lastCompleted, todayEpoch) > 1L) {
                     if (recurrence == "daily") {
                         streak = 0
                     }
@@ -176,8 +201,13 @@ object ReminderRepository {
                         deferredUntilMillis = obj.optLong("deferredUntilMillis", 0L)
                     )
                 )
+              } catch (_: Exception) {
+                skipped++
+              }
             }
+            if (skipped > 0) preserveUnreadableJson(prefs, KEY_ITEMS, rawJson)
         } catch (_: Exception) {
+            preserveUnreadableJson(prefs, KEY_ITEMS, rawJson)
         }
         return list
     }
@@ -336,7 +366,9 @@ object ReminderRepository {
         val list = mutableListOf<NoteItem>()
         try {
             val arr = JSONArray(rawJson)
+            var skippedNotes = 0
             for (i in 0 until arr.length()) {
+              try {
                 val o = arr.getJSONObject(i)
                 list.add(
                     NoteItem(
@@ -351,8 +383,14 @@ object ReminderRepository {
                         imageUri = o.optString("imageUri", "")
                     )
                 )
+              } catch (_: Exception) {
+                skippedNotes++
+              }
             }
-        } catch (_: Exception) {}
+            if (skippedNotes > 0) preserveUnreadableJson(prefs, KEY_NOTES, rawJson)
+        } catch (_: Exception) {
+            preserveUnreadableJson(prefs, KEY_NOTES, rawJson)
+        }
         return list
     }
 
@@ -978,7 +1016,7 @@ object AlarmScheduler {
         // Tasks carrying a future due date must ring on that date, not today/tomorrow
         // (the scheduler previously ignored dueDateEpochDay for non-habits).
         if (!item.isHabit && item.dueDateEpochDay > ReminderRepository.currentEpochDay()) {
-            calendar.add(Calendar.DAY_OF_YEAR, (item.dueDateEpochDay - ReminderRepository.currentEpochDay()).toInt())
+            calendar.add(Calendar.DAY_OF_YEAR, ReminderRepository.epochDaysBetween(ReminderRepository.currentEpochDay(), item.dueDateEpochDay).toInt())
         } else if (forceTomorrow || calendar.timeInMillis <= nowMillis) {
             // Habit day IDs are stored in Saturday-first order: Sat=1, Sun=2, ... Fri=7.
             // Find the next enabled day instead of blindly scheduling tomorrow.
