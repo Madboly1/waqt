@@ -4006,7 +4006,7 @@ class MainActivity : AppCompatActivity() {
                             id = UUID.randomUUID().toString(),
                             title = taskTitle,
                             isHabit = false,
-                            hour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + 1,
+                            hour = (Calendar.getInstance().get(Calendar.HOUR_OF_DAY) + 1) % 24,
                             minute = 0,
                             priority = "high",
                             dueDateEpochDay = ReminderRepository.currentEpochDay()
